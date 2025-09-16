@@ -108,62 +108,62 @@ export const IMPACT_STATS = [
 export const PROGRAM_AREAS = [
   {
     id: "healthcare-access",
-    title: "Access to Healthcare",
+    title: "Access to Healthcare and the Relief of Sickness",
     icon: "Heart",
-    description: "Ensuring lawful, equitable, and dignified care for all in need, regardless of geography, circumstance, or means.",
+    description: "To relieve illness and preserve life by ensuring that individuals—regardless of geography, circumstance, or means—may access timely, ethical, and competent healthcare.",
     outcomes: [
-      "Subsidised healthcare services for excluded populations",
-      "Enhanced clinical programmes in underserved communities", 
-      "Medical supply provision where demonstrable need exists",
-      "Healthcare infrastructure development in crisis regions"
+      "The provision or subsidisation of healthcare services to those who are excluded from adequate statutory provision",
+      "The support of clinical programmes and public health outreach initiatives in underserved or vulnerable communities", 
+      "The acquisition or funding of medical supplies, diagnostics, or technologies where there exists a demonstrable need",
+      "The establishment or enhancement of healthcare infrastructure in regions where such systems are absent, overwhelmed, or in crisis"
     ]
   },
   {
     id: "education-training", 
-    title: "Education & Professional Training",
-    icon: "GraduationCap",
-    description: "Building future capacity through lawful training, education, and ethical formation of health professionals.",
+    title: "Education and Professional Capacity in Health and Care",
+    icon: "Users",
+    description: "To advance education, particularly in the fields of medicine, public health, and healthcare delivery, through the support of individuals and institutions engaged in the formation and development of health professionals.",
     outcomes: [
-      "Grants and scholarships for health professional training",
-      "Institutional support for training programmes",
-      "Academic partnerships and professional exchanges", 
-      "Sustainable local healthcare capacity development"
+      "The provision of grants, bursaries, or scholarships to persons undertaking recognised training in medicine, nursing, allied health, public health, or mental health disciplines",
+      "The funding of training institutions or professional development programmes that enhance access, equity, or quality within health systems",
+      "The support of academic partnerships, exchanges, and vocational pathways aimed at building sustainable local healthcare capacity", 
+      "Collaboration with universities, hospitals, NGOs, or other lawful training entities"
     ]
   },
   {
     id: "systems-strengthening",
-    title: "Health Systems Strengthening", 
-    icon: "Building",
-    description: "Reinforcing institutional care and health equity through lawful public service and infrastructure development.",
+    title: "Health Systems Strengthening and Public Infrastructure Development", 
+    icon: "Globe",
+    description: "To support the lawful development, maintenance, and strengthening of health systems and public institutions where access to care is compromised due to infrastructural fragility, displacement, underfunding, or systemic failure.",
     outcomes: [
-      "Clinical records and logistics infrastructure support",
-      "Strategic collaboration with governmental organisations",
-      "Lawful innovations enhancing healthcare delivery",
-      "Transparency and continuity improvements"
+      "The funding of clinics, records systems, logistics infrastructure, or mobile services in support of public health",
+      "Strategic collaboration with governmental, intergovernmental, or registered third-party organisations to deliver population-level health improvements",
+      "Support for lawful innovations that enhance transparency, delivery, or continuity in healthcare provision",
+      "Neutral, apolitical, and compliant assistance that does not undermine legitimate public institutions"
     ]
   },
   {
     id: "policy-research",
-    title: "Research & Policy Work",
-    icon: "FileText", 
-    description: "Advancing lawful insight, policy integrity, and institutional accountability through rigorous research and scholarship.",
+    title: "Research, Legal Scholarship, and Public Benefit Policy Work",
+    icon: "TrendingUp", 
+    description: "To promote and fund research, legal inquiry, and the structured dissemination of knowledge that contributes to the understanding and resolution of health inequality, systems injustice, or the denial of access to care.",
     outcomes: [
-      "Legal and policy research on health inequality",
-      "Collaboration with academic and governmental bodies",
-      "Publication of findings advancing policy reform",
-      "Human rights evaluations and system audits"
+      "Commissioned legal or policy research examining the intersection of law, ethics, and health access",
+      "Collaboration with academic or governmental bodies to conduct impact studies, system audits, or human rights evaluations",
+      "Publication or broadcast of findings that serve to advance lawful policy reform, institutional accountability, or access to remedies",
+      "Research that serves exclusively charitable purposes without party-political activity or commercial interest"
     ]
   },
   {
     id: "emergency-relief",
-    title: "Emergency & Exceptional Relief",
-    icon: "AlertTriangle",
-    description: "Time-sensitive healthcare access during humanitarian emergencies, systemic collapse, or public health disasters.",
+    title: "Emergency and Exceptional Relief",
+    icon: "ArrowRight",
+    description: "In circumstances of humanitarian emergency, systemic collapse, armed conflict, or public health disaster, the Trust may, upon formal resolution by the Board of Trustees, allocate funds to deliver time-sensitive or critical healthcare access.",
     outcomes: [
-      "Emergency medical services and supply provision",
-      "Collaboration with multilateral humanitarian agencies",
-      "Support via lawful diplomatic and faith-based channels",
-      "Targeted assistance to displaced populations"
+      "Emergency provision of medical services, supplies, or personnel",
+      "Collaboration with multilateral agencies (e.g. WHO, Red Cross) or recognised field partners",
+      "Support delivered via lawful ecclesiastical, faith-based, or diplomatic channels",
+      "Targeted assistance to displaced populations or border-zone healthcare voids that is apolitical, impartial, and compliant with international humanitarian law"
     ]
   }
 ];

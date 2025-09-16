@@ -19,11 +19,10 @@ export const HomePage = () => {
         
         <div className="hero__overlay">
           <h1 className="font-serif font-bold mb-6 text-center">
-            Access to Health is Justice — Not Charity.
+            "Access to health is not an act of generosity—it is a matter of justice."
           </h1>
           <p className="text-xl mb-8 leading-relaxed text-center">
-            The Global Health Access Trust upholds the sacred obligation to protect 
-            human dignity through healthcare access, without border, bias, or exclusion.
+            The Global Health Access Trust was established to uphold one of the most sacred obligations of civil society: to protect the dignity of every human life through access to health, healing, and hope—without border, bias, or exclusion.
           </p>
           <div className="cta-row max-w-xs mx-auto mb-6">
             <Link to="/donate">
@@ -36,17 +35,30 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Impact Statistics */}
+      {/* Vision Section */}
       <section className="section" style={{background: 'var(--c-alt)'}}>
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
-              Our Impact at a Glance
+              Our vision is unwavering
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{color: 'var(--c-muted)'}}>
-              Principled. Enduring. Uncompromising. Our commitment to healthcare justice 
-              reaches across borders to uphold human dignity.
-            </p>
+            <div className="max-w-4xl mx-auto space-y-6" style={{color: 'var(--c-muted)'}}>
+              <p className="text-lg leading-relaxed">
+                Anchored in the enduring principles of duty, legacy, and public service, we exist not to make noise—but to make a difference. Ours is not a campaign. It is a trust. A covenant between conscience and capacity, designed to stand the test of time.
+              </p>
+              <p className="text-lg leading-relaxed">
+                We are governed not by trend or transaction, but by responsibility to those left behind—the displaced, the overlooked, the abandoned. We act with the same resolve one would expect from the stewards of great estates or the custodians of national legacy. Because that is what we are.
+              </p>
+              <p className="text-lg leading-relaxed">
+                Founded by leaders in global health, governance, and systems change, the Trust is built to convene those who seek meaning beyond wealth. Individuals and institutions who understand that a life well lived is one that uplifts others.
+              </p>
+              <p className="text-lg leading-relaxed">
+                We believe in a world in which no human being is denied care or dignity because of where they were born, what they own, or what they lack.
+              </p>
+              <p className="text-lg leading-relaxed font-semibold">
+                This is not charity. This is legacy in motion.
+              </p>
+            </div>
           </div>
           
           <div className="grid-3">
@@ -72,16 +84,15 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Five Pillars Section */}
+      {/* Five Areas Section */}
       <section className="section">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
-              Five Areas of Intervention
+              What We Fund
             </h2>
             <p className="text-lg max-w-3xl mx-auto" style={{color: 'var(--c-muted)'}}>
-              Our charitable mandate encompasses lawful, equitable intervention 
-              across these five critical areas of global health access.
+              The Global Health Access Trust is established for exclusively charitable purposes in accordance with the laws of England and Wales. The Trust's funding mandate encompasses the following five areas of lawful, equitable, and public-spirited intervention:
             </p>
           </div>
           
@@ -116,39 +127,40 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Principles Section */}
       <section className="section" style={{background: 'var(--c-alt)'}}>
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
-              Voices of Impact
+              Welcome to the Global Health Access Trust
             </h2>
-            <p className="text-lg max-w-2xl mx-auto" style={{color: 'var(--c-muted)'}}>
-              Hear from healthcare professionals and communities whose lives 
-              have been transformed through our principled approach to global health access.
-            </p>
           </div>
           
-          <div className="grid-2 max-w-6xl mx-auto">
-            {TESTIMONIALS.slice(0, 2).map((testimonial, index) => (
-              <div key={index} className="card">
-                <blockquote className="text-lg leading-relaxed mb-6" style={{color: 'var(--c-text)'}}>
-                  "{testimonial.quote}"
-                </blockquote>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{background: 'color-mix(in srgb, var(--c-primary) 10%, white)'}}>
-                    <Users className="w-6 h-6" style={{color: 'var(--c-primary)'}} />
-                  </div>
-                  <div>
-                    <div className="font-semibold" style={{color: 'var(--c-text)'}}>{testimonial.author}</div>
-                    <div className="text-sm" style={{color: 'var(--c-muted)'}}>
-                      {testimonial.role}
-                      {testimonial.organization && `, ${testimonial.organization}`}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="grid-3 max-w-4xl mx-auto">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4" style={{color: 'var(--c-highlight)'}}>
+                Principled.
+              </h3>
+              <p style={{color: 'var(--c-muted)'}}>
+                Unwavering commitment to ethical standards and institutional integrity in all our work.
+              </p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4" style={{color: 'var(--c-highlight)'}}>
+                Enduring.
+              </h3>
+              <p style={{color: 'var(--c-muted)'}}>
+                Built to stand the test of time, serving communities for generations to come.
+              </p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4" style={{color: 'var(--c-highlight)'}}>
+                Uncompromising.
+              </h3>
+              <p style={{color: 'var(--c-muted)'}}>
+                Never wavering in our commitment to healthcare as a matter of justice, not charity.
+              </p>
+            </div>
           </div>
         </div>
       </section>
