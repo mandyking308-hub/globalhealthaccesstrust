@@ -162,23 +162,16 @@ export const HomePage = () => {
       <section className="py-16 primary-gradient text-primary-foreground">
         <div className="container-section text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-            Join Our Mission
+            Support Our Mission
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
-            Whether through donation, partnership, or advocacy, your support enables 
-            us to uphold healthcare as a matter of justice, not generosity.
+            Your donation enables us to uphold healthcare as a matter of justice, not generosity.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex justify-center">
             <Link to="/donate">
-              <Button size="lg" variant="secondary" className="px-8 py-4">
+              <Button size="lg" variant="secondary" className="px-8 py-4 min-h-[44px]">
                 Make a Donation
                 <Heart className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link to="/get-involved">
-              <Button size="lg" variant="outline" className="px-8 py-4 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                Get Involved
-                <Users className="ml-2 w-5 h-5" />
               </Button>
             </Link>
           </div>

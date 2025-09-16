@@ -39,7 +39,7 @@ export const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-2">
+            <nav className="hidden lg:flex items-center gap-4">
               {NAVIGATION_ITEMS.map((item) => (
                 <div
                   key={item.href}
@@ -49,7 +49,7 @@ export const Header = () => {
                 >
                   <Link
                     to={item.href}
-                    className="flex items-center px-3 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent/80 rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="flex items-center px-3 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent/80 rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 whitespace-nowrap"
                     tabIndex={0}
                   >
                     {item.label}

@@ -52,7 +52,7 @@ export const Footer = () => {
                   <Mail className="w-4 h-4 flex-shrink-0" />
                   <a 
                     href={`mailto:${SITE_CONFIG.email}`}
-                    className="hover:text-primary-foreground transition-colors"
+                    className="hover:text-primary-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded"
                   >
                     {SITE_CONFIG.email}
                   </a>
