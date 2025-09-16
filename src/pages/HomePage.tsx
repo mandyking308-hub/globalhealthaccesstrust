@@ -34,8 +34,8 @@ export const HomePage = () => {
             </Link>
           </div>
           
-          {/* Donate Card inside Hero */}
-          <div className="donate-inline">
+          {/* Donate Panel inside Hero */}
+          <div className="donate-panel">
             <p className="text-xl mb-8 max-w-3xl mx-auto">
               Your donation enables us to uphold healthcare as a matter of justice, not generosity.
             </p>
