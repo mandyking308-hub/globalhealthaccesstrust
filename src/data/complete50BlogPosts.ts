@@ -92,7 +92,7 @@ Policy change is measured not in legislation passed but in lives improved. Every
 const generateRemainingPosts = (): BlogPost[] => {
   const titles = [
     "Building Resilient Health Systems in MENA Region",
-    "Community Health Workers: The Backbone of Primary Care",
+    "Community Health Workers: The Backbone of Primary Care", 
     "Digital Health Solutions in Remote Communities",
     "Mental Health Integration in Primary Healthcare",
     "Maternal Health Access in Rural Settings",
@@ -100,41 +100,165 @@ const generateRemainingPosts = (): BlogPost[] => {
     "Training Programs for Healthcare Leadership",
     "Health System Financing: Sustainable Models",
     "Quality Assurance in Resource-Constrained Settings",
-    "Partnership Approaches to Healthcare Development"
-    // ... and 37 more titles
+    "Partnership Approaches to Healthcare Development",
+    "Cultural Competency in Global Health Practice",
+    "Women's Health Rights and Access Barriers",
+    "Addressing Health Inequities in Urban Settings",
+    "Child Health and Nutrition Security",
+    "Elderly Care in Resource-Limited Contexts",
+    "Mental Health Stigma Reduction Strategies",
+    "Healthcare Workforce Development Models",
+    "Technology Transfer in Medical Equipment",
+    "Primary Healthcare Strengthening Initiatives",
+    "Health Education and Community Engagement",
+    "Pharmaceutical Access and Supply Chain Management",
+    "Infection Prevention and Control Standards",
+    "Health Data Systems and Digital Infrastructure",
+    "Humanitarian Health Response Coordination",
+    "Non-Communicable Disease Management",
+    "Reproductive Health Services Expansion",
+    "Traditional Medicine Integration Approaches",
+    "Health Facility Management and Operations",
+    "Community-Based Health Insurance Models",
+    "Health Professional Education Reform",
+    "Cross-Border Health Programme Implementation",
+    "Health System Performance Measurement",
+    "Public-Private Partnership Development",
+    "Health Policy Implementation Strategies",
+    "Clinical Research Capacity Building",
+    "Health Communication and Information Systems",
+    "Preventive Care Programme Design",
+    "Healthcare Quality Improvement Methods",
+    "Sustainable Health Financing Mechanisms",
+    "Health Governance and Accountability",
+    "Medical Ethics in Resource-Limited Settings",
+    "Health Workforce Retention Strategies",
+    "Community Health Programme Evaluation",
+    "Healthcare Innovation and Technology",
+    "Health System Resilience Building",
+    "Global Health Partnership Models",
+    "Health Security and Emergency Preparedness"
   ];
 
   const regions = ["Africa", "South Asia", "MENA", "Latin America", "Eastern Europe"];
   const authors = ["Dr. Sarah Chen", "Dr. Amara Okafor", "Professor James Wilson", "Dr. Priya Sharma", "Dr. Elena Rodriguez"];
   const programAreas = ["Healthcare Access", "Education & Training", "Systems Strengthening", "Policy & Research", "Emergency Relief"];
 
-  return Array.from({ length: 47 }, (_, index) => ({
-    id: String(index + 4),
-    title: titles[index % titles.length] + ` - ${regions[index % regions.length]}`,
-    slug: (titles[index % titles.length] + `-${regions[index % regions.length]}`).toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-    summary: `Comprehensive analysis of healthcare initiatives and their impact on community health outcomes in ${regions[index % regions.length]}.`,
-    body: `# ${titles[index % titles.length]}
+  return Array.from({ length: 47 }, (_, index) => {
+    const title = titles[index];
+    const region = regions[index % regions.length];
+    const author = authors[index % authors.length];
+    const programArea = programAreas[index % programAreas.length];
+    const fullTitle = `${title} - ${region}`;
+    const slug = fullTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    
+    return {
+      id: String(index + 4),
+      title: fullTitle,
+      slug: slug,
+      summary: `Examining innovative healthcare approaches and their implementation in ${region}, focusing on sustainable development and community-centered care delivery models.`,
+      body: generateDetailedArticleBody(title, region, programArea),
+      featuredImage: "/api/placeholder/800/400",
+      publishDate: new Date(2023, 0, 1 + index * 15).toISOString().split('T')[0], // Back-dated across 24 months
+      author: author,
+      categories: [programArea],
+      tags: [region.toLowerCase(), "healthcare", "community development", "global health"],
+      readingTime: Math.floor(Math.random() * 4) + 4,
+      seoTitle: `${title} ${region} - GHAT Research`,
+      metaDescription: `Analysis of ${title.toLowerCase()} in ${region} and their impact on community health outcomes and sustainable development.`,
+      region: region,
+      programArea: programArea
+    };
+  });
+};
 
-This article explores innovative healthcare approaches and their implementation across diverse contexts, examining both challenges and opportunities for sustainable health system development.
+// Helper function to generate detailed article bodies
+const generateDetailedArticleBody = (title: string, region: string, programArea: string): string => {
+  const introductions = [
+    `Healthcare delivery in ${region} presents unique opportunities and challenges that require innovative, context-sensitive approaches.`,
+    `The implementation of ${title.toLowerCase()} in ${region} represents a critical step forward in addressing healthcare inequities.`,
+    `Across ${region}, healthcare professionals and communities are pioneering new approaches to ${title.toLowerCase()}.`,
+    `The landscape of healthcare in ${region} is evolving, with ${title.toLowerCase()} at the forefront of sustainable change.`
+  ];
 
-## Key Findings
+  const challenges = [
+    "Resource constraints and infrastructure limitations",
+    "Cultural barriers and community engagement challenges",
+    "Workforce development and professional training needs",
+    "Policy frameworks and regulatory environments",
+    "Financial sustainability and funding mechanisms"
+  ];
 
-Our research demonstrates the importance of community-centered approaches that respect local contexts while maintaining high standards of care and professional excellence.
+  const solutions = [
+    "Community-centered care delivery models that respect local contexts",
+    "Capacity building programmes that emphasise sustainability",
+    "Partnership approaches that leverage local expertise",
+    "Technology integration that enhances rather than replaces human care",
+    "Policy advocacy that promotes equitable access to healthcare"
+  ];
 
-## Impact and Outcomes
+  const outcomes = [
+    "Improved healthcare access for underserved populations",
+    "Enhanced professional capacity and institutional resilience",
+    "Strengthened community engagement and local ownership",
+    "Evidence-based policy development and implementation",
+    "Sustainable financing mechanisms and resource allocation"
+  ];
 
-The initiatives discussed represent meaningful progress toward more equitable healthcare access, demonstrating that principled, sustainable interventions can create lasting positive change for communities.`,
-    featuredImage: "/api/placeholder/800/400",
-    publishDate: new Date(2023, 0, 1 + index * 15).toISOString().split('T')[0], // Back-dated across 24 months
-    author: authors[index % authors.length],
-    categories: [programAreas[index % programAreas.length]],
-    tags: [regions[index % regions.length].toLowerCase(), "healthcare", "community development"],
-    readingTime: Math.floor(Math.random() * 4) + 3,
-    seoTitle: `${titles[index % titles.length]} - GHAT Research`,
-    metaDescription: `Analysis of healthcare initiatives in ${regions[index % regions.length]} and their impact on community health outcomes.`,
-    region: regions[index % regions.length],
-    programArea: programAreas[index % programAreas.length]
-  }));
+  return `# ${title} - ${region}
+
+${introductions[Math.floor(Math.random() * introductions.length)]} This comprehensive analysis examines current approaches, emerging challenges, and promising solutions in the context of ${programArea.toLowerCase()}.
+
+## Current Landscape
+
+The healthcare environment in ${region} is characterised by both significant opportunities and persistent challenges. Communities across the region are demonstrating remarkable resilience whilst healthcare professionals work tirelessly to provide quality care within existing constraints.
+
+Understanding the local context is essential for developing effective interventions. What works in one setting may require adaptation in another, not due to inherent limitations, but because of the unique social, cultural, and economic factors that shape each community's health needs.
+
+## Key Challenges
+
+Healthcare delivery in ${region} faces several interconnected challenges:
+
+- ${challenges[0]}
+- ${challenges[1]} 
+- ${challenges[2]}
+- ${challenges[3]}
+- ${challenges[4]}
+
+These challenges are not insurmountable barriers but rather opportunities for innovation and creative problem-solving when approached with dignity, respect, and genuine partnership.
+
+## Innovative Solutions
+
+Across ${region}, healthcare professionals and communities are developing innovative approaches:
+
+### Community-Centered Approaches
+${solutions[0]}. This approach recognises that sustainable healthcare solutions must be developed with, not for, the communities they serve.
+
+### Capacity Building
+${solutions[1]}. Investment in human resources and institutional development creates lasting change that extends far beyond individual programmes.
+
+### Strategic Partnerships
+${solutions[2]}. Effective partnerships leverage the strengths of all stakeholders whilst maintaining clear accountability and shared responsibility.
+
+## Measurable Outcomes
+
+The implementation of these approaches has yielded significant positive results:
+
+- ${outcomes[0]}
+- ${outcomes[1]}
+- ${outcomes[2]}
+- ${outcomes[3]}
+- ${outcomes[4]}
+
+> "Healthcare transformation is not measured in statistics alone, but in the dignity restored, the hope rekindled, and the communities strengthened through principled, sustainable intervention."
+
+## Looking Forward
+
+The work ahead requires continued commitment to evidence-based practice, community engagement, and institutional integrity. Every intervention must be designed with sustainability in mind, ensuring that today's investments create lasting positive change for future generations.
+
+Success in global health is not about imposing solutions but about enabling communities to build their own capacity for health and healing. This requires patience, humility, and unwavering commitment to the principle that access to healthcare is a matter of justice, not charity.
+
+The lessons learned from ${region} offer valuable insights for healthcare development globally, demonstrating that principled, community-centered approaches can create meaningful, lasting change in even the most challenging circumstances.`;
 };
 
 export const all50BlogPosts = [...complete50BlogPosts, ...generateRemainingPosts()];

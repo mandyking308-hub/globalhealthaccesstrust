@@ -1,280 +1,293 @@
-import { Heart, Users, Gift, Mail, ArrowRight, Info } from "lucide-react";
+import { useState } from "react";
+import { Heart, Users, Mail, FileText, ArrowRight, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export const GetInvolvedPage = () => {
+  const [newsletterForm, setNewsletterForm] = useState({
+    name: "",
+    email: "",
+    consent: false
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterForm.consent) return;
+    
+    // Simulate submission
+    console.log("Newsletter subscription:", newsletterForm);
+    setIsSubmitted(true);
+    
+    // Reset form after delay
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setNewsletterForm({ name: "", email: "", consent: false });
+    }, 3000);
+  };
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-gold/10 to-primary/5">
+      <section className="py-16 bg-gradient-to-br from-primary/5 to-gold/10">
         <div className="container-section">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Support the Trust
+              Get Involved
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-              The Global Health Access Trust is structured to receive, steward, and apply 
-              charitable donations, legacies, and grants with the full solemnity of a 
-              fiduciary institution, governed by trust law and operating exclusively for 
-              the public benefit.
+              Join our mission to uphold healthcare as a matter of justice. Whether through 
+              donation, partnership, or advocacy, your involvement creates lasting change.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Introduction */}
+      {/* Ways to Get Involved */}
       <section className="py-16">
-        <div className="container-section">
-          <div className="max-w-4xl mx-auto prose-professional text-center mb-16">
-            <p className="text-lg">
-              Gifts to the Trust constitute enduring expressions of public duty, civic identity, 
-              and personal legacy. Whether made in life or by will, every gift received is held 
-              in perpetuity for charitable purposes, and is administered with the same care, 
-              documentation, and integrity one would expect of a constitutional body or public trustee.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Ways to Support */}
-      <section className="py-16 bg-muted/30">
         <div className="container-section">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
               Ways to Support Our Mission
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              We respectfully invite support through the following lawful and recognised methods:
+              From financial support to professional partnerships, there are many meaningful 
+              ways to contribute to healthcare justice worldwide.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-            {/* Direct Donations */}
-            <Card className="card-elevated">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-heart/10 rounded-lg flex items-center justify-center mr-4">
-                    <Heart className="w-6 h-6 text-destructive" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">Direct Charitable Donations</h3>
-                    <Badge variant="secondary" className="mt-1">Most Common</Badge>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Donate */}
+            <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-gold/20 transition-colors">
+                  <Heart className="w-8 h-8 text-gold" />
                 </div>
-                
+                <h3 className="text-xl font-semibold mb-4">Make a Donation</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Support through single or recurring charitable donations made directly to our 
-                  registered bank account, or through authorised donation platforms.
+                  Support our charitable programmes through one-time or monthly donations. 
+                  UK taxpayers can add Gift Aid to increase impact.
                 </p>
-                
-                <div className="space-y-4 mb-6">
-                  <div className="flex justify-between items-center">
-                    <span>One-time donation</span>
-                    <Button size="sm" disabled>Coming Soon</Button>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Monthly giving</span>
-                    <Button size="sm" disabled>Coming Soon</Button>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Annual donation</span>
-                    <Button size="sm" disabled>Coming Soon</Button>
-                  </div>
-                </div>
-                
-                <Alert>
-                  <Info className="w-4 h-4" />
-                  <AlertDescription>
-                    <strong>Gift Aid:</strong> UK taxpayers may qualify for Gift Aid relief 
-                    under HMRC guidelines, increasing the value of your donation by 25% at no cost to you.
-                  </AlertDescription>
-                </Alert>
+                <Link to="/donate">
+                  <Button size="lg" className="w-full">
+                    Donate Now
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
-            {/* Legacy Giving */}
-            <Card className="card-elevated">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gold/10 rounded-lg flex items-center justify-center mr-4">
-                    <Gift className="w-6 h-6 text-gold" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">Legacy Giving</h3>
-                    <Badge variant="outline" className="mt-1">Bequests by Will</Badge>
-                  </div>
+            {/* Partner */}
+            <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
+                  <Users className="w-8 h-8 text-primary" />
                 </div>
-                
+                <h3 className="text-xl font-semibold mb-4">Become a Partner</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Testators may name the Global Health Access Trust as a beneficiary in their will. 
-                  A lasting way to ensure healthcare justice continues beyond your lifetime.
+                  Professional partnerships with healthcare institutions, academic bodies, 
+                  and development organisations to advance our shared mission.
                 </p>
-                
-                <div className="bg-accent/20 border border-accent rounded-lg p-4 mb-6">
-                  <h4 className="font-semibold mb-2">Suggested Wording:</h4>
-                  <p className="text-sm text-muted-foreground italic">
-                    "I give [the sum of £____ / ___% of my residuary estate] to the Global Health 
-                    Access Trust (registered address: 2 Harley Street. London, Charity Commission 
-                    registration pending, anticipated 2025), for its general charitable purposes."
-                  </p>
-                </div>
-                
-                <p className="text-sm text-muted-foreground">
-                  We offer guidance and collaboration with legal and financial advisers to ensure 
-                  your legacy is both honoured and protected.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Major Giving Options */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Restricted Gifts */}
-            <Card className="card-professional">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
-                    <Users className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold">Restricted Gifts & Named Funds</h3>
-                </div>
-                
-                <p className="text-muted-foreground mb-4">
-                  Major benefactors may direct their support to a particular charitable purpose 
-                  aligned with the Trust's objectives—such as the establishment of a named bursary, 
-                  programme, or grant stream.
-                </p>
-                
-                <ul className="text-sm text-muted-foreground space-y-2">
-                  <li>• Review and approval by the Board of Trustees</li>
-                  <li>• Alignment with the Trust's charitable objects</li>
-                  <li>• Documentation via Memorandum of Understanding</li>
-                </ul>
+                <Link to="/contact">
+                  <Button variant="outline" size="lg" className="w-full">
+                    Partner With Us
+                    <Users className="ml-2 w-4 h-4" />
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
-            {/* Founding Benefactors */}
-            <Card className="card-professional">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gold/10 rounded-lg flex items-center justify-center mr-4">
-                    <Gift className="w-6 h-6 text-gold" />
-                  </div>
-                  <h3 className="text-xl font-semibold">Founding Benefactor Status</h3>
+            {/* Stay Informed */}
+            <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-colors">
+                  <Mail className="w-8 h-8 text-accent" />
                 </div>
-                
-                <p className="text-muted-foreground mb-4">
-                  Individuals, foundations, and family offices who make a capital contribution of 
-                  significant scale may be invited to become Founding Benefactors of the Trust.
+                <h3 className="text-xl font-semibold mb-4">Stay Informed</h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Subscribe to our newsletter for updates on programmes, research, 
+                  and opportunities to get involved in healthcare justice.
                 </p>
-                
-                <ul className="text-sm text-muted-foreground space-y-2">
-                  <li>• Establish named endowments</li>
-                  <li>• Recognition in perpetuity on formal registers</li>
-                  <li>• Annual stewardship reports</li>
-                  <li>• Ceremonial and diplomatic representation opportunities</li>
-                </ul>
+                <Button variant="outline" size="lg" className="w-full" onClick={() => {
+                  document.getElementById('newsletter-section')?.scrollIntoView({ behavior: 'smooth' });
+                }}>
+                  Subscribe
+                  <Mail className="ml-2 w-4 h-4" />
+                </Button>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Donation Integration Placeholder */}
-      <section className="py-16 primary-gradient text-primary-foreground">
+      {/* Professional Partnerships */}
+      <section className="py-16 bg-muted/30">
         <div className="container-section">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-              Ready to Make a Difference?
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-8 text-center">
+              Professional Partnerships
             </h2>
             
-            <div className="bg-primary-foreground/10 border border-primary-foreground/20 rounded-lg p-8 mb-8">
-              <h3 className="text-xl font-semibold mb-4">Integration Placeholder</h3>
-              <p className="text-primary-foreground/80 mb-4">
-                Secure donation processing will be integrated with one of the following trusted platforms:
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center text-sm">
-                <Badge variant="secondary">Stripe</Badge>
-                <Badge variant="secondary">Charities Aid Foundation</Badge>
-                <Badge variant="secondary">JustGiving</Badge>
-                <Badge variant="secondary">PayPal Giving Fund</Badge>
-              </div>
-              <p className="text-sm text-primary-foreground/70 mt-4">
-                Implementation notes: Ensure PCI compliance, Gift Aid capture, and donor stewardship workflows.
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-              <Button size="lg" variant="secondary" disabled>
-                <Heart className="mr-2 w-5 h-5" />
-                Donate Now (Coming Soon)
-              </Button>
-              
-              <div className="text-primary-foreground/80">
-                <p>For immediate donations or legacy enquiries, please contact:</p>
-                <a 
-                  href="mailto:operations@globalhealthaccesstrust.org" 
-                  className="font-medium underline hover:no-underline"
-                >
-                  operations@globalhealthaccesstrust.org
-                </a>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <Card className="card-professional">
+                <CardContent className="p-8">
+                  <FileText className="w-8 h-8 text-primary mb-4" />
+                  <h3 className="text-xl font-semibold mb-4">Healthcare Institutions</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    We welcome partnerships with hospitals, clinics, medical schools, and 
+                    healthcare systems committed to principled, sustainable care delivery.
+                  </p>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Clinical programme development</li>
+                    <li>• Professional training initiatives</li>
+                    <li>• Research collaboration opportunities</li>
+                    <li>• Quality improvement programmes</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="card-professional">
+                <CardContent className="p-8">
+                  <Users className="w-8 h-8 text-primary mb-4" />
+                  <h3 className="text-xl font-semibold mb-4">Academic & Research</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    Academic partnerships advance evidence-based policy and practice 
+                    through rigorous research and scholarship.
+                  </p>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Policy research initiatives</li>
+                    <li>• Academic exchange programmes</li>
+                    <li>• Publication and dissemination</li>
+                    <li>• Capacity building support</li>
+                  </ul>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-16">
+      <section id="newsletter-section" className="py-16">
         <div className="container-section">
-          <div className="max-w-2xl mx-auto text-center">
-            <Mail className="w-16 h-16 text-gold mx-auto mb-6" />
-            <h2 className="text-2xl font-serif font-bold mb-4">Stay Connected</h2>
-            <p className="text-muted-foreground mb-8">
-              Subscribe to receive updates on our work, impact reports, and opportunities 
-              to support healthcare justice worldwide.
-            </p>
-            
-            <div className="bg-muted/30 border border-border rounded-lg p-6">
-              <h3 className="font-semibold mb-4">Newsletter Integration Placeholder</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Double opt-in newsletter signup with integration options:
-              </p>
-              <div className="flex flex-wrap gap-2 justify-center mb-4">
-                <Badge variant="outline">Mailchimp</Badge>
-                <Badge variant="outline">ConvertKit</Badge>
-                <Badge variant="outline">Generic Webhook</Badge>
-              </div>
-              <Button disabled>
-                Subscribe (Coming Soon)
-              </Button>
-            </div>
+          <div className="max-w-2xl mx-auto">
+            <Card className="card-elevated">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <Mail className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <h2 className="text-2xl font-serif font-bold mb-2">Stay Informed</h2>
+                  <p className="text-muted-foreground">
+                    Subscribe to receive updates on our programmes, research findings, 
+                    and opportunities to support healthcare justice.
+                  </p>
+                </div>
+
+                {isSubmitted ? (
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Send className="w-8 h-8 text-success" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">Subscription Confirmed</h3>
+                    <p className="text-muted-foreground">
+                      Thank you for subscribing. You'll receive a confirmation email shortly 
+                      with instructions to complete your subscription.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="newsletter-name">First Name</Label>
+                        <Input
+                          id="newsletter-name"
+                          value={newsletterForm.name}
+                          onChange={(e) => setNewsletterForm(prev => ({ ...prev, name: e.target.value }))}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="newsletter-email">Email Address</Label>
+                        <Input
+                          id="newsletter-email"
+                          type="email"
+                          value={newsletterForm.email}
+                          onChange={(e) => setNewsletterForm(prev => ({ ...prev, email: e.target.value }))}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex items-start space-x-3">
+                        <Checkbox
+                          id="newsletter-consent"
+                          checked={newsletterForm.consent}
+                          onCheckedChange={(checked) => 
+                            setNewsletterForm(prev => ({ ...prev, consent: checked as boolean }))
+                          }
+                          className="mt-1"
+                        />
+                        <Label htmlFor="newsletter-consent" className="text-sm leading-relaxed cursor-pointer">
+                          I consent to receiving email updates from the Global Health Access Trust 
+                          and understand I can unsubscribe at any time. Your information will be 
+                          processed in accordance with our Privacy Policy.
+                        </Label>
+                      </div>
+
+                      <Alert>
+                        <AlertDescription className="text-sm">
+                          <strong>Double Opt-In:</strong> You will receive a confirmation email 
+                          to verify your subscription. We respect your privacy and will never 
+                          share your information with third parties.
+                        </AlertDescription>
+                      </Alert>
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      className="w-full"
+                      disabled={!newsletterForm.consent}
+                    >
+                      <Mail className="mr-2 w-4 h-4" />
+                      Subscribe to Updates
+                    </Button>
+                  </form>
+                )}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Stewardship Promise */}
-      <section className="py-16 bg-accent/20">
-        <div className="container-section">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-serif font-bold mb-6">
-              Stewardship and Oversight
-            </h2>
-            <div className="prose-professional">
-              <p className="text-lg mb-6">
-                All support received by the Trust shall be receipted and acknowledged with due formality, 
-                accounted for in published financial statements, and applied solely in accordance with 
-                the Trust's charitable constitution and the laws of England and Wales.
-              </p>
-              <blockquote className="text-xl font-serif italic text-primary">
-                "No donation may be used for private benefit, nor may any influence be accepted 
-                in exchange for gift. The Trust retains full independence of operation and 
-                decision-making authority in all matters."
-              </blockquote>
-            </div>
+      {/* Contact CTA */}
+      <section className="py-16 bg-primary text-primary-foreground">
+        <div className="container-section text-center">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
+            Ready to Make a Difference?
+          </h2>
+          <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
+            Whether you're an individual donor, healthcare professional, or institutional 
+            partner, we welcome you to join our mission of healthcare justice.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link to="/contact">
+              <Button size="lg" variant="secondary" className="px-8 py-4">
+                Get in Touch
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+            <Link to="/about">
+              <Button size="lg" variant="outline" className="px-8 py-4 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                Learn More About GHAT
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
