@@ -3,7 +3,7 @@ import { ArrowRight, Heart, Users, Globe, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { IMPACT_STATS, TESTIMONIALS, PROGRAM_AREAS } from "@/lib/constants";
-import heroImage from "@/assets/hero-healthcare-dignity.jpg";
+import heroImage from "@/assets/hero-global-health-access.jpg";
 
 export const HomePage = () => {
   return (

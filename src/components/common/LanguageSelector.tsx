@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ChevronDown, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { 
@@ -8,15 +7,13 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import { LANGUAGES } from "@/lib/constants";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export const LanguageSelector = () => {
-  const [currentLanguage, setCurrentLanguage] = useState<(typeof LANGUAGES)[number]>(LANGUAGES[0]);
+  const { currentLanguage, setLanguage } = useTranslation();
 
   const handleLanguageChange = (language: (typeof LANGUAGES)[number]) => {
-    setCurrentLanguage(language);
-    // In a real implementation, this would trigger translation
-    // For now, we'll just update the state
-    console.log(`Language changed to: ${language.name}`);
+    setLanguage(language);
   };
 
   return (

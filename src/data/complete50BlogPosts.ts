@@ -20,7 +20,7 @@ Our recent work in the region has focused on creating resilient healthcare netwo
 Telemedicine platforms have emerged as powerful tools for consultation and continuing education. Local healthcare workers can now access specialist advice in real-time, whilst patients receive diagnoses and treatment plans without lengthy travel.
 
 The networks we build today will serve communities for generations. Every connection strengthened, every skill transferred, contributes to a more equitable future where geography no longer determines access to healthcare.`,
-    featuredImage: "/api/placeholder/800/400",
+    featuredImage: "/src/assets/blog-rural-healthcare-africa.jpg",
     publishDate: "2024-09-15",
     author: "Dr. Amara Okafor",
     categories: ["Healthcare Access", "Systems Strengthening"],
@@ -47,7 +47,7 @@ Emergency contexts require specialised approaches to professional development. T
 Our crisis training programmes emphasise practical skills, rapid deployment, and contextual adaptation. Healthcare workers learn to provide quality care with limited resources whilst maintaining dignity and respect for every patient.
 
 The investment in crisis training extends far beyond immediate emergency response. These skills strengthen healthcare systems for years to come, creating more resilient communities prepared for whatever challenges they may face.`,
-    featuredImage: "/api/placeholder/800/400",
+    featuredImage: "/src/assets/blog-crisis-training.jpg",
     publishDate: "2024-08-28",
     author: "Dr. Elena Rodriguez",
     categories: ["Education & Training", "Emergency Relief"],
@@ -74,7 +74,7 @@ Across the region, countries are grappling with similar challenges: rising healt
 Effective policy reform requires deep understanding of local contexts. What works in one setting may fail entirely in another, not due to inherent flaws in the approach, but because of misalignment with local realities.
 
 Policy change is measured not in legislation passed but in lives improved. Every reform that removes a barrier to care, every intervention that reduces inequality, contributes to a more just and equitable healthcare system for all.`,
-    featuredImage: "/api/placeholder/800/400",
+    featuredImage: "/src/assets/blog-policy-south-asia.jpg",
     publishDate: "2024-08-10",
     author: "Professor James Wilson",
     categories: ["Policy & Research"],
