@@ -20,9 +20,9 @@ export const Header = () => {
         Skip to content
       </a>
       
-      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border h-16 lg:h-18">
         <div className="container-section">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-16 lg:h-18 items-center justify-between">
             {/* Logo */}
             <Link 
               to="/" 
@@ -39,7 +39,7 @@ export const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-1">
+            <nav className="hidden lg:flex items-center space-x-2">
               {NAVIGATION_ITEMS.map((item) => (
                 <div
                   key={item.href}
@@ -49,7 +49,8 @@ export const Header = () => {
                 >
                   <Link
                     to={item.href}
-                    className="flex items-center px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-all duration-200"
+                    className="flex items-center px-3 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent/80 rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    tabIndex={0}
                   >
                     {item.label}
                     {'submenu' in item && <ChevronDown className="w-3 h-3 ml-1" />}
@@ -57,13 +58,14 @@ export const Header = () => {
                   
                   {/* Dropdown Menu */}
                   {'submenu' in item && activeDropdown === item.label && (
-                    <div className="absolute top-full left-0 mt-1 w-64 bg-background border border-border rounded-md shadow-lg py-2 z-50">
+                    <div className="absolute top-full left-0 mt-2 w-72 bg-background border border-border rounded-lg shadow-xl py-2 z-50">
                       {item.submenu.map((subItem) => (
                         <Link
                           key={subItem.href}
                           to={subItem.href}
-                          className="block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-accent transition-colors"
+                          className="block px-4 py-3 text-sm text-foreground hover:text-primary hover:bg-accent/60 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                           onClick={() => setActiveDropdown(null)}
+                          tabIndex={0}
                         >
                           {subItem.label}
                         </Link>
@@ -111,26 +113,26 @@ export const Header = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="lg:hidden border-t border-border">
-              <div className="py-4 space-y-1">
+            <div className="lg:hidden border-t border-border bg-background">
+              <div className="py-4 space-y-2 max-h-96 overflow-y-auto">
                 {NAVIGATION_ITEMS.map((item) => (
                   <div key={item.href}>
                     <Link
                       to={item.href}
-                      className="flex items-center justify-between px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-accent rounded-md transition-all duration-200"
+                      className="flex items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-accent/60 rounded-md transition-all duration-200 min-h-[44px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                       onClick={() => !('submenu' in item) && setIsMenuOpen(false)}
                     >
                       {item.label}
-                      {'submenu' in item && <ChevronDown className="w-3 h-3" />}
+                      {'submenu' in item && <ChevronDown className="w-4 h-4" />}
                     </Link>
                     {/* Mobile Submenu */}
                     {'submenu' in item && (
-                      <div className="ml-4 mt-2 space-y-1">
+                      <div className="ml-4 mt-1 space-y-1 border-l-2 border-accent pl-4">
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.href}
                             to={subItem.href}
-                            className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-all duration-200"
+                            className="block px-4 py-3 text-sm text-muted-foreground hover:text-primary hover:bg-accent/40 rounded-md transition-all duration-200 min-h-[44px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                             onClick={() => setIsMenuOpen(false)}
                           >
                             {subItem.label}
@@ -140,9 +142,9 @@ export const Header = () => {
                     )}
                   </div>
                 ))}
-                <div className="px-4 pt-2">
+                <div className="px-4 pt-4 border-t border-border mt-4">
                   <Link to="/donate">
-                    <Button variant="default" size="sm" className="w-full">
+                    <Button variant="default" size="lg" className="w-full min-h-[44px]">
                       Donate Now
                     </Button>
                   </Link>

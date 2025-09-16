@@ -86,26 +86,89 @@
   }
   
   html {
-    font-size: 18px; /* Base 18px as specified */
+    font-size: 16px; /* Standard base */
+    scroll-behavior: smooth;
   }
   
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
-    line-height: 1.6; /* Body line-height: 1.6 */
+    line-height: 1.65; /* Improved body line-height */
+    font-size: 1rem; /* 16px base */
   }
   
+  /* Typography Scale & Hierarchy */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     font-weight: 600;
-    line-height: 1.25; /* Headings line-height: 1.25 */
+    line-height: 1.2; /* Tighter heading line-height */
+    scroll-margin-top: 5rem; /* Prevent header overlap */
   }
   
-  h1 { font-weight: 700; }
-  h2 { font-weight: 700; }
+  h1 { 
+    font-weight: 700; 
+    font-size: clamp(2rem, 4vw, 2.25rem);
+    margin: 2rem 0 1rem 0;
+  }
+  
+  h2 { 
+    font-weight: 700; 
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
+    margin: 3rem 0 0.75rem 0;
+  }
+  
+  h3 { 
+    font-size: clamp(1.25rem, 2.5vw, 1.375rem);
+    margin: 2rem 0 0.5rem 0;
+  }
+  
+  h1:first-child,
+  h2:first-child,
+  h3:first-child {
+    margin-top: 0;
+  }
   
   p {
-    margin-bottom: 1em; /* Paragraph spacing: 1.0em after */
+    margin-bottom: 1rem;
+    max-width: 72ch; /* Optimal reading line length */
+  }
+  
+  /* Improved focus states */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  
+  /* Link styles */
+  a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  a:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+  
+  /* List improvements */
+  ul, ol {
+    padding-left: 1.25rem;
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+  }
+  
+  li:last-child {
+    margin-bottom: 0;
   }
   
   /* Skip to content link */
@@ -117,12 +180,64 @@
 
 /* Custom Utilities - GHAT Design System */
 .container-section {
-  @apply container mx-auto px-6 lg:px-8;
-  max-width: 1320px; /* 2xl container max */
+  @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  max-width: 1152px; /* 72rem as specified */
 }
 
 .container-content {
-  @apply max-w-4xl mx-auto px-6 lg:px-8;
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Content Layout Utilities */
+.content-wrapper {
+  @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16;
+}
+
+.content-prose {
+  @apply prose prose-lg max-w-none;
+}
+
+.content-prose p {
+  @apply leading-relaxed mb-4;
+  max-width: 72ch;
+}
+
+.content-prose h1 {
+  @apply text-4xl lg:text-5xl font-serif font-bold mb-6;
+  line-height: 1.2;
+}
+
+.content-prose h2 {
+  @apply text-2xl lg:text-3xl font-serif font-bold mt-8 mb-4;
+  line-height: 1.25;
+}
+
+.content-prose h3 {
+  @apply text-xl lg:text-2xl font-serif font-semibold mt-6 mb-3;
+}
+
+.content-prose ul,
+.content-prose ol {
+  @apply my-4 pl-6;
+}
+
+.content-prose li {
+  @apply mb-2;
+}
+
+/* Mobile-first responsive spacing */
+@media (max-width: 640px) {
+  .content-prose p {
+    max-width: 45ch;
+  }
+  
+  .content-prose h1 {
+    @apply text-3xl;
+  }
+  
+  .content-prose h2 {
+    @apply text-xl;
+  }
 }
 
 /* Card Variants with Exact Shadows */
