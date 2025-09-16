@@ -140,23 +140,28 @@ a:hover{text-decoration:none;}
   background: transparent !important; color: #FFFFFF !important; border: 1px solid rgba(255,255,255,.9) !important;
 }
 
-/* Compact navy donate panel (ONE only) inside hero overlay */
+/* Navy donate panel inside hero overlay */
 .donate-panel {
-  background: #0B2B4C;   /* matching navy */
-  color: #FFFFFF;
-  border-radius: 10px;
-  padding: 12px 16px;
-  display: grid; gap: 8px; align-content: start;
-  max-width: 520px;
+  background: #0B2B4C;   /* navy blue to match website */
+  color: #FFFFFF;        /* white text */
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+  box-shadow: 0 4px 12px rgba(11, 43, 76, 0.3);
 }
 .donate-panel * { color: #FFFFFF !important; }
+.donate-panel p { margin-bottom: 16px; }
 .donate-panel a, .donate-panel .btn, .donate-panel button {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 44px; padding: 10px 16px;
+  min-height: 44px; padding: 12px 20px;
   background: #FFFFFF; color: #0B2B4C !important;
   border: 1px solid #FFFFFF; border-radius: 8px; font-weight: 600; text-decoration: none;
+  transition: all 0.2s ease;
 }
-.donate-panel a:hover, .donate-panel .btn:hover, .donate-panel button:hover { filter: brightness(.92); }
+.donate-panel a:hover, .donate-panel .btn:hover, .donate-panel button:hover { 
+  background: #f8f9fa; 
+  transform: translateY(-1px);
+}
 
 /* Clean up: remove any other donate cards/boxes on THIS PAGE ONLY if they exist */
 .donate, .donate-card, .box--donate { display: none !important; }  /* only if these are separate sections outside the hero */
