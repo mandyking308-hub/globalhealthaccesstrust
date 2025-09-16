@@ -9,7 +9,7 @@ export const HomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="hero--full relative flex items-center justify-center overflow-hidden">
+      <section className="hero--full hero--bg relative flex items-center justify-center overflow-hidden">
         <div 
           className="hero__image absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
@@ -156,12 +156,12 @@ export const HomePage = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="section text-center" style={{background: 'var(--c-primary)', color: '#fff'}}>
+      <section className="section text-center donate">
         <div className="container">
-          <h2 className="font-serif font-bold mb-6 text-white">
+          <h2 className="font-serif font-bold mb-6">
             Support Our Mission
           </h2>
-          <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
+          <p className="text-xl mb-8 max-w-3xl mx-auto">
             Your donation enables us to uphold healthcare as a matter of justice, not generosity.
           </p>
           <div className="cta-row max-w-xs mx-auto">
