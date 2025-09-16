@@ -4,12 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { blogPosts } from "@/data/fullBlogPosts";
+import { all50BlogPosts } from "@/data/complete50BlogPosts";
 
 export const BlogIndexPage = () => {
-  // Show first 12 posts for initial load
-  const displayedPosts = blogPosts.slice(0, 12);
-  const featuredPosts = blogPosts.slice(0, 3);
+  const displayedPosts = all50BlogPosts.slice(0, 12);
+  const featuredPosts = all50BlogPosts.slice(0, 3);
 
   return (
     <div className="py-16">
@@ -147,7 +146,7 @@ export const BlogIndexPage = () => {
 
         <div className="text-center mt-12">
           <p className="text-muted-foreground mb-4">
-            Showing {displayedPosts.length} of {blogPosts.length} articles
+            Showing {displayedPosts.length} of {all50BlogPosts.length} articles
           </p>
           <Button size="lg">Load More Articles</Button>
         </div>

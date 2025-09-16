@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { CookieBanner } from "@/components/CookieBanner";
+import { Analytics } from "@/components/Analytics";
 
 export const Layout = () => {
   return (
@@ -10,6 +12,8 @@ export const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <CookieBanner />
+      <Analytics />
     </div>
   );
 };

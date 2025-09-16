@@ -12,19 +12,14 @@ import { BlogPostPage } from "./pages/BlogPostPage";
 import { GetInvolvedPage } from "./pages/GetInvolvedPage";
 import { PublicationsPage } from "./pages/PublicationsPage";
 import { ContactPage } from "./pages/ContactPage";
-import { 
-  ConstitutionPage,
-  PrivacyPolicyPage,
-  CookiePolicyPage,
-  TermsOfUsePage,
-  AccessibilityStatementPage,
-  SafeguardingPage,
-  AntiFraudPage,
-  WhistleblowingPage,
-  GovernancePage
-} from "./pages/ConstitutionPage";
+import { ConstitutionPage } from "./pages/ConstitutionPage";
+import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage";
+import { CookiePolicyPage } from "./pages/CookiePolicyPage";
+import { TermsOfUsePage } from "./pages/TermsOfUsePage";
+import { AccessibilityStatementPage } from "./pages/AccessibilityStatementPage";
+import { SafeguardingPage, AntiFraudPage, WhistleblowingPage, GovernancePage } from "./pages/SafeguardingPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 import { DonatePage } from "./pages/DonatePage";
-import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +35,7 @@ const App = () => (
             <Route path="about" element={<AboutPage />} />
             <Route path="what-we-do" element={<WhatWeDoPage />} />
             <Route path="blog" element={<BlogIndexPage />} />
-            <Route path="blog/:slug" element={<BlogPostPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="get-involved" element={<GetInvolvedPage />} />
             <Route path="donate" element={<DonatePage />} />
             <Route path="publications" element={<PublicationsPage />} />
@@ -58,7 +53,7 @@ const App = () => (
             <Route path="governance" element={<GovernancePage />} />
           </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

@@ -24,8 +24,8 @@ export const LanguageSelector = () => {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="flex items-center space-x-2">
           <Globe className="w-4 h-4" />
-          <span className="hidden sm:inline">{currentLanguage.flag} {currentLanguage.name}</span>
-          <span className="sm:hidden">{currentLanguage.flag}</span>
+          <span className="hidden sm:inline">🌐 {currentLanguage.name}</span>
+          <span className="sm:hidden">🌐</span>
           <ChevronDown className="w-3 h-3" />
         </Button>
       </DropdownMenuTrigger>
@@ -38,7 +38,7 @@ export const LanguageSelector = () => {
               language.code === currentLanguage.code ? "bg-accent" : ""
             }`}
           >
-            <span className="text-lg">{language.flag}</span>
+            <span className="text-lg">🌐</span>
             <span>{language.name}</span>
           </DropdownMenuItem>
         ))}
