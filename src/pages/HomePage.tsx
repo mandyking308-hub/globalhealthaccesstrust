@@ -9,26 +9,26 @@ export const HomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+      <section className="hero--full relative flex items-center justify-center overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="hero__image absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         >
-          <div className="absolute inset-0 bg-primary/70"></div>
+          <div className="absolute inset-0" style={{background: 'var(--c-primary)', opacity: 0.7}}></div>
         </div>
         
-        <div className="relative z-10 container-section text-center text-white">
-          <div className="max-w-4xl mx-auto animate-fade-in">
-            <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight max-w-[28ch] md:max-w-[34ch]">
-              Access to health is justice — not charity.
+        <div className="relative z-10 container text-center text-white">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="font-serif font-bold mb-6 text-white">
+              Access to Health is Justice — Not Charity.
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-3xl mx-auto">
               The Global Health Access Trust upholds the sacred obligation to protect 
               human dignity through healthcare access, without border, bias, or exclusion.
             </p>
-            <div className="flex justify-center">
+            <div className="cta-row max-w-xs mx-auto">
               <Link to="/donate">
-                <Button size="lg" variant="secondary" className="text-lg px-8 py-4 min-h-[44px]">
+                <Button size="lg" variant="secondary" className="btn--primary text-lg w-full">
                   Donate Now
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -39,33 +39,33 @@ export const HomePage = () => {
       </section>
 
       {/* Impact Statistics */}
-      <section className="py-16 bg-muted/30">
-        <div className="container-section">
+      <section className="section" style={{background: 'var(--c-alt)'}}>
+        <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+            <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
               Our Impact at a Glance
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto" style={{color: 'var(--c-muted)'}}>
               Principled. Enduring. Uncompromising. Our commitment to healthcare justice 
               reaches across borders to uphold human dignity.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid-3">
             {IMPACT_STATS.map((stat, index) => (
-              <div key={index} className="text-center animate-slide-up">
+              <div key={index} className="text-center">
                 <div className="mb-3">
-                  <span className="text-sm font-semibold text-gold uppercase tracking-wider">
+                  <span className="text-sm font-semibold uppercase tracking-wider" style={{color: 'var(--c-highlight)'}}>
                     {index === 0 ? "Governance" : index === 1 ? "Legacy" : "Mission"}
                   </span>
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-gold mb-2">
+                <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{color: 'var(--c-highlight)'}}>
                   {stat.number}
                 </h3>
-                <div className="text-lg font-semibold mb-2">
+                <div className="text-lg font-semibold mb-2" style={{color: 'var(--c-text)'}}>
                   {stat.label}
                 </div>
-                <p className="text-muted-foreground max-w-[65ch]">
+                <p style={{color: 'var(--c-muted)'}}>
                   {stat.description}
                 </p>
               </div>
@@ -74,105 +74,102 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Program Areas Preview */}
-      <section className="py-16">
-        <div className="container-section">
+      {/* Five Pillars Section */}
+      <section className="section">
+        <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+            <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
               Five Areas of Intervention
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg max-w-3xl mx-auto" style={{color: 'var(--c-muted)'}}>
               Our charitable mandate encompasses lawful, equitable intervention 
               across these five critical areas of global health access.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PROGRAM_AREAS.slice(0, 6).map((area, index) => {
+          <div className="pillars-grid">
+            {PROGRAM_AREAS.slice(0, 5).map((area, index) => {
               const IconComponent = getIconComponent(area.icon);
               return (
-                <Card key={area.id} className="card-professional">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-gold/10 rounded-lg flex items-center justify-center mr-4">
-                        <IconComponent className="w-6 h-6 text-gold" />
-                      </div>
-                      <h3 className="text-xl font-semibold">{area.title}</h3>
-                    </div>
-                    <p className="text-muted-foreground leading-relaxed max-w-[70ch]">
-                      {area.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                <div key={area.id} className="card">
+                  <div className="w-10 h-10 flex items-center justify-center mb-3" style={{color: 'var(--c-highlight)'}}>
+                    <IconComponent className="w-8 h-8" />
+                  </div>
+                  <div className="card__divider"></div>
+                  <h3 className="card__title pillar__title text-xl font-semibold mb-3">
+                    {area.title}
+                  </h3>
+                  <p className="card__text leading-relaxed">
+                    {area.description}
+                  </p>
+                </div>
               );
             })}
           </div>
           
           <div className="text-center mt-12">
             <Link to="/what-we-do">
-              <Button variant="outline" size="lg">
+              <button className="btn--secondary">
                 Explore All Programme Areas
                 <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Carousel */}
-      <section className="py-16 bg-accent/30">
-        <div className="container-section">
+      {/* Testimonials */}
+      <section className="section" style={{background: 'var(--c-alt)'}}>
+        <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+            <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
               Voices of Impact
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg max-w-2xl mx-auto" style={{color: 'var(--c-muted)'}}>
               Hear from healthcare professionals and communities whose lives 
               have been transformed through our principled approach to global health access.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid-2 max-w-6xl mx-auto">
             {TESTIMONIALS.slice(0, 2).map((testimonial, index) => (
-              <Card key={index} className="card-elevated">
-                <CardContent className="p-8">
-                  <blockquote className="blockquote text-lg leading-relaxed mb-6 text-foreground/90">
-                    "{testimonial.quote}"
-                  </blockquote>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
-                      <Users className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold">{testimonial.author}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {testimonial.role}
-                        {testimonial.organization && `, ${testimonial.organization}`}
-                      </div>
+              <div key={index} className="card">
+                <blockquote className="text-lg leading-relaxed mb-6" style={{color: 'var(--c-text)'}}>
+                  "{testimonial.quote}"
+                </blockquote>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{background: 'color-mix(in srgb, var(--c-primary) 10%, white)'}}>
+                    <Users className="w-6 h-6" style={{color: 'var(--c-primary)'}} />
+                  </div>
+                  <div>
+                    <div className="font-semibold" style={{color: 'var(--c-text)'}}>{testimonial.author}</div>
+                    <div className="text-sm" style={{color: 'var(--c-muted)'}}>
+                      {testimonial.role}
+                      {testimonial.organization && `, ${testimonial.organization}`}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 primary-gradient text-primary-foreground">
-        <div className="container-section text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
+      <section className="section text-center" style={{background: 'var(--c-primary)', color: '#fff'}}>
+        <div className="container">
+          <h2 className="font-serif font-bold mb-6 text-white">
             Support Our Mission
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
             Your donation enables us to uphold healthcare as a matter of justice, not generosity.
           </p>
-          <div className="flex justify-center">
+          <div className="cta-row max-w-xs mx-auto">
             <Link to="/donate">
-              <Button size="lg" variant="secondary" className="px-8 py-4 min-h-[44px]">
+              <button className="btn--primary w-full">
                 Make a Donation
                 <Heart className="ml-2 w-5 h-5" />
-              </Button>
+              </button>
             </Link>
           </div>
         </div>

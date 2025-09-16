@@ -4,6 +4,92 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   HOMEPAGE POLISH - DESIGN SYSTEM OVERRIDE
+======================================== */
+
+:root{
+  --c-primary:#0B2B4C; --c-accent:#00A3A3; --c-highlight:#E5B800;
+  --c-text:#111111; --c-muted:#6B7280; --c-bg:#FFFFFF; --c-alt:#F7F9FC;
+  --radius:6px;
+}
+
+/* Base type + NO hyphenation anywhere */
+html{-webkit-text-size-adjust:100%;}
+body{font-size:16px; line-height:1.6; color:var(--c-text); background:var(--c-bg);}
+h1,h2,h3,h4{line-height:1.25; margin:0 0 .5em;}
+h1{font-size:clamp(32px,6vw,48px);}
+h2{font-size:clamp(24px,5vw,32px);}
+h3{font-size:22px;} h4{font-size:18px;}
+h1,h2,h3,h4,p,li{
+  hyphens:none; -webkit-hyphens:none; -ms-hyphens:none;
+  overflow-wrap:normal; word-break:normal; white-space:normal;
+}
+
+/* Containers & sections */
+.container{max-width:1140px; margin:0 auto; padding:0 16px;}
+.section{padding:28px 0;}
+@media (min-width:768px){.section{padding:40px 0;}}
+@media (min-width:1024px){.section{padding:64px 0;}}
+
+/* Buttons */
+.button,.btn,button{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:12px 18px; min-height:44px; border-radius:var(--radius); font-weight:600;
+  text-decoration:none; transition:filter .2s, background .2s, border-color .2s;
+}
+.btn--primary{background:var(--c-primary); color:#fff;}
+.btn--primary:hover{filter:brightness(0.9);}
+.btn--secondary{border:1px solid var(--c-primary); color:var(--c-primary); background:transparent;}
+.btn--secondary:hover{background:color-mix(in srgb, var(--c-primary) 10%, white);}
+
+/* CTA rows stack on mobile */
+.cta-row,.btn-row,.button-group{display:grid; grid-template-columns:1fr; gap:12px;}
+
+/* Grids */
+.grid-2,.grid-3,.grid-4,.features-grid,.pillars-grid{
+  display:grid; gap:16px;
+}
+.grid-2{grid-template-columns:1fr;}
+.grid-3,.grid-4,.features-grid,.pillars-grid{grid-template-columns:1fr;}
+@media (min-width:768px){.grid-2{grid-template-columns:1fr 1fr;}}
+@media (min-width:1024px){
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  .pillars-grid{grid-template-columns:repeat(5,1fr);}
+}
+
+/* Cards */
+.card{background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:24px;}
+.card__title{margin-bottom:.25rem; font-weight:700; color:var(--c-primary);}
+.card__text{color:var(--c-muted);}
+.card__divider{height:3px; width:32px; background:var(--c-highlight); border-radius:3px; margin:4px 0 12px;}
+
+/* Images */
+img{max-width:100%; height:auto; object-fit:cover; border-radius:8px;}
+.hero__image,.feature__image{aspect-ratio:16/9; overflow:hidden;}
+
+/* Links */
+a{color:var(--c-primary); text-decoration:underline;}
+a:hover{text-decoration:none;}
+
+/* Focus styles */
+:focus-visible{outline:3px solid var(--c-highlight); outline-offset:2px;}
+
+/* Sticky header safe area */
+.header--sticky{position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid #e5e7eb;}
+.header--sticky .nav a{padding:10px 12px;}
+
+/* iOS viewport correctness */
+.vh-100,.hero--full{min-height:100dvh;}
+
+/* Prevent layout shift from long titles: allow multi-line, no truncation */
+.card__title,.pillar__title{white-space:normal; overflow:visible; text-overflow:clip;}
+
+/* ======================================== 
+   ORIGINAL DESIGN SYSTEM BELOW 
+======================================== */
+
 :root {
   /* GHAT Design System - Exact Color Specifications */
   --background: 0 0% 100%;
