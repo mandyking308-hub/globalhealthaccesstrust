@@ -62,7 +62,7 @@ export const BlogIndexPage = () => {
             {featuredPosts.map((post) => (
               <Card key={post.id} className="card-elevated">
                 <CardContent className="p-0">
-                  <div className="aspect-video bg-gradient-to-br from-primary/20 to-gold/10 rounded-t-xl"></div>
+                  {/* No featured image - clean text-only layout */}
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
                       {post.categories.map((category) => (
@@ -107,7 +107,7 @@ export const BlogIndexPage = () => {
             {displayedPosts.map((post) => (
               <Card key={post.id} className="card-elevated">
                 <CardContent className="p-6">
-                  <div className="aspect-video bg-muted rounded-lg mb-4"></div>
+                  {/* No image - clean text-only layout */}
                   <div className="flex items-center gap-2 mb-3">
                     {post.categories.slice(0, 2).map((category) => (
                       <Badge key={category} variant="secondary" className="text-xs">

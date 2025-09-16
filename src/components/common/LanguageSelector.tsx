@@ -19,14 +19,21 @@ export const LanguageSelector = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          className="flex items-center space-x-2 bg-[#BDBDBD] text-[#0A0F14] hover:bg-[#BDBDBD]/80 focus:outline-none focus:ring-2 focus:ring-[#0B2B4C] px-3 py-2 rounded-lg min-h-[44px]"
+        >
           <Globe className="w-4 h-4" />
           <span className="hidden sm:inline">🌐 {currentLanguage.name}</span>
           <span className="sm:hidden">🌐</span>
           <ChevronDown className="w-3 h-3" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48 max-h-96 overflow-y-auto">
+      <DropdownMenuContent 
+        align="end" 
+        className="w-48 max-h-96 overflow-y-auto bg-background border border-border shadow-lg z-50"
+      >
         {LANGUAGES.map((language) => (
           <DropdownMenuItem
             key={language.code}

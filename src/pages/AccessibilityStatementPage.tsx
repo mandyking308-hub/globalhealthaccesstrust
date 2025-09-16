@@ -12,9 +12,9 @@ export const AccessibilityStatementPage = () => {
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
             Accessibility Statement
           </h1>
-          <p className="text-lg text-muted-foreground">
-            Last updated: <span className="font-medium">16 September 2024</span>
-          </p>
+              <p className="text-lg text-muted-foreground">
+                Last updated: <span className="font-medium">{new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </p>
         </div>
 
         <div className="prose-professional max-w-none space-y-8">
