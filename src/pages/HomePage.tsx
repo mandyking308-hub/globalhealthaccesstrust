@@ -33,21 +33,6 @@ export const HomePage = () => {
               </Button>
             </Link>
           </div>
-          
-          {/* Donate Panel inside Hero */}
-          <div className="donate-panel">
-            <p className="text-xl mb-8 max-w-3xl mx-auto">
-              Your donation enables us to uphold healthcare as a matter of justice, not generosity.
-            </p>
-            <div className="cta-row max-w-xs mx-auto">
-              <Link to="/donate">
-                <button className="btn--primary w-full">
-                  Make a Donation
-                  <Heart className="ml-2 w-5 h-5" />
-                </button>
-              </Link>
-            </div>
-          </div>
         </div>
       </section>
 
