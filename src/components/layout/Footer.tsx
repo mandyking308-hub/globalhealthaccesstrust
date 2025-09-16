@@ -52,7 +52,7 @@ export const Footer = () => {
                   <Mail className="w-4 h-4 flex-shrink-0" />
                   <a 
                     href={`mailto:${SITE_CONFIG.email}`}
-                    className="hover:text-primary-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded"
+                    className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
                   >
                     {SITE_CONFIG.email}
                   </a>
@@ -68,7 +68,7 @@ export const Footer = () => {
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                      className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
                     >
                       {link.label}
                     </Link>
@@ -85,7 +85,7 @@ export const Footer = () => {
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                      className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
                     >
                       {link.label}
                     </Link>
@@ -141,19 +141,19 @@ export const Footer = () => {
             <div className="flex items-center space-x-6 text-sm">
               <Link
                 to="/privacy-policy"
-                className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
               >
                 Privacy
               </Link>
               <Link
                 to="/cookie-policy"
-                className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
               >
                 Cookies
               </Link>
               <Link
                 to="/terms-of-use"
-                className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+                className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
               >
                 Terms
               </Link>
