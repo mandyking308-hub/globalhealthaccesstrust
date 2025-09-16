@@ -81,8 +81,6 @@ export const BlogPostPage = () => {
             </div>
           </div>
 
-          {/* Featured Image */}
-          <div className="aspect-video bg-gradient-to-br from-primary/20 to-gold/10 rounded-xl mb-12"></div>
         </header>
 
         {/* Article Content */}
