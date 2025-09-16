@@ -86,86 +86,96 @@ a:hover{text-decoration:none;}
 /* Prevent layout shift from long titles: allow multi-line, no truncation */
 .card__title,.pillar__title{white-space:normal; overflow:visible; text-overflow:clip;}
 
-/* HERO — bigger image while staying responsive */
-.hero { display: grid; gap: 16px; align-items: center; }
+/* Keep words intact; no hyphen breaks anywhere in hero */
+.hero, .hero * { hyphens:none; -webkit-hyphens:none; overflow-wrap:normal; word-break:normal; }
+
+/* HERO layout: two columns on desktop, single column on mobile */
+.hero {
+  display: grid; gap: 20px; align-items: center;
+  padding-top: 24px; padding-bottom: 24px;
+}
+@media (min-width: 992px){
+  .hero { grid-template-columns: 1.05fr 1fr; }
+}
+
+/* Content column: keep text IN THE BOX with safe width */
+.hero__content {
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+  background: #FFFFFF;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(17,24,39,0.06);
+  position: relative;
+  z-index: 2; /* keeps it above background if hero uses bg image */
+}
+
+/* Larger hero image without overflow or stretching */
 .hero__image {
-  width: 100%; border-radius: 12px; overflow: hidden;
-  aspect-ratio: auto; height: clamp(220px, 45vh, 420px); /* bigger on mobile */
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  height: clamp(280px, 55vh, 700px);  /* bigger on all devices */
 }
-.hero__image img { width: 100%; height: 100%; object-fit: cover; }
-@media (min-width: 768px){
-  .hero { grid-template-columns: 1.1fr 1fr; } /* text + image */
-  .hero__image { height: clamp(380px, 58vh, 680px); }
-}
-@media (min-width: 1200px){
-  .hero { grid-template-columns: 1fr 1fr; }
-  .hero__image { height: clamp(520px, 62vh, 780px); }
+.hero__image img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
 
-/* If hero is a background image section instead of <img>: */
-.hero--bg {
-  min-height: clamp(420px, 62vh, 840px);
+/* If hero uses a background image on the section */
+.hero.hero--bg {
+  min-height: clamp(520px, 70vh, 860px);
   background-size: cover; background-position: center;
-  border-radius: 12px; overflow: hidden;
+  border-radius: 12px; overflow: hidden; position: relative;
+  padding: 24px;
 }
+/* Ensure text stays readable over bg images */
+.hero.hero--bg::before {
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(0deg, rgba(255,255,255,0.82), rgba(255,255,255,0.82));
+  z-index: 1;
+}
+.hero.hero--bg .hero__content { background: #FFFFFF; }
 
-/* Ensure hero text is not hidden under any sticky header */
-.header--sticky + .hero, .header + .hero, .hero--bg { scroll-margin-top: 72px; }
-
-/* Donate card — white, high contrast, accessible */
-.donate, .donate-card, .box--donate {
+/* DONATE card INSIDE the hero content */
+.hero .donate-card {
   background: #FFFFFF; color: #111111;
   border: 1px solid #e5e7eb; border-radius: 12px;
-  padding: 20px; box-shadow: 0 2px 10px rgba(17,24,39,0.06);
+  padding: 18px; margin-top: 16px;
+  box-shadow: 0 2px 10px rgba(17,24,39,0.08);
 }
-.donate h2, .donate h3,
-.donate-card h2, .donate-card h3,
-.box--donate h2, .box--donate h3 {
-  color: #0B2B4C; margin-bottom: 8px; /* primary navy for headings */
-}
-.donate p, .donate-card p, .box--donate p { color: #374151; } /* readable body */
-.donate a, .donate-card a, .box--donate a {
-  color: #0B2B4C; text-decoration: underline; /* link */
-}
-.donate a:hover, .donate-card a:hover, .box--donate a:hover { text-decoration: none; }
+.hero .donate-card h2, .hero .donate-card h3 { color: #0B2B4C; margin: 0 0 8px; }
+.hero .donate-card p { color: #374151; margin: 0 0 12px; }
+.hero .donate-card a { color: #0B2B4C; text-decoration: underline; }
+.hero .donate-card a:hover { text-decoration: none; }
 
-/* Primary CTA inside donate */
-.donate .btn-primary, .donate .btn--primary,
-.donate-card .btn-primary, .donate-card .btn--primary,
-.box--donate .btn-primary, .box--donate .btn--primary {
-  background: #0B2B4C; color: #FFFFFF; border-radius: 8px;
-  padding: 12px 18px; min-height: 44px; font-weight: 600;
-}
-.donate .btn-primary:hover, .donate .btn--primary:hover,
-.donate-card .btn-primary:hover, .donate-card .btn--primary:hover,
-.box--donate .btn-primary:hover, .box--donate .btn--primary:hover {
-  filter: brightness(0.9);
-}
+/* Make donate card visually LARGER and clear */
+@media (min-width: 480px){ .hero .donate-card { padding: 22px; } }
+@media (min-width: 768px){ .hero .donate-card { padding: 24px; } }
 
-/* Optional secondary CTA (outline) if present */
-.donate .btn-secondary, .donate .btn--secondary,
-.donate-card .btn-secondary, .donate-card .btn--secondary,
-.box--donate .btn-secondary, .box--donate .btn--secondary {
+/* Donate buttons: primary + outline, accessible sizes */
+.hero .donate-card .btn-primary, .hero .donate-card .btn--primary {
+  background: #0B2B4C; color: #FFFFFF;
+  border-radius: 8px; padding: 12px 18px; min-height: 44px; font-weight: 600;
+}
+.hero .donate-card .btn-primary:hover, .hero .donate-card .btn--primary:hover { filter: brightness(0.9); }
+
+.hero .donate-card .btn-secondary, .hero .donate-card .btn--secondary {
   background: transparent; color: #0B2B4C; border: 1px solid #0B2B4C;
+  border-radius: 8px; padding: 12px 18px; min-height: 44px; font-weight: 600;
 }
-.donate .btn-secondary:hover, .donate .btn--secondary:hover,
-.donate-card .btn-secondary:hover, .donate-card .btn--secondary:hover,
-.box--donate .btn-secondary:hover, .box--donate .btn--secondary:hover {
+.hero .donate-card .btn-secondary:hover, .hero .donate-card .btn--secondary:hover {
   background: color-mix(in srgb, #0B2B4C 10%, white);
 }
 
-/* Tidy button layout on mobile: stack with spacing */
-.donate .button-group, .donate .cta-row,
-.donate-card .button-group, .donate-card .cta-row,
-.box--donate .button-group, .box--donate .cta-row {
+/* Stack donate buttons on mobile */
+.hero .donate-card .button-group, .hero .donate-card .cta-row {
   display: grid; grid-template-columns: 1fr; gap: 12px;
 }
 
-/* OPTIONAL small trustline under CTA, if such an element exists */
-.donate .trustline, .donate-card .trustline, .box--donate .trustline {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 14px; color: #6B7280; margin-top: 8px;
-}
+/* Prevent sticky header overlap when anchoring to hero */
+.header--sticky + .hero, .header + .hero { scroll-margin-top: 72px; }
 
 /* ======================================== 
    ORIGINAL DESIGN SYSTEM BELOW 

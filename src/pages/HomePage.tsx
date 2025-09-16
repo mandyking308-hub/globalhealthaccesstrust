@@ -9,7 +9,7 @@ export const HomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="hero--full hero--bg relative flex items-center justify-center overflow-hidden">
+      <section className="hero--full hero--bg hero relative flex items-center justify-center overflow-hidden">
         <div 
           className="hero__image absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
@@ -17,22 +17,40 @@ export const HomePage = () => {
           <div className="absolute inset-0" style={{background: 'var(--c-primary)', opacity: 0.7}}></div>
         </div>
         
-        <div className="relative z-10 container text-center text-white">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="font-serif font-bold mb-6 text-white">
+        <div className="relative z-10 container">
+          <div className="hero__content">
+            <h1 className="font-serif font-bold mb-6 text-center" style={{color: 'var(--c-text)'}}>
               Access to Health is Justice — Not Charity.
             </h1>
-            <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl mb-8 leading-relaxed text-center" style={{color: 'var(--c-muted)'}}>
               The Global Health Access Trust upholds the sacred obligation to protect 
               human dignity through healthcare access, without border, bias, or exclusion.
             </p>
-            <div className="cta-row max-w-xs mx-auto">
+            <div className="cta-row max-w-xs mx-auto mb-6">
               <Link to="/donate">
                 <Button size="lg" variant="secondary" className="btn--primary text-lg w-full">
                   Donate Now
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
+            </div>
+            
+            {/* Donate Card inside Hero */}
+            <div className="donate-card">
+              <h2 className="font-serif font-bold mb-6">
+                Support Our Mission
+              </h2>
+              <p className="text-xl mb-8 max-w-3xl mx-auto">
+                Your donation enables us to uphold healthcare as a matter of justice, not generosity.
+              </p>
+              <div className="cta-row max-w-xs mx-auto">
+                <Link to="/donate">
+                  <button className="btn--primary w-full">
+                    Make a Donation
+                    <Heart className="ml-2 w-5 h-5" />
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -151,26 +169,6 @@ export const HomePage = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="section text-center donate">
-        <div className="container">
-          <h2 className="font-serif font-bold mb-6">
-            Support Our Mission
-          </h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Your donation enables us to uphold healthcare as a matter of justice, not generosity.
-          </p>
-          <div className="cta-row max-w-xs mx-auto">
-            <Link to="/donate">
-              <button className="btn--primary w-full">
-                Make a Donation
-                <Heart className="ml-2 w-5 h-5" />
-              </button>
-            </Link>
           </div>
         </div>
       </section>
