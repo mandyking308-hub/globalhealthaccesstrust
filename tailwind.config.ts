@@ -22,13 +22,12 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          light: "hsl(var(--primary-light))",
-          dark: "hsl(var(--primary-dark))",
+          700: "hsl(var(--primary-700))",
+          50: "hsl(var(--primary-50))",
         },
         gold: {
           DEFAULT: "hsl(var(--gold))",
-          light: "hsl(var(--gold-light))",
-          dark: "hsl(var(--gold-dark))",
+          700: "hsl(var(--gold-700))",
           foreground: "hsl(var(--gold-foreground))",
         },
         secondary: {
@@ -43,9 +42,9 @@ export default {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
         },
-        warning: {
-          DEFAULT: "hsl(var(--warning))",
-          foreground: "hsl(var(--warning-foreground))",
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -73,14 +72,14 @@ export default {
         },
       },
       fontFamily: {
-        serif: ["var(--font-serif)"],
-        sans: ["var(--font-sans)"],
+        serif: ["Spectral", "Georgia", "Times New Roman", "Times", "serif"],
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
       },
       borderRadius: {
-        lg: "var(--radius-lg)",
-        md: "var(--radius)",
-        sm: "calc(var(--radius) - 4px)",
-        xl: "var(--radius-xl)",
+        lg: "12px",
+        md: "8px", 
+        sm: "6px",
+        xl: "24px",
       },
       boxShadow: {
         soft: "var(--shadow-soft)",
@@ -91,11 +90,6 @@ export default {
       transitionTimingFunction: {
         elegant: "var(--ease-elegant)",
         bounce: "var(--ease-bounce)",
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {

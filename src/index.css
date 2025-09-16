@@ -1,280 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;0,700;1,600;1,700&family=Inter:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* GHAT Design System - Professional, Warm, Institutional */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
-
-@layer base {
-  :root {
-    /* Foundation Colors - Professional Trust Palette */
-    --background: 0 0% 100%;
-    --foreground: 220 15% 15%;
-    
-    /* Trust Navy - Deep, authoritative, institutional */
-    --primary: 220 35% 20%;
-    --primary-foreground: 0 0% 98%;
-    --primary-light: 220 25% 35%;
-    --primary-dark: 220 45% 12%;
-    
-    /* Warm Gold - Heritage, legacy, warmth */
-    --gold: 42 85% 55%;
-    --gold-light: 42 75% 65%;
-    --gold-dark: 42 95% 45%;
-    --gold-foreground: 220 35% 20%;
-    
-    /* Professional Greys */
-    --muted: 220 10% 96%;
-    --muted-foreground: 220 15% 45%;
-    --muted-dark: 220 15% 88%;
-    
-    /* Supporting Colors */
-    --card: 0 0% 100%;
-    --card-foreground: 220 15% 15%;
-    --card-border: 220 10% 92%;
-    
-    --secondary: 220 10% 96%;
-    --secondary-foreground: 220 15% 15%;
-    
-    --accent: 42 75% 95%;
-    --accent-foreground: 220 35% 20%;
-    
-    /* System Colors */
-    --border: 220 10% 92%;
-    --input: 220 10% 96%;
-    --ring: 42 85% 55%;
-    
-    --destructive: 0 75% 60%;
-    --destructive-foreground: 0 0% 98%;
-    
-    --success: 142 70% 45%;
-    --success-foreground: 0 0% 98%;
-    
-    --warning: 25 95% 55%;
-    --warning-foreground: 0 0% 98%;
-    
-    /* Layout & Spacing */
-    --radius: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    
-    /* Typography Scale */
-    --font-serif: 'Crimson Text', Georgia, serif;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    
-    /* Shadows - Elegant, professional */
-    --shadow-soft: 0 2px 8px -2px hsl(220 15% 15% / 0.08);
-    --shadow-medium: 0 4px 16px -4px hsl(220 15% 15% / 0.12);
-    --shadow-strong: 0 8px 32px -8px hsl(220 15% 15% / 0.16);
-    --shadow-gold: 0 4px 20px -4px hsl(42 85% 55% / 0.3);
-    
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(42 75% 85%) 0%, hsl(42 85% 75%) 50%, hsl(42 95% 65%) 100%);
-    --gradient-primary: linear-gradient(135deg, hsl(220 35% 20%) 0%, hsl(220 25% 35%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(42 85% 55%) 0%, hsl(42 95% 45%) 100%);
-    
-    /* Animation Curves */
-    --ease-elegant: cubic-bezier(0.25, 0.1, 0.25, 1);
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --transition-fast: 0.15s var(--ease-elegant);
-    --transition-medium: 0.3s var(--ease-elegant);
-    --transition-slow: 0.5s var(--ease-elegant);
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+:root {
+  /* GHAT Design System - Exact Color Specifications */
+  --background: 0 0% 100%;
+  --foreground: 217 25% 5%;
   
-  /* Dark mode adjustments for professional trust theme */
-  .dark {
-    --background: 220 35% 8%;
-    --foreground: 220 10% 95%;
-    
-    --primary: 42 85% 55%;
-    --primary-foreground: 220 35% 8%;
-    
-    --gold: 42 75% 65%;
-    --gold-light: 42 65% 75%;
-    --gold-dark: 42 85% 45%;
-    
-    --card: 220 30% 12%;
-    --card-foreground: 220 10% 95%;
-    --card-border: 220 20% 20%;
-    
-    --muted: 220 25% 15%;
-    --muted-foreground: 220 15% 65%;
-    
-    --border: 220 20% 20%;
-    --input: 220 25% 15%;
-  }
+  --card: 0 0% 100%;
+  --card-foreground: 217 25% 5%;
+  --card-border: 217 12% 91%;
+  
+  /* Primary Navy: #0B2B4C */
+  --primary: 213 64% 18%;
+  --primary-foreground: 0 0% 98%;
+  --primary-700: 213 64% 25%;
+  --primary-50: 213 64% 98%;
+  
+  /* Accent Gold: #D9A441 */
+  --gold: 42 65% 56%;
+  --gold-700: 42 65% 35%;
+  --gold-foreground: 217 25% 5%;
+  
+  --secondary: 217 12% 91%;
+  --secondary-foreground: 217 25% 18%;
+  
+  --muted: 217 12% 94%;
+  --muted-foreground: 217 12% 45%;
+  --muted-dark: 217 12% 87%;
+  
+  --accent: 217 22% 84%;
+  --accent-foreground: 213 64% 18%;
+  
+  /* Success: #1E874B */
+  --success: 142 76% 36%;
+  --success-foreground: 0 0% 98%;
+  
+  /* Danger: #B3261E */
+  --destructive: 0 74% 42%;
+  --destructive-foreground: 0 0% 98%;
+  
+  /* Info: #1E5AA8 */
+  --info: 213 73% 39%;
+  --info-foreground: 0 0% 98%;
+  
+  --border: 217 12% 91%;
+  --input: 217 12% 91%;
+  --ring: 213 64% 18%;
+  
+  /* Typography - Locked Design System */
+  --font-serif: "Spectral", Georgia, "Times New Roman", Times, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Spacing & Layout */
+  --radius: 12px;
+  --radius-lg: 12px;
+  --radius-xl: 24px;
+  
+  /* Shadows - Exact Specifications */
+  --shadow-soft: 0 2px 8px rgba(0,0,0,.06);
+  --shadow-medium: 0 4px 16px rgba(0,0,0,.08);
+  --shadow-strong: 0 8px 24px rgba(0,0,0,.12);
+  --shadow-gold: 0 4px 16px rgba(217, 164, 65, 0.2);
+  
+  /* Animations */
+  --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Sidebar colors */
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 217 12% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
 }
 
-/* Component System - Professional, accessible, elegant */
 @layer base {
   * {
     @apply border-border;
   }
-
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+  
+  html {
+    font-size: 18px; /* Base 18px as specified */
   }
   
-  /* Typography Hierarchy */
-  h1, h2, h3 {
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    line-height: 1.6; /* Body line-height: 1.6 */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.025em;
+    line-height: 1.25; /* Headings line-height: 1.25 */
   }
   
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+  h1 { font-weight: 700; }
+  h2 { font-weight: 700; }
+  
+  p {
+    margin-bottom: 1em; /* Paragraph spacing: 1.0em after */
   }
   
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-  
-  h3 {
-    @apply text-2xl md:text-3xl;
-  }
-  
-  h4, h5, h6 {
-    @apply font-sans font-semibold;
-  }
-  
-  /* Skip to content - accessibility */
-  .skip-link {
-    @apply absolute -top-full left-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-md;
-    @apply focus:top-4 transition-all duration-200;
-  }
-  
-  /* Focus styles for accessibility */
-  *:focus-visible {
-    @apply outline-2 outline-offset-2;
-    outline-color: hsl(var(--gold));
+  /* Skip to content link */
+  .skip-to-content {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50;
+    @apply bg-primary text-primary-foreground px-4 py-2 rounded-md font-medium;
   }
 }
 
-/* Utility Classes - Design System Components */
-@layer components {
-  /* Hero Gradient Background */
-  .hero-gradient {
-    background: var(--gradient-hero);
-  }
-  
-  .primary-gradient {
-    background: var(--gradient-primary);
-  }
-  
-  .gold-gradient {
-    background: var(--gradient-gold);
-  }
-  
-  /* Professional Shadows */
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
-  }
-  
-  .shadow-medium {
-    box-shadow: var(--shadow-medium);
-  }
-  
-  .shadow-strong {
-    box-shadow: var(--shadow-strong);
-  }
-  
-  .shadow-gold {
-    box-shadow: var(--shadow-gold);
-  }
-  
-  /* Animations */
-  .animate-fade-in {
-    animation: fadeIn 0.6s var(--ease-elegant);
-  }
-  
-  .animate-slide-up {
-    animation: slideUp 0.8s var(--ease-elegant);
-  }
-  
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-  
-  /* Content containers */
-  .container-section {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  .container-narrow {
-    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  .container-content {
-    @apply max-w-3xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  /* Professional Cards */
-  .card-professional {
-    @apply bg-card border border-card-border rounded-lg shadow-soft;
-    @apply hover:shadow-medium transition-all duration-300;
-  }
-  
-  .card-elevated {
-    @apply bg-card border border-card-border rounded-lg shadow-medium;
-    @apply hover:shadow-strong hover:-translate-y-1 transition-all duration-300;
-  }
-  
-  /* Prose styling for rich content */
-  .prose-professional {
-    @apply prose prose-lg max-w-none;
-    @apply prose-headings:font-serif prose-headings:text-foreground;
-    @apply prose-p:text-muted-foreground prose-p:leading-relaxed;
-    @apply prose-a:text-primary prose-a:no-underline hover:prose-a:underline;
-    @apply prose-strong:text-foreground prose-em:text-foreground;
-    @apply prose-blockquote:border-l-4 prose-blockquote:border-gold;
-    @apply prose-blockquote:bg-accent prose-blockquote:pl-6 prose-blockquote:py-4;
-  }
+/* Custom Utilities - GHAT Design System */
+.container-section {
+  @apply container mx-auto px-6 lg:px-8;
+  max-width: 1320px; /* 2xl container max */
+}
+
+.container-content {
+  @apply max-w-4xl mx-auto px-6 lg:px-8;
+}
+
+/* Card Variants with Exact Shadows */
+.card-elevated {
+  @apply bg-card border border-card-border rounded-xl;
+  box-shadow: var(--shadow-medium);
+}
+
+.card-professional {
+  @apply bg-card border border-card-border rounded-xl;
+  box-shadow: var(--shadow-soft);
+}
+
+.card-hero {
+  @apply bg-card border border-card-border;
+  border-radius: var(--radius-xl); /* 24px for hero cards */
+  box-shadow: var(--shadow-strong);
+}
+
+/* Typography Utilities */
+.prose-professional {
+  @apply text-foreground leading-relaxed;
+}
+
+.prose-professional p {
+  @apply mb-4;
+}
+
+.prose-professional h2 {
+  @apply text-2xl font-serif font-bold mb-4 mt-8 first:mt-0;
+}
+
+.prose-professional h3 {
+  @apply text-xl font-serif font-semibold mb-3 mt-6;
+}
+
+/* Background Gradients */
+.primary-gradient {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-700)));
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-700)) 100%);
+}
+
+/* Button Styles - Exact Design System */
+.btn-primary {
+  @apply bg-gold text-gold-foreground hover:bg-gold/90 focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  @apply px-6 py-3 rounded-xl font-medium transition-all duration-200;
+  font-family: var(--font-sans);
+}
+
+.btn-secondary {
+  @apply border border-gold text-primary bg-transparent hover:bg-gold/10;
+  @apply px-6 py-3 rounded-xl font-medium transition-all duration-200;
+  font-family: var(--font-sans);
+}
+
+.btn-disabled {
+  @apply opacity-40 cursor-not-allowed;
 }
 
 /* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.8s var(--ease-elegant);
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s var(--ease-elegant);
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(2rem); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* Accessibility & Focus States */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
 }
 
 /* RTL Support */
 [dir="rtl"] {
-  .prose-blockquote {
-    @apply border-l-0 border-r-4 pl-0 pr-6;
+  .container-section,
+  .container-content {
+    @apply text-right;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply text-black bg-white;
   }
 }

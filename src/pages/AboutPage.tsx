@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
 import { Users, Clock, Globe, Heart, Shield, Scale } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { TRUSTEES } from "@/lib/constants";
 
 export const AboutPage = () => {
   return (
@@ -80,12 +82,12 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      {/* Leadership & Governance */}
+      {/* Leadership & Trustees - FULLY RENDERED from source */}
       <section className="py-16 bg-muted/30">
         <div className="container-section">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              Leadership & Governance
+              Leadership & Trustees
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Our Board of Trustees brings together distinguished leaders in global health, 
@@ -94,20 +96,22 @@ export const AboutPage = () => {
             </p>
           </div>
           
-          {/* Trustees - Placeholder for now */}
+          {/* Trustees with proper names, roles, and bios */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <Card key={i} className="card-elevated">
+            {TRUSTEES.map((trustee, index) => (
+              <Card key={index} className="card-elevated">
                 <CardContent className="p-6 text-center">
-                  <div className="w-20 h-20 bg-muted rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <Users className="w-10 h-10 text-muted-foreground" />
+                  <div className="w-20 h-20 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <Users className="w-10 h-10 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Trustee Name</h3>
-                  <p className="text-sm text-muted-foreground mb-3">Chair of Trustees</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Distinguished leader in global health governance with extensive experience 
-                    in institutional stewardship and public trust.
+                  <h3 className="font-semibold text-lg mb-2">{trustee.name}</h3>
+                  <p className="text-sm text-primary font-medium mb-3">{trustee.role}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    {trustee.bio}
                   </p>
+                  <div className="text-xs text-muted-foreground">
+                    <strong>Expertise:</strong> {trustee.expertise}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -135,7 +139,7 @@ export const AboutPage = () => {
                 formally in progress and expected in 2025.
               </p>
               
-              <div className="bg-accent/30 border border-accent rounded-lg p-8">
+              <div className="bg-accent/30 border border-accent rounded-xl p-8">
                 <h3 className="text-xl font-semibold mb-4 text-foreground">
                   Registered Correspondence Address
                 </h3>
