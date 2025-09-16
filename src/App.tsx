@@ -8,6 +8,15 @@ import { TranslationProvider } from "@/hooks/useTranslation";
 import { Layout } from "./components/layout/Layout";
 import { HomePage } from "./pages/HomePage";
 import { AboutPage } from "./pages/AboutPage";
+import { AboutTheTrustPage } from "./pages/AboutTheTrustPage";
+import { TrusteeBiographiesPage } from "./pages/TrusteeBiographiesPage";
+import { GovernanceLegalFrameworkPage } from "./pages/GovernanceLegalFrameworkPage";
+import { OurWorkPage } from "./pages/OurWorkPage";
+import { HowWeWorkPage } from "./pages/HowWeWorkPage";
+import { DonorRecognitionPage } from "./pages/DonorRecognitionPage";
+import { SupportTheTrustPage } from "./pages/SupportTheTrustPage";
+import { FrequentlyAskedQuestionsPage } from "./pages/FrequentlyAskedQuestionsPage";
+import { ContactTheTrustPage } from "./pages/ContactTheTrustPage";
 import { WhatWeDoPage } from "./pages/WhatWeDoPage";
 import { BlogIndexPage } from "./pages/BlogIndexPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
@@ -58,6 +67,15 @@ const App = () => (
           <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path="about-the-trust" element={<AboutTheTrustPage />} />
+            <Route path="trustee-biographies" element={<TrusteeBiographiesPage />} />
+            <Route path="governance-legal-framework" element={<GovernanceLegalFrameworkPage />} />
+            <Route path="our-work" element={<OurWorkPage />} />
+            <Route path="how-we-work" element={<HowWeWorkPage />} />
+            <Route path="support-the-trust" element={<SupportTheTrustPage />} />
+            <Route path="donor-recognition" element={<DonorRecognitionPage />} />
+            <Route path="frequently-asked-questions" element={<FrequentlyAskedQuestionsPage />} />
+            <Route path="contact-the-trust" element={<ContactTheTrustPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="what-we-do" element={<WhatWeDoPage />} />
             <Route path="blog" element={<BlogIndexPage />} />

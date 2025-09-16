@@ -18,13 +18,47 @@ export const SITE_CONFIG = {
 } as const;
 
 export const NAVIGATION_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "What We Do", href: "/what-we-do" },
-  { label: "Impact", href: "/blog" },
-  { label: "Get Involved", href: "/get-involved" },
-  { label: "Publications & Documents", href: "/publications" },
-  { label: "Contact", href: "/contact" }
+  {
+    label: "About",
+    href: "/about-the-trust",
+    submenu: [
+      { label: "About the Trust", href: "/about-the-trust" },
+      { label: "Trustee Biographies", href: "/trustee-biographies" }
+    ]
+  },
+  {
+    label: "Governance", 
+    href: "/governance-legal-framework",
+    submenu: [
+      { label: "Governance & Legal Framework", href: "/governance-legal-framework" },
+      { label: "Governance & Oversight", href: "/governance" }
+    ]
+  },
+  {
+    label: "Our Work",
+    href: "/our-work", 
+    submenu: [
+      { label: "Our Work", href: "/our-work" },
+      { label: "How We Work", href: "/how-we-work" }
+    ]
+  },
+  {
+    label: "Support",
+    href: "/support-the-trust",
+    submenu: [
+      { label: "Support the Trust", href: "/support-the-trust" },
+      { label: "Donor Recognition", href: "/donor-recognition" }
+    ]
+  },
+  {
+    label: "Help",
+    href: "/frequently-asked-questions",
+    submenu: [
+      { label: "Frequently Asked Questions", href: "/frequently-asked-questions" },
+      { label: "Contact", href: "/contact-the-trust" }
+    ]
+  },
+  { label: "Blog", href: "/blog" }
 ] as const;
 
 export const FOOTER_SECTIONS = {
