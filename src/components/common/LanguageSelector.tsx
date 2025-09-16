@@ -8,45 +8,225 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { LANGUAGES } from "@/lib/constants";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useState } from "react";
+
+// Flag mapping for languages (using emoji flags as specified)
+const LANGUAGE_FLAGS: Record<string, string> = {
+  'en': '🇬🇧',
+  'es': '🇪🇸', 
+  'fr': '🇫🇷',
+  'de': '🇩🇪',
+  'it': '🇮🇹',
+  'pt': '🇵🇹',
+  'pt-br': '🇧🇷',
+  'ru': '🇷🇺',
+  'zh-hans': '🇨🇳',
+  'zh-hant': '🇹🇼',
+  'ja': '🇯🇵',
+  'ko': '🇰🇷',
+  'ar': '🇸🇦',
+  'hi': '🇮🇳',
+  'bn': '🇧🇩',
+  'ur': '🇵🇰',
+  'fa': '🇮🇷',
+  'tr': '🇹🇷',
+  'he': '🇮🇱',
+  'th': '🇹🇭',
+  'vi': '🇻🇳',
+  'sw': '🇹🇿',
+  'nl': '🇳🇱',
+  'sv': '🇸🇪',
+  'no': '🇳🇴',
+  'da': '🇩🇰',
+  'fi': '🇫🇮',
+  'pl': '🇵🇱',
+  'cs': '🇨🇿',
+  'sk': '🇸🇰',
+  'hu': '🇭🇺',
+  'ro': '🇷🇴',
+  'bg': '🇧🇬',
+  'hr': '🇭🇷',
+  'sr': '🇷🇸',
+  'sl': '🇸🇮',
+  'et': '🇪🇪',
+  'lv': '🇱🇻',
+  'lt': '🇱🇹',
+  'uk': '🇺🇦',
+  'be': '🇧🇾',
+  'mk': '🇲🇰',
+  'sq': '🇦🇱',
+  'el': '🇬🇷',
+  'ca': '🇪🇸', // Catalonia uses Spain flag
+  'eu': '🇪🇸', // Basque uses Spain flag
+  'gl': '🇪🇸', // Galician uses Spain flag
+  'mt': '🇲🇹',
+  'cy': '🏴󠁧󠁢󠁷󠁬󠁳󠁿', // Wales flag
+  'ga': '🇮🇪',
+  'is': '🇮🇸',
+  'fo': '🇫🇴',
+  'gd': '🏴󠁧󠁢󠁳󠁣󠁴󠁿', // Scotland flag
+  'br': '🇫🇷', // Breton uses France flag
+  'co': '🇫🇷', // Corsican uses France flag
+  'oc': '🇫🇷', // Occitan uses France flag
+  'rm': '🇨🇭', // Romansh uses Switzerland flag
+  'lb': '🇱🇺',
+  'frp': '🇫🇷', // Franco-Provençal uses France flag
+  'fur': '🇮🇹', // Friulian uses Italy flag
+  'lij': '🇮🇹', // Ligurian uses Italy flag
+  'lmo': '🇮🇹', // Lombard uses Italy flag
+  'pms': '🇮🇹', // Piedmontese uses Italy flag
+  'rgn': '🇮🇹', // Romagnol uses Italy flag
+  'scn': '🇮🇹', // Sicilian uses Italy flag
+  'vec': '🇮🇹', // Venetian uses Italy flag
+  'wa': '🇧🇪', // Walloon uses Belgium flag
+  'li': '🇳🇱', // Limburgish uses Netherlands flag
+  'nds': '🇩🇪', // Low German uses Germany flag
+  'bar': '🇩🇪', // Bavarian uses Germany flag
+  'gsw': '🇨🇭', // Swiss German uses Switzerland flag
+  'pdc': '🇺🇸', // Pennsylvania Dutch uses USA flag
+  'ksh': '🇩🇪', // Kölsch uses Germany flag
+  'stq': '🇩🇪', // Saterland Frisian uses Germany flag
+  'fy': '🇳🇱', // West Frisian uses Netherlands flag
+  'af': '🇿🇦',
+  'zu': '🇿🇦',
+  'xh': '🇿🇦',
+  'ss': '🇸🇿',
+  'st': '🇿🇦',
+  'tn': '🇿🇦',
+  've': '🇿🇦',
+  'ts': '🇿🇦',
+  'nr': '🇿🇦',
+  'nso': '🇿🇦',
+  'am': '🇪🇹',
+  'ti': '🇪🇹',
+  'om': '🇪🇹',
+  'so': '🇸🇴',
+  'ha': '🇳🇬',
+  'ig': '🇳🇬',
+  'yo': '🇳🇬',
+  'ff': '🇸🇳', // Fulah uses Senegal flag
+  'wo': '🇸🇳', // Wolof uses Senegal flag
+  'bm': '🇲🇱', // Bambara uses Mali flag
+  'dyu': '🇧🇫', // Dyula uses Burkina Faso flag
+  'ee': '🇬🇭', // Ewe uses Ghana flag
+  'tw': '🇬🇭', // Twi uses Ghana flag
+  'ak': '🇬🇭', // Akan uses Ghana flag
+  'lg': '🇺🇬', // Luganda uses Uganda flag
+  'rw': '🇷🇼',
+  'rn': '🇧🇮',
+  'ny': '🇲🇼', // Chewa uses Malawi flag
+  'sn': '🇿🇼', // Shona uses Zimbabwe flag
+  'nd': '🇿🇼', // North Ndebele uses Zimbabwe flag
+  'mg': '🇲🇬',
+  'ms': '🇲🇾',
+  'id': '🇮🇩',
+  'jv': '🇮🇩', // Javanese uses Indonesia flag
+  'su': '🇮🇩', // Sundanese uses Indonesia flag
+  'mad': '🇮🇩', // Madurese uses Indonesia flag
+  'ban': '🇮🇩', // Balinese uses Indonesia flag
+  'bug': '🇮🇩', // Buginese uses Indonesia flag
+  'bjn': '🇮🇩', // Banjarese uses Indonesia flag
+  'ace': '🇮🇩', // Acehnese uses Indonesia flag
+  'min': '🇮🇩', // Minangkabau uses Indonesia flag
+  'rej': '🇮🇩', // Rejang uses Indonesia flag
+  'tl': '🇵🇭',
+  'ceb': '🇵🇭', // Cebuano uses Philippines flag
+  'hil': '🇵🇭', // Hiligaynon uses Philippines flag
+  'war': '🇵🇭', // Waray uses Philippines flag
+  'pam': '🇵🇭' // Kapampangan uses Philippines flag
+};
 
 export const LanguageSelector = () => {
   const { currentLanguage, setLanguage } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLanguageChange = (language: (typeof LANGUAGES)[number]) => {
     setLanguage(language);
+    setIsOpen(false);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      setIsOpen(false);
+    }
+  };
+
+  const currentFlag = LANGUAGE_FLAGS[currentLanguage.code] || '🌐';
+
   return (
-    <DropdownMenu>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <Button 
           variant="ghost" 
-          size="sm" 
-          className="flex items-center space-x-2 bg-[#BDBDBD] text-[#0A0F14] hover:bg-[#BDBDBD]/80 focus:outline-none focus:ring-2 focus:ring-[#0B2B4C] px-3 py-2 rounded-lg min-h-[44px]"
+          size="sm"
+          className="flex items-center space-x-2 min-h-[44px] px-3 py-2 rounded-lg bg-[#BDBDBD] text-[#0A0F14] hover:bg-[#BDBDBD]/80 focus:outline-none focus:ring-2 focus:ring-[#0B2B4C] focus:ring-offset-2"
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
+          aria-label="Change language"
+          onKeyDown={handleKeyDown}
         >
-          <Globe className="w-4 h-4" />
-          <span className="hidden sm:inline">🌐 {currentLanguage.name}</span>
-          <span className="sm:hidden">🌐</span>
+          <span 
+            className="text-lg leading-none" 
+            aria-hidden="true"
+            style={{ fontSize: '18px' }}
+          >
+            {currentFlag}
+          </span>
+          <span className="hidden sm:inline font-medium">
+            {currentLanguage.nativeName}
+          </span>
+          <span className="sm:hidden font-medium">
+            {currentLanguage.code.toUpperCase()}
+          </span>
           <ChevronDown className="w-3 h-3" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="w-48 max-h-96 overflow-y-auto bg-background border border-border shadow-lg z-50"
+        className="w-56 max-h-96 overflow-y-auto bg-[#BDBDBD] border border-[#0A0F14]/20 shadow-lg z-50"
+        role="listbox"
+        onKeyDown={handleKeyDown}
       >
-        {LANGUAGES.map((language) => (
-          <DropdownMenuItem
-            key={language.code}
-            onClick={() => handleLanguageChange(language)}
-            className={`flex items-center space-x-3 ${
-              language.code === currentLanguage.code ? "bg-accent" : ""
-            }`}
-          >
-            <span className="text-lg">🌐</span>
-            <span>{language.name}</span>
-          </DropdownMenuItem>
-        ))}
-        <div className="px-2 py-1 text-xs text-muted-foreground border-t mt-2">
+        {LANGUAGES.map((language) => {
+          const flag = LANGUAGE_FLAGS[language.code] || '🌐';
+          const isSelected = language.code === currentLanguage.code;
+          
+          return (
+            <DropdownMenuItem
+              key={language.code}
+              onClick={() => handleLanguageChange(language)}
+              className={`flex items-center space-x-3 py-3 px-3 cursor-pointer hover:bg-[#0A0F14]/8 focus:bg-[#0A0F14]/8 focus:outline-none focus:ring-2 focus:ring-[#0B2B4C] focus:ring-inset ${
+                isSelected ? "font-bold border-l-3 border-[#0B2B4C]" : ""
+              }`}
+              role="option"
+              aria-selected={isSelected}
+              aria-current={isSelected ? "page" : undefined}
+            >
+              <a
+                href={`/${language.code === 'en' ? '' : language.code + '/'}`}
+                lang={language.code}
+                hrefLang={language.code}
+                className="flex items-center space-x-3 w-full text-[#0A0F14] no-underline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLanguageChange(language);
+                }}
+              >
+                <span 
+                  className="text-lg leading-none flex-shrink-0" 
+                  aria-hidden="true"
+                  style={{ fontSize: '18px' }}
+                >
+                  {flag}
+                </span>
+                <span className="font-medium">
+                  {language.nativeName}
+                </span>
+              </a>
+            </DropdownMenuItem>
+          );
+        })}
+        <div className="px-3 py-2 text-xs text-[#0A0F14]/70 border-t border-[#0A0F14]/20 mt-2">
           <p>
             *Translations provided for convenience. 
             English version remains authoritative.
