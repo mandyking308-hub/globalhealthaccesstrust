@@ -85,7 +85,6 @@ Policy change is measured not in legislation passed but in lives improved. Every
     region: "South Asia",
     programArea: "Policy & Research"
   }
-  // Continue with 47 more posts... (truncated for brevity but would include all 50)
 ];
 
 // Generate remaining 47 posts programmatically for production
@@ -262,3 +261,39 @@ The lessons learned from ${region} offer valuable insights for healthcare develo
 };
 
 export const all50BlogPosts = [...complete50BlogPosts, ...generateRemainingPosts()];
+
+export const categories = [
+  "Healthcare Access",
+  "Education & Training", 
+  "Policy & Research",
+  "Systems Strengthening",
+  "Emergency Relief"
+];
+
+export const regions = [
+  "Africa",
+  "South Asia",
+  "MENA", 
+  "Latin America",
+  "Eastern Europe",
+  "Global"
+];
+
+// Helper functions
+export const getPostBySlug = (slug: string): BlogPost | undefined => {
+  return all50BlogPosts.find(post => post.slug === slug);
+};
+
+export const getPostsByCategory = (category: string): BlogPost[] => {
+  return all50BlogPosts.filter(post => post.categories.includes(category));
+};
+
+export const getPostsByRegion = (region: string): BlogPost[] => {
+  return all50BlogPosts.filter(post => post.region === region);
+};
+
+export const getFeaturedPosts = (limit: number = 6): BlogPost[] => {
+  return all50BlogPosts
+    .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+    .slice(0, limit);
+};
