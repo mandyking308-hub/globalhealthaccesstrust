@@ -27,7 +27,7 @@ export const HomePage = () => {
           </p>
           <div className="cta-row max-w-xs mx-auto mb-6">
             <Link to="/donate">
-              <Button size="lg" variant="secondary" className="btn--primary text-lg w-full">
+              <Button size="lg" variant="secondary" className="btn--navy text-lg w-full">
                 Donate Now
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>

@@ -140,6 +140,18 @@ a:hover{text-decoration:none;}
   background: transparent !important; color: #FFFFFF !important; border: 1px solid rgba(255,255,255,.9) !important;
 }
 
+/* Navy donate button in hero */
+.hero__overlay .btn--navy {
+  background: #0B2B4C !important; 
+  color: #FFFFFF !important; 
+  border: 1px solid #0B2B4C !important;
+  box-shadow: 0 4px 12px rgba(11, 43, 76, 0.3);
+}
+.hero__overlay .btn--navy:hover {
+  background: #093254 !important;
+  transform: translateY(-1px);
+}
+
 /* Navy donate panel inside hero overlay */
 .donate-panel {
   background: #0B2B4C;   /* navy blue to match website */
