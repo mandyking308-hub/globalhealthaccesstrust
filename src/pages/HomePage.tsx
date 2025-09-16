@@ -9,48 +9,43 @@ export const HomePage = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="hero--full hero--bg hero relative flex items-center justify-center overflow-hidden">
-        <div 
-          className="hero__image absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        >
-          <div className="absolute inset-0" style={{background: 'var(--c-primary)', opacity: 0.7}}></div>
+      <section 
+        className="hero hero--overlay hero--bg"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        <div className="hero__image" style={{ display: 'none' }}>
+          <img src={heroImage} alt="Global Health Access" />
         </div>
         
-        <div className="relative z-10 container">
-          <div className="hero__content">
-            <h1 className="font-serif font-bold mb-6 text-center" style={{color: 'var(--c-text)'}}>
-              Access to Health is Justice — Not Charity.
-            </h1>
-            <p className="text-xl mb-8 leading-relaxed text-center" style={{color: 'var(--c-muted)'}}>
-              The Global Health Access Trust upholds the sacred obligation to protect 
-              human dignity through healthcare access, without border, bias, or exclusion.
+        <div className="hero__overlay">
+          <h1 className="font-serif font-bold mb-6 text-center">
+            Access to Health is Justice — Not Charity.
+          </h1>
+          <p className="text-xl mb-8 leading-relaxed text-center">
+            The Global Health Access Trust upholds the sacred obligation to protect 
+            human dignity through healthcare access, without border, bias, or exclusion.
+          </p>
+          <div className="cta-row max-w-xs mx-auto mb-6">
+            <Link to="/donate">
+              <Button size="lg" variant="secondary" className="btn--primary text-lg w-full">
+                Donate Now
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
+          
+          {/* Donate Card inside Hero */}
+          <div className="donate-inline">
+            <p className="text-xl mb-8 max-w-3xl mx-auto">
+              Your donation enables us to uphold healthcare as a matter of justice, not generosity.
             </p>
-            <div className="cta-row max-w-xs mx-auto mb-6">
+            <div className="cta-row max-w-xs mx-auto">
               <Link to="/donate">
-                <Button size="lg" variant="secondary" className="btn--primary text-lg w-full">
-                  Donate Now
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
+                <button className="btn--primary w-full">
+                  Make a Donation
+                  <Heart className="ml-2 w-5 h-5" />
+                </button>
               </Link>
-            </div>
-            
-            {/* Donate Card inside Hero */}
-            <div className="donate-card">
-              <h2 className="font-serif font-bold mb-6">
-                Support Our Mission
-              </h2>
-              <p className="text-xl mb-8 max-w-3xl mx-auto">
-                Your donation enables us to uphold healthcare as a matter of justice, not generosity.
-              </p>
-              <div className="cta-row max-w-xs mx-auto">
-                <Link to="/donate">
-                  <button className="btn--primary w-full">
-                    Make a Donation
-                    <Heart className="ml-2 w-5 h-5" />
-                  </button>
-                </Link>
-              </div>
             </div>
           </div>
         </div>

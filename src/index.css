@@ -738,3 +738,78 @@ a:hover{text-decoration:none;}
     @apply text-black bg-white;
   }
 }
+
+/* PAGE-SPECIFIC HERO OVERLAY STYLES */
+/* Prevent mid-word breaks in the hero area */
+.hero, .hero * { hyphens:none; -webkit-hyphens:none; word-break:normal; overflow-wrap:normal; }
+
+/* Large background hero with overlay content */
+.hero--overlay.hero--bg{
+  position:relative; display:flex; align-items:flex-end;
+  min-height:clamp(520px,70vh,880px);       /* big, image-dominant hero */
+  background-size:cover; background-position:center;
+  border-radius:12px; overflow:hidden;
+  padding:clamp(16px,2vw,28px);
+}
+/* Hide inline hero image here only (we use same file as background) */
+.hero--overlay.hero--bg .hero__image{ display:none !important; }
+
+/* Slight dark layer so white text stays readable */
+.hero--overlay.hero--bg::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.35) 40%, rgba(0,0,0,.45));
+  z-index:0;
+}
+
+/* Overlay column: headline, paragraph, CTAs, and donate box */
+.hero__overlay{
+  position:relative; z-index:1; color:#FFFFFF;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+  display:flex; flex-direction:column; gap:16px;
+  width:100%; max-width:780px;            /* text narrower than image */
+  margin-left:max(16px, env(safe-area-inset-left));
+  margin-right:max(16px, env(safe-area-inset-right));
+  margin-top:auto; margin-bottom:clamp(16px,4vh,40px);
+}
+/* Force white text inside hero overlay */
+.hero__overlay h1,.hero__overlay h2,.hero__overlay h3,
+.hero__overlay p,.hero__overlay li{ color:#FFFFFF !important; }
+
+/* High-contrast buttons on dark hero */
+.hero__overlay .btn--primary,.hero__overlay .btn-primary{
+  background:#FFFFFF !important; color:#0B2B4C !important; border:1px solid #FFFFFF !important;
+}
+.hero__overlay .btn--secondary,.hero__overlay .btn-secondary{
+  background:transparent !important; color:#FFFFFF !important; border:1px solid rgba(255,255,255,.9) !important;
+}
+.hero__overlay .button-group,.hero__overlay .cta-row{ display:grid; grid-template-columns:1fr; gap:12px; }
+
+/* Donate card INSIDE hero overlay (white card) */
+.donate-inline{
+  background:#FFFFFF; color:#111111; border:1px solid #e5e7eb;
+  border-radius:12px; padding:clamp(16px,2vw,24px);
+  box-shadow:0 2px 10px rgba(17,24,39,.08);
+}
+.donate-inline h2,.donate-inline h3{ color:#0B2B4C; margin:0 0 8px; }
+.donate-inline p{ color:#374151; margin:0 0 12px; }
+.donate-inline a{ color:#0B2B4C; text-decoration:underline; }
+.donate-inline a:hover{ text-decoration:none; }
+
+/* Buttons that remain inside donate (if any) */
+.donate-inline .btn--primary,.donate-inline .btn-primary{
+  background:#0B2B4C; color:#FFFFFF;
+  border-radius:8px; padding:12px 18px; min-height:44px; font-weight:600;
+}
+.donate-inline .btn--primary:hover,.donate-inline .btn-primary:hover{ filter:brightness(.9); }
+.donate-inline .btn--secondary,.donate-inline .btn-secondary{
+  background:transparent; color:#0B2B4C; border:1px solid #0B2B4C;
+  border-radius:8px; padding:12px 18px; min-height:44px; font-weight:600;
+}
+.donate-inline .btn--secondary:hover,.donate-inline .btn-secondary:hover{
+  background:color-mix(in srgb, #0B2B4C 10%, white);
+}
+
+/* Mobile fit */
+@media (max-width:768px){ .hero__overlay{ max-width:100%; } }
+/* Prevent sticky header overlap on anchor jump */
+.header--sticky + .hero, .header + .hero, .hero--bg{ scroll-margin-top:72px; }
