@@ -43,8 +43,11 @@ export const FOOTER_SECTIONS = {
     { label: "Terms of Use", href: "/terms-of-use" },
     { label: "Accessibility Statement", href: "/accessibility-statement" },
     { label: "Safeguarding", href: "/safeguarding" },
-    { label: "Anti-Fraud & Anti-Corruption", href: "/anti-fraud" },
+    { label: "Conflict of Interest", href: "/conflict-of-interest" },
+    { label: "Financial Controls", href: "/financial-controls" },
+    { label: "Risk Management", href: "/risk-management" },
     { label: "Whistleblowing", href: "/whistleblowing" },
+    { label: "Anti-Fraud & Anti-Corruption", href: "/anti-fraud" },
     { label: "Governance & Oversight", href: "/governance" },
     { label: "Constitution", href: "/constitution" }
   ]

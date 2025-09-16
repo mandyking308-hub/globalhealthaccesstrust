@@ -81,7 +81,7 @@ export const Footer = () => {
             <div>
               <h3 className="font-semibold text-lg mb-6">Governance & Policies</h3>
               <ul className="space-y-3">
-                {FOOTER_SECTIONS.governance.slice(0, 7).map((link) => (
+                {FOOTER_SECTIONS.governance.slice(0, 8).map((link) => (
                   <li key={link.href}>
                     <Link
                       to={link.href}
