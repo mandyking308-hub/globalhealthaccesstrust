@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { TranslationProvider } from "@/hooks/useTranslation";
 import { Layout } from "./components/layout/Layout";
@@ -65,7 +65,8 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
-          <Route path="/" element={<Layout />}>
+            <Route path="learn-about-our-mission" element={<Navigate to="/about-the-trust" replace />} />
+            <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="about-the-trust" element={<AboutTheTrustPage />} />
             <Route path="trustee-biographies" element={<TrusteeBiographiesPage />} />

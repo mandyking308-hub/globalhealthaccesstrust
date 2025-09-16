@@ -19,23 +19,18 @@ export const HomePage = () => {
         
         <div className="relative z-10 container-section text-center text-white">
           <div className="max-w-4xl mx-auto animate-fade-in">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight">
+            <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-tight max-w-[28ch] md:max-w-[34ch]">
               Access to health is justice — not charity.
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed max-w-3xl mx-auto">
               The Global Health Access Trust upholds the sacred obligation to protect 
               human dignity through healthcare access, without border, bias, or exclusion.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex justify-center">
               <Link to="/donate">
-                <Button size="lg" variant="secondary" className="text-lg px-8 py-4">
+                <Button size="lg" variant="secondary" className="text-lg px-8 py-4 min-h-[44px]">
                   Donate Now
                   <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link to="/about">
-                <Button size="lg" variant="outline" className="text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-                  Learn About Our Mission
                 </Button>
               </Link>
             </div>
@@ -59,13 +54,18 @@ export const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {IMPACT_STATS.map((stat, index) => (
               <div key={index} className="text-center animate-slide-up">
-                <div className="text-5xl md:text-6xl font-bold text-gold mb-2">
-                  {stat.number}
+                <div className="mb-3">
+                  <span className="text-sm font-semibold text-gold uppercase tracking-wider">
+                    {index === 0 ? "Governance" : index === 1 ? "Legacy" : "Mission"}
+                  </span>
                 </div>
-                <div className="text-xl font-semibold mb-2">
+                <h3 className="text-2xl md:text-3xl font-bold text-gold mb-2">
+                  {stat.number}
+                </h3>
+                <div className="text-lg font-semibold mb-2">
                   {stat.label}
                 </div>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground max-w-[65ch]">
                   {stat.description}
                 </p>
               </div>
@@ -99,7 +99,7 @@ export const HomePage = () => {
                       </div>
                       <h3 className="text-xl font-semibold">{area.title}</h3>
                     </div>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed max-w-[70ch]">
                       {area.description}
                     </p>
                   </CardContent>
@@ -136,7 +136,7 @@ export const HomePage = () => {
             {TESTIMONIALS.slice(0, 2).map((testimonial, index) => (
               <Card key={index} className="card-elevated">
                 <CardContent className="p-8">
-                  <blockquote className="text-lg leading-relaxed mb-6 text-foreground/90">
+                  <blockquote className="blockquote text-lg leading-relaxed mb-6 text-foreground/90">
                     "{testimonial.quote}"
                   </blockquote>
                   <div className="flex items-center">

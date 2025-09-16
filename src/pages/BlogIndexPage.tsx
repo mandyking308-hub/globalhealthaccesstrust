@@ -71,13 +71,13 @@ export const BlogIndexPage = () => {
                       ))}
                     </div>
                     <Link to={`/blog/${post.slug}`}>
-                      <h3 className="text-xl font-serif font-semibold mb-3 hover:text-primary transition-colors line-clamp-2 leading-snug">
+                      <h3 className="card-title text-xl font-serif font-semibold mb-3 hover:text-primary transition-colors leading-snug">
                         {post.title}
                       </h3>
                     </Link>
-                    <p className="text-muted-foreground mb-4 line-clamp-3 leading-relaxed text-sm">
+                    <div className="card-summary text-muted-foreground mb-4 leading-relaxed text-sm">
                       {post.summary}
-                    </p>
+                    </div>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex items-center">
                         <User className="w-3 h-3 mr-1" />
@@ -113,13 +113,13 @@ export const BlogIndexPage = () => {
                       ))}
                     </div>
                     <Link to={`/blog/${post.slug}`}>
-                      <h3 className="text-xl font-serif font-semibold mb-3 hover:text-primary transition-colors line-clamp-2 leading-snug">
+                      <h3 className="card-title text-xl font-serif font-semibold mb-3 hover:text-primary transition-colors leading-snug">
                         {post.title}
                       </h3>
                     </Link>
-                    <p className="text-muted-foreground mb-4 line-clamp-3 leading-relaxed text-sm">
+                    <div className="card-summary text-muted-foreground mb-4 leading-relaxed text-sm">
                       {post.summary}
-                    </p>
+                    </div>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex items-center">
                         <User className="w-3 h-3 mr-1" />
