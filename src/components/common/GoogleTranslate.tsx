@@ -155,7 +155,7 @@ export const GoogleTranslate = () => {
         /* Custom placeholder text with accessibility */
         .goog-te-gadget-simple .goog-te-menu-value:before {
           content: 'Select Language' !important;
-          color: #6b7280 !important;
+          color: #ffffff !important;
           font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !important;
           font-size: 14px !important;
           font-weight: 400 !important;
@@ -178,6 +178,7 @@ export const GoogleTranslate = () => {
           
           .goog-te-gadget-simple .goog-te-menu-value:before {
             content: 'Select Language' !important;
+            color: #ffffff !important;
             font-size: 14px !important;
           }
         }
@@ -201,6 +202,7 @@ export const GoogleTranslate = () => {
           
           .goog-te-gadget-simple .goog-te-menu-value:before {
             content: 'Language' !important;
+            color: #ffffff !important;
             font-size: 14px !important;
           }
         }
