@@ -9,33 +9,37 @@ declare global {
 
 export const GoogleTranslate = () => {
   useEffect(() => {
-    // Add responsive styles for cross-device compatibility
+    // Add the exact styling as specified
     const addCustomStyles = () => {
       const style = document.createElement('style');
-      style.id = 'google-translate-responsive-styles';
+      style.id = 'google-translate-footer-exact-styles';
       style.innerHTML = `
-        /* General footer dropdown styling */
+        /* Ensure footer dropdown is always visible */
         #google_translate_element {
+          display: block !important;
+          margin: 12px auto !important;
+          text-align: center !important;
           background: transparent !important;
-          color: #ffffff !important;   /* White text for footer */
+          color: #ffffff !important; /* White text in footer */
           font-family: inherit !important;
-          font-size: 14px !important;
-          display: inline-block !important;
-          padding: 6px 10px !important;
+          font-size: 16px !important;
+          padding: 8px 12px !important;
           visibility: visible !important;
           opacity: 1 !important;
           position: relative !important;
           z-index: 1000 !important;
           width: auto !important;
+          overflow: visible !important;
         }
 
-        /* Translate gadget styling */
+        /* Gadget styling */
         .goog-te-gadget {
           color: #ffffff !important;
-          font-family: inherit !important;
-          font-size: 14px !important;
           background: transparent !important;
-          display: inline-block !important;
+          font-size: inherit !important;
+          font-family: inherit !important;
+          text-align: center !important;
+          display: block !important;
           visibility: visible !important;
           opacity: 1 !important;
           width: 100% !important;
@@ -43,23 +47,23 @@ export const GoogleTranslate = () => {
 
         .goog-te-gadget-simple {
           background: transparent !important;
-          display: inline-block !important;
+          display: block !important;
           visibility: visible !important;
           opacity: 1 !important;
-          width: 100% !important;
+          text-align: center !important;
         }
 
         .goog-te-gadget select,
         .goog-te-gadget .goog-te-combo {
-          background: #1a1a1a !important;     /* Dark dropdown box */
+          background: #0a1a3f !important;     /* Navy dropdown box */
           color: #ffffff !important;          /* White text */
           border: 1px solid #ffffff !important;
           border-radius: 4px !important;
-          padding: 6px 10px !important;
-          font-size: 14px !important;
-          width: 100% !important;             /* Force full width in containers */
-          max-width: 250px !important;        /* Keep it tidy */
-          min-width: 160px !important;        /* Prevent collapsing on mobile */
+          padding: 8px 12px !important;
+          font-size: 16px !important;
+          width: auto !important;
+          min-width: 180px !important;
+          max-width: 240px !important;
           box-sizing: border-box !important;
           font-family: inherit !important;
           line-height: 1.4 !important;
@@ -68,31 +72,33 @@ export const GoogleTranslate = () => {
           appearance: none !important;
           -webkit-appearance: none !important;
           -moz-appearance: none !important;
-          display: block !important;
+          display: inline-block !important;
           visibility: visible !important;
           opacity: 1 !important;
+          margin: 0 auto !important;
         }
 
         .goog-te-gadget select:hover,
         .goog-te-gadget .goog-te-combo:hover {
+          background: #0d2251 !important;
           border-color: #cccccc !important;
-          background-color: #2a2a2a !important;
         }
 
         .goog-te-gadget select:focus,
         .goog-te-gadget .goog-te-combo:focus {
+          background: #0a1a3f !important;
           border-color: #ffffff !important;
           box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
         }
 
-        /* Force white text for all dropdown elements */
+        /* Force white text for all elements */
         .goog-te-gadget .goog-te-menu-value,
         .goog-te-gadget .goog-te-menu-value span,
         .goog-te-gadget-simple .goog-te-menu-value,
         .goog-te-gadget-simple .goog-te-menu-value span,
         .goog-te-gadget option {
           color: #ffffff !important;
-          background: #1a1a1a !important;
+          background: #0a1a3f !important;
         }
 
         /* Custom placeholder text */
@@ -103,61 +109,36 @@ export const GoogleTranslate = () => {
           font-size: inherit !important;
         }
 
-        /* Responsive fixes */
+        /* Tablet fixes */
         @media (max-width: 1024px) {
-          #google_translate_element {
-            display: block !important;
-            margin: 10px auto !important;
-            text-align: center !important;
-            width: 100% !important;
-            max-width: 300px !important;
-          }
-          
-          .goog-te-gadget {
-            display: block !important;
-            width: 100% !important;
-            text-align: center !important;
-          }
-          
           .goog-te-gadget select,
           .goog-te-gadget .goog-te-combo {
             width: 90% !important;
-            font-size: 16px !important;       /* Larger, more readable on tablets */
-            padding: 8px 12px !important;
-            min-height: 44px !important;
-            margin: 0 auto !important;
-            display: block !important;
+            font-size: 18px !important;       /* Larger text for tablets */
+            padding: 10px 14px !important;
+            max-width: 280px !important;
+            min-width: 200px !important;
           }
           
           .goog-te-gadget-simple .goog-te-menu-value:before {
-            font-size: 16px !important;
+            font-size: 18px !important;
           }
         }
 
+        /* Mobile fixes */
         @media (max-width: 768px) {
           #google_translate_element {
-            display: block !important;
-            margin: 12px auto !important;
-            text-align: center !important;
-            width: 100% !important;
-            max-width: 280px !important;
-            padding: 8px !important;
-          }
-          
-          .goog-te-gadget {
-            display: block !important;
-            width: 100% !important;
-            text-align: center !important;
+            margin: 14px auto !important;
+            padding: 10px 12px !important;
           }
           
           .goog-te-gadget select,
           .goog-te-gadget .goog-te-combo {
             width: 100% !important;
-            font-size: 18px !important;       /* Bigger text for small screens */
-            padding: 10px 12px !important;    /* More tap-friendly */
-            min-height: 48px !important;
-            margin: 0 auto !important;
-            display: block !important;
+            font-size: 18px !important;       /* Bigger for readability */
+            padding: 12px 16px !important;
+            max-width: 300px !important;
+            min-width: 220px !important;
             border-radius: 6px !important;
           }
           
@@ -220,32 +201,32 @@ export const GoogleTranslate = () => {
 
         /* Dropdown menu styling */
         .goog-te-menu-frame {
-          background: #1a1a1a !important;
+          background: #0a1a3f !important;
           border: 1px solid #ffffff !important;
-          border-radius: 6px !important;
+          border-radius: 4px !important;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
           z-index: 10000 !important;
         }
 
         .goog-te-menu2 {
-          background: #1a1a1a !important;
+          background: #0a1a3f !important;
           color: #ffffff !important;
           font-family: inherit !important;
         }
 
         .goog-te-menu2-item div {
           color: #ffffff !important;
-          background: #1a1a1a !important;
+          background: #0a1a3f !important;
           font-family: inherit !important;
           padding: 8px 12px !important;
         }
 
         .goog-te-menu2-item:hover {
-          background-color: #2a2a2a !important;
+          background-color: #0d2251 !important;
         }
 
         .goog-te-menu2-item div:hover {
-          background-color: #2a2a2a !important;
+          background-color: #0d2251 !important;
           color: #ffffff !important;
         }
 
@@ -263,12 +244,12 @@ export const GoogleTranslate = () => {
 
     // Initialize Google Translate with priority languages
     const initializeGoogleTranslate = () => {
-      console.log('[GoogleTranslate] Initializing responsive widget...');
+      console.log('[GoogleTranslate] Initializing with exact specifications...');
       
       if (window.google && window.google.translate) {
         console.log('[GoogleTranslate] Creating translate element...');
         
-        // Priority languages first, then others
+        // Priority languages as specified
         const priorityLanguages = 'zh-CN,es,hi,ar,bn,pt,ru,ja,pa,de,fr,sw,uk,pl,tr,it,nl';
         const otherLanguages = 'ko,th,vi,ms,id,tl,ur,fa,he,am,ha,yo,ig,zu,af,sq,eu,be,bg,ca,hr,cs,da,et,fi,gl,el,hu,is,ga,lv,lt,mk,mt,no,ro,sr,sk,sl,sv,cy';
         const allLanguages = priorityLanguages + ',' + otherLanguages;
@@ -286,13 +267,13 @@ export const GoogleTranslate = () => {
           'google_translate_element'
         );
 
-        // Enhanced visibility and responsive styling
-        const ensureResponsiveVisibility = () => {
+        // Ensure perfect visibility and styling
+        const ensurePerfectVisibility = () => {
           const element = document.getElementById('google_translate_element');
           const gadget = document.querySelector('.goog-te-gadget');
           const combo = document.querySelector('.goog-te-combo');
           
-          console.log('[GoogleTranslate] Responsive visibility check:', {
+          console.log('[GoogleTranslate] Perfect visibility check:', {
             element: !!element,
             gadget: !!gadget,
             combo: !!combo,
@@ -300,59 +281,70 @@ export const GoogleTranslate = () => {
           });
 
           if (element && gadget) {
-            // Force visibility and responsive behavior
+            // Apply exact styling as specified
             const htmlElement = element as HTMLElement;
             const gadgetElement = gadget as HTMLElement;
             
-            // Base styling
-            htmlElement.style.display = window.innerWidth <= 1024 ? 'block' : 'inline-block';
+            // Exact element styling
+            htmlElement.style.display = 'block';
+            htmlElement.style.margin = '12px auto';
+            htmlElement.style.textAlign = 'center';
+            htmlElement.style.background = 'transparent';
+            htmlElement.style.color = '#ffffff';
+            htmlElement.style.fontFamily = 'inherit';
+            htmlElement.style.fontSize = '16px';
+            htmlElement.style.padding = '8px 12px';
             htmlElement.style.visibility = 'visible';
             htmlElement.style.opacity = '1';
             htmlElement.style.position = 'relative';
             htmlElement.style.zIndex = '1000';
-            htmlElement.style.color = '#ffffff';
-            htmlElement.style.background = 'transparent';
             
-            // Responsive adjustments
-            if (window.innerWidth <= 1024) {
-              htmlElement.style.margin = '10px auto';
-              htmlElement.style.textAlign = 'center';
-              htmlElement.style.width = '100%';
-              htmlElement.style.maxWidth = window.innerWidth <= 768 ? '280px' : '300px';
+            // Mobile adjustments
+            if (window.innerWidth <= 768) {
+              htmlElement.style.margin = '14px auto';
+              htmlElement.style.padding = '10px 12px';
             }
             
-            gadgetElement.style.display = window.innerWidth <= 1024 ? 'block' : 'inline-block';
-            gadgetElement.style.visibility = 'visible';
-            gadgetElement.style.opacity = '1';
+            // Gadget styling
             gadgetElement.style.color = '#ffffff';
             gadgetElement.style.background = 'transparent';
+            gadgetElement.style.fontSize = 'inherit';
+            gadgetElement.style.fontFamily = 'inherit';
+            gadgetElement.style.textAlign = 'center';
+            gadgetElement.style.display = 'block';
+            gadgetElement.style.visibility = 'visible';
+            gadgetElement.style.opacity = '1';
             gadgetElement.style.width = '100%';
-            
-            if (window.innerWidth <= 1024) {
-              gadgetElement.style.textAlign = 'center';
-            }
 
             if (combo) {
               const comboEl = combo as HTMLElement;
-              comboEl.style.background = '#1a1a1a';
+              comboEl.style.background = '#0a1a3f';
               comboEl.style.color = '#ffffff';
               comboEl.style.border = '1px solid #ffffff';
-              comboEl.style.display = 'block';
+              comboEl.style.borderRadius = '4px';
+              comboEl.style.fontSize = '16px';
+              comboEl.style.padding = '8px 12px';
+              comboEl.style.minWidth = '180px';
+              comboEl.style.maxWidth = '240px';
+              comboEl.style.display = 'inline-block';
               comboEl.style.visibility = 'visible';
               comboEl.style.opacity = '1';
+              comboEl.style.margin = '0 auto';
               
-              // Responsive font sizing
-              if (window.innerWidth <= 768) {
+              // Responsive adjustments
+              if (window.innerWidth <= 1024 && window.innerWidth > 768) {
                 comboEl.style.fontSize = '18px';
-                comboEl.style.padding = '10px 12px';
-                comboEl.style.minHeight = '48px';
-                comboEl.style.width = '100%';
-              } else if (window.innerWidth <= 1024) {
-                comboEl.style.fontSize = '16px';
-                comboEl.style.padding = '8px 12px';
-                comboEl.style.minHeight = '44px';
+                comboEl.style.padding = '10px 14px';
                 comboEl.style.width = '90%';
-                comboEl.style.margin = '0 auto';
+                comboEl.style.maxWidth = '280px';
+                comboEl.style.minWidth = '200px';
+              } else if (window.innerWidth <= 768) {
+                comboEl.style.fontSize = '18px';
+                comboEl.style.padding = '12px 16px';
+                comboEl.style.width = '100%';
+                comboEl.style.maxWidth = '300px';
+                comboEl.style.minWidth = '220px';
+                comboEl.style.borderRadius = '6px';
               }
               
               // Enhanced accessibility
@@ -363,26 +355,26 @@ export const GoogleTranslate = () => {
               comboEl.setAttribute('title', 'Select website language');
             }
 
-            console.log('[GoogleTranslate] Responsive visibility and styling applied successfully');
+            console.log('[GoogleTranslate] Perfect visibility and styling applied successfully');
             return true;
           }
           return false;
         };
 
-        // Multi-attempt initialization with responsive checks
+        // Multi-attempt initialization with perfect visibility checks
         let attempts = 0;
-        const maxAttempts = 15;
+        const maxAttempts = 20;
         
-        const retryResponsiveVisibility = () => {
+        const retryPerfectVisibility = () => {
           attempts++;
-          console.log(`[GoogleTranslate] Responsive visibility attempt ${attempts}/${maxAttempts}`);
+          console.log(`[GoogleTranslate] Perfect visibility attempt ${attempts}/${maxAttempts}`);
           
-          if (ensureResponsiveVisibility()) {
-            console.log('[GoogleTranslate] Successfully initialized with responsive styling');
+          if (ensurePerfectVisibility()) {
+            console.log('[GoogleTranslate] Successfully initialized with perfect styling');
             
             // Add resize listener for dynamic responsiveness
             const handleResize = () => {
-              setTimeout(ensureResponsiveVisibility, 100);
+              setTimeout(ensurePerfectVisibility, 50);
             };
             window.addEventListener('resize', handleResize);
             
@@ -390,13 +382,13 @@ export const GoogleTranslate = () => {
           }
           
           if (attempts < maxAttempts) {
-            setTimeout(retryResponsiveVisibility, attempts * 200);
+            setTimeout(retryPerfectVisibility, attempts * 150);
           } else {
-            console.error('[GoogleTranslate] Failed to initialize responsive styling after all attempts');
+            console.error('[GoogleTranslate] Failed to achieve perfect visibility after all attempts');
           }
         };
         
-        setTimeout(retryResponsiveVisibility, 300);
+        setTimeout(retryPerfectVisibility, 200);
       } else {
         console.error('[GoogleTranslate] Google API not available');
       }
@@ -431,11 +423,8 @@ export const GoogleTranslate = () => {
     addCustomStyles();
 
     return () => {
-      const style = document.getElementById('google-translate-responsive-styles');
+      const style = document.getElementById('google-translate-footer-exact-styles');
       if (style) style.remove();
-      
-      // Remove resize listener
-      window.removeEventListener('resize', () => {});
     };
   }, []);
 
@@ -445,14 +434,15 @@ export const GoogleTranslate = () => {
       aria-label="Website language selector"
       role="region"
       title="Select website language"
-      className="google-translate-container"
       style={{
+        display: 'block',
+        margin: '12px auto',
+        textAlign: 'center',
         background: 'transparent',
         color: '#ffffff',
         fontFamily: 'inherit',
-        fontSize: '14px',
-        display: 'inline-block',
-        padding: '6px 10px',
+        fontSize: '16px',
+        padding: '8px 12px',
         visibility: 'visible',
         opacity: 1,
         position: 'relative',
