@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { IMPACT_STATS, NEW_IMPACT_STATS, PROGRAM_AREAS } from "@/lib/constants";
 import heroImage from "@/assets/hero-bright-healthcare.jpg";
+import ukraineConflictImage from "@/assets/conflict-ukraine-humanitarian.jpg";
+import africaConflictImage from "@/assets/conflict-africa-humanitarian.jpg";
 
 export const HomePage = () => {
   return (
@@ -67,21 +69,39 @@ export const HomePage = () => {
       {/* Human Story Section */}
       <section className="section" style={{background: 'var(--c-alt)'}}>
         <div className="container">
-          <div className="human-story-grid">
-            <div className="order-2 lg:order-1">
+          <div className="text-center mb-12">
+            <h2 className="font-serif font-bold mb-6" style={{color: 'var(--c-text)'}}>
+              Why It Matters
+            </h2>
+            <p className="text-lg leading-relaxed max-w-4xl mx-auto" style={{color: 'var(--c-muted)'}}>
+              When conflict forced Amina's family to flee, they lost access to medical care. Through our partners, she now receives regular treatment for her child. This is why we exist — to restore dignity and care to the most overlooked.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            <div className="text-center">
               <img 
                 src={heroImage} 
                 alt="Healthcare professional providing care"
-                className="w-full h-96 object-cover rounded-lg"
+                className="w-full h-64 object-cover rounded-lg mb-4"
               />
+              <p className="text-sm font-semibold" style={{color: 'var(--c-text)'}}>Healthcare Access</p>
             </div>
-            <div className="order-1 lg:order-2">
-              <h2 className="font-serif font-bold mb-6" style={{color: 'var(--c-text)'}}>
-                Why It Matters
-              </h2>
-              <p className="text-lg leading-relaxed" style={{color: 'var(--c-muted)'}}>
-                When conflict forced Amina's family to flee, they lost access to medical care. Through our partners, she now receives regular treatment for her child. This is why we exist — to restore dignity and care to the most overlooked.
-              </p>
+            <div className="text-center">
+              <img 
+                src={ukraineConflictImage} 
+                alt="Conflict in Ukraine – humanitarian aid and displaced families receiving assistance"
+                className="w-full h-64 object-cover rounded-lg mb-4"
+              />
+              <p className="text-sm font-semibold" style={{color: 'var(--c-text)'}}>Ukraine Crisis Response</p>
+            </div>
+            <div className="text-center md:col-span-2 lg:col-span-1">
+              <img 
+                src={africaConflictImage} 
+                alt="Conflict in Africa – displaced families receiving medical care and humanitarian assistance"
+                className="w-full h-64 object-cover rounded-lg mb-4"
+              />
+              <p className="text-sm font-semibold" style={{color: 'var(--c-text)'}}>Africa Humanitarian Aid</p>
             </div>
           </div>
         </div>
