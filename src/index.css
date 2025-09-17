@@ -910,6 +910,18 @@ a:hover{text-decoration:none;}
   .section{ padding-block: 40px; text-align: center; }
 }
 
+/* Vision section center alignment for tablet/desktop */
+@media (min-width: 768px){
+  .section .section-content{
+    text-align: center;
+  }
+  .section .section-content p{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* Typography & wrapping safety (no mid-word hyphens) */
 @media (min-width: 768px){
   .section *, .impact-grid *, .human-story-grid *, .section-content *{
