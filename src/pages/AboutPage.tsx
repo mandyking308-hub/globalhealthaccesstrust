@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { Users, Clock, Globe, Heart, Shield, Scale } from "lucide-react";
+import { Clock, Shield, Scale } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { TRUSTEES } from "@/lib/constants";
 
 export const AboutPage = () => {
   return (
