@@ -61,7 +61,7 @@ export const AboutTheTrustPage = () => {
       <h2>Constitution & Governance</h2>
       <p>Global Health Access Trust is governed by a formal Constitution, which outlines our purpose, structure, and decision-making processes. This document sets out the roles of our trustees, how we operate, and our commitment to transparency and accountability.</p>
       
-      <p><a href="/GHAT_Constitution_2025_Refined.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Download Constitution (Adopted June 2025)</a></p>
+      <p className="block"><a href="/GHAT_Constitution_2025_Refined.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-block py-2">Download Constitution (Adopted June 2025)</a></p>
     </ContentLayout>
   );
 };
