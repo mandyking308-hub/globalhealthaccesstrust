@@ -3,6 +3,7 @@ import { Globe, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FOOTER_SECTIONS, SITE_CONFIG } from "@/lib/constants";
+import { GoogleTranslate } from "@/components/common/GoogleTranslate";
 import { useState } from "react";
 
 export const Footer = () => {
@@ -121,6 +122,14 @@ export const Footer = () => {
                   </Button>
                 </div>
               </form>
+
+              {/* Language Selector */}
+              <div className="mt-6">
+                <h4 className="font-medium text-primary-foreground mb-3 text-sm">
+                  Select Language
+                </h4>
+                <GoogleTranslate />
+              </div>
             </div>
           </div>
         </div>
