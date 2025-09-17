@@ -55,14 +55,21 @@ h1,h2,h3,h4,p,li{
     max-width: 900px;
     margin-inline: auto;
     text-align: center;
-    display: grid;
-    align-content: center;
-    justify-items: center;
-    gap: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
     padding-inline: 24px;
     min-height: 70vh;
   }
-  .hero__overlay .button-group, .hero__overlay .cta-row{ display:grid; grid-template-columns:1fr; gap:12px; }
+  .hero__overlay h1{ text-align: center; }
+  .hero__overlay .button-group, .hero__overlay .cta-row{ 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+  }
 }
 @media (min-width:1024px){
   .hero__overlay{min-height:80vh;}
