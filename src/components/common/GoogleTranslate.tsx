@@ -152,6 +152,16 @@ export const GoogleTranslate = () => {
           display: none !important;
         }
         
+        /* Force white text for ALL text elements in dropdown */
+        .goog-te-gadget .goog-te-combo,
+        .goog-te-gadget .goog-te-combo option,
+        .goog-te-gadget .goog-te-menu-value,
+        .goog-te-gadget .goog-te-menu-value span,
+        .goog-te-gadget-simple .goog-te-menu-value,
+        .goog-te-gadget-simple .goog-te-menu-value span {
+          color: #ffffff !important;
+        }
+        
         /* Custom placeholder text with accessibility */
         .goog-te-gadget-simple .goog-te-menu-value:before {
           content: 'Select Language' !important;
@@ -174,6 +184,15 @@ export const GoogleTranslate = () => {
             height: 42px !important;
             max-width: 200px !important;
             min-width: 160px !important;
+            color: #ffffff !important;
+          }
+          
+          .goog-te-gadget .goog-te-combo option,
+          .goog-te-gadget .goog-te-menu-value,
+          .goog-te-gadget .goog-te-menu-value span,
+          .goog-te-gadget-simple .goog-te-menu-value,
+          .goog-te-gadget-simple .goog-te-menu-value span {
+            color: #ffffff !important;
           }
           
           .goog-te-gadget-simple .goog-te-menu-value:before {
@@ -198,6 +217,15 @@ export const GoogleTranslate = () => {
             max-width: 180px !important;
             min-width: 160px !important;
             border-radius: 6px !important;
+            color: #ffffff !important;
+          }
+          
+          .goog-te-gadget .goog-te-combo option,
+          .goog-te-gadget .goog-te-menu-value,
+          .goog-te-gadget .goog-te-menu-value span,
+          .goog-te-gadget-simple .goog-te-menu-value,
+          .goog-te-gadget-simple .goog-te-menu-value span {
+            color: #ffffff !important;
           }
           
           .goog-te-gadget-simple .goog-te-menu-value:before {
