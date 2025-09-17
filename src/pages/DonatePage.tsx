@@ -145,24 +145,9 @@ export const DonatePage = () => {
                 <Card className="card-professional">
                   <CardContent className="p-6">
                     <h3 className="font-semibold mb-4">Your Impact</h3>
-                    <div className="space-y-4">
-                      <div className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-success mr-3 flex-shrink-0" />
-                        <span className="text-sm">Direct support for healthcare access programmes</span>
-                      </div>
-                      <div className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-success mr-3 flex-shrink-0" />
-                        <span className="text-sm">Professional training and capacity building</span>
-                      </div>
-                      <div className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-success mr-3 flex-shrink-0" />
-                        <span className="text-sm">Emergency relief and crisis response</span>
-                      </div>
-                      <div className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-success mr-3 flex-shrink-0" />
-                        <span className="text-sm">Health system strengthening initiatives</span>
-                      </div>
-                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Your donation directly supports the Trust's mission to uphold healthcare as a fundamental human right, creating lasting change through principled interventions.
+                    </p>
                   </CardContent>
                 </Card>
 
