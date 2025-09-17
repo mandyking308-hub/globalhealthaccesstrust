@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X, Search, Globe, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NAVIGATION_ITEMS, SITE_CONFIG } from "@/lib/constants";
-import { GoogleTranslate } from "@/components/common/GoogleTranslate";
+import { GoogleTranslateFixed } from "@/components/common/GoogleTranslateFixed";
 import { SearchModal } from "@/components/common/SearchModal";
 
 export const Header = () => {
@@ -88,7 +88,7 @@ export const Header = () => {
 
               {/* Google Translate */}
               <div className="flex-shrink-0">
-                <GoogleTranslate />
+                <GoogleTranslateFixed />
               </div>
 
               {/* Donate Button */}
@@ -145,7 +145,7 @@ export const Header = () => {
                 <div className="px-4 pt-4 border-t border-border mt-4 space-y-4">
                   {/* Mobile Google Translate */}
                   <div className="flex justify-center">
-                    <GoogleTranslate />
+                    <GoogleTranslateFixed />
                   </div>
                   <Link to="/donate">
                     <Button variant="default" size="lg" className="w-full min-h-[44px]">

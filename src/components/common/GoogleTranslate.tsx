@@ -348,9 +348,11 @@ export const GoogleTranslate = () => {
       document.head.appendChild(style);
     };
 
-    // Initialize Google Translate with enhanced visibility monitoring
+    // Initialize Google Translate with enhanced visibility monitoring and debugging
     const initializeGoogleTranslate = () => {
+      console.log('[GoogleTranslate] Initializing Google Translate...');
       if (window.google && window.google.translate) {
+        console.log('[GoogleTranslate] Google Translate API is available');
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
@@ -365,11 +367,21 @@ export const GoogleTranslate = () => {
           'google_translate_element'
         );
         
+        console.log('[GoogleTranslate] TranslateElement created');
+        
         // AGGRESSIVE visibility enforcement after initialization
         setTimeout(() => {
           const translateElement = document.getElementById('google_translate_element');
           const gadget = document.querySelector('.goog-te-gadget');
           const combo = document.querySelector('.goog-te-combo');
+          
+          console.log('[GoogleTranslate] Checking elements:', {
+            translateElement: !!translateElement,
+            gadget: !!gadget,
+            combo: !!combo,
+            isMobile: window.innerWidth <= 640,
+            isTablet: window.innerWidth > 640 && window.innerWidth <= 1024
+          });
           
           if (translateElement) {
             translateElement.style.display = 'block';
@@ -377,6 +389,9 @@ export const GoogleTranslate = () => {
             translateElement.style.opacity = '1';
             translateElement.style.position = 'relative';
             translateElement.style.zIndex = '99999';
+            console.log('[GoogleTranslate] Applied styles to translateElement');
+          } else {
+            console.error('[GoogleTranslate] translateElement not found!');
           }
           
           if (gadget) {
@@ -386,6 +401,9 @@ export const GoogleTranslate = () => {
             gadgetEl.style.opacity = '1';
             gadgetEl.style.position = 'relative';
             gadgetEl.style.zIndex = '99999';
+            console.log('[GoogleTranslate] Applied styles to gadget');
+          } else {
+            console.error('[GoogleTranslate] gadget not found!');
           }
           
           if (combo) {
@@ -401,6 +419,14 @@ export const GoogleTranslate = () => {
             comboEl.setAttribute('aria-haspopup', 'listbox');
             comboEl.setAttribute('aria-label', 'Select website language for translation');
             
+            console.log('[GoogleTranslate] Applied styles to combo, final dimensions:', {
+              width: comboEl.offsetWidth,
+              height: comboEl.offsetHeight,
+              display: getComputedStyle(comboEl).display,
+              visibility: getComputedStyle(comboEl).visibility,
+              opacity: getComputedStyle(comboEl).opacity
+            });
+            
             // Enhanced keyboard navigation
             combo.addEventListener('keydown', (e: any) => {
               if (e.key === 'Enter' || e.key === ' ') {
@@ -408,8 +434,12 @@ export const GoogleTranslate = () => {
                 comboEl.click();
               }
             });
+          } else {
+            console.error('[GoogleTranslate] combo not found!');
           }
         }, 800);
+      } else {
+        console.error('[GoogleTranslate] Google Translate API not available');
       }
     };
 
@@ -448,6 +478,14 @@ export const GoogleTranslate = () => {
       const gadget = document.querySelector('.goog-te-gadget');
       const combo = document.querySelector('.goog-te-combo');
       
+      console.log('[GoogleTranslate] Visibility check:', {
+        element: !!element,
+        gadget: !!gadget,
+        combo: !!combo,
+        screenWidth: window.innerWidth,
+        deviceType: window.innerWidth <= 640 ? 'mobile' : window.innerWidth <= 1024 ? 'tablet' : 'desktop'
+      });
+      
       if (element) {
         element.style.display = 'block';
         element.style.visibility = 'visible';
@@ -472,6 +510,14 @@ export const GoogleTranslate = () => {
         comboEl.style.opacity = '1';
         comboEl.style.position = 'relative';
         comboEl.style.zIndex = '99999';
+        
+        console.log('[GoogleTranslate] Combo final state:', {
+          width: comboEl.offsetWidth,
+          height: comboEl.offsetHeight,
+          computedDisplay: getComputedStyle(comboEl).display,
+          computedVisibility: getComputedStyle(comboEl).visibility,
+          computedOpacity: getComputedStyle(comboEl).opacity
+        });
       }
     }, 1000);
 
