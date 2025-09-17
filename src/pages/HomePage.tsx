@@ -21,6 +21,11 @@ export const HomePage = () => {
           <h1 className="font-serif font-bold mb-6 text-center">
             A charity building lasting access to healthcare.
           </h1>
+          <div className="text-center mb-6">
+            <h2 className="font-serif font-medium text-center" style={{ color: '#FFD700', fontSize: '28px' }}>
+              <span className="sm:text-[36px] lg:text-[48px]">Global Health Access Trust</span>
+            </h2>
+          </div>
           <div className="cta-row max-w-xs mx-auto mb-6">
             <Link to="/donate">
               <Button size="lg" variant="secondary" className="btn--navy text-lg w-full">

@@ -31,13 +31,8 @@ export const Header = () => {
               <img 
                 src="/ghat-logo.png" 
                 alt="Global Health Access Trust logo"
-                className="h-8 w-auto sm:h-10 lg:h-12"
+                className="h-12 w-auto sm:h-14 lg:h-16"
               />
-              <div className="hidden md:block">
-                <div className="font-serif font-semibold text-lg lg:text-xl whitespace-nowrap">
-                  Global Health Access Trust
-                </div>
-              </div>
             </Link>
 
             {/* Desktop Navigation */}
