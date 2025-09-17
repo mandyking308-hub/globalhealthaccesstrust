@@ -50,29 +50,37 @@ h1,h2,h3,h4,p,li{
   text-align:center; padding:0 24px; min-height:60vh;
 }
 @media (min-width: 768px){
-  .hero { position: relative; display: grid; min-height: inherit; }
+  .hero { position: relative; display: flex; align-items: center; justify-content: center; min-height: 70vh; }
   .hero__overlay{
     max-width: 900px;
-    margin-inline: auto;
+    margin: 0 auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 24px;
-    padding-inline: 24px;
-    min-height: 70vh;
+    padding: 0 24px;
+    width: 100%;
   }
-  .hero__overlay h1{ text-align: center; }
-  .hero__overlay .button-group, .hero__overlay .cta-row{ 
+  .hero__overlay h1{ 
+    text-align: center; 
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero__overlay .cta-row{ 
     display: flex; 
     justify-content: center; 
     align-items: center;
     width: 100%;
+    margin: 0 auto;
+  }
+  .hero__overlay .cta-row > *{
+    margin: 0 auto;
   }
 }
 @media (min-width:1024px){
-  .hero__overlay{min-height:80vh;}
+  .hero { min-height: 80vh; }
 }
 
 /* Buttons */
