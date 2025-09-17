@@ -105,6 +105,25 @@ export const IMPACT_STATS = [
   }
 ];
 
+export const NEW_IMPACT_STATS = [
+  {
+    icon: "Globe",
+    text: "Working in 12 countries with partnerships across 100+ more"
+  },
+  {
+    icon: "Users",
+    text: "20,000+ health organisations connected through our network"
+  },
+  {
+    icon: "Heart",
+    text: "Over 1 million people supported with access to care and information"
+  },
+  {
+    icon: "TrendingUp",
+    text: "85% of every donation goes directly to health programs"
+  }
+];
+
 export const PROGRAM_AREAS = [
   {
     id: "healthcare-access",
