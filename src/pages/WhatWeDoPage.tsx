@@ -80,12 +80,11 @@ export const WhatWeDoPage = () => {
               const IconComponent = getIconComponent(area.icon);
               const heroImage = getHeroImage(area.id);
               return (
-                <div key={area.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                }`}>
-                  <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
+                <div key={area.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                  {/* Content Section */}
+                  <div className={`order-2 lg:order-${index % 2 === 1 ? '2' : '1'}`}>
                     <div className="flex items-center mb-6">
-                      <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mr-6">
+                      <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
                         <IconComponent className="w-8 h-8 text-gold" />
                       </div>
                       <div>
@@ -115,19 +114,22 @@ export const WhatWeDoPage = () => {
                     </div>
                   </div>
                   
-                  <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                    <Card className="card-elevated overflow-hidden">
+                  {/* Image Section */}
+                  <div className={`order-1 lg:order-${index % 2 === 1 ? '1' : '2'}`}>
+                    <Card className="card-elevated overflow-hidden w-full">
                       <CardContent className="p-0">
-                        <div className="aspect-video relative overflow-hidden">
+                        <div className="aspect-video w-full relative overflow-hidden bg-muted/20">
                           <img 
                             src={heroImage} 
                             alt={`${area.title} - Healthcare illustration`}
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                            style={{ minHeight: '240px' }}
+                            loading="lazy"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
                         </div>
-                        <div className="p-8">
-                          <blockquote className="text-lg font-serif italic text-primary">
+                        <div className="p-6 lg:p-8">
+                          <blockquote className="text-base lg:text-lg font-serif italic text-primary leading-relaxed">
                             "All activities shall be conducted in compliance with applicable 
                             health, safety, and regulatory standards, with preference given to 
                             interventions that are culturally appropriate, legally permitted, 
