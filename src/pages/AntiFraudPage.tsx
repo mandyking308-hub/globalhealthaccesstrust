@@ -1,19 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Shield } from "lucide-react";
 
 export const AntiFraudPage = () => {
   return (
     <div className="py-16">
       <div className="container-content">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Anti-Fraud & Anti-Corruption Policy
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Our commitment to maintaining the highest standards of integrity and transparency.
-          </p>
+        <div className="text-left mb-12">
+          <div className="flex items-start mb-4">
+            <Shield className="w-12 h-12 text-primary mr-4 mt-2" />
+            <div>
+              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+                Anti-Fraud & Anti-Corruption Policy
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-3xl">
+                Our commitment to maintaining the highest standards of integrity and transparency.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="prose max-w-none text-left space-y-8">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center justify-between">

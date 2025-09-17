@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PROGRAM_AREAS } from "@/lib/constants";
 
+// Import hero images
+import healthcareAccessHero from "@/assets/healthcare-access-hero.jpg";
+import educationTrainingHero from "@/assets/education-training-hero.jpg";
+import systemsStrengtheningHero from "@/assets/systems-strengthening-hero.jpg";
+import policyResearchHero from "@/assets/policy-research-hero.jpg";
+import emergencyReliefHero from "@/assets/emergency-relief-hero.jpg";
+
 const getIconComponent = (iconName: string) => {
   const icons = {
     Heart,
@@ -13,6 +20,17 @@ const getIconComponent = (iconName: string) => {
     AlertTriangle
   };
   return icons[iconName as keyof typeof icons] || Heart;
+};
+
+const getHeroImage = (areaId: string) => {
+  const images = {
+    "healthcare-access": healthcareAccessHero,
+    "education-training": educationTrainingHero,
+    "systems-strengthening": systemsStrengtheningHero,
+    "policy-research": policyResearchHero,
+    "emergency-relief": emergencyReliefHero
+  };
+  return images[areaId as keyof typeof images] || healthcareAccessHero;
 };
 
 export const WhatWeDoPage = () => {
@@ -60,6 +78,7 @@ export const WhatWeDoPage = () => {
           <div className="space-y-16">
             {PROGRAM_AREAS.map((area, index) => {
               const IconComponent = getIconComponent(area.icon);
+              const heroImage = getHeroImage(area.id);
               return (
                 <div key={area.id} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
                   index % 2 === 1 ? 'lg:flex-row-reverse' : ''
@@ -97,17 +116,24 @@ export const WhatWeDoPage = () => {
                   </div>
                   
                   <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                    <Card className="card-elevated">
-                      <CardContent className="p-8">
-                        <div className="aspect-video bg-gradient-to-br from-accent/20 to-gold/10 rounded-lg mb-6 flex items-center justify-center">
-                          <IconComponent className="w-20 h-20 text-muted-foreground/30" />
+                    <Card className="card-elevated overflow-hidden">
+                      <CardContent className="p-0">
+                        <div className="aspect-video relative overflow-hidden">
+                          <img 
+                            src={heroImage} 
+                            alt={`${area.title} - Healthcare illustration`}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
                         </div>
-                        <blockquote className="text-lg font-serif italic text-primary">
-                          "All activities shall be conducted in compliance with applicable 
-                          health, safety, and regulatory standards, with preference given to 
-                          interventions that are culturally appropriate, legally permitted, 
-                          and professionally governed."
-                        </blockquote>
+                        <div className="p-8">
+                          <blockquote className="text-lg font-serif italic text-primary">
+                            "All activities shall be conducted in compliance with applicable 
+                            health, safety, and regulatory standards, with preference given to 
+                            interventions that are culturally appropriate, legally permitted, 
+                            and professionally governed."
+                          </blockquote>
+                        </div>
                       </CardContent>
                     </Card>
                   </div>

@@ -39,20 +39,6 @@ const documents: Document[] = [
     size: "2.4 MB"
   },
   {
-    id: "annual-report-2023",
-    title: "Annual Report 2023",
-    description: "Comprehensive review of our charitable activities, financial position, and impact across our programme areas.",
-    type: "Annual Report",
-    version: "1.0",
-    date: "2024-03-31",
-    lastUpdated: "2024-03-31",
-    language: "English",
-    tags: ["annual report", "impact", "financial"],
-    fileUrl: "#",
-    checksum: "sha256:b4c6d3e2f1a0h9i8j7k6l5m4n3o2p1q0r9s8t7u6v5w4x3y2z1a0",
-    size: "8.7 MB"
-  },
-  {
     id: "safeguarding-statement-2024",
     title: "Safeguarding Statement 2024",
     description: "Our commitment to safeguarding principles and procedures for protecting vulnerable individuals in all our activities.",

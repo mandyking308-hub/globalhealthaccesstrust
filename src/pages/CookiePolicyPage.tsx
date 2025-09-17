@@ -6,19 +6,21 @@ export const CookiePolicyPage = () => {
   return (
     <div className="py-16">
       <div className="container-content">
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-4">
-            <Cookie className="w-12 h-12 text-primary mr-4" />
+        <div className="text-left mb-12">
+          <div className="flex items-start mb-4">
+            <Cookie className="w-12 h-12 text-primary mr-4 mt-2" />
+            <div>
+              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+                Cookie Policy
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                Last updated: <span className="font-medium">16 September 2024</span>
+              </p>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Cookie Policy
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Last updated: <span className="font-medium">16 September 2024</span>
-          </p>
         </div>
 
-        <div className="prose-professional max-w-none space-y-8">
+        <div className="prose max-w-none text-left space-y-8">
           {/* What are cookies */}
           <Card className="card-professional">
             <CardHeader>

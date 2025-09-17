@@ -5,19 +5,21 @@ export const AccessibilityStatementPage = () => {
   return (
     <div className="py-16">
       <div className="container-content">
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center mb-4">
-            <Eye className="w-12 h-12 text-primary mr-4" />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Accessibility Statement
-          </h1>
+        <div className="text-left mb-12">
+          <div className="flex items-start mb-4">
+            <Eye className="w-12 h-12 text-primary mr-4 mt-2" />
+            <div>
+              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+                Accessibility Statement
+              </h1>
               <p className="text-lg text-muted-foreground">
                 Last updated: <span className="font-medium">{new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
               </p>
+            </div>
+          </div>
         </div>
 
-        <div className="prose-professional max-w-none space-y-8">
+        <div className="prose max-w-none text-left space-y-8">
           <Card className="card-professional">
             <CardHeader>
               <CardTitle>Our Commitment</CardTitle>

@@ -5,16 +5,21 @@ export const WhistleblowingPage = () => {
   return (
     <div className="py-16">
       <div className="container-content">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Whistleblowing Policy
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Protection and support for those who speak up about wrongdoing.
-          </p>
+        <div className="text-left mb-12">
+          <div className="flex items-start mb-4">
+            <Shield className="w-12 h-12 text-primary mr-4 mt-2" />
+            <div>
+              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+                Whistleblowing Policy
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-3xl">
+                Protection and support for those who speak up about wrongdoing.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="prose max-w-none text-left space-y-8">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center justify-between">

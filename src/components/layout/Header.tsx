@@ -42,6 +42,7 @@ export const Header = () => {
                   className="relative"
                   onMouseEnter={() => 'submenu' in item && setActiveDropdown(item.label)}
                   onMouseLeave={() => setActiveDropdown(null)}
+                  onClick={() => 'submenu' in item && setActiveDropdown(activeDropdown === item.label ? null : item.label)}
                 >
                   <Link
                     to={item.href}
@@ -52,9 +53,9 @@ export const Header = () => {
                     {'submenu' in item && <ChevronDown className="w-3 h-3 ml-1" />}
                   </Link>
                   
-                  {/* Dropdown Menu */}
+                   {/* Dropdown Menu */}
                   {'submenu' in item && activeDropdown === item.label && (
-                    <div className="absolute top-full left-0 mt-2 w-72 bg-background border border-border rounded-lg shadow-xl py-2 z-50">
+                    <div className="absolute top-full left-0 mt-2 w-72 bg-background border border-border rounded-lg shadow-xl py-2 z-50 animate-in fade-in-0 zoom-in-95 duration-200">
                       {item.submenu.map((subItem) => (
                         <Link
                           key={subItem.href}
@@ -115,14 +116,21 @@ export const Header = () => {
                     <Link
                       to={item.href}
                       className="flex items-center justify-between px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-accent/60 rounded-md transition-all duration-200 min-h-[44px] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                      onClick={() => !('submenu' in item) && setIsMenuOpen(false)}
+                      onClick={(e) => {
+                        if ('submenu' in item) {
+                          e.preventDefault();
+                          setActiveDropdown(activeDropdown === item.label ? null : item.label);
+                        } else {
+                          setIsMenuOpen(false);
+                        }
+                      }}
                     >
                       {item.label}
                       {'submenu' in item && <ChevronDown className="w-4 h-4" />}
                     </Link>
                     {/* Mobile Submenu */}
-                    {'submenu' in item && (
-                      <div className="ml-4 mt-1 space-y-1 border-l-2 border-accent pl-4">
+                    {'submenu' in item && activeDropdown === item.label && (
+                      <div className="ml-4 mt-1 space-y-1 border-l-2 border-accent pl-4 animate-in fade-in-0 slide-in-from-left-2 duration-200">
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.href}

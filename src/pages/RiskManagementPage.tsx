@@ -1,22 +1,28 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Shield } from "lucide-react";
 
 export const RiskManagementPage = () => (
   <div className="py-16">
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Global Health Access Trust – Risk Management Statement
-          </h1>
-          <div className="text-sm text-muted-foreground mb-6">
-            <p><strong>Last Updated:</strong> September 16, 2025</p>
-            <p><strong>Effective Date:</strong> 08/05/2025</p>
-            <p><strong>Review Date:</strong> 08/05/2026</p>
-            <p><strong>Approved by:</strong> Board of Trustees</p>
+        <div className="text-left mb-12">
+          <div className="flex items-start mb-4">
+            <Shield className="w-12 h-12 text-primary mr-4 mt-2" />
+            <div>
+              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+                Global Health Access Trust – Risk Management Statement
+              </h1>
+              <div className="text-sm text-muted-foreground mb-6">
+                <p><strong>Last Updated:</strong> September 16, 2025</p>
+                <p><strong>Effective Date:</strong> 08/05/2025</p>
+                <p><strong>Review Date:</strong> 08/05/2026</p>
+                <p><strong>Approved by:</strong> Board of Trustees</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="prose max-w-none text-left space-y-8">
           <Card className="card-professional">
             <CardContent className="p-8">
               <h2 className="text-2xl font-serif font-bold mb-4">1. Policy Statement</h2>

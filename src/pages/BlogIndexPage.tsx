@@ -134,15 +134,6 @@ export const BlogIndexPage = () => {
             <Button size="lg" className="min-h-[44px] px-8">Load More Articles</Button>
           </div>
 
-          {/* RSS Feed */}
-          <div className="text-center mt-8">
-            <Link 
-              to="/blog/rss.xml" 
-              className="text-sm text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline"
-            >
-              Subscribe to RSS Feed
-            </Link>
-          </div>
         </div>
       </div>
     </div>
