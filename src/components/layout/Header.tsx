@@ -28,9 +28,11 @@ export const Header = () => {
               to="/" 
               className="flex items-center space-x-3 text-foreground hover:opacity-80 transition-opacity"
             >
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <Globe className="w-6 h-6 text-primary-foreground" />
-              </div>
+              <img 
+                src="/ghat-logo.png" 
+                alt="Global Health Access Trust logo"
+                className="h-8 w-auto sm:h-10"
+              />
               <div className="hidden sm:block">
                 <div className="font-serif font-semibold text-lg">
                   Global Health Access Trust

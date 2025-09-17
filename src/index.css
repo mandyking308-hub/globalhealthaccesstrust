@@ -27,10 +27,25 @@ h1,h2,h3,h4,p,li{
 }
 
 /* Containers & sections */
-.container{max-width:1140px; margin:0 auto; padding:0 16px;}
-.section{padding:28px 0;}
+.container{max-width:1200px; margin:0 auto; padding:0 16px;}
+.section{padding:28px 0; text-align:center;}
 @media (min-width:768px){.section{padding:40px 0;}}
 @media (min-width:1024px){.section{padding:64px 0;}}
+
+/* Section content max-width */
+.section-content{max-width:1200px; margin:0 auto;}
+
+/* Hero centering */
+.hero__overlay{
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:0 24px; min-height:60vh;
+}
+@media (min-width:768px){
+  .hero__overlay{padding:0 40px; min-height:70vh;}
+}
+@media (min-width:1024px){
+  .hero__overlay{padding:0 64px; min-height:80vh;}
+}
 
 /* Buttons */
 .button,.btn,button{
@@ -47,6 +62,25 @@ h1,h2,h3,h4,p,li{
 .cta-row,.btn-row,.button-group{display:grid; grid-template-columns:1fr; gap:12px;}
 
 /* Grids */
+/* Impact grid responsive */
+.impact-grid{
+  display:grid; gap:24px; grid-template-columns:1fr;
+}
+@media (min-width:768px){
+  .impact-grid{grid-template-columns:1fr 1fr;}
+}
+@media (min-width:1024px){
+  .impact-grid{grid-template-columns:repeat(4, 1fr);}
+}
+
+/* Human story two-column */
+.human-story-grid{
+  display:grid; gap:32px; grid-template-columns:1fr; align-items:center;
+}
+@media (min-width:768px){
+  .human-story-grid{grid-template-columns:1fr 1fr;}
+}
+
 .grid-2,.grid-3,.grid-4,.features-grid,.pillars-grid{
   display:grid; gap:16px;
 }

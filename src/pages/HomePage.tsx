@@ -41,7 +41,7 @@ export const HomePage = () => {
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="impact-grid">
             {NEW_IMPACT_STATS.map((stat, index) => {
               const IconComponent = getIconComponent(stat.icon);
               return (
@@ -62,7 +62,7 @@ export const HomePage = () => {
       {/* Human Story Section */}
       <section className="section" style={{background: 'var(--c-alt)'}}>
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="human-story-grid">
             <div className="order-2 lg:order-1">
               <img 
                 src={heroImage} 
@@ -89,7 +89,7 @@ export const HomePage = () => {
             <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
               Our Vision
             </h2>
-            <div className="max-w-4xl mx-auto space-y-6" style={{color: 'var(--c-muted)'}}>
+            <div className="section-content max-w-4xl mx-auto space-y-6 text-center" style={{color: 'var(--c-muted)'}}>
               <p className="text-lg leading-relaxed">
                 We believe no one should be denied healthcare or dignity because of where they were born or what they own.
               </p>
