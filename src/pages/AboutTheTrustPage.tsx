@@ -1,8 +1,15 @@
 import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
 export const AboutTheTrustPage = () => {
   return (
-    <ContentLayout>
+    <>
+      <SEO 
+        title="About the Trust - Global Health Access Trust"
+        description="Learn about the Global Health Access Trust's origins, governance structure, charitable purpose, and commitment to building lasting healthcare access for vulnerable populations worldwide."
+        canonical="/about-the-trust"
+      />
+      <ContentLayout>
       <h1>About the Trust</h1>
       
       <p className="text-lg italic mb-8">"A life of service begins with the solemnity of intention."</p>
@@ -62,6 +69,7 @@ export const AboutTheTrustPage = () => {
       <p>Global Health Access Trust is governed by a formal Constitution, which outlines our purpose, structure, and decision-making processes. This document sets out the roles of our trustees, how we operate, and our commitment to transparency and accountability.</p>
       
       <p className="block"><a href="/GHAT_Constitution_2025_Refined.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-block py-2">Download Constitution (Adopted June 2025)</a></p>
-    </ContentLayout>
+      </ContentLayout>
+    </>
   );
 };

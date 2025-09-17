@@ -3,6 +3,8 @@ import { ArrowLeft, User, Clock, Share2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
+import { generateArticleSchema } from "@/lib/seo";
 import { all50BlogPosts } from "@/data/complete50BlogPosts";
 
 const getPostBySlug = (slug: string) => {
@@ -15,23 +17,52 @@ export const BlogPostPage = () => {
 
   if (!post) {
     return (
-      <div className="py-16">
-        <div className="container-content text-center">
-          <h1 className="text-4xl font-serif font-bold mb-6">Article Not Found</h1>
-          <p className="text-muted-foreground mb-8">The article you're looking for doesn't exist or has been moved.</p>
-          <Link to="/blog">
-            <Button>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Articles
-            </Button>
-          </Link>
+      <>
+        <SEO 
+          title="Article Not Found - Global Health Access Trust"
+          description="The article you're looking for doesn't exist or has been moved. Explore our other healthcare insights and global health stories."
+          canonical="/blog"
+        />
+        <div className="py-16">
+          <div className="container-content text-center">
+            <h1 className="text-4xl font-serif font-bold mb-6">Article Not Found</h1>
+            <p className="text-muted-foreground mb-8">The article you're looking for doesn't exist or has been moved.</p>
+            <Link to="/blog">
+              <Button>
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Articles
+              </Button>
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 
+  const articleSchema = generateArticleSchema({
+    title: post.title,
+    description: post.summary,
+    author: post.author,
+    publishDate: post.publishDate,
+    url: `https://globalhealthaccesstrust.org/blog/${post.slug}`
+  });
+
   return (
-    <article className="py-16">
+    <>
+      <SEO 
+        title={`${post.title} - Global Health Access Trust`}
+        description={post.summary}
+        canonical={`/blog/${post.slug}`}
+        type="article"
+        article={{
+          author: post.author,
+          publishedTime: post.publishDate,
+          section: post.categories[0],
+          tags: post.tags
+        }}
+        schema={articleSchema}
+      />
+      <article className="py-16">
       <div className="container-content">
         {/* Breadcrumb */}
         <nav className="mb-8">
@@ -127,5 +158,6 @@ export const BlogPostPage = () => {
         </footer>
       </div>
     </article>
+    </>
   );
 };

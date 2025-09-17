@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { TranslationProvider } from "@/hooks/useTranslation";
 import { Layout } from "./components/layout/Layout";
@@ -62,48 +62,46 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="learn-about-our-mission" element={<Navigate to="/about-the-trust" replace />} />
-            <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="about-the-trust" element={<AboutTheTrustPage />} />
-            <Route path="trustee-biographies" element={<TrusteeBiographiesPage />} />
-            <Route path="governance-legal-framework" element={<GovernanceLegalFrameworkPage />} />
-            <Route path="our-work" element={<OurWorkPage />} />
-            <Route path="how-we-work" element={<HowWeWorkPage />} />
-            <Route path="support-the-trust" element={<SupportTheTrustPage />} />
-            <Route path="donor-recognition" element={<DonorRecognitionPage />} />
-            <Route path="frequently-asked-questions" element={<FrequentlyAskedQuestionsPage />} />
-            <Route path="contact-the-trust" element={<ContactTheTrustPage />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="what-we-do" element={<WhatWeDoPage />} />
-            <Route path="blog" element={<BlogIndexPage />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
-            <Route path="get-involved" element={<GetInvolvedPage />} />
-            <Route path="donate" element={<DonatePage />} />
-            <Route path="publications" element={<PublicationsPage />} />
-            <Route path="contact" element={<ContactPage />} />
-            <Route path="constitution" element={<ConstitutionPage />} />
-            
-            {/* Governance & Policy Pages */}
-            <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-            <Route path="cookie-policy" element={<CookiePolicyPage />} />
-            <Route path="terms-of-use" element={<TermsOfUsePage />} />
-            <Route path="accessibility-statement" element={<AccessibilityStatementPage />} />
-            <Route path="safeguarding" element={<SafeguardingPage />} />
-            <Route path="conflict-of-interest" element={<ConflictOfInterestPage />} />
-            <Route path="financial-controls" element={<FinancialControlsPage />} />
-            <Route path="risk-management" element={<RiskManagementPage />} />
-            <Route path="anti-fraud" element={<AntiFraudPage />} />
-            <Route path="whistleblowing" element={<WhistleblowingPage />} />
-            <Route path="governance" element={<GovernancePage />} />
-          </Route>
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        </BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="learn-about-our-mission" element={<Navigate to="/about-the-trust" replace />} />
+          <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="about-the-trust" element={<AboutTheTrustPage />} />
+          <Route path="trustee-biographies" element={<TrusteeBiographiesPage />} />
+          <Route path="governance-legal-framework" element={<GovernanceLegalFrameworkPage />} />
+          <Route path="our-work" element={<OurWorkPage />} />
+          <Route path="how-we-work" element={<HowWeWorkPage />} />
+          <Route path="support-the-trust" element={<SupportTheTrustPage />} />
+          <Route path="donor-recognition" element={<DonorRecognitionPage />} />
+          <Route path="frequently-asked-questions" element={<FrequentlyAskedQuestionsPage />} />
+          <Route path="contact-the-trust" element={<ContactTheTrustPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="what-we-do" element={<WhatWeDoPage />} />
+          <Route path="blog" element={<BlogIndexPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="get-involved" element={<GetInvolvedPage />} />
+          <Route path="donate" element={<DonatePage />} />
+          <Route path="publications" element={<PublicationsPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="constitution" element={<ConstitutionPage />} />
+          
+          {/* Governance & Policy Pages */}
+          <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="cookie-policy" element={<CookiePolicyPage />} />
+          <Route path="terms-of-use" element={<TermsOfUsePage />} />
+          <Route path="accessibility-statement" element={<AccessibilityStatementPage />} />
+          <Route path="safeguarding" element={<SafeguardingPage />} />
+          <Route path="conflict-of-interest" element={<ConflictOfInterestPage />} />
+          <Route path="financial-controls" element={<FinancialControlsPage />} />
+          <Route path="risk-management" element={<RiskManagementPage />} />
+          <Route path="anti-fraud" element={<AntiFraudPage />} />
+          <Route path="whistleblowing" element={<WhistleblowingPage />} />
+          <Route path="governance" element={<GovernancePage />} />
+        </Route>
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
       </TooltipProvider>
     </TranslationProvider>
   </QueryClientProvider>
