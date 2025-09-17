@@ -120,7 +120,7 @@ export const AboutPage = () => {
                 fiduciary obligations consistent with public trust and institutional governance.
               </p>
               
-              <blockquote className="text-2xl font-serif italic text-primary mt-8 text-center">
+              <blockquote className="text-2xl font-serif italic text-primary mt-8 text-left">
                 "It is chartered under law, grounded in public duty, and built to endure."
               </blockquote>
             </div>
