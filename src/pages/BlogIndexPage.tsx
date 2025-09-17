@@ -1,4 +1,4 @@
-import { Search, Calendar, User, Clock, Filter } from "lucide-react";
+import { Search, User, Clock, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -83,14 +83,6 @@ export const BlogIndexPage = () => {
                         <User className="w-3 h-3 mr-1" />
                         <span>{post.author}</span>
                       </div>
-                      <div className="flex items-center">
-                        <Calendar className="w-3 h-3 mr-1" />
-                        <span>{new Date(post.publishDate).toLocaleDateString('en-GB', { 
-                          year: 'numeric', 
-                          month: 'short', 
-                          day: 'numeric' 
-                        })}</span>
-                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -126,13 +118,6 @@ export const BlogIndexPage = () => {
                         <span className="mr-3">{post.author}</span>
                         <Clock className="w-3 h-3 mr-1" />
                         <span>{post.readingTime} min read</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Calendar className="w-3 h-3 mr-1" />
-                        <span>{new Date(post.publishDate).toLocaleDateString('en-GB', { 
-                          month: 'short', 
-                          day: 'numeric' 
-                        })}</span>
                       </div>
                     </div>
                   </CardContent>
