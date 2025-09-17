@@ -3,7 +3,7 @@ import { ArrowRight, Heart, Users, Globe, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { IMPACT_STATS, NEW_IMPACT_STATS, PROGRAM_AREAS } from "@/lib/constants";
-import heroImage from "@/assets/hero-bright-healthcare.jpg";
+import heroImage from "@/assets/hero-global-healthcare-access.jpg";
 import ukraineConflictImage from "@/assets/conflict-ukraine-humanitarian.jpg";
 import africaConflictImage from "@/assets/conflict-africa-humanitarian.jpg";
 
@@ -16,7 +16,7 @@ export const HomePage = () => {
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         <div className="hero__image" style={{ display: 'none' }}>
-          <img src={heroImage} alt="Global Health Access" />
+          <img src={heroImage} alt="Global Healthcare Access - diverse healthcare workers providing care worldwide" />
         </div>
         
         <div className="hero__overlay">
