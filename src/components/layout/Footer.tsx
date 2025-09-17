@@ -3,7 +3,7 @@ import { Globe, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FOOTER_SECTIONS, SITE_CONFIG } from "@/lib/constants";
-import { CustomLanguageSelector } from "@/components/common/CustomLanguageSelector";
+import { GoogleTranslate } from "@/components/common/GoogleTranslate";
 import { useState } from "react";
 
 export const Footer = () => {
@@ -125,7 +125,7 @@ export const Footer = () => {
 
               {/* Language Selector */}
               <div className="mt-6">
-                <CustomLanguageSelector />
+                <GoogleTranslate />
               </div>
             </div>
           </div>
