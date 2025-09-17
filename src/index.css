@@ -28,23 +28,44 @@ h1,h2,h3,h4,p,li{
 
 /* Containers & sections */
 .container{max-width:1200px; margin:0 auto; padding:0 16px;}
-.section{padding:28px 0; text-align:center;}
+.section{padding:28px 0;}
 @media (min-width:768px){.section{padding:40px 0;}}
 @media (min-width:1024px){.section{padding:64px 0;}}
+
+/* Base container for tablet/desktop; mobile remains unchanged */
+@media (min-width: 768px){
+  .container, .section > .container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+}
 
 /* Section content max-width */
 .section-content{max-width:1200px; margin:0 auto;}
 
-/* Hero centering */
+/* HERO alignment on tablet/desktop */
 .hero__overlay{
   display:flex; flex-direction:column; justify-content:center; align-items:center;
   text-align:center; padding:0 24px; min-height:60vh;
 }
-@media (min-width:768px){
-  .hero__overlay{padding:0 40px; min-height:70vh;}
+@media (min-width: 768px){
+  .hero { position: relative; display: grid; min-height: inherit; }
+  .hero__overlay{
+    max-width: 900px;
+    margin-inline: auto;
+    text-align: center;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    gap: 16px;
+    padding-inline: 24px;
+    min-height: 70vh;
+  }
+  .hero__overlay .button-group, .hero__overlay .cta-row{ display:grid; grid-template-columns:1fr; gap:12px; }
 }
 @media (min-width:1024px){
-  .hero__overlay{padding:0 64px; min-height:80vh;}
+  .hero__overlay{min-height:80vh;}
 }
 
 /* Buttons */
@@ -66,19 +87,33 @@ h1,h2,h3,h4,p,li{
 .impact-grid{
   display:grid; gap:24px; grid-template-columns:1fr;
 }
-@media (min-width:768px){
-  .impact-grid{grid-template-columns:1fr 1fr;}
+@media (min-width: 1024px){
+  .impact-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 24px; align-items: start; }
 }
-@media (min-width:1024px){
-  .impact-grid{grid-template-columns:repeat(4, 1fr);}
+@media (min-width: 768px) and (max-width: 1023px){
+  .impact-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 24px; align-items: start; }
+}
+
+/* Impact cards equal height and consistent spacing */
+.impact-grid > div{
+  display: grid; justify-items: center; text-align: center; gap: 8px;
+  height: 100%; padding: 16px;
+}
+.impact-grid > div .w-12{
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 8px;
 }
 
 /* Human story two-column */
 .human-story-grid{
   display:grid; gap:32px; grid-template-columns:1fr; align-items:center;
 }
-@media (min-width:768px){
-  .human-story-grid{grid-template-columns:1fr 1fr;}
+@media (min-width: 768px){
+  .human-story-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  .human-story-grid img{
+    width: 100%; height: 100%;
+    aspect-ratio: 4/3; object-fit: cover; display:block;
+  }
 }
 
 .grid-2,.grid-3,.grid-4,.features-grid,.pillars-grid{
@@ -852,5 +887,25 @@ a:hover{text-decoration:none;}
 
 /* Mobile fit */
 @media (max-width:768px){ .hero__overlay{ max-width:100%; } }
-/* Prevent sticky header overlap on anchor jump */
-.header--sticky + .hero, .header + .hero, .hero--bg{ scroll-margin-top:72px; }
+/* Section padding consistency and typography safety */
+@media (min-width: 1024px){
+  .section{ padding-block: 64px; text-align: center; }
+}
+@media (min-width: 768px) and (max-width: 1023px){
+  .section{ padding-block: 40px; text-align: center; }
+}
+
+/* Typography & wrapping safety (no mid-word hyphens) */
+@media (min-width: 768px){
+  .section *, .impact-grid *, .human-story-grid *, .section-content *{
+    hyphens: none; -webkit-hyphens: none; word-break: normal; overflow-wrap: normal;
+    line-height: 1.6;
+  }
+  h1,h2,h3{ line-height: 1.25; }
+}
+
+/* Card equal heights in What We Fund (desktop/tablet) */
+@media (min-width: 768px){
+  .pillars-grid{ display:grid; align-items: stretch; }
+  .pillars-grid > *{ height: 100%; }
+}
