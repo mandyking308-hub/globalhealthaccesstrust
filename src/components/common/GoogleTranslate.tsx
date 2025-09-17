@@ -9,17 +9,17 @@ declare global {
 
 export const GoogleTranslate = () => {
   useEffect(() => {
-    // Add comprehensive styles for footer visibility
+    // Add responsive styles for cross-device compatibility
     const addCustomStyles = () => {
       const style = document.createElement('style');
-      style.id = 'google-translate-footer-styles';
+      style.id = 'google-translate-responsive-styles';
       style.innerHTML = `
-        /* Force visibility and correct styling for footer */
+        /* General footer dropdown styling */
         #google_translate_element {
-          background: transparent !important; /* Blend into footer background */
-          color: #ffffff !important;          /* White text for readability */
-          font-family: inherit !important;    /* Match site font */
-          font-size: 14px !important;         /* Uniform font size */
+          background: transparent !important;
+          color: #ffffff !important;   /* White text for footer */
+          font-family: inherit !important;
+          font-size: 14px !important;
           display: inline-block !important;
           padding: 6px 10px !important;
           visibility: visible !important;
@@ -27,10 +27,9 @@ export const GoogleTranslate = () => {
           position: relative !important;
           z-index: 1000 !important;
           width: auto !important;
-          max-width: 220px !important;
         }
 
-        /* Dropdown select box styling */
+        /* Translate gadget styling */
         .goog-te-gadget {
           color: #ffffff !important;
           font-family: inherit !important;
@@ -39,27 +38,39 @@ export const GoogleTranslate = () => {
           display: inline-block !important;
           visibility: visible !important;
           opacity: 1 !important;
+          width: 100% !important;
+        }
+
+        .goog-te-gadget-simple {
+          background: transparent !important;
+          display: inline-block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          width: 100% !important;
         }
 
         .goog-te-gadget select,
         .goog-te-gadget .goog-te-combo {
-          background: #1a1a1a !important;     /* Dark background for dropdown */
+          background: #1a1a1a !important;     /* Dark dropdown box */
           color: #ffffff !important;          /* White text */
           border: 1px solid #ffffff !important;
           border-radius: 4px !important;
           padding: 6px 10px !important;
           font-size: 14px !important;
+          width: 100% !important;             /* Force full width in containers */
+          max-width: 250px !important;        /* Keep it tidy */
+          min-width: 160px !important;        /* Prevent collapsing on mobile */
+          box-sizing: border-box !important;
           font-family: inherit !important;
-          min-height: 36px !important;
           line-height: 1.4 !important;
           cursor: pointer !important;
           outline: none !important;
           appearance: none !important;
           -webkit-appearance: none !important;
           -moz-appearance: none !important;
-          width: 100% !important;
-          max-width: 200px !important;
-          min-width: 160px !important;
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
         }
 
         .goog-te-gadget select:hover,
@@ -71,7 +82,7 @@ export const GoogleTranslate = () => {
         .goog-te-gadget select:focus,
         .goog-te-gadget .goog-te-combo:focus {
           border-color: #ffffff !important;
-          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2) !important;
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
         }
 
         /* Force white text for all dropdown elements */
@@ -89,18 +100,84 @@ export const GoogleTranslate = () => {
           content: 'Select Language' !important;
           color: #ffffff !important;
           font-family: inherit !important;
-          font-size: 14px !important;
+          font-size: inherit !important;
         }
 
-        /* Remove Google branding bar and link */
+        /* Responsive fixes */
+        @media (max-width: 1024px) {
+          #google_translate_element {
+            display: block !important;
+            margin: 10px auto !important;
+            text-align: center !important;
+            width: 100% !important;
+            max-width: 300px !important;
+          }
+          
+          .goog-te-gadget {
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+          }
+          
+          .goog-te-gadget select,
+          .goog-te-gadget .goog-te-combo {
+            width: 90% !important;
+            font-size: 16px !important;       /* Larger, more readable on tablets */
+            padding: 8px 12px !important;
+            min-height: 44px !important;
+            margin: 0 auto !important;
+            display: block !important;
+          }
+          
+          .goog-te-gadget-simple .goog-te-menu-value:before {
+            font-size: 16px !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          #google_translate_element {
+            display: block !important;
+            margin: 12px auto !important;
+            text-align: center !important;
+            width: 100% !important;
+            max-width: 280px !important;
+            padding: 8px !important;
+          }
+          
+          .goog-te-gadget {
+            display: block !important;
+            width: 100% !important;
+            text-align: center !important;
+          }
+          
+          .goog-te-gadget select,
+          .goog-te-gadget .goog-te-combo {
+            width: 100% !important;
+            font-size: 18px !important;       /* Bigger text for small screens */
+            padding: 10px 12px !important;    /* More tap-friendly */
+            min-height: 48px !important;
+            margin: 0 auto !important;
+            display: block !important;
+            border-radius: 6px !important;
+          }
+          
+          .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: 'Language' !important;
+            font-size: 18px !important;
+          }
+        }
+
+        /* Remove Google branding */
         .goog-te-banner-frame.skiptranslate,
         .goog-te-banner-frame,
         .goog-logo-link,
         .goog-te-gadget img,
         .goog-te-gadget-simple img,
         .goog-te-gadget .goog-te-menu-value img,
+        .goog-te-gadget span img,
         [src*="translate.google"],
-        [src*="google.com/images/branding"] {
+        [src*="google.com/images/branding"],
+        [src*="googleusercontent.com"] {
           display: none !important;
           visibility: hidden !important;
           opacity: 0 !important;
@@ -120,53 +197,6 @@ export const GoogleTranslate = () => {
           position: static !important;
         }
 
-        /* Tablet responsive adjustments */
-        @media screen and (min-width: 641px) and (max-width: 1024px) {
-          #google_translate_element {
-            max-width: 200px !important;
-            font-size: 14px !important;
-            padding: 6px 8px !important;
-          }
-          
-          .goog-te-gadget select,
-          .goog-te-gadget .goog-te-combo {
-            font-size: 14px !important;
-            padding: 6px 8px !important;
-            min-height: 36px !important;
-            max-width: 180px !important;
-            min-width: 140px !important;
-          }
-          
-          .goog-te-gadget-simple .goog-te-menu-value:before {
-            content: 'Select Language' !important;
-            font-size: 14px !important;
-          }
-        }
-
-        /* Mobile responsive adjustments */
-        @media screen and (max-width: 640px) {
-          #google_translate_element {
-            max-width: 180px !important;
-            font-size: 14px !important;
-            padding: 6px !important;
-          }
-          
-          .goog-te-gadget select,
-          .goog-te-gadget .goog-te-combo {
-            font-size: 14px !important;
-            padding: 6px 8px !important;
-            min-height: 36px !important;
-            max-width: 160px !important;
-            min-width: 120px !important;
-            border-radius: 4px !important;
-          }
-          
-          .goog-te-gadget-simple .goog-te-menu-value:before {
-            content: 'Language' !important;
-            font-size: 14px !important;
-          }
-        }
-
         /* RTL language support */
         html[dir="rtl"] .goog-te-gadget select,
         html[dir="rtl"] .goog-te-gadget .goog-te-combo,
@@ -174,7 +204,6 @@ export const GoogleTranslate = () => {
         [dir="rtl"] .goog-te-gadget .goog-te-combo {
           text-align: right !important;
           direction: rtl !important;
-          padding: 6px 10px 6px 20px !important;
         }
 
         html[dir="rtl"] .goog-te-gadget-simple .goog-te-menu-value:before,
@@ -182,24 +211,33 @@ export const GoogleTranslate = () => {
           content: 'اختر اللغة' !important;
         }
 
+        @media (max-width: 768px) {
+          html[dir="rtl"] .goog-te-gadget-simple .goog-te-menu-value:before,
+          [dir="rtl"] .goog-te-gadget-simple .goog-te-menu-value:before {
+            content: 'اللغة' !important;
+          }
+        }
+
         /* Dropdown menu styling */
         .goog-te-menu-frame {
           background: #1a1a1a !important;
           border: 1px solid #ffffff !important;
-          border-radius: 4px !important;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+          border-radius: 6px !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
           z-index: 10000 !important;
         }
 
         .goog-te-menu2 {
           background: #1a1a1a !important;
           color: #ffffff !important;
+          font-family: inherit !important;
         }
 
         .goog-te-menu2-item div {
           color: #ffffff !important;
           background: #1a1a1a !important;
           font-family: inherit !important;
+          padding: 8px 12px !important;
         }
 
         .goog-te-menu2-item:hover {
@@ -210,13 +248,22 @@ export const GoogleTranslate = () => {
           background-color: #2a2a2a !important;
           color: #ffffff !important;
         }
+
+        /* Mobile dropdown menu adjustments */
+        @media (max-width: 768px) {
+          .goog-te-menu2-item div {
+            font-size: 16px !important;
+            padding: 12px 16px !important;
+            min-height: 44px !important;
+          }
+        }
       `;
       document.head.appendChild(style);
     };
 
     // Initialize Google Translate with priority languages
     const initializeGoogleTranslate = () => {
-      console.log('[GoogleTranslate] Initializing...');
+      console.log('[GoogleTranslate] Initializing responsive widget...');
       
       if (window.google && window.google.translate) {
         console.log('[GoogleTranslate] Creating translate element...');
@@ -239,38 +286,76 @@ export const GoogleTranslate = () => {
           'google_translate_element'
         );
 
-        // Force visibility and styling after initialization
-        const ensureVisibility = () => {
+        // Enhanced visibility and responsive styling
+        const ensureResponsiveVisibility = () => {
           const element = document.getElementById('google_translate_element');
           const gadget = document.querySelector('.goog-te-gadget');
           const combo = document.querySelector('.goog-te-combo');
           
-          console.log('[GoogleTranslate] Visibility check:', {
+          console.log('[GoogleTranslate] Responsive visibility check:', {
             element: !!element,
             gadget: !!gadget,
-            combo: !!combo
+            combo: !!combo,
+            viewport: `${window.innerWidth}x${window.innerHeight}`
           });
 
           if (element && gadget) {
-            // Force visibility
-            [element, gadget].forEach((el) => {
-              const htmlEl = el as HTMLElement;
-              htmlEl.style.display = 'inline-block';
-              htmlEl.style.visibility = 'visible';
-              htmlEl.style.opacity = '1';
-              htmlEl.style.position = 'relative';
-              htmlEl.style.zIndex = '1000';
-              htmlEl.style.color = '#ffffff';
-              htmlEl.style.background = 'transparent';
-            });
+            // Force visibility and responsive behavior
+            const htmlElement = element as HTMLElement;
+            const gadgetElement = gadget as HTMLElement;
+            
+            // Base styling
+            htmlElement.style.display = window.innerWidth <= 1024 ? 'block' : 'inline-block';
+            htmlElement.style.visibility = 'visible';
+            htmlElement.style.opacity = '1';
+            htmlElement.style.position = 'relative';
+            htmlElement.style.zIndex = '1000';
+            htmlElement.style.color = '#ffffff';
+            htmlElement.style.background = 'transparent';
+            
+            // Responsive adjustments
+            if (window.innerWidth <= 1024) {
+              htmlElement.style.margin = '10px auto';
+              htmlElement.style.textAlign = 'center';
+              htmlElement.style.width = '100%';
+              htmlElement.style.maxWidth = window.innerWidth <= 768 ? '280px' : '300px';
+            }
+            
+            gadgetElement.style.display = window.innerWidth <= 1024 ? 'block' : 'inline-block';
+            gadgetElement.style.visibility = 'visible';
+            gadgetElement.style.opacity = '1';
+            gadgetElement.style.color = '#ffffff';
+            gadgetElement.style.background = 'transparent';
+            gadgetElement.style.width = '100%';
+            
+            if (window.innerWidth <= 1024) {
+              gadgetElement.style.textAlign = 'center';
+            }
 
             if (combo) {
               const comboEl = combo as HTMLElement;
               comboEl.style.background = '#1a1a1a';
               comboEl.style.color = '#ffffff';
               comboEl.style.border = '1px solid #ffffff';
+              comboEl.style.display = 'block';
+              comboEl.style.visibility = 'visible';
+              comboEl.style.opacity = '1';
               
-              // Accessibility attributes
+              // Responsive font sizing
+              if (window.innerWidth <= 768) {
+                comboEl.style.fontSize = '18px';
+                comboEl.style.padding = '10px 12px';
+                comboEl.style.minHeight = '48px';
+                comboEl.style.width = '100%';
+              } else if (window.innerWidth <= 1024) {
+                comboEl.style.fontSize = '16px';
+                comboEl.style.padding = '8px 12px';
+                comboEl.style.minHeight = '44px';
+                comboEl.style.width = '90%';
+                comboEl.style.margin = '0 auto';
+              }
+              
+              // Enhanced accessibility
               comboEl.setAttribute('tabindex', '0');
               comboEl.setAttribute('role', 'combobox');
               comboEl.setAttribute('aria-label', 'Website language selector');
@@ -278,33 +363,40 @@ export const GoogleTranslate = () => {
               comboEl.setAttribute('title', 'Select website language');
             }
 
-            console.log('[GoogleTranslate] Visibility and styling applied successfully');
+            console.log('[GoogleTranslate] Responsive visibility and styling applied successfully');
             return true;
           }
           return false;
         };
 
-        // Retry visibility with progressive delays
+        // Multi-attempt initialization with responsive checks
         let attempts = 0;
-        const maxAttempts = 12;
+        const maxAttempts = 15;
         
-        const retryVisibility = () => {
+        const retryResponsiveVisibility = () => {
           attempts++;
-          console.log(`[GoogleTranslate] Visibility attempt ${attempts}/${maxAttempts}`);
+          console.log(`[GoogleTranslate] Responsive visibility attempt ${attempts}/${maxAttempts}`);
           
-          if (ensureVisibility()) {
-            console.log('[GoogleTranslate] Successfully initialized and styled');
+          if (ensureResponsiveVisibility()) {
+            console.log('[GoogleTranslate] Successfully initialized with responsive styling');
+            
+            // Add resize listener for dynamic responsiveness
+            const handleResize = () => {
+              setTimeout(ensureResponsiveVisibility, 100);
+            };
+            window.addEventListener('resize', handleResize);
+            
             return;
           }
           
           if (attempts < maxAttempts) {
-            setTimeout(retryVisibility, attempts * 250);
+            setTimeout(retryResponsiveVisibility, attempts * 200);
           } else {
-            console.error('[GoogleTranslate] Failed to initialize after all attempts');
+            console.error('[GoogleTranslate] Failed to initialize responsive styling after all attempts');
           }
         };
         
-        setTimeout(retryVisibility, 300);
+        setTimeout(retryResponsiveVisibility, 300);
       } else {
         console.error('[GoogleTranslate] Google API not available');
       }
@@ -339,8 +431,11 @@ export const GoogleTranslate = () => {
     addCustomStyles();
 
     return () => {
-      const style = document.getElementById('google-translate-footer-styles');
+      const style = document.getElementById('google-translate-responsive-styles');
       if (style) style.remove();
+      
+      // Remove resize listener
+      window.removeEventListener('resize', () => {});
     };
   }, []);
 
@@ -350,7 +445,7 @@ export const GoogleTranslate = () => {
       aria-label="Website language selector"
       role="region"
       title="Select website language"
-      className="inline-block"
+      className="google-translate-container"
       style={{
         background: 'transparent',
         color: '#ffffff',
@@ -361,9 +456,7 @@ export const GoogleTranslate = () => {
         visibility: 'visible',
         opacity: 1,
         position: 'relative',
-        zIndex: 1000,
-        width: 'auto',
-        maxWidth: '220px'
+        zIndex: 1000
       }}
     />
   );
