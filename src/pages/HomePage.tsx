@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { IMPACT_STATS, NEW_IMPACT_STATS, PROGRAM_AREAS } from "@/lib/constants";
 import heroImage from "@/assets/hero-global-healthcare-access.jpg";
+import familyMedicalCareImage from "@/assets/family-medical-care.jpg";
 import ukraineConflictImage from "@/assets/conflict-ukraine-humanitarian.jpg";
 import africaConflictImage from "@/assets/conflict-africa-humanitarian.jpg";
 
@@ -81,8 +82,8 @@ export const HomePage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             <div className="text-center">
               <img 
-                src={heroImage} 
-                alt="Healthcare professional providing care"
+                src={familyMedicalCareImage} 
+                alt="Displaced mother and child receiving medical care from healthcare worker"
                 className="w-full h-64 object-cover rounded-lg mb-4"
               />
               <p className="text-sm font-semibold" style={{color: 'var(--c-text)'}}>Healthcare Access</p>
