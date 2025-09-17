@@ -159,7 +159,7 @@ export const LanguageSelector = () => {
         <Button 
           variant="ghost" 
           size="sm"
-          className="flex items-center space-x-2 min-h-[44px] px-3 py-2 rounded-lg bg-[#BDBDBD] text-[#0A0F14] hover:bg-[#BDBDBD]/80 focus:outline-none focus:ring-2 focus:ring-[#0B2B4C] focus:ring-offset-2"
+          className="flex items-center space-x-2 min-h-[44px] px-3 py-2 rounded-lg bg-accent/20 text-foreground hover:bg-accent/40 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-label="Change language"
@@ -168,7 +168,7 @@ export const LanguageSelector = () => {
           <span 
             className="text-lg leading-none" 
             aria-hidden="true"
-            style={{ fontSize: '18px' }}
+            style={{ fontSize: '18px', fontFamily: 'system-ui, -apple-system, "Segoe UI", sans-serif' }}
           >
             {currentFlag}
           </span>
@@ -183,9 +183,10 @@ export const LanguageSelector = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="w-56 max-h-96 overflow-y-auto bg-[#BDBDBD] border border-[#0A0F14]/20 shadow-lg z-50"
+        className="w-56 max-h-96 overflow-y-auto bg-background border border-border shadow-lg z-50"
         role="listbox"
         onKeyDown={handleKeyDown}
+        style={{ backgroundColor: 'var(--background)', border: '1px solid var(--border)' }}
       >
         {LANGUAGES.map((language) => {
           const flag = LANGUAGE_FLAGS[language.code] || '🌐';
@@ -195,8 +196,8 @@ export const LanguageSelector = () => {
             <DropdownMenuItem
               key={language.code}
               onClick={() => handleLanguageChange(language)}
-              className={`flex items-center space-x-3 py-3 px-3 cursor-pointer hover:bg-[#0A0F14]/8 focus:bg-[#0A0F14]/8 focus:outline-none focus:ring-2 focus:ring-[#0B2B4C] focus:ring-inset ${
-                isSelected ? "font-bold border-l-3 border-[#0B2B4C]" : ""
+              className={`flex items-center space-x-3 py-3 px-3 cursor-pointer hover:bg-accent/80 focus:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset ${
+                isSelected ? "font-bold border-l-3 border-primary" : ""
               }`}
               role="option"
               aria-selected={isSelected}
@@ -206,7 +207,7 @@ export const LanguageSelector = () => {
                 href={`/${language.code === 'en' ? '' : language.code + '/'}`}
                 lang={language.code}
                 hrefLang={language.code}
-                className="flex items-center space-x-3 w-full text-[#0A0F14] no-underline"
+                className="flex items-center space-x-3 w-full text-foreground no-underline"
                 onClick={(e) => {
                   e.preventDefault();
                   handleLanguageChange(language);
@@ -215,7 +216,7 @@ export const LanguageSelector = () => {
                 <span 
                   className="text-lg leading-none flex-shrink-0" 
                   aria-hidden="true"
-                  style={{ fontSize: '18px' }}
+                  style={{ fontSize: '18px', fontFamily: 'system-ui, -apple-system, "Segoe UI", sans-serif' }}
                 >
                   {flag}
                 </span>
@@ -226,7 +227,7 @@ export const LanguageSelector = () => {
             </DropdownMenuItem>
           );
         })}
-        <div className="px-3 py-2 text-xs text-[#0A0F14]/70 border-t border-[#0A0F14]/20 mt-2">
+        <div className="px-3 py-2 text-xs text-muted-foreground border-t border-border mt-2">
           <p>
             *Translations provided for convenience. 
             English version remains authoritative.
