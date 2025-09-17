@@ -81,15 +81,18 @@ export const Header = () => {
                 size="sm"
                 onClick={() => setIsSearchOpen(true)}
                 aria-label="Search website"
+                className="flex-shrink-0"
               >
                 <Search className="w-4 h-4" />
               </Button>
 
               {/* Google Translate */}
-              <GoogleTranslate />
+              <div className="flex-shrink-0">
+                <GoogleTranslate />
+              </div>
 
               {/* Donate Button */}
-              <Link to="/donate">
+              <Link to="/donate" className="flex-shrink-0">
                 <Button variant="default" size="sm" className="hidden sm:inline-flex">
                   Donate Now
                 </Button>
@@ -99,7 +102,7 @@ export const Header = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="lg:hidden"
+                className="lg:hidden flex-shrink-0"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
               >
