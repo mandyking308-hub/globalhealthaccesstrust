@@ -183,10 +183,10 @@ export const LanguageSelector = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="w-56 max-h-96 overflow-y-auto bg-background border border-border shadow-lg z-50"
+        className="w-56 max-h-96 overflow-y-auto bg-white border border-gray-300 shadow-lg z-50"
         role="listbox"
         onKeyDown={handleKeyDown}
-        style={{ backgroundColor: 'var(--background)', border: '1px solid var(--border)' }}
+        style={{ backgroundColor: 'white', border: '1px solid #d1d5db' }}
       >
         {LANGUAGES.map((language) => {
           const flag = LANGUAGE_FLAGS[language.code] || '🌐';
@@ -196,8 +196,8 @@ export const LanguageSelector = () => {
             <DropdownMenuItem
               key={language.code}
               onClick={() => handleLanguageChange(language)}
-              className={`flex items-center space-x-3 py-3 px-3 cursor-pointer hover:bg-accent/80 focus:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset ${
-                isSelected ? "font-bold border-l-3 border-primary" : ""
+              className={`flex items-center space-x-3 py-3 px-3 cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset text-black ${
+                isSelected ? "font-bold border-l-3 border-primary bg-gray-50" : ""
               }`}
               role="option"
               aria-selected={isSelected}
@@ -207,7 +207,7 @@ export const LanguageSelector = () => {
                 href={`/${language.code === 'en' ? '' : language.code + '/'}`}
                 lang={language.code}
                 hrefLang={language.code}
-                className="flex items-center space-x-3 w-full text-foreground no-underline"
+                className="flex items-center space-x-3 w-full text-black no-underline"
                 onClick={(e) => {
                   e.preventDefault();
                   handleLanguageChange(language);
@@ -227,7 +227,7 @@ export const LanguageSelector = () => {
             </DropdownMenuItem>
           );
         })}
-        <div className="px-3 py-2 text-xs text-muted-foreground border-t border-border mt-2">
+        <div className="px-3 py-2 text-xs text-gray-600 border-t border-gray-300 mt-2 bg-white">
           <p>
             *Translations provided for convenience. 
             English version remains authoritative.

@@ -28,9 +28,9 @@ export const HomePage = () => {
           </h2>
           <div className="cta-row max-w-xs mx-auto mb-6">
             <Link to="/donate">
-              <Button size="lg" variant="secondary" className="btn--navy text-lg w-full">
+              <Button size="sm" variant="default" className="w-full">
                 Donate Now
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
           </div>
