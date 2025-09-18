@@ -185,6 +185,12 @@ export const DonatePage = () => {
                     Send Enquiry
                   </Button>
                 </form>
+
+                <div className="mt-8 pt-6 border-t border-border/50 text-center">
+                  <p className="text-sm text-muted-foreground leading-relaxed max-w-lg mx-auto">
+                    Global Health Access Trust is committed to transparency and safeguarding. Your enquiry will be handled with discretion, and we will never share your details outside our team.
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </div>
