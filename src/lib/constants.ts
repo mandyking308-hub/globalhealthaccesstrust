@@ -378,9 +378,9 @@ export const SOCIAL_LINKS = [
 ];
 
 export const DONATION_TIERS = [
-  { amount: 25, description: "Supports basic medical supplies" },
-  { amount: 50, description: "Funds professional development training" },
-  { amount: 100, description: "Enables emergency response capacity" },
-  { amount: 250, description: "Supports system strengthening initiatives" },
-  { amount: 500, description: "Funds comprehensive programme support" }
+  { amount: 25, description: "Basic support" },
+  { amount: 50, description: "Training programs" },
+  { amount: 100, description: "Emergency response" },
+  { amount: 250, description: "System strengthening" },
+  { amount: 500, description: "Full program support" }
 ];

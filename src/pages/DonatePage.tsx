@@ -23,7 +23,7 @@ export const DonatePage = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
               Support Healthcare Justice
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
               Your donation enables the Global Health Access Trust to uphold healthcare 
               as a matter of justice, not charity. Every contribution supports principled, 
               sustainable interventions that create lasting change.
@@ -56,18 +56,18 @@ export const DonatePage = () => {
                                 setSelectedAmount(tier.amount);
                                 setCustomAmount("");
                               }}
-                              className="h-auto p-4 flex flex-col items-center"
+                              className="h-auto p-3 md:p-4 flex flex-col items-center min-h-[70px] md:min-h-[80px]"
                             >
                               <span className="text-lg font-semibold">£{tier.amount}</span>
-                              <span className="text-xs text-muted-foreground mt-1 text-center">
+                              <span className="text-xs text-muted-foreground mt-1 text-center leading-tight px-1">
                                 {tier.description}
                               </span>
                             </Button>
                           ))}
                         </div>
                         
-                        <div className="flex items-center space-x-2">
-                          <Label htmlFor="custom-amount">Custom Amount (£)</Label>
+                        <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                          <Label htmlFor="custom-amount" className="text-sm font-medium">Custom Amount (£)</Label>
                           <Input
                             id="custom-amount"
                             type="number"
@@ -77,7 +77,7 @@ export const DonatePage = () => {
                               setCustomAmount(e.target.value);
                               setSelectedAmount(null);
                             }}
-                            className="max-w-32"
+                            className="max-w-full sm:max-w-32"
                           />
                         </div>
                       </div>
@@ -110,8 +110,8 @@ export const DonatePage = () => {
                         {giftAid && (
                           <Alert>
                             <Info className="h-4 w-4" />
-                            <AlertDescription className="text-sm">
-                              <strong>Gift Aid Declaration:</strong> By selecting this option, you confirm that you are a UK taxpayer and understand that if you pay less Income Tax and/or Capital Gains Tax than the amount of Gift Aid claimed on all your donations in that tax year, it is your responsibility to pay any difference. The Trust will reclaim 25p on every £1 you donate.
+                            <AlertDescription className="text-sm leading-relaxed">
+                              <strong>Gift Aid Declaration:</strong> I confirm I am a UK taxpayer. I understand that if I pay less Income Tax and/or Capital Gains Tax than the amount of Gift Aid claimed on all donations in that tax year, it is my responsibility to pay any difference. The Trust will reclaim 25p on every £1 donated.
                             </AlertDescription>
                           </Alert>
                         )}
@@ -120,8 +120,8 @@ export const DonatePage = () => {
                       {/* Integration Placeholder */}
                       <div className="pt-6 border-t">
                         <Alert className="mb-6">
-                          <AlertDescription>
-                            <strong>Payment Integration:</strong> This is a demonstration. In production, this would integrate with Stripe, CAF Donate, or JustGiving for secure payment processing.
+                          <AlertDescription className="text-sm">
+                            <strong>Payment Integration:</strong> This is a demonstration. Production would integrate with Stripe, CAF Donate, or JustGiving for secure processing.
                           </AlertDescription>
                         </Alert>
                         
@@ -131,8 +131,8 @@ export const DonatePage = () => {
                           {isMonthly ? ' Monthly' : ''}
                         </Button>
                         
-                        <p className="text-xs text-muted-foreground text-center mt-3">
-                          Secure payment processing via Stripe. Your donation will be processed securely and you will receive a confirmation email.
+                        <p className="text-xs text-muted-foreground text-center mt-3 px-2">
+                          Secure payment processing. You will receive a confirmation email.
                         </p>
                       </div>
                     </div>
@@ -145,8 +145,8 @@ export const DonatePage = () => {
                 <Card className="card-professional">
                   <CardContent className="p-6">
                     <h3 className="font-semibold mb-4">Your Impact</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Your donation directly supports the Trust's mission to uphold healthcare as a fundamental human right, creating lasting change through principled interventions.
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Your donation directly supports healthcare as a fundamental human right, creating lasting change through principled interventions.
                     </p>
                   </CardContent>
                 </Card>
@@ -161,8 +161,8 @@ export const DonatePage = () => {
                       <li>• Professional fundraising</li>
                       <li>• In-kind donations and services</li>
                     </ul>
-                    <p className="text-xs mt-3">
-                      For enquiries about major gifts or legacy giving, please contact our operations team.
+                    <p className="text-xs mt-3 text-muted-foreground">
+                      For major gifts or legacy enquiries, contact our operations team.
                     </p>
                   </CardContent>
                 </Card>
