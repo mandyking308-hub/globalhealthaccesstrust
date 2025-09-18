@@ -19,18 +19,18 @@ export const Header = () => {
         Skip to content
       </a>
       
-      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border h-16 lg:h-20">
+      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border h-18 lg:h-24">
         <div className="w-full max-w-none px-4 lg:px-8">
-          <div className="flex h-16 lg:h-20 items-center justify-between">
+          <div className="flex h-18 lg:h-24 items-center justify-between">
             {/* Logo */}
             <Link 
               to="/" 
-              className="flex items-center space-x-3 text-foreground hover:opacity-80 transition-opacity flex-shrink-0"
+              className="flex items-center space-x-3 text-foreground hover:opacity-80 transition-opacity flex-shrink-0 py-2"
             >
               <img 
                 src="/ghat-logo.png" 
                 alt="Global Health Access Trust logo"
-                className="h-12 w-auto sm:h-14 lg:h-16"
+                className="h-16 w-auto sm:h-18 lg:h-20"
               />
             </Link>
 
