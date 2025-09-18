@@ -33,14 +33,14 @@ export const FrequentlyAskedQuestionsPage = () => {
 
       <h2>Supporting the Trust</h2>
 
-      <h3>How can I donate to the Trust?</h3>
-      <p>Donations can be made through secure online platforms, bank transfer, or by cheque. All UK taxpayers can increase the value of their gift through Gift Aid at no extra cost. We also welcome legacy giving through will bequests.</p>
+      <h3>How can I partner with the Trust?</h3>
+      <p>Partnerships can be made through secure online platforms, bank transfer, or by cheque. All UK taxpayers can increase the value of their gift through Gift Aid at no extra cost. We also welcome legacy giving through will bequests.</p>
 
       <h3>Can I specify how my donation is used?</h3>
       <p>Yes, donors may make restricted gifts to specific programmes or initiatives, subject to Board approval and formal documentation that aligns with our charitable objectives and includes reversion clauses if the original purpose becomes obsolete.</p>
 
       <h3>Do you provide tax receipts?</h3>
-      <p>Yes, all donations are formally receipted. UK taxpayers can benefit from Gift Aid, which allows us to claim an additional 25p for every £1 donated at no extra cost to the donor.</p>
+      <p>Yes, all contributions are formally receipted. UK taxpayers can benefit from Gift Aid, which allows us to claim an additional 25p for every £1 contributed at no extra cost to the contributor.</p>
 
       <h2>Governance & Operations</h2>
 

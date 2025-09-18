@@ -96,6 +96,6 @@ export const PAGE_KEYWORDS = {
   whatWeDo: "healthcare interventions, medical capacity building, health systems, humanitarian response, healthcare equity",
   blog: "global health insights, healthcare policy, medical humanitarian stories, health access updates",
   contact: "healthcare charity contact, global health organization, medical humanitarian support",
-  donate: "donate healthcare charity, support global health, medical humanitarian donations",
+  partner: "partner with healthcare charity, support global health, medical humanitarian contributions",
   governance: "healthcare charity governance, medical trust transparency, health organization accountability"
 };

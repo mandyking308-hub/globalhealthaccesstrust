@@ -41,7 +41,7 @@ export const HomePage = () => {
             <div className="cta-row max-w-xs mx-auto mb-6">
               <Link to="/donate">
                 <Button size="sm" variant="default" className="w-full">
-                  Donate Now
+                  Partner With Us
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>

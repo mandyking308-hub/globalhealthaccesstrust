@@ -63,20 +63,20 @@ export const GetInvolvedPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            {/* Donate */}
+            {/* Partner With Us */}
             <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-gold/20 transition-colors">
                   <Heart className="w-8 h-8 text-gold" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Make a Donation</h3>
+                <h3 className="text-xl font-semibold mb-4">Partner With Us</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Support our charitable programmes through one-time or monthly donations. 
+                  Support our charitable programmes through partnerships. 
                   UK taxpayers can add Gift Aid to increase impact.
                 </p>
                 <Link to="/donate">
                   <Button size="lg" className="w-full">
-                    Donate Now
+                    Partner With Us
                     <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>

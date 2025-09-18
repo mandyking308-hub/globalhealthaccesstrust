@@ -87,10 +87,10 @@ export const Header = () => {
               </Button>
 
 
-              {/* Donate Button */}
+              {/* Partner With Us Button */}
               <Link to="/donate" className="flex-shrink-0">
                 <Button variant="default" size="sm" className="hidden sm:inline-flex">
-                  Donate Now
+                  Partner With Us
                 </Button>
               </Link>
 
@@ -148,7 +148,7 @@ export const Header = () => {
                 <div className="px-4 pt-4 border-t border-border mt-4">
                   <Link to="/donate">
                     <Button variant="default" size="lg" className="w-full min-h-[44px]">
-                      Donate Now
+                      Partner With Us
                     </Button>
                   </Link>
                 </div>
