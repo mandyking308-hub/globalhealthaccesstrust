@@ -65,67 +65,40 @@ export const DonatePage = () => {
               
               {/* Major Gifts & Families */}
               <Card className="h-full border-2 hover:border-primary/20 transition-colors">
-                <CardContent className="p-8 h-full flex flex-col">
-                  <div className="flex-1">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                      <Users className="w-8 h-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-serif font-bold mb-4">Major Gifts & Families</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-8">
-                      Shape the future of healthcare with a personal or family gift.
-                    </p>
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                    <Users className="w-8 h-8 text-primary" />
                   </div>
-                  <Button 
-                    variant="outline" 
-                    onClick={scrollToForm}
-                    className="w-full rounded-full"
-                  >
-                    Talk to Us
-                  </Button>
+                  <h3 className="text-2xl font-serif font-bold mb-4">Major Gifts & Families</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Shape the future of healthcare with a personal or family gift.
+                  </p>
                 </CardContent>
               </Card>
 
               {/* Corporate & Foundations */}
               <Card className="h-full border-2 hover:border-primary/20 transition-colors">
-                <CardContent className="p-8 h-full flex flex-col">
-                  <div className="flex-1">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                      <Building className="w-8 h-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-serif font-bold mb-4">Corporate & Foundations</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-8">
-                      Collaborate with us to deliver large-scale impact.
-                    </p>
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                    <Building className="w-8 h-8 text-primary" />
                   </div>
-                  <Button 
-                    variant="outline" 
-                    onClick={scrollToForm}
-                    className="w-full rounded-full"
-                  >
-                    Talk to Us
-                  </Button>
+                  <h3 className="text-2xl font-serif font-bold mb-4">Corporate & Foundations</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Collaborate with us to deliver large-scale impact.
+                  </p>
                 </CardContent>
               </Card>
 
               {/* Legacy Giving */}
               <Card className="h-full border-2 hover:border-primary/20 transition-colors">
-                <CardContent className="p-8 h-full flex flex-col">
-                  <div className="flex-1">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                      <Heart className="w-8 h-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-serif font-bold mb-4">Legacy Giving</h3>
-                    <p className="text-muted-foreground leading-relaxed mb-8">
-                      Leave a lasting legacy by supporting global health access.
-                    </p>
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                    <Heart className="w-8 h-8 text-primary" />
                   </div>
-                  <Button 
-                    variant="outline" 
-                    onClick={scrollToForm}
-                    className="w-full rounded-full"
-                  >
-                    Talk to Us
-                  </Button>
+                  <h3 className="text-2xl font-serif font-bold mb-4">Legacy Giving</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Leave a lasting legacy by supporting global health access.
+                  </p>
                 </CardContent>
               </Card>
 
