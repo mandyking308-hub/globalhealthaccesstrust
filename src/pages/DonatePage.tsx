@@ -117,14 +117,8 @@ export const DonatePage = () => {
                         )}
                       </div>
 
-                      {/* Integration Placeholder */}
+                      {/* Donation Button */}
                       <div className="pt-6 border-t">
-                        <Alert className="mb-6">
-                          <AlertDescription className="text-sm">
-                            <strong>Payment Integration:</strong> This is a demonstration. Production would integrate with Stripe, CAF Donate, or JustGiving for secure processing.
-                          </AlertDescription>
-                        </Alert>
-                        
                         <Button size="lg" disabled className="w-full">
                           <Heart className="mr-2 w-5 h-5" />
                           Donate {selectedAmount ? `£${selectedAmount}` : customAmount ? `£${customAmount}` : ''} 
