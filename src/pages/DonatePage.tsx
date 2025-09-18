@@ -151,19 +151,6 @@ export const DonatePage = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="card-professional">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold mb-4">Transparency</h3>
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Every donation is held in trust and applied exclusively for charitable purposes 
-                      under the supervision of our appointed Trustees.
-                    </p>
-                    <Button variant="outline" size="sm" className="w-full">
-                      View Annual Reports
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                  </CardContent>
-                </Card>
 
                 <Card className="card-professional">
                   <CardContent className="p-6">
