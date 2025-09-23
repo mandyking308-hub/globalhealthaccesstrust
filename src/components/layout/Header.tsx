@@ -19,7 +19,7 @@ export const Header = () => {
         Skip to content
       </a>
       
-      <header className="sticky top-0 z-50 bg-white/98 backdrop-blur-xl supports-[backdrop-filter]:bg-white/95 border-b border-muted shadow-soft h-24 lg:h-36">
+      <header className="sticky top-0 z-50 bg-background border-b border-border shadow-medium h-24 lg:h-36">
         <div className="w-full max-w-none px-4 lg:px-8">
           <div className="flex h-24 lg:h-36 items-center justify-between">
             {/* Logo */}
@@ -56,7 +56,7 @@ export const Header = () => {
                   
                    {/* Dropdown Menu */}
                   {'submenu' in item && activeDropdown === item.label && (
-                    <div className="absolute top-full left-0 mt-3 w-80 bg-white/98 backdrop-blur-xl border border-muted/60 rounded-2xl shadow-strong py-3 z-50 animate-in fade-in-0 slide-in-from-top-2 duration-300">
+                    <div className="absolute top-full left-0 mt-3 w-80 bg-card border border-border rounded-2xl shadow-strong py-3 z-50 animate-in fade-in-0 slide-in-from-top-2 duration-300">
                       {item.submenu.map((subItem, index) => (
                         <Link
                           key={subItem.href}
@@ -114,7 +114,7 @@ export const Header = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="lg:hidden border-t border-muted/60 bg-white/98 backdrop-blur-xl shadow-medium animate-in slide-in-from-top-4 duration-300">
+            <div className="lg:hidden border-t border-border bg-background shadow-medium animate-in slide-in-from-top-4 duration-300">
               <div className="py-6 space-y-1 max-h-[70vh] overflow-y-auto">
                 {NAVIGATION_ITEMS.map((item, index) => (
                   <div key={item.href} className="relative" style={{ animationDelay: `${index * 100}ms` }}>
