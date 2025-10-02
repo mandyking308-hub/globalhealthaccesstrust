@@ -4,6 +4,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Content Protection: Disable text selection across the site */
+* {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+  user-select: none; /* Standard */
+  -webkit-touch-callout: none; /* iOS Safari */
+}
+
+/* Allow text selection for form inputs and textareas for usability */
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* Prevent image dragging */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
+}
+
 /* ========================================
    HOMEPAGE POLISH - DESIGN SYSTEM OVERRIDE
 ======================================== */

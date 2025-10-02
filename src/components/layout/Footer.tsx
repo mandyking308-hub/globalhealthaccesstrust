@@ -134,8 +134,13 @@ export const Footer = () => {
         {/* Bottom Footer */}
         <div className="py-6 border-t border-primary-foreground/20">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-sm text-primary-foreground/70">
-              © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
+            <div className="flex flex-col space-y-2">
+              <div className="text-sm text-primary-foreground/70">
+                © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
+              </div>
+              <div className="text-xs text-primary-foreground/60 max-w-2xl">
+                Content is protected under copyright law. Unauthorized copying, distribution, or reproduction is prohibited.
+              </div>
             </div>
             <div className="flex items-center space-x-6 text-sm">
               <Link

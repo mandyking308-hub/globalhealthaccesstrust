@@ -3,6 +3,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Analytics } from "@/components/Analytics";
+import { ContentProtection } from "@/components/ContentProtection";
 
 export const Layout = () => {
   return (
@@ -14,6 +15,7 @@ export const Layout = () => {
       <Footer />
       <CookieBanner />
       <Analytics />
+      <ContentProtection />
     </div>
   );
 };
