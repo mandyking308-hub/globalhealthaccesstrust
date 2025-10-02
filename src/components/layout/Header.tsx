@@ -19,7 +19,7 @@ export const Header = () => {
         Skip to content
       </a>
       
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border/50 shadow-sm h-24 lg:h-28">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border/50 shadow-sm h-20 md:h-22 lg:h-24">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-full">
           <div className="flex h-full items-center justify-between gap-8">
             
@@ -32,7 +32,7 @@ export const Header = () => {
               <img 
                 src="/ghat-logo.png" 
                 alt="Global Health Access Trust logo"
-                className="h-20 w-auto lg:h-24 object-contain"
+                className="h-16 w-auto md:h-18 lg:h-20 object-contain"
               />
             </Link>
 
