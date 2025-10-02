@@ -37,12 +37,8 @@ export const SEO = ({
       <meta name="description" content={description} />
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       
-      {/* Content Protection Meta Tags */}
-      <meta name="robots" content="noarchive, nocache" />
-      <meta name="googlebot" content="noarchive, nocache" />
-      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-      <meta http-equiv="Pragma" content="no-cache" />
-      <meta http-equiv="Expires" content="0" />
+      {/* Basic SEO directives */}
+      <meta name="robots" content="index, follow" />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />

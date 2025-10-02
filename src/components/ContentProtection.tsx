@@ -54,18 +54,14 @@ export const ContentProtection = () => {
       return false;
     };
 
-    // Disable common keyboard shortcuts for copying
+    // Disable common keyboard shortcuts for copying (but not F12 or dev tools to avoid blocking)
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ctrl+C, Ctrl+X, Ctrl+U (view source), Ctrl+S (save), F12 (dev tools)
+      // Only block: Ctrl+C, Ctrl+X, Ctrl+U (view source), Ctrl+S (save)
       if (
         (e.ctrlKey && (e.key === 'c' || e.key === 'C')) ||
         (e.ctrlKey && (e.key === 'x' || e.key === 'X')) ||
         (e.ctrlKey && (e.key === 'u' || e.key === 'U')) ||
-        (e.ctrlKey && (e.key === 's' || e.key === 'S')) ||
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I')) ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J')) ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'c' || e.key === 'C'))
+        (e.ctrlKey && (e.key === 's' || e.key === 'S'))
       ) {
         e.preventDefault();
         return false;
