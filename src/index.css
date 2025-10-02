@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,600;0,700;1,600;1,700&family=Inter:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
+/* Fonts loaded asynchronously to prevent blocking */
 
 @tailwind base;
 @tailwind components;
