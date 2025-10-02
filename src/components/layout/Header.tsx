@@ -32,7 +32,7 @@ export const Header = () => {
               <img 
                 src="/ghat-logo.png" 
                 alt="Global Health Access Trust logo"
-                className="h-32 w-auto lg:h-40 object-contain"
+                className="h-20 w-auto lg:h-24 object-contain"
               />
             </Link>
 
