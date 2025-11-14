@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
@@ -124,6 +124,23 @@ export const DonorDashboardPage = () => {
 
       {/* Main Content */}
       <div className="container-section py-8">
+        {/* Welcome Banner */}
+        <Card className="mb-6 bg-primary/5 border-primary/20">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Welcome to Your Donor Console</h2>
+                <p className="text-muted-foreground">
+                  Learn about your dashboard features, recognition tiers, and how your donations make an impact.
+                </p>
+              </div>
+              <Link to="/donor-guide">
+                <Button variant="default">View Donor Guide</Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           {/* Quick Stats */}
           <Card>
