@@ -35,6 +35,7 @@ import { RiskManagementPage } from "./pages/RiskManagementPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { DonatePage } from "./pages/DonatePage";
 import { DonationFormPage } from "./pages/DonationFormPage";
+import { DonorGuidePage } from "./pages/DonorGuidePage";
 import { AuthPage } from "./pages/AuthPage";
 import { DonorDashboardPage } from "./pages/DonorDashboardPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
@@ -107,6 +108,7 @@ const App = () => (
         {/* Donor Portal Routes (outside Layout - full page) */}
           <Route path="donate" element={<DonatePage />} />
           <Route path="donation-form" element={<DonationFormPage />} />
+          <Route path="donor-guide" element={<DonorGuidePage />} />
           <Route path="auth" element={<AuthPage />} />
           <Route path="donor-dashboard" element={<DonorDashboardPage />} />
           <Route path="admin-dashboard" element={<AdminDashboardPage />} />
