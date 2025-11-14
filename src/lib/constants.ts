@@ -5,7 +5,6 @@ export const SITE_CONFIG = {
   shortName: "GHAT",
   description: "Access to health is justice — not charity.",
   url: "https://globalhealthaccesstrust.org",
-  email: "operations@globalhealthaccesstrust.org",
   address: {
     line1: "2 Harley Street",
     city: "London",
@@ -362,7 +361,6 @@ export const LANGUAGES = [
 ];
 
 export const CONTACT_INFO = {
-  email: "operations@globalhealthaccesstrust.org",
   address: {
     line1: "Global Health Access Trust", 
     line2: "2 Harley Street",

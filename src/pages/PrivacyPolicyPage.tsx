@@ -39,7 +39,11 @@ export const PrivacyPolicyPage = () => {
                 <p className="font-medium mb-2">Contact Details:</p>
                 <p>Global Health Access Trust</p>
                 <p>2 Harley Street, London, United Kingdom</p>
-                <p>Email: <a href="mailto:operations@globalhealthaccesstrust.org" className="text-primary hover:underline">operations@globalhealthaccesstrust.org</a></p>
+                <p>
+                  <a href="/contact" className="text-primary hover:underline">
+                    Please use the Contact Form for all enquiries
+                  </a>
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -120,9 +124,9 @@ export const PrivacyPolicyPage = () => {
                   How to Exercise Your Rights
                 </h4>
                 <p className="text-sm">
-                  To exercise any of these rights, please contact us at{" "}
-                  <a href="mailto:operations@globalhealthaccesstrust.org" className="text-primary hover:underline">
-                    operations@globalhealthaccesstrust.org
+                  To exercise any of these rights, please{" "}
+                  <a href="/contact" className="text-primary hover:underline">
+                    use the Contact Form
                   </a>
                   {" "}with "Data Subject Access Request" in the subject line.
                 </p>
@@ -196,10 +200,9 @@ export const PrivacyPolicyPage = () => {
             </CardHeader>
             <CardContent>
               <p>
-                If you have questions about this Privacy Policy or our data practices, please contact 
-                us at{" "}
-                <a href="mailto:operations@globalhealthaccesstrust.org" className="text-primary hover:underline">
-                  operations@globalhealthaccesstrust.org
+                If you have questions about this Privacy Policy or our data practices, please{" "}
+                <a href="/contact" className="text-primary hover:underline">
+                  use the Contact Form
                 </a>.
               </p>
               <p className="mt-4">

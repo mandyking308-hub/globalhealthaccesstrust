@@ -250,7 +250,12 @@ export const GovernancePage = () => {
               <section>
                 <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
                 <div className="bg-muted/30 p-4 rounded-lg">
-                  <p><strong>Chair of Trustees:</strong> operations@globalhealthaccesstrust.org</p>
+                  <p>
+                    <strong>Contact:</strong>{" "}
+                    <a href="/contact" className="text-primary hover:underline">
+                      Please use the Contact Form
+                    </a>
+                  </p>
                   <p><strong>Governance Enquiries:</strong> Include "Governance" in subject line</p>
                   <p><strong>Annual Reports:</strong> Available on request and via Charity Commission</p>
                 </div>

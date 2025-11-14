@@ -71,12 +71,12 @@ export const ServerErrorPage = () => {
                 <p className="text-sm text-muted-foreground mb-4">
                   Need immediate assistance?
                 </p>
-                <a 
-                  href="mailto:operations@globalhealthaccesstrust.org"
+                <Link 
+                  to="/contact"
                   className="text-primary hover:underline text-sm"
                 >
-                  operations@globalhealthaccesstrust.org
-                </a>
+                  Please use the Contact Form
+                </Link>
               </div>
             </CardContent>
           </Card>

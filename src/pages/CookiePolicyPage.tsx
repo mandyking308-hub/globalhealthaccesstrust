@@ -211,10 +211,10 @@ export const CookiePolicyPage = () => {
             </CardHeader>
             <CardContent>
               <p>
-                If you have any questions about our use of cookies, please contact us at{" "}
-                <a href="mailto:operations@globalhealthaccesstrust.org" className="text-primary hover:underline">
-                  operations@globalhealthaccesstrust.org
-                </a>
+                If you have any questions about our use of cookies, please{" "}
+                <a href="/contact" className="text-primary hover:underline">
+                  use the Contact Form
+                </a>.
               </p>
               <p className="mt-4 text-sm text-muted-foreground">
                 This Cookie Policy should be read alongside our{" "}

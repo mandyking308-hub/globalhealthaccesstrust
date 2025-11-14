@@ -146,11 +146,14 @@ export const SafeguardingPage = () => (
               </p>
               
               <div className="border-t pt-6">
-                <h3 className="font-semibold mb-2">Contact Details</h3>
+                <h3 className="font-semibold mb-2">Reporting Safeguarding Concerns</h3>
                 <p className="text-muted-foreground">
-                  <strong>Designated Safeguarding Lead:</strong><br/>
-                  Dr Jagdev Thukral<br/>
-                  Subject Line: Safeguarding Concern – Confidential
+                  <strong>Designated Safeguarding Lead:</strong> Dr Jagdev Thukral<br/>
+                  Please{" "}
+                  <a href="/contact" className="text-primary hover:underline">
+                    use the Contact Form
+                  </a>
+                  {" "}with "Safeguarding Concern – Confidential" in the subject line.
                 </p>
               </div>
             </CardContent>
@@ -252,7 +255,13 @@ export const WhistleblowingPage = () => (
           <Card className="card-professional">
             <CardContent className="p-8">
               <h2 className="text-2xl font-serif font-bold mb-4">4. Reporting a Concern</h2>
-              <p className="text-muted-foreground mb-4">Concerns should be raised as soon as possible through one of the following methods:</p>
+              <p className="text-muted-foreground mb-4">
+                Concerns should be raised as soon as possible using the{" "}
+                <a href="/contact" className="text-primary hover:underline">
+                  Contact Form
+                </a>
+                {" "}with the following information:
+              </p>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li><strong>Primary contact:</strong> Mandy King, Chair of Trustees</li>
                 <li><strong>Alternative contact:</strong> John O Sullivan, Governance Lead</li>
@@ -318,8 +327,12 @@ export const WhistleblowingPage = () => (
               <div className="border-t pt-6">
                 <h3 className="font-semibold mb-2">Contact for Confidential Disclosures:</h3>
                 <p className="text-muted-foreground">
-                  <strong>Mandy King</strong><br/>
-                  Subject Line: Whistleblowing – Confidential
+                  <strong>Mandy King, Chair of Trustees</strong><br/>
+                  Please{" "}
+                  <a href="/contact" className="text-primary hover:underline">
+                    use the Contact Form
+                  </a>
+                  {" "}with "Whistleblowing – Confidential" in the subject line.
                 </p>
               </div>
             </CardContent>
