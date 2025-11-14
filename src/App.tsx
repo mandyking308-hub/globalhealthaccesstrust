@@ -34,6 +34,8 @@ import { FinancialControlsPage } from "./pages/FinancialControlsPage";
 import { RiskManagementPage } from "./pages/RiskManagementPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { DonatePage } from "./pages/DonatePage";
+import { AuthPage } from "./pages/AuthPage";
+import { DonorDashboardPage } from "./pages/DonorDashboardPage";
 
 const queryClient = new QueryClient();
 
@@ -99,6 +101,11 @@ const App = () => (
           <Route path="whistleblowing" element={<WhistleblowingPage />} />
           <Route path="governance" element={<GovernancePage />} />
         </Route>
+        
+        {/* Donor Portal Routes (outside Layout - full page) */}
+        <Route path="/auth" element={<AuthPage />} />
+        <Route path="/donor-dashboard" element={<DonorDashboardPage />} />
+        
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
