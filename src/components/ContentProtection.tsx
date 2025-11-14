@@ -18,6 +18,11 @@ import { useEffect } from "react";
  */
 export const ContentProtection = () => {
   useEffect(() => {
+    // TEMPORARILY DISABLED FOR SCREENSHOT DOCUMENTATION
+    // All content protection has been disabled to allow screenshots
+    // Re-enable by uncommenting the code below when screenshots are complete
+    
+    /*
     // Disable right-click context menu
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
@@ -87,6 +92,7 @@ export const ContentProtection = () => {
       document.removeEventListener('dragstart', handleDragStart);
       document.removeEventListener('keydown', handleKeyDown);
     };
+    */
   }, []);
 
   return null; // This component doesn't render anything
