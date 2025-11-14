@@ -47,14 +47,16 @@ export const Footer = () => {
                     {SITE_CONFIG.address.country}
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4 flex-shrink-0" />
-                  <a 
-                    href={`mailto:${SITE_CONFIG.email}`}
-                    className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
-                  >
-                    {SITE_CONFIG.email}
-                  </a>
+                <div className="flex items-start space-x-2">
+                  <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <Link 
+                      to="/contact"
+                      className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
+                    >
+                      Please use the Contact Form for all enquiries
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

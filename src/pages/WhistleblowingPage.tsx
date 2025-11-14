@@ -89,7 +89,12 @@ export const WhistleblowingPage = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Internal Reporting</h3>
                     <div className="bg-muted/30 p-4 rounded-lg">
-                      <p><strong>Email:</strong> operations@globalhealthaccesstrust.org</p>
+                      <p>
+                        Please{" "}
+                        <a href="/contact" className="text-primary hover:underline">
+                          use the Contact Form
+                        </a>
+                      </p>
                       <p><strong>Subject:</strong> Confidential - Whistleblowing Report</p>
                       <p><strong>Mark as:</strong> Private and Confidential</p>
                     </div>
@@ -193,11 +198,16 @@ export const WhistleblowingPage = () => {
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
                   <Phone className="w-6 h-6 mr-3 text-primary" />
-                  Emergency Contacts
+                  Reporting Contacts
                 </h2>
                 <div className="bg-muted/30 p-4 rounded-lg space-y-2">
-                  <p><strong>Chair of Trustees:</strong> operations@globalhealthaccesstrust.org</p>
-                  <p><strong>For urgent matters:</strong> Include "URGENT - WHISTLEBLOWING" in subject</p>
+                  <p>
+                    <strong>Internal Reporting:</strong>{" "}
+                    <a href="/contact" className="text-primary hover:underline">
+                      Please use the Contact Form
+                    </a>
+                  </p>
+                  <p><strong>For urgent matters:</strong> Include "URGENT - WHISTLEBLOWING" in subject line</p>
                   <p><strong>External Support:</strong> Public Concern at Work - 020 7404 6609</p>
                 </div>
               </section>

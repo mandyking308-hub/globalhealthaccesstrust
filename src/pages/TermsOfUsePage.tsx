@@ -159,10 +159,10 @@ export const TermsOfUsePage = () => {
             </CardHeader>
             <CardContent>
               <p>
-                If you have questions about these Terms of Use, please contact us at{" "}
-                <a href="mailto:operations@globalhealthaccesstrust.org" className="text-primary hover:underline">
-                  operations@globalhealthaccesstrust.org
-                </a>
+                If you have questions about these Terms of Use, please{" "}
+                <a href="/contact" className="text-primary hover:underline">
+                  use the Contact Form
+                </a>.
               </p>
               <p className="mt-4 text-sm text-muted-foreground">
                 We reserve the right to modify these terms at any time. Changes will be 

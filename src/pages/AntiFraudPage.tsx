@@ -89,11 +89,14 @@ export const AntiFraudPage = () => {
               <section>
                 <h2 className="text-2xl font-semibold mb-4">Reporting Procedures</h2>
                 <p>
-                  If you suspect fraud, corruption, or any financial misconduct, please report it immediately:
+                  If you suspect fraud, corruption, or any financial misconduct, please report it immediately using the{" "}
+                  <a href="/contact" className="text-primary hover:underline">
+                    Contact Form
+                  </a>:
                 </p>
                 <div className="bg-muted/30 p-4 rounded-lg space-y-2">
-                  <p><strong>Email:</strong> operations@globalhealthaccesstrust.org</p>
                   <p><strong>Subject:</strong> Confidential - Fraud/Corruption Report</p>
+                  <p><strong>Mark as:</strong> Urgent if needed</p>
                 </div>
                 <p>
                   All reports will be treated confidentially and investigated thoroughly. 
@@ -155,7 +158,12 @@ export const AntiFraudPage = () => {
               <section>
                 <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
                 <div className="bg-muted/30 p-4 rounded-lg">
-                  <p><strong>Chair of Trustees:</strong> operations@globalhealthaccesstrust.org</p>
+                  <p>
+                    <strong>Contact:</strong>{" "}
+                    <a href="/contact" className="text-primary hover:underline">
+                      Please use the Contact Form
+                    </a>
+                  </p>
                   <p><strong>For urgent matters:</strong> Include "URGENT" in subject line</p>
                   <p><strong>Anonymous reporting:</strong> Available through our whistleblowing procedures</p>
                 </div>

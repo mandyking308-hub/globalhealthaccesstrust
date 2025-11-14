@@ -39,7 +39,7 @@ export const ContactPage = () => {
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    // In a real implementation, this would send to operations@globalhealthaccesstrust.org
+    // Form submission to backend (contact form only - no direct email display)
     console.log("Form submission:", {
       ...formData,
       timestamp: new Date().toISOString(),
@@ -122,8 +122,7 @@ export const ContactPage = () => {
                 <h2 className="text-2xl font-serif font-bold mb-6">Get in Touch</h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
                   For all matters relating to the Trust's charitable activities, partnership 
-                  opportunities, or general enquiries, please use the contact form or reach 
-                  out directly using the information below.
+                  opportunities, or general enquiries, please use the contact form below.
                 </p>
               </div>
 
@@ -133,27 +132,18 @@ export const ContactPage = () => {
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
                       <Mail className="w-5 h-5 text-primary mr-3" />
-                      <h3 className="font-semibold">Email</h3>
+                      <h3 className="font-semibold">Contact Form</h3>
                     </div>
-                    <div className="space-y-2 text-sm">
-                      <div>
-                        <p className="font-medium">General Enquiries:</p>
-                        <a 
-                          href="mailto:operations@globalhealthaccesstrust.org"
-                          className="text-primary hover:underline"
-                        >
-                          operations@globalhealthaccesstrust.org
-                        </a>
-                      </div>
-                      <div>
-                        <p className="font-medium">Legacy & Legal:</p>
-                        <a 
-                          href="mailto:operations@globalhealthaccesstrust.org?subject=Legacy – Confidential"
-                          className="text-primary hover:underline"
-                        >
-                          Chair of Trustees (Legacy – Confidential)
-                        </a>
-                      </div>
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      <p>
+                        Please use the Contact Form on this page for all enquiries including:
+                      </p>
+                      <ul className="list-disc pl-5 space-y-1">
+                        <li>General enquiries</li>
+                        <li>Partnership opportunities</li>
+                        <li>Legacy and legal matters</li>
+                        <li>Donation queries</li>
+                      </ul>
                     </div>
                   </CardContent>
                 </Card>

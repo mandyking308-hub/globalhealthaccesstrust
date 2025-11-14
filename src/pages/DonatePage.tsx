@@ -10,7 +10,6 @@ import { toast } from "@/hooks/use-toast";
 interface FormData {
   name: string;
   email: string;
-  phone?: string;
   message: string;
 }
 
@@ -154,15 +153,6 @@ export const DonatePage = () => {
                     )}
                   </div>
 
-                  <div>
-                    <Label htmlFor="phone" className="text-base font-medium">Phone (optional)</Label>
-                    <Input
-                      id="phone"
-                      {...register("phone")}
-                      className="mt-2 h-12 text-base"
-                      placeholder="Your phone number"
-                    />
-                  </div>
 
                   <div>
                     <Label htmlFor="message" className="text-base font-medium">Message *</Label>

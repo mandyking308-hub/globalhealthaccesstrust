@@ -184,14 +184,14 @@ export const AccessibilityStatementPage = () => {
                   <div>
                     <h4 className="font-medium mb-1">Accessibility Support</h4>
                     <p className="text-sm text-muted-foreground">
-                      Email:{" "}
-                      <a href="mailto:operations@globalhealthaccesstrust.org?subject=Accessibility Support" 
-                         className="text-primary hover:underline">
-                        operations@globalhealthaccesstrust.org
+                      Please use the{" "}
+                      <a href="/contact" className="text-primary hover:underline">
+                        Contact Form
                       </a>
+                      {" "}for all accessibility enquiries.
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                      Subject line: "Accessibility Support"
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Please include "Accessibility Support" in your subject line.
                     </p>
                   </div>
                 </div>
