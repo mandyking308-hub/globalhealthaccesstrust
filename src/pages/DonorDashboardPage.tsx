@@ -206,7 +206,7 @@ export const DonorDashboardPage = () => {
                   <p className="text-muted-foreground mb-6">
                     Your donation helps provide healthcare access to those who need it most
                   </p>
-                  <Button size="lg" onClick={() => navigate("/donate-now")}>
+                  <Button size="lg" onClick={() => navigate("/donation-form")}>
                     <Heart className="w-4 h-4 mr-2" />
                     Donate Now
                   </Button>
