@@ -90,14 +90,25 @@ export const Header = () => {
                 <Search className="w-[18px] h-[18px]" />
               </Button>
 
-              {/* CTA Button - Desktop */}
-              <Link to="/donate" className="hidden sm:inline-flex">
+              {/* Login Button - Desktop */}
+              <Link to="/auth" className="hidden md:inline-flex">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="h-10 px-5 text-[15px] font-medium border-border hover:bg-accent/50 rounded-lg transition-all duration-200"
+                >
+                  Login
+                </Button>
+              </Link>
+
+              {/* Sign Up Button - Desktop */}
+              <Link to="/auth" className="hidden sm:inline-flex">
                 <Button 
                   variant="default" 
                   size="sm" 
                   className="h-10 px-6 text-[15px] font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                 >
-                  Partner With Us
+                  Sign Up
                 </Button>
               </Link>
 
@@ -161,10 +172,15 @@ export const Header = () => {
                     )}
                   </div>
                 ))}
-                <div className="px-6 pt-6 border-t border-muted/40 mt-6 animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
-                  <Link to="/donate">
-                    <Button variant="default" size="lg" className="w-full min-h-[52px] bg-primary hover:bg-primary-700 text-primary-foreground rounded-2xl font-medium shadow-medium hover:shadow-strong transition-all duration-300 hover:scale-105 hover:-translate-y-0.5">
-                      Partner With Us
+                <div className="px-6 pt-6 border-t border-muted/40 mt-6 animate-in fade-in-0 slide-in-from-bottom-4 duration-500 space-y-3">
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="outline" size="lg" className="w-full min-h-[52px] border-border hover:bg-accent/50 rounded-2xl font-medium transition-all duration-300">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="default" size="lg" className="w-full min-h-[52px] bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl font-medium shadow-medium hover:shadow-strong transition-all duration-300">
+                      Sign Up
                     </Button>
                   </Link>
                 </div>
