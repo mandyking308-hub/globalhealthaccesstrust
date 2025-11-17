@@ -54,6 +54,7 @@ import { AdminAIPage } from "./pages/admin/AdminAIPage";
 import { AdminSecurityPage } from "./pages/admin/AdminSecurityPage";
 import { AdminSettingsPage } from "./pages/admin/AdminSettingsPage";
 import { AdminGDPRPage } from "./pages/admin/AdminGDPRPage";
+import { AdminTestingChecklistPage } from "./pages/admin/AdminTestingChecklistPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 
 const queryClient = new QueryClient();
@@ -143,6 +144,7 @@ const App = () => (
             <Route path="ai" element={<AdminAIPage />} />
             <Route path="security" element={<AdminSecurityPage />} />
             <Route path="gdpr" element={<AdminGDPRPage />} />
+            <Route path="testing" element={<AdminTestingChecklistPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           
