@@ -137,6 +137,54 @@ export type Database = {
         }
         Relationships: []
       }
+      document_records: {
+        Row: {
+          created_at: string
+          document_id: string
+          document_type: string
+          downloaded_count: number | null
+          expires_at: string | null
+          file_path: string
+          file_size: number | null
+          id: string
+          last_downloaded_at: string | null
+          metadata: Json | null
+          related_id: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          document_id: string
+          document_type: string
+          downloaded_count?: number | null
+          expires_at?: string | null
+          file_path: string
+          file_size?: number | null
+          id?: string
+          last_downloaded_at?: string | null
+          metadata?: Json | null
+          related_id?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          document_id?: string
+          document_type?: string
+          downloaded_count?: number | null
+          expires_at?: string | null
+          file_path?: string
+          file_size?: number | null
+          id?: string
+          last_downloaded_at?: string | null
+          metadata?: Json | null
+          related_id?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       donations: {
         Row: {
           amount: number
@@ -786,6 +834,10 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      increment_document_download: {
+        Args: { doc_id: string }
+        Returns: undefined
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
       log_admin_action: {
