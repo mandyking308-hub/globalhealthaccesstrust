@@ -9,6 +9,7 @@ import {
   Brain,
   Settings,
   Shield,
+  BookOpen,
 } from "lucide-react";
 import {
   Sidebar,
@@ -31,6 +32,7 @@ const menuItems = [
   { title: "Evidence", url: "/admin/evidence", icon: FileCheck },
   { title: "Messages", url: "/admin/messages", icon: MessageSquare },
   { title: "AI Panel", url: "/admin/ai", icon: Brain },
+  { title: "Documentation", url: "/admin/documentation", icon: BookOpen },
   { title: "Security", url: "/admin/security", icon: Shield },
   { title: "GDPR", url: "/admin/gdpr", icon: Shield },
   { title: "Branding", url: "/admin/branding", icon: Settings },
