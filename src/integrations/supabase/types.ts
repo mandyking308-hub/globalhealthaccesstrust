@@ -110,6 +110,33 @@ export type Database = {
         }
         Relationships: []
       }
+      data_retention_settings: {
+        Row: {
+          description: string | null
+          id: string
+          setting_key: string
+          setting_value: number
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          description?: string | null
+          id?: string
+          setting_key: string
+          setting_value: number
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          description?: string | null
+          id?: string
+          setting_key?: string
+          setting_value?: number
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       donations: {
         Row: {
           amount: number
@@ -199,27 +226,33 @@ export type Database = {
       gdpr_requests: {
         Row: {
           created_at: string
+          email: string | null
           id: string
           processed_at: string | null
           processed_by: string | null
+          request_details: string | null
           request_type: string
           status: string
           user_id: string
         }
         Insert: {
           created_at?: string
+          email?: string | null
           id?: string
           processed_at?: string | null
           processed_by?: string | null
+          request_details?: string | null
           request_type: string
           status?: string
           user_id: string
         }
         Update: {
           created_at?: string
+          email?: string | null
           id?: string
           processed_at?: string | null
           processed_by?: string | null
+          request_details?: string | null
           request_type?: string
           status?: string
           user_id?: string
@@ -264,32 +297,47 @@ export type Database = {
       }
       profiles: {
         Row: {
+          cookie_consent: boolean | null
+          cookie_consent_date: string | null
           created_at: string
+          data_processing_consent: boolean | null
+          data_processing_consent_date: string | null
           email: string
           first_name: string
           gdpr_consent: boolean
           id: string
           last_name: string
+          marketing_consent: boolean | null
           two_factor_enabled: boolean | null
           updated_at: string
         }
         Insert: {
+          cookie_consent?: boolean | null
+          cookie_consent_date?: string | null
           created_at?: string
+          data_processing_consent?: boolean | null
+          data_processing_consent_date?: string | null
           email: string
           first_name: string
           gdpr_consent?: boolean
           id: string
           last_name: string
+          marketing_consent?: boolean | null
           two_factor_enabled?: boolean | null
           updated_at?: string
         }
         Update: {
+          cookie_consent?: boolean | null
+          cookie_consent_date?: string | null
           created_at?: string
+          data_processing_consent?: boolean | null
+          data_processing_consent_date?: string | null
           email?: string
           first_name?: string
           gdpr_consent?: boolean
           id?: string
           last_name?: string
+          marketing_consent?: boolean | null
           two_factor_enabled?: boolean | null
           updated_at?: string
         }
@@ -694,6 +742,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      anonymize_user_data: {
+        Args: { target_user_id: string }
+        Returns: boolean
+      }
+      export_user_data: { Args: { target_user_id: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

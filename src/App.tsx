@@ -53,6 +53,8 @@ import { AdminMessagesPage } from "./pages/admin/AdminMessagesPage";
 import { AdminAIPage } from "./pages/admin/AdminAIPage";
 import { AdminSecurityPage } from "./pages/admin/AdminSecurityPage";
 import { AdminSettingsPage } from "./pages/admin/AdminSettingsPage";
+import { AdminGDPRPage } from "./pages/admin/AdminGDPRPage";
+import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 
 const queryClient = new QueryClient();
 
@@ -110,6 +112,7 @@ const App = () => (
           <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="cookie-policy" element={<CookiePolicyPage />} />
           <Route path="terms-of-use" element={<TermsOfUsePage />} />
+          <Route path="data-access-request" element={<DataAccessRequestPage />} />
           <Route path="accessibility-statement" element={<AccessibilityStatementPage />} />
           <Route path="safeguarding" element={<SafeguardingPage />} />
           <Route path="conflict-of-interest" element={<ConflictOfInterestPage />} />
@@ -139,6 +142,7 @@ const App = () => (
             <Route path="messages" element={<AdminMessagesPage />} />
             <Route path="ai" element={<AdminAIPage />} />
             <Route path="security" element={<AdminSecurityPage />} />
+            <Route path="gdpr" element={<AdminGDPRPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           
