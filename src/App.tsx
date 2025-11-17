@@ -55,6 +55,7 @@ import { AdminSecurityPage } from "./pages/admin/AdminSecurityPage";
 import { AdminSettingsPage } from "./pages/admin/AdminSettingsPage";
 import { AdminGDPRPage } from "./pages/admin/AdminGDPRPage";
 import { AdminTestingChecklistPage } from "./pages/admin/AdminTestingChecklistPage";
+import { AdminBrandingPage } from "./pages/admin/AdminBrandingPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 
 const queryClient = new QueryClient();
@@ -145,6 +146,7 @@ const App = () => (
             <Route path="security" element={<AdminSecurityPage />} />
             <Route path="gdpr" element={<AdminGDPRPage />} />
             <Route path="testing" element={<AdminTestingChecklistPage />} />
+            <Route path="branding" element={<AdminBrandingPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           
