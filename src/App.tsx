@@ -43,6 +43,15 @@ import { DonorGuidePage } from "./pages/DonorGuidePage";
 import { AuthPage } from "./pages/AuthPage";
 import { DonorDashboardPage } from "./pages/DonorDashboardPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
+import { AdminLayout } from "./components/admin/AdminLayout";
+import { AdminDashboardPage as NewAdminDashboardPage } from "./pages/admin/AdminDashboardPage";
+import { AdminDonorsPage } from "./pages/admin/AdminDonorsPage";
+import { AdminVolunteersPage } from "./pages/admin/AdminVolunteersPage";
+import { AdminProjectsPage } from "./pages/admin/AdminProjectsPage";
+import { AdminEvidencePage } from "./pages/admin/AdminEvidencePage";
+import { AdminMessagesPage } from "./pages/admin/AdminMessagesPage";
+import { AdminAIPage } from "./pages/admin/AdminAIPage";
+import { AdminSettingsPage } from "./pages/admin/AdminSettingsPage";
 
 const queryClient = new QueryClient();
 
@@ -110,13 +119,26 @@ const App = () => (
           <Route path="governance" element={<GovernancePage />} />
         </Route>
         
-        {/* Donor Portal Routes (outside Layout - full page) */}
+          {/* Donor Portal Routes (outside Layout - full page) */}
           <Route path="donate" element={<DonatePage />} />
           <Route path="donation-form" element={<DonationFormPage />} />
           <Route path="donor-guide" element={<DonorGuidePage />} />
           <Route path="auth" element={<AuthPage />} />
           <Route path="donor-dashboard" element={<DonorDashboardPage />} />
           <Route path="admin-dashboard" element={<AdminDashboardPage />} />
+          
+          {/* New Admin Console Routes */}
+          <Route path="admin" element={<AdminLayout />}>
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<NewAdminDashboardPage />} />
+            <Route path="donors" element={<AdminDonorsPage />} />
+            <Route path="volunteers" element={<AdminVolunteersPage />} />
+            <Route path="projects" element={<AdminProjectsPage />} />
+            <Route path="evidence" element={<AdminEvidencePage />} />
+            <Route path="messages" element={<AdminMessagesPage />} />
+            <Route path="ai" element={<AdminAIPage />} />
+            <Route path="settings" element={<AdminSettingsPage />} />
+          </Route>
           
           {/* Volunteer Portal Routes */}
           <Route path="volunteers" element={<VolunteersPage />} />
