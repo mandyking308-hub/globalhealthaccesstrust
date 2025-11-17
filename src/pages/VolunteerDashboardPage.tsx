@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { User, LogOut, Briefcase, FolderOpen, MessageSquare, Bot, CheckCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { VolunteerAIWidget } from "@/components/ai/VolunteerAIWidget";
 
 interface Volunteer {
   id: string;
@@ -270,6 +271,9 @@ export const VolunteerDashboardPage = () => {
             </TabsContent>
           </Tabs>
         </div>
+        
+        {/* AI Assistant Widget */}
+        {volunteer && <VolunteerAIWidget volunteerId={volunteer.id} />}
       </div>
     </>
   );
