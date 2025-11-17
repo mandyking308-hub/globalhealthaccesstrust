@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useOnboarding } from "@/hooks/useOnboarding";
+import { OnboardingTour } from "@/components/onboarding/OnboardingTour";
+import { donorOnboardingSteps } from "@/data/onboardingSteps";
 import { User } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -35,6 +38,8 @@ export const DonorDashboardPage = () => {
   const [totalDonated, setTotalDonated] = useState(0);
   const [loading, setLoading] = useState(true);
   const [profileEdit, setProfileEdit] = useState({ first_name: "", last_name: "", email: "" });
+  const { isComplete, isLoading: onboardingLoading, markOnboardingComplete, resetOnboarding } = useOnboarding("donor");
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -44,6 +49,12 @@ export const DonorDashboardPage = () => {
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  useEffect(() => {
+    if (!onboardingLoading && isComplete === false && user) {
+      setShowOnboarding(true);
+    }
+  }, [onboardingLoading, isComplete, user]);
 
   const checkAuth = async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -101,7 +112,19 @@ export const DonorDashboardPage = () => {
   if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" /></div>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 to-accent/10">
+    <>
+      {showOnboarding && (
+        <OnboardingTour
+          steps={donorOnboardingSteps}
+          onComplete={() => {
+            markOnboardingComplete();
+            setShowOnboarding(false);
+          }}
+          onClose={() => setShowOnboarding(false)}
+        />
+      )}
+      
+      <div className="min-h-screen bg-gradient-to-br from-primary/5 to-accent/10">
       <header className="bg-background border-b">
         <div className="container-section py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -221,5 +244,6 @@ export const DonorDashboardPage = () => {
       {/* AI Assistant Widget */}
       {user && <DonorAIWidget donorId={user.id} />}
     </div>
+    </>
   );
 };

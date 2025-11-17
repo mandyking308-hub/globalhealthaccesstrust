@@ -5,11 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Users, UserCheck, FolderKanban, FileCheck, AlertCircle, Clock, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { useOnboarding } from "@/hooks/useOnboarding";
+import { OnboardingTour } from "@/components/onboarding/OnboardingTour";
+import { adminOnboardingSteps } from "@/data/onboardingSteps";
 
 export const AdminDashboardPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
+  const { isComplete, isLoading: onboardingLoading, markOnboardingComplete } = useOnboarding("admin");
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [metrics, setMetrics] = useState({
     totalDonors: 0,
     totalVolunteers: 0,
@@ -25,6 +30,12 @@ export const AdminDashboardPage = () => {
   useEffect(() => {
     loadDashboardData();
   }, []);
+
+  useEffect(() => {
+    if (!onboardingLoading && isComplete === false && !loading) {
+      setShowOnboarding(true);
+    }
+  }, [onboardingLoading, isComplete, loading]);
 
   const loadDashboardData = async () => {
     try {
@@ -91,7 +102,19 @@ export const AdminDashboardPage = () => {
   }
 
   return (
-    <div className="p-8 space-y-8">
+    <>
+      {showOnboarding && (
+        <OnboardingTour
+          steps={adminOnboardingSteps}
+          onComplete={() => {
+            markOnboardingComplete();
+            setShowOnboarding(false);
+          }}
+          onClose={() => setShowOnboarding(false)}
+        />
+      )}
+      
+      <div className="p-8 space-y-8">
       <div>
         <h1 className="text-4xl font-serif text-foreground mb-2">Command Hub</h1>
         <p className="text-muted-foreground">Admin Operations Overview</p>
@@ -210,5 +233,6 @@ export const AdminDashboardPage = () => {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 };
