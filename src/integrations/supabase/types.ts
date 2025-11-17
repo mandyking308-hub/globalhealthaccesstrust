@@ -376,6 +376,147 @@ export type Database = {
         }
         Relationships: []
       }
+      presentation_exports: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          downloaded_count: number | null
+          expires_at: string | null
+          export_type: string
+          file_path: string | null
+          id: string
+          presentation_id: string
+          share_link: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          downloaded_count?: number | null
+          expires_at?: string | null
+          export_type: string
+          file_path?: string | null
+          id?: string
+          presentation_id: string
+          share_link?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          downloaded_count?: number | null
+          expires_at?: string | null
+          export_type?: string
+          file_path?: string | null
+          id?: string
+          presentation_id?: string
+          share_link?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "presentation_exports_presentation_id_fkey"
+            columns: ["presentation_id"]
+            isOneToOne: false
+            referencedRelation: "presentations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      presentation_slides: {
+        Row: {
+          content: string | null
+          created_at: string
+          id: string
+          image_urls: string[] | null
+          layout_config: Json | null
+          presentation_id: string
+          slide_order: number
+          slide_type: string
+          subtitle: string | null
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_urls?: string[] | null
+          layout_config?: Json | null
+          presentation_id: string
+          slide_order: number
+          slide_type: string
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          id?: string
+          image_urls?: string[] | null
+          layout_config?: Json | null
+          presentation_id?: string
+          slide_order?: number
+          slide_type?: string
+          subtitle?: string | null
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "presentation_slides_presentation_id_fkey"
+            columns: ["presentation_id"]
+            isOneToOne: false
+            referencedRelation: "presentations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      presentations: {
+        Row: {
+          cover_image_url: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          metadata: Json | null
+          project_id: string | null
+          status: string
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          cover_image_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          metadata?: Json | null
+          project_id?: string | null
+          status?: string
+          title: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          cover_image_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          metadata?: Json | null
+          project_id?: string | null
+          status?: string
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "presentations_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           cookie_consent: boolean | null
