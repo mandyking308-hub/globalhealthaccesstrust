@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { CookieConsentBanner } from "@/components/gdpr/CookieConsentBanner";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Analytics } from "@/components/Analytics";
 import { ContentProtection } from "@/components/ContentProtection";

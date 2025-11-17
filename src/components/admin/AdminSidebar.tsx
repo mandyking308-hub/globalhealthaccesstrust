@@ -32,6 +32,7 @@ const menuItems = [
   { title: "Messages", url: "/admin/messages", icon: MessageSquare },
   { title: "AI Panel", url: "/admin/ai", icon: Brain },
   { title: "Security", url: "/admin/security", icon: Shield },
+  { title: "GDPR", url: "/admin/gdpr", icon: Shield },
   { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 

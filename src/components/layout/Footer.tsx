@@ -166,6 +166,12 @@ export const Footer = () => {
               >
                 Terms
               </Link>
+              <Link
+                to="/data-access-request"
+                className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
+              >
+                Data Request
+              </Link>
             </div>
           </div>
         </div>
