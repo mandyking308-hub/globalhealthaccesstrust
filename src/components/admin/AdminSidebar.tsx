@@ -33,6 +33,7 @@ const menuItems = [
   { title: "AI Panel", url: "/admin/ai", icon: Brain },
   { title: "Security", url: "/admin/security", icon: Shield },
   { title: "GDPR", url: "/admin/gdpr", icon: Shield },
+  { title: "Testing", url: "/admin/testing", icon: Settings },
   { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 
