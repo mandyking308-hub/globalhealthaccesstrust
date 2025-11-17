@@ -57,6 +57,7 @@ import { AdminGDPRPage } from "./pages/admin/AdminGDPRPage";
 import { AdminTestingChecklistPage } from "./pages/admin/AdminTestingChecklistPage";
 import { AdminBrandingPage } from "./pages/admin/AdminBrandingPage";
 import { AdminDocumentationPage } from "./pages/admin/AdminDocumentationPage";
+import { AdminPresentationsPage } from "./pages/admin/AdminPresentationsPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 
 const queryClient = new QueryClient();
@@ -148,6 +149,7 @@ const App = () => (
             <Route path="gdpr" element={<AdminGDPRPage />} />
             <Route path="testing" element={<AdminTestingChecklistPage />} />
             <Route path="documentation" element={<AdminDocumentationPage />} />
+            <Route path="presentations" element={<AdminPresentationsPage />} />
             <Route path="branding" element={<AdminBrandingPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
