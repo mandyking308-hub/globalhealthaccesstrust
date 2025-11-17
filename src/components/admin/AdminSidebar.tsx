@@ -41,6 +41,7 @@ const menuItems = [
   { title: "GDPR", url: "/admin/gdpr", icon: Shield },
   { title: "Branding", url: "/admin/branding", icon: Settings },
   { title: "Testing", url: "/admin/testing", icon: Settings },
+  { title: "Launch Prep", url: "/admin/launch-checklist", icon: Settings },
   { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 
