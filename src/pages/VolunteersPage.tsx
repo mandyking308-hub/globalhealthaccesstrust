@@ -147,61 +147,61 @@ export const VolunteersPage = () => {
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <section 
-          className="relative min-h-[50vh] flex items-center justify-center bg-cover bg-center"
+          className="relative min-h-[40vh] sm:min-h-[50vh] flex items-center justify-center bg-cover bg-center"
           style={{ backgroundImage: `linear-gradient(rgba(5, 21, 47, 0.7), rgba(5, 21, 47, 0.7)), url(${educationTrainingHero})` }}
         >
-          <div className="container max-w-4xl text-center px-6 py-16">
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          <div className="container max-w-4xl text-center px-4 sm:px-6 py-12 sm:py-16">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
               Join Us in Delivering Health With Heart
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
               Be part of a global community of skilled professionals supporting high-impact health interventions commissioned by our donors.
             </p>
           </div>
         </section>
 
         {/* Why Volunteer Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="container max-w-6xl px-6">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-4">
+        <section className="py-12 sm:py-16 lg:py-20 bg-muted/30">
+          <div className="container max-w-6xl px-4 sm:px-6">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">
               Why Volunteer With GHAT
             </h2>
-            <p className="text-lg text-muted-foreground text-center max-w-3xl mx-auto mb-16">
+            <p className="text-base sm:text-lg text-muted-foreground text-center max-w-3xl mx-auto mb-12 sm:mb-16">
               Join a purpose-driven organization where your skills make a real difference.
             </p>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
-                <CardContent className="pt-8 pb-8">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Heart className="w-8 h-8 text-accent" />
+                <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-accent" />
                   </div>
-                  <h3 className="font-serif text-xl font-bold mb-3">Meaningful Impact</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold mb-2 sm:mb-3">Meaningful Impact</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Work on targeted, high-integrity projects with measurable outcomes that change lives.
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
-                <CardContent className="pt-8 pb-8">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Briefcase className="w-8 h-8 text-accent" />
+                <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <Briefcase className="w-7 h-7 sm:w-8 sm:h-8 text-accent" />
                   </div>
-                  <h3 className="font-serif text-xl font-bold mb-3">Flexible Roles</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold mb-2 sm:mb-3">Flexible Roles</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Field work, logistics, training, admin support, or remote assistance — find your fit.
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
-                <CardContent className="pt-8 pb-8">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Users className="w-8 h-8 text-accent" />
+                <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                    <Users className="w-7 h-7 sm:w-8 sm:h-8 text-accent" />
                   </div>
-                  <h3 className="font-serif text-xl font-bold mb-3">Full Support</h3>
-                  <p className="text-muted-foreground">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold mb-2 sm:mb-3">Full Support</h3>
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Guided by our admin team and AI assistant every step of the way.
                   </p>
                 </CardContent>
@@ -211,17 +211,17 @@ export const VolunteersPage = () => {
         </section>
 
         {/* Application Form Section */}
-        <section className="py-20">
-          <div className="container max-w-3xl px-6">
+        <section className="py-12 sm:py-16 lg:py-20">
+          <div className="container max-w-3xl px-4 sm:px-6">
             <Card className="shadow-medium">
               <CardHeader>
-                <CardTitle className="font-serif text-3xl">Volunteer Application</CardTitle>
-                <CardDescription className="text-base">
+                <CardTitle className="font-serif text-2xl sm:text-3xl">Volunteer Application</CardTitle>
+                <CardDescription className="text-sm sm:text-base">
                   Complete the form below to join our community of dedicated professionals.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Full Name *</Label>
                     <Input
@@ -353,7 +353,7 @@ export const VolunteersPage = () => {
                     </label>
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                  <Button type="submit" size="lg" className="w-full min-h-[48px]" disabled={isSubmitting}>
                     {isSubmitting ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />

@@ -84,13 +84,13 @@ export const CommissionProjectForm = () => {
   return (
     <Card className="shadow-soft">
       <CardHeader>
-        <CardTitle className="font-serif text-2xl">Commission a New Project</CardTitle>
-        <CardDescription>
+        <CardTitle className="font-serif text-xl sm:text-2xl">Commission a New Project</CardTitle>
+        <CardDescription className="text-sm">
           Design a bespoke health intervention project with complete transparency and real-time tracking.
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div className="space-y-2">
             <Label htmlFor="title">Project Title *</Label>
             <Input
@@ -209,7 +209,7 @@ export const CommissionProjectForm = () => {
             </p>
           </div>
 
-          <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+          <Button type="submit" size="lg" className="w-full min-h-[48px]" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />

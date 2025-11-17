@@ -135,33 +135,38 @@ export const VolunteerDashboardPage = () => {
           </Card>
 
           {/* Main Tabs */}
-          <Tabs defaultValue="overview" className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="overview">
-                <Briefcase className="w-4 h-4 mr-2" />
-                Overview
+          <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1">
+              <TabsTrigger value="overview" className="text-xs sm:text-sm">
+                <Briefcase className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Overview</span>
+                <span className="sm:hidden">Home</span>
               </TabsTrigger>
-              <TabsTrigger value="projects">
-                <FolderOpen className="w-4 h-4 mr-2" />
-                Available Projects
+              <TabsTrigger value="projects" className="text-xs sm:text-sm">
+                <FolderOpen className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Available</span>
+                <span className="sm:hidden">Available</span>
               </TabsTrigger>
-              <TabsTrigger value="my-projects">
-                <CheckCircle className="w-4 h-4 mr-2" />
-                My Projects
+              <TabsTrigger value="my-projects" className="text-xs sm:text-sm">
+                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">My Projects</span>
+                <span className="sm:hidden">Mine</span>
               </TabsTrigger>
-              <TabsTrigger value="messages">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                Messages
+              <TabsTrigger value="messages" className="text-xs sm:text-sm">
+                <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Messages</span>
+                <span className="sm:hidden">Messages</span>
               </TabsTrigger>
-              <TabsTrigger value="profile">
-                <User className="w-4 h-4 mr-2" />
-                Profile
+              <TabsTrigger value="profile" className="text-xs sm:text-sm">
+                <User className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Profile</span>
+                <span className="sm:hidden">Profile</span>
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview">
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <Card>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                <Card className="shadow-soft hover:shadow-medium transition-shadow">
                   <CardHeader>
                     <CardTitle className="text-sm font-medium">Skills</CardTitle>
                   </CardHeader>
@@ -170,7 +175,7 @@ export const VolunteerDashboardPage = () => {
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-soft hover:shadow-medium transition-shadow">
                   <CardHeader>
                     <CardTitle className="text-sm font-medium">Status</CardTitle>
                   </CardHeader>
@@ -181,7 +186,7 @@ export const VolunteerDashboardPage = () => {
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="shadow-soft hover:shadow-medium transition-shadow">
                   <CardHeader>
                     <CardTitle className="text-sm font-medium">AI Assistant</CardTitle>
                   </CardHeader>
