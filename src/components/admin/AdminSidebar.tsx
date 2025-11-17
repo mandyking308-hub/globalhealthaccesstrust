@@ -8,6 +8,7 @@ import {
   MessageSquare,
   Brain,
   Settings,
+  Shield,
 } from "lucide-react";
 import {
   Sidebar,
@@ -30,6 +31,7 @@ const menuItems = [
   { title: "Evidence", url: "/admin/evidence", icon: FileCheck },
   { title: "Messages", url: "/admin/messages", icon: MessageSquare },
   { title: "AI Panel", url: "/admin/ai", icon: Brain },
+  { title: "Security", url: "/admin/security", icon: Shield },
   { title: "Settings", url: "/admin/settings", icon: Settings },
 ];
 

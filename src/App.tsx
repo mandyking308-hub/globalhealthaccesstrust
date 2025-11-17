@@ -51,6 +51,7 @@ import { AdminProjectsPage } from "./pages/admin/AdminProjectsPage";
 import { AdminEvidencePage } from "./pages/admin/AdminEvidencePage";
 import { AdminMessagesPage } from "./pages/admin/AdminMessagesPage";
 import { AdminAIPage } from "./pages/admin/AdminAIPage";
+import { AdminSecurityPage } from "./pages/admin/AdminSecurityPage";
 import { AdminSettingsPage } from "./pages/admin/AdminSettingsPage";
 
 const queryClient = new QueryClient();
@@ -137,6 +138,7 @@ const App = () => (
             <Route path="evidence" element={<AdminEvidencePage />} />
             <Route path="messages" element={<AdminMessagesPage />} />
             <Route path="ai" element={<AdminAIPage />} />
+            <Route path="security" element={<AdminSecurityPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           

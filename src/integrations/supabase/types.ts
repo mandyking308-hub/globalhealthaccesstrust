@@ -17,32 +17,41 @@ export type Database = {
       audit_logs: {
         Row: {
           action: string
+          action_type: string | null
           created_at: string
           details: Json | null
           id: string
           ip_address: string | null
           record_id: string | null
           table_name: string | null
+          target_id: string | null
+          target_type: string | null
           user_id: string | null
         }
         Insert: {
           action: string
+          action_type?: string | null
           created_at?: string
           details?: Json | null
           id?: string
           ip_address?: string | null
           record_id?: string | null
           table_name?: string | null
+          target_id?: string | null
+          target_type?: string | null
           user_id?: string | null
         }
         Update: {
           action?: string
+          action_type?: string | null
           created_at?: string
           details?: Json | null
           id?: string
           ip_address?: string | null
           record_id?: string | null
           table_name?: string | null
+          target_id?: string | null
+          target_type?: string | null
           user_id?: string | null
         }
         Relationships: []
@@ -362,6 +371,90 @@ export type Database = {
           },
         ]
       }
+      rate_limit_tracking: {
+        Row: {
+          action_type: string
+          attempt_count: number | null
+          blocked_until: string | null
+          created_at: string | null
+          id: string
+          ip_address: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action_type: string
+          attempt_count?: number | null
+          blocked_until?: string | null
+          created_at?: string | null
+          id?: string
+          ip_address: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action_type?: string
+          attempt_count?: number | null
+          blocked_until?: string | null
+          created_at?: string | null
+          id?: string
+          ip_address?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      recovery_codes: {
+        Row: {
+          code: string
+          created_at: string | null
+          id: string
+          used: boolean | null
+          user_id: string
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          id?: string
+          used?: boolean | null
+          user_id: string
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          id?: string
+          used?: boolean | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      two_factor_codes: {
+        Row: {
+          code: string
+          created_at: string | null
+          expires_at: string
+          id: string
+          used: boolean | null
+          user_id: string
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          expires_at: string
+          id?: string
+          used?: boolean | null
+          user_id: string
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          expires_at?: string
+          id?: string
+          used?: boolean | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -379,6 +472,42 @@ export type Database = {
           created_at?: string
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_sessions: {
+        Row: {
+          created_at: string | null
+          device_info: string | null
+          expires_at: string
+          id: string
+          ip_address: string | null
+          last_activity: string | null
+          session_token: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          device_info?: string | null
+          expires_at: string
+          id?: string
+          ip_address?: string | null
+          last_activity?: string | null
+          session_token: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          device_info?: string | null
+          expires_at?: string
+          id?: string
+          ip_address?: string | null
+          last_activity?: string | null
+          session_token?: string
+          user_agent?: string | null
           user_id?: string
         }
         Relationships: []
@@ -573,6 +702,16 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      log_admin_action: {
+        Args: {
+          p_action: string
+          p_action_type: string
+          p_details?: Json
+          p_target_id: string
+          p_target_type: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role: "donor" | "admin" | "super_admin"
