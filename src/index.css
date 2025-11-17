@@ -1031,4 +1031,44 @@ a:hover{text-decoration:none;}
   /* Animation Utilities */
   .transition-smooth { @apply transition-all duration-300 ease-in-out; }
   .hover-lift { @apply hover:-translate-y-1 transition-transform duration-200; }
+  
+  /* Premium Button Animations */
+  .btn-premium { @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5; }
+  .btn-gold-hover { @apply bg-[#0B3C89] hover:bg-[#C2A878] transition-colors duration-200; }
+  
+  /* Card Hover Effects */
+  .card-lift { @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1; }
+  
+  /* Gold Accent Underline */
+  .gold-accent {
+    @apply relative pb-2;
+  }
+  .gold-accent::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-16 h-0.5 bg-[#C2A878];
+  }
+  
+  /* Hero Image Overlay */
+  .hero-overlay { @apply relative; }
+  .hero-overlay::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-b from-black/20 to-black/40;
+  }
+  
+  /* Vignette Effect */
+  .vignette { @apply relative; }
+  .vignette::after {
+    content: '';
+    @apply absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)] pointer-events-none;
+  }
+  
+  /* AI Widget Pulse */
+  .ai-pulse {
+    @apply animate-pulse;
+    animation-duration: 2s;
+  }
+  
+  /* Smooth Modal Animations */
+  .modal-fade-up { @apply animate-in fade-in slide-in-from-bottom-4 duration-300; }
+  .modal-fade-down { @apply animate-out fade-out slide-out-to-bottom-4 duration-200; }
 }
