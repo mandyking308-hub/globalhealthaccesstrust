@@ -11,6 +11,7 @@ import {
   Shield,
   BookOpen,
   Presentation,
+  Activity,
 } from "lucide-react";
 import {
   Sidebar,
@@ -34,6 +35,7 @@ const menuItems = [
   { title: "Messages", url: "/admin/messages", icon: MessageSquare },
   { title: "AI Panel", url: "/admin/ai", icon: Brain },
   { title: "Presentations", url: "/admin/presentations", icon: Presentation },
+  { title: "System Health", url: "/admin/system-health", icon: Activity },
   { title: "Documentation", url: "/admin/documentation", icon: BookOpen },
   { title: "Security", url: "/admin/security", icon: Shield },
   { title: "GDPR", url: "/admin/gdpr", icon: Shield },
