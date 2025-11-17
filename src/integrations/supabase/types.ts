@@ -295,6 +295,39 @@ export type Database = {
         }
         Relationships: []
       }
+      onboarding_status: {
+        Row: {
+          admin_onboarding_complete: boolean
+          created_at: string
+          donor_onboarding_complete: boolean
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at: string
+          user_id: string
+          volunteer_onboarding_complete: boolean
+        }
+        Insert: {
+          admin_onboarding_complete?: boolean
+          created_at?: string
+          donor_onboarding_complete?: boolean
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+          user_id: string
+          volunteer_onboarding_complete?: boolean
+        }
+        Update: {
+          admin_onboarding_complete?: boolean
+          created_at?: string
+          donor_onboarding_complete?: boolean
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+          user_id?: string
+          volunteer_onboarding_complete?: boolean
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           cookie_consent: boolean | null

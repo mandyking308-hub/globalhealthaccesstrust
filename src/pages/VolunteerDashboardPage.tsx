@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useOnboarding } from "@/hooks/useOnboarding";
+import { OnboardingTour } from "@/components/onboarding/OnboardingTour";
+import { volunteerOnboardingSteps } from "@/data/onboardingSteps";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -25,6 +28,8 @@ export const VolunteerDashboardPage = () => {
   const { toast } = useToast();
   const [volunteer, setVolunteer] = useState<Volunteer | null>(null);
   const [loading, setLoading] = useState(true);
+  const { isComplete, isLoading: onboardingLoading, markOnboardingComplete, resetOnboarding } = useOnboarding("volunteer");
+  const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -33,6 +38,12 @@ export const VolunteerDashboardPage = () => {
     });
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  useEffect(() => {
+    if (!onboardingLoading && isComplete === false && volunteer) {
+      setShowOnboarding(true);
+    }
+  }, [onboardingLoading, isComplete, volunteer]);
 
   const checkAuth = async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -88,6 +99,17 @@ export const VolunteerDashboardPage = () => {
 
   return (
     <>
+      {showOnboarding && (
+        <OnboardingTour
+          steps={volunteerOnboardingSteps}
+          onComplete={() => {
+            markOnboardingComplete();
+            setShowOnboarding(false);
+          }}
+          onClose={() => setShowOnboarding(false)}
+        />
+      )}
+      
       <SEO
         title="Volunteer Dashboard - Global Health Access Trust"
         description="Your volunteer portal for managing projects and updates"
