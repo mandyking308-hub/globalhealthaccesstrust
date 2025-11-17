@@ -126,21 +126,78 @@ export const DonorDashboardPage = () => {
           </CardContent>
         </Card>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <Card><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium">Total Donated</CardTitle><DollarSign className="h-4 w-4 text-muted-foreground" /></CardHeader><CardContent><div className="text-2xl font-bold">£{totalDonated.toLocaleString()}</div><p className="text-xs text-muted-foreground">All time</p></CardContent></Card>
-          <Card><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium">Donations</CardTitle><Heart className="h-4 w-4 text-muted-foreground" /></CardHeader><CardContent><div className="text-2xl font-bold">{donations.length}</div></CardContent></Card>
-          <Card><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium">Tier</CardTitle><Shield className="h-4 w-4 text-muted-foreground" /></CardHeader><CardContent><div className="text-lg font-bold">{donorTier.name}</div></CardContent></Card>
-          <Card><CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2"><CardTitle className="text-sm font-medium">Recent</CardTitle><History className="h-4 w-4 text-muted-foreground" /></CardHeader><CardContent><div className="text-lg font-bold">{donations.length > 0 ? new Date(donations[0].created_at).toLocaleDateString() : 'N/A'}</div></CardContent></Card>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
+          <Card className="shadow-soft hover:shadow-medium transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Donated</CardTitle>
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">£{totalDonated.toLocaleString()}</div>
+              <p className="text-xs text-muted-foreground">All time</p>
+            </CardContent>
+          </Card>
+          <Card className="shadow-soft hover:shadow-medium transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Donations</CardTitle>
+              <Heart className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl sm:text-2xl font-bold">{donations.length}</div>
+            </CardContent>
+          </Card>
+          <Card className="shadow-soft hover:shadow-medium transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Tier</CardTitle>
+              <Shield className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-base sm:text-lg font-bold">{donorTier.name}</div>
+            </CardContent>
+          </Card>
+          <Card className="shadow-soft hover:shadow-medium transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Recent</CardTitle>
+              <History className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-base sm:text-lg font-bold">{donations.length > 0 ? new Date(donations[0].created_at).toLocaleDateString() : 'N/A'}</div>
+            </CardContent>
+          </Card>
         </div>
 
-        <Tabs defaultValue="donate" className="space-y-6">
-          <TabsList>
-            <TabsTrigger value="donate"><Heart className="w-4 h-4 mr-2" />Donate</TabsTrigger>
-            <TabsTrigger value="projects"><Target className="w-4 h-4 mr-2" />My Projects</TabsTrigger>
-            <TabsTrigger value="commission"><Target className="w-4 h-4 mr-2" />Commission</TabsTrigger>
-            <TabsTrigger value="history"><History className="w-4 h-4 mr-2" />History</TabsTrigger>
-            <TabsTrigger value="messages"><MessageSquare className="w-4 h-4 mr-2" />Messages</TabsTrigger>
-            <TabsTrigger value="profile"><UserIcon className="w-4 h-4 mr-2" />Profile</TabsTrigger>
+        <Tabs defaultValue="donate" className="space-y-4 sm:space-y-6">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1">
+            <TabsTrigger value="donate" className="text-xs sm:text-sm">
+              <Heart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Donate</span>
+              <span className="sm:hidden">Give</span>
+            </TabsTrigger>
+            <TabsTrigger value="projects" className="text-xs sm:text-sm">
+              <Target className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">My Projects</span>
+              <span className="sm:hidden">Projects</span>
+            </TabsTrigger>
+            <TabsTrigger value="commission" className="text-xs sm:text-sm">
+              <Target className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Commission</span>
+              <span className="sm:hidden">New</span>
+            </TabsTrigger>
+            <TabsTrigger value="history" className="text-xs sm:text-sm">
+              <History className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">History</span>
+              <span className="sm:hidden">History</span>
+            </TabsTrigger>
+            <TabsTrigger value="messages" className="text-xs sm:text-sm">
+              <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Messages</span>
+              <span className="sm:hidden">Messages</span>
+            </TabsTrigger>
+            <TabsTrigger value="profile" className="text-xs sm:text-sm">
+              <UserIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">Profile</span>
+              <span className="sm:hidden">Profile</span>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="donate"><Card><CardHeader><CardTitle>Make a Donation</CardTitle></CardHeader><CardContent><div className="text-center py-12"><Heart className="w-16 h-16 text-primary mx-auto mb-4" /><h3 className="text-xl font-semibold mb-2">Ready to Make a Difference?</h3><Link to="/donation-form"><Button size="lg">Start Donation</Button></Link></div></CardContent></Card></TabsContent>

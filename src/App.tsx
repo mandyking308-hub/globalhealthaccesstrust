@@ -6,6 +6,7 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { TranslationProvider } from "@/hooks/useTranslation";
 import { Layout } from "./components/layout/Layout";
+import { TestingChecklistPage } from "./pages/TestingChecklistPage";
 import { VolunteersPage } from "./pages/VolunteersPage";
 import { VolunteerDashboardPage } from "./pages/VolunteerDashboardPage";
 import { CommissionProjectsPage } from "./pages/CommissionProjectsPage";
@@ -120,6 +121,9 @@ const App = () => (
           {/* Volunteer Portal Routes */}
           <Route path="volunteers" element={<VolunteersPage />} />
           <Route path="volunteer-dashboard" element={<VolunteerDashboardPage />} />
+          
+          {/* Admin Testing Route (Hidden) */}
+          <Route path="testing-checklist" element={<TestingChecklistPage />} />
         
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFoundPage />} />

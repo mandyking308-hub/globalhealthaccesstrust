@@ -17,30 +17,30 @@ export const CommissionProjectsPage = () => {
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <section 
-          className="relative min-h-[60vh] flex items-center justify-center bg-cover bg-center"
+          className="relative min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center bg-cover bg-center"
           style={{ backgroundImage: `linear-gradient(rgba(5, 21, 47, 0.7), rgba(5, 21, 47, 0.7)), url(${emergencyReliefHero})` }}
         >
-          <div className="container max-w-4xl text-center px-6 py-16">
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+          <div className="container max-w-4xl text-center px-4 sm:px-6 py-12 sm:py-16">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
               Philanthropy With Clarity, Control, and Heart
             </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
               Our commissioned projects model gives you the freedom to direct your impact — and the transparency to watch it unfold.
             </p>
           </div>
         </section>
 
         {/* Why It Works Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="container max-w-6xl px-6">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-center mb-4">
+        <section className="py-12 sm:py-16 lg:py-20 bg-muted/30">
+          <div className="container max-w-6xl px-4 sm:px-6">
+            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">
               A New Standard in High-Integrity Philanthropy
             </h2>
-            <p className="text-lg text-muted-foreground text-center max-w-3xl mx-auto mb-16">
+            <p className="text-base sm:text-lg text-muted-foreground text-center max-w-3xl mx-auto mb-12 sm:mb-16">
               With GHAT, you don't just make a donation — you shape a targeted health project that reflects your values. Choose where your support goes, follow every milestone, and receive real-world updates from the field.
             </p>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[
                 {
                   icon: Target,
@@ -74,10 +74,10 @@ export const CommissionProjectsPage = () => {
                 }
               ].map((feature, index) => (
                 <Card key={index} className="border-border/50 shadow-soft hover:shadow-medium transition-shadow">
-                  <CardContent className="pt-6">
-                    <feature.icon className="w-12 h-12 text-accent mb-4" />
-                    <h3 className="font-serif text-xl font-bold mb-2">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                  <CardContent className="pt-4 sm:pt-6">
+                    <feature.icon className="w-10 h-10 sm:w-12 sm:h-12 text-accent mb-3 sm:mb-4" />
+                    <h3 className="font-serif text-lg sm:text-xl font-bold mb-2">{feature.title}</h3>
+                    <p className="text-sm sm:text-base text-muted-foreground">{feature.description}</p>
                   </CardContent>
                 </Card>
               ))}
