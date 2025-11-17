@@ -6,6 +6,7 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { TranslationProvider } from "@/hooks/useTranslation";
 import { Layout } from "./components/layout/Layout";
+import { CommissionProjectsPage } from "./pages/CommissionProjectsPage";
 import { HomePage } from "./pages/HomePage";
 import { AboutPage } from "./pages/AboutPage";
 import { AboutTheTrustPage } from "./pages/AboutTheTrustPage";
@@ -87,6 +88,7 @@ const App = () => (
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="get-involved" element={<GetInvolvedPage />} />
           <Route path="donate" element={<DonatePage />} />
+          <Route path="commission-projects" element={<CommissionProjectsPage />} />
           <Route path="publications" element={<PublicationsPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="constitution" element={<ConstitutionPage />} />

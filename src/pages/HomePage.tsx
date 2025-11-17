@@ -30,19 +30,25 @@ export const HomePage = () => {
           </div>
           
           <div className="hero__overlay">
-            <div className="text-center mb-6">
-              <h1 className="font-serif font-bold text-center text-[32px] sm:text-[42px] lg:text-[56px]" style={{ color: '#FFD700' }}>
-                Global Health Access Trust
-              </h1>
-            </div>
-            <h2 className="font-serif font-bold mb-6 text-center">
-              A charity building lasting access to healthcare.
+            <h1 className="font-serif font-bold text-center text-[32px] sm:text-[48px] lg:text-[64px] mb-4 text-white leading-tight">
+              Where Purpose Meets Precision.
+            </h1>
+            <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl mb-8 text-white/90 max-w-4xl mx-auto">
+              Your Impact, Delivered With Total Transparency.
             </h2>
-            <div className="cta-row max-w-xs mx-auto mb-6">
-              <Link to="/donate">
-                <Button size="sm" variant="default" className="w-full">
-                  Partner With Us
-                  <ArrowRight className="ml-2 w-4 h-4" />
+            <p className="text-base sm:text-lg lg:text-xl mb-8 text-white/80 max-w-3xl mx-auto">
+              Global Health Access Trust empowers committed donors to fund, direct, and witness life-changing health interventions — with full visibility from conception to completion.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link to="/auth">
+                <Button size="lg" variant="default" className="min-w-[180px]">
+                  Log In / Donate
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link to="/commission-projects">
+                <Button size="lg" variant="outline" className="min-w-[180px] bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20">
+                  How It Works
                 </Button>
               </Link>
             </div>
@@ -72,6 +78,67 @@ export const HomePage = () => {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Commission a Project Section */}
+        <section className="py-20 bg-muted/30">
+          <div className="container max-w-6xl">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">
+                Commission a Project
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12">
+                With GHAT, you don't just make a donation — you shape a targeted health project that reflects your values. Choose where your support goes, follow every milestone, and receive real-world updates from the field. Transparent. Personal. Measurable.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
+                <CardContent className="pt-8 pb-8">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Heart className="w-8 h-8 text-accent" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold mb-3">Design Your Project</h3>
+                  <p className="text-muted-foreground">
+                    Set region, focus area, and intended impact.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
+                <CardContent className="pt-8 pb-8">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <TrendingUp className="w-8 h-8 text-accent" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold mb-3">Track Progress in Real Time</h3>
+                  <p className="text-muted-foreground">
+                    Milestones, photos, updates, field notes — all inside your secure dashboard.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
+                <CardContent className="pt-8 pb-8">
+                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Globe className="w-8 h-8 text-accent" />
+                  </div>
+                  <h3 className="font-serif text-xl font-bold mb-3">Complete Visibility</h3>
+                  <p className="text-muted-foreground">
+                    Every pound allocated with clarity and integrity.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center">
+              <Link to="/commission-projects">
+                <Button size="lg" variant="default">
+                  Learn More About Commissioned Projects
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </section>

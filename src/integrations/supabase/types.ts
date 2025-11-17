@@ -47,6 +47,60 @@ export type Database = {
         }
         Relationships: []
       }
+      commissioned_projects: {
+        Row: {
+          budget_range: string
+          country: string
+          created_at: string
+          dedication: string | null
+          description: string
+          donor_id: string
+          end_date: string | null
+          id: string
+          project_type: string
+          region: string
+          start_date: string | null
+          status: string
+          title: string
+          updated_at: string
+          urgency: string
+        }
+        Insert: {
+          budget_range: string
+          country: string
+          created_at?: string
+          dedication?: string | null
+          description: string
+          donor_id: string
+          end_date?: string | null
+          id?: string
+          project_type: string
+          region: string
+          start_date?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+          urgency: string
+        }
+        Update: {
+          budget_range?: string
+          country?: string
+          created_at?: string
+          dedication?: string | null
+          description?: string
+          donor_id?: string
+          end_date?: string | null
+          id?: string
+          project_type?: string
+          region?: string
+          start_date?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+          urgency?: string
+        }
+        Relationships: []
+      }
       donations: {
         Row: {
           amount: number
@@ -231,6 +285,82 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      project_milestones: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          is_completed: boolean
+          milestone_description: string | null
+          milestone_title: string
+          project_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          is_completed?: boolean
+          milestone_description?: string | null
+          milestone_title: string
+          project_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          is_completed?: boolean
+          milestone_description?: string | null
+          milestone_title?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestones_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_updates: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          file_url: string | null
+          id: string
+          note_text: string | null
+          project_id: string
+          update_type: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          file_url?: string | null
+          id?: string
+          note_text?: string | null
+          project_id: string
+          update_type: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          file_url?: string | null
+          id?: string
+          note_text?: string | null
+          project_id?: string
+          update_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_updates_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {

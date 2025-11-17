@@ -39,9 +39,43 @@ img {
 ======================================== */
 
 :root{
-  --c-primary:#0B2B4C; --c-accent:#00A3A3; --c-highlight:#E5B800;
-  --c-text:#111111; --c-muted:#6B7280; --c-bg:#FFFFFF; --c-alt:#F7F9FC;
-  --radius:6px;
+  /* GHAT Luxury Design System */
+  --deep-navy: 210 58% 11%;       /* #05152F */
+  --royal-blue: 213 85% 29%;      /* #0B3C89 */
+  --clean-white: 0 0% 100%;       /* #FFFFFF */
+  --soft-grey: 210 20% 93%;       /* #E8ECEF */
+  --gold-accent: 40 33% 62%;      /* #C2A878 */
+  
+  /* Semantic tokens mapped to luxury palette */
+  --background: var(--clean-white);
+  --foreground: var(--deep-navy);
+  --card: var(--clean-white);
+  --card-foreground: var(--deep-navy);
+  --popover: var(--clean-white);
+  --popover-foreground: var(--deep-navy);
+  --primary: var(--royal-blue);
+  --primary-foreground: var(--clean-white);
+  --secondary: var(--soft-grey);
+  --secondary-foreground: var(--deep-navy);
+  --muted: var(--soft-grey);
+  --muted-foreground: 210 10% 46%;
+  --accent: var(--gold-accent);
+  --accent-foreground: var(--deep-navy);
+  --destructive: 0 84% 60%;
+  --destructive-foreground: var(--clean-white);
+  --border: 214 20% 85%;
+  --input: 214 20% 85%;
+  --ring: var(--royal-blue);
+  --radius: 0.5rem;
+  
+  /* Shadows */
+  --shadow-soft: 0 2px 8px rgba(5, 21, 47, 0.08);
+  --shadow-medium: 0 4px 16px rgba(5, 21, 47, 0.12);
+  --shadow-strong: 0 8px 32px rgba(5, 21, 47, 0.16);
+  --shadow-gold: 0 4px 16px rgba(194, 168, 120, 0.2);
+  
+  /* Transitions */
+  --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Base type + NO hyphenation anywhere */
