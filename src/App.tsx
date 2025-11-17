@@ -6,6 +6,8 @@ import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { TranslationProvider } from "@/hooks/useTranslation";
 import { Layout } from "./components/layout/Layout";
+import { VolunteersPage } from "./pages/VolunteersPage";
+import { VolunteerDashboardPage } from "./pages/VolunteerDashboardPage";
 import { CommissionProjectsPage } from "./pages/CommissionProjectsPage";
 import { HomePage } from "./pages/HomePage";
 import { AboutPage } from "./pages/AboutPage";
@@ -114,6 +116,10 @@ const App = () => (
           <Route path="auth" element={<AuthPage />} />
           <Route path="donor-dashboard" element={<DonorDashboardPage />} />
           <Route path="admin-dashboard" element={<AdminDashboardPage />} />
+          
+          {/* Volunteer Portal Routes */}
+          <Route path="volunteers" element={<VolunteersPage />} />
+          <Route path="volunteer-dashboard" element={<VolunteerDashboardPage />} />
         
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFoundPage />} />

@@ -65,6 +65,14 @@ export const Footer = () => {
             <div>
               <h3 className="font-semibold text-lg mb-6">Quick Links</h3>
               <ul className="space-y-3">
+                <li>
+                  <Link
+                    to="/volunteers"
+                    className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
+                  >
+                    Become a Volunteer
+                  </Link>
+                </li>
                 {FOOTER_SECTIONS.quickLinks.map((link) => (
                   <li key={link.href}>
                     <Link

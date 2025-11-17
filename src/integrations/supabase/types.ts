@@ -383,6 +383,183 @@ export type Database = {
         }
         Relationships: []
       }
+      volunteer_project_assignments: {
+        Row: {
+          assigned_role: string
+          created_at: string
+          id: string
+          project_id: string
+          volunteer_id: string
+        }
+        Insert: {
+          assigned_role: string
+          created_at?: string
+          id?: string
+          project_id: string
+          volunteer_id: string
+        }
+        Update: {
+          assigned_role?: string
+          created_at?: string
+          id?: string
+          project_id?: string
+          volunteer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_project_assignments_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_project_assignments_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_project_requests: {
+        Row: {
+          created_at: string
+          id: string
+          project_id: string
+          status: string
+          volunteer_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          project_id: string
+          status?: string
+          volunteer_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          project_id?: string
+          status?: string
+          volunteer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_project_requests_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_project_requests_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_updates: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          file_url: string | null
+          id: string
+          note_text: string | null
+          project_id: string
+          update_type: string
+          volunteer_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          file_url?: string | null
+          id?: string
+          note_text?: string | null
+          project_id: string
+          update_type: string
+          volunteer_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          file_url?: string | null
+          id?: string
+          note_text?: string | null
+          project_id?: string
+          update_type?: string
+          volunteer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_updates_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteer_updates_volunteer_id_fkey"
+            columns: ["volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteers: {
+        Row: {
+          country: string
+          created_at: string
+          cv_url: string | null
+          email: string
+          experience: string
+          id: string
+          languages: string
+          name: string
+          notes: string | null
+          phone: string
+          skills: string
+          status: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          country: string
+          created_at?: string
+          cv_url?: string | null
+          email: string
+          experience: string
+          id?: string
+          languages: string
+          name: string
+          notes?: string | null
+          phone: string
+          skills: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          country?: string
+          created_at?: string
+          cv_url?: string | null
+          email?: string
+          experience?: string
+          id?: string
+          languages?: string
+          name?: string
+          notes?: string | null
+          phone?: string
+          skills?: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
