@@ -8,12 +8,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { User as UserIcon, Heart, History, MessageSquare, LogOut, DollarSign, Shield, Download, Trash2, BookOpen } from "lucide-react";
+import { User as UserIcon, Heart, History, MessageSquare, LogOut, DollarSign, Shield, Download, Trash2, BookOpen, Target } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { DonorTierBadge } from "@/components/donor/DonorTierBadge";
 import { DonationHistoryTable } from "@/components/donor/DonationHistoryTable";
 import { MessagesPanel } from "@/components/donor/MessagesPanel";
 import { calculateDonorTier } from "@/utils/donorTiers";
+import { CommissionProjectForm } from "@/components/donor/CommissionProjectForm";
+import { CommissionedProjectsList } from "@/components/donor/CommissionedProjectsList";
 
 interface Profile {
   first_name: string;
@@ -133,12 +135,18 @@ export const DonorDashboardPage = () => {
         <Tabs defaultValue="donate" className="space-y-6">
           <TabsList>
             <TabsTrigger value="donate"><Heart className="w-4 h-4 mr-2" />Donate</TabsTrigger>
+            <TabsTrigger value="projects"><Target className="w-4 h-4 mr-2" />My Projects</TabsTrigger>
+            <TabsTrigger value="commission"><Target className="w-4 h-4 mr-2" />Commission</TabsTrigger>
             <TabsTrigger value="history"><History className="w-4 h-4 mr-2" />History</TabsTrigger>
             <TabsTrigger value="messages"><MessageSquare className="w-4 h-4 mr-2" />Messages</TabsTrigger>
             <TabsTrigger value="profile"><UserIcon className="w-4 h-4 mr-2" />Profile</TabsTrigger>
           </TabsList>
 
           <TabsContent value="donate"><Card><CardHeader><CardTitle>Make a Donation</CardTitle></CardHeader><CardContent><div className="text-center py-12"><Heart className="w-16 h-16 text-primary mx-auto mb-4" /><h3 className="text-xl font-semibold mb-2">Ready to Make a Difference?</h3><Link to="/donation-form"><Button size="lg">Start Donation</Button></Link></div></CardContent></Card></TabsContent>
+          
+          <TabsContent value="projects"><CommissionedProjectsList /></TabsContent>
+          
+          <TabsContent value="commission"><CommissionProjectForm /></TabsContent>
           
           <TabsContent value="history"><Card><CardHeader><CardTitle>Donation History</CardTitle></CardHeader><CardContent>{donations.length === 0 ? <p className="text-muted-foreground">No donations yet</p> : <DonationHistoryTable donations={donations} donorName={`${profile?.first_name} ${profile?.last_name}`} />}</CardContent></Card></TabsContent>
           
