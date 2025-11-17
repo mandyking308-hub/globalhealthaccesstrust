@@ -16,6 +16,7 @@ import { MessagesPanel } from "@/components/donor/MessagesPanel";
 import { calculateDonorTier } from "@/utils/donorTiers";
 import { CommissionProjectForm } from "@/components/donor/CommissionProjectForm";
 import { CommissionedProjectsList } from "@/components/donor/CommissionedProjectsList";
+import { DonorAIWidget } from "@/components/ai/DonorAIWidget";
 
 interface Profile {
   first_name: string;
@@ -159,6 +160,9 @@ export const DonorDashboardPage = () => {
           </TabsContent>
         </Tabs>
       </div>
+      
+      {/* AI Assistant Widget */}
+      {user && <DonorAIWidget donorId={user.id} />}
     </div>
   );
 };

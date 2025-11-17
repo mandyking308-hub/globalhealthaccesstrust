@@ -18,6 +18,7 @@ import { Download, Send, Shield, BookOpen, Users, DollarSign, BarChart3, Mail, A
 import { exportToCSV } from "@/utils/exportUtils";
 import { calculateDonorTier } from "@/utils/donorTiers";
 import { Badge } from "@/components/ui/badge";
+import { AdminAIPanel } from "@/components/ai/AdminAIPanel";
 
 const AdminDashboardPage = () => {
   const navigate = useNavigate();
@@ -792,6 +793,10 @@ const AdminDashboardPage = () => {
           </Tabs>
         </div>
       </main>
+      
+      {/* AI Assistant Widget */}
+      <AdminAIPanel />
+      
       <Footer />
     </div>
   );
