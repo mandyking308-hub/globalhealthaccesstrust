@@ -58,6 +58,7 @@ import { AdminTestingChecklistPage } from "./pages/admin/AdminTestingChecklistPa
 import { AdminBrandingPage } from "./pages/admin/AdminBrandingPage";
 import { AdminDocumentationPage } from "./pages/admin/AdminDocumentationPage";
 import { AdminPresentationsPage } from "./pages/admin/AdminPresentationsPage";
+import { AdminSystemHealthPage } from "./pages/admin/AdminSystemHealthPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 
 const queryClient = new QueryClient();
@@ -150,6 +151,7 @@ const App = () => (
             <Route path="testing" element={<AdminTestingChecklistPage />} />
             <Route path="documentation" element={<AdminDocumentationPage />} />
             <Route path="presentations" element={<AdminPresentationsPage />} />
+            <Route path="system-health" element={<AdminSystemHealthPage />} />
             <Route path="branding" element={<AdminBrandingPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>

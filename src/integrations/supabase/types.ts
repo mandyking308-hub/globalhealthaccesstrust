@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      alert_settings: {
+        Row: {
+          alert_type: string
+          created_at: string
+          enabled: boolean
+          id: string
+          notification_method: string
+          threshold_config: Json | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          alert_type: string
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          notification_method?: string
+          threshold_config?: Json | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          alert_type?: string
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          notification_method?: string
+          threshold_config?: Json | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       audit_logs: {
         Row: {
           action: string
@@ -695,6 +728,120 @@ export type Database = {
           id?: string
           used?: boolean | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      system_alerts: {
+        Row: {
+          alert_type: string
+          assigned_to: string | null
+          created_at: string
+          description: string | null
+          id: string
+          metadata: Json | null
+          related_id: string | null
+          related_type: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          severity: string
+          status: string
+          title: string
+        }
+        Insert: {
+          alert_type: string
+          assigned_to?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          related_id?: string | null
+          related_type?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity: string
+          status?: string
+          title: string
+        }
+        Update: {
+          alert_type?: string
+          assigned_to?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          metadata?: Json | null
+          related_id?: string | null
+          related_type?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity?: string
+          status?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      system_health_metrics: {
+        Row: {
+          id: string
+          metadata: Json | null
+          metric_type: string
+          metric_unit: string | null
+          metric_value: number
+          recorded_at: string
+        }
+        Insert: {
+          id?: string
+          metadata?: Json | null
+          metric_type: string
+          metric_unit?: string | null
+          metric_value: number
+          recorded_at?: string
+        }
+        Update: {
+          id?: string
+          metadata?: Json | null
+          metric_type?: string
+          metric_unit?: string | null
+          metric_value?: number
+          recorded_at?: string
+        }
+        Relationships: []
+      }
+      system_logs: {
+        Row: {
+          created_at: string
+          id: string
+          log_type: string
+          message: string
+          metadata: Json | null
+          related_id: string | null
+          related_type: string | null
+          severity: string
+          stack_trace: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          log_type: string
+          message: string
+          metadata?: Json | null
+          related_id?: string | null
+          related_type?: string | null
+          severity: string
+          stack_trace?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          log_type?: string
+          message?: string
+          metadata?: Json | null
+          related_id?: string | null
+          related_type?: string | null
+          severity?: string
+          stack_trace?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
