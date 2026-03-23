@@ -90,6 +90,19 @@ h1,h2,h3,h4,p,li{
   overflow-wrap:normal; word-break:normal; white-space:normal;
 }
 
+/* Institutional section containment */
+.section-container {
+  background: hsl(210 20% 97%);
+  border: 1px solid hsl(210 20% 92%);
+  border-radius: 2px;
+  padding: 2rem 2.5rem;
+}
+@media (min-width: 768px) {
+  .section-container {
+    padding: 2.5rem 3rem;
+  }
+}
+
 /* Containers & sections */
 .container{max-width:1200px; margin:0 auto; padding:0 16px;}
 .section{padding:48px 0;}
