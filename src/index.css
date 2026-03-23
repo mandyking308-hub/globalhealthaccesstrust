@@ -289,7 +289,7 @@ a:hover{text-decoration:none;}
 @media (min-width: 900px){
   .hero__overlay { margin-left: clamp(16px, 6vw, 80px); margin-right: auto; }
 }
-.hero__overlay h1, .hero__overlay h2, .hero__overlay p { color: #FFFFFF !important; }
+.hero__overlay h1, .hero__overlay h2, .hero__overlay p { color: #FFFFFF !important; text-align: center !important; }
 .hero__overlay .cta-row, .hero__overlay .button-group {
   display: grid; grid-template-columns: 1fr; gap: 12px;
 }
@@ -945,7 +945,7 @@ a:hover{text-decoration:none;}
 }
 /* Force white text inside hero overlay */
 .hero__overlay h1,.hero__overlay h2,.hero__overlay h3,
-.hero__overlay p,.hero__overlay li{ color:#FFFFFF !important; }
+.hero__overlay p,.hero__overlay li{ color:#FFFFFF !important; text-align:center !important; }
 
 /* High-contrast buttons on dark hero */
 .hero__overlay .btn--primary,.hero__overlay .btn-primary{
