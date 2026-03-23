@@ -405,9 +405,9 @@ a:hover{text-decoration:none;}
   --focus-offset: 2px;
   
   /* Spacing & Layout */
-  --radius: 12px;
-  --radius-lg: 12px;
-  --radius-xl: 24px;
+  --radius: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
   
   /* Shadows - Exact Specifications */
   --shadow-soft: 0 2px 8px rgba(0,0,0,.06);
