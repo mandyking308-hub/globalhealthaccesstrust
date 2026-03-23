@@ -73,15 +73,11 @@ export const SessionManager = () => {
     }
   };
 
-  const getDeviceIcon = (deviceInfo: string) => {
+  const getDeviceLabel = (deviceInfo: string) => {
     const info = deviceInfo?.toLowerCase() || "";
-    if (info.includes("mobile") || info.includes("phone")) {
-      return ;
-    }
-    if (info.includes("tablet") || info.includes("ipad")) {
-      return ;
-    }
-    return ;
+    if (info.includes("mobile") || info.includes("phone")) return "Mobile";
+    if (info.includes("tablet") || info.includes("ipad")) return "Tablet";
+    return "Desktop";
   };
 
   const formatDate = (dateString: string) => {
@@ -121,9 +117,9 @@ export const SessionManager = () => {
             <Card key={session.id}>
               <CardContent className="flex items-center justify-between py-4">
                 <div className="flex items-center gap-4">
-                  <div className="text-muted-foreground">
-                    {getDeviceIcon(session.device_info)}
-                  </div>
+                  <span className="text-xs font-medium text-muted-foreground uppercase">
+                    {getDeviceLabel(session.device_info)}
+                  </span>
                   <div>
                     <div className="font-medium">
                       {session.device_info || "Unknown Device"}

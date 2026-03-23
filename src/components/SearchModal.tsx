@@ -90,11 +90,11 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     setResults([...pageResults, ...blogResults, ...docResults].slice(0, 8));
   }, [query]);
 
-  const getIcon = (type: string) => {
+  const getTypeLabel = (type: string) => {
     switch (type) {
-      case 'blog': return ;
-      case 'document': return ;
-      default: return ;
+      case 'blog': return 'Blog';
+      case 'document': return 'Doc';
+      default: return 'Page';
     }
   };
 
@@ -145,7 +145,7 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex items-start space-x-3 flex-1">
-                        <div className="mt-1">{getIcon(result.type)}</div>
+                        <span className="mt-1 text-xs font-medium text-muted-foreground uppercase">{getTypeLabel(result.type)}</span>
                         <div className="flex-1 min-w-0">
                           <h3 className="font-medium text-sm line-clamp-1">{result.title}</h3>
                           <p className="text-xs text-muted-foreground line-clamp-2 mt-1">

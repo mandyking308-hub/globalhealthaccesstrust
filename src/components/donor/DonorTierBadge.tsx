@@ -7,21 +7,6 @@ interface DonorTierBadgeProps {
 }
 
 export const DonorTierBadge = ({ tierName, totalDonated, className }: DonorTierBadgeProps) => {
-  const getTierIcon = () => {
-    switch (tierName) {
-      case "Visionary Donor":
-        return ;
-      case "Legacy Builder":
-        return ;
-      case "Strategic Partner":
-        return ;
-      case "Founding Supporter":
-        return ;
-      default:
-        return ;
-    }
-  };
-
   const getTierVariant = () => {
     switch (tierName) {
       case "Visionary Donor":
@@ -37,8 +22,7 @@ export const DonorTierBadge = ({ tierName, totalDonated, className }: DonorTierB
 
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <Badge variant={getTierVariant()} className="w-fit flex items-center gap-2">
-        
+      <Badge variant={getTierVariant()} className="w-fit">
         {tierName}
       </Badge>
       <p className="text-sm text-muted-foreground">
