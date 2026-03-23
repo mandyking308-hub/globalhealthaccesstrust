@@ -1,19 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
 import {
-  LayoutDashboard,
-  Users,
-  UserCheck,
-  FolderKanban,
-  FileCheck,
-  MessageSquare,
-  Brain,
-  Settings,
-  Shield,
-  BookOpen,
-  Presentation,
-  Activity,
-} from "lucide-react";
-import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
@@ -27,22 +13,22 @@ import {
 } from "@/components/ui/sidebar";
 
 const menuItems = [
-  { title: "Dashboard", url: "/admin/dashboard", icon: LayoutDashboard },
-  { title: "Donors", url: "/admin/donors", icon: Users },
-  { title: "Volunteers", url: "/admin/volunteers", icon: UserCheck },
-  { title: "Projects", url: "/admin/projects", icon: FolderKanban },
-  { title: "Evidence", url: "/admin/evidence", icon: FileCheck },
-  { title: "Messages", url: "/admin/messages", icon: MessageSquare },
-  { title: "AI Panel", url: "/admin/ai", icon: Brain },
-  { title: "Presentations", url: "/admin/presentations", icon: Presentation },
-  { title: "System Health", url: "/admin/system-health", icon: Activity },
-  { title: "Documentation", url: "/admin/documentation", icon: BookOpen },
-  { title: "Security", url: "/admin/security", icon: Shield },
-  { title: "GDPR", url: "/admin/gdpr", icon: Shield },
-  { title: "Branding", url: "/admin/branding", icon: Settings },
-  { title: "Testing", url: "/admin/testing", icon: Settings },
-  { title: "Launch Prep", url: "/admin/launch-checklist", icon: Settings },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Dashboard", url: "/admin/dashboard" },
+  { title: "Donors", url: "/admin/donors" },
+  { title: "Volunteers", url: "/admin/volunteers" },
+  { title: "Projects", url: "/admin/projects" },
+  { title: "Evidence", url: "/admin/evidence" },
+  { title: "Messages", url: "/admin/messages" },
+  { title: "AI Panel", url: "/admin/ai" },
+  { title: "Presentations", url: "/admin/presentations" },
+  { title: "System Health", url: "/admin/system-health" },
+  { title: "Documentation", url: "/admin/documentation" },
+  { title: "Security", url: "/admin/security" },
+  { title: "GDPR", url: "/admin/gdpr" },
+  { title: "Branding", url: "/admin/branding" },
+  { title: "Testing", url: "/admin/testing" },
+  { title: "Launch Prep", url: "/admin/launch-checklist" },
+  { title: "Settings", url: "/admin/settings" },
 ];
 
 export const AdminSidebar = () => {
@@ -57,7 +43,7 @@ export const AdminSidebar = () => {
       className={isCollapsed ? "w-14" : "w-60"}
       collapsible="icon"
       style={{
-        backgroundColor: "hsl(219, 71%, 9%)", // Deep Navy #05152F
+        backgroundColor: "hsl(219, 71%, 9%)",
       }}
     >
       <div className="p-4 border-b border-white/10">
@@ -90,8 +76,7 @@ export const AdminSidebar = () => {
                     `}
                   >
                     <Link to={item.url}>
-                      <item.icon className={`${isCollapsed ? "" : "mr-3"} h-5 w-5`} />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
