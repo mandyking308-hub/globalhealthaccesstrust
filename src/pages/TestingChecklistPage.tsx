@@ -119,18 +119,8 @@ export const TestingChecklistPage = () => {
     );
   };
 
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case "mobile": return ;
-      case "tablet": return ;
-      case "desktop": return ;
-      case "upload": return ;
-      case "forms": return ;
-      case "navigation": return ;
-      case "ai": return ;
-      case "permissions": return ;
-      default: return ;
-    }
+  const getCategoryLabel = (category: string) => {
+    return <span className="text-xs font-medium text-muted-foreground uppercase">{category}</span>;
   };
 
   const getCategoryProgress = (category: string) => {
