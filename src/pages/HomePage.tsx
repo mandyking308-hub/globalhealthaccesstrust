@@ -129,6 +129,7 @@ export const HomePage = () => {
                   src={clinicImage} 
                   alt="Primary healthcare clinic interior with medical equipment in a rural setting"
                   className="w-full h-48 object-cover"
+                  loading="lazy"
                 />
                 <div className="p-5">
                   <p className="text-sm font-medium text-foreground">Primary Healthcare</p>
@@ -139,6 +140,7 @@ export const HomePage = () => {
                   src={systemsImage} 
                   alt="Aerial view of river delta and agricultural systems with settlements"
                   className="w-full h-48 object-cover"
+                  loading="lazy"
                 />
                 <div className="p-5">
                   <p className="text-sm font-medium text-foreground">Systems Infrastructure</p>
@@ -149,6 +151,7 @@ export const HomePage = () => {
                   src={ruralImage} 
                   alt="Rural landscape with scattered settlements and green hillside terrain"
                   className="w-full h-48 object-cover"
+                  loading="lazy"
                 />
                 <div className="p-5">
                   <p className="text-sm font-medium text-foreground">Rural Access</p>

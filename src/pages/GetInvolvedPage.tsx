@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { SEO } from "@/components/SEO";
 
 export const GetInvolvedPage = () => {
   const [newsletterForm, setNewsletterForm] = useState({
@@ -26,7 +27,13 @@ export const GetInvolvedPage = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <>
+      <SEO
+        title="Get Involved"
+        description="Volunteer, donate, or partner with the Global Health Access Trust to advance healthcare access for vulnerable and underserved populations worldwide."
+        canonical="/get-involved"
+      />
+      <div className="flex flex-col">
       {/* Hero */}
       <section className="py-16 bg-gradient-to-br from-primary/5 to-gold/5">
         <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
@@ -225,5 +232,6 @@ export const GetInvolvedPage = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };

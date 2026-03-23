@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Helmet } from "react-helmet-async";
 
 interface Document {
   id: string;
@@ -75,6 +76,7 @@ export const PublicationsPage = () => {
 
   return (
     <div className="py-16">
+      <Helmet><title>Publications & Documents | Global Health Access Trust</title><meta name="description" content="Access official publications, governance documents, annual reports, and policy statements from the Global Health Access Trust." /><link rel="canonical" href="https://globalhealthaccesstrust.org/publications" /></Helmet>
       <div className="container-section">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">

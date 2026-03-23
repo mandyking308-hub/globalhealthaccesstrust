@@ -6,6 +6,7 @@ interface SEOProps {
   canonical?: string;
   image?: string;
   type?: "website" | "article";
+  noindex?: boolean;
   article?: {
     author?: string;
     publishedTime?: string;
@@ -22,6 +23,7 @@ export const SEO = ({
   canonical, 
   image = "/ghat-logo.png",
   type = "website",
+  noindex = false,
   article,
   schema 
 }: SEOProps) => {
@@ -37,8 +39,13 @@ export const SEO = ({
       <meta name="description" content={description} />
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       
-      {/* Basic SEO directives */}
-      <meta name="robots" content="index, follow" />
+      {/* SEO directives */}
+      <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+      
+      {/* Security Headers */}
+      <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+      <meta httpEquiv="X-Frame-Options" content="DENY" />
+      <meta name="referrer" content="strict-origin-when-cross-origin" />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />

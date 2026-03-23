@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useOnboarding } from "@/hooks/useOnboarding";
@@ -124,6 +125,7 @@ export const DonorDashboardPage = () => {
       )}
       
       <div className="min-h-screen bg-gradient-to-br from-primary/5 to-accent/10">
+      <Helmet><title>Donor Dashboard | Global Health Access Trust</title><meta name="robots" content="noindex, nofollow" /></Helmet>
       <header className="bg-background border-b">
         <div className="container-section py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">

@@ -1,8 +1,14 @@
 import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
 export const HowWeWorkPage = () => {
   return (
     <ContentLayout>
+      <SEO
+        title="How We Work"
+        description="Learn about the operational methodology of the Global Health Access Trust — disciplined, legally compliant, and high-impact charitable activity."
+        canonical="/how-we-work"
+      />
       <h1>How We Work</h1>
       
       <p className="text-lg italic mb-8">"Our method is measured. Our purpose is enduring."</p>

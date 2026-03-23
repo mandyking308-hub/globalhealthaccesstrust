@@ -1,8 +1,14 @@
 import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
 export const ContactTheTrustPage = () => {
   return (
     <ContentLayout>
+      <SEO
+        title="Contact the Trust"
+        description="Contact the Global Health Access Trust for general, legacy, legal, or partnership enquiries. All communication handled with discretion and GDPR compliance."
+        canonical="/contact-the-trust"
+      />
       <h1>Contact the Trust</h1>
       
       <p className="text-lg italic mb-8">Discreet. Professional. Accountable.</p>

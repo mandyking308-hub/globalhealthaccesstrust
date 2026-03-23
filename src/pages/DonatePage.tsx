@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
+import { Helmet } from "react-helmet-async";
 
 interface FormData {
   name: string;
@@ -33,6 +34,7 @@ export const DonatePage = () => {
 
   return (
     <div className="flex flex-col">
+      <Helmet><title>Donate | Global Health Access Trust</title><meta name="description" content="Partner with the Global Health Access Trust to transform access to healthcare for vulnerable populations worldwide." /><link rel="canonical" href="https://globalhealthaccesstrust.org/donate" /></Helmet>
       {/* Hero Section */}
       <section className="py-20 md:py-32 bg-gradient-to-br from-primary/5 to-accent/10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

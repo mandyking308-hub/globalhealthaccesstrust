@@ -1,8 +1,14 @@
 import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
 export const GovernanceLegalFrameworkPage = () => {
   return (
     <ContentLayout>
+      <SEO
+        title="Governance & Legal Framework"
+        description="Legal status, regulatory compliance, and governance framework of the Global Health Access Trust, a charitable trust under English and Welsh law."
+        canonical="/governance-legal-framework"
+      />
       <h1>Governance & Legal Framework</h1>
       
       <p className="text-lg italic mb-8">"Governance is not a formality—it is a responsibility owed to the public."</p>

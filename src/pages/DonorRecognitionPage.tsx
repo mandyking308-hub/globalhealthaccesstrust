@@ -1,8 +1,14 @@
 import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
 export const DonorRecognitionPage = () => {
   return (
     <ContentLayout>
+      <SEO
+        title="Donor Recognition"
+        description="Recognising the generosity and vision of those who support the Global Health Access Trust's mission to advance healthcare access worldwide."
+        canonical="/donor-recognition"
+      />
       <h1>Donor Recognition</h1>
       
       <p className="text-lg italic mb-8">"True generosity is not about acknowledgment—it is about legacy."</p>

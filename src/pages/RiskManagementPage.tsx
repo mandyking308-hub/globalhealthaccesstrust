@@ -1,7 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 export const RiskManagementPage = () => (
-  <div className="py-16">
+  <>
+    <SEO
+      title="Risk Management"
+      description="Risk management framework of the Global Health Access Trust, covering identification, assessment, and mitigation of organisational and operational risks."
+      canonical="/risk-management"
+    />
+    <div className="py-16">
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-left mb-12">
@@ -153,5 +160,6 @@ export const RiskManagementPage = () => (
         </div>
       </div>
     </div>
-  </div>
+    </div>
+  </>
 );

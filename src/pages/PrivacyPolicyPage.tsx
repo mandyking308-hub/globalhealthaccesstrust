@@ -1,8 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 export const PrivacyPolicyPage = () => {
   return (
-    <div className="py-16">
+    <>
+      <SEO
+        title="Privacy Policy"
+        description="Privacy Policy of the Global Health Access Trust. How we collect, use, store, and protect your personal data under UK GDPR."
+        canonical="/privacy-policy"
+      />
+      <div className="py-16">
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
@@ -218,5 +225,6 @@ export const PrivacyPolicyPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

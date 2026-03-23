@@ -1,8 +1,14 @@
 import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
 export const FrequentlyAskedQuestionsPage = () => {
   return (
     <ContentLayout>
+      <SEO
+        title="Frequently Asked Questions"
+        description="Common questions about the Global Health Access Trust — our mission, governance, how to donate, volunteer, and support global healthcare access."
+        canonical="/frequently-asked-questions"
+      />
       <h1>Frequently Asked Questions</h1>
       
       <p className="text-lg italic mb-8">"Clarity of purpose demands clarity of communication."</p>
