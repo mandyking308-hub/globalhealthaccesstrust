@@ -1,4 +1,3 @@
-import { Shield, Mail, Lock, Calendar } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const PrivacyPolicyPage = () => {
@@ -7,7 +6,7 @@ export const PrivacyPolicyPage = () => {
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
-            <Shield className="w-12 h-12 text-primary mr-4 mt-2" />
+            
             <div>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 Privacy Policy
@@ -24,7 +23,7 @@ export const PrivacyPolicyPage = () => {
           <Card className="card-professional">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Lock className="w-5 h-5 mr-2" />
+                
                 Data Controller
               </CardTitle>
             </CardHeader>
@@ -120,7 +119,7 @@ export const PrivacyPolicyPage = () => {
               
               <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
                 <h4 className="font-semibold mb-2 flex items-center">
-                  <Mail className="w-4 h-4 mr-2" />
+                  
                   How to Exercise Your Rights
                 </h4>
                 <p className="text-sm">

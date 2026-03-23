@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
-import { Heart, Users, Briefcase, Loader2, Upload, CheckCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import educationTrainingHero from "@/assets/education-training-hero.jpg";
 
 export const VolunteersPage = () => {
@@ -174,7 +174,7 @@ export const VolunteersPage = () => {
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
                 <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8">
                   <div className="w-14 h-14 sm:w-16 sm:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                    <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-accent" />
+                    
                   </div>
                   <h3 className="font-serif text-lg sm:text-xl font-bold mb-2 sm:mb-3">Meaningful Impact</h3>
                   <p className="text-sm sm:text-base text-muted-foreground">
@@ -186,7 +186,7 @@ export const VolunteersPage = () => {
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
                 <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8">
                   <div className="w-14 h-14 sm:w-16 sm:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                    <Briefcase className="w-7 h-7 sm:w-8 sm:h-8 text-accent" />
+                    
                   </div>
                   <h3 className="font-serif text-lg sm:text-xl font-bold mb-2 sm:mb-3">Flexible Roles</h3>
                   <p className="text-sm sm:text-base text-muted-foreground">
@@ -198,7 +198,7 @@ export const VolunteersPage = () => {
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
                 <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8">
                   <div className="w-14 h-14 sm:w-16 sm:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                    <Users className="w-7 h-7 sm:w-8 sm:h-8 text-accent" />
+                    
                   </div>
                   <h3 className="font-serif text-lg sm:text-xl font-bold mb-2 sm:mb-3">Full Support</h3>
                   <p className="text-sm sm:text-base text-muted-foreground">
@@ -317,7 +317,7 @@ export const VolunteersPage = () => {
                       />
                       {cvFile && (
                         <div className="flex items-center gap-2 text-sm text-green-600">
-                          <CheckCircle className="w-4 h-4" />
+                          
                           <span>{cvFile.name}</span>
                         </div>
                       )}
@@ -361,7 +361,7 @@ export const VolunteersPage = () => {
                       </>
                     ) : (
                       <>
-                        <Upload className="mr-2 h-4 w-4" />
+                        
                         Submit Application
                       </>
                     )}

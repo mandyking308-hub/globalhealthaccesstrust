@@ -6,20 +6,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SEO } from "@/components/SEO";
-import { 
-  CheckCircle2, 
-  Circle, 
-  Smartphone, 
-  Tablet, 
-  Monitor, 
-  Upload, 
-  FileText, 
-  Navigation, 
-  Bot,
-  Shield,
-  AlertTriangle
-} from "lucide-react";
-
 interface TestItem {
   id: string;
   category: string;
@@ -135,15 +121,15 @@ export const TestingChecklistPage = () => {
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case "mobile": return <Smartphone className="w-5 h-5" />;
-      case "tablet": return <Tablet className="w-5 h-5" />;
-      case "desktop": return <Monitor className="w-5 h-5" />;
-      case "upload": return <Upload className="w-5 h-5" />;
-      case "forms": return <FileText className="w-5 h-5" />;
-      case "navigation": return <Navigation className="w-5 h-5" />;
-      case "ai": return <Bot className="w-5 h-5" />;
-      case "permissions": return <Shield className="w-5 h-5" />;
-      default: return <Circle className="w-5 h-5" />;
+      case "mobile": return ;
+      case "tablet": return ;
+      case "desktop": return ;
+      case "upload": return ;
+      case "forms": return ;
+      case "navigation": return ;
+      case "ai": return ;
+      case "permissions": return ;
+      default: return ;
     }
   };
 
@@ -279,7 +265,7 @@ export const TestingChecklistPage = () => {
                             {item.label}
                           </label>
                           {item.checked && (
-                            <CheckCircle2 className="w-4 h-4 text-green-600" />
+                            <span className="text-xs text-green-600 font-medium">✓</span>
                           )}
                         </div>
                       ))}
@@ -294,7 +280,7 @@ export const TestingChecklistPage = () => {
           <Card className="mt-8 border-yellow-200 bg-yellow-50">
             <CardContent className="pt-6">
               <div className="flex gap-3">
-                <AlertTriangle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                
                 <div>
                   <p className="font-semibold text-yellow-900 mb-1">Testing Reminder</p>
                   <p className="text-sm text-yellow-800">

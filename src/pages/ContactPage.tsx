@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Mail, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -70,7 +69,7 @@ export const ContactPage = () => {
       <div className="py-16">
         <div className="container-section">
           <div className="max-w-2xl mx-auto text-center">
-            <CheckCircle className="w-16 h-16 text-success mx-auto mb-6" />
+            
             <h1 className="text-3xl font-serif font-bold mb-4">Message Sent Successfully</h1>
             <p className="text-lg text-muted-foreground mb-8">
               Thank you for contacting the Global Health Access Trust. We have received 
@@ -131,7 +130,7 @@ export const ContactPage = () => {
                 <Card className="card-professional">
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <Mail className="w-5 h-5 text-primary mr-3" />
+                      
                       <h3 className="font-semibold">Contact Form</h3>
                     </div>
                     <div className="space-y-2 text-sm text-muted-foreground">
@@ -151,7 +150,7 @@ export const ContactPage = () => {
                 <Card className="card-professional">
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <MapPin className="w-5 h-5 text-primary mr-3" />
+                      
                       <h3 className="font-semibold">Address</h3>
                     </div>
                     <div className="text-sm text-muted-foreground">
@@ -169,7 +168,7 @@ export const ContactPage = () => {
                 <Card className="card-professional">
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <Clock className="w-5 h-5 text-primary mr-3" />
+                      
                       <h3 className="font-semibold">Response Time</h3>
                     </div>
                     <p className="text-sm text-muted-foreground">
@@ -288,7 +287,7 @@ export const ContactPage = () => {
                         "Sending..."
                       ) : (
                         <>
-                          <Send className="mr-2 w-4 h-4" />
+                          
                           Send Message
                         </>
                       )}

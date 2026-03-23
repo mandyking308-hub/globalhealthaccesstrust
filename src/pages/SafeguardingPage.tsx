@@ -1,4 +1,3 @@
-import { Shield, Users, AlertTriangle, Heart, Phone } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
@@ -8,7 +7,7 @@ export const SafeguardingPage = () => (
       <div className="max-w-4xl mx-auto">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
-            <Shield className="w-12 h-12 text-primary mr-4 mt-2" />
+            
             <div>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 Global Health Access Trust – Safeguarding Policy
@@ -25,7 +24,7 @@ export const SafeguardingPage = () => (
 
         <div className="prose max-w-none text-left space-y-8">
           <Alert className="border-green-200 bg-green-50">
-            <Shield className="w-4 h-4 text-green-600" />
+            
             <AlertDescription className="text-green-800">
               <strong>Zero tolerance</strong> approach to abuse in any form. 
               The welfare of vulnerable individuals is paramount in all our decisions.

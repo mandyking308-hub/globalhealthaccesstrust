@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { ArrowDown, Users, Building, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -50,7 +49,7 @@ export const DonatePage = () => {
               className="px-8 py-4 text-lg rounded-full"
             >
               Start a Conversation
-              <ArrowDown className="ml-2 w-5 h-5" />
+              
             </Button>
           </div>
         </div>
@@ -66,7 +65,7 @@ export const DonatePage = () => {
               <Card className="h-full border-2 hover:border-primary/20 transition-colors">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                    <Users className="w-8 h-8 text-primary" />
+                    
                   </div>
                   <h3 className="text-2xl font-serif font-bold mb-4">Major Gifts & Families</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -79,7 +78,7 @@ export const DonatePage = () => {
               <Card className="h-full border-2 hover:border-primary/20 transition-colors">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                    <Building className="w-8 h-8 text-primary" />
+                    
                   </div>
                   <h3 className="text-2xl font-serif font-bold mb-4">Corporate & Foundations</h3>
                   <p className="text-muted-foreground leading-relaxed">
@@ -92,7 +91,7 @@ export const DonatePage = () => {
               <Card className="h-full border-2 hover:border-primary/20 transition-colors">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                    <Heart className="w-8 h-8 text-primary" />
+                    
                   </div>
                   <h3 className="text-2xl font-serif font-bold mb-4">Legacy Giving</h3>
                   <p className="text-muted-foreground leading-relaxed">

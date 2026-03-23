@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Bot, Send, Minimize2, Loader2 } from "lucide-react";
+import { Minimize2, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -155,7 +155,7 @@ export const AIChatWidget = ({
           )}
           aria-label={`Open ${title}`}
         >
-          {icon || <Bot className="w-5 h-5 sm:w-6 sm:h-6" />}
+          {icon || <span className="text-sm font-semibold">AI</span>}
         </Button>
       </div>
     );
@@ -167,7 +167,7 @@ export const AIChatWidget = ({
         <CardHeader className={cn("pb-3 bg-gradient-to-r", `from-${accentColor}/10 to-${accentColor}/5`)}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              {icon || <Bot className="w-5 h-5 text-accent" />}
+              {icon || <span className="text-sm font-semibold">AI</span>}
               <div>
                 <CardTitle className="text-sm sm:text-base">{title}</CardTitle>
                 {subtitle && <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>}
@@ -188,7 +188,7 @@ export const AIChatWidget = ({
           <ScrollArea className="h-64 sm:h-80 md:h-96 p-3 sm:p-4" ref={scrollRef}>
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground">
-                {icon || <Bot className="w-10 h-10 sm:w-12 sm:h-12 mb-3 opacity-50" />}
+                {icon || <span className="text-base opacity-50">AI</span>}
                 <p className="text-xs sm:text-sm px-4">{subtitle || "How can I assist you today?"}</p>
               </div>
             ) : (
@@ -203,7 +203,7 @@ export const AIChatWidget = ({
                   >
                     {msg.role === "assistant" && (
                       <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                        {icon || <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" />}
+                        {icon || <span className="text-xs">AI</span>}
                       </div>
                     )}
                     <div
@@ -255,7 +255,7 @@ export const AIChatWidget = ({
                 className="flex-shrink-0 min-h-[44px] min-w-[44px]"
                 aria-label="Send message"
               >
-                <Send className="w-4 h-4" />
+                
               </Button>
             </div>
           </form>

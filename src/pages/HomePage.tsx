@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart, Users, Globe, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { IMPACT_STATS, NEW_IMPACT_STATS, PROGRAM_AREAS } from "@/lib/constants";
@@ -43,7 +42,7 @@ export const HomePage = () => {
               <Link to="/auth">
                 <Button size="lg" variant="default" className="min-w-[180px]">
                   Log In / Donate
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  
                 </Button>
               </Link>
               <Link to="/commission-projects">
@@ -66,12 +65,8 @@ export const HomePage = () => {
             
             <div className="impact-grid">
               {NEW_IMPACT_STATS.map((stat, index) => {
-                const IconComponent = getIconComponent(stat.icon);
                 return (
                   <div key={index} className="text-center">
-                    <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4" style={{color: 'var(--c-highlight)'}}>
-                      <IconComponent className="w-8 h-8" />
-                    </div>
                     <p className="text-lg leading-relaxed" style={{color: 'var(--c-text)'}}>
                       {stat.text}
                     </p>
@@ -97,9 +92,6 @@ export const HomePage = () => {
             <div className="grid md:grid-cols-3 gap-8 mb-12">
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
                 <CardContent className="pt-8 pb-8">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Heart className="w-8 h-8 text-accent" />
-                  </div>
                   <h3 className="font-serif text-xl font-bold mb-3">Design Your Project</h3>
                   <p className="text-muted-foreground">
                     Set region, focus area, and intended impact.
@@ -109,9 +101,6 @@ export const HomePage = () => {
 
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
                 <CardContent className="pt-8 pb-8">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <TrendingUp className="w-8 h-8 text-accent" />
-                  </div>
                   <h3 className="font-serif text-xl font-bold mb-3">Track Progress in Real Time</h3>
                   <p className="text-muted-foreground">
                     Milestones, photos, updates, field notes — all inside your secure dashboard.
@@ -121,9 +110,6 @@ export const HomePage = () => {
 
               <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
                 <CardContent className="pt-8 pb-8">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Globe className="w-8 h-8 text-accent" />
-                  </div>
                   <h3 className="font-serif text-xl font-bold mb-3">Complete Visibility</h3>
                   <p className="text-muted-foreground">
                     Every pound allocated with clarity and integrity.
@@ -136,7 +122,7 @@ export const HomePage = () => {
               <Link to="/commission-projects">
                 <Button size="lg" variant="default">
                   Learn More About Commissioned Projects
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  
                 </Button>
               </Link>
             </div>
@@ -241,12 +227,8 @@ export const HomePage = () => {
             
             <div className="pillars-grid">
               {PROGRAM_AREAS.slice(0, 5).map((area, index) => {
-                const IconComponent = getIconComponent(area.icon);
                 return (
                   <div key={area.id} className="card">
-                    <div className="w-10 h-10 flex items-center justify-center mb-3" style={{color: 'var(--c-highlight)'}}>
-                      <IconComponent className="w-8 h-8" />
-                    </div>
                     <div className="card__divider"></div>
                     <h3 className="card__title pillar__title text-xl font-semibold mb-3">
                       {area.title}
@@ -263,7 +245,7 @@ export const HomePage = () => {
               <Link to="/what-we-do">
                 <button className="btn--secondary">
                   Learn More About Our Healthcare Programs
-                  <ArrowRight className="ml-2 w-4 h-4" />
+                  
                 </button>
               </Link>
             </div>
@@ -275,14 +257,3 @@ export const HomePage = () => {
   );
 };
 
-// Helper function to get icon components
-const getIconComponent = (iconName: string) => {
-  const icons = {
-    Heart,
-    Users,
-    Globe,
-    TrendingUp,
-    ArrowRight
-  };
-  return icons[iconName as keyof typeof icons] || Heart;
-};

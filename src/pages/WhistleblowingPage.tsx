@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Lock, Eye, Phone } from "lucide-react";
 
 export const WhistleblowingPage = () => {
   return (
@@ -7,7 +6,7 @@ export const WhistleblowingPage = () => {
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
-            <Shield className="w-12 h-12 text-primary mr-4 mt-2" />
+            
             <div>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 Whistleblowing Policy
@@ -66,7 +65,7 @@ export const WhistleblowingPage = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                  <Shield className="w-6 h-6 mr-3 text-primary" />
+                  
                   Protection for Whistleblowers
                 </h2>
                 <p>The Trust provides comprehensive protection for genuine whistleblowers:</p>
@@ -82,7 +81,7 @@ export const WhistleblowingPage = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                  <Lock className="w-6 h-6 mr-3 text-primary" />
+                  
                   Confidential Reporting Procedures
                 </h2>
                 <div className="space-y-4">
@@ -181,7 +180,7 @@ export const WhistleblowingPage = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                  <Eye className="w-6 h-6 mr-3 text-primary" />
+                  
                   Monitoring and Review
                 </h2>
                 <p>
@@ -197,7 +196,7 @@ export const WhistleblowingPage = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                  <Phone className="w-6 h-6 mr-3 text-primary" />
+                  
                   Reporting Contacts
                 </h2>
                 <div className="bg-muted/30 p-4 rounded-lg space-y-2">

@@ -8,7 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Shield, LogIn, UserPlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -145,7 +144,7 @@ export const AuthPage = () => {
       <main className="flex-grow flex items-center justify-center bg-gradient-to-br from-primary/5 to-accent/10 py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <Shield className="w-12 h-12 sm:w-16 sm:h-16 text-primary mx-auto mb-4" />
+            
             <h1 className="text-2xl sm:text-3xl font-serif font-bold mb-2">Global Health Access Trust</h1>
             <p className="text-sm sm:text-base text-muted-foreground">Secure Donor Portal</p>
           </div>
@@ -160,7 +159,7 @@ export const AuthPage = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <LogIn className="w-5 h-5" />
+                  
                   Login
                 </CardTitle>
                 <CardDescription>
@@ -213,7 +212,7 @@ export const AuthPage = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <UserPlus className="w-5 h-5" />
+                  
                   Create Account
                 </CardTitle>
                 <CardDescription>

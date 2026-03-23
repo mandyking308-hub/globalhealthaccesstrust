@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { RotateCcw } from "lucide-react";
 import { useOnboarding } from "@/hooks/useOnboarding";
 
 export const AdminOnboardingSettingsPage = () => {
@@ -30,7 +29,7 @@ export const AdminOnboardingSettingsPage = () => {
             onClick={resetOnboarding}
             className="gap-2"
           >
-            <RotateCcw className="w-4 h-4" />
+            
             Replay Admin Tour
           </Button>
         </div>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Heart, Users, Mail, FileText, ArrowRight, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -67,7 +66,7 @@ export const GetInvolvedPage = () => {
             <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-gold/20 transition-colors">
-                  <Heart className="w-8 h-8 text-gold" />
+                  
                 </div>
                 <h3 className="text-xl font-semibold mb-4">Partner With Us</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -77,7 +76,7 @@ export const GetInvolvedPage = () => {
                 <Link to="/donate">
                   <Button size="lg" className="w-full">
                     Partner With Us
-                    <ArrowRight className="ml-2 w-4 h-4" />
+                    
                   </Button>
                 </Link>
               </CardContent>
@@ -87,7 +86,7 @@ export const GetInvolvedPage = () => {
             <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
-                  <Users className="w-8 h-8 text-primary" />
+                  
                 </div>
                 <h3 className="text-xl font-semibold mb-4">Become a Partner</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -97,7 +96,7 @@ export const GetInvolvedPage = () => {
                 <Link to="/contact">
                   <Button variant="outline" size="lg" className="w-full">
                     Partner With Us
-                    <Users className="ml-2 w-4 h-4" />
+                    
                   </Button>
                 </Link>
               </CardContent>
@@ -107,7 +106,7 @@ export const GetInvolvedPage = () => {
             <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-colors">
-                  <Mail className="w-8 h-8 text-accent" />
+                  
                 </div>
                 <h3 className="text-xl font-semibold mb-4">Stay Informed</h3>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -118,7 +117,7 @@ export const GetInvolvedPage = () => {
                   document.getElementById('newsletter-section')?.scrollIntoView({ behavior: 'smooth' });
                 }}>
                   Subscribe
-                  <Mail className="ml-2 w-4 h-4" />
+                  
                 </Button>
               </CardContent>
             </Card>
@@ -137,7 +136,7 @@ export const GetInvolvedPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <Card className="card-professional">
                 <CardContent className="p-8">
-                  <FileText className="w-8 h-8 text-primary mb-4" />
+                  
                   <h3 className="text-xl font-semibold mb-4">Healthcare Institutions</h3>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     We welcome partnerships with hospitals, clinics, medical schools, and 
@@ -154,7 +153,7 @@ export const GetInvolvedPage = () => {
 
               <Card className="card-professional">
                 <CardContent className="p-8">
-                  <Users className="w-8 h-8 text-primary mb-4" />
+                  
                   <h3 className="text-xl font-semibold mb-4">Academic & Research</h3>
                   <p className="text-muted-foreground leading-relaxed mb-4">
                     Academic partnerships advance evidence-based policy and practice 
@@ -180,7 +179,7 @@ export const GetInvolvedPage = () => {
             <Card className="card-elevated">
               <CardContent className="p-8">
                 <div className="text-center mb-6">
-                  <Mail className="w-12 h-12 text-primary mx-auto mb-4" />
+                  
                   <h2 className="text-2xl font-serif font-bold mb-2">Stay Informed</h2>
                   <p className="text-muted-foreground">
                     Subscribe to receive updates on our programmes, research findings, 
@@ -191,7 +190,7 @@ export const GetInvolvedPage = () => {
                 {isSubmitted ? (
                   <div className="text-center">
                     <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Send className="w-8 h-8 text-success" />
+                      
                     </div>
                     <h3 className="text-lg font-semibold mb-2">Subscription Confirmed</h3>
                     <p className="text-muted-foreground">
@@ -255,7 +254,7 @@ export const GetInvolvedPage = () => {
                       className="w-full"
                       disabled={!newsletterForm.consent}
                     >
-                      <Mail className="mr-2 w-4 h-4" />
+                      
                       Subscribe to Updates
                     </Button>
                   </form>
@@ -280,7 +279,7 @@ export const GetInvolvedPage = () => {
             <Link to="/contact">
               <Button size="lg" variant="secondary" className="px-8 py-4">
                 Get in Touch
-                <ArrowRight className="ml-2 w-5 h-5" />
+                
               </Button>
             </Link>
             <Link to="/about">

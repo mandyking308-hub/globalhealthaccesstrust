@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search, FileText, BookOpen, File, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -92,9 +92,9 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
 
   const getIcon = (type: string) => {
     switch (type) {
-      case 'blog': return <BookOpen className="w-4 h-4" />;
-      case 'document': return <File className="w-4 h-4" />;
-      default: return <FileText className="w-4 h-4" />;
+      case 'blog': return ;
+      case 'document': return ;
+      default: return ;
     }
   };
 

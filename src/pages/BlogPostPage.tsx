@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, User, Clock, Share2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -29,7 +28,7 @@ export const BlogPostPage = () => {
             <p className="text-muted-foreground mb-8">The article you're looking for doesn't exist or has been moved.</p>
             <Link to="/blog">
               <Button>
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                
                 Back to Articles
               </Button>
             </Link>
@@ -70,7 +69,7 @@ export const BlogPostPage = () => {
             to="/blog" 
             className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            
             Back to Articles
           </Link>
         </nav>
@@ -95,11 +94,11 @@ export const BlogPostPage = () => {
 
           <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground mb-8">
             <div className="flex items-center">
-              <User className="w-4 h-4 mr-2" />
+              
               <span>{post.author}</span>
             </div>
             <div className="flex items-center">
-              <Clock className="w-4 h-4 mr-2" />
+              
               <span>{post.readingTime} min read</span>
             </div>
           </div>
@@ -125,7 +124,7 @@ export const BlogPostPage = () => {
               ))}
             </div>
             <Button variant="outline" size="sm">
-              <Share2 className="w-4 h-4 mr-2" />
+              
               Share Article
             </Button>
           </div>

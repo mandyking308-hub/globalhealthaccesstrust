@@ -1,4 +1,3 @@
-import { Heart, GraduationCap, Building, FileText, AlertTriangle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,17 +9,6 @@ import educationTrainingHero from "@/assets/education-training-hero.jpg";
 import systemsStrengtheningHero from "@/assets/systems-strengthening-hero.jpg";
 import policyResearchHero from "@/assets/policy-research-hero.jpg";
 import emergencyReliefHero from "@/assets/emergency-relief-hero.jpg";
-
-const getIconComponent = (iconName: string) => {
-  const icons = {
-    Heart,
-    GraduationCap, 
-    Building,
-    FileText,
-    AlertTriangle
-  };
-  return icons[iconName as keyof typeof icons] || Heart;
-};
 
 const getHeroImage = (areaId: string) => {
   const images = {
@@ -77,16 +65,12 @@ export const WhatWeDoPage = () => {
           {/* Program Areas */}
           <div className="space-y-16">
             {PROGRAM_AREAS.map((area, index) => {
-              const IconComponent = getIconComponent(area.icon);
               const heroImage = getHeroImage(area.id);
               return (
                 <div key={area.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                   {/* Content Section */}
                   <div className={`order-2 lg:order-${index % 2 === 1 ? '2' : '1'}`}>
                     <div className="flex items-center mb-6">
-                      <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
-                        <IconComponent className="w-8 h-8 text-gold" />
-                      </div>
                       <div>
                         <div className="text-sm font-medium text-gold mb-1">
                           {['I', 'II', 'III', 'IV', 'V'][index]}
@@ -188,7 +172,7 @@ export const WhatWeDoPage = () => {
               <Link to="/get-involved">
                 <Button size="lg" variant="default">
                   Support Our Mission
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  
                 </Button>
               </Link>
             </div>

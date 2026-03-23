@@ -1,4 +1,4 @@
-import { AlertTriangle, Home, ArrowLeft, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,7 +11,7 @@ export const ServerErrorPage = () => {
           <Card className="card-elevated">
             <CardContent className="p-12">
               <div className="w-20 h-20 bg-danger/10 rounded-full flex items-center justify-center mx-auto mb-8">
-                <AlertTriangle className="w-10 h-10 text-danger" />
+                
               </div>
               
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
@@ -55,7 +55,7 @@ export const ServerErrorPage = () => {
                 
                 <Link to="/">
                   <Button variant="outline" size="lg">
-                    <Home className="mr-2 w-4 h-4" />
+                    
                     Go Home
                   </Button>
                 </Link>

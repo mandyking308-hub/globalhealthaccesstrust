@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Activity, Lock, AlertTriangle } from "lucide-react";
 import { AuditLogViewer } from "@/components/admin/AuditLogViewer";
 import { SessionManager } from "@/components/security/SessionManager";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -17,15 +16,15 @@ export const AdminSecurityPage = () => {
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
           <TabsTrigger value="overview">
-            <Shield className="h-4 w-4 mr-2" />
+            
             Overview
           </TabsTrigger>
           <TabsTrigger value="audit">
-            <Activity className="h-4 w-4 mr-2" />
+            
             Audit Logs
           </TabsTrigger>
           <TabsTrigger value="sessions">
-            <Lock className="h-4 w-4 mr-2" />
+            
             Active Sessions
           </TabsTrigger>
         </TabsList>
@@ -136,7 +135,7 @@ export const AdminSecurityPage = () => {
                 </div>
               </div>
               <Alert className="mt-4">
-                <AlertTriangle className="h-4 w-4" />
+                
                 <AlertDescription>
                   All uploads are validated for file type, scanned, and stored with encryption
                 </AlertDescription>

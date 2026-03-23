@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search, FileText, Download, Edit } from "lucide-react";
+import { Search } from "lucide-react";
 import { toast } from "sonner";
 
 const categories = [
@@ -52,7 +52,7 @@ export const AdminDocumentationPage = () => {
       </div>
       <div className="flex-1 flex items-center justify-center">
         <div className="text-center text-muted-foreground">
-          <FileText className="h-16 w-16 mx-auto mb-4 opacity-50" />
+          
           <p>Documentation will load after migration approval</p>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Upload, X, CheckCircle, AlertCircle, Image, Video, FileText } from "lucide-react";
+import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { validateFile, FILE_UPLOAD_LIMITS } from "@/lib/security";
 
@@ -145,9 +145,9 @@ export const EvidenceUploadZone = ({
   };
 
   const getFileIcon = (file: File) => {
-    if (file.type.startsWith("image/")) return <Image className="h-5 w-5" />;
-    if (file.type.startsWith("video/")) return <Video className="h-5 w-5" />;
-    return <FileText className="h-5 w-5" />;
+    if (file.type.startsWith("image/")) return <span>IMG</span>;
+    if (file.type.startsWith("video/")) return <span>VID</span>;
+    return <span>DOC</span>;
   };
 
   const formatFileSize = (bytes: number) => {
@@ -182,7 +182,7 @@ export const EvidenceUploadZone = ({
             disabled={uploading}
           />
           <label htmlFor="file-upload" className="cursor-pointer">
-            <Upload className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+            
             <div className="space-y-2">
               <p className="text-lg font-medium">
                 {isDragging ? "Drop files here" : "Drag & drop files here, or click to select"}
@@ -235,11 +235,11 @@ export const EvidenceUploadZone = ({
                     {/* Status */}
                     <div className="flex items-center gap-2 flex-shrink-0">
                       {uploadedFile.status === "success" && (
-                        <CheckCircle className="h-5 w-5 text-green-600" />
+                        <span className="text-sm text-green-600 font-medium">✓</span>
                       )}
                       {uploadedFile.status === "error" && (
                         <>
-                          <AlertCircle className="h-5 w-5 text-destructive" />
+                          <span className="text-sm text-destructive font-medium">✗</span>
                           <Button
                             size="sm"
                             variant="outline"

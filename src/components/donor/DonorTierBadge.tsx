@@ -1,5 +1,4 @@
 import { Badge } from "@/components/ui/badge";
-import { Crown, Star, Gem, Award, Sparkles } from "lucide-react";
 
 interface DonorTierBadgeProps {
   tierName: string;
@@ -11,15 +10,15 @@ export const DonorTierBadge = ({ tierName, totalDonated, className }: DonorTierB
   const getTierIcon = () => {
     switch (tierName) {
       case "Visionary Donor":
-        return <Crown className="w-4 h-4" />;
+        return ;
       case "Legacy Builder":
-        return <Gem className="w-4 h-4" />;
+        return ;
       case "Strategic Partner":
-        return <Star className="w-4 h-4" />;
+        return ;
       case "Founding Supporter":
-        return <Award className="w-4 h-4" />;
+        return ;
       default:
-        return <Sparkles className="w-4 h-4" />;
+        return ;
     }
   };
 
@@ -39,7 +38,7 @@ export const DonorTierBadge = ({ tierName, totalDonated, className }: DonorTierB
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       <Badge variant={getTierVariant()} className="w-fit flex items-center gap-2">
-        {getTierIcon()}
+        
         {tierName}
       </Badge>
       <p className="text-sm text-muted-foreground">

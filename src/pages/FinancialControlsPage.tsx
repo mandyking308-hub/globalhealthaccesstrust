@@ -1,5 +1,4 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Shield } from "lucide-react";
 
 export const FinancialControlsPage = () => (
   <div className="py-16">
@@ -7,7 +6,7 @@ export const FinancialControlsPage = () => (
       <div className="max-w-4xl mx-auto">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
-            <Shield className="w-12 h-12 text-primary mr-4 mt-2" />
+            
             <div>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 Global Health Access Trust – Financial Controls Policy

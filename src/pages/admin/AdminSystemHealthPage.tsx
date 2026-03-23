@@ -4,10 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Activity, AlertTriangle, CheckCircle, Database, HardDrive,
-  Clock, TrendingUp, Shield, Bell, FileText, Zap
-} from "lucide-react";
 import { toast } from "sonner";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 
@@ -132,8 +128,8 @@ export const AdminSystemHealthPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card className="p-6">
             <div className="flex items-center justify-between mb-2">
-              <Activity className="h-8 w-8 text-[hsl(var(--gold))]" />
-              <CheckCircle className={`h-5 w-5 ${getStatusColor(apiUptime24h, { good: 99, warning: 95 })}`} />
+              
+              
             </div>
             <h3 className="text-sm text-muted-foreground">API Uptime (24h)</h3>
             <p className="text-2xl font-bold text-foreground">{getMetricValue('api_uptime_24h')}</p>
@@ -141,8 +137,8 @@ export const AdminSystemHealthPage = () => {
 
           <Card className="p-6">
             <div className="flex items-center justify-between mb-2">
-              <Clock className="h-8 w-8 text-[hsl(var(--gold))]" />
-              <CheckCircle className="h-5 w-5 text-green-600" />
+              
+              
             </div>
             <h3 className="text-sm text-muted-foreground">Page Load Speed</h3>
             <p className="text-2xl font-bold text-foreground">{getMetricValue('page_load_speed')}</p>
@@ -150,8 +146,8 @@ export const AdminSystemHealthPage = () => {
 
           <Card className="p-6">
             <div className="flex items-center justify-between mb-2">
-              <Database className="h-8 w-8 text-[hsl(var(--gold))]" />
-              <CheckCircle className="h-5 w-5 text-green-600" />
+              
+              
             </div>
             <h3 className="text-sm text-muted-foreground">DB Response Time</h3>
             <p className="text-2xl font-bold text-foreground">{getMetricValue('database_response_time')}</p>
@@ -159,8 +155,8 @@ export const AdminSystemHealthPage = () => {
 
           <Card className="p-6">
             <div className="flex items-center justify-between mb-2">
-              <HardDrive className="h-8 w-8 text-[hsl(var(--gold))]" />
-              <CheckCircle className="h-5 w-5 text-green-600" />
+              
+              
             </div>
             <h3 className="text-sm text-muted-foreground">Storage Used</h3>
             <p className="text-2xl font-bold text-foreground">{getMetricValue('storage_used')}</p>
@@ -170,23 +166,23 @@ export const AdminSystemHealthPage = () => {
         <Tabs defaultValue="alerts" className="space-y-6">
           <TabsList>
             <TabsTrigger value="alerts">
-              <Bell className="mr-2 h-4 w-4" />
+              
               Alerts ({alerts.length})
             </TabsTrigger>
             <TabsTrigger value="performance">
-              <TrendingUp className="mr-2 h-4 w-4" />
+              
               Performance
             </TabsTrigger>
             <TabsTrigger value="security">
-              <Shield className="mr-2 h-4 w-4" />
+              
               Security
             </TabsTrigger>
             <TabsTrigger value="logs">
-              <FileText className="mr-2 h-4 w-4" />
+              
               Logs
             </TabsTrigger>
             <TabsTrigger value="ai">
-              <Zap className="mr-2 h-4 w-4" />
+              
               AI Recommendations
             </TabsTrigger>
           </TabsList>
@@ -226,7 +222,7 @@ export const AdminSystemHealthPage = () => {
                 </div>
               ) : (
                 <div className="text-center py-8 text-muted-foreground">
-                  <CheckCircle className="h-12 w-12 mx-auto mb-2 text-green-600" />
+                  
                   <p>No active alerts</p>
                 </div>
               )}
@@ -296,7 +292,7 @@ export const AdminSystemHealthPage = () => {
                       <p className="font-semibold text-foreground">Failed Login Attempts (24h)</p>
                       <p className="text-sm text-muted-foreground">No suspicious activity detected</p>
                     </div>
-                    <CheckCircle className="h-6 w-6 text-green-600" />
+                    
                   </div>
                 </Card>
                 <Card className="p-4 bg-muted/30">
@@ -305,7 +301,7 @@ export const AdminSystemHealthPage = () => {
                       <p className="font-semibold text-foreground">Active IP Bans</p>
                       <p className="text-sm text-muted-foreground">0 addresses currently blocked</p>
                     </div>
-                    <CheckCircle className="h-6 w-6 text-green-600" />
+                    
                   </div>
                 </Card>
                 <Card className="p-4 bg-muted/30">
@@ -314,7 +310,7 @@ export const AdminSystemHealthPage = () => {
                       <p className="font-semibold text-foreground">2FA Status</p>
                       <p className="text-sm text-muted-foreground">87% of admins have 2FA enabled</p>
                     </div>
-                    <AlertTriangle className="h-6 w-6 text-yellow-600" />
+                    
                   </div>
                 </Card>
               </div>
@@ -333,19 +329,19 @@ export const AdminSystemHealthPage = () => {
               </p>
               <div className="space-y-2">
                 <Button variant="outline" className="w-full justify-start">
-                  <FileText className="mr-2 h-4 w-4" />
+                  
                   View Application Logs
                 </Button>
                 <Button variant="outline" className="w-full justify-start">
-                  <AlertTriangle className="mr-2 h-4 w-4" />
+                  
                   View Error Logs
                 </Button>
                 <Button variant="outline" className="w-full justify-start">
-                  <Zap className="mr-2 h-4 w-4" />
+                  
                   View AI Logs
                 </Button>
                 <Button variant="outline" className="w-full justify-start">
-                  <Shield className="mr-2 h-4 w-4" />
+                  
                   View Security Logs
                 </Button>
               </div>
@@ -359,7 +355,7 @@ export const AdminSystemHealthPage = () => {
               <div className="space-y-3">
                 <Card className="p-4 bg-[hsl(var(--gold))]/5 border border-[hsl(var(--gold))]/20">
                   <div className="flex items-start gap-3">
-                    <Zap className="h-5 w-5 text-[hsl(var(--gold))] mt-0.5" />
+                    
                     <div>
                       <p className="font-semibold text-foreground mb-1">Volunteer Follow-Up Recommended</p>
                       <p className="text-sm text-muted-foreground mb-2">
@@ -372,7 +368,7 @@ export const AdminSystemHealthPage = () => {
 
                 <Card className="p-4 bg-[hsl(var(--gold))]/5 border border-[hsl(var(--gold))]/20">
                   <div className="flex items-start gap-3">
-                    <Zap className="h-5 w-5 text-[hsl(var(--gold))] mt-0.5" />
+                    
                     <div>
                       <p className="font-semibold text-foreground mb-1">Donor Update Suggested</p>
                       <p className="text-sm text-muted-foreground mb-2">
@@ -385,7 +381,7 @@ export const AdminSystemHealthPage = () => {
 
                 <Card className="p-4 bg-[hsl(var(--gold))]/5 border border-[hsl(var(--gold))]/20">
                   <div className="flex items-start gap-3">
-                    <Zap className="h-5 w-5 text-[hsl(var(--gold))] mt-0.5" />
+                    
                     <div>
                       <p className="font-semibold text-foreground mb-1">Evidence Review Priority</p>
                       <p className="text-sm text-muted-foreground mb-2">

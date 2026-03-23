@@ -9,7 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { User, LogOut, Briefcase, FolderOpen, MessageSquare, Bot, CheckCircle } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { VolunteerAIWidget } from "@/components/ai/VolunteerAIWidget";
 
@@ -124,7 +123,7 @@ export const VolunteerDashboardPage = () => {
               <p className="text-sm text-muted-foreground">Welcome back, {volunteer.name}!</p>
             </div>
             <Button variant="outline" onClick={handleLogout}>
-              <LogOut className="w-4 h-4 mr-2" />
+              
               Logout
             </Button>
           </div>
@@ -141,12 +140,12 @@ export const VolunteerDashboardPage = () => {
                     View available projects, manage your assignments, and coordinate with the GHAT team.
                   </p>
                   <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
-                    <CheckCircle className="w-3 h-3 mr-1" />
+                    
                     Approved Volunteer
                   </Badge>
                 </div>
                 <div className="flex items-center gap-2 px-6 py-4 bg-accent/10 rounded-lg border border-accent/20">
-                  <Bot className="w-8 h-8 text-accent" />
+                  
                   <div>
                     <p className="text-sm font-semibold">AI Field Support</p>
                     <p className="text-xs text-muted-foreground">Coming Online</p>
@@ -160,27 +159,27 @@ export const VolunteerDashboardPage = () => {
           <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
             <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1">
               <TabsTrigger value="overview" className="text-xs sm:text-sm">
-                <Briefcase className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                
                 <span className="hidden sm:inline">Overview</span>
                 <span className="sm:hidden">Home</span>
               </TabsTrigger>
               <TabsTrigger value="projects" className="text-xs sm:text-sm">
-                <FolderOpen className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                
                 <span className="hidden sm:inline">Available</span>
                 <span className="sm:hidden">Available</span>
               </TabsTrigger>
               <TabsTrigger value="my-projects" className="text-xs sm:text-sm">
-                <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                
                 <span className="hidden sm:inline">My Projects</span>
                 <span className="sm:hidden">Mine</span>
               </TabsTrigger>
               <TabsTrigger value="messages" className="text-xs sm:text-sm">
-                <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                
                 <span className="hidden sm:inline">Messages</span>
                 <span className="sm:hidden">Messages</span>
               </TabsTrigger>
               <TabsTrigger value="profile" className="text-xs sm:text-sm">
-                <User className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                
                 <span className="hidden sm:inline">Profile</span>
                 <span className="sm:hidden">Profile</span>
               </TabsTrigger>
@@ -214,7 +213,7 @@ export const VolunteerDashboardPage = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Bot className="w-4 h-4 text-accent" />
+                      
                       <span>Coming Soon</span>
                     </div>
                   </CardContent>

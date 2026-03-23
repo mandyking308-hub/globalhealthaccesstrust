@@ -1,4 +1,3 @@
-import { Eye, Keyboard, Users, Phone } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const AccessibilityStatementPage = () => {
@@ -7,7 +6,7 @@ export const AccessibilityStatementPage = () => {
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
-            <Eye className="w-12 h-12 text-primary mr-4 mt-2" />
+            
             <div>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 Accessibility Statement
@@ -41,7 +40,7 @@ export const AccessibilityStatementPage = () => {
             <Card className="card-professional">
               <CardHeader>
                 <CardTitle className="flex items-center text-primary">
-                  <Eye className="w-5 h-5 mr-2" />
+                  
                   Visual Accessibility
                 </CardTitle>
               </CardHeader>
@@ -59,7 +58,7 @@ export const AccessibilityStatementPage = () => {
             <Card className="card-professional">
               <CardHeader>
                 <CardTitle className="flex items-center text-primary">
-                  <Keyboard className="w-5 h-5 mr-2" />
+                  
                   Keyboard Navigation
                 </CardTitle>
               </CardHeader>
@@ -168,7 +167,7 @@ export const AccessibilityStatementPage = () => {
           <Card className="card-professional border-primary/20">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Users className="w-5 h-5 mr-2" />
+                
                 Feedback & Support
               </CardTitle>
             </CardHeader>
@@ -180,7 +179,7 @@ export const AccessibilityStatementPage = () => {
               
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <Phone className="w-5 h-5 text-primary mt-1 mr-3" />
+                  
                   <div>
                     <h4 className="font-medium mb-1">Accessibility Support</h4>
                     <p className="text-sm text-muted-foreground">
