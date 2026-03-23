@@ -235,11 +235,11 @@ export const EvidenceUploadZone = ({
                     {/* Status */}
                     <div className="flex items-center gap-2 flex-shrink-0">
                       {uploadedFile.status === "success" && (
-                        
+                        <span className="text-sm text-green-600 font-medium">✓</span>
                       )}
                       {uploadedFile.status === "error" && (
                         <>
-                          
+                          <span className="text-sm text-destructive font-medium">✗</span>
                           <Button
                             size="sm"
                             variant="outline"

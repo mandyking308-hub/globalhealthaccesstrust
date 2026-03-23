@@ -110,9 +110,9 @@ export const MessagesPanel = ({ userId }: MessagesPanelProps) => {
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       {message.status === 'unread' ? (
-                        
+                        <span className="w-2 h-2 bg-primary rounded-full" />
                       ) : (
-                        
+                        <span className="w-2 h-2 bg-muted rounded-full" />
                       )}
                       <p className="font-medium text-sm">{message.subject}</p>
                     </div>
