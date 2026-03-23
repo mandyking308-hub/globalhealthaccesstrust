@@ -1,8 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Helmet } from "react-helmet-async";
 
 export const SafeguardingPage = () => (
   <div className="py-16">
+    <Helmet><title>Safeguarding Policy | Global Health Access Trust</title><meta name="description" content="Safeguarding policy of the Global Health Access Trust, ensuring zero tolerance for abuse and protection of vulnerable individuals." /><link rel="canonical" href="https://globalhealthaccesstrust.org/safeguarding" /><meta name="robots" content="index, follow" /></Helmet>
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-left mb-12">
