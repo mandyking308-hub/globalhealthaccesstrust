@@ -49,7 +49,7 @@ export function validatePassword(password: string): { valid: boolean; errors: st
 const SESSION_TIMEOUT = 45 * 60 * 1000; // 45 minutes
 const SESSION_MAX_AGE = 24 * 60 * 60 * 1000; // 24 hours
 
-let inactivityTimer: NodeJS.Timeout | null = null;
+let inactivityTimer: ReturnType<typeof setTimeout> | null = null;
 
 export function initSessionMonitoring() {
   // Reset timer on user activity
