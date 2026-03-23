@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { PROGRAM_AREAS } from "@/lib/constants";
 
-// Import hero images
 import healthcareAccessHero from "@/assets/healthcare-access-hero.jpg";
 import educationTrainingHero from "@/assets/education-training-hero.jpg";
 import systemsStrengtheningHero from "@/assets/systems-strengthening-hero.jpg";
@@ -11,14 +9,14 @@ import policyResearchHero from "@/assets/policy-research-hero.jpg";
 import emergencyReliefHero from "@/assets/emergency-relief-hero.jpg";
 
 const getHeroImage = (areaId: string) => {
-  const images = {
+  const images: Record<string, string> = {
     "healthcare-access": healthcareAccessHero,
     "education-training": educationTrainingHero,
     "systems-strengthening": systemsStrengtheningHero,
     "policy-research": policyResearchHero,
     "emergency-relief": emergencyReliefHero
   };
-  return images[areaId as keyof typeof images] || healthcareAccessHero;
+  return images[areaId] || healthcareAccessHero;
 };
 
 export const WhatWeDoPage = () => {
@@ -26,25 +24,21 @@ export const WhatWeDoPage = () => {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-br from-primary/5 to-gold/5">
-        <div className="container-section">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
-              What We Fund
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-              The Global Health Access Trust is established for exclusively charitable purposes 
-              in accordance with the laws of England and Wales, specifically the advancement 
-              of health and the preservation of life.
-            </p>
-          </div>
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <h1 className="mb-6">What We Fund</h1>
+          <p className="text-[15px] text-muted-foreground leading-[1.7] max-w-3xl">
+            The Global Health Access Trust is established for exclusively charitable purposes 
+            in accordance with the laws of England and Wales, specifically the advancement 
+            of health and the preservation of life.
+          </p>
         </div>
       </section>
 
-      {/* Funding Mandate */}
+      {/* Funding Mandate Intro */}
       <section className="py-16">
-        <div className="container-section">
-          <div className="max-w-4xl mx-auto prose-professional mb-16">
-            <p className="text-lg text-center">
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="section-container mb-12">
+            <p className="text-[15px] text-muted-foreground leading-[1.7]">
               Funds administered by the Trust shall be applied solely in furtherance of its 
               charitable objectives, with all grant-making, programme activity, and public 
               engagement conducted under the strict supervision of its appointed Trustees, 
@@ -52,76 +46,45 @@ export const WhatWeDoPage = () => {
             </p>
           </div>
           
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              Five Areas of Lawful Intervention
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              The Trust's funding mandate encompasses these areas of equitable, 
-              public-spirited intervention:
-            </p>
-          </div>
-          
-          {/* Program Areas */}
-          <div className="space-y-16">
+          <h2 className="mb-4">Five Areas of Lawful Intervention</h2>
+          <p className="text-[15px] text-muted-foreground mb-10 leading-[1.7] max-w-3xl">
+            The Trust's funding mandate encompasses these areas of equitable, 
+            public-spirited intervention:
+          </p>
+        </div>
+      </section>
+
+      {/* Program Areas — grid of cards with images */}
+      <section className="py-16 bg-muted/30">
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {PROGRAM_AREAS.map((area, index) => {
               const heroImage = getHeroImage(area.id);
               return (
-                <div key={area.id} className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                  {/* Content Section */}
-                  <div className={`order-2 lg:order-${index % 2 === 1 ? '2' : '1'}`}>
-                    <div className="flex items-center mb-6">
-                      <div>
-                        <div className="text-sm font-medium text-gold mb-1">
-                          {['I', 'II', 'III', 'IV', 'V'][index]}
-                        </div>
-                        <h3 className="text-2xl md:text-3xl font-serif font-bold">
-                          {area.title}
-                        </h3>
-                      </div>
+                <div key={area.id} className="section-container !p-0 overflow-hidden">
+                  <img 
+                    src={heroImage} 
+                    alt={`${area.title} - Healthcare illustration`}
+                    className="w-full h-48 object-cover"
+                    loading="lazy"
+                  />
+                  <div className="p-6">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground mb-1">
+                      {['I', 'II', 'III', 'IV', 'V'][index]}
                     </div>
-                    
-                    <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                    <h3 className="mb-3 text-foreground">{area.title}</h3>
+                    <p className="text-[15px] text-muted-foreground leading-[1.7] mb-4">
                       {area.description}
                     </p>
-                    
-                    <div className="mb-8">
-                      <h4 className="font-semibold mb-4">Example Outcomes:</h4>
-                      <ul className="space-y-2">
-                        {area.outcomes.map((outcome, outcomeIndex) => (
-                          <li key={outcomeIndex} className="flex items-start">
-                            <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 flex-shrink-0" />
-                            <span className="text-muted-foreground">{outcome}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  {/* Image Section */}
-                  <div className={`order-1 lg:order-${index % 2 === 1 ? '1' : '2'}`}>
-                    <Card className="card-elevated overflow-hidden w-full">
-                      <CardContent className="p-0">
-                        <div className="aspect-video w-full relative overflow-hidden bg-muted/20">
-                          <img 
-                            src={heroImage} 
-                            alt={`${area.title} - Healthcare illustration`}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                            style={{ minHeight: '240px' }}
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
-                        </div>
-                        <div className="p-6 lg:p-8">
-                          <blockquote className="text-base lg:text-lg font-serif italic text-primary leading-relaxed">
-                            "All activities shall be conducted in compliance with applicable 
-                            health, safety, and regulatory standards, with preference given to 
-                            interventions that are culturally appropriate, legally permitted, 
-                            and professionally governed."
-                          </blockquote>
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <h4 className="text-sm font-medium mb-3 text-foreground">Example Outcomes:</h4>
+                    <ul className="space-y-2">
+                      {area.outcomes.map((outcome, outcomeIndex) => (
+                        <li key={outcomeIndex} className="flex items-start">
+                          <div className="w-1.5 h-1.5 bg-[hsl(var(--gold))] rounded-full mt-2 mr-2.5 flex-shrink-0" />
+                          <span className="text-[13px] text-muted-foreground leading-relaxed">{outcome}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               );
@@ -131,51 +94,42 @@ export const WhatWeDoPage = () => {
       </section>
 
       {/* Governance Standards */}
-      <section className="py-16 bg-muted/30">
-        <div className="container-section">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-8 text-center">
-              Governance and Conditions of Grant-Making
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card className="card-professional">
-                <CardContent className="p-8">
-                  <h3 className="text-xl font-semibold mb-4">Due Diligence</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    All disbursements must be resolved by the Trustees in accordance with the 
-                    governing document of the Trust. Due diligence shall be undertaken for all 
-                    partners and recipients, with reference to AML, counter-terrorism, and 
-                    compliance statutes.
-                  </p>
-                </CardContent>
-              </Card>
-              
-              <Card className="card-professional">
-                <CardContent className="p-8">
-                  <h3 className="text-xl font-semibold mb-4">Public Benefit</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    All expenditures must be proportionate, purpose-driven, and evidentially 
-                    justified. No person may receive private benefit except where clearly 
-                    incidental and legally permitted under Charity Commission guidance.
-                  </p>
-                </CardContent>
-              </Card>
+      <section className="py-16">
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <h2 className="mb-8">Governance and Conditions of Grant-Making</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div className="section-container">
+              <h3 className="mb-3 text-foreground">Due Diligence</h3>
+              <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                All disbursements must be resolved by the Trustees in accordance with the 
+                governing document of the Trust. Due diligence shall be undertaken for all 
+                partners and recipients, with reference to AML, counter-terrorism, and 
+                compliance statutes.
+              </p>
             </div>
             
-            <div className="text-center mt-12">
-              <blockquote className="text-xl font-serif italic text-primary mb-8">
-                "The Trust exists to discharge its public duty with decorum, discretion, 
-                and diligence—never to impress, but always to serve."
-              </blockquote>
-              
-              <Link to="/get-involved">
-                <Button size="lg" variant="default">
-                  Support Our Mission
-                  
-                </Button>
-              </Link>
+            <div className="section-container">
+              <h3 className="mb-3 text-foreground">Public Benefit</h3>
+              <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                All expenditures must be proportionate, purpose-driven, and evidentially 
+                justified. No person may receive private benefit except where clearly 
+                incidental and legally permitted under Charity Commission guidance.
+              </p>
             </div>
+          </div>
+          
+          <div className="section-container">
+            <blockquote className="text-[15px] italic text-primary leading-[1.7] mb-6">
+              "The Trust exists to discharge its public duty with decorum, discretion, 
+              and diligence—never to impress, but always to serve."
+            </blockquote>
+            
+            <Link to="/get-involved">
+              <Button size="lg" variant="default">
+                Support Our Mission
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
