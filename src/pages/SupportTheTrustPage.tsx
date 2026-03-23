@@ -1,8 +1,14 @@
 import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
 export const SupportTheTrustPage = () => {
   return (
     <ContentLayout>
+      <SEO
+        title="Support the Trust"
+        description="Support the Global Health Access Trust through charitable donations, legacy giving, bequests, and institutional partnerships for global healthcare access."
+        canonical="/support-the-trust"
+      />
       <h1>Support the Trust</h1>
       
       <p className="text-lg italic mb-8">"Legacy is not measured by what we leave behind—but by how we uplift others while we are here."</p>

@@ -1,8 +1,14 @@
 import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
 export const OurWorkPage = () => {
   return (
     <ContentLayout>
+      <SEO
+        title="Our Work"
+        description="Explore the five funding pillars of the Global Health Access Trust: ethical healthcare access, capacity building, systems strengthening, research, and emergency relief."
+        canonical="/our-work"
+      />
       <h1>Our Work</h1>
       
       <p className="text-lg italic mb-8">"We do not fund moments. We fund movements."</p>
