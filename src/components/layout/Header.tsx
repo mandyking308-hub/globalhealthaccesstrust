@@ -29,7 +29,7 @@ export const Header = () => {
               className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0 -ml-2"
               aria-label="Global Health Access Trust - Home"
             >
-              <span className="font-serif text-[15px] md:text-[17px] lg:text-[19px] tracking-[0.06em] uppercase text-foreground font-bold italic leading-tight">
+              <span className="font-serif text-[15px] md:text-[17px] lg:text-[19px] tracking-[0.04em] uppercase text-foreground font-medium leading-tight">
                 Global Health Access Trust
               </span>
             </Link>
