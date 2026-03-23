@@ -216,7 +216,7 @@ export const DonorDashboardPage = () => {
               <span className="sm:hidden">Messages</span>
             </TabsTrigger>
             <TabsTrigger value="profile" className="text-xs sm:text-sm">
-              <UserIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               <span className="hidden sm:inline">Profile</span>
               <span className="sm:hidden">Profile</span>
             </TabsTrigger>

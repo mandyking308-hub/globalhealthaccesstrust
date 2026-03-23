@@ -38,7 +38,7 @@ export const DonorTierBadge = ({ tierName, totalDonated, className }: DonorTierB
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       <Badge variant={getTierVariant()} className="w-fit flex items-center gap-2">
-        {getTierIcon()}
+        
         {tierName}
       </Badge>
       <p className="text-sm text-muted-foreground">

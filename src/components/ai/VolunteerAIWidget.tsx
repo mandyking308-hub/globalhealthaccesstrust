@@ -11,8 +11,7 @@ export const VolunteerAIWidget = ({ volunteerId }: VolunteerAIWidgetProps) => {
       subtitle="Your coordination partner in the field"
       endpoint="volunteer-ai-assistant"
       userId={volunteerId}
-      icon={}
-      accentColor="primary"
+            accentColor="primary"
     />
   );
 };

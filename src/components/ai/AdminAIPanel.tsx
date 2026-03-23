@@ -7,8 +7,7 @@ export const AdminAIPanel = () => {
       subtitle="Your intelligent coordination assistant"
       endpoint="admin-ai-assistant"
       userId="admin"
-      icon={}
-      accentColor="primary"
+            accentColor="primary"
       defaultExpanded={false}
     />
   );

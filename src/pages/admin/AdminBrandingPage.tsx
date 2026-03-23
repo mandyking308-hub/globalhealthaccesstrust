@@ -183,7 +183,7 @@ export const AdminBrandingPage = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <ImageIcon className="w-5 h-5 text-[#C2A878]" />
+                <"Img" className="w-5 h-5 text-[#C2A878]" />
                 Hero Images
               </CardTitle>
               <CardDescription>

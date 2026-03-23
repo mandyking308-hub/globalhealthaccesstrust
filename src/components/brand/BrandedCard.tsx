@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 
 interface BrandedCardProps {
   title: string;
-  icon?: LucideIcon;
   children: React.ReactNode;
   className?: string;
   hoverable?: boolean;
@@ -11,7 +10,7 @@ interface BrandedCardProps {
 
 export const BrandedCard = ({ 
   title, 
-  icon: Icon, 
+  : Icon, 
   children, 
   className,
   hoverable = true 
@@ -26,7 +25,7 @@ export const BrandedCard = ({
     >
       <CardHeader className="border-b border-border/50 bg-gradient-to-r from-primary/5 to-accent/5">
         <CardTitle className="flex items-center gap-3 text-foreground">
-          {Icon && <Icon className="w-5 h-5 text-[#C2A878]" strokeWidth={1.5} />}
+          {Icon && }
           <span className="font-serif">{title}</span>
         </CardTitle>
       </CardHeader>

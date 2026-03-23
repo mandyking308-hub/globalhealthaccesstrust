@@ -145,9 +145,9 @@ export const EvidenceUploadZone = ({
   };
 
   const getFileIcon = (file: File) => {
-    if (file.type.startsWith("image/")) return ;
-    if (file.type.startsWith("video/")) return ;
-    return ;
+    if (file.type.startsWith("image/")) return <span>IMG</span>;
+    if (file.type.startsWith("video/")) return <span>VID</span>;
+    return <span>DOC</span>;
   };
 
   const formatFileSize = (bytes: number) => {
