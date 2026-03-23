@@ -73,15 +73,11 @@ export const SessionManager = () => {
     }
   };
 
-  const getDeviceIcon = (deviceInfo: string) => {
+  const getDeviceLabel = (deviceInfo: string) => {
     const info = deviceInfo?.toLowerCase() || "";
-    if (info.includes("mobile") || info.includes("phone")) {
-      return ;
-    }
-    if (info.includes("tablet") || info.includes("ipad")) {
-      return ;
-    }
-    return ;
+    if (info.includes("mobile") || info.includes("phone")) return "Mobile";
+    if (info.includes("tablet") || info.includes("ipad")) return "Tablet";
+    return "Desktop";
   };
 
   const formatDate = (dateString: string) => {
