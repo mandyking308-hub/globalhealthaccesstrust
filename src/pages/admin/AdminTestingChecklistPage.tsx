@@ -166,14 +166,11 @@ export const AdminTestingChecklistPage = () => {
     pending: filteredChecklist.filter(i => i.status === "pending").length,
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIndicator = (status: string) => {
     switch (status) {
-      case "pass":
-        return ;
-      case "fail":
-        return ;
-      default:
-        return ;
+      case "pass": return <span className="text-green-600 font-bold">✓</span>;
+      case "fail": return <span className="text-red-600 font-bold">✗</span>;
+      default: return <span className="text-muted-foreground">○</span>;
     }
   };
 
