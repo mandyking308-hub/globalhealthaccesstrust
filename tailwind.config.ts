@@ -72,8 +72,8 @@ export default {
         },
       },
       fontFamily: {
-        serif: ["Playfair Display", "Georgia", "Times New Roman", "Times", "serif"],
-        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+        serif: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
+        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
       },
       borderRadius: {
         lg: "4px",
