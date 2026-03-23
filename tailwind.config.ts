@@ -76,10 +76,10 @@ export default {
         sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
       },
       borderRadius: {
-        lg: "12px",
-        md: "8px", 
-        sm: "6px",
-        xl: "24px",
+        lg: "4px",
+        md: "2px", 
+        sm: "1px",
+        xl: "6px",
       },
       boxShadow: {
         soft: "var(--shadow-soft)",
