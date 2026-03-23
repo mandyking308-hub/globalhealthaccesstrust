@@ -29,12 +29,13 @@ export const Header = () => {
               className="flex items-center gap-3 text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0 -ml-2"
               aria-label="Global Health Access Trust - Home"
             >
-              {/* Stacked GT Monogram */}
-              <span className="font-serif text-foreground leading-none flex flex-col items-center flex-shrink-0 mr-1">
-                <span className="text-[22px] md:text-[26px] lg:text-[28px] font-normal leading-[0.85]">G</span>
-                <span className="text-[18px] md:text-[21px] lg:text-[23px] font-normal leading-[0.9]">T</span>
-              </span>
-              <span className="h-8 md:h-9 w-px bg-foreground/20 mx-1" />
+              {/* Structural Gateway Mark */}
+              <svg viewBox="0 0 56 80" className="h-8 w-auto md:h-9 lg:h-10 flex-shrink-0" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="square">
+                <line x1="11" y1="0" x2="11" y2="80"/>
+                <line x1="45" y1="0" x2="45" y2="80"/>
+                <line x1="11" y1="28" x2="45" y2="28"/>
+              </svg>
+              <span className="h-8 md:h-9 w-px bg-foreground/15 mx-0.5" />
               <span className="font-serif text-[14px] md:text-[16px] lg:text-[18px] tracking-[0.04em] uppercase text-foreground font-medium leading-tight">
                 Global Health Access Trust
               </span>
