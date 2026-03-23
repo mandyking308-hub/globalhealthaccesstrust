@@ -160,5 +160,5 @@ export const RiskManagementPage = () => (
         </div>
       </div>
     </div>
-  </div>
+  </>
 );

@@ -150,6 +150,6 @@ export const ConstitutionPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

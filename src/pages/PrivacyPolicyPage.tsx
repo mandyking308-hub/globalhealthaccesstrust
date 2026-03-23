@@ -224,6 +224,6 @@ export const PrivacyPolicyPage = () => {
           </Card>
         </div>
       </div>
-    </div>
+    </>
   );
 };

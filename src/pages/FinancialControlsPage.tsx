@@ -176,5 +176,5 @@ export const FinancialControlsPage = () => (
         </div>
       </div>
     </div>
-  </div>
+  </>
 );

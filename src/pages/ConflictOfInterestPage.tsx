@@ -151,5 +151,5 @@ export const ConflictOfInterestPage = () => (
         </div>
       </div>
     </div>
-  </div>
+  </>
 );
