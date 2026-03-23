@@ -80,11 +80,11 @@ img {
 
 /* Base type + NO hyphenation anywhere */
 html{-webkit-text-size-adjust:100%;}
-body{font-size:16px; line-height:1.6; color:var(--c-text); background:var(--c-bg);}
-h1,h2,h3,h4{line-height:1.25; margin:0 0 .5em;}
-h1{font-size:clamp(32px,6vw,48px);}
-h2{font-size:clamp(24px,5vw,32px);}
-h3{font-size:22px;} h4{font-size:18px;}
+body{font-size:15px; line-height:1.65; color:var(--c-text); background:var(--c-bg);}
+h1,h2,h3,h4{line-height:1.3; margin:0 0 .5em; font-weight:500;}
+h1{font-size:clamp(26px,4.5vw,38px); max-width:720px;}
+h2{font-size:clamp(20px,3.5vw,26px);}
+h3{font-size:clamp(17px,2.5vw,20px);} h4{font-size:16px;}
 h1,h2,h3,h4,p,li{
   hyphens:none; -webkit-hyphens:none; -ms-hyphens:none;
   overflow-wrap:normal; word-break:normal; white-space:normal;
@@ -658,26 +658,38 @@ a:hover{text-decoration:none;}
 }
 
 .content-prose {
-  @apply prose prose-lg max-w-none;
+  @apply prose max-w-none;
+  font-size: 15px;
+  line-height: 1.65;
 }
 
 .content-prose p {
-  @apply leading-relaxed mb-4;
-  max-width: 72ch;
+  @apply leading-relaxed mb-5;
+  max-width: 68ch;
 }
 
 .content-prose h1 {
-  @apply text-4xl lg:text-5xl font-serif font-bold mb-6;
-  line-height: 1.2;
+  font-size: clamp(26px, 4.5vw, 38px);
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  max-width: 720px;
 }
 
 .content-prose h2 {
-  @apply text-2xl lg:text-3xl font-serif font-bold mt-8 mb-4;
-  line-height: 1.25;
+  font-size: clamp(20px, 3.5vw, 26px);
+  font-weight: 500;
+  line-height: 1.3;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .content-prose h3 {
-  @apply text-xl lg:text-2xl font-serif font-semibold mt-6 mb-3;
+  font-size: clamp(17px, 2.5vw, 20px);
+  font-weight: 500;
+  line-height: 1.35;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .content-prose ul,
@@ -694,14 +706,7 @@ a:hover{text-decoration:none;}
   .content-prose p {
     max-width: 45ch;
   }
-  
-  .content-prose h1 {
-    @apply text-3xl;
-  }
-  
-  .content-prose h2 {
-    @apply text-xl;
-  }
+}
 }
 
 /* Card Variants with Exact Shadows */
