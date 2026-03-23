@@ -92,9 +92,9 @@ h1,h2,h3,h4,p,li{
 
 /* Containers & sections */
 .container{max-width:1200px; margin:0 auto; padding:0 16px;}
-.section{padding:28px 0;}
-@media (min-width:768px){.section{padding:40px 0;}}
-@media (min-width:1024px){.section{padding:64px 0;}}
+.section{padding:48px 0;}
+@media (min-width:768px){.section{padding:72px 0;}}
+@media (min-width:1024px){.section{padding:96px 0;}}
 
 /* Base container for tablet/desktop; mobile remains unchanged */
 @media (min-width: 768px){
@@ -207,11 +207,11 @@ h1,h2,h3,h4,p,li{
   .pillars-grid{grid-template-columns:repeat(5,1fr);}
 }
 
-/* Cards */
-.card{background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:24px;}
+/* Cards - minimal, no containers */
+.card{background:transparent; border:none; border-radius:0; padding:24px 0;}
 .card__title{margin-bottom:.25rem; font-weight:700; color:var(--c-primary);}
 .card__text{color:var(--c-muted);}
-.card__divider{height:3px; width:32px; background:var(--c-highlight); border-radius:3px; margin:4px 0 12px;}
+.card__divider{height:1px; width:32px; background:var(--c-highlight); margin:4px 0 12px;}
 
 /* Images */
 img{max-width:100%; height:auto; object-fit:cover; border-radius:8px;}
@@ -405,9 +405,9 @@ a:hover{text-decoration:none;}
   --focus-offset: 2px;
   
   /* Spacing & Layout */
-  --radius: 12px;
-  --radius-lg: 12px;
-  --radius-xl: 24px;
+  --radius: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
   
   /* Shadows - Exact Specifications */
   --shadow-soft: 0 2px 8px rgba(0,0,0,.06);

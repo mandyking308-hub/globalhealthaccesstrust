@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { IMPACT_STATS, NEW_IMPACT_STATS, PROGRAM_AREAS } from "@/lib/constants";
 import { SEO } from "@/components/SEO";
 import { organizationSchema, PAGE_KEYWORDS } from "@/lib/seo";
@@ -25,7 +24,7 @@ export const HomePage = () => {
           style={{ backgroundImage: `url(${heroImage})` }}
         >
           <div className="hero__image" style={{ display: 'none' }}>
-            <img src={heroImage} alt="Diverse global healthcare workers providing medical care worldwide - doctors, nurses, and community health workers treating patients across different countries and cultures" />
+            <img src={heroImage} alt="Diverse global healthcare workers providing medical care worldwide" />
           </div>
           
           <div className="hero__overlay">
@@ -42,7 +41,6 @@ export const HomePage = () => {
               <Link to="/auth">
                 <Button size="lg" variant="default" className="min-w-[180px]">
                   Log In / Donate
-                  
                 </Button>
               </Link>
               <Link to="/commission-projects">
@@ -54,157 +52,138 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Impact Highlights Section */}
-        <section className="section">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
-                Our Impact
-              </h2>
-            </div>
+        {/* Impact Highlights */}
+        <section className="py-20 md:py-28 lg:py-36">
+          <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-[42px] font-bold text-center mb-16 text-foreground leading-tight">
+              Our Impact
+            </h2>
             
-            <div className="impact-grid">
-              {NEW_IMPACT_STATS.map((stat, index) => {
-                return (
-                  <div key={index} className="text-center">
-                    <p className="text-lg leading-relaxed" style={{color: 'var(--c-text)'}}>
-                      {stat.text}
-                    </p>
-                  </div>
-                );
-              })}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+              {NEW_IMPACT_STATS.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <p className="text-lg leading-relaxed text-muted-foreground">
+                    {stat.text}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Commission a Project Section */}
-        <section className="py-20 bg-muted/30">
-          <div className="container max-w-6xl">
-            <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">
-                Commission a Project
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12">
-                With GHAT, you don't just make a donation — you shape a targeted health project that reflects your values. Choose where your support goes, follow every milestone, and receive real-world updates from the field. Transparent. Personal. Measurable.
-              </p>
-            </div>
+        {/* Commission a Project */}
+        <section className="py-20 md:py-28 lg:py-36 border-t border-border/40">
+          <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-[42px] font-bold text-center mb-8 text-foreground leading-tight">
+              Commission a Project
+            </h2>
+            <p className="text-lg text-muted-foreground text-center mb-16 leading-relaxed max-w-2xl mx-auto">
+              With GHAT, you don't just make a donation — you shape a targeted health project that reflects your values. Choose where your support goes, follow every milestone, and receive real-world updates from the field. Transparent. Personal. Measurable.
+            </p>
 
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
-                <CardContent className="pt-8 pb-8">
-                  <h3 className="font-serif text-xl font-bold mb-3">Design Your Project</h3>
-                  <p className="text-muted-foreground">
-                    Set region, focus area, and intended impact.
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="space-y-12 mb-16">
+              <div className="text-center">
+                <h3 className="font-serif text-xl md:text-2xl font-semibold mb-3 text-foreground">Design Your Project</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Set region, focus area, and intended impact.
+                </p>
+              </div>
 
-              <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
-                <CardContent className="pt-8 pb-8">
-                  <h3 className="font-serif text-xl font-bold mb-3">Track Progress in Real Time</h3>
-                  <p className="text-muted-foreground">
-                    Milestones, photos, updates, field notes — all inside your secure dashboard.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="text-center">
+                <h3 className="font-serif text-xl md:text-2xl font-semibold mb-3 text-foreground">Track Progress in Real Time</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Milestones, photos, updates, field notes — all inside your secure dashboard.
+                </p>
+              </div>
 
-              <Card className="text-center shadow-soft hover:shadow-medium transition-shadow">
-                <CardContent className="pt-8 pb-8">
-                  <h3 className="font-serif text-xl font-bold mb-3">Complete Visibility</h3>
-                  <p className="text-muted-foreground">
-                    Every pound allocated with clarity and integrity.
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="text-center">
+                <h3 className="font-serif text-xl md:text-2xl font-semibold mb-3 text-foreground">Complete Visibility</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Every pound allocated with clarity and integrity.
+                </p>
+              </div>
             </div>
 
             <div className="text-center">
               <Link to="/commission-projects">
                 <Button size="lg" variant="default">
                   Learn More About Commissioned Projects
-                  
                 </Button>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* Human Story Section */}
-        <section className="section" style={{background: 'var(--c-alt)'}}>
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="font-serif font-bold mb-6" style={{color: 'var(--c-text)'}}>
-                Why It Matters
-              </h2>
-              <p className="text-lg leading-relaxed max-w-4xl mx-auto" style={{color: 'var(--c-muted)'}}>
-                When conflict forced Amina's family to flee, they lost access to medical care. Through our partners, she now receives regular treatment for her child. This is why we exist — to restore dignity and care to the most overlooked.
-              </p>
-            </div>
+        {/* Why It Matters */}
+        <section className="py-20 md:py-28 lg:py-36 border-t border-border/40">
+          <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-[42px] font-bold text-center mb-8 text-foreground leading-tight">
+              Why It Matters
+            </h2>
+            <p className="text-lg leading-relaxed max-w-3xl mx-auto text-center text-muted-foreground mb-16">
+              When conflict forced Amina's family to flee, they lost access to medical care. Through our partners, she now receives regular treatment for her child. This is why we exist — to restore dignity and care to the most overlooked.
+            </p>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-              <div className="text-center">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div>
                 <img 
                   src={familyMedicalCareImage} 
-                  alt="Displaced mother and child receiving compassionate medical care from healthcare worker - demonstrating restored access to healthcare for vulnerable families"
-                  className="w-full h-64 object-cover rounded-lg mb-4"
+                  alt="Displaced mother and child receiving compassionate medical care from healthcare worker"
+                  className="w-full h-64 object-cover rounded mb-4"
                 />
-                <p className="text-sm font-semibold" style={{color: 'var(--c-text)'}}>Healthcare Access</p>
+                <p className="text-sm font-medium text-foreground text-center">Healthcare Access</p>
               </div>
-              <div className="text-center">
+              <div>
                 <img 
                   src={ukraineConflictImage} 
-                  alt="Ukraine humanitarian crisis response - medical aid workers providing healthcare assistance to displaced families and civilians affected by conflict"
-                  className="w-full h-64 object-cover rounded-lg mb-4"
+                  alt="Ukraine humanitarian crisis response - medical aid workers providing healthcare assistance"
+                  className="w-full h-64 object-cover rounded mb-4"
                 />
-                <p className="text-sm font-semibold" style={{color: 'var(--c-text)'}}>Ukraine Crisis Response</p>
+                <p className="text-sm font-medium text-foreground text-center">Ukraine Crisis Response</p>
               </div>
-              <div className="text-center md:col-span-2 lg:col-span-1">
+              <div className="md:col-span-2 lg:col-span-1">
                 <img 
                   src={africaConflictImage} 
-                  alt="African humanitarian aid response - displaced families receiving essential medical care and health services in refugee settings across Africa"
-                  className="w-full h-64 object-cover rounded-lg mb-4"
+                  alt="African humanitarian aid response - displaced families receiving essential medical care"
+                  className="w-full h-64 object-cover rounded mb-4"
                 />
-                <p className="text-sm font-semibold" style={{color: 'var(--c-text)'}}>Africa Humanitarian Aid</p>
+                <p className="text-sm font-medium text-foreground text-center">Africa Humanitarian Aid</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Vision Section */}
-        <section className="section">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
-                Our Vision
-              </h2>
-              <div className="section-content max-w-4xl mx-auto space-y-6 text-center" style={{color: 'var(--c-muted)'}}>
-                <p className="text-lg leading-relaxed">
-                  We believe no one should be denied healthcare or dignity because of where they were born or what they own.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  The Global Health Access Trust is a charity working with leaders in health and governance to reach people who are too often displaced, overlooked, or abandoned.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  Our mission is simple: to build lasting health systems, uplift communities, and ensure care for generations to come.
-                </p>
-              </div>
+        {/* Our Vision */}
+        <section className="py-20 md:py-28 lg:py-36 border-t border-border/40">
+          <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-[42px] font-bold text-center mb-12 text-foreground leading-tight">
+              Our Vision
+            </h2>
+            <div className="space-y-6 text-center mb-20">
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                We believe no one should be denied healthcare or dignity because of where they were born or what they own.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                The Global Health Access Trust is a charity working with leaders in health and governance to reach people who are too often displaced, overlooked, or abandoned.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                Our mission is simple: to build lasting health systems, uplift communities, and ensure care for generations to come.
+              </p>
             </div>
             
-            <div className="grid-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {IMPACT_STATS.map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="mb-3">
-                    <span className="text-sm font-semibold uppercase tracking-wider" style={{color: 'var(--c-highlight)'}}>
-                      {index === 0 ? "Governance" : index === 1 ? "Legacy" : "Mission"}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{color: 'var(--c-highlight)'}}>
+                  <span className="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+                    {index === 0 ? "Governance" : index === 1 ? "Legacy" : "Mission"}
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-bold my-2 text-foreground">
                     {stat.number}
                   </h3>
-                  <div className="text-lg font-semibold mb-2" style={{color: 'var(--c-text)'}}>
+                  <div className="text-base font-semibold mb-2 text-foreground">
                     {stat.label}
                   </div>
-                  <p style={{color: 'var(--c-muted)'}}>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {stat.description}
                   </p>
                 </div>
@@ -213,40 +192,34 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Five Areas Section */}
-        <section className="section">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="font-serif font-bold mb-4" style={{color: 'var(--c-text)'}}>
-                What We Fund
-              </h2>
-              <p className="text-lg max-w-3xl mx-auto" style={{color: 'var(--c-muted)'}}>
-                The Global Health Access Trust is established for exclusively charitable purposes in accordance with the laws of England and Wales. The Trust's funding mandate encompasses the following five areas of lawful, equitable, and public-spirited intervention:
-              </p>
+        {/* What We Fund */}
+        <section className="py-20 md:py-28 lg:py-36 border-t border-border/40">
+          <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-[42px] font-bold text-center mb-8 text-foreground leading-tight">
+              What We Fund
+            </h2>
+            <p className="text-lg max-w-3xl mx-auto text-center text-muted-foreground mb-16 leading-relaxed">
+              The Global Health Access Trust is established for exclusively charitable purposes in accordance with the laws of England and Wales. The Trust's funding mandate encompasses the following five areas of lawful, equitable, and public-spirited intervention:
+            </p>
+            
+            <div className="space-y-10">
+              {PROGRAM_AREAS.slice(0, 5).map((area) => (
+                <div key={area.id} className="text-center max-w-2xl mx-auto">
+                  <h3 className="font-serif text-xl md:text-2xl font-semibold mb-3 text-foreground">
+                    {area.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {area.description}
+                  </p>
+                </div>
+              ))}
             </div>
             
-            <div className="pillars-grid">
-              {PROGRAM_AREAS.slice(0, 5).map((area, index) => {
-                return (
-                  <div key={area.id} className="card">
-                    <div className="card__divider"></div>
-                    <h3 className="card__title pillar__title text-xl font-semibold mb-3">
-                      {area.title}
-                    </h3>
-                    <p className="card__text leading-relaxed">
-                      {area.description}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-            
-            <div className="text-center mt-12">
+            <div className="text-center mt-16">
               <Link to="/what-we-do">
-                <button className="btn--secondary">
+                <Button variant="outline" size="lg">
                   Learn More About Our Healthcare Programs
-                  
-                </button>
+                </Button>
               </Link>
             </div>
           </div>
@@ -256,4 +229,3 @@ export const HomePage = () => {
     </>
   );
 };
-

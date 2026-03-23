@@ -10,64 +10,51 @@ export const Footer = () => {
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Newsletter signup logic would go here
     setIsSubscribed(true);
     setTimeout(() => setIsSubscribed(false), 3000);
   };
 
   return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="container-section">
-        {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer className="border-t border-border/30 bg-foreground text-background">
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-12">
+        <div className="py-16 md:py-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
             
             {/* Organization Info */}
             <div className="lg:col-span-1">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-primary-foreground rounded-full flex items-center justify-center">
-                  
-                </div>
-                <div className="font-serif font-semibold text-lg">
-                  {SITE_CONFIG.name}
-                </div>
+              <div className="font-serif text-lg font-semibold mb-6">
+                {SITE_CONFIG.name}
               </div>
               
-              <p className="text-primary-foreground/80 mb-6 leading-relaxed">
+              <p className="text-background/70 mb-6 leading-relaxed text-sm">
                 {SITE_CONFIG.description}
               </p>
               
-              <div className="space-y-3 text-sm text-primary-foreground/70">
-                <div className="flex items-start space-x-2">
-                  
-                  <div>
-                    {SITE_CONFIG.address.line1}<br />
-                    {SITE_CONFIG.address.city}<br />
-                    {SITE_CONFIG.address.country}
-                  </div>
+              <div className="space-y-2 text-sm text-background/60">
+                <div>
+                  {SITE_CONFIG.address.line1}<br />
+                  {SITE_CONFIG.address.city}<br />
+                  {SITE_CONFIG.address.country}
                 </div>
-                <div className="flex items-start space-x-2">
-                  
-                  <div>
-                    <Link 
-                      to="/contact"
-                      className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
-                    >
-                      Please use the Contact Form for all enquiries
-                    </Link>
-                  </div>
+                <div className="pt-2">
+                  <Link 
+                    to="/contact"
+                    className="text-background/80 hover:text-background transition-colors underline-offset-4 hover:underline"
+                  >
+                    Contact Form
+                  </Link>
                 </div>
               </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h3 className="font-semibold text-lg mb-6">Quick Links</h3>
-              <ul className="space-y-3">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.1em] mb-6 text-background/50">Quick Links</h3>
+              <ul className="space-y-2.5">
                 <li>
                   <Link
                     to="/volunteers"
-                    className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
+                    className="text-sm text-background/70 hover:text-background transition-colors"
                   >
                     Become a Volunteer
                   </Link>
@@ -76,7 +63,7 @@ export const Footer = () => {
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
+                      className="text-sm text-background/70 hover:text-background transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -85,15 +72,15 @@ export const Footer = () => {
               </ul>
             </div>
 
-            {/* Governance & Policies */}
+            {/* Governance */}
             <div>
-              <h3 className="font-semibold text-lg mb-6">Governance & Policies</h3>
-              <ul className="space-y-3">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.1em] mb-6 text-background/50">Governance</h3>
+              <ul className="space-y-2.5">
                 {FOOTER_SECTIONS.governance.slice(0, 8).map((link) => (
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
+                      className="text-sm text-background/70 hover:text-background transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -102,75 +89,49 @@ export const Footer = () => {
               </ul>
             </div>
 
-            {/* Newsletter & Language */}
+            {/* Newsletter */}
             <div>
-              <h3 className="font-semibold text-lg mb-6">Stay Connected</h3>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.1em] mb-6 text-background/50">Stay Connected</h3>
               
-              {/* Newsletter Signup */}
-              <form onSubmit={handleNewsletterSubmit} className="mb-6">
-                <p className="text-primary-foreground/80 mb-4 text-sm">
+              <form onSubmit={handleNewsletterSubmit}>
+                <p className="text-background/60 mb-4 text-sm leading-relaxed">
                   Subscribe to receive updates on our work and impact.
                 </p>
-                <div className="flex flex-col space-y-3">
+                <div className="flex flex-col space-y-2">
                   <Input
                     type="email"
                     placeholder="Your email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/60"
+                    className="bg-background/10 border-background/20 text-background placeholder:text-background/40 text-sm h-9"
                   />
                   <Button 
                     type="submit"
                     variant="secondary"
                     size="sm"
                     disabled={isSubscribed}
+                    className="text-sm h-9"
                   >
-                    {isSubscribed ? "Subscribed!" : "Subscribe"}
+                    {isSubscribed ? "Subscribed" : "Subscribe"}
                   </Button>
                 </div>
               </form>
-
             </div>
           </div>
         </div>
 
-        {/* Bottom Footer */}
-        <div className="py-6 border-t border-primary-foreground/20">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex flex-col space-y-2">
-              <div className="text-sm text-primary-foreground/70">
-                © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
-              </div>
-              <div className="text-xs text-primary-foreground/60 max-w-2xl">
-                Content is protected under copyright law. Unauthorized copying, distribution, or reproduction is prohibited.
-              </div>
+        {/* Bottom */}
+        <div className="py-6 border-t border-background/10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-xs text-background/50">
+              © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
             </div>
-            <div className="flex items-center space-x-6 text-sm">
-              <Link
-                to="/privacy-policy"
-                className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
-              >
-                Privacy
-              </Link>
-              <Link
-                to="/cookie-policy"
-                className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
-              >
-                Cookies
-              </Link>
-              <Link
-                to="/terms-of-use"
-                className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
-              >
-                Terms
-              </Link>
-              <Link
-                to="/data-access-request"
-                className="text-primary-foreground font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-primary-foreground focus:ring-offset-2 focus:ring-offset-primary rounded transition-all"
-              >
-                Data Request
-              </Link>
+            <div className="flex items-center gap-6 text-xs">
+              <Link to="/privacy-policy" className="text-background/50 hover:text-background/80 transition-colors">Privacy</Link>
+              <Link to="/cookie-policy" className="text-background/50 hover:text-background/80 transition-colors">Cookies</Link>
+              <Link to="/terms-of-use" className="text-background/50 hover:text-background/80 transition-colors">Terms</Link>
+              <Link to="/data-access-request" className="text-background/50 hover:text-background/80 transition-colors">Data Request</Link>
             </div>
           </div>
         </div>
