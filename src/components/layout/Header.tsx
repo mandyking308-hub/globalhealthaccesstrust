@@ -26,9 +26,19 @@ export const Header = () => {
             {/* Logo */}
             <Link 
               to="/" 
-              className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0 -ml-2"
+              className="flex items-center gap-3 text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0 -ml-2"
               aria-label="Global Health Access Trust - Home"
             >
+              {/* Structure Mark */}
+              <svg viewBox="0 0 56 56" className="h-8 w-8 md:h-9 md:w-9 lg:h-10 lg:w-10 flex-shrink-0" stroke="currentColor" strokeWidth="1.8" fill="none" strokeLinecap="square">
+                <line x1="0" y1="0" x2="0" y2="56"/>
+                <line x1="56" y1="0" x2="56" y2="56"/>
+                <line x1="0" y1="56" x2="56" y2="56"/>
+                <line x1="0" y1="0" x2="22" y2="0"/>
+                <line x1="34" y1="0" x2="56" y2="0"/>
+                <line x1="28" y1="14" x2="28" y2="42" strokeWidth="1.2"/>
+                <line x1="14" y1="28" x2="42" y2="28" strokeWidth="1.2"/>
+              </svg>
               <span className="font-serif text-[15px] md:text-[17px] lg:text-[19px] tracking-[0.04em] uppercase text-foreground font-medium leading-tight">
                 Global Health Access Trust
               </span>
