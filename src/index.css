@@ -92,9 +92,9 @@ h1,h2,h3,h4,p,li{
 
 /* Containers & sections */
 .container{max-width:1200px; margin:0 auto; padding:0 16px;}
-.section{padding:28px 0;}
-@media (min-width:768px){.section{padding:40px 0;}}
-@media (min-width:1024px){.section{padding:64px 0;}}
+.section{padding:48px 0;}
+@media (min-width:768px){.section{padding:72px 0;}}
+@media (min-width:1024px){.section{padding:96px 0;}}
 
 /* Base container for tablet/desktop; mobile remains unchanged */
 @media (min-width: 768px){
