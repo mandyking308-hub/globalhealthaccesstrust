@@ -29,11 +29,9 @@ export const Header = () => {
               className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0 -ml-2"
               aria-label="Global Health Access Trust - Home"
             >
-              <img 
-                src="/ghat-logo.png" 
-                alt="Global Health Access Trust logo"
-                className="h-16 w-auto md:h-18 lg:h-20 object-contain"
-              />
+              <span className="font-serif text-[15px] md:text-[17px] lg:text-[19px] tracking-[0.06em] uppercase text-foreground font-normal leading-tight">
+                Global Health Access Trust
+              </span>
             </Link>
 
             {/* Desktop Navigation - Centered & Professional */}
