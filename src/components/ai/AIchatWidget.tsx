@@ -167,7 +167,7 @@ export const AIChatWidget = ({
         <CardHeader className={cn("pb-3 bg-gradient-to-r", `from-${accentColor}/10 to-${accentColor}/5`)}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              {icon || }
+              {icon || <span className="text-sm font-semibold">AI</span>}
               <div>
                 <CardTitle className="text-sm sm:text-base">{title}</CardTitle>
                 {subtitle && <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>}
