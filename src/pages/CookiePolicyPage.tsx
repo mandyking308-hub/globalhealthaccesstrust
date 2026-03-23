@@ -1,9 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Helmet } from "react-helmet-async";
 
 export const CookiePolicyPage = () => {
   return (
     <div className="py-16">
+      <Helmet><title>Cookie Policy | Global Health Access Trust</title><meta name="description" content="Cookie Policy of the Global Health Access Trust explaining how we use cookies and your choices." /><link rel="canonical" href="https://globalhealthaccesstrust.org/cookie-policy" /></Helmet>
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
