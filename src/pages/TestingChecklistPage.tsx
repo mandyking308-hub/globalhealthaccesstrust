@@ -265,7 +265,7 @@ export const TestingChecklistPage = () => {
                             {item.label}
                           </label>
                           {item.checked && (
-                            
+                            <span className="text-xs text-green-600 font-medium">✓</span>
                           )}
                         </div>
                       ))}
