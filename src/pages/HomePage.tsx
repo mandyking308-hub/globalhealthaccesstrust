@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { IMPACT_STATS, NEW_IMPACT_STATS, PROGRAM_AREAS } from "@/lib/constants";
 import { SEO } from "@/components/SEO";
 import { organizationSchema, PAGE_KEYWORDS } from "@/lib/seo";
-import heroImage from "@/assets/hero-global-healthcare-access.jpg";
-import familyMedicalCareImage from "@/assets/family-medical-care.jpg";
-import ukraineConflictImage from "@/assets/conflict-ukraine-humanitarian.jpg";
-import africaConflictImage from "@/assets/conflict-africa-humanitarian.jpg";
+import heroImage from "@/assets/hero-territorial-overview.jpg";
+import clinicImage from "@/assets/delivery-healthcare-clinic.jpg";
+import systemsImage from "@/assets/delivery-landscape-systems.jpg";
+import ruralImage from "@/assets/delivery-rural-landscape.jpg";
 
 export const HomePage = () => {
   return (
@@ -24,7 +24,7 @@ export const HomePage = () => {
           style={{ backgroundImage: `url(${heroImage})` }}
         >
           <div className="hero__image" style={{ display: 'none' }}>
-            <img src={heroImage} alt="Healthcare workers providing medical care" />
+            <img src={heroImage} alt="Aerial view of terraced agricultural landscape with rural health infrastructure" />
           </div>
           
           <div className="hero__overlay">
@@ -66,7 +66,7 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Approach — Commissioned Projects */}
+        {/* Approach */}
         <section className="py-20 md:py-28 lg:py-36 border-t border-border/40">
           <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12">
             <h2 className="font-serif text-3xl md:text-4xl lg:text-[42px] font-bold text-center mb-8 text-foreground leading-tight">
@@ -109,7 +109,7 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Delivery — Field Work */}
+        {/* Delivery */}
         <section className="py-20 md:py-28 lg:py-36 border-t border-border/40">
           <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
             <h2 className="font-serif text-3xl md:text-4xl lg:text-[42px] font-bold text-center mb-8 text-foreground leading-tight">
@@ -122,27 +122,27 @@ export const HomePage = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div>
                 <img 
-                  src={familyMedicalCareImage} 
-                  alt="Primary healthcare provision for displaced families"
+                  src={clinicImage} 
+                  alt="Primary healthcare clinic interior with medical equipment in a rural setting"
                   className="w-full h-64 object-cover rounded mb-4"
                 />
                 <p className="text-sm font-medium text-foreground text-center">Primary Healthcare</p>
               </div>
               <div>
                 <img 
-                  src={ukraineConflictImage} 
-                  alt="Medical assistance in conflict-affected regions of Ukraine"
+                  src={systemsImage} 
+                  alt="Aerial view of river delta and agricultural systems with settlements"
                   className="w-full h-64 object-cover rounded mb-4"
                 />
-                <p className="text-sm font-medium text-foreground text-center">Conflict Response</p>
+                <p className="text-sm font-medium text-foreground text-center">Systems Infrastructure</p>
               </div>
               <div className="md:col-span-2 lg:col-span-1">
                 <img 
-                  src={africaConflictImage} 
-                  alt="Healthcare services for displaced populations in Africa"
+                  src={ruralImage} 
+                  alt="Rural landscape with scattered settlements and green hillside terrain"
                   className="w-full h-64 object-cover rounded mb-4"
                 />
-                <p className="text-sm font-medium text-foreground text-center">Displaced Populations</p>
+                <p className="text-sm font-medium text-foreground text-center">Rural Access</p>
               </div>
             </div>
           </div>
