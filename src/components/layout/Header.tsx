@@ -19,8 +19,8 @@ export const Header = () => {
         Skip to content
       </a>
       
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border/50 shadow-sm h-20 md:h-22 lg:h-24">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-full">
+      <header className="sticky top-0 z-50 bg-background border-b border-border/30 h-16 md:h-18 lg:h-20">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-12 h-full">
           <div className="flex h-full items-center justify-between gap-8">
             
             {/* Logo */}
@@ -29,7 +29,7 @@ export const Header = () => {
               className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <svg viewBox="0 0 100 100" className="h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 100 100" className="h-9 w-9 md:h-10 md:w-10" xmlns="http://www.w3.org/2000/svg">
                 <rect x="3" y="3" width="94" height="94" fill="none" stroke="#1F3A2F" strokeWidth="2"/>
                 <rect x="26" y="14" width="13" height="72" fill="#1F3A2F"/>
                 <rect x="61" y="14" width="13" height="72" fill="#1F3A2F"/>
@@ -41,9 +41,9 @@ export const Header = () => {
               </svg>
             </Link>
 
-            {/* Desktop Navigation - Centered & Professional */}
-            <nav className="hidden lg:flex items-center justify-center flex-1 max-w-4xl mx-auto">
-              <div className="flex items-center gap-1">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center justify-center flex-1 max-w-3xl mx-auto">
+              <div className="flex items-center gap-0">
                 {NAVIGATION_ITEMS.map((item) => (
                   <div
                     key={item.href}
@@ -53,22 +53,21 @@ export const Header = () => {
                   >
                     <Link
                       to={item.href}
-                      className="flex items-center gap-1.5 px-4 py-2.5 text-[15px] font-medium text-foreground/80 hover:text-foreground hover:bg-accent/50 rounded-lg transition-all duration-200 whitespace-nowrap group"
+                      className="flex items-center gap-1 px-4 py-2 text-[14px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 whitespace-nowrap"
                     >
                       {item.label}
                       {'submenu' in item && (
-                        <ChevronDown className="w-3.5 h-3.5 text-muted-foreground transition-transform duration-200 group-hover:translate-y-0.5" />
+                        <ChevronDown className="w-3 h-3 text-muted-foreground/60" />
                       )}
                     </Link>
                     
-                    {/* Professional Dropdown Menu */}
                     {'submenu' in item && activeDropdown === item.label && (
-                      <div className="absolute top-full left-0 mt-2 w-72 bg-background border border-border/80 rounded-xl shadow-xl py-2 z-50 animate-in fade-in-0 slide-in-from-top-1 duration-200">
+                      <div className="absolute top-full left-0 mt-0 w-64 bg-background border border-border/60 shadow-sm py-2 z-50">
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.href}
                             to={subItem.href}
-                            className="block px-4 py-3 text-[14px] text-foreground/75 hover:text-foreground hover:bg-accent/50 transition-colors duration-150"
+                            className="block px-5 py-2.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors duration-150"
                             onClick={() => setActiveDropdown(null)}
                           >
                             {subItem.label}
@@ -81,68 +80,59 @@ export const Header = () => {
               </div>
             </nav>
 
-            {/* Actions - Right Aligned */}
+            {/* Actions */}
             <div className="flex items-center gap-3 flex-shrink-0">
-              
-              {/* Search Button */}
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsSearchOpen(true)}
                 aria-label="Search website"
-                className="h-9 w-9 p-0 hover:bg-accent/50 rounded-lg transition-colors duration-200"
+                className="h-9 w-9 p-0 hover:bg-muted/50 transition-colors duration-200"
               >
-                <Search className="w-[18px] h-[18px]" />
+                <Search className="w-[16px] h-[16px]" />
               </Button>
 
-              {/* Login Button - Desktop */}
               <Link to="/auth" className="hidden md:inline-flex">
                 <Button 
-                  variant="outline" 
+                  variant="ghost" 
                   size="sm" 
-                  className="h-10 px-5 text-[15px] font-medium border-border hover:bg-accent/50 rounded-lg transition-all duration-200"
+                  className="h-9 px-4 text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   Login
                 </Button>
               </Link>
 
-              {/* Sign Up Button - Desktop */}
               <Link to="/auth" className="hidden sm:inline-flex">
                 <Button 
                   variant="default" 
                   size="sm" 
-                  className="h-10 px-6 text-[15px] font-medium bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
+                  className="h-9 px-5 text-[13px] font-medium rounded-sm"
                 >
                   Sign Up
                 </Button>
               </Link>
 
-              {/* Mobile Menu Toggle */}
               <Button
                 variant="ghost"
                 size="sm"
-                className="lg:hidden h-9 w-9 p-0 hover:bg-accent/50 rounded-lg transition-colors duration-200"
+                className="lg:hidden h-9 w-9 p-0"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
               >
-                {isMenuOpen ? (
-                  <X className="w-5 h-5" />
-                ) : (
-                  <Menu className="w-5 h-5" />
-                )}
+                {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </Button>
             </div>
           </div>
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="lg:hidden border-t border-border bg-background shadow-medium animate-in slide-in-from-top-4 duration-300">
-              <div className="py-6 space-y-1 max-h-[70vh] overflow-y-auto">
-                {NAVIGATION_ITEMS.map((item, index) => (
-                  <div key={item.href} className="relative" style={{ animationDelay: `${index * 100}ms` }}>
+            <div className="lg:hidden border-t border-border/30 bg-background">
+              <div className="py-4 space-y-1">
+                {NAVIGATION_ITEMS.map((item) => (
+                  <div key={item.href}>
                     <Link
                       to={item.href}
-                      className="flex items-center justify-between px-6 py-4 text-base font-medium text-foreground hover:text-primary hover:bg-gradient-to-r hover:from-primary/5 hover:to-primary/10 rounded-2xl mx-4 transition-all duration-300 min-h-[52px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 relative overflow-hidden group animate-in fade-in-0 slide-in-from-left-4"
+                      className="flex items-center justify-between px-4 py-3 text-sm font-medium text-foreground hover:bg-muted/40 transition-colors"
                       onClick={(e) => {
                         if ('submenu' in item) {
                           e.preventDefault();
@@ -152,39 +142,35 @@ export const Header = () => {
                         }
                       }}
                     >
-                      <span className="relative z-10">{item.label}</span>
+                      <span>{item.label}</span>
                       {'submenu' in item && (
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180' : 'rotate-0'}`} />
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
                       )}
-                      <div className="absolute left-0 top-0 h-full w-1 bg-primary transform scale-y-0 group-hover:scale-y-100 transition-transform duration-200 origin-center rounded-r-full" />
                     </Link>
-                    {/* Mobile Submenu */}
                     {'submenu' in item && activeDropdown === item.label && (
-                      <div className="ml-8 mt-2 space-y-1 border-l-2 border-primary/20 pl-6 animate-in fade-in-0 slide-in-from-left-2 duration-300">
-                        {item.submenu.map((subItem, subIndex) => (
+                      <div className="ml-4 border-l border-border/30 pl-4 py-1 space-y-1">
+                        {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.href}
                             to={subItem.href}
-                            className="block px-4 py-4 text-sm text-muted-foreground hover:text-primary hover:bg-accent/40 rounded-xl transition-all duration-300 min-h-[48px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 animate-in fade-in-0 slide-in-from-left-2 group relative overflow-hidden"
+                            className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
                             onClick={() => setIsMenuOpen(false)}
-                            style={{ animationDelay: `${subIndex * 50}ms` }}
                           >
-                            <span className="relative z-10 font-medium">{subItem.label}</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-xl" />
+                            {subItem.label}
                           </Link>
                         ))}
                       </div>
                     )}
                   </div>
                 ))}
-                <div className="px-6 pt-6 border-t border-muted/40 mt-6 animate-in fade-in-0 slide-in-from-bottom-4 duration-500 space-y-3">
+                <div className="px-4 pt-4 border-t border-border/30 mt-4 space-y-2">
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="outline" size="lg" className="w-full min-h-[52px] border-border hover:bg-accent/50 rounded-2xl font-medium transition-all duration-300">
+                    <Button variant="outline" size="sm" className="w-full text-sm">
                       Login
                     </Button>
                   </Link>
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="default" size="lg" className="w-full min-h-[52px] bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl font-medium shadow-medium hover:shadow-strong transition-all duration-300">
+                    <Button variant="default" size="sm" className="w-full text-sm">
                       Sign Up
                     </Button>
                   </Link>
@@ -195,7 +181,6 @@ export const Header = () => {
         </div>
       </header>
 
-      {/* Search Modal */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   );
