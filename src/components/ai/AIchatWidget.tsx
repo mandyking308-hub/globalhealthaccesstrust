@@ -155,7 +155,7 @@ export const AIChatWidget = ({
           )}
           aria-label={`Open ${title}`}
         >
-          {icon || }
+          {icon || <span className="text-sm font-semibold">AI</span>}
         </Button>
       </div>
     );
