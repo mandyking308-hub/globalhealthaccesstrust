@@ -26,19 +26,24 @@ export const Header = () => {
             {/* Logo */}
             <Link 
               to="/" 
-              className="flex items-center gap-3 text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0 -ml-2"
+              className="flex items-center gap-3 text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              {/* Structural Gateway Mark */}
-              <svg viewBox="0 0 56 80" className="h-8 w-auto md:h-9 lg:h-10 flex-shrink-0" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="square">
-                <line x1="11" y1="0" x2="11" y2="80"/>
-                <line x1="45" y1="0" x2="45" y2="80"/>
-                <line x1="11" y1="28" x2="45" y2="28"/>
+              {/* Structural Gateway Logo Mark */}
+              <svg viewBox="0 0 40 40" className="h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="39" height="39" rx="3.5" stroke="currentColor" strokeWidth="1" opacity="0.15"/>
+                <rect x="10" y="8" width="4" height="24" fill="currentColor"/>
+                <rect x="26" y="8" width="4" height="24" fill="currentColor"/>
+                <rect x="14" y="17" width="12" height="3.5" fill="currentColor"/>
               </svg>
-              <span className="h-8 md:h-9 w-px bg-foreground/15 mx-0.5" />
-              <span className="font-serif text-[14px] md:text-[16px] lg:text-[18px] tracking-[0.04em] uppercase text-foreground font-medium leading-tight">
-                Global Health Access Trust
-              </span>
+              <div className="flex flex-col leading-none">
+                <span className="font-serif text-[15px] md:text-[17px] lg:text-[18px] tracking-[0.03em] uppercase text-foreground font-semibold">
+                  GHAT
+                </span>
+                <span className="text-[9px] md:text-[10px] tracking-[0.08em] uppercase text-muted-foreground font-medium mt-0.5">
+                  Global Health Access Trust
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Navigation - Centered & Professional */}
