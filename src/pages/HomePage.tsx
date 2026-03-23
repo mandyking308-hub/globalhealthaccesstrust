@@ -151,6 +151,7 @@ export const HomePage = () => {
                   src={ruralImage} 
                   alt="Rural landscape with scattered settlements and green hillside terrain"
                   className="w-full h-48 object-cover"
+                  loading="lazy"
                 />
                 <div className="p-5">
                   <p className="text-sm font-medium text-foreground">Rural Access</p>
