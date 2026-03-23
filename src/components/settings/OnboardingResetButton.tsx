@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { RotateCcw } from "lucide-react";
 
 interface OnboardingResetButtonProps {
   onReset: () => void;
@@ -21,7 +20,7 @@ export const OnboardingResetButton = ({
         onClick={onReset}
         className="gap-2"
       >
-        <RotateCcw className="w-4 h-4" />
+        
         {label}
       </Button>
     </div>

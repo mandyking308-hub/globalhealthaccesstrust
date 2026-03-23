@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Shield, Copy, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { generateRecoveryCodes } from "@/lib/security";
 
@@ -162,7 +161,7 @@ export const TwoFactorSetup = ({ userId, onComplete }: TwoFactorSetupProps) => {
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="h-8 w-8 text-primary" />
+              
               <CardTitle className="font-serif text-2xl">Enable Two-Factor Authentication</CardTitle>
             </div>
             <CardDescription>
@@ -253,12 +252,12 @@ export const TwoFactorSetup = ({ userId, onComplete }: TwoFactorSetupProps) => {
             >
               {copiedCodes ? (
                 <>
-                  <Check className="h-4 w-4 mr-2" />
+                  
                   Copied!
                 </>
               ) : (
                 <>
-                  <Copy className="h-4 w-4 mr-2" />
+                  
                   Copy All Codes
                 </>
               )}

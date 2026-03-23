@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Target, Eye, Heart, FileCheck, ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import emergencyReliefHero from "@/assets/emergency-relief-hero.jpg";
 
@@ -43,32 +42,32 @@ export const CommissionProjectsPage = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[
                 {
-                  icon: Target,
+                  ,
                   title: "Direct Philanthropic Control",
                   description: "Choose your region, intervention type, and intended impact with precision."
                 },
                 {
-                  icon: Eye,
+                  ,
                   title: "Real-Time Visibility",
                   description: "Track progress through photos, field notes, and milestone updates."
                 },
                 {
-                  icon: FileCheck,
+                  ,
                   title: "Evidence of Progress",
                   description: "Receive documented proof of every stage from deployment to completion."
                 },
                 {
-                  icon: Heart,
+                  ,
                   title: "Personal Connection",
                   description: "Add dedications and witness the human impact of your contribution."
                 },
                 {
-                  icon: CheckCircle,
+                  ,
                   title: "No Bureaucracy",
                   description: "Streamlined process from request to implementation to reporting."
                 },
                 {
-                  icon: FileCheck,
+                  ,
                   title: "High-Integrity Reporting",
                   description: "Complete spending logs and formal impact certificates upon completion."
                 }
@@ -150,7 +149,7 @@ export const CommissionProjectsPage = () => {
             <Link to="/auth">
               <Button size="lg" variant="secondary" className="text-lg px-8">
                 Log In
-                <ArrowRight className="ml-2 w-5 h-5" />
+                
               </Button>
             </Link>
           </div>

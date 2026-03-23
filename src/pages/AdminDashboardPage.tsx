@@ -14,7 +14,6 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FundAllocationChart } from "@/components/admin/FundAllocationChart";
 import { AuditLogViewer } from "@/components/admin/AuditLogViewer";
-import { Download, Send, Shield, BookOpen, Users, DollarSign, BarChart3, Mail, Activity, TrendingUp } from "lucide-react";
 import { exportToCSV } from "@/utils/exportUtils";
 import { calculateDonorTier } from "@/utils/donorTiers";
 import { Badge } from "@/components/ui/badge";
@@ -247,27 +246,27 @@ const AdminDashboardPage = () => {
         <div className="container-section py-8">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
-              <Shield className="w-8 h-8 text-primary" />
+              
               <div>
                 <h1 className="text-3xl font-bold">Admin Console</h1>
                 <p className="text-muted-foreground">Secure dashboard for authorized staff</p>
               </div>
             </div>
             <Badge variant="default" className="text-sm">
-              <Shield className="w-3 h-3 mr-1" />
+              
               Admin Access
             </Badge>
           </div>
 
           <Tabs defaultValue="overview" className="space-y-6">
             <TabsList className="flex-wrap h-auto">
-              <TabsTrigger value="overview"><BarChart3 className="w-4 h-4 mr-2" />Overview</TabsTrigger>
-              <TabsTrigger value="donors"><Users className="w-4 h-4 mr-2" />Donors</TabsTrigger>
-              <TabsTrigger value="donations"><DollarSign className="w-4 h-4 mr-2" />Donations</TabsTrigger>
-              <TabsTrigger value="allocations"><TrendingUp className="w-4 h-4 mr-2" />Fund Allocation</TabsTrigger>
-              <TabsTrigger value="messages"><Mail className="w-4 h-4 mr-2" />Messages</TabsTrigger>
-              <TabsTrigger value="audit"><Activity className="w-4 h-4 mr-2" />Audit Log</TabsTrigger>
-              <TabsTrigger value="guide"><BookOpen className="w-4 h-4 mr-2" />Admin Guide</TabsTrigger>
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="donors">Donors</TabsTrigger>
+              <TabsTrigger value="donations">Donations</TabsTrigger>
+              <TabsTrigger value="allocations">Fund Allocation</TabsTrigger>
+              <TabsTrigger value="messages">Messages</TabsTrigger>
+              <TabsTrigger value="audit">Audit Log</TabsTrigger>
+              <TabsTrigger value="guide">Admin Guide</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="space-y-6">
@@ -275,7 +274,7 @@ const AdminDashboardPage = () => {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Total Donors</CardTitle>
-                    <Users className="h-4 w-4 text-muted-foreground" />
+                    
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold">{donors.length}</div>
@@ -286,7 +285,7 @@ const AdminDashboardPage = () => {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Total Raised</CardTitle>
-                    <DollarSign className="h-4 w-4 text-muted-foreground" />
+                    
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold">{formatCurrency(totalDonations, 'GBP')}</div>
@@ -297,7 +296,7 @@ const AdminDashboardPage = () => {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Largest Donation</CardTitle>
-                    <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                    
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold">{formatCurrency(largestDonation, 'GBP')}</div>
@@ -308,7 +307,7 @@ const AdminDashboardPage = () => {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">Top Donor</CardTitle>
-                    <Users className="h-4 w-4 text-muted-foreground" />
+                    
                   </CardHeader>
                   <CardContent>
                     <div className="text-lg font-bold">
@@ -372,7 +371,7 @@ const AdminDashboardPage = () => {
                       <CardDescription>View, search, and export donor records</CardDescription>
                     </div>
                     <Button onClick={handleExportDonors} variant="outline">
-                      <Download className="w-4 h-4 mr-2" />
+                      
                       Export CSV
                     </Button>
                   </div>
@@ -443,7 +442,7 @@ const AdminDashboardPage = () => {
                       <CardDescription>Track all donation transactions with advanced filters</CardDescription>
                     </div>
                     <Button onClick={handleExportDonations} variant="outline">
-                      <Download className="w-4 h-4 mr-2" />
+                      
                       Export CSV
                     </Button>
                   </div>
@@ -671,7 +670,7 @@ const AdminDashboardPage = () => {
                     </div>
 
                     <Button type="submit" className="w-full">
-                      <Send className="w-4 h-4 mr-2" />
+                      
                       Send Message
                     </Button>
                   </form>
@@ -687,7 +686,7 @@ const AdminDashboardPage = () => {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <BookOpen className="w-6 h-6" />
+                    
                     Admin Console Guide
                   </CardTitle>
                   <CardDescription>Comprehensive walkthrough for authorized staff</CardDescription>
@@ -706,7 +705,7 @@ const AdminDashboardPage = () => {
                   <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold flex items-center gap-2">
-                        <Shield className="w-4 h-4" />
+                        
                         🔐 Secure Admin Login
                       </h4>
                       <p className="text-sm text-muted-foreground">
@@ -716,7 +715,7 @@ const AdminDashboardPage = () => {
 
                     <div>
                       <h4 className="font-semibold flex items-center gap-2">
-                        <Users className="w-4 h-4" />
+                        
                         📋 Donor Management
                       </h4>
                       <p className="text-sm text-muted-foreground">
@@ -726,7 +725,7 @@ const AdminDashboardPage = () => {
 
                     <div>
                       <h4 className="font-semibold flex items-center gap-2">
-                        <DollarSign className="w-4 h-4" />
+                        
                         💳 Donation Oversight
                       </h4>
                       <p className="text-sm text-muted-foreground">
@@ -736,7 +735,7 @@ const AdminDashboardPage = () => {
 
                     <div>
                       <h4 className="font-semibold flex items-center gap-2">
-                        <Download className="w-4 h-4" />
+                        
                         🧾 Exportable Reports
                       </h4>
                       <p className="text-sm text-muted-foreground">
@@ -746,7 +745,7 @@ const AdminDashboardPage = () => {
 
                     <div>
                       <h4 className="font-semibold flex items-center gap-2">
-                        <BarChart3 className="w-4 h-4" />
+                        
                         📊 Fund Allocation Panel
                       </h4>
                       <p className="text-sm text-muted-foreground">
@@ -756,7 +755,7 @@ const AdminDashboardPage = () => {
 
                     <div>
                       <h4 className="font-semibold flex items-center gap-2">
-                        <Mail className="w-4 h-4" />
+                        
                         ✉️ Messaging System
                       </h4>
                       <p className="text-sm text-muted-foreground">
@@ -766,7 +765,7 @@ const AdminDashboardPage = () => {
 
                     <div>
                       <h4 className="font-semibold flex items-center gap-2">
-                        <Activity className="w-4 h-4" />
+                        
                         🧠 Activity Logs
                       </h4>
                       <p className="text-sm text-muted-foreground">

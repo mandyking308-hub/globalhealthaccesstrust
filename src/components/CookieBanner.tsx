@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Cookie, Settings, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
@@ -86,7 +86,7 @@ export const CookieBanner = () => {
         <Card className="max-w-4xl mx-auto">
           <CardContent className="p-6">
             <div className="flex items-start gap-4">
-              <Cookie className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
+              
               <div className="flex-1">
                 <h3 className="font-semibold mb-2">We use cookies to enhance your experience</h3>
                 <p className="text-sm text-muted-foreground mb-4">
@@ -107,7 +107,7 @@ export const CookieBanner = () => {
                     onClick={() => setShowPreferences(true)} 
                     variant="outline"
                   >
-                    <Settings className="w-4 h-4 mr-2" />
+                    
                     Customize
                   </Button>
                 </div>
@@ -130,7 +130,7 @@ export const CookieBanner = () => {
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle className="flex items-center">
-              <Settings className="w-5 h-5 mr-2" />
+              
               Cookie Preferences
             </DialogTitle>
           </DialogHeader>

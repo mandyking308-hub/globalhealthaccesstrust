@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, FileText, Scale, Shield } from "lucide-react";
 
 export const GovernancePage = () => {
   return (
@@ -44,7 +43,7 @@ export const GovernancePage = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                  <Users className="w-6 h-6 mr-3 text-primary" />
+                  
                   Board of Trustees
                 </h2>
                 <div className="space-y-4">
@@ -81,7 +80,7 @@ export const GovernancePage = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                  <Scale className="w-6 h-6 mr-3 text-primary" />
+                  
                   Decision-Making Framework
                 </h2>
                 <div className="space-y-4">
@@ -116,7 +115,7 @@ export const GovernancePage = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                  <FileText className="w-6 h-6 mr-3 text-primary" />
+                  
                   Conflicts of Interest
                 </h2>
                 <div className="space-y-4">
@@ -141,7 +140,7 @@ export const GovernancePage = () => {
 
               <section>
                 <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                  <Shield className="w-6 h-6 mr-3 text-primary" />
+                  
                   Risk Management
                 </h2>
                 <div className="space-y-4">

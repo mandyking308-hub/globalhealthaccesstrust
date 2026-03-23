@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Monitor, Smartphone, Tablet, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Session {
@@ -76,12 +76,12 @@ export const SessionManager = () => {
   const getDeviceIcon = (deviceInfo: string) => {
     const info = deviceInfo?.toLowerCase() || "";
     if (info.includes("mobile") || info.includes("phone")) {
-      return <Smartphone className="h-5 w-5" />;
+      return ;
     }
     if (info.includes("tablet") || info.includes("ipad")) {
-      return <Tablet className="h-5 w-5" />;
+      return ;
     }
-    return <Monitor className="h-5 w-5" />;
+    return ;
   };
 
   const formatDate = (dateString: string) => {

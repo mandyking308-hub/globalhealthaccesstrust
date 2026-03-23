@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield } from "lucide-react";
 
 export const AntiFraudPage = () => {
   return (
@@ -7,7 +6,7 @@ export const AntiFraudPage = () => {
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
-            <Shield className="w-12 h-12 text-primary mr-4 mt-2" />
+            
             <div>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 Anti-Fraud & Anti-Corruption Policy

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Upload, Palette, Type, Image as ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export const AdminBrandingPage = () => {
@@ -45,7 +44,7 @@ export const AdminBrandingPage = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Upload className="w-5 h-5 text-[#C2A878]" />
+                
                 Upload Logo
               </CardTitle>
               <CardDescription>
@@ -79,7 +78,7 @@ export const AdminBrandingPage = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Palette className="w-5 h-5 text-[#C2A878]" />
+                
                 Brand Color Palette
               </CardTitle>
               <CardDescription>
@@ -132,7 +131,7 @@ export const AdminBrandingPage = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Type className="w-5 h-5 text-[#C2A878]" />
+                
                 Typography Hierarchy
               </CardTitle>
               <CardDescription>

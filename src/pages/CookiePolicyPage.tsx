@@ -1,4 +1,3 @@
-import { Cookie, Settings, BarChart3, Shield } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -8,7 +7,7 @@ export const CookiePolicyPage = () => {
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
-            <Cookie className="w-12 h-12 text-primary mr-4 mt-2" />
+            
             <div>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 Cookie Policy
@@ -40,7 +39,7 @@ export const CookiePolicyPage = () => {
             <Card className="card-professional">
               <CardHeader>
                 <CardTitle className="flex items-center text-success">
-                  <Shield className="w-5 h-5 mr-2" />
+                  
                   Essential Cookies
                 </CardTitle>
               </CardHeader>
@@ -64,7 +63,7 @@ export const CookiePolicyPage = () => {
             <Card className="card-professional">
               <CardHeader>
                 <CardTitle className="flex items-center text-info">
-                  <BarChart3 className="w-5 h-5 mr-2" />
+                  
                   Analytics Cookies
                 </CardTitle>
               </CardHeader>
@@ -137,7 +136,7 @@ export const CookiePolicyPage = () => {
           <Card className="card-professional">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Settings className="w-5 h-5 mr-2" />
+                
                 Managing Your Cookie Preferences
               </CardTitle>
             </CardHeader>

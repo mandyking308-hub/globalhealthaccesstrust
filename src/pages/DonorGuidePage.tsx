@@ -1,4 +1,3 @@
-import { Shield, Heart, Users, TrendingUp, Award, MessageSquare } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/layout/Header";
@@ -41,7 +40,7 @@ export const DonorGuidePage = () => {
       <main className="flex-grow container mx-auto px-4 py-12">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <Shield className="w-16 h-16 text-primary mx-auto mb-4" />
+          
           <h1 className="text-4xl font-bold mb-4">Welcome to the Donor Console</h1>
           <h2 className="text-2xl font-semibold text-muted-foreground mb-4">Global Health Access Trust</h2>
           <p className="text-lg max-w-3xl mx-auto leading-relaxed">
@@ -55,7 +54,7 @@ export const DonorGuidePage = () => {
         {/* Dashboard Features */}
         <section className="mb-12">
           <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
-            <Heart className="w-8 h-8 text-primary" />
+            
             Your Donor Dashboard Includes:
           </h2>
 
@@ -136,7 +135,7 @@ export const DonorGuidePage = () => {
         {/* Recognition Tiers */}
         <section className="mb-12">
           <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
-            <Award className="w-8 h-8 text-primary" />
+            
             Donor Recognition Tiers
           </h2>
 
@@ -175,7 +174,7 @@ export const DonorGuidePage = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Shield className="w-6 h-6 text-primary" />
+                
                 Final Notes
               </CardTitle>
             </CardHeader>
@@ -195,7 +194,7 @@ export const DonorGuidePage = () => {
           <Card className="bg-primary/5 border-primary/20">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <MessageSquare className="w-6 h-6 text-primary" />
+                
                 Questions?
               </CardTitle>
             </CardHeader>

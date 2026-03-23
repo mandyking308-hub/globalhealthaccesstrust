@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Users, UserCheck, FolderKanban, FileCheck, AlertCircle, Clock, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { useOnboarding } from "@/hooks/useOnboarding";
@@ -125,56 +124,56 @@ export const AdminDashboardPage = () => {
         <MetricCard
           title="Total Donors"
           value={metrics.totalDonors}
-          icon={Users}
+          
           color="text-blue-600"
           onClick={() => navigate("/admin/donors")}
         />
         <MetricCard
           title="Total Volunteers"
           value={metrics.totalVolunteers}
-          icon={UserCheck}
+          
           color="text-green-600"
           onClick={() => navigate("/admin/volunteers")}
         />
         <MetricCard
           title="Active Projects"
           value={metrics.activeProjects}
-          icon={FolderKanban}
+          
           color="text-purple-600"
           onClick={() => navigate("/admin/projects")}
         />
         <MetricCard
           title="Pending Evidence"
           value={metrics.pendingEvidence}
-          icon={FileCheck}
+          
           color="text-orange-600"
           onClick={() => navigate("/admin/evidence")}
         />
         <MetricCard
           title="Pending Projects"
           value={metrics.pendingProjects}
-          icon={AlertCircle}
+          
           color="text-yellow-600"
           onClick={() => navigate("/admin/projects")}
         />
         <MetricCard
           title="Completed Projects"
           value={metrics.completedProjects}
-          icon={TrendingUp}
+          
           color="text-emerald-600"
           onClick={() => navigate("/admin/projects")}
         />
         <MetricCard
           title="Volunteer Apps"
           value={metrics.pendingVolunteerApps}
-          icon={UserCheck}
+          
           color="text-indigo-600"
           onClick={() => navigate("/admin/volunteers")}
         />
         <MetricCard
           title="Overdue Milestones"
           value={metrics.overdueMilestones}
-          icon={Clock}
+          
           color="text-red-600"
           onClick={() => navigate("/admin/projects")}
         />

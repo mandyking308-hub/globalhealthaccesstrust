@@ -3,7 +3,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Presentation, FileText, Download, Plus, Edit, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { SectionHeading } from "@/components/brand/SectionHeading";
 import { useNavigate } from "react-router-dom";
@@ -89,11 +88,11 @@ export const AdminPresentationsPage = () => {
         <Tabs defaultValue="global" className="space-y-6">
           <TabsList>
             <TabsTrigger value="global">
-              <Presentation className="mr-2 h-4 w-4" />
+              
               Global Overview Deck
             </TabsTrigger>
             <TabsTrigger value="projects">
-              <FileText className="mr-2 h-4 w-4" />
+              
               Project Decks
             </TabsTrigger>
           </TabsList>
@@ -119,7 +118,7 @@ export const AdminPresentationsPage = () => {
                       size="sm"
                       onClick={() => handleViewPresentation(globalDeck.id)}
                     >
-                      <Eye className="mr-2 h-4 w-4" />
+                      
                       Preview
                     </Button>
                     <Button
@@ -127,14 +126,14 @@ export const AdminPresentationsPage = () => {
                       size="sm"
                       onClick={() => navigate(`/admin/presentations/${globalDeck.id}/edit`)}
                     >
-                      <Edit className="mr-2 h-4 w-4" />
+                      
                       Edit
                     </Button>
                     <Button
                       size="sm"
                       onClick={() => handleExportPDF(globalDeck.id)}
                     >
-                      <Download className="mr-2 h-4 w-4" />
+                      
                       Export PDF
                     </Button>
                   </div>
@@ -176,7 +175,7 @@ export const AdminPresentationsPage = () => {
 
                 <div className="mt-6 p-4 border border-[hsl(var(--gold))] rounded-lg bg-[hsl(var(--gold))]/5">
                   <h4 className="font-semibold text-foreground mb-2 flex items-center">
-                    <Presentation className="mr-2 h-5 w-5 text-[hsl(var(--gold))]" />
+                    
                     AI Assistance Available
                   </h4>
                   <div className="grid grid-cols-2 gap-2 mt-3">
@@ -191,7 +190,7 @@ export const AdminPresentationsPage = () => {
               </Card>
             ) : (
               <Card className="p-12 text-center">
-                <Presentation className="h-16 w-16 mx-auto mb-4 text-muted-foreground opacity-50" />
+                
                 <h3 className="text-xl font-serif text-foreground mb-2">
                   No Global Overview Deck Found
                 </h3>
@@ -211,7 +210,7 @@ export const AdminPresentationsPage = () => {
                 </p>
               </div>
               <Button onClick={handleGenerateProjectDeck}>
-                <Plus className="mr-2 h-4 w-4" />
+                
                 Generate Project Deck
               </Button>
             </div>
@@ -239,7 +238,7 @@ export const AdminPresentationsPage = () => {
                         size="sm"
                         onClick={() => handleViewPresentation(deck.id)}
                       >
-                        <Eye className="mr-2 h-4 w-4" />
+                        
                         View
                       </Button>
                       <Button
@@ -247,14 +246,14 @@ export const AdminPresentationsPage = () => {
                         size="sm"
                         onClick={() => navigate(`/admin/presentations/${deck.id}/edit`)}
                       >
-                        <Edit className="mr-2 h-4 w-4" />
+                        
                         Edit
                       </Button>
                       <Button
                         size="sm"
                         onClick={() => handleExportPDF(deck.id)}
                       >
-                        <Download className="mr-2 h-4 w-4" />
+                        
                         Export
                       </Button>
                     </div>
@@ -263,7 +262,7 @@ export const AdminPresentationsPage = () => {
               </div>
             ) : (
               <Card className="p-12 text-center">
-                <FileText className="h-16 w-16 mx-auto mb-4 text-muted-foreground opacity-50" />
+                
                 <h3 className="text-xl font-serif text-foreground mb-2">
                   No Project Decks Yet
                 </h3>
@@ -271,7 +270,7 @@ export const AdminPresentationsPage = () => {
                   Generate presentation decks for commissioned projects to share with donors.
                 </p>
                 <Button onClick={handleGenerateProjectDeck}>
-                  <Plus className="mr-2 h-4 w-4" />
+                  
                   Create First Project Deck
                 </Button>
               </Card>

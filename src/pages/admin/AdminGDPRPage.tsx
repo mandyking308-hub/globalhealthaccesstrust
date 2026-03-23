@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Download, Trash2, AlertTriangle, CheckCircle, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   AlertDialog,
@@ -198,9 +197,9 @@ export const AdminGDPRPage = () => {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "pending":
-        return <Badge variant="outline"><Clock className="h-3 w-3 mr-1" />Pending</Badge>;
+        return <Badge variant="outline">Pending</Badge>;
       case "completed":
-        return <Badge variant="default"><CheckCircle className="h-3 w-3 mr-1" />Completed</Badge>;
+        return <Badge variant="default">Completed</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
@@ -218,7 +217,7 @@ export const AdminGDPRPage = () => {
       </div>
 
       <Alert>
-        <AlertTriangle className="h-4 w-4" />
+        
         <AlertDescription>
           All GDPR actions are irreversible and logged for audit purposes. Exercise caution when processing deletion requests.
         </AlertDescription>
@@ -260,9 +259,9 @@ export const AdminGDPRPage = () => {
                       <TableCell>
                         <Badge variant={request.request_type === "export" ? "default" : "destructive"}>
                           {request.request_type === "export" ? (
-                            <><Download className="h-3 w-3 mr-1" />Export</>
+                            <>Export</>
                           ) : (
-                            <><Trash2 className="h-3 w-3 mr-1" />Delete</>
+                            <>Delete</>
                           )}
                         </Badge>
                       </TableCell>
@@ -279,7 +278,7 @@ export const AdminGDPRPage = () => {
                                 onClick={() => handleExportData(request)}
                                 disabled={!request.user_id}
                               >
-                                <Download className="h-4 w-4 mr-1" />
+                                
                                 Export
                               </Button>
                             ) : (
@@ -292,7 +291,7 @@ export const AdminGDPRPage = () => {
                                 }}
                                 disabled={!request.user_id}
                               >
-                                <Trash2 className="h-4 w-4 mr-1" />
+                                
                                 Process
                               </Button>
                             )}

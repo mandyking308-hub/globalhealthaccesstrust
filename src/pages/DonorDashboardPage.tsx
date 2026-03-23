@@ -11,7 +11,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { User as UserIcon, Heart, History, MessageSquare, LogOut, DollarSign, Shield, Download, Trash2, BookOpen, Target } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { DonorTierBadge } from "@/components/donor/DonorTierBadge";
 import { DonationHistoryTable } from "@/components/donor/DonationHistoryTable";
@@ -128,10 +127,10 @@ export const DonorDashboardPage = () => {
       <header className="bg-background border-b">
         <div className="container-section py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Shield className="w-8 h-8 text-primary" />
+            
             <div><h1 className="text-2xl font-bold">Donor Portal</h1><p className="text-sm text-muted-foreground">Welcome back, {profile?.first_name}!</p></div>
           </div>
-          <Button variant="outline" onClick={handleLogout}><LogOut className="w-4 h-4 mr-2" />Logout</Button>
+          <Button variant="outline" onClick={handleLogout}>Logout</Button>
         </div>
       </header>
 
@@ -144,7 +143,7 @@ export const DonorDashboardPage = () => {
                 <p className="text-muted-foreground mb-4">Thank you for your support. View contributions, track impact, and manage preferences.</p>
                 <DonorTierBadge tierName={donorTier.name} totalDonated={totalDonated} />
               </div>
-              <Link to="/donor-guide"><Button variant="outline"><BookOpen className="w-4 h-4 mr-2" />Donor Guide</Button></Link>
+              <Link to="/donor-guide"><Button variant="outline">Donor Guide</Button></Link>
             </div>
           </CardContent>
         </Card>
@@ -153,7 +152,7 @@ export const DonorDashboardPage = () => {
           <Card className="shadow-soft hover:shadow-medium transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Donated</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
+              
             </CardHeader>
             <CardContent>
               <div className="text-xl sm:text-2xl font-bold">£{totalDonated.toLocaleString()}</div>
@@ -163,7 +162,7 @@ export const DonorDashboardPage = () => {
           <Card className="shadow-soft hover:shadow-medium transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Donations</CardTitle>
-              <Heart className="h-4 w-4 text-muted-foreground" />
+              
             </CardHeader>
             <CardContent>
               <div className="text-xl sm:text-2xl font-bold">{donations.length}</div>
@@ -172,7 +171,7 @@ export const DonorDashboardPage = () => {
           <Card className="shadow-soft hover:shadow-medium transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Tier</CardTitle>
-              <Shield className="h-4 w-4 text-muted-foreground" />
+              
             </CardHeader>
             <CardContent>
               <div className="text-base sm:text-lg font-bold">{donorTier.name}</div>
@@ -181,7 +180,7 @@ export const DonorDashboardPage = () => {
           <Card className="shadow-soft hover:shadow-medium transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Recent</CardTitle>
-              <History className="h-4 w-4 text-muted-foreground" />
+              
             </CardHeader>
             <CardContent>
               <div className="text-base sm:text-lg font-bold">{donations.length > 0 ? new Date(donations[0].created_at).toLocaleDateString() : 'N/A'}</div>
@@ -192,27 +191,27 @@ export const DonorDashboardPage = () => {
         <Tabs defaultValue="donate" className="space-y-4 sm:space-y-6">
           <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1">
             <TabsTrigger value="donate" className="text-xs sm:text-sm">
-              <Heart className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              
               <span className="hidden sm:inline">Donate</span>
               <span className="sm:hidden">Give</span>
             </TabsTrigger>
             <TabsTrigger value="projects" className="text-xs sm:text-sm">
-              <Target className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              
               <span className="hidden sm:inline">My Projects</span>
               <span className="sm:hidden">Projects</span>
             </TabsTrigger>
             <TabsTrigger value="commission" className="text-xs sm:text-sm">
-              <Target className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              
               <span className="hidden sm:inline">Commission</span>
               <span className="sm:hidden">New</span>
             </TabsTrigger>
             <TabsTrigger value="history" className="text-xs sm:text-sm">
-              <History className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              
               <span className="hidden sm:inline">History</span>
               <span className="sm:hidden">History</span>
             </TabsTrigger>
             <TabsTrigger value="messages" className="text-xs sm:text-sm">
-              <MessageSquare className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              
               <span className="hidden sm:inline">Messages</span>
               <span className="sm:hidden">Messages</span>
             </TabsTrigger>
@@ -223,7 +222,7 @@ export const DonorDashboardPage = () => {
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="donate"><Card><CardHeader><CardTitle>Make a Donation</CardTitle></CardHeader><CardContent><div className="text-center py-12"><Heart className="w-16 h-16 text-primary mx-auto mb-4" /><h3 className="text-xl font-semibold mb-2">Ready to Make a Difference?</h3><Link to="/donation-form"><Button size="lg">Start Donation</Button></Link></div></CardContent></Card></TabsContent>
+          <TabsContent value="donate"><Card><CardHeader><CardTitle>Make a Donation</CardTitle></CardHeader><CardContent><div className="text-center py-12"><h3 className="text-xl font-semibold mb-2">Ready to Make a Difference?</h3><Link to="/donation-form"><Button size="lg">Start Donation</Button></Link></div></CardContent></Card></TabsContent>
           
           <TabsContent value="projects"><CommissionedProjectsList /></TabsContent>
           
@@ -236,7 +235,7 @@ export const DonorDashboardPage = () => {
           <TabsContent value="profile" className="space-y-4">
             <Card><CardHeader><CardTitle>Personal Information</CardTitle></CardHeader><CardContent className="space-y-4"><div><Label>First Name</Label><Input value={profileEdit.first_name} onChange={(e) => setProfileEdit({ ...profileEdit, first_name: e.target.value })} /></div><div><Label>Last Name</Label><Input value={profileEdit.last_name} onChange={(e) => setProfileEdit({ ...profileEdit, last_name: e.target.value })} /></div><div><Label>Email</Label><Input value={profileEdit.email} onChange={(e) => setProfileEdit({ ...profileEdit, email: e.target.value })} /></div><Button onClick={handleProfileUpdate}>Update Profile</Button></CardContent></Card>
             <Card><CardHeader><CardTitle>Donor Benefits</CardTitle></CardHeader><CardContent><p className="font-medium mb-2">As a {donorTier.name}, you receive:</p><ul className="list-disc list-inside">{donorTier.benefits.map((b, i) => <li key={i} className="text-sm text-muted-foreground">{b}</li>)}</ul></CardContent></Card>
-            <Card><CardHeader><CardTitle>GDPR & Privacy</CardTitle></CardHeader><CardContent className="space-y-4"><div className="flex gap-2"><Button variant="outline" size="sm" onClick={handleDataExport}><Download className="w-4 h-4 mr-2" />Export Data</Button><AlertDialog><AlertDialogTrigger asChild><Button variant="destructive" size="sm"><Trash2 className="w-4 h-4 mr-2" />Delete Account</Button></AlertDialogTrigger><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Are you sure?</AlertDialogTitle><AlertDialogDescription>This will submit a deletion request processed within 30 days.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel><AlertDialogAction onClick={handleAccountDeletion}>Submit Request</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog></div></CardContent></Card>
+            <Card><CardHeader><CardTitle>GDPR & Privacy</CardTitle></CardHeader><CardContent className="space-y-4"><div className="flex gap-2"><Button variant="outline" size="sm" onClick={handleDataExport}>Export Data</Button><AlertDialog><AlertDialogTrigger asChild><Button variant="destructive" size="sm">Delete Account</Button></AlertDialogTrigger><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Are you sure?</AlertDialogTitle><AlertDialogDescription>This will submit a deletion request processed within 30 days.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel><AlertDialogAction onClick={handleAccountDeletion}>Submit Request</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog></div></CardContent></Card>
           </TabsContent>
         </Tabs>
       </div>

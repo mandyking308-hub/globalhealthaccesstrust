@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Globe, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FOOTER_SECTIONS, SITE_CONFIG } from "@/lib/constants";
@@ -27,7 +26,7 @@ export const Footer = () => {
             <div className="lg:col-span-1">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-10 h-10 bg-primary-foreground rounded-full flex items-center justify-center">
-                  <Globe className="w-6 h-6 text-primary" />
+                  
                 </div>
                 <div className="font-serif font-semibold text-lg">
                   {SITE_CONFIG.name}
@@ -40,7 +39,7 @@ export const Footer = () => {
               
               <div className="space-y-3 text-sm text-primary-foreground/70">
                 <div className="flex items-start space-x-2">
-                  <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  
                   <div>
                     {SITE_CONFIG.address.line1}<br />
                     {SITE_CONFIG.address.city}<br />
@@ -48,7 +47,7 @@ export const Footer = () => {
                   </div>
                 </div>
                 <div className="flex items-start space-x-2">
-                  <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  
                   <div>
                     <Link 
                       to="/contact"

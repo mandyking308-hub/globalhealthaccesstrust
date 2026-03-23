@@ -1,4 +1,3 @@
-import { Heart, GraduationCap, Building, FileText, AlertTriangle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -188,7 +187,7 @@ export const WhatWeDoPage = () => {
               <Link to="/get-involved">
                 <Button size="lg" variant="default">
                   Support Our Mission
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  
                 </Button>
               </Link>
             </div>

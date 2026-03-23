@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Download, CheckCircle2, AlertCircle, Rocket } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -202,7 +201,7 @@ export const AdminLaunchChecklistPage = () => {
 
             {progressPercentage === 100 && (
               <div className="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-lg flex items-center gap-3">
-                <CheckCircle2 className="h-6 w-6 text-primary" />
+                
                 <div>
                   <p className="font-semibold text-foreground">
                     All checks complete!
@@ -257,7 +256,7 @@ export const AdminLaunchChecklistPage = () => {
 
               {(maintenanceMode || contentFreezeMode) && (
                 <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-lg flex items-start gap-3">
-                  <AlertCircle className="h-5 w-5 text-destructive mt-0.5" />
+                  
                   <div>
                     <p className="font-semibold text-foreground">Active Restrictions</p>
                     <ul className="text-sm text-muted-foreground mt-1 space-y-1">
@@ -289,7 +288,7 @@ export const AdminLaunchChecklistPage = () => {
                   metadata
                 </p>
                 <Button onClick={handleExportBackup} className="w-full sm:w-auto">
-                  <Download className="h-4 w-4 mr-2" />
+                  
                   Export Platform Backup
                 </Button>
               </div>
@@ -304,7 +303,7 @@ export const AdminLaunchChecklistPage = () => {
                   variant="outline"
                   className="w-full sm:w-auto"
                 >
-                  <Download className="h-4 w-4 mr-2" />
+                  
                   Download Evidence Archive
                 </Button>
               </div>
@@ -319,7 +318,7 @@ export const AdminLaunchChecklistPage = () => {
                   variant="outline"
                   className="w-full sm:w-auto"
                 >
-                  <Download className="h-4 w-4 mr-2" />
+                  
                   Export System Logs
                 </Button>
               </div>
@@ -362,7 +361,7 @@ export const AdminLaunchChecklistPage = () => {
                   health, and security status
                 </p>
                 <Button onClick={handleGenerateLaunchReport} className="w-full sm:w-auto">
-                  <Rocket className="h-4 w-4 mr-2" />
+                  
                   Generate Launch Report
                 </Button>
               </div>
@@ -378,7 +377,7 @@ export const AdminLaunchChecklistPage = () => {
                     Review Final Checklist
                   </Button>
                   <Button size="sm" disabled={progressPercentage !== 100}>
-                    <Rocket className="h-4 w-4 mr-2" />
+                    
                     Go Live
                   </Button>
                 </div>

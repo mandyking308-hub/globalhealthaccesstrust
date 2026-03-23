@@ -3,7 +3,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Mail, MailOpen } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Message {
@@ -111,9 +110,9 @@ export const MessagesPanel = ({ userId }: MessagesPanelProps) => {
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
                       {message.status === 'unread' ? (
-                        <Mail className="w-4 h-4 text-primary" />
+                        
                       ) : (
-                        <MailOpen className="w-4 h-4 text-muted-foreground" />
+                        
                       )}
                       <p className="font-medium text-sm">{message.subject}</p>
                     </div>

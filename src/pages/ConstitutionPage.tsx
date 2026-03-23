@@ -1,4 +1,3 @@
-import { Download, FileText, Shield, Calendar, Hash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,7 +10,7 @@ export const ConstitutionPage = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <FileText className="w-12 h-12 text-primary mr-4" />
+            
             <Badge variant="outline" className="text-sm">
               Authoritative Document
             </Badge>
@@ -30,7 +29,7 @@ export const ConstitutionPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card className="card-professional">
             <CardContent className="p-6 text-center">
-              <Calendar className="w-8 h-8 text-primary mx-auto mb-2" />
+              
               <h3 className="font-semibold mb-1">Effective Date</h3>
               <p className="text-muted-foreground">1 December 2024</p>
             </CardContent>
@@ -38,7 +37,7 @@ export const ConstitutionPage = () => {
           
           <Card className="card-professional">
             <CardContent className="p-6 text-center">
-              <Shield className="w-8 h-8 text-primary mx-auto mb-2" />
+              
               <h3 className="font-semibold mb-1">Version</h3>
               <p className="text-muted-foreground">1.0 (Original)</p>
             </CardContent>
@@ -46,7 +45,7 @@ export const ConstitutionPage = () => {
           
           <Card className="card-professional">
             <CardContent className="p-6 text-center">
-              <Hash className="w-8 h-8 text-primary mx-auto mb-2" />
+              
               <h3 className="font-semibold mb-1">Checksum</h3>
               <p className="text-muted-foreground text-xs">sha256:a1b2c3...</p>
             </CardContent>
@@ -59,7 +58,7 @@ export const ConstitutionPage = () => {
             <CardTitle className="flex items-center justify-between">
               <span>Constitution Document</span>
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Download className="w-4 h-4 mr-2" />
+                
                 Download Signed PDF
               </Button>
             </CardTitle>
@@ -68,13 +67,13 @@ export const ConstitutionPage = () => {
             {/* PDF Viewer Placeholder */}
             <div className="bg-muted rounded-lg h-96 flex items-center justify-center border-2 border-dashed border-muted-foreground/20">
               <div className="text-center">
-                <FileText className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                
                 <h3 className="text-lg font-semibold mb-2">PDF Viewer</h3>
                 <p className="text-muted-foreground mb-4">
                   Interactive PDF viewer will display the signed Constitution document here.
                 </p>
                 <Button variant="outline">
-                  <Download className="w-4 h-4 mr-2" />
+                  
                   Download to View
                 </Button>
               </div>
@@ -107,7 +106,7 @@ export const ConstitutionPage = () => {
         <Card className="border-gold/20 bg-gold/5">
           <CardContent className="p-6">
             <div className="flex items-start">
-              <Shield className="w-6 h-6 text-gold mt-1 mr-3 flex-shrink-0" />
+              
               <div>
                 <h3 className="font-semibold mb-2">Authoritative English Version</h3>
                 <p className="text-sm text-muted-foreground mb-4">

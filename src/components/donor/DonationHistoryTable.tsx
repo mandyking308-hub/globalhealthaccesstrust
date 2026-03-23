@@ -3,7 +3,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Download, FileText } from "lucide-react";
 import { exportToCSV, exportDonationsToPDF } from "@/utils/exportUtils";
 
 interface Donation {
@@ -89,11 +88,11 @@ export const DonationHistoryTable = ({ donations, donorName }: DonationHistoryTa
         </Select>
         <div className="flex gap-2 ml-auto">
           <Button variant="outline" size="sm" onClick={handleExportCSV}>
-            <Download className="w-4 h-4 mr-2" />
+            
             CSV
           </Button>
           <Button variant="outline" size="sm" onClick={handleExportPDF}>
-            <FileText className="w-4 h-4 mr-2" />
+            
             PDF
           </Button>
         </div>

@@ -1,4 +1,4 @@
-import { Search, User, Clock, Filter } from "lucide-react";
+import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -51,7 +51,7 @@ export const BlogIndexPage = () => {
                 <Input placeholder="Search articles..." className="pl-10 h-12" />
               </div>
               <Button variant="outline" className="h-12 px-6">
-                <Filter className="w-4 h-4 mr-2" />
+                
                 Filter
               </Button>
             </div>
@@ -81,7 +81,7 @@ export const BlogIndexPage = () => {
                     </div>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex items-center">
-                        <User className="w-3 h-3 mr-1" />
+                        
                         <span>{post.author}</span>
                       </div>
                     </div>
@@ -115,9 +115,9 @@ export const BlogIndexPage = () => {
                     </div>
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <div className="flex items-center">
-                        <User className="w-3 h-3 mr-1" />
+                        
                         <span className="mr-3">{post.author}</span>
-                        <Clock className="w-3 h-3 mr-1" />
+                        
                         <span>{post.readingTime} min read</span>
                       </div>
                     </div>

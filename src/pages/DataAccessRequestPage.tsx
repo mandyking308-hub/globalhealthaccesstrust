@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Shield, Download, Trash2, Info } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -84,7 +83,7 @@ export const DataAccessRequestPage = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">
-              <Shield className="h-8 w-8 text-primary" />
+              
               <h1 className="text-4xl font-serif text-foreground">Data Access Request</h1>
             </div>
             <p className="text-muted-foreground">
@@ -93,7 +92,7 @@ export const DataAccessRequestPage = () => {
           </div>
 
           <Alert className="mb-8">
-            <Info className="h-4 w-4" />
+            
             <AlertDescription>
               Under UK GDPR, you have the right to access your personal data or request its deletion. 
               We will respond to your request within 30 days.
@@ -117,7 +116,7 @@ export const DataAccessRequestPage = () => {
                       <div className="flex-1">
                         <Label htmlFor="export" className="cursor-pointer">
                           <div className="flex items-center gap-2 mb-1">
-                            <Download className="h-4 w-4 text-primary" />
+                            
                             <span className="font-semibold">Data Export</span>
                           </div>
                           <p className="text-sm text-muted-foreground">
@@ -132,7 +131,7 @@ export const DataAccessRequestPage = () => {
                       <div className="flex-1">
                         <Label htmlFor="delete" className="cursor-pointer">
                           <div className="flex items-center gap-2 mb-1">
-                            <Trash2 className="h-4 w-4 text-destructive" />
+                            
                             <span className="font-semibold">Data Deletion</span>
                           </div>
                           <p className="text-sm text-muted-foreground">

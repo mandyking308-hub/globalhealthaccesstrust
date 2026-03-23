@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Clock, Shield, Scale } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const AboutPage = () => {
@@ -53,7 +52,7 @@ export const AboutPage = () => {
             <div className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <Card className="card-professional text-center p-6">
-                  <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
+                  
                   <h3 className="font-semibold text-lg mb-2">Principled</h3>
                   <p className="text-sm text-muted-foreground">
                     Governed by unwavering ethical standards
@@ -61,7 +60,7 @@ export const AboutPage = () => {
                 </Card>
                 
                 <Card className="card-professional text-center p-6">
-                  <Clock className="w-12 h-12 text-primary mx-auto mb-4" />
+                  
                   <h3 className="font-semibold text-lg mb-2">Enduring</h3>
                   <p className="text-sm text-muted-foreground">
                     Built to stand the test of time
@@ -69,7 +68,7 @@ export const AboutPage = () => {
                 </Card>
                 
                 <Card className="card-professional text-center p-6">
-                  <Scale className="w-12 h-12 text-primary mx-auto mb-4" />
+                  
                   <h3 className="font-semibold text-lg mb-2">Uncompromising</h3>
                   <p className="text-sm text-muted-foreground">
                     Never wavering in our commitment

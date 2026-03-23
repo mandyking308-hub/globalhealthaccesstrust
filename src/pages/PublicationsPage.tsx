@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, Download, Search, Filter, Eye, Calendar, Hash } from "lucide-react";
+import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -138,7 +138,7 @@ export const PublicationsPage = () => {
             <Card key={doc.id} className="card-elevated group hover:shadow-lg transition-all duration-300">
               <CardContent className="p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <FileText className="w-8 h-8 text-primary flex-shrink-0" />
+                  
                   <Badge variant="secondary" className="text-xs">
                     {doc.type}
                   </Badge>
@@ -154,11 +154,11 @@ export const PublicationsPage = () => {
                 
                 <div className="space-y-2 mb-4 text-xs text-muted-foreground">
                   <div className="flex items-center">
-                    <Calendar className="w-3 h-3 mr-2" />
+                    
                     Published: {new Date(doc.date).toLocaleDateString()}
                   </div>
                   <div className="flex items-center">
-                    <Hash className="w-3 h-3 mr-2" />
+                    
                     Version {doc.version} • {doc.size}
                   </div>
                 </div>
@@ -175,19 +175,19 @@ export const PublicationsPage = () => {
                   {doc.id === "constitution-signed" ? (
                     <Link to="/constitution" className="flex-1">
                       <Button size="sm" variant="outline" className="w-full">
-                        <Eye className="w-4 h-4 mr-2" />
+                        
                         View
                       </Button>
                     </Link>
                   ) : (
                     <Button size="sm" variant="outline" className="flex-1">
-                      <Eye className="w-4 h-4 mr-2" />
+                      
                       View
                     </Button>
                   )}
                   
                   <Button size="sm" variant="outline">
-                    <Download className="w-4 h-4" />
+                    
                   </Button>
                 </div>
                 
@@ -206,7 +206,7 @@ export const PublicationsPage = () => {
 
         {filteredDocuments.length === 0 && (
           <div className="text-center py-12">
-            <FileText className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+            
             <h3 className="text-lg font-semibold mb-2">No documents found</h3>
             <p className="text-muted-foreground">
               Try adjusting your search terms or filters to find what you're looking for.

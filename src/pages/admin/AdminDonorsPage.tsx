@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { Search, Eye } from "lucide-react";
+import { Search } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { calculateDonorTier } from "@/utils/donorTiers";
 
@@ -110,7 +110,7 @@ export const AdminDonorsPage = () => {
                     <TableCell className="text-sm text-muted-foreground">{new Date(d.updated_at).toLocaleDateString()}</TableCell>
                     <TableCell className="text-right">
                       <Button size="sm" variant="ghost" onClick={() => loadDonorDetails(d)}>
-                        <Eye className="h-4 w-4 mr-2" />View
+                        View
                       </Button>
                     </TableCell>
                   </TableRow>

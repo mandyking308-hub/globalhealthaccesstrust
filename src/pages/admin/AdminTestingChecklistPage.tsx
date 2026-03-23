@@ -5,7 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CheckCircle, XCircle, Clock, Download } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 interface ChecklistItem {
@@ -170,11 +169,11 @@ export const AdminTestingChecklistPage = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "pass":
-        return <CheckCircle className="h-5 w-5 text-green-600" />;
+        return ;
       case "fail":
-        return <XCircle className="h-5 w-5 text-red-600" />;
+        return ;
       default:
-        return <Clock className="h-5 w-5 text-muted-foreground" />;
+        return ;
     }
   };
 
@@ -226,7 +225,7 @@ export const AdminTestingChecklistPage = () => {
       {/* Actions */}
       <div className="flex gap-3 mb-6">
         <Button onClick={exportResults}>
-          <Download className="h-4 w-4 mr-2" />
+          
           Export Results
         </Button>
         <Button variant="outline" onClick={resetChecklist}>

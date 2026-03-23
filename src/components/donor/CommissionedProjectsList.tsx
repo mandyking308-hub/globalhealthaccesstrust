@@ -5,7 +5,6 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
-import { MapPin, Calendar, TrendingUp, CheckCircle } from "lucide-react";
 
 interface CommissionedProject {
   id: string;
@@ -115,20 +114,20 @@ export const CommissionedProjectsList = () => {
             
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-muted-foreground" />
+                
                 <span>{project.country}, {project.region}</span>
               </div>
               <div className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-muted-foreground" />
+                
                 <span>{project.budget_range}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-muted-foreground" />
+                
                 <span>Requested: {format(new Date(project.created_at), "MMM d, yyyy")}</span>
               </div>
               {project.status !== "pending" && (
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-muted-foreground" />
+                  
                   <span>Updated: {format(new Date(project.updated_at), "MMM d, yyyy")}</span>
                 </div>
               )}

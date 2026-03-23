@@ -1,4 +1,3 @@
-import { Scale, Shield, AlertTriangle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const TermsOfUsePage = () => {
@@ -7,7 +6,7 @@ export const TermsOfUsePage = () => {
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
-            <Scale className="w-12 h-12 text-primary mr-4 mt-2" />
+            
             <div>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
                 Terms of Use
@@ -100,7 +99,7 @@ export const TermsOfUsePage = () => {
           <Card className="card-professional">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <AlertTriangle className="w-5 h-5 mr-2" />
+                
                 Disclaimers
               </CardTitle>
             </CardHeader>
