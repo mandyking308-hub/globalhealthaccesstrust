@@ -207,11 +207,11 @@ h1,h2,h3,h4,p,li{
   .pillars-grid{grid-template-columns:repeat(5,1fr);}
 }
 
-/* Cards */
-.card{background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:24px;}
+/* Cards - minimal, no containers */
+.card{background:transparent; border:none; border-radius:0; padding:24px 0;}
 .card__title{margin-bottom:.25rem; font-weight:700; color:var(--c-primary);}
 .card__text{color:var(--c-muted);}
-.card__divider{height:3px; width:32px; background:var(--c-highlight); border-radius:3px; margin:4px 0 12px;}
+.card__divider{height:1px; width:32px; background:var(--c-highlight); margin:4px 0 12px;}
 
 /* Images */
 img{max-width:100%; height:auto; object-fit:cover; border-radius:8px;}
