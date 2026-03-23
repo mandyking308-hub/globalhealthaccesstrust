@@ -232,5 +232,6 @@ export const GetInvolvedPage = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
