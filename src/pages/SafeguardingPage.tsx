@@ -348,6 +348,7 @@ export const WhistleblowingPage = () => (
 
 export const GovernancePage = () => (
   <div className="py-16">
+    <Helmet><title>Governance & Oversight | Global Health Access Trust</title><meta name="description" content="Governance and oversight framework of the Global Health Access Trust, ensuring accountability, transparency, and regulatory compliance." /><link rel="canonical" href="https://globalhealthaccesstrust.org/governance" /></Helmet>
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
