@@ -1,5 +1,15 @@
 User-agent: *
 Allow: /
+
+# Block private/authenticated areas
+Disallow: /admin
+Disallow: /admin/
+Disallow: /donor-dashboard
+Disallow: /volunteer-dashboard
+Disallow: /admin-dashboard
+Disallow: /auth
+Disallow: /testing-checklist
+Disallow: /donation-form
 Disallow: /404
 Disallow: /500
 
