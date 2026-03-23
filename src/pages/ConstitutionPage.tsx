@@ -2,10 +2,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { SEO } from "@/components/SEO";
 
 export const ConstitutionPage = () => {
   return (
-    <div className="py-16">
+    <>
+      <SEO
+        title="Constitution"
+        description="The founding constitution of the Global Health Access Trust, setting out our charitable objects, trustee powers, and governance structure."
+        canonical="/constitution"
+      />
+      <div className="py-16">
       <div className="container-content">
         {/* Header */}
         <div className="text-center mb-12">

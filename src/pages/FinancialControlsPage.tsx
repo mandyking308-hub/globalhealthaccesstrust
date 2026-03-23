@@ -1,7 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 export const FinancialControlsPage = () => (
-  <div className="py-16">
+  <>
+    <SEO
+      title="Financial Controls"
+      description="Financial control framework of the Global Health Access Trust, including budgetary oversight, audit procedures, and fund management policies."
+      canonical="/financial-controls"
+    />
+    <div className="py-16">
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-left mb-12">

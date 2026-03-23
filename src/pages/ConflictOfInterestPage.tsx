@@ -1,7 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 
 export const ConflictOfInterestPage = () => (
-  <div className="py-16">
+  <>
+    <SEO
+      title="Conflict of Interest Policy"
+      description="Conflict of Interest Policy of the Global Health Access Trust, ensuring transparency and integrity in trustee and staff decision-making."
+      canonical="/conflict-of-interest"
+    />
+    <div className="py-16">
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-left mb-12">
