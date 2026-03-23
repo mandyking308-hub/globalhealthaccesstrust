@@ -42,39 +42,32 @@ export const CommissionProjectsPage = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[
                 {
-                  ,
                   title: "Direct Philanthropic Control",
                   description: "Choose your region, intervention type, and intended impact with precision."
                 },
                 {
-                  ,
                   title: "Real-Time Visibility",
                   description: "Track progress through photos, field notes, and milestone updates."
                 },
                 {
-                  ,
                   title: "Evidence of Progress",
                   description: "Receive documented proof of every stage from deployment to completion."
                 },
                 {
-                  ,
                   title: "Personal Connection",
                   description: "Add dedications and witness the human impact of your contribution."
                 },
                 {
-                  ,
                   title: "No Bureaucracy",
                   description: "Streamlined process from request to implementation to reporting."
                 },
                 {
-                  ,
                   title: "High-Integrity Reporting",
                   description: "Complete spending logs and formal impact certificates upon completion."
                 }
               ].map((feature, index) => (
                 <Card key={index} className="border-border/50 shadow-soft hover:shadow-medium transition-shadow">
                   <CardContent className="pt-4 sm:pt-6">
-                    <feature.icon className="w-10 h-10 sm:w-12 sm:h-12 text-accent mb-3 sm:mb-4" />
                     <h3 className="font-serif text-lg sm:text-xl font-bold mb-2">{feature.title}</h3>
                     <p className="text-sm sm:text-base text-muted-foreground">{feature.description}</p>
                   </CardContent>
