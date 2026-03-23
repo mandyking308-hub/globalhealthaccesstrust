@@ -90,36 +90,36 @@ export const IMPACT_STATS = [
   {
     number: "Principled", 
     label: "Governance",
-    description: "Unwavering commitment to ethical standards and institutional integrity"
+    description: "Independent oversight, ethical standards, and institutional accountability"
   },
   {
     number: "Enduring",
     label: "Legacy",
-    description: "Built to stand the test of time, serving communities for generations"
+    description: "Structured for long-term operation and intergenerational continuity"
   },
   {
     number: "Uncompromising", 
     label: "Mission",
-    description: "Never wavering in our commitment to healthcare as a matter of justice"
+    description: "Healthcare access as a matter of justice, not discretion"
   }
 ];
 
 export const NEW_IMPACT_STATS = [
   {
     icon: "Globe",
-    text: "Working in 12 countries with partnerships across 100+ more"
+    text: "Operating across 12 countries with partnerships in over 100 jurisdictions"
   },
   {
     icon: "Users",
-    text: "20,000+ health organisations connected through our network"
+    text: "Connected to a network of 20,000+ health organisations"
   },
   {
     icon: "Heart",
-    text: "Over 1 million people supported with access to care and information"
+    text: "Over 1 million individuals reached through funded programmes"
   },
   {
     icon: "TrendingUp",
-    text: "85% of every donation goes directly to health programs"
+    text: "85% of all contributions directed to frontline health delivery"
   }
 ];
 
