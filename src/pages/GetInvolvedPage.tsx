@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -18,12 +17,8 @@ export const GetInvolvedPage = () => {
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newsletterForm.consent) return;
-    
-    // Simulate submission
     console.log("Newsletter subscription:", newsletterForm);
     setIsSubmitted(true);
-    
-    // Reset form after delay
     setTimeout(() => {
       setIsSubmitted(false);
       setNewsletterForm({ name: "", email: "", consent: false });
@@ -32,258 +27,197 @@ export const GetInvolvedPage = () => {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-primary/5 to-gold/10">
-        <div className="container-section">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Get Involved
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-              Join our mission to uphold healthcare as a matter of justice. Whether through 
-              donation, partnership, or advocacy, your involvement creates lasting change.
-            </p>
-          </div>
+      {/* Hero */}
+      <section className="py-16 bg-gradient-to-br from-primary/5 to-gold/5">
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <h1 className="mb-4">Get Involved</h1>
+          <p className="text-[15px] text-muted-foreground leading-[1.7] max-w-3xl">
+            Join our mission to uphold healthcare as a matter of justice. Whether through 
+            donation, partnership, or advocacy, your involvement creates lasting change.
+          </p>
         </div>
       </section>
 
-      {/* Ways to Get Involved */}
+      {/* Ways to Support */}
       <section className="py-16">
-        <div className="container-section">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              Ways to Support Our Mission
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              From financial support to professional partnerships, there are many meaningful 
-              ways to contribute to healthcare justice worldwide.
-            </p>
-          </div>
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <h2 className="mb-4">Ways to Support Our Mission</h2>
+          <p className="text-[15px] text-muted-foreground mb-10 leading-[1.7] max-w-3xl">
+            From financial support to professional partnerships, there are many meaningful 
+            ways to contribute to healthcare justice worldwide.
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            {/* Partner With Us */}
-            <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-gold/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-gold/20 transition-colors">
-                  
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Partner With Us</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Support our charitable programmes through partnerships. 
-                  UK taxpayers can add Gift Aid to increase impact.
-                </p>
-                <Link to="/donate">
-                  <Button size="lg" className="w-full">
-                    Partner With Us
-                    
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="section-container">
+              <h3 className="mb-3 text-foreground">Partner With Us</h3>
+              <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
+                Support our charitable programmes through partnerships. 
+                UK taxpayers can add Gift Aid to increase impact.
+              </p>
+              <Link to="/donate">
+                <Button size="lg" className="w-full">Partner With Us</Button>
+              </Link>
+            </div>
 
-            {/* Partner */}
-            <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
-                  
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Become a Partner</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Professional partnerships with healthcare institutions, academic bodies, 
-                  and development organisations to advance our shared mission.
-                </p>
-                <Link to="/contact">
-                  <Button variant="outline" size="lg" className="w-full">
-                    Partner With Us
-                    
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+            <div className="section-container">
+              <h3 className="mb-3 text-foreground">Become a Partner</h3>
+              <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
+                Professional partnerships with healthcare institutions, academic bodies, 
+                and development organisations to advance our shared mission.
+              </p>
+              <Link to="/contact">
+                <Button variant="outline" size="lg" className="w-full">Partner With Us</Button>
+              </Link>
+            </div>
 
-            {/* Stay Informed */}
-            <Card className="card-elevated group hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-accent/20 transition-colors">
-                  
-                </div>
-                <h3 className="text-xl font-semibold mb-4">Stay Informed</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Subscribe to our newsletter for updates on programmes, research, 
-                  and opportunities to get involved in healthcare justice.
-                </p>
-                <Button variant="outline" size="lg" className="w-full" onClick={() => {
-                  document.getElementById('newsletter-section')?.scrollIntoView({ behavior: 'smooth' });
-                }}>
-                  Subscribe
-                  
-                </Button>
-              </CardContent>
-            </Card>
+            <div className="section-container">
+              <h3 className="mb-3 text-foreground">Stay Informed</h3>
+              <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
+                Subscribe to our newsletter for updates on programmes, research, 
+                and opportunities to get involved in healthcare justice.
+              </p>
+              <Button variant="outline" size="lg" className="w-full" onClick={() => {
+                document.getElementById('newsletter-section')?.scrollIntoView({ behavior: 'smooth' });
+              }}>
+                Subscribe
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Professional Partnerships */}
       <section className="py-16 bg-muted/30">
-        <div className="container-section">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-8 text-center">
-              Professional Partnerships
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card className="card-professional">
-                <CardContent className="p-8">
-                  
-                  <h3 className="text-xl font-semibold mb-4">Healthcare Institutions</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    We welcome partnerships with hospitals, clinics, medical schools, and 
-                    healthcare systems committed to principled, sustainable care delivery.
-                  </p>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Clinical programme development</li>
-                    <li>• Professional training initiatives</li>
-                    <li>• Research collaboration opportunities</li>
-                    <li>• Quality improvement programmes</li>
-                  </ul>
-                </CardContent>
-              </Card>
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <h2 className="mb-6">Professional Partnerships</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="section-container">
+              <h3 className="mb-3 text-foreground">Healthcare Institutions</h3>
+              <p className="text-[15px] text-muted-foreground leading-[1.7] mb-4">
+                We welcome partnerships with hospitals, clinics, medical schools, and 
+                healthcare systems committed to principled, sustainable care delivery.
+              </p>
+              <ul className="text-[13px] text-muted-foreground space-y-1">
+                <li>• Clinical programme development</li>
+                <li>• Professional training initiatives</li>
+                <li>• Research collaboration opportunities</li>
+                <li>• Quality improvement programmes</li>
+              </ul>
+            </div>
 
-              <Card className="card-professional">
-                <CardContent className="p-8">
-                  
-                  <h3 className="text-xl font-semibold mb-4">Academic & Research</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Academic partnerships advance evidence-based policy and practice 
-                    through rigorous research and scholarship.
-                  </p>
-                  <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• Policy research initiatives</li>
-                    <li>• Academic exchange programmes</li>
-                    <li>• Publication and dissemination</li>
-                    <li>• Capacity building support</li>
-                  </ul>
-                </CardContent>
-              </Card>
+            <div className="section-container">
+              <h3 className="mb-3 text-foreground">Academic & Research</h3>
+              <p className="text-[15px] text-muted-foreground leading-[1.7] mb-4">
+                Academic partnerships advance evidence-based policy and practice 
+                through rigorous research and scholarship.
+              </p>
+              <ul className="text-[13px] text-muted-foreground space-y-1">
+                <li>• Policy research initiatives</li>
+                <li>• Academic exchange programmes</li>
+                <li>• Publication and dissemination</li>
+                <li>• Capacity building support</li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter Signup */}
+      {/* Newsletter */}
       <section id="newsletter-section" className="py-16">
-        <div className="container-section">
-          <div className="max-w-2xl mx-auto">
-            <Card className="card-elevated">
-              <CardContent className="p-8">
-                <div className="text-center mb-6">
-                  
-                  <h2 className="text-2xl font-serif font-bold mb-2">Stay Informed</h2>
-                  <p className="text-muted-foreground">
-                    Subscribe to receive updates on our programmes, research findings, 
-                    and opportunities to support healthcare justice.
-                  </p>
-                </div>
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-2xl">
+            <h2 className="mb-4">Stay Informed</h2>
+            <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
+              Subscribe to receive updates on our programmes, research findings, 
+              and opportunities to support healthcare justice.
+            </p>
 
-                {isSubmitted ? (
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      
+            {isSubmitted ? (
+              <div className="section-container">
+                <h3 className="mb-2 text-foreground">Subscription Confirmed</h3>
+                <p className="text-[15px] text-muted-foreground">
+                  Thank you for subscribing. You'll receive a confirmation email shortly.
+                </p>
+              </div>
+            ) : (
+              <div className="section-container">
+                <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="newsletter-name">First Name</Label>
+                      <Input
+                        id="newsletter-name"
+                        value={newsletterForm.name}
+                        onChange={(e) => setNewsletterForm(prev => ({ ...prev, name: e.target.value }))}
+                        required
+                      />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2">Subscription Confirmed</h3>
-                    <p className="text-muted-foreground">
-                      Thank you for subscribing. You'll receive a confirmation email shortly 
-                      with instructions to complete your subscription.
-                    </p>
+                    <div className="space-y-2">
+                      <Label htmlFor="newsletter-email">Email Address</Label>
+                      <Input
+                        id="newsletter-email"
+                        type="email"
+                        value={newsletterForm.email}
+                        onChange={(e) => setNewsletterForm(prev => ({ ...prev, email: e.target.value }))}
+                        required
+                      />
+                    </div>
                   </div>
-                ) : (
-                  <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="newsletter-name">First Name</Label>
-                        <Input
-                          id="newsletter-name"
-                          value={newsletterForm.name}
-                          onChange={(e) => setNewsletterForm(prev => ({ ...prev, name: e.target.value }))}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="newsletter-email">Email Address</Label>
-                        <Input
-                          id="newsletter-email"
-                          type="email"
-                          value={newsletterForm.email}
-                          onChange={(e) => setNewsletterForm(prev => ({ ...prev, email: e.target.value }))}
-                          required
-                        />
-                      </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <Checkbox
+                        id="newsletter-consent"
+                        checked={newsletterForm.consent}
+                        onCheckedChange={(checked) => 
+                          setNewsletterForm(prev => ({ ...prev, consent: checked as boolean }))
+                        }
+                        className="mt-1"
+                      />
+                      <Label htmlFor="newsletter-consent" className="text-sm leading-relaxed cursor-pointer">
+                        I consent to receiving email updates from the Global Health Access Trust 
+                        and understand I can unsubscribe at any time.
+                      </Label>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex items-start space-x-3">
-                        <Checkbox
-                          id="newsletter-consent"
-                          checked={newsletterForm.consent}
-                          onCheckedChange={(checked) => 
-                            setNewsletterForm(prev => ({ ...prev, consent: checked as boolean }))
-                          }
-                          className="mt-1"
-                        />
-                        <Label htmlFor="newsletter-consent" className="text-sm leading-relaxed cursor-pointer">
-                          I consent to receiving email updates from the Global Health Access Trust 
-                          and understand I can unsubscribe at any time. Your information will be 
-                          processed in accordance with our Privacy Policy.
-                        </Label>
-                      </div>
+                    <Alert>
+                      <AlertDescription className="text-sm">
+                        <strong>Double Opt-In:</strong> You will receive a confirmation email 
+                        to verify your subscription.
+                      </AlertDescription>
+                    </Alert>
+                  </div>
 
-                      <Alert>
-                        <AlertDescription className="text-sm">
-                          <strong>Double Opt-In:</strong> You will receive a confirmation email 
-                          to verify your subscription. We respect your privacy and will never 
-                          share your information with third parties.
-                        </AlertDescription>
-                      </Alert>
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      size="lg" 
-                      className="w-full"
-                      disabled={!newsletterForm.consent}
-                    >
-                      
-                      Subscribe to Updates
-                    </Button>
-                  </form>
-                )}
-              </CardContent>
-            </Card>
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full"
+                    disabled={!newsletterForm.consent}
+                  >
+                    Subscribe to Updates
+                  </Button>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       {/* Contact CTA */}
       <section className="py-16 bg-primary text-primary-foreground">
-        <div className="container-section text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-            Ready to Make a Difference?
-          </h2>
-          <p className="text-xl mb-8 opacity-90 max-w-3xl mx-auto">
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+          <h2 className="mb-4">Ready to Make a Difference?</h2>
+          <p className="text-[15px] mb-8 opacity-90 max-w-3xl leading-[1.7]">
             Whether you're an individual donor, healthcare professional, or institutional 
             partner, we welcome you to join our mission of healthcare justice.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/contact">
-              <Button size="lg" variant="secondary" className="px-8 py-4">
-                Get in Touch
-                
-              </Button>
+              <Button size="lg" variant="secondary">Get in Touch</Button>
             </Link>
             <Link to="/about">
-              <Button size="lg" variant="outline" className="px-8 py-4 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
                 Learn More About GHAT
               </Button>
             </Link>
