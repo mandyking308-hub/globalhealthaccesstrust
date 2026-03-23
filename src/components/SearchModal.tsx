@@ -90,11 +90,11 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     setResults([...pageResults, ...blogResults, ...docResults].slice(0, 8));
   }, [query]);
 
-  const getIcon = (type: string) => {
+  const getTypeLabel = (type: string) => {
     switch (type) {
-      case 'blog': return ;
-      case 'document': return ;
-      default: return ;
+      case 'blog': return 'Blog';
+      case 'document': return 'Doc';
+      default: return 'Page';
     }
   };
 
