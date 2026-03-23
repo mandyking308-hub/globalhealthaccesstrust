@@ -129,6 +129,7 @@ export const HomePage = () => {
                   src={clinicImage} 
                   alt="Primary healthcare clinic interior with medical equipment in a rural setting"
                   className="w-full h-48 object-cover"
+                  loading="lazy"
                 />
                 <div className="p-5">
                   <p className="text-sm font-medium text-foreground">Primary Healthcare</p>
