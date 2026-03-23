@@ -140,6 +140,7 @@ export const HomePage = () => {
                   src={systemsImage} 
                   alt="Aerial view of river delta and agricultural systems with settlements"
                   className="w-full h-48 object-cover"
+                  loading="lazy"
                 />
                 <div className="p-5">
                   <p className="text-sm font-medium text-foreground">Systems Infrastructure</p>
