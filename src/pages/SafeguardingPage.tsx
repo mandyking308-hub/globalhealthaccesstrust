@@ -194,6 +194,7 @@ export const AntiFraudPage = () => (
 
 export const WhistleblowingPage = () => (
   <div className="py-16">
+    <Helmet><title>Whistleblowing Policy | Global Health Access Trust</title><meta name="description" content="Whistleblowing policy of the Global Health Access Trust for reporting concerns about malpractice or wrongdoing." /><link rel="canonical" href="https://globalhealthaccesstrust.org/whistleblowing" /></Helmet>
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
