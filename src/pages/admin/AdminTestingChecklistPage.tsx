@@ -255,7 +255,7 @@ export const AdminTestingChecklistPage = () => {
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 mt-1">
-                      {getStatusIcon(item.status)}
+                      {getStatusIndicator(item.status)}
                     </div>
                     
                     <div className="flex-1">

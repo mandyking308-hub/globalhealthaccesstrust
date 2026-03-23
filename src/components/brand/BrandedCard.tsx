@@ -10,7 +10,6 @@ interface BrandedCardProps {
 
 export const BrandedCard = ({ 
   title, 
-  : Icon, 
   children, 
   className,
   hoverable = true 
@@ -25,7 +24,6 @@ export const BrandedCard = ({
     >
       <CardHeader className="border-b border-border/50 bg-gradient-to-r from-primary/5 to-accent/5">
         <CardTitle className="flex items-center gap-3 text-foreground">
-          {Icon && }
           <span className="font-serif">{title}</span>
         </CardTitle>
       </CardHeader>

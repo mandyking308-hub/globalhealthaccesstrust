@@ -182,9 +182,7 @@ export const AdminBrandingPage = () => {
         <TabsContent value="images" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                
-                Hero Images
+              <CardTitle>Hero Images
               </CardTitle>
               <CardDescription>
                 Upload hero images for key pages (minimum 1920x1080px)

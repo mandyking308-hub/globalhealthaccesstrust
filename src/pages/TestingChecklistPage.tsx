@@ -223,7 +223,7 @@ export const TestingChecklistPage = () => {
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        {getCategoryIcon(category.key)}
+                        {getCategoryLabel(category.key)}
                         <div>
                           <CardTitle className="text-lg">{category.name}</CardTitle>
                           <CardDescription>

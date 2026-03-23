@@ -117,9 +117,9 @@ export const SessionManager = () => {
             <Card key={session.id}>
               <CardContent className="flex items-center justify-between py-4">
                 <div className="flex items-center gap-4">
-                  <div className="text-muted-foreground">
-                    {getDeviceIcon(session.device_info)}
-                  </div>
+                  <span className="text-xs font-medium text-muted-foreground uppercase">
+                    {getDeviceLabel(session.device_info)}
+                  </span>
                   <div>
                     <div className="font-medium">
                       {session.device_info || "Unknown Device"}
