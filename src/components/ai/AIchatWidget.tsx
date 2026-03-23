@@ -188,7 +188,7 @@ export const AIChatWidget = ({
           <ScrollArea className="h-64 sm:h-80 md:h-96 p-3 sm:p-4" ref={scrollRef}>
             {messages.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground">
-                {icon || }
+                {icon || <span className="text-base opacity-50">AI</span>}
                 <p className="text-xs sm:text-sm px-4">{subtitle || "How can I assist you today?"}</p>
               </div>
             ) : (
