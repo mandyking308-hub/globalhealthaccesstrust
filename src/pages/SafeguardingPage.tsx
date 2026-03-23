@@ -167,6 +167,7 @@ export const SafeguardingPage = () => (
 
 export const AntiFraudPage = () => (
   <div className="py-16">
+    <Helmet><title>Anti-Fraud & Anti-Corruption Policy | Global Health Access Trust</title><meta name="description" content="Anti-fraud and anti-corruption policy of the Global Health Access Trust." /><link rel="canonical" href="https://globalhealthaccesstrust.org/anti-fraud" /></Helmet>
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
