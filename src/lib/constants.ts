@@ -90,17 +90,17 @@ export const IMPACT_STATS = [
   {
     number: "Principled", 
     label: "Governance",
-    description: "Unwavering commitment to ethical standards and institutional integrity"
+    description: "Independent oversight, ethical standards, and institutional accountability"
   },
   {
     number: "Enduring",
     label: "Legacy",
-    description: "Built to stand the test of time, serving communities for generations"
+    description: "Structured for long-term operation and intergenerational continuity"
   },
   {
     number: "Uncompromising", 
     label: "Mission",
-    description: "Never wavering in our commitment to healthcare as a matter of justice"
+    description: "Healthcare access as a matter of justice, not discretion"
   }
 ];
 
