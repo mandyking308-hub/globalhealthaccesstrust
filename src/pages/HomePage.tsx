@@ -179,7 +179,7 @@ export const HomePage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {IMPACT_STATS.map((stat, index) => (
-                <div key={index} className="section-container text-center">
+                <div key={index} className="section-container text-left">
                   <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
                     {index === 0 ? "Standards" : index === 1 ? "Structure" : "Mandate"}
                   </span>
