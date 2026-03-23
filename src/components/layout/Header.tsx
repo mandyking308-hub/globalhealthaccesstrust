@@ -29,11 +29,15 @@ export const Header = () => {
               className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <svg viewBox="0 0 40 40" className="h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="0.5" y="0.5" width="39" height="39" rx="3.5" stroke="currentColor" strokeWidth="1" opacity="0.15"/>
-                <rect x="10" y="8" width="4" height="24" fill="currentColor"/>
-                <rect x="26" y="8" width="4" height="24" fill="currentColor"/>
-                <rect x="14" y="17" width="12" height="3.5" fill="currentColor"/>
+              <svg viewBox="0 0 100 100" className="h-10 w-10 md:h-11 md:w-11 lg:h-12 lg:w-12" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="94" height="94" fill="none" stroke="#1F3A2F" strokeWidth="2"/>
+                <rect x="26" y="14" width="13" height="72" fill="#1F3A2F"/>
+                <rect x="61" y="14" width="13" height="72" fill="#1F3A2F"/>
+                <rect x="39" y="42" width="22" height="11" fill="#1F3A2F"/>
+                <rect x="20" y="14" width="25" height="4.5" fill="#1F3A2F"/>
+                <rect x="55" y="14" width="25" height="4.5" fill="#1F3A2F"/>
+                <rect x="20" y="81.5" width="25" height="4.5" fill="#1F3A2F"/>
+                <rect x="55" y="81.5" width="25" height="4.5" fill="#1F3A2F"/>
               </svg>
             </Link>
 
