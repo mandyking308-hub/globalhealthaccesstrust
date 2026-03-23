@@ -124,6 +124,7 @@ export const DonorDashboardPage = () => {
       )}
       
       <div className="min-h-screen bg-gradient-to-br from-primary/5 to-accent/10">
+      <Helmet><title>Donor Dashboard | Global Health Access Trust</title><meta name="robots" content="noindex, nofollow" /></Helmet>
       <header className="bg-background border-b">
         <div className="container-section py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
