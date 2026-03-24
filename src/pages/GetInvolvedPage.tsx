@@ -37,10 +37,10 @@ export const GetInvolvedPage = () => {
       {/* Hero */}
       <section className="py-16 bg-gradient-to-br from-primary/5 to-gold/5">
         <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
-          <h1 className="mb-4">Get Involved</h1>
+          <h1 className="mb-4">Engage with the Trust</h1>
           <p className="text-[15px] text-muted-foreground leading-[1.7] max-w-3xl">
-            The Trust welcomes engagement from individuals, institutions, and professionals 
-            committed to advancing healthcare access through structured, accountable partnerships.
+            The Trust welcomes selective engagement from individuals, institutions, and professionals 
+            aligned with our mandate to advance healthcare access through structured, accountable partnerships.
           </p>
         </div>
       </section>
