@@ -31,11 +31,20 @@ export const AuthPage = () => {
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [gdprConsent, setGdprConsent] = useState(false);
 
+  const redirectByRole = async (userId: string) => {
+    const { data: roles } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId);
+    
+    const isAdmin = roles?.some(r => r.role === "admin" || r.role === "super_admin");
+    navigate(isAdmin ? "/admin/dashboard" : "/donor-dashboard");
+  };
+
   useEffect(() => {
-    // Check if user is already logged in
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        navigate("/donor-dashboard");
+        redirectByRole(session.user.id);
       }
     });
   }, [navigate]);
@@ -58,7 +67,7 @@ export const AuthPage = () => {
           title: "Welcome back!",
           description: "You've successfully logged in.",
         });
-        navigate("/donor-dashboard");
+        await redirectByRole(data.session.user.id);
       }
     } catch (err: any) {
       setError(err.message || "Invalid email or password");
@@ -120,7 +129,7 @@ export const AuthPage = () => {
           title: "Welcome to GHAT!",
           description: "Your account has been created successfully.",
         });
-        navigate("/donor-dashboard");
+        await redirectByRole(data.session.user.id);
       } else {
         toast({
           title: "Registration successful",
