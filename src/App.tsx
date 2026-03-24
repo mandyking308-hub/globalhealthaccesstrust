@@ -158,6 +158,7 @@ const App = () => (
             <Route path="branding" element={<AdminBrandingPage />} />
             <Route path="launch-checklist" element={<AdminLaunchChecklistPage />} />
             <Route path="contacts" element={<AdminContactsPage />} />
+            <Route path="manual" element={<AdminManualPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           

@@ -29,6 +29,7 @@ const menuItems = [
   { title: "Branding", url: "/admin/branding" },
   { title: "Testing", url: "/admin/testing" },
   { title: "Launch Prep", url: "/admin/launch-checklist" },
+  { title: "System Manual", url: "/admin/manual" },
   { title: "Settings", url: "/admin/settings" },
 ];
 
