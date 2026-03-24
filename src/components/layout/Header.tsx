@@ -93,15 +93,6 @@ export const Header = () => {
                 </Button>
               </Link>
 
-              <Link to="/auth" className="hidden sm:inline-flex">
-                <Button 
-                  variant="default" 
-                  size="sm" 
-                  className="h-9 px-5 text-[13px] font-medium rounded-sm"
-                >
-                  Sign Up
-                </Button>
-              </Link>
 
               <Button
                 variant="ghost"
@@ -158,11 +149,6 @@ export const Header = () => {
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                     <Button variant="outline" size="sm" className="w-full text-sm">
                       Login
-                    </Button>
-                  </Link>
-                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="default" size="sm" className="w-full text-sm">
-                      Sign Up
                     </Button>
                   </Link>
                 </div>
