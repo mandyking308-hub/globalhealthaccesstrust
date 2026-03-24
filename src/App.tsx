@@ -164,7 +164,7 @@ const App = () => (
           </Route>
           
           {/* Volunteer Portal Routes */}
-          <Route path="volunteers" element={<VolunteersPage />} />
+          <Route path="volunteer-apply" element={<VolunteersPage />} />
           <Route path="volunteer-dashboard" element={<VolunteerDashboardPage />} />
           
           {/* Admin Testing Route (Hidden) */}

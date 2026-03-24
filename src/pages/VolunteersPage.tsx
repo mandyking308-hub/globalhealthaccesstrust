@@ -109,7 +109,7 @@ export const VolunteersPage = () => {
 
   return (
     <>
-      <SEO title="Become a Volunteer - Global Health Access Trust" description="Join a global community of skilled professionals supporting high-impact health interventions." canonical="/volunteers" />
+      <SEO title="Become a Volunteer - Global Health Access Trust" description="Join a global community of skilled professionals supporting high-impact health interventions." canonical="/volunteer-apply" />
       <div className="min-h-screen bg-background">
         {/* Hero */}
         <section className="relative min-h-[40vh] sm:min-h-[50vh] flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: `linear-gradient(rgba(5, 21, 47, 0.7), rgba(5, 21, 47, 0.7)), url(${educationTrainingHero})` }}>
