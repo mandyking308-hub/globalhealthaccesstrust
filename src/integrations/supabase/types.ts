@@ -340,6 +340,51 @@ export type Database = {
         }
         Relationships: []
       }
+      inbound_contacts: {
+        Row: {
+          additional_context: string | null
+          created_at: string
+          email: string
+          gdpr_consent: boolean
+          id: string
+          message: string
+          name: string
+          nature_of_enquiry: string
+          organisation: string | null
+          phone: string | null
+          position: string | null
+          status: string
+        }
+        Insert: {
+          additional_context?: string | null
+          created_at?: string
+          email: string
+          gdpr_consent?: boolean
+          id?: string
+          message: string
+          name: string
+          nature_of_enquiry: string
+          organisation?: string | null
+          phone?: string | null
+          position?: string | null
+          status?: string
+        }
+        Update: {
+          additional_context?: string | null
+          created_at?: string
+          email?: string
+          gdpr_consent?: boolean
+          id?: string
+          message?: string
+          name?: string
+          nature_of_enquiry?: string
+          organisation?: string | null
+          phone?: string | null
+          position?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           body: string
