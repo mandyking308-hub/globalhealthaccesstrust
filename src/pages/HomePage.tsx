@@ -288,13 +288,13 @@ export const HomePage = () => {
             </h2>
             <div className="max-w-2xl mx-auto text-center mb-10">
               <p className="text-[15px] text-muted-foreground leading-[1.7] mb-4">
-                The Trust does not operate an open donation model.
+                Engagement with the Trust is conducted through a structured and selective process.
               </p>
               <p className="text-[15px] text-muted-foreground leading-[1.7] mb-4">
-                All funding relationships are established through a structured engagement process to ensure alignment, accountability, and effective deployment of capital.
+                Relationships are established with individuals, institutions, and partners aligned with the Trust's mandate and governance framework.
               </p>
               <p className="text-[15px] text-muted-foreground leading-[1.7]">
-                This approach allows the Trust to maintain full oversight of how funds are allocated, monitored, and delivered across its areas of intervention.
+                This approach ensures capital is deployed with precision, oversight, and long-term impact.
               </p>
             </div>
 
