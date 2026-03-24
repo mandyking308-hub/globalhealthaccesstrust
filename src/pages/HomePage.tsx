@@ -35,7 +35,7 @@ export const HomePage = () => {
               A private charitable trust directing capital into healthcare access, system infrastructure, and capacity where it is most critically needed.
             </p>
             <p className="text-[13px] sm:text-sm mb-8 text-white/60 max-w-xl mx-auto text-center tracking-wide">
-              Structured funding. Verified delivery. Measurable outcomes.
+              A controlled platform for deploying capital into healthcare systems with oversight, accountability, and measurable impact.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/auth">
@@ -123,7 +123,7 @@ export const HomePage = () => {
               How the Trust Operates
             </h2>
             <p className="text-[15px] text-muted-foreground text-center mb-10 leading-[1.7] max-w-2xl mx-auto">
-              The Trust operates through a structured system that connects capital, delivery partners, and measurable outcomes within a controlled environment.
+              The Trust operates through a structured model that defines how capital, delivery, and oversight are aligned within a controlled environment.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -166,7 +166,7 @@ export const HomePage = () => {
               Operational Framework
             </h2>
             <p className="text-[15px] text-muted-foreground text-center mb-10 leading-[1.7] max-w-2xl mx-auto">
-              The Trust operates through a structured internal system that manages capital allocation, project delivery, monitoring, and outcome verification.
+              The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -371,7 +371,7 @@ export const HomePage = () => {
             <div className="text-center mt-10">
               <Link to="/contact">
                 <Button size="lg" variant="default">
-                  Request Private Engagement
+                  Initiate Engagement
                 </Button>
               </Link>
             </div>
