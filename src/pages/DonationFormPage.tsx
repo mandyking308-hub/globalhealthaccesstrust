@@ -61,7 +61,7 @@ export const DonationFormPage = () => {
     if (!formData.purpose) {
       toast({
         title: "Purpose required",
-        description: "Please select a donation purpose.",
+        description: "Please select a funding purpose.",
         variant: "destructive",
       });
       return;
