@@ -703,8 +703,9 @@ a:hover{text-decoration:none;}
 }
 
 .content-prose p {
-  @apply leading-relaxed mb-5;
-  max-width: 68ch;
+  @apply leading-relaxed;
+  max-width: 72ch;
+  margin-bottom: 0.875rem;
 }
 
 .content-prose h1 {
