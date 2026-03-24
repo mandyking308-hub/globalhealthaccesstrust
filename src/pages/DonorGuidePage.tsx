@@ -47,7 +47,7 @@ export const DonorGuidePage = () => {
             Every supporter begins their journey by creating a secure account. This is required for all engagement.
           </p>
           <p className="text-muted-foreground max-w-3xl mx-auto mt-4">
-            Our platform is encrypted, GDPR-compliant, and designed to handle high-value contributions with full discretion and accountability.
+            Our platform is encrypted, GDPR-compliant, and designed to handle structured funding relationships with full discretion and accountability.
           </p>
         </div>
 
