@@ -60,6 +60,7 @@ import { AdminDocumentationPage } from "./pages/admin/AdminDocumentationPage";
 import { AdminPresentationsPage } from "./pages/admin/AdminPresentationsPage";
 import { AdminSystemHealthPage } from "./pages/admin/AdminSystemHealthPage";
 import { AdminLaunchChecklistPage } from "./pages/admin/AdminLaunchChecklistPage";
+import { AdminContactsPage } from "./pages/admin/AdminContactsPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 
 const queryClient = new QueryClient();
