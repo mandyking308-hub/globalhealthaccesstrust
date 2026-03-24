@@ -159,6 +159,45 @@ export const HomePage = () => {
           </div>
         </section>
 
+        {/* Operational Framework */}
+        <section className="py-16 md:py-20 lg:py-24">
+          <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="text-center mb-4 text-foreground">
+              Operational Framework
+            </h2>
+            <p className="text-[15px] text-muted-foreground text-center mb-10 leading-[1.7] max-w-2xl mx-auto">
+              The Trust operates through a structured internal system that manages capital allocation, project delivery, monitoring, and outcome verification.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="section-container">
+                <h3 className="mb-3 text-foreground">Capital Allocation</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Funding is assigned to clearly defined initiatives with agreed scope and objectives.
+                </p>
+              </div>
+              <div className="section-container">
+                <h3 className="mb-3 text-foreground">Project Structuring</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Delivery partners, geography, and operational frameworks are established.
+                </p>
+              </div>
+              <div className="section-container">
+                <h3 className="mb-3 text-foreground">Monitoring &amp; Reporting</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Progress is tracked against milestones with structured reporting.
+                </p>
+              </div>
+              <div className="section-container">
+                <h3 className="mb-3 text-foreground">Outcome Verification</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Results are assessed to ensure accountability and measurable impact.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Delivery */}
         <section className="py-16 md:py-20 lg:py-24">
           <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
