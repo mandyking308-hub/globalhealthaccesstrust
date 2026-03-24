@@ -48,10 +48,10 @@ export const GetInvolvedPage = () => {
       {/* Ways to Engage */}
       <section className="py-16">
         <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
-          <h2 className="mb-4">Ways to Engage</h2>
+          <h2 className="mb-4">Pathways to Engagement</h2>
           <p className="text-[15px] text-muted-foreground mb-10 leading-[1.7] max-w-3xl">
-            From structured funding relationships to professional partnerships, there are several 
-            pathways to engage with the Trust's mission.
+            From structured funding relationships to professional partnerships, engagement with 
+            the Trust follows a selective and governed process.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
