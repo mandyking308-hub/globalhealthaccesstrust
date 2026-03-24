@@ -52,7 +52,7 @@ export const DonationFormPage = () => {
     if (!formData.amount || parseFloat(formData.amount) < 500) {
       toast({
         title: "Invalid amount",
-        description: "Minimum donation amount is £500.",
+        description: "Minimum funding amount is £500.",
         variant: "destructive",
       });
       return;
