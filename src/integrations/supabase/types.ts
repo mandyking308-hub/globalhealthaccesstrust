@@ -343,6 +343,7 @@ export type Database = {
       inbound_contacts: {
         Row: {
           additional_context: string | null
+          admin_notes: string | null
           created_at: string
           email: string
           gdpr_consent: boolean
@@ -357,6 +358,7 @@ export type Database = {
         }
         Insert: {
           additional_context?: string | null
+          admin_notes?: string | null
           created_at?: string
           email: string
           gdpr_consent?: boolean
@@ -371,6 +373,7 @@ export type Database = {
         }
         Update: {
           additional_context?: string | null
+          admin_notes?: string | null
           created_at?: string
           email?: string
           gdpr_consent?: boolean
