@@ -129,7 +129,7 @@ export const AuthPage = () => {
           title: "Welcome to GHAT!",
           description: "Your account has been created successfully.",
         });
-        navigate("/donor-dashboard");
+        await redirectByRole(data.session.user.id);
       } else {
         toast({
           title: "Registration successful",
