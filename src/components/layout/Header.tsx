@@ -151,11 +151,6 @@ export const Header = () => {
                       Login
                     </Button>
                   </Link>
-                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button variant="default" size="sm" className="w-full text-sm">
-                      Sign Up
-                    </Button>
-                  </Link>
                 </div>
               </div>
             </div>
