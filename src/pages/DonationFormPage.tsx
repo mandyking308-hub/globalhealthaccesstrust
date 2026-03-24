@@ -108,7 +108,7 @@ export const DonationFormPage = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg shadow-sm border">
             <div>
-              <Label htmlFor="amount">Donation Amount (£)*</Label>
+              <Label htmlFor="amount">Funding Amount (£)*</Label>
               <Input
                 id="amount"
                 type="number"
