@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
@@ -69,6 +70,12 @@ export const AboutTheTrustPage = () => {
           <h2>Constitution & Governance</h2>
           <p>Global Health Access Trust is governed by a formal Constitution, which outlines our purpose, structure, and decision-making processes. This document sets out the roles of our trustees, how we operate, and our commitment to transparency and accountability.</p>
           <p className="block"><a href="/GHAT_Constitution_2025_Refined.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-block py-2">Download Constitution (Adopted June 2025)</a></p>
+        </div>
+
+        <div className="flex flex-wrap gap-4 mt-8">
+          <Link to="/contact-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Contact the Trust →</Link>
+          <Link to="/governance" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">View Governance →</Link>
+          <Link to="/support-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Support the Trust →</Link>
         </div>
       </ContentLayout>
     </>

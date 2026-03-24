@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
@@ -81,7 +82,12 @@ export const OurWorkPage = () => {
           <li>Audited, reviewed, and governed with strict neutrality</li>
           <li>Undertaken in the service of long-term public benefit</li>
         </ul>
-      </div>
+        </div>
+
+        <div className="flex flex-wrap gap-4 mt-8">
+          <Link to="/support-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Support Our Work →</Link>
+          <Link to="/contact-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Contact the Trust →</Link>
+        </div>
     </ContentLayout>
   );
 };
