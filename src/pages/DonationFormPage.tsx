@@ -42,7 +42,7 @@ export const DonationFormPage = () => {
     if (!userId) {
       toast({
         title: "Authentication required",
-        description: "Please log in to make a donation.",
+        description: "Please log in to submit funding.",
         variant: "destructive",
       });
       navigate("/auth");
