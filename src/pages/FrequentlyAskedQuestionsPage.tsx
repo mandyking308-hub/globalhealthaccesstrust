@@ -6,7 +6,7 @@ export const FrequentlyAskedQuestionsPage = () => {
     <ContentLayout>
       <SEO
         title="Frequently Asked Questions"
-        description="Common questions about the Global Health Access Trust — our mission, governance, how to donate, volunteer, and support global healthcare access."
+        description="Common questions about the Global Health Access Trust — our mission, governance, how to engage, volunteer, and support global healthcare access."
         canonical="/frequently-asked-questions"
       />
       <h1>Frequently Asked Questions</h1>
@@ -37,10 +37,10 @@ export const FrequentlyAskedQuestionsPage = () => {
 
       <div className="section-container">
         <h2>Supporting the Trust</h2>
-        <h3>How can I partner with the Trust?</h3>
-        <p>Partnerships can be made through secure online platforms, bank transfer, or by cheque. All UK taxpayers can increase the value of their gift through Gift Aid at no extra cost. We also welcome legacy giving through will bequests.</p>
-        <h3>Can I specify how my donation is used?</h3>
-        <p>Yes, donors may make restricted gifts to specific programmes or initiatives, subject to Board approval and formal documentation that aligns with our charitable objectives and includes reversion clauses if the original purpose becomes obsolete.</p>
+        <h3>How can I support the Trust?</h3>
+        <p>Engagement with the Trust follows a structured process. Initial contact can be made through our enquiry form. All funding relationships are formalised through appropriate legal documentation aligned with our charitable objectives.</p>
+        <h3>Can I specify how my contribution is used?</h3>
+        <p>Yes, supporters may direct restricted gifts to specific programmes or initiatives, subject to Board approval and formal documentation that aligns with our charitable objectives and includes reversion clauses if the original purpose becomes obsolete.</p>
         <h3>Do you provide tax receipts?</h3>
         <p>Yes, all contributions are formally receipted. UK taxpayers can benefit from Gift Aid, which allows us to claim an additional 25p for every £1 contributed at no extra cost to the contributor.</p>
       </div>

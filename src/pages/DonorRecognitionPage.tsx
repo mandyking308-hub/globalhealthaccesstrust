@@ -36,11 +36,11 @@ export const DonorRecognitionPage = () => {
           </div>
           <div className="p-4 bg-background rounded border border-border">
             <h3>Founding Benefactors</h3>
-            <p>Major donors contributing £50,000+ who provide critical cornerstone funding for our strategic initiatives and programme development.</p>
+            <p>Major supporters contributing £50,000+ who provide critical cornerstone funding for our strategic initiatives and programme development.</p>
           </div>
           <div className="p-4 bg-background rounded border border-border">
             <h3>Founding Supporters</h3>
-            <p>Committed philanthropists donating £25,000+ who enable the Trust to undertake significant healthcare access projects.</p>
+            <p>Committed philanthropists contributing £25,000+ who enable the Trust to undertake significant healthcare access projects.</p>
           </div>
           <div className="p-4 bg-background rounded border border-border">
             <h3>Charter Members</h3>
@@ -77,7 +77,7 @@ export const DonorRecognitionPage = () => {
         <p>For questions about recognition, to update recognition preferences, or to discuss memorial recognition:</p>
         <p>Chair of Trustees<br />
         Subject: Donor Recognition - Confidential</p>
-        <p>We welcome discussions about recognition preferences at any time and respect all donor wishes regarding acknowledgment of their generous support.</p>
+        <p>We welcome discussions about recognition preferences at any time and respect all supporter wishes regarding acknowledgment of their generous support.</p>
       </div>
     </ContentLayout>
   );
