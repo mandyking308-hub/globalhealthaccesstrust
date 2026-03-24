@@ -30,7 +30,7 @@ export const GetInvolvedPage = () => {
     <>
       <SEO
         title="Get Involved"
-        description="Volunteer, donate, or partner with the Global Health Access Trust to advance healthcare access for vulnerable and underserved populations worldwide."
+        description="Engage with the Global Health Access Trust through structured partnerships, volunteering, or professional collaboration to advance healthcare access worldwide."
         canonical="/get-involved"
       />
       <div className="flex flex-col">
@@ -39,30 +39,30 @@ export const GetInvolvedPage = () => {
         <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
           <h1 className="mb-4">Get Involved</h1>
           <p className="text-[15px] text-muted-foreground leading-[1.7] max-w-3xl">
-            Join our mission to uphold healthcare as a matter of justice. Whether through 
-            donation, partnership, or advocacy, your involvement creates lasting change.
+            The Trust welcomes engagement from individuals, institutions, and professionals 
+            committed to advancing healthcare access through structured, accountable partnerships.
           </p>
         </div>
       </section>
 
-      {/* Ways to Support */}
+      {/* Ways to Engage */}
       <section className="py-16">
         <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
-          <h2 className="mb-4">Ways to Support Our Mission</h2>
+          <h2 className="mb-4">Ways to Engage</h2>
           <p className="text-[15px] text-muted-foreground mb-10 leading-[1.7] max-w-3xl">
-            From financial support to professional partnerships, there are many meaningful 
-            ways to contribute to healthcare justice worldwide.
+            From structured funding relationships to professional partnerships, there are several 
+            pathways to engage with the Trust's mission.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="section-container">
-              <h3 className="mb-3 text-foreground">Partner With Us</h3>
+              <h3 className="mb-3 text-foreground">Support the Trust</h3>
               <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
-                Support our charitable programmes through partnerships. 
-                UK taxpayers can add Gift Aid to increase impact.
+                Engage with the Trust through a structured funding relationship 
+                aligned with our governance and charitable mandate.
               </p>
-              <Link to="/donate">
-                <Button size="lg" className="w-full">Partner With Us</Button>
+              <Link to="/support-the-trust">
+                <Button size="lg" className="w-full">Engage with the Trust</Button>
               </Link>
             </div>
 
@@ -73,7 +73,7 @@ export const GetInvolvedPage = () => {
                 and development organisations to advance our shared mission.
               </p>
               <Link to="/contact">
-                <Button variant="outline" size="lg" className="w-full">Partner With Us</Button>
+                <Button variant="outline" size="lg" className="w-full">Submit an Enquiry</Button>
               </Link>
             </div>
 
@@ -81,7 +81,7 @@ export const GetInvolvedPage = () => {
               <h3 className="mb-3 text-foreground">Stay Informed</h3>
               <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
                 Subscribe to our newsletter for updates on programmes, research, 
-                and opportunities to get involved in healthcare justice.
+                and opportunities to engage with the Trust.
               </p>
               <Button variant="outline" size="lg" className="w-full" onClick={() => {
                 document.getElementById('newsletter-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -114,7 +114,7 @@ export const GetInvolvedPage = () => {
             </div>
 
             <div className="section-container">
-              <h3 className="mb-3 text-foreground">Academic & Research</h3>
+              <h3 className="mb-3 text-foreground">Academic &amp; Research</h3>
               <p className="text-[15px] text-muted-foreground leading-[1.7] mb-4">
                 Academic partnerships advance evidence-based policy and practice 
                 through rigorous research and scholarship.
@@ -137,7 +137,7 @@ export const GetInvolvedPage = () => {
             <h2 className="mb-4">Stay Informed</h2>
             <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
               Subscribe to receive updates on our programmes, research findings, 
-              and opportunities to support healthcare justice.
+              and opportunities to engage with the Trust.
             </p>
 
             {isSubmitted ? (
@@ -214,18 +214,18 @@ export const GetInvolvedPage = () => {
       {/* Contact CTA */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
-          <h2 className="mb-4">Ready to Make a Difference?</h2>
+          <h2 className="mb-4">Ready to Engage?</h2>
           <p className="text-[15px] mb-8 opacity-90 max-w-3xl leading-[1.7]">
-            Whether you're an individual donor, healthcare professional, or institutional 
-            partner, we welcome you to join our mission of healthcare justice.
+            Whether you represent an institution, a professional body, or wish to explore 
+            a structured funding relationship, we welcome your enquiry.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/contact">
-              <Button size="lg" variant="secondary">Get in Touch</Button>
+              <Button size="lg" variant="secondary">Submit an Enquiry</Button>
             </Link>
-            <Link to="/about">
+            <Link to="/about-the-trust">
               <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                Learn More About GHAT
+                Learn More About the Trust
               </Button>
             </Link>
           </div>

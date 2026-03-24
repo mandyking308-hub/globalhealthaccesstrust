@@ -343,7 +343,7 @@ export const AuthPage = () => {
 
         <div className="mt-6 text-center text-sm text-muted-foreground">
           <p>
-            All donations require registration for GDPR compliance and receipt management.
+            All engagement requires registration for GDPR compliance and record management.
           </p>
         </div>
       </div>
