@@ -6,7 +6,7 @@ export const FrequentlyAskedQuestionsPage = () => {
     <ContentLayout>
       <SEO
         title="Frequently Asked Questions"
-        description="Common questions about the Global Health Access Trust — our mission, governance, how to donate, volunteer, and support global healthcare access."
+        description="Common questions about the Global Health Access Trust — our mission, governance, how to engage, volunteer, and support global healthcare access."
         canonical="/frequently-asked-questions"
       />
       <h1>Frequently Asked Questions</h1>
