@@ -92,7 +92,7 @@ export const SupportTheTrustPage = () => {
       <div className="text-center mt-10">
         <Link to="/contact">
           <Button size="lg" variant="default">
-            Submit an Enquiry
+            Request Private Engagement
           </Button>
         </Link>
       </div>

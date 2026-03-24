@@ -217,11 +217,11 @@ export const GetInvolvedPage = () => {
           <h2 className="mb-4">Ready to Engage?</h2>
           <p className="text-[15px] mb-8 opacity-90 max-w-3xl leading-[1.7]">
             Whether you represent an institution, a professional body, or wish to explore 
-            a structured funding relationship, we welcome your enquiry.
+            a structured funding relationship, we welcome aligned enquiries.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/contact">
-              <Button size="lg" variant="secondary">Submit an Enquiry</Button>
+              <Button size="lg" variant="secondary">Request Private Engagement</Button>
             </Link>
             <Link to="/about-the-trust">
               <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">

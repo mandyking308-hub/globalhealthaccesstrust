@@ -38,7 +38,7 @@ export const DonatePage = () => {
       <div className="text-center mt-10">
         <Link to="/contact">
           <Button size="lg" variant="default">
-            Contact the Trust
+            Initiate Engagement
           </Button>
         </Link>
       </div>
