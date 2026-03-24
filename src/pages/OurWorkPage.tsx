@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
