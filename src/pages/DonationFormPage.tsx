@@ -103,8 +103,8 @@ export const DonationFormPage = () => {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-4xl font-bold mb-2">Make a Donation</h1>
-          <p className="text-muted-foreground mb-8">Support our global health initiatives</p>
+          <h1 className="text-4xl font-bold mb-2">Funding Submission</h1>
+          <p className="text-muted-foreground mb-8">Submit a structured funding allocation</p>
 
           <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg shadow-sm border">
             <div>
