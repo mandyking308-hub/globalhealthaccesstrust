@@ -13,7 +13,7 @@ export const AdminLayout = () => {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        navigate("/");
+        navigate("/auth");
         return;
       }
 
@@ -25,7 +25,7 @@ export const AdminLayout = () => {
         .maybeSingle();
 
       if (!roleData) {
-        navigate("/");
+        navigate("/auth");
         return;
       }
 
@@ -33,6 +33,15 @@ export const AdminLayout = () => {
     };
 
     checkAdminAccess();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        setIsAdmin(null);
+        navigate("/auth");
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, [navigate]);
 
   if (isAdmin === null) {
