@@ -280,6 +280,65 @@ export const HomePage = () => {
           </div>
         </section>
 
+        {/* Engagement & Funding Approach */}
+        <section className="py-16 md:py-20 lg:py-24 bg-muted/30">
+          <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="text-center mb-4 text-foreground">
+              Engagement &amp; Funding Approach
+            </h2>
+            <div className="max-w-2xl mx-auto text-center mb-10">
+              <p className="text-[15px] text-muted-foreground leading-[1.7] mb-4">
+                The Trust does not operate an open donation model.
+              </p>
+              <p className="text-[15px] text-muted-foreground leading-[1.7] mb-4">
+                All funding relationships are established through a structured engagement process to ensure alignment, accountability, and effective deployment of capital.
+              </p>
+              <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                This approach allows the Trust to maintain full oversight of how funds are allocated, monitored, and delivered across its areas of intervention.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="section-container">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 1</span>
+                <h3 className="my-2 text-foreground">Initial Enquiry</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Engagement begins through a direct enquiry to the Trust.
+                </p>
+              </div>
+              <div className="section-container">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 2</span>
+                <h3 className="my-2 text-foreground">Review &amp; Alignment</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Each enquiry is assessed to ensure alignment with the Trust's mandate and governance framework.
+                </p>
+              </div>
+              <div className="section-container">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 3</span>
+                <h3 className="my-2 text-foreground">Structured Engagement</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Funding relationships are formalised with defined scope, objectives, and reporting expectations.
+                </p>
+              </div>
+              <div className="section-container">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 4</span>
+                <h3 className="my-2 text-foreground">Project Deployment</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Capital is deployed into clearly defined initiatives with ongoing monitoring and accountability.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center mt-10">
+              <Link to="/contact">
+                <Button size="lg" variant="default">
+                  Submit an Enquiry
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
       </div>
     </>
   );
