@@ -92,7 +92,7 @@ export const DonationFormPage = () => {
     } else {
       toast({
         title: "Success",
-        description: "Your donation has been recorded. Payment processing will be added soon.",
+        description: "Your funding submission has been recorded.",
       });
       navigate("/donor-dashboard");
     }
