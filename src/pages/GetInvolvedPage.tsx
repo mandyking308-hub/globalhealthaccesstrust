@@ -73,7 +73,7 @@ export const GetInvolvedPage = () => {
                 and development organisations to advance our shared mission.
               </p>
               <Link to="/contact">
-                <Button variant="outline" size="lg" className="w-full">Submit an Enquiry</Button>
+                <Button variant="outline" size="lg" className="w-full">Initiate Engagement</Button>
               </Link>
             </div>
 
