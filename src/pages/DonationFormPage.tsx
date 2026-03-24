@@ -170,7 +170,7 @@ export const DonationFormPage = () => {
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Processing..." : "Submit Donation"}
+              {loading ? "Processing..." : "Submit Funding"}
             </Button>
           </form>
         </div>
