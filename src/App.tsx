@@ -156,6 +156,7 @@ const App = () => (
             <Route path="system-health" element={<AdminSystemHealthPage />} />
             <Route path="branding" element={<AdminBrandingPage />} />
             <Route path="launch-checklist" element={<AdminLaunchChecklistPage />} />
+            <Route path="contacts" element={<AdminContactsPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           
