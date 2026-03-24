@@ -20,7 +20,7 @@ import { Paperclip } from "lucide-react";
 const ENQUIRY_OPTIONS = [
   "General Enquiry",
   "Partnership Opportunity",
-  "Donation / Funding",
+  "Funding Engagement",
   "Legal / Legacy Matters",
   "Media / Press",
   "Other",
@@ -28,7 +28,7 @@ const ENQUIRY_OPTIONS = [
 
 const getPriority = (enquiryType: string): string => {
   switch (enquiryType) {
-    case "Donation / Funding":
+    case "Funding Engagement":
     case "Legal / Legacy Matters":
       return "High";
     case "Partnership Opportunity":
@@ -165,13 +165,12 @@ export const ContactPage = () => {
       <section className="py-16 bg-gradient-to-br from-primary/5 to-accent/10">
         <div className="container-section">
           <div className="max-w-4xl mx-auto text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
-              Contact Us
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-              We welcome confidential enquiries from donors, legal representatives,
-              philanthropic institutions, and regulated professionals.
-            </p>
+             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
+               Contact the Trust
+             </h1>
+             <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+               The Trust reviews all engagement requests and responds selectively based on alignment and scope.
+             </p>
           </div>
         </div>
       </section>

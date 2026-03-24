@@ -37,10 +37,10 @@ export const GetInvolvedPage = () => {
       {/* Hero */}
       <section className="py-16 bg-gradient-to-br from-primary/5 to-gold/5">
         <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
-          <h1 className="mb-4">Get Involved</h1>
+          <h1 className="mb-4">Engage with the Trust</h1>
           <p className="text-[15px] text-muted-foreground leading-[1.7] max-w-3xl">
-            The Trust welcomes engagement from individuals, institutions, and professionals 
-            committed to advancing healthcare access through structured, accountable partnerships.
+            The Trust welcomes selective engagement from individuals, institutions, and professionals 
+            aligned with our mandate to advance healthcare access through structured, accountable partnerships.
           </p>
         </div>
       </section>
@@ -48,21 +48,21 @@ export const GetInvolvedPage = () => {
       {/* Ways to Engage */}
       <section className="py-16">
         <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
-          <h2 className="mb-4">Ways to Engage</h2>
+          <h2 className="mb-4">Pathways to Engagement</h2>
           <p className="text-[15px] text-muted-foreground mb-10 leading-[1.7] max-w-3xl">
-            From structured funding relationships to professional partnerships, there are several 
-            pathways to engage with the Trust's mission.
+            From structured funding relationships to professional partnerships, engagement with 
+            the Trust follows a selective and governed process.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="section-container">
               <h3 className="mb-3 text-foreground">Support the Trust</h3>
               <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
-                Engage with the Trust through a structured funding relationship 
+                Engage with the Trust through a selective funding relationship 
                 aligned with our governance and charitable mandate.
               </p>
               <Link to="/support-the-trust">
-                <Button size="lg" className="w-full">Engage with the Trust</Button>
+                <Button size="lg" className="w-full">Request Access</Button>
               </Link>
             </div>
 
@@ -73,7 +73,7 @@ export const GetInvolvedPage = () => {
                 and development organisations to advance our shared mission.
               </p>
               <Link to="/contact">
-                <Button variant="outline" size="lg" className="w-full">Submit an Enquiry</Button>
+                <Button variant="outline" size="lg" className="w-full">Initiate Engagement</Button>
               </Link>
             </div>
 
@@ -217,11 +217,11 @@ export const GetInvolvedPage = () => {
           <h2 className="mb-4">Ready to Engage?</h2>
           <p className="text-[15px] mb-8 opacity-90 max-w-3xl leading-[1.7]">
             Whether you represent an institution, a professional body, or wish to explore 
-            a structured funding relationship, we welcome your enquiry.
+            a structured funding relationship, we welcome aligned enquiries.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/contact">
-              <Button size="lg" variant="secondary">Submit an Enquiry</Button>
+              <Button size="lg" variant="secondary">Request Private Engagement</Button>
             </Link>
             <Link to="/about-the-trust">
               <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
