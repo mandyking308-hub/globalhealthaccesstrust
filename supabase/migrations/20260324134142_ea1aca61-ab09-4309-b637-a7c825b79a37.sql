@@ -1,0 +1,1 @@
+ALTER TABLE public.inbound_contacts ADD COLUMN admin_notes TEXT;
