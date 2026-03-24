@@ -38,15 +38,15 @@ export const ContactTheTrustPage = () => {
 
       <div className="section-container">
         <h2>Support the Trust</h2>
-        <p>Every contribution entrusted to us strengthens our ability to act.</p>
-        <p>We respectfully invite support via the following secure channels:</p>
+        <p>All funding relationships are established through a structured engagement process aligned with the Trust's governance and charitable mandate.</p>
+        <p>We welcome enquiries regarding:</p>
         <ul>
-          <li>One-off or recurring donations (via authorised platforms such as Stripe or CAF)</li>
+          <li>Structured funding relationships (via formal engagement pathways)</li>
           <li>Legacy giving (see suggested will wording on our Support the Trust page)</li>
           <li>Restricted gifts for specific programmes, bursaries, or geographies</li>
           <li>Founding benefactor capital (minimum thresholds apply)</li>
         </ul>
-        <p>All donations are receipted, independently accounted for, and held exclusively for charitable purposes. Influence is never accepted in exchange for support.</p>
+        <p>All contributions are receipted, independently accounted for, and held exclusively for charitable purposes. Influence is never accepted in exchange for support.</p>
         <p>If you wish to discuss a significant gift, charitable vehicle, or family legacy, please contact us in confidence.</p>
       </div>
 

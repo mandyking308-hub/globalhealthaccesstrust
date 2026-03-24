@@ -76,7 +76,7 @@ export const DonorGuidePage = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  One-time or recurring donation entry with Stripe integration.
+                  Structured funding submission with secure processing.
                 </p>
               </CardContent>
             </Card>

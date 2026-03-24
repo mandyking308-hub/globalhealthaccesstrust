@@ -77,7 +77,7 @@ export const DonorRecognitionPage = () => {
         <p>For questions about recognition, to update recognition preferences, or to discuss memorial recognition:</p>
         <p>Chair of Trustees<br />
         Subject: Donor Recognition - Confidential</p>
-        <p>We welcome discussions about recognition preferences at any time and respect all donor wishes regarding acknowledgment of their generous support.</p>
+        <p>We welcome discussions about recognition preferences at any time and respect all supporter wishes regarding acknowledgment of their generous support.</p>
       </div>
     </ContentLayout>
   );

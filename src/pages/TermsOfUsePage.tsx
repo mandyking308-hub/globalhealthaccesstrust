@@ -79,11 +79,11 @@ export const TermsOfUsePage = () => {
 
           <Card className="card-professional">
             <CardHeader>
-              <CardTitle>Donations</CardTitle>
+              <CardTitle>Funding &amp; Engagement</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="mb-4">
-                All donations made through our website are processed securely and are subject to:
+                All funding relationships established through the Trust are subject to:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Our charitable objects and governing document</li>
@@ -92,7 +92,7 @@ export const TermsOfUsePage = () => {
                 <li>Our commitment to use funds exclusively for charitable purposes</li>
               </ul>
               <p className="mt-4">
-                Donations are generally not refundable except in exceptional circumstances 
+                Contributions are generally not refundable except in exceptional circumstances 
                 at our sole discretion.
               </p>
             </CardContent>
