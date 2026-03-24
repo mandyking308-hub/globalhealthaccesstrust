@@ -344,6 +344,7 @@ export type Database = {
         Row: {
           additional_context: string | null
           admin_notes: string | null
+          attachment_url: string | null
           created_at: string
           email: string
           gdpr_consent: boolean
@@ -354,11 +355,13 @@ export type Database = {
           organisation: string | null
           phone: string | null
           position: string | null
+          priority: string
           status: string
         }
         Insert: {
           additional_context?: string | null
           admin_notes?: string | null
+          attachment_url?: string | null
           created_at?: string
           email: string
           gdpr_consent?: boolean
@@ -369,11 +372,13 @@ export type Database = {
           organisation?: string | null
           phone?: string | null
           position?: string | null
+          priority?: string
           status?: string
         }
         Update: {
           additional_context?: string | null
           admin_notes?: string | null
+          attachment_url?: string | null
           created_at?: string
           email?: string
           gdpr_consent?: boolean
@@ -384,6 +389,7 @@ export type Database = {
           organisation?: string | null
           phone?: string | null
           position?: string | null
+          priority?: string
           status?: string
         }
         Relationships: []
@@ -1105,6 +1111,8 @@ export type Database = {
       }
       volunteers: {
         Row: {
+          area_of_interest: string | null
+          availability: string | null
           country: string
           created_at: string
           cv_url: string | null
@@ -1112,6 +1120,7 @@ export type Database = {
           experience: string
           id: string
           languages: string
+          motivation: string | null
           name: string
           notes: string | null
           phone: string
@@ -1121,6 +1130,8 @@ export type Database = {
           user_id: string | null
         }
         Insert: {
+          area_of_interest?: string | null
+          availability?: string | null
           country: string
           created_at?: string
           cv_url?: string | null
@@ -1128,6 +1139,7 @@ export type Database = {
           experience: string
           id?: string
           languages: string
+          motivation?: string | null
           name: string
           notes?: string | null
           phone: string
@@ -1137,6 +1149,8 @@ export type Database = {
           user_id?: string | null
         }
         Update: {
+          area_of_interest?: string | null
+          availability?: string | null
           country?: string
           created_at?: string
           cv_url?: string | null
@@ -1144,6 +1158,7 @@ export type Database = {
           experience?: string
           id?: string
           languages?: string
+          motivation?: string | null
           name?: string
           notes?: string | null
           phone?: string
