@@ -138,7 +138,7 @@ export const AdminContactsPage = () => {
 
   return (
     <div className="space-y-6">
-      <SEO title="Contact Enquiries | Admin" noIndex />
+      <SEO title="Contact Enquiries | Admin" noindex />
 
       <div className="flex items-center justify-between">
         <div>
