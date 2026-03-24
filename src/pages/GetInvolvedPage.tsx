@@ -58,11 +58,11 @@ export const GetInvolvedPage = () => {
             <div className="section-container">
               <h3 className="mb-3 text-foreground">Support the Trust</h3>
               <p className="text-[15px] text-muted-foreground mb-6 leading-[1.7]">
-                Engage with the Trust through a structured funding relationship 
+                Engage with the Trust through a selective funding relationship 
                 aligned with our governance and charitable mandate.
               </p>
               <Link to="/support-the-trust">
-                <Button size="lg" className="w-full">Engage with the Trust</Button>
+                <Button size="lg" className="w-full">Request Access</Button>
               </Link>
             </div>
 
