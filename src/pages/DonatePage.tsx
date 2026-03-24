@@ -13,10 +13,10 @@ export const DonatePage = () => {
       />
       <h1>Funding &amp; Engagement</h1>
 
-      <p className="featured-text">"The Trust does not operate an open donation model. All funding relationships are established through a structured engagement process to ensure alignment, accountability, and effective deployment of capital."</p>
+      <p className="featured-text">"The Trust engages with a limited number of aligned partners through a structured process. All funding relationships are established to ensure alignment, accountability, and effective deployment of capital."</p>
 
-      <p>The Global Health Access Trust directs capital into healthcare access, system infrastructure, and capacity building through structured, governed funding relationships.</p>
-      <p>This approach ensures that all funding is aligned with the Trust's charitable mandate, subject to independent oversight, and deployed with full accountability.</p>
+      <p>The Global Health Access Trust directs capital into healthcare access, system infrastructure, and capacity building through selective, governed funding relationships.</p>
+      <p>Participation is based on alignment with the Trust's mandate, scope of engagement, and the ability to deploy capital effectively within defined areas of intervention.</p>
 
       <div className="section-container">
         <h2>Why Structured Engagement</h2>
