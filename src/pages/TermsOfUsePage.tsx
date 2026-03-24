@@ -43,7 +43,7 @@ export const TermsOfUsePage = () => {
               <p className="mb-4">You may use our website for lawful purposes only, including:</p>
               <ul className="list-disc pl-6 space-y-2 mb-6">
                 <li>Learning about our charitable activities and mission</li>
-                <li>Making donations to support our work</li>
+                <li>Engaging with the Trust through structured funding and partnership channels</li>
                 <li>Accessing public information and resources</li>
                 <li>Contacting us through provided channels</li>
               </ul>
