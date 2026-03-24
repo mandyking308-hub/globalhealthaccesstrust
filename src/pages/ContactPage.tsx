@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Paperclip } from "lucide-react";
 
 const ENQUIRY_OPTIONS = [
   "General Enquiry",
@@ -24,6 +25,19 @@ const ENQUIRY_OPTIONS = [
   "Media / Press",
   "Other",
 ] as const;
+
+const getPriority = (enquiryType: string): string => {
+  switch (enquiryType) {
+    case "Donation / Funding":
+    case "Legal / Legacy Matters":
+      return "High";
+    case "Partnership Opportunity":
+    case "Media / Press":
+      return "Medium";
+    default:
+      return "Low";
+  }
+};
 
 export const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -38,8 +52,25 @@ export const ContactPage = () => {
     consent: false,
     honeypot: "",
   });
+  const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'image/jpeg', 'image/png'];
+      if (!validTypes.includes(file.type)) {
+        toast.error("Please upload a PDF, Word document, JPEG, or PNG file.");
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error("File must be smaller than 5MB.");
+        return;
+      }
+      setAttachmentFile(file);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +82,23 @@ export const ContactPage = () => {
 
     setIsSubmitting(true);
     try {
+      let attachmentUrl: string | null = null;
+
+      if (attachmentFile) {
+        const fileExt = attachmentFile.name.split('.').pop();
+        const fileName = `contact-${Date.now()}.${fileExt}`;
+        const { error: uploadError } = await supabase.storage
+          .from('evidence-packs')
+          .upload(`contact-attachments/${fileName}`, attachmentFile);
+        if (uploadError) throw uploadError;
+        const { data: { publicUrl } } = supabase.storage
+          .from('evidence-packs')
+          .getPublicUrl(`contact-attachments/${fileName}`);
+        attachmentUrl = publicUrl;
+      }
+
+      const priority = getPriority(formData.nature_of_enquiry);
+
       const { error } = await supabase.from("inbound_contacts").insert({
         name: formData.name.trim(),
         email: formData.email.trim(),
@@ -62,7 +110,9 @@ export const ContactPage = () => {
         additional_context: formData.additional_context.trim() || null,
         gdpr_consent: formData.consent,
         status: "New",
-      });
+        priority,
+        attachment_url: attachmentUrl,
+      } as any);
 
       if (error) throw error;
       setIsSubmitted(true);
@@ -98,6 +148,7 @@ export const ContactPage = () => {
                   nature_of_enquiry: "", message: "", additional_context: "",
                   consent: false, honeypot: "",
                 });
+                setAttachmentFile(null);
               }}
             >
               Submit Another Enquiry
@@ -137,7 +188,6 @@ export const ContactPage = () => {
                   opportunities, or general enquiries, please use the contact form.
                 </p>
               </div>
-
               <div className="space-y-6">
                 <Card className="card-professional">
                   <CardContent className="p-6">
@@ -151,7 +201,6 @@ export const ContactPage = () => {
                     </ul>
                   </CardContent>
                 </Card>
-
                 <Card className="card-professional">
                   <CardContent className="p-6">
                     <h3 className="font-semibold mb-4 text-left">Address</h3>
@@ -166,7 +215,6 @@ export const ContactPage = () => {
                     </div>
                   </CardContent>
                 </Card>
-
                 <Card className="card-professional">
                   <CardContent className="p-6">
                     <h3 className="font-semibold mb-4 text-left">Response Time</h3>
@@ -188,7 +236,6 @@ export const ContactPage = () => {
                   </h2>
 
                   <form onSubmit={handleSubmit} className="space-y-10">
-                    {/* Honeypot */}
                     <input
                       type="text" name="honeypot" value={formData.honeypot}
                       onChange={handleInputChange}
@@ -284,6 +331,34 @@ export const ContactPage = () => {
                       </div>
                     </fieldset>
 
+                    {/* Section 5 — Attachment */}
+                    <fieldset className="space-y-5">
+                      <legend className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                        Supporting Document
+                      </legend>
+                      <div className="space-y-2">
+                        <Label htmlFor="attachment">Attach a File (Optional)</Label>
+                        <div className="flex items-center gap-3">
+                          <Input
+                            id="attachment"
+                            type="file"
+                            accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                            onChange={handleFileChange}
+                            className="cursor-pointer"
+                          />
+                          {attachmentFile && (
+                            <div className="flex items-center gap-1 text-sm text-green-600">
+                              <Paperclip className="h-4 w-4" />
+                              <span>{attachmentFile.name}</span>
+                            </div>
+                          )}
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Max 5MB · PDF, Word, JPEG, or PNG
+                        </p>
+                      </div>
+                    </fieldset>
+
                     {/* Consent */}
                     <div className="space-y-4">
                       <div className="flex items-start space-x-3 p-4 border rounded-lg bg-muted/30">
@@ -300,7 +375,6 @@ export const ContactPage = () => {
                           Privacy Policy. <span className="text-destructive">*</span>
                         </Label>
                       </div>
-
                       <Alert>
                         <AlertDescription className="text-sm">
                           <strong>Data Protection:</strong> Your information will be processed
