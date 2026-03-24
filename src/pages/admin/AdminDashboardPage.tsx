@@ -8,6 +8,15 @@ import { useOnboarding } from "@/hooks/useOnboarding";
 import { OnboardingTour } from "@/components/onboarding/OnboardingTour";
 import { adminOnboardingSteps } from "@/data/onboardingSteps";
 
+const MetricCard = ({ title, value, color, onClick }: { title: string; value: number; color: string; onClick: () => void }) => (
+  <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={onClick}>
+    <CardContent className="pt-6">
+      <p className="text-sm font-medium text-muted-foreground">{title}</p>
+      <p className={`text-3xl font-bold mt-1 ${color}`}>{value}</p>
+    </CardContent>
+  </Card>
+);
+
 export const AdminDashboardPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
