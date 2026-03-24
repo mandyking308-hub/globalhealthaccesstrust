@@ -40,7 +40,7 @@ export const DonorRecognitionPage = () => {
           </div>
           <div className="p-4 bg-background rounded border border-border">
             <h3>Founding Supporters</h3>
-            <p>Committed philanthropists donating £25,000+ who enable the Trust to undertake significant healthcare access projects.</p>
+            <p>Committed philanthropists contributing £25,000+ who enable the Trust to undertake significant healthcare access projects.</p>
           </div>
           <div className="p-4 bg-background rounded border border-border">
             <h3>Charter Members</h3>
