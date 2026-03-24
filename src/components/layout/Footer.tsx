@@ -53,7 +53,7 @@ export const Footer = () => {
               <ul className="space-y-2.5">
                 <li>
                   <Link
-                    to="/volunteers"
+                    to="/volunteer-apply"
                     className="text-sm text-background/70 hover:text-background transition-colors"
                   >
                     Become a Volunteer

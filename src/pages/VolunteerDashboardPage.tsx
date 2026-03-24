@@ -64,7 +64,7 @@ export const VolunteerDashboardPage = () => {
         description: "You need to be an approved volunteer to access this dashboard.",
         variant: "destructive",
       });
-      navigate("/volunteers");
+      navigate("/volunteer-apply");
       return;
     }
 
