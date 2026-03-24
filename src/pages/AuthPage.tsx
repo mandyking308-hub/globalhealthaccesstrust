@@ -67,7 +67,7 @@ export const AuthPage = () => {
           title: "Welcome back!",
           description: "You've successfully logged in.",
         });
-        navigate("/donor-dashboard");
+        await redirectByRole(data.session.user.id);
       }
     } catch (err: any) {
       setError(err.message || "Invalid email or password");
