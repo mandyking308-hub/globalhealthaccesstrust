@@ -371,7 +371,7 @@ export const HomePage = () => {
             <div className="text-center mt-10">
               <Link to="/contact">
                 <Button size="lg" variant="default">
-                  Request Private Engagement
+                  Initiate Engagement
                 </Button>
               </Link>
             </div>
