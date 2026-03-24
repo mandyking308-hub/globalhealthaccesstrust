@@ -42,7 +42,7 @@ export const DonationFormPage = () => {
     if (!userId) {
       toast({
         title: "Authentication required",
-        description: "Please log in to make a donation.",
+        description: "Please log in to submit funding.",
         variant: "destructive",
       });
       navigate("/auth");
@@ -52,7 +52,7 @@ export const DonationFormPage = () => {
     if (!formData.amount || parseFloat(formData.amount) < 500) {
       toast({
         title: "Invalid amount",
-        description: "Minimum donation amount is £500.",
+        description: "Minimum funding amount is £500.",
         variant: "destructive",
       });
       return;
@@ -61,7 +61,7 @@ export const DonationFormPage = () => {
     if (!formData.purpose) {
       toast({
         title: "Purpose required",
-        description: "Please select a donation purpose.",
+        description: "Please select a funding purpose.",
         variant: "destructive",
       });
       return;
@@ -92,7 +92,7 @@ export const DonationFormPage = () => {
     } else {
       toast({
         title: "Success",
-        description: "Your donation has been recorded. Payment processing will be added soon.",
+        description: "Your funding submission has been recorded.",
       });
       navigate("/donor-dashboard");
     }
@@ -103,12 +103,12 @@ export const DonationFormPage = () => {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-4xl font-bold mb-2">Make a Donation</h1>
-          <p className="text-muted-foreground mb-8">Support our global health initiatives</p>
+          <h1 className="text-4xl font-bold mb-2">Funding Submission</h1>
+          <p className="text-muted-foreground mb-8">Submit a structured funding allocation</p>
 
           <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg shadow-sm border">
             <div>
-              <Label htmlFor="amount">Donation Amount (£)*</Label>
+              <Label htmlFor="amount">Funding Amount (£)*</Label>
               <Input
                 id="amount"
                 type="number"
@@ -119,11 +119,11 @@ export const DonationFormPage = () => {
                 onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                 required
               />
-              <p className="text-sm text-muted-foreground mt-1">Minimum donation: £500</p>
+              <p className="text-sm text-muted-foreground mt-1">Minimum funding amount: £500</p>
             </div>
 
             <div>
-              <Label htmlFor="purpose">Donation Purpose*</Label>
+              <Label htmlFor="purpose">Funding Purpose*</Label>
               <Select 
                 value={formData.purpose} 
                 onValueChange={(value) => setFormData({ ...formData, purpose: value })}
@@ -142,7 +142,7 @@ export const DonationFormPage = () => {
             </div>
 
             <div>
-              <Label htmlFor="frequency">Donation Frequency*</Label>
+              <Label htmlFor="frequency">Funding Frequency*</Label>
               <Select 
                 value={formData.frequency} 
                 onValueChange={(value) => setFormData({ ...formData, frequency: value })}
@@ -170,7 +170,7 @@ export const DonationFormPage = () => {
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Processing..." : "Submit Donation"}
+              {loading ? "Processing..." : "Submit Funding"}
             </Button>
           </form>
         </div>

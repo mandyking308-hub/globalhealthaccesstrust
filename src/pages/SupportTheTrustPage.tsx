@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
@@ -6,26 +8,54 @@ export const SupportTheTrustPage = () => {
     <ContentLayout>
       <SEO
         title="Support the Trust"
-        description="Support the Global Health Access Trust through charitable donations, legacy giving, bequests, and institutional partnerships for global healthcare access."
+        description="The Global Health Access Trust engages with donors, institutions, and partners through a structured and selective process aligned with its governance and funding mandate."
         canonical="/support-the-trust"
       />
       <h1>Support the Trust</h1>
       
-      <p className="featured-text">"Legacy is not measured by what we leave behind—but by how we uplift others while we are here."</p>
+      <p className="featured-text">"The Trust engages with donors, institutions, and partners through a structured and selective process aligned with its governance and funding mandate."</p>
 
-      <p>The Global Health Access Trust exists not for profile, popularity, or persuasion—but to quietly and lawfully serve those who are too often forgotten.</p>
-      <p>We are structured to receive, safeguard, and deploy charitable capital with the solemnity of a public institution and the vigilance of a fiduciary body. We are bound by law, governed by conscience, and accountable to the public interest.</p>
-      <p>Support is welcomed through the following lawful, transparent, and institutionally managed channels:</p>
+      <p>The Global Health Access Trust does not operate an open funding model. All funding relationships are established through a structured engagement process to ensure alignment, accountability, and effective deployment of capital.</p>
+      <p>This approach allows the Trust to maintain full oversight of how funds are allocated, monitored, and delivered across its areas of intervention.</p>
 
       <div className="section-container">
-        <h2>I. Charitable Donations</h2>
-        <p>Donors may contribute directly to the Trust via our registered bank details or through HMRC-recognised donation platforms.</p>
-        <p>All gifts are receipted and may be eligible for Gift Aid (UK taxpayers), increasing the impact of your contribution at no cost to you.</p>
-        <p className="featured-text">"A donation to the Trust is more than a gesture—it is an investment in enduring public service."</p>
+        <h2>Engagement Process</h2>
+        <p>Support for the Trust follows a defined pathway designed to ensure governance, transparency, and alignment with our charitable objectives.</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+        <div className="section-container">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 1</span>
+          <h3 className="my-2 text-foreground">Initial Enquiry</h3>
+          <p className="text-[15px] text-muted-foreground leading-[1.7]">
+            Engagement begins through a direct enquiry to the Trust, submitted via the official contact form or through authorised channels.
+          </p>
+        </div>
+        <div className="section-container">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 2</span>
+          <h3 className="my-2 text-foreground">Review &amp; Alignment</h3>
+          <p className="text-[15px] text-muted-foreground leading-[1.7]">
+            Each enquiry is assessed to ensure alignment with the Trust's mandate, governance framework, and charitable objectives.
+          </p>
+        </div>
+        <div className="section-container">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 3</span>
+          <h3 className="my-2 text-foreground">Structured Engagement</h3>
+          <p className="text-[15px] text-muted-foreground leading-[1.7]">
+            Funding relationships are formalised with defined scope, objectives, and reporting expectations through appropriate legal documentation.
+          </p>
+        </div>
+        <div className="section-container">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 4</span>
+          <h3 className="my-2 text-foreground">Project Deployment</h3>
+          <p className="text-[15px] text-muted-foreground leading-[1.7]">
+            Capital is deployed into clearly defined initiatives with ongoing monitoring, accountability, and structured reporting.
+          </p>
+        </div>
       </div>
 
       <div className="section-container">
-        <h2>II. Legacy Giving</h2>
+        <h2>Legacy Giving</h2>
         <p><strong>(Bequests Made by Will)</strong></p>
         <p>A gift in your will ensures your values endure beyond your lifetime. The following sample wording may be used with your solicitor:</p>
         <p className="featured-text">"I give [the sum of £____ / ___% of my residuary estate] to the Global Health Access Trust, registered at 2 Harley Street, London, for its general charitable purposes. I declare that the receipt of the Chair of Trustees or other authorised officer shall be full discharge to my executors."</p>
@@ -33,46 +63,39 @@ export const SupportTheTrustPage = () => {
       </div>
 
       <div className="section-container">
-        <h2>III. Restricted Gifts & Named Funds</h2>
-        <p>Support may also be given to a specific area of charitable interest (e.g. bursaries, field programmes, or public health infrastructure).</p>
+        <h2>Restricted Gifts &amp; Named Funds</h2>
+        <p>Support may also be directed to a specific area of charitable interest, subject to formal agreement.</p>
         <p>Restricted gifts must:</p>
         <ul>
           <li>Align with the charitable objectives of the Trust</li>
           <li>Be formally documented via Deed of Gift or Memorandum of Understanding</li>
           <li>Include a clause of reversion in the event the original purpose becomes obsolete, unlawful, or no longer serves the public benefit</li>
         </ul>
-        <p className="featured-text">We honour specificity—but we uphold duty first.</p>
       </div>
 
       <div className="section-container">
-        <h2>IV. Founding Benefactors & Endowments</h2>
-        <p>Individuals, family offices, and foundations who contribute at scale may be invited to become Founding Benefactors of the Trust.</p>
-        <p>Subject to Board approval, founding benefactors may:</p>
-        <ul>
-          <li>Establish named endowments or strategic philanthropic funds</li>
-          <li>Be recognised in official records, publications, or heritage listings</li>
-          <li>Receive confidential stewardship reports</li>
-          <li>Participate in ceremonial briefings or advisory gatherings (non-voting)</li>
-        </ul>
+        <h2>Founding Benefactors &amp; Endowments</h2>
+        <p>Individuals, family offices, and foundations who engage at scale may be invited to become Founding Benefactors of the Trust, subject to Board approval.</p>
         <p>At no stage may benefactors exert influence over governance, grant-making, or strategy. The Trust remains strictly independent.</p>
       </div>
 
       <div className="section-container">
-        <h2>Documentation & Stewardship</h2>
-        <p>Every gift, whether £10 or £10 million, is:</p>
+        <h2>Documentation &amp; Stewardship</h2>
+        <p>Every contribution is:</p>
         <ul>
           <li>Logged, receipted, and formally acknowledged</li>
           <li>Applied only to charitable purposes under law</li>
-          <li>Reported in our annual governance and financial disclosures</li>
+          <li>Reported in annual governance and financial disclosures</li>
         </ul>
-        <p>No donor shall receive private benefit or inducement, and no contribution shall ever override the Trust's fiduciary independence.</p>
+        <p>No supporter shall receive private benefit or inducement, and no contribution shall override the Trust's fiduciary independence.</p>
       </div>
 
-      <div className="section-container">
-        <h2>To Enquire Confidentially</h2>
-        <p>For all questions relating to donations, legacies, or restricted gifts, please contact:</p>
-        <p>Chair of Trustees<br />
-        Subject: Support – Confidential</p>
+      <div className="text-center mt-10">
+        <Link to="/contact">
+          <Button size="lg" variant="default">
+            Submit an Enquiry
+          </Button>
+        </Link>
       </div>
     </ContentLayout>
   );

@@ -40,7 +40,7 @@ export const HomePage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/auth">
                 <Button size="lg" variant="default" className="min-w-[180px]">
-                  Donor Login
+                  Donor Portal
                 </Button>
               </Link>
               <Link to="/about-the-trust">
