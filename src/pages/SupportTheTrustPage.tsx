@@ -13,10 +13,9 @@ export const SupportTheTrustPage = () => {
       />
       <h1>Support the Trust</h1>
       
-      <p className="featured-text">"The Trust engages with donors, institutions, and partners through a structured and selective process aligned with its governance and funding mandate."</p>
+      <p className="featured-text">"The Trust engages with a limited number of aligned partners through a structured process. Participation is based on alignment, scope, and the ability to deploy capital effectively within defined areas of intervention."</p>
 
-      <p>The Global Health Access Trust does not operate an open funding model. All funding relationships are established through a structured engagement process to ensure alignment, accountability, and effective deployment of capital.</p>
-      <p>This approach allows the Trust to maintain full oversight of how funds are allocated, monitored, and delivered across its areas of intervention.</p>
+      <p>The Global Health Access Trust does not operate an open funding model. All funding relationships are established through a selective engagement process to ensure alignment with the Trust's mandate, governance framework, and charitable objectives.</p>
 
       <div className="section-container">
         <h2>Engagement Process</h2>
