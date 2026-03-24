@@ -28,7 +28,7 @@ const ENQUIRY_OPTIONS = [
 
 const getPriority = (enquiryType: string): string => {
   switch (enquiryType) {
-    case "Donation / Funding":
+    case "Funding Engagement":
     case "Legal / Legacy Matters":
       return "High";
     case "Partnership Opportunity":
