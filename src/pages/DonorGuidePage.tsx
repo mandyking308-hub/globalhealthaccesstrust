@@ -44,7 +44,7 @@ export const DonorGuidePage = () => {
           <h1 className="text-4xl font-bold mb-4">Welcome to the Donor Console</h1>
           <h2 className="text-2xl font-semibold text-muted-foreground mb-4">Global Health Access Trust</h2>
           <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-            Every donor begins their journey by creating a secure account. This is required for all donations.
+            Every supporter begins their journey by creating a secure account. This is required for all engagement.
           </p>
           <p className="text-muted-foreground max-w-3xl mx-auto mt-4">
             Our platform is encrypted, GDPR-compliant, and designed to handle high-value contributions with full discretion and accountability.
