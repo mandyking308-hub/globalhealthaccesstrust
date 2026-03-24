@@ -94,6 +94,7 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="learn-about-our-mission" element={<Navigate to="/about-the-trust" replace />} />
+          <Route path="volunteers" element={<Navigate to="/volunteer-apply" replace />} />
           <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="about-the-trust" element={<AboutTheTrustPage />} />
