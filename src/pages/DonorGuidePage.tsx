@@ -72,7 +72,7 @@ export const DonorGuidePage = () => {
 
             <Card>
               <CardHeader>
-                <CardTitle>Donation Portal</CardTitle>
+                <CardTitle>Funding Portal</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
