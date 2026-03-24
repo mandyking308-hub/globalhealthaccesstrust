@@ -31,11 +31,20 @@ export const AuthPage = () => {
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [gdprConsent, setGdprConsent] = useState(false);
 
+  const redirectByRole = async (userId: string) => {
+    const { data: roles } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId);
+    
+    const isAdmin = roles?.some(r => r.role === "admin" || r.role === "super_admin");
+    navigate(isAdmin ? "/admin/dashboard" : "/donor-dashboard");
+  };
+
   useEffect(() => {
-    // Check if user is already logged in
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        navigate("/donor-dashboard");
+        redirectByRole(session.user.id);
       }
     });
   }, [navigate]);
