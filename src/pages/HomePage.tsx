@@ -166,7 +166,7 @@ export const HomePage = () => {
               Operational Framework
             </h2>
             <p className="text-[15px] text-muted-foreground text-center mb-10 leading-[1.7] max-w-2xl mx-auto">
-              The Trust operates through a structured internal system that manages capital allocation, project delivery, monitoring, and outcome verification.
+              The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
