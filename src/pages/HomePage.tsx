@@ -13,7 +13,7 @@ export const HomePage = () => {
     <>
       <SEO 
         title="Global Health Access Trust"
-        description="A charitable trust established to fund and strengthen healthcare access for underserved populations worldwide."
+        description="A private charitable trust directing capital into healthcare access, system infrastructure, and capacity building where it is most critically needed."
         canonical="/"
         schema={organizationSchema}
       />
@@ -31,8 +31,11 @@ export const HomePage = () => {
             <h1 className="text-center mb-4 text-white">
               Global Health Access Trust
             </h1>
-            <p className="text-[15px] sm:text-base mb-8 text-white/80 max-w-2xl mx-auto text-center leading-relaxed">
-              A charitable trust funding healthcare access, capacity building, and systems strengthening for underserved populations worldwide.
+            <p className="text-[15px] sm:text-base mb-3 text-white/80 max-w-2xl mx-auto text-center leading-relaxed">
+              A private charitable trust directing capital into healthcare access, system infrastructure, and capacity where it is most critically needed.
+            </p>
+            <p className="text-[13px] sm:text-sm mb-8 text-white/60 max-w-xl mx-auto text-center tracking-wide">
+              Structured funding. Verified delivery. Measurable outcomes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/auth">
@@ -58,7 +61,7 @@ export const HomePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="section-container">
                 <p className="text-[15px] leading-[1.7] text-muted-foreground">
-                  The Trust exists to fund lawful, ethical interventions that improve access to healthcare for populations excluded from adequate provision.
+                  The Trust deploys capital into lawful, ethical interventions that expand access to healthcare for underserved populations.
                 </p>
               </div>
               <div className="section-container">
@@ -77,7 +80,7 @@ export const HomePage = () => {
               Approach
             </h2>
             <p className="text-[15px] text-muted-foreground text-center mb-10 leading-[1.7] max-w-2xl mx-auto">
-              Donors may commission specific health projects. Each commission is structured with defined scope, region, and reporting obligations.
+              Capital is deployed through structured, commission-based health interventions with defined scope, delivery oversight, and reporting.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -113,14 +116,57 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Delivery */}
+        {/* How the Trust Operates */}
         <section className="py-16 md:py-20 lg:py-24 bg-muted/30">
+          <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
+            <h2 className="text-center mb-4 text-foreground">
+              How the Trust Operates
+            </h2>
+            <p className="text-[15px] text-muted-foreground text-center mb-10 leading-[1.7] max-w-2xl mx-auto">
+              The Trust operates through a structured system that connects capital, delivery partners, and measurable outcomes within a controlled environment.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="section-container">
+                <h3 className="mb-3 text-foreground">Structured Funding</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Capital is allocated to clearly defined projects with agreed scope, geography, and objectives prior to deployment.
+                </p>
+              </div>
+              <div className="section-container">
+                <h3 className="mb-3 text-foreground">Project Oversight</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Each initiative is tracked against milestones, with delivery monitored through a structured reporting framework.
+                </p>
+              </div>
+              <div className="section-container">
+                <h3 className="mb-3 text-foreground">Donor Visibility</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  Donors have access to a secure environment where progress, updates, and documentation are made available.
+                </p>
+              </div>
+              <div className="section-container">
+                <h3 className="mb-3 text-foreground">Accountability & Control</h3>
+                <p className="text-[15px] text-muted-foreground leading-[1.7]">
+                  All activity is documented, auditable, and aligned with legal and governance requirements.
+                </p>
+              </div>
+            </div>
+
+            <p className="text-[13px] text-muted-foreground/70 text-center mt-8 leading-relaxed max-w-2xl mx-auto">
+              The platform supports structured project management, reporting, and administrative oversight through a secure internal system.
+            </p>
+          </div>
+        </section>
+
+        {/* Delivery */}
+        <section className="py-16 md:py-20 lg:py-24">
           <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
             <h2 className="text-center mb-4 text-foreground">
               Delivery
             </h2>
             <p className="text-[15px] leading-[1.7] max-w-2xl mx-auto text-center text-muted-foreground mb-10">
-              The Trust delivers through established partners operating in conflict-affected, displaced, and resource-limited settings.
+              Delivery is executed through established, vetted partners operating in complex and resource-constrained environments.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -162,7 +208,7 @@ export const HomePage = () => {
         </section>
 
         {/* Governance */}
-        <section className="py-16 md:py-20 lg:py-24">
+        <section className="py-16 md:py-20 lg:py-24 bg-muted/30">
           <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
             <h2 className="text-center mb-6 text-foreground">
               Governance
@@ -170,7 +216,7 @@ export const HomePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
               <div className="section-container">
                 <p className="text-[15px] leading-[1.7] text-muted-foreground">
-                  The Trust is governed by an independent Board of Trustees with professional backgrounds in healthcare, law, public policy, and institutional governance.
+                  The Trust is governed by an independent Board with expertise across healthcare, law, public policy, and institutional governance.
                 </p>
               </div>
               <div className="section-container">
@@ -202,13 +248,13 @@ export const HomePage = () => {
         </section>
 
         {/* Funding Mandate */}
-        <section className="py-16 md:py-20 lg:py-24 bg-muted/30">
+        <section className="py-16 md:py-20 lg:py-24">
           <div className="max-w-[1100px] mx-auto px-6 sm:px-8 lg:px-12">
             <h2 className="text-center mb-4 text-foreground">
               Funding Mandate
             </h2>
             <p className="text-[15px] max-w-2xl mx-auto text-center text-muted-foreground mb-10 leading-[1.7]">
-              The Trust is established for exclusively charitable purposes. Its funding mandate encompasses five areas of lawful intervention:
+              All funding is directed exclusively toward defined areas of charitable intervention, aligned with long-term system impact.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
