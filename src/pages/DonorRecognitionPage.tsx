@@ -36,7 +36,7 @@ export const DonorRecognitionPage = () => {
           </div>
           <div className="p-4 bg-background rounded border border-border">
             <h3>Founding Benefactors</h3>
-            <p>Major donors contributing £50,000+ who provide critical cornerstone funding for our strategic initiatives and programme development.</p>
+            <p>Major supporters contributing £50,000+ who provide critical cornerstone funding for our strategic initiatives and programme development.</p>
           </div>
           <div className="p-4 bg-background rounded border border-border">
             <h3>Founding Supporters</h3>
