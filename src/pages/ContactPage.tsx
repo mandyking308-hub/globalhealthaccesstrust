@@ -20,7 +20,7 @@ import { Paperclip } from "lucide-react";
 const ENQUIRY_OPTIONS = [
   "General Enquiry",
   "Partnership Opportunity",
-  "Donation / Funding",
+  "Funding Engagement",
   "Legal / Legacy Matters",
   "Media / Press",
   "Other",
