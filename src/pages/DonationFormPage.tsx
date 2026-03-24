@@ -119,7 +119,7 @@ export const DonationFormPage = () => {
                 onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                 required
               />
-              <p className="text-sm text-muted-foreground mt-1">Minimum donation: £500</p>
+              <p className="text-sm text-muted-foreground mt-1">Minimum funding amount: £500</p>
             </div>
 
             <div>
