@@ -92,15 +92,41 @@ h1,h2,h3,h4,p,li{
 
 /* Institutional section containment */
 .section-container {
-  background: hsl(210 20% 97%);
-  border: 1px solid hsl(210 20% 92%);
-  border-radius: 2px;
-  padding: 2rem 2.5rem;
+  background: hsl(210 20% 97.5%);
+  border: 1px solid hsl(210 20% 91%);
+  border-radius: 6px;
+  padding: 1.75rem 1.5rem;
+  margin-bottom: 1.5rem;
 }
 @media (min-width: 768px) {
   .section-container {
-    padding: 2.5rem 3rem;
+    padding: 2.25rem 2.75rem;
+    margin-bottom: 2rem;
   }
+}
+@media (min-width: 1024px) {
+  .section-container {
+    padding: 2.5rem 3rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Featured/quoted text block */
+.featured-text {
+  background: hsl(210 20% 96%);
+  border-left: 3px solid hsl(var(--primary));
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 4px 4px 0;
+  margin: 1.25rem 0;
+  font-style: italic;
+  max-width: 68ch;
+  line-height: 1.7;
+}
+
+/* Section heading inside containers */
+.section-container h2:first-child,
+.section-container h3:first-child {
+  margin-top: 0;
 }
 
 /* Containers & sections */
