@@ -35,7 +35,7 @@ export const HomePage = () => {
               A private charitable trust directing capital into healthcare access, system infrastructure, and capacity where it is most critically needed.
             </p>
             <p className="text-[13px] sm:text-sm mb-8 text-white/60 max-w-xl mx-auto text-center tracking-wide">
-              Structured funding. Verified delivery. Measurable outcomes.
+              A controlled platform for deploying capital into healthcare systems with oversight, accountability, and measurable impact.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/auth">
