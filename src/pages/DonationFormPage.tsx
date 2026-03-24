@@ -142,7 +142,7 @@ export const DonationFormPage = () => {
             </div>
 
             <div>
-              <Label htmlFor="frequency">Donation Frequency*</Label>
+              <Label htmlFor="frequency">Funding Frequency*</Label>
               <Select 
                 value={formData.frequency} 
                 onValueChange={(value) => setFormData({ ...formData, frequency: value })}
