@@ -1,5 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { SmtpClient } from "https://deno.land/x/smtp@v0.7.0/mod.ts";
+import nodemailer from "npm:nodemailer@6.9.8";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -8,10 +8,14 @@ const corsHeaders = {
 };
 
 const TAG_MAP: Record<string, string[]> = {
+  "Funding Engagement": ["funding", "donor", "capital"],
   "Donation / Funding": ["funding", "donor", "capital"],
+  "Partnership Opportunity": ["partnership", "collaboration"],
   "Partnership": ["partnership", "collaboration"],
   "Legal / Legacy": ["legal", "governance"],
+  "Media Enquiry": ["media", "communications"],
   "Media": ["media", "communications"],
+  "General Enquiry": ["general"],
   "General": ["general"],
 };
 
@@ -31,15 +35,19 @@ function getSubject(priority: string): string {
 }
 
 function formatTimestamp(isoStr: string): string {
-  const d = new Date(isoStr);
-  return d.toLocaleString("en-GB", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "Europe/London",
-  });
+  try {
+    const d = new Date(isoStr);
+    return d.toLocaleString("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Europe/London",
+    });
+  } catch {
+    return isoStr;
+  }
 }
 
 function buildEmail(data: any): string {
@@ -78,7 +86,7 @@ ${divider}
 Submitted:          ${formatTimestamp(data.created_at)}
 Source:              Global Health Access Trust
 Record ID:          ${data.id}
-${data.attachment_url ? `Attachment:          ${data.attachment_url}` : ""}
+${data.attachment_url ? `Attachment:         ${data.attachment_url}` : ""}
 
 ${divider}
 This is an internal notification. Do not forward.
@@ -102,23 +110,27 @@ serve(async (req) => {
     const subject = getSubject(data.priority);
     const body = buildEmail(data);
 
-    const client = new SmtpClient();
-
-    await client.connectTLS({
-      hostname: "smtp.ionos.co.uk",
+    const transporter = nodemailer.createTransport({
+      host: "smtp.ionos.co.uk",
       port: 587,
-      username: "contact@globalhealthaccesstrust.com",
-      password: smtpPassword,
+      secure: false,
+      auth: {
+        user: "contact@globalhealthaccesstrust.com",
+        pass: smtpPassword,
+      },
+      tls: {
+        rejectUnauthorized: true,
+      },
     });
 
-    await client.send({
-      from: "contact@globalhealthaccesstrust.com",
+    await transporter.sendMail({
+      from: '"GHAT Intake System" <contact@globalhealthaccesstrust.com>',
       to: "contact@globalhealthaccesstrust.com",
       subject: subject,
-      content: body,
+      text: body,
     });
 
-    await client.close();
+    console.log("Notification email sent successfully for record:", data.id);
 
     return new Response(
       JSON.stringify({
@@ -140,7 +152,7 @@ serve(async (req) => {
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 200, // Return 200 so form submission isn't blocked
+        status: 200,
       }
     );
   }
