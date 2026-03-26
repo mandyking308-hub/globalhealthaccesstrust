@@ -1,0 +1,1 @@
+ALTER TABLE public.inbound_contacts ADD COLUMN IF NOT EXISTS internal_tags text[] DEFAULT '{}'::text[];
