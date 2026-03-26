@@ -99,7 +99,11 @@ export const ContactPage = () => {
 
       const priority = getPriority(formData.nature_of_enquiry);
 
-      const { error } = await supabase.from("inbound_contacts").insert({
+      const contactId = crypto.randomUUID();
+      const createdAt = new Date().toISOString();
+
+      const contactRecord = {
+        id: contactId,
         name: formData.name.trim(),
         email: formData.email.trim(),
         phone: formData.phone.trim() || null,
@@ -112,9 +116,27 @@ export const ContactPage = () => {
         status: "New",
         priority,
         attachment_url: attachmentUrl,
-      } as any);
+        created_at: createdAt,
+      };
 
+      const { error } = await supabase.from("inbound_contacts").insert(contactRecord as any);
       if (error) throw error;
+
+      // Fire notification email (non-blocking — don't let failure stop submission)
+      supabase.functions.invoke("contact-notification", {
+        body: contactRecord,
+      }).then((res) => {
+        if (res.data?.tags) {
+          // Update internal tags on the record
+          supabase.from("inbound_contacts")
+            .update({ internal_tags: res.data.tags } as any)
+            .eq("id", contactId)
+            .then(() => {});
+        }
+      }).catch((err) => {
+        console.error("Notification email failed (non-blocking):", err);
+      });
+
       setIsSubmitted(true);
     } catch (err) {
       console.error("Submission error:", err);
