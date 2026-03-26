@@ -349,6 +349,7 @@ export type Database = {
           email: string
           gdpr_consent: boolean
           id: string
+          internal_tags: string[] | null
           message: string
           name: string
           nature_of_enquiry: string
@@ -366,6 +367,7 @@ export type Database = {
           email: string
           gdpr_consent?: boolean
           id?: string
+          internal_tags?: string[] | null
           message: string
           name: string
           nature_of_enquiry: string
@@ -383,6 +385,7 @@ export type Database = {
           email?: string
           gdpr_consent?: boolean
           id?: string
+          internal_tags?: string[] | null
           message?: string
           name?: string
           nature_of_enquiry?: string
