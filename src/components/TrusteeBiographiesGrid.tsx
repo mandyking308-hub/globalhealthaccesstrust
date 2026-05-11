@@ -45,10 +45,10 @@ const trustees: TrusteeProps[] = [
     quote: "Every contribution is held with care, precision, and purpose. We are not just managing funds—we are safeguarding legacies."
   },
   {
-    name: "Mike Newman",
-    role: "Human Resources & Workforce Ethics",
-    bio: "Mike Newman brings over 40 years of HR leadership, with a career focused on organisational growth, vetting, and compliance. His work in developing scalable HR systems ensures that all operations under the Trust's remit meet the highest ethical and legal standards. Mike plays a key role in board development, trustee training, and workforce governance.",
-    quote: "Behind every policy is a person. Behind every structure, a soul. Human dignity begins with how we manage people."
+    name: "John O'Sullivan",
+    role: "Trustee - Finance & Strategic Investment",
+    bio: "John O'Sullivan is a seasoned care-sector executive and finance director, having served as CEO across multiple large care groups. His expertise spans financial forecasting, investment oversight, and operational management within regulated healthcare environments. At the Trust, John leads on financial governance, audit strategy, and fiduciary stewardship.",
+    quote: "Every contribution is held with care, precision, and purpose. We are not just managing funds—we are safeguarding legacies."
   }
 ];
 
