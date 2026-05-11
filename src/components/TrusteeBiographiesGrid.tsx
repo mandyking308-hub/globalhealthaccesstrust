@@ -44,12 +44,6 @@ const trustees: TrusteeProps[] = [
     bio: "John O'Sullivan is a seasoned care-sector executive and finance director, having served as CEO across multiple large care groups. His expertise spans financial forecasting, investment oversight, and operational management within regulated healthcare environments. At the Trust, John leads on financial governance, audit strategy, and fiduciary stewardship.",
     quote: "Every contribution is held with care, precision, and purpose. We are not just managing funds—we are safeguarding legacies."
   },
-  {
-    name: "John O'Sullivan",
-    role: "Trustee - Finance & Strategic Investment",
-    bio: "John O'Sullivan is a seasoned care-sector executive and finance director, having served as CEO across multiple large care groups. His expertise spans financial forecasting, investment oversight, and operational management within regulated healthcare environments. At the Trust, John leads on financial governance, audit strategy, and fiduciary stewardship.",
-    quote: "Every contribution is held with care, precision, and purpose. We are not just managing funds—we are safeguarding legacies."
-  }
 ];
 
 export const TrusteeBiographiesGrid = () => {
