@@ -7,6 +7,7 @@ import heroImage from "@/assets/ghat-hero-community-health.jpg";
 import clinicImage from "@/assets/ghat-maternal-care.jpg";
 import systemsImage from "@/assets/ghat-infrastructure-delivery.jpg";
 import ruralImage from "@/assets/ghat-capacity-training.jpg";
+import mandateImage from "@/assets/delivery-healthcare-clinic.jpg";
 
 export const HomePage = () => {
   return (
