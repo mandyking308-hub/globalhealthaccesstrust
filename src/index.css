@@ -386,97 +386,97 @@ a:hover{text-decoration:none;}
 ======================================== */
 
 :root {
-  /* GHAT Design System - Exact Color Specifications */
-  --background: 0 0% 100%;
-  --foreground: 217 25% 5%;
+  /* GHAT Editorial Design System - Ivory, Charcoal, Forest Green */
+  --background: 43 33% 97%;       /* #F9F7F2 ivory */
+  --foreground: 0 0% 10%;       /* #1A1A1A charcoal */
   
-  --card: 0 0% 100%;
-  --card-foreground: 217 25% 5%;
-  --card-border: 217 12% 91%;
+  --card: 43 33% 97%;
+  --card-foreground: 0 0% 10%;
+  --card-border: 0 0% 10% / 0.08;
   
-  /* Primary Navy: #0B2B4C */
-  --primary: 213 64% 18%;
-  --primary-foreground: 0 0% 98%;
-  --primary-700: 213 64% 25%;
-  --primary-50: 213 64% 98%;
+  /* Primary Deep Forest Green: #0D2619 */
+  --primary: 150 47% 11%;
+  --primary-foreground: 43 33% 97%;
+  --primary-700: 150 47% 16%;
+  --primary-50: 150 30% 96%;
   
-  /* Accent Gold: #D9A441 */
-  --gold: 42 65% 56%;
-  --gold-700: 42 65% 35%;
-  --gold-foreground: 217 25% 5%;
+  /* Accent Brighter Green: #2D6A4F */
+  --gold: 153 30% 36%;
+  --gold-700: 153 30% 26%;
+  --gold-foreground: 43 33% 97%;
   
-  --secondary: 217 12% 91%;
-  --secondary-foreground: 217 25% 18%;
+  --secondary: 43 20% 92%;
+  --secondary-foreground: 0 0% 10%;
   
-  --muted: 217 12% 94%;
-  --muted-foreground: 217 12% 45%;
-  --muted-dark: 217 12% 87%;
+  --muted: 43 20% 92%;
+  --muted-foreground: 0 0% 40%;
+  --muted-dark: 43 15% 85%;
   
-  --accent: 217 22% 84%;
-  --accent-foreground: 213 64% 18%;
+  --accent: 153 30% 36%;
+  --accent-foreground: 43 33% 97%;
   
-  /* Success: #1E874B */
-  --success: 142 76% 36%;
-  --success-foreground: 0 0% 98%;
+  /* Success: #2D6A4F */
+  --success: 153 30% 36%;
+  --success-foreground: 43 33% 97%;
   
   /* Danger: #B3261E */
   --destructive: 0 74% 42%;
-  --destructive-foreground: 0 0% 98%;
+  --destructive-foreground: 43 33% 97%;
   
-  /* Info: #1E5AA8 */
-  --info: 213 73% 39%;
-  --info-foreground: 0 0% 98%;
+  /* Info: #2D6A4F */
+  --info: 153 30% 36%;
+  --info-foreground: 43 33% 97%;
   
-  --border: 217 12% 91%;
-  --input: 217 12% 91%;
-  --ring: 213 64% 18%;
+  --border: 0 0% 10% / 0.1;
+  --input: 0 0% 10% / 0.1;
+  --ring: 153 30% 36%;
   
-  /* Typography - Locked Design System */
-  --font-serif: "Spectral", Georgia, "Times New Roman", Times, serif;
+  /* Typography - Editorial Design System */
+  --font-serif: "EB Garamond", Georgia, "Times New Roman", Times, serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
   /* Responsive type scale (clamp) */
   --font-size-body: clamp(1rem, 0.9rem + 0.3vw, 1.0625rem);        /* 16→17px */
-  --font-size-h1: clamp(1.75rem, 1.2rem + 3vw, 2.5rem);            /* 28→40px */
-  --font-size-h2: clamp(1.375rem, 1.05rem + 1.6vw, 1.875rem);      /* 22→30px */
-  --font-size-h3: clamp(1.125rem, 1.0rem + 0.9vw, 1.375rem);       /* 18→22px */
-  --line-height-heading: 1.25;
-  --line-height-body: 1.6;
+  --font-size-h1: clamp(2.125rem, 1.5rem + 3.5vw, 3.5rem);        /* 34→56px */
+  --font-size-h2: clamp(1.75rem, 1.25rem + 2.5vw, 2.75rem);      /* 28→44px */
+  --font-size-h3: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem);       /* 20→26px */
+  --line-height-heading: 1.15;
+  --line-height-body: 1.65;
 
   /* Layout */
-  --container-max: 72rem; /* 1152px */
+  --container-max: 80rem; /* 1280px */
   --gutter-mobile: 1rem;
-  --gutter-tablet: 2rem;
-  --gutter-desktop: 3rem;
+  --gutter-tablet: 1.5rem;
+  --gutter-desktop: 2rem;
 
   /* Focus */
-  --focus-ring: 2px solid #0B2B4C;
+  --focus-ring: 2px solid #2D6A4F;
   --focus-offset: 2px;
   
   /* Spacing & Layout */
-  --radius: 2px;
-  --radius-lg: 4px;
-  --radius-xl: 6px;
+  --radius: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
   
   /* Shadows - Exact Specifications */
-  --shadow-soft: 0 2px 8px rgba(0,0,0,.06);
-  --shadow-medium: 0 4px 16px rgba(0,0,0,.08);
-  --shadow-strong: 0 8px 24px rgba(0,0,0,.12);
-  --shadow-gold: 0 4px 16px rgba(217, 164, 65, 0.2);
+  --shadow-soft: 0 2px 8px rgba(13, 38, 25, 0.08);
+  --shadow-medium: 0 4px 16px rgba(13, 38, 25, 0.12);
+  --shadow-strong: 0 8px 32px rgba(13, 38, 25, 0.16);
+  --shadow-gold: 0 4px 16px rgba(45, 106, 79, 0.2);
   
   /* Animations */
   --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   
   /* Sidebar colors */
-  --sidebar-background: 0 0% 98%;
-  --sidebar-foreground: 240 5.3% 26.1%;
-  --sidebar-primary: 240 5.9% 10%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 240 4.8% 95.9%;
-  --sidebar-accent-foreground: 240 5.9% 10%;
-  --sidebar-border: 217 12% 91%;
-  --sidebar-ring: 217.2 91.2% 59.8%;
+  --sidebar-background: 43 33% 97%;
+  --sidebar-foreground: 0 0% 10%;
+  --sidebar-primary: 150 47% 11%;
+  --sidebar-primary-foreground: 43 33% 97%;
+  --sidebar-accent: 43 20% 92%;
+  --sidebar-accent-foreground: 0 0% 10%;
+  --sidebar-border: 0 0% 10% / 0.1;
+  --sidebar-ring: 153 30% 36%;
 }
 
 @layer base {
