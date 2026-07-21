@@ -381,7 +381,8 @@ export const HomePage = () => {
                   { t: "Project Deployment", d: "Capital is deployed into clearly defined initiatives with ongoing monitoring and accountability." },
                 ].map((c, i) => (
                   <li key={c.t}>
-                    <span className="timeline-node">Step {i + 1}</span>
+                    <span className="timeline-node">0{i + 1}</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent block mb-2">Step {i + 1}</span>
                     <h3 className="mb-3 text-foreground">{c.t}</h3>
                     <p className="text-muted-foreground leading-relaxed">{c.d}</p>
                   </li>
