@@ -64,16 +64,32 @@ export const HomePage = () => {
             <div className="relative order-1 lg:order-2 min-h-[420px] lg:min-h-full overflow-hidden bg-primary">
               <img
                 src={heroImage}
-                alt="Community health worker consulting with a patient in a rural clinic"
+                alt="A mother and child on a residential street in an Eastern European town affected by the Ukraine crisis"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-primary-foreground">
                 <p className="text-[10.5px] uppercase tracking-[0.22em] font-semibold opacity-80">Field Documentation</p>
                 <p className="text-sm mt-2 max-w-md opacity-95 leading-relaxed">
-                  Primary healthcare consultation, partner-operated clinic, Sub-Saharan Africa.
+                  Displaced family, residential district, Eastern Ukraine.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Editorial Pull-Quote — OSF-style impact band */}
+        <section className="bg-background border-b border-foreground/10 py-24 md:py-32">
+          <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-10 md:gap-16 items-start">
+            <span className="eyebrow whitespace-nowrap md:mt-4">A Statement of Intent</span>
+            <div>
+              <p className="font-serif text-[28px] md:text-[42px] lg:text-[52px] leading-[1.12] tracking-[-0.01em] text-foreground font-medium">
+                Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital — from Ukraine to the wider regions where care is denied.
+              </p>
+              <div className="mt-10 flex items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                <span className="h-px w-10 bg-foreground/30" />
+                <span>The Board of Trustees</span>
               </div>
             </div>
           </div>
@@ -233,7 +249,7 @@ export const HomePage = () => {
                 <div className="aspect-[16/10] overflow-hidden mb-6">
                   <img
                     src={clinicImage}
-                    alt="Primary healthcare clinic interior with medical equipment in a rural setting"
+                    alt="A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
@@ -247,7 +263,7 @@ export const HomePage = () => {
                 <div className="aspect-[16/10] overflow-hidden mb-6">
                   <img
                     src={systemsImage}
-                    alt="Aerial view of river delta and agricultural systems with settlements"
+                    alt="Aid workers unloading medical supply pallets outside a damaged building in a Syrian town"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
@@ -261,7 +277,7 @@ export const HomePage = () => {
                 <div className="aspect-[16/10] overflow-hidden mb-6">
                   <img
                     src={ruralImage}
-                    alt="Rural landscape with scattered settlements and green hillside terrain"
+                    alt="A multi-region group of clinicians in a field training session"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
