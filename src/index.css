@@ -39,12 +39,12 @@ img {
 ======================================== */
 
 :root{
-  /* GHAT Editorial Design System - Ivory, Charcoal, Forest Green */
+  /* GHAT Editorial Design System - Ivory, Charcoal, Bright Emerald */
   --ivory: 43 33% 97%;            /* #F9F7F2 */
   --charcoal: 0 0% 10%;           /* #1A1A1A */
-  --forest: 150 47% 11%;          /* #0D2619 */
-  --forest-light: 153 30% 41%;    /* #40916C */
-  --green-accent: 153 30% 36%;    /* #2D6A4F */
+  --forest: 158 64% 24%;          /* #064E3B */
+  --forest-light: 160 84% 39%;    /* #14B8A6 */
+  --green-accent: 158 84% 38%;    /* #10B981 */
   
   /* Semantic tokens mapped to editorial palette */
   --background: var(--ivory);
@@ -69,10 +69,10 @@ img {
   --radius: 0px;
   
   /* Shadows */
-  --shadow-soft: 0 2px 8px rgba(13, 38, 25, 0.08);
-  --shadow-medium: 0 4px 16px rgba(13, 38, 25, 0.12);
-  --shadow-strong: 0 8px 32px rgba(13, 38, 25, 0.16);
-  --shadow-gold: 0 4px 16px rgba(45, 106, 79, 0.2);
+  --shadow-soft: 0 2px 8px rgba(6, 78, 59, 0.08);
+  --shadow-medium: 0 4px 16px rgba(6, 78, 59, 0.12);
+  --shadow-strong: 0 8px 32px rgba(6, 78, 59, 0.16);
+  --shadow-gold: 0 4px 16px rgba(16, 185, 129, 0.25);
   
   /* Transitions */
   --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
