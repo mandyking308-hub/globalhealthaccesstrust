@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
 interface Message {
@@ -27,8 +24,7 @@ export const MessagesPanel = ({ userId }: MessagesPanelProps) => {
 
   useEffect(() => {
     loadMessages();
-    
-    // Subscribe to real-time updates
+
     const channel = supabase
       .channel('messages')
       .on(
@@ -86,73 +82,74 @@ export const MessagesPanel = ({ userId }: MessagesPanelProps) => {
   };
 
   if (loading) {
-    return <div>Loading messages...</div>;
+    return <div className="portal-panel text-muted-foreground">Loading messages...</div>;
   }
 
   return (
-    <div className="grid md:grid-cols-3 gap-4">
-      {/* Message List */}
-      <div className="md:col-span-1 space-y-2">
-        <h3 className="font-semibold mb-4">Your Messages</h3>
-        {messages.length === 0 ? (
-          <p className="text-sm text-muted-foreground">No messages yet</p>
-        ) : (
-          messages.map((message) => (
-            <Card
-              key={message.id}
-              className={`cursor-pointer transition-colors hover:bg-accent ${
-                selectedMessage?.id === message.id ? 'border-primary' : ''
-              }`}
-              onClick={() => handleMessageClick(message)}
-            >
-              <CardContent className="p-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      {message.status === 'unread' ? (
-                        <span className="w-2 h-2 bg-primary rounded-full" />
-                      ) : (
-                        <span className="w-2 h-2 bg-muted rounded-full" />
+    <div className="portal-panel p-0">
+      <div className="px-8 py-6 border-b border-foreground/10">
+        <span className="portal-eyebrow">Messages</span>
+        <h2 className="text-foreground mt-2" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>Your Messages</h2>
+      </div>
+
+      <div className="grid md:grid-cols-[320px_1fr] min-h-[400px]">
+        {/* List */}
+        <div className="border-b md:border-b-0 md:border-r border-foreground/10 divide-y divide-foreground/10 max-h-[560px] overflow-y-auto">
+          {messages.length === 0 ? (
+            <p className="p-6 text-sm text-muted-foreground">No messages yet</p>
+          ) : (
+            messages.map((message) => (
+              <button
+                key={message.id}
+                onClick={() => handleMessageClick(message)}
+                className={`w-full text-left px-6 py-4 hover:bg-secondary/50 transition-colors ${
+                  selectedMessage?.id === message.id ? 'bg-secondary/60 border-l-2 border-primary' : 'border-l-2 border-transparent'
+                }`}
+              >
+                <div className="flex items-start gap-2">
+                  <span className={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                    message.status === 'unread' ? 'bg-primary' : 'bg-foreground/25'
+                  }`} />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <p className={`text-[14px] truncate ${message.status === 'unread' ? 'font-semibold text-foreground' : 'text-foreground/80'}`}>
+                        {message.subject}
+                      </p>
+                      {message.status === 'unread' && (
+                        <span className="text-[9.5px] uppercase tracking-[0.16em] font-bold text-primary flex-shrink-0">New</span>
                       )}
-                      <p className="font-medium text-sm">{message.subject}</p>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <p className="text-[11.5px] uppercase tracking-[0.14em] font-semibold text-muted-foreground mt-1">
                       {new Date(message.created_at).toLocaleDateString()}
                     </p>
                   </div>
-                  {message.status === 'unread' && (
-                    <Badge variant="default" className="ml-2">New</Badge>
-                  )}
                 </div>
-              </CardContent>
-            </Card>
-          ))
-        )}
-      </div>
+              </button>
+            ))
+          )}
+        </div>
 
-      {/* Message Content */}
-      <div className="md:col-span-2">
-        {selectedMessage ? (
-          <Card>
-            <CardHeader>
-              <CardTitle>{selectedMessage.subject}</CardTitle>
-              <p className="text-sm text-muted-foreground">
+        {/* Detail */}
+        <div className="p-8">
+          {selectedMessage ? (
+            <>
+              <span className="portal-eyebrow mb-3">Message</span>
+              <h3 className="text-foreground mt-2 mb-2" style={{ fontSize: "clamp(20px, 1.8vw, 26px)", fontWeight: 600 }}>
+                {selectedMessage.subject}
+              </h3>
+              <p className="text-[11.5px] uppercase tracking-[0.14em] font-semibold text-muted-foreground mb-6">
                 {new Date(selectedMessage.created_at).toLocaleString()}
               </p>
-            </CardHeader>
-            <CardContent>
-              <div className="prose prose-sm max-w-none">
+              <div className="text-[15.5px] text-foreground/85 leading-relaxed whitespace-pre-wrap">
                 {selectedMessage.body}
               </div>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card>
-            <CardContent className="p-12 text-center text-muted-foreground">
+            </>
+          ) : (
+            <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
               Select a message to read
-            </CardContent>
-          </Card>
-        )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

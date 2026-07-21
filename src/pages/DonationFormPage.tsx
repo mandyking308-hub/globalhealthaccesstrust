@@ -15,7 +15,7 @@ export const DonationFormPage = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
-  
+
   const [formData, setFormData] = useState({
     amount: "",
     purpose: "",
@@ -38,7 +38,7 @@ export const DonationFormPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!userId) {
       toast({
         title: "Authentication required",
@@ -99,16 +99,25 @@ export const DonationFormPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col donor-portal">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-12">
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-4xl font-bold mb-2">Funding Submission</h1>
-          <p className="text-muted-foreground mb-8">Submit a structured funding allocation</p>
-
-          <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg shadow-sm border">
+      <main className="flex-grow">
+        <div className="max-w-[900px] mx-auto px-6 md:px-10 py-16 md:py-24">
+          <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14 mb-12">
+            <span className="portal-eyebrow md:mt-2">Funding Submission</span>
             <div>
-              <Label htmlFor="amount">Funding Amount (£)*</Label>
+              <h1 className="no-display text-foreground mb-4" style={{ fontFamily: "var(--font-serif)", fontWeight: 900, textTransform: "uppercase", letterSpacing: "-0.01em", fontSize: "clamp(34px, 4vw, 56px)", lineHeight: 1 }}>
+                Funding Submission
+              </h1>
+              <p className="text-[16.5px] text-muted-foreground leading-relaxed">
+                Submit a structured funding allocation
+              </p>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="portal-panel space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="amount" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">Funding Amount (£)*</Label>
               <Input
                 id="amount"
                 type="number"
@@ -118,17 +127,18 @@ export const DonationFormPage = () => {
                 value={formData.amount}
                 onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                 required
+                className="h-11"
               />
-              <p className="text-sm text-muted-foreground mt-1">Minimum funding amount: £500</p>
+              <p className="text-xs text-muted-foreground">Minimum funding amount: £500</p>
             </div>
 
-            <div>
-              <Label htmlFor="purpose">Funding Purpose*</Label>
-              <Select 
-                value={formData.purpose} 
+            <div className="space-y-2">
+              <Label htmlFor="purpose" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">Funding Purpose*</Label>
+              <Select
+                value={formData.purpose}
                 onValueChange={(value) => setFormData({ ...formData, purpose: value })}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-11">
                   <SelectValue placeholder="Select a purpose" />
                 </SelectTrigger>
                 <SelectContent>
@@ -141,13 +151,13 @@ export const DonationFormPage = () => {
               </Select>
             </div>
 
-            <div>
-              <Label htmlFor="frequency">Funding Frequency*</Label>
-              <Select 
-                value={formData.frequency} 
+            <div className="space-y-2">
+              <Label htmlFor="frequency" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">Funding Frequency*</Label>
+              <Select
+                value={formData.frequency}
                 onValueChange={(value) => setFormData({ ...formData, frequency: value })}
               >
-                <SelectTrigger>
+                <SelectTrigger className="h-11">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -159,17 +169,18 @@ export const DonationFormPage = () => {
               </Select>
             </div>
 
-            <div>
-              <Label htmlFor="notes">Additional Notes (Optional)</Label>
+            <div className="space-y-2">
+              <Label htmlFor="notes" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">Additional Notes (Optional)</Label>
               <Textarea
                 id="notes"
                 placeholder="Add any special instructions or dedication..."
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                rows={4}
               />
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase" disabled={loading}>
               {loading ? "Processing..." : "Submit Funding"}
             </Button>
           </form>

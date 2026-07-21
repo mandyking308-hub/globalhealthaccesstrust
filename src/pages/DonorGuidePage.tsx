@@ -1,9 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export const DonorGuidePage = () => {
   const recognitionTiers = [
@@ -34,184 +32,179 @@ export const DonorGuidePage = () => {
     }
   ];
 
+  const features = [
+    { title: "Secure Login", body: "Private donor access with password protection." },
+    { title: "Funding Portal", body: "Structured funding submission with secure processing." },
+    {
+      title: "Donation Preferences",
+      body: "Choose where your funds are directed:",
+      list: [
+        "Healthcare Access",
+        "Humanitarian Crisis (e.g. Ukraine)",
+        "Research & Policy",
+        "Professional Education",
+        "Where Most Needed",
+      ],
+    },
+    { title: "Donation History", body: "Review past contributions and download receipts instantly." },
+    { title: "Messaging & Updates", body: "Receive personal notes, project updates, and event invitations." },
+    { title: "Recognition Tier", body: "Your profile displays your donor tier with tailored benefits." },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col donor-portal">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          
-          <h1 className="text-4xl font-bold mb-4">Welcome to the Donor Console</h1>
-          <h2 className="text-2xl font-semibold text-muted-foreground mb-4">Global Health Access Trust</h2>
-          <p className="text-lg max-w-3xl mx-auto leading-relaxed">
-            Every supporter begins their journey by creating a secure account. This is required for all engagement.
-          </p>
-          <p className="text-muted-foreground max-w-3xl mx-auto mt-4">
-            Our platform is encrypted, GDPR-compliant, and designed to handle structured funding relationships with full discretion and accountability.
-          </p>
-        </div>
+      <main className="flex-grow">
+
+        {/* Hero */}
+        <section className="border-b border-foreground/10 bg-background">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14">
+              <span className="portal-eyebrow md:mt-2">Donor Portal</span>
+              <div className="max-w-3xl">
+                <h1 className="no-display text-foreground mb-6" style={{ fontFamily: "var(--font-serif)", fontWeight: 900, textTransform: "uppercase", letterSpacing: "-0.01em", fontSize: "clamp(40px, 5.4vw, 78px)", lineHeight: 0.98 }}>
+                  Welcome to the Donor Console
+                </h1>
+                <p className="text-[13px] uppercase tracking-[0.22em] font-bold text-primary mb-8">
+                  Global Health Access Trust
+                </p>
+                <p className="text-[18px] text-foreground leading-relaxed mb-4 max-w-2xl">
+                  Every supporter begins their journey by creating a secure account. This is required for all engagement.
+                </p>
+                <p className="text-[15.5px] text-muted-foreground leading-relaxed max-w-2xl">
+                  Our platform is encrypted, GDPR-compliant, and designed to handle structured funding relationships with full discretion and accountability.
+                </p>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <Link to="/auth">
+                    <Button className="h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase px-8">
+                      Login to Portal
+                    </Button>
+                  </Link>
+                  <Link to="/contact-the-trust">
+                    <Button variant="outline" className="h-11 border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.1em] text-[13px] font-semibold uppercase px-8">
+                      Contact the Trust
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Dashboard Features */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
-            
-            Your Donor Dashboard Includes:
-          </h2>
+        <section className="py-20 md:py-24 border-b border-foreground/10">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14 mb-14">
+              <span className="portal-eyebrow md:mt-2">Dashboard</span>
+              <h2 className="text-foreground max-w-3xl" style={{ fontWeight: 500, fontSize: "clamp(26px, 2.8vw, 40px)", letterSpacing: "-0.018em", lineHeight: 1.2 }}>
+                Your Donor Dashboard Includes:
+              </h2>
+            </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Secure Login</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Private donor access with password protection.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Funding Portal</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Structured funding submission with secure processing.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Donation Preferences</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-3">Choose where your funds are directed:</p>
-                <ul className="space-y-1 text-sm">
-                  <li>→ Healthcare Access</li>
-                  <li>→ Humanitarian Crisis (e.g. Ukraine)</li>
-                  <li>→ Research & Policy</li>
-                  <li>→ Professional Education</li>
-                  <li>→ Where Most Needed</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Donation History</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Review past contributions and download receipts instantly.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Messaging & Updates</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Receive personal notes, project updates, and event invitations.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Recognition Tier</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Your profile displays your donor tier with tailored benefits.
-                </p>
-              </CardContent>
-            </Card>
+            <div className="md:pl-[196px] grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-0 border-t border-foreground/12">
+              {features.map((f, i) => (
+                <div key={f.title} className={`py-8 border-b border-foreground/12 ${i % 2 === 0 ? "md:border-r md:pr-14" : ""}`}>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary block mb-3">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-foreground mb-3" style={{ fontSize: "clamp(19px, 1.5vw, 23px)", fontWeight: 600 }}>
+                    {f.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed text-[15.5px]">
+                    {f.body}
+                  </p>
+                  {f.list && (
+                    <ul className="mt-3 space-y-1.5">
+                      {f.list.map((item) => (
+                        <li key={item} className="text-[14.5px] text-muted-foreground flex items-start">
+                          <span className="text-primary mr-2">→</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Recognition Tiers */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6 flex items-center gap-2">
-            
-            Donor Recognition Tiers
-          </h2>
+        <section className="py-20 md:py-24 border-b border-foreground/10 bg-secondary/40">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14 mb-12">
+              <span className="portal-eyebrow md:mt-2">Recognition</span>
+              <h2 className="text-foreground max-w-3xl" style={{ fontWeight: 500, fontSize: "clamp(26px, 2.8vw, 40px)", letterSpacing: "-0.018em", lineHeight: 1.2 }}>
+                Donor Recognition Tiers
+              </h2>
+            </div>
 
-          <Card>
-            <CardContent className="pt-6">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="font-bold">Tier Name</TableHead>
-                    <TableHead className="font-bold">Amount</TableHead>
-                    <TableHead className="font-bold">Recognition</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {recognitionTiers.map((tier, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-semibold">{tier.tier}</TableCell>
-                      <TableCell>{tier.amount}</TableCell>
-                      <TableCell>{tier.recognition}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+            <div className="md:pl-[196px]">
+              <div className="border-t border-foreground/15 border-b divide-y divide-foreground/12">
+                <div className="grid grid-cols-12 py-4 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/60">
+                  <div className="col-span-4">Tier Name</div>
+                  <div className="col-span-3">Amount</div>
+                  <div className="col-span-5">Recognition</div>
+                </div>
+                {recognitionTiers.map((t) => (
+                  <div key={t.tier} className="grid grid-cols-12 py-6 items-baseline">
+                    <div className="col-span-4 font-serif font-bold text-foreground text-[16.5px]">{t.tier}</div>
+                    <div className="col-span-3 text-[15.5px] text-foreground">{t.amount}</div>
+                    <div className="col-span-5 text-[15px] text-muted-foreground leading-relaxed">{t.recognition}</div>
+                  </div>
+                ))}
+              </div>
 
-              <div className="mt-6 p-4 bg-muted rounded-lg">
-                <p className="text-sm">
+              <div className="mt-8 border-l-2 border-primary pl-6 max-w-2xl">
+                <p className="text-[15.5px] text-foreground leading-relaxed">
                   If you&apos;d like to discuss major donations, our board will connect with you personally. We&apos;re here to build something meaningful, together.
                 </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </section>
 
         {/* Final Notes */}
-        <section className="mb-12">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                
-                Final Notes
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p>
-                All donation records are stored securely. You can manage your preferences, receive updates, and track your impact.
-              </p>
-              <p>
-                We honour our donors with full transparency and care. Thank you for being part of the future of global health access.
-              </p>
-            </CardContent>
-          </Card>
+        <section className="py-20 md:py-24 border-b border-foreground/10">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14">
+              <span className="portal-eyebrow md:mt-2">Final Notes</span>
+              <div className="max-w-3xl space-y-5">
+                <p className="text-[16.5px] text-foreground leading-relaxed">
+                  All donation records are stored securely. You can manage your preferences, receive updates, and track your impact.
+                </p>
+                <p className="text-[16.5px] text-muted-foreground leading-relaxed">
+                  We honour our donors with full transparency and care. Thank you for being part of the future of global health access.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* Questions Section */}
-        <section className="mb-12">
-          <Card className="bg-primary/5 border-primary/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                
-                Questions?
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">
-                Please use the Messaging section of your dashboard or our Contact Form for any queries or requests.
-              </p>
-              <div className="flex gap-4">
-                <Link to="/donor-dashboard">
-                  <Button variant="default">Go to Dashboard</Button>
-                </Link>
-                <Link to="/contact-the-trust">
-                  <Button variant="outline">Contact Form</Button>
-                </Link>
+        {/* Questions */}
+        <section className="py-20 md:py-24">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14">
+              <span className="portal-eyebrow md:mt-2">Questions?</span>
+              <div className="max-w-3xl">
+                <p className="text-[16.5px] text-foreground leading-relaxed mb-8">
+                  Please use the Messaging section of your dashboard or our Contact Form for any queries or requests.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/donor-dashboard">
+                    <Button className="h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase px-8">
+                      Go to Dashboard
+                    </Button>
+                  </Link>
+                  <Link to="/contact-the-trust">
+                    <Button variant="outline" className="h-11 border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.1em] text-[13px] font-semibold uppercase px-8">
+                      Contact Form
+                    </Button>
+                  </Link>
+                </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </section>
       </main>
       <Footer />
