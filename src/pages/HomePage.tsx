@@ -222,7 +222,7 @@ export const HomePage = () => {
 
             <div className="pl-0 md:pl-[196px] mt-16">
               <Link to="/commission-projects">
-                <Button variant="outline" size="lg" className="rounded-none border-foreground/25 hover:bg-foreground hover:text-background uppercase tracking-[0.18em] text-[11px] font-bold h-12 px-8">
+                <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
                   Commissioned Projects
                 </Button>
               </Link>
