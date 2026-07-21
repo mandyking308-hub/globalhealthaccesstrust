@@ -98,7 +98,7 @@ export const Header = () => {
 
               <Link
                 to="/auth"
-                className="hidden md:inline-flex items-center h-9 px-4 bg-primary text-primary-foreground text-[11px] font-bold uppercase tracking-[0.18em] hover:bg-primary/90 transition-colors"
+                className="hidden md:inline-flex items-center h-9 px-4 bg-primary text-primary-foreground text-[12px] font-serif font-black uppercase tracking-[0.14em] hover:bg-primary/90 transition-colors"
               >
                 Login
               </Link>
