@@ -76,16 +76,16 @@ export const Header = () => {
         </div>
 
         {/* Main bar */}
-        <div className="max-w-[1400px] mx-auto px-6 md:px-8 h-[84px]">
-          <div className="flex h-full items-center justify-between gap-10">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 h-[84px]">
+          <div className="flex h-full items-center justify-between gap-2 sm:gap-4 lg:gap-10">
 
             {/* Logo — GHAT institutional wordmark */}
             <Link
               to="/"
-              className="flex items-center hover:opacity-85 transition-opacity duration-200 flex-shrink-0"
+              className="flex min-w-0 items-center hover:opacity-85 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <GHATLogo className="h-16 w-auto" />
+              <GHATLogo className="h-10 w-[180px] sm:h-12 sm:w-[270px] md:h-16 md:w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -128,11 +128,11 @@ export const Header = () => {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-4 flex-shrink-0 pl-4 lg:border-l lg:border-foreground/10">
+            <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 pl-0 sm:pl-2 lg:pl-4 lg:border-l lg:border-foreground/10">
               <button
                 onClick={() => setIsSearchOpen(true)}
                 aria-label="Search website"
-                className="h-10 w-10 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors"
+                className="h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors"
               >
                 <Search className="w-[18px] h-[18px]" />
               </button>
