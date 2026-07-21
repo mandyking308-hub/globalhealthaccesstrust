@@ -169,16 +169,24 @@ export const HomePage = () => {
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
               <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent md:mt-3">Purpose</span>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="pt-8 border-t border-primary-foreground/25">
-                  <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                    The Trust deploys capital into lawful, ethical interventions that expand access to healthcare for underserved populations.
-                  </p>
-                </div>
-                <div className="pt-8 border-t border-primary-foreground/25">
-                  <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                    It operates through structured partnerships with health systems, academic institutions, and recognised delivery organisations across twelve countries.
-                  </p>
+              <div>
+                <h2
+                  className="display-condensed text-primary-foreground mb-12"
+                  style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
+                >
+                  About the Trust
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  <div className="pt-8 border-t border-primary-foreground/25">
+                    <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
+                      The Trust deploys capital into lawful, ethical interventions that expand access to healthcare for underserved populations.
+                    </p>
+                  </div>
+                  <div className="pt-8 border-t border-primary-foreground/25">
+                    <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
+                      It operates through structured partnerships with health systems, academic institutions, and recognised delivery organisations across twelve countries.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
