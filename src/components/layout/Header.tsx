@@ -36,14 +36,13 @@ export const Header = () => {
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 h-[76px]">
           <div className="flex h-full items-center justify-between gap-10">
 
-            {/* Logo */}
+            {/* Logo — OSF-style stacked heavy uppercase wordmark */}
             <Link
               to="/"
-              className="flex items-center gap-3 text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
+              className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <span className="inline-block w-[26px] h-[26px] bg-primary" aria-hidden="true" />
-              <span className="font-serif text-[13px] font-extrabold tracking-tight uppercase leading-[1.05]">
+              <span className="font-serif text-[15px] font-black tracking-[0.02em] uppercase leading-[0.95]">
                 Global Health<br/>Access Trust
               </span>
             </Link>
