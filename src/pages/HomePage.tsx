@@ -254,6 +254,10 @@ export const HomePage = () => {
                 ))}
               </ol>
             </div>
+
+            <p className="pl-0 md:pl-[196px] text-sm text-muted-foreground/80 mt-12 leading-relaxed max-w-2xl">
+              The platform supports structured project management, reporting, and administrative oversight through a secure internal system.
+            </p>
           </div>
         </section>
 
@@ -267,19 +271,21 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
-              {[
-                { t: "Capital Allocation", d: "Funding is assigned to clearly defined initiatives with agreed scope and objectives." },
-                { t: "Project Structuring", d: "Delivery partners, geography, and operational frameworks are established." },
-                { t: "Monitoring & Reporting", d: "Progress is tracked against milestones with structured reporting." },
-                { t: "Outcome Verification", d: "Results are assessed to ensure accountability and measurable impact." },
-              ].map((c, i) => (
-                <div key={c.t} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent block mb-4">0{i + 1}</span>
-                  <h3 className="mb-4 text-foreground">{c.t}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{c.d}</p>
-                </div>
-              ))}
+            <div className="pl-0 md:pl-[196px]">
+              <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+                {[
+                  { t: "Capital Allocation", d: "Funding is assigned to clearly defined initiatives with agreed scope and objectives." },
+                  { t: "Project Structuring", d: "Delivery partners, geography, and operational frameworks are established." },
+                  { t: "Monitoring & Reporting", d: "Progress is tracked against milestones with structured reporting." },
+                  { t: "Outcome Verification", d: "Results are assessed to ensure accountability and measurable impact." },
+                ].map((c, i) => (
+                  <li key={c.t}>
+                    <span className="timeline-node">0{i + 1}</span>
+                    <h3 className="mb-3 text-foreground">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </section>
@@ -366,19 +372,21 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
-              {[
-                { t: "Initial Enquiry", d: "Engagement begins through a direct enquiry to the Trust." },
-                { t: "Review & Alignment", d: "Each enquiry is assessed to ensure alignment with the Trust's mandate and governance framework." },
-                { t: "Structured Engagement", d: "Funding relationships are formalised with defined scope, objectives, and reporting expectations." },
-                { t: "Project Deployment", d: "Capital is deployed into clearly defined initiatives with ongoing monitoring and accountability." },
-              ].map((c, i) => (
-                <div key={c.t} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent block mb-3">Step {i + 1}</span>
-                  <h3 className="mb-4 text-foreground">{c.t}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{c.d}</p>
-                </div>
-              ))}
+            <div className="pl-0 md:pl-[196px]">
+              <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+                {[
+                  { t: "Initial Enquiry", d: "Engagement begins through a direct enquiry to the Trust." },
+                  { t: "Review & Alignment", d: "Each enquiry is assessed to ensure alignment with the Trust's mandate and governance framework." },
+                  { t: "Structured Engagement", d: "Funding relationships are formalised with defined scope, objectives, and reporting expectations." },
+                  { t: "Project Deployment", d: "Capital is deployed into clearly defined initiatives with ongoing monitoring and accountability." },
+                ].map((c, i) => (
+                  <li key={c.t}>
+                    <span className="timeline-node">Step {i + 1}</span>
+                    <h3 className="mb-3 text-foreground">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
 
             <div className="pl-0 md:pl-[196px] mt-16">
