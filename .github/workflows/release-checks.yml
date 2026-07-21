@@ -84,3 +84,44 @@ jobs:
       - name: Show preview log on failure
         if: failure()
         run: cat /tmp/ghat-preview.log || true
+
+  production-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install browser smoke-test tooling
+        run: |
+          npm install --no-save --package-lock=false playwright@1.52.0
+          npx playwright install --with-deps chromium
+
+      - name: Wait for deployment and test custom domain
+        env:
+          SMOKE_BASE_URL: https://globalhealthaccesstrust.com
+        run: |
+          for attempt in {1..12}; do
+            echo "Production verification attempt ${attempt}/12"
+            if node scripts/release-smoke.mjs; then
+              exit 0
+            fi
+            sleep 20
+          done
+          exit 1
+
+      - name: Upload production smoke report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-smoke-report
+          path: release-smoke-failures.txt
+          if-no-files-found: ignore
