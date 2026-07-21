@@ -73,6 +73,14 @@ jobs:
           SMOKE_BASE_URL: http://127.0.0.1:4173
         run: node scripts/release-smoke.mjs
 
+      - name: Upload smoke-test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-smoke-report
+          path: release-smoke-failures.txt
+          if-no-files-found: ignore
+
       - name: Show preview log on failure
         if: failure()
         run: cat /tmp/ghat-preview.log || true
