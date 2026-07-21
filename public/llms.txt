@@ -1,0 +1,44 @@
+# Global Health Access Trust
+
+> A discreet, high-trust private capital platform that structures verified health funding and delivery for underserved populations in crisis and conflict zones.
+
+Global Health Access Trust connects serious philanthropic capital with verified health interventions. The platform operates a closed engagement model: donors, volunteers, and administrators work through role-based portals, with all contact mediated by staff. There are no public donations or open sign-ups.
+
+## Pages
+
+- [/](/): Institutional homepage introducing the trust, its mission, and current focus areas.
+- [About](/about): Overview of the trust's purpose, values, and operational approach.
+- [About the Trust](/about-the-trust): Detailed background on the organisation's foundation and mandate.
+- [What We Do](/what-we-do): Summary of programmes, funding mechanisms, and intervention types.
+- [Our Work](/our-work): Field-level examples and delivery partners.
+- [How We Work](/how-we-work): Governance, verification, and operational processes.
+- [Learn About Our Mission](/learn-about-our-mission): Mission statement and strategic priorities.
+- [Commissioned Projects](/commissioned-projects): The five-step bespoke project process for major donors.
+- [Get Involved](/get-involved): Information on professional and institutional engagement pathways.
+- [Volunteers](/volunteers): Overview of the volunteer professional network and application pipeline.
+- [Support the Trust](/support-the-trust): Guidance for qualified donors and institutional partners.
+- [Donate](/donate): Structured funding engagement information for eligible contributors.
+- [Trustee Biographies](/trustee-biographies): Profiles of the board and advisory trustees.
+- [Governance](/governance): Board structure, oversight, and accountability framework.
+- [Governance and Legal Framework](/governance-legal-framework): Constitutional and legal basis of the trust.
+- [Constitution](/constitution): The trust's governing constitutional document.
+- [Financial Controls](/financial-controls): Policies for financial stewardship and audit.
+- [Risk Management](/risk-management): Approach to operational, financial, and reputational risk.
+- [Safeguarding](/safeguarding): Safeguarding policy for beneficiaries, staff, and partners.
+- [Anti-Fraud](/anti-fraud): Fraud prevention, detection, and reporting procedures.
+- [Conflict of Interest](/conflict-of-interest): Policy for managing conflicts among trustees and staff.
+- [Whistleblowing](/whistleblowing): Confidential reporting channels and protections.
+- [Donor Recognition](/donor-recognition): How contributions are acknowledged and reported.
+- [Donor Guide](/donor-guide): Practical information for engaged donors.
+- [Publications](/publications): Reports, impact summaries, and public documents.
+- [Blog](/blog): Articles and updates from the trust.
+- [Blog Post](/blog/ukraine-health-access-update): Representative update on Ukraine health access work.
+- [Blog Post](/blog/multicultural-field-teams): Representative field report on multicultural delivery teams.
+- [Contact](/contact): Secure enquiry form for professional and institutional contact.
+- [Contact the Trust](/contact-the-trust): Alternative contact route for trustees and advisors.
+- [Frequently Asked Questions](/frequently-asked-questions): Common questions about engagement and operations.
+- [Privacy Policy](/privacy-policy): GDPR-compliant privacy notice and data handling.
+- [Terms of Use](/terms-of-use): Terms governing use of the website and services.
+- [Cookie Policy](/cookie-policy): Cookie and tracking technology notice.
+- [Accessibility Statement](/accessibility-statement): Accessibility standards and support.
+- [Data Access Request](/data-access-request): Form for exercising GDPR data subject rights.
