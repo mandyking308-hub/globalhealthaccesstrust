@@ -242,11 +242,11 @@ export const HomePage = () => {
         {/* How the Trust Operates */}
         <section className="py-24 md:py-32 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
-              <span className="eyebrow md:mt-3">How the Trust Operates</span>
-              <div>
-                <h2 className="mb-6 text-foreground max-w-[820px]">The Trust operates through a structured model that defines how capital, delivery, and oversight are aligned within a controlled environment.</h2>
-              </div>
+            <div className="mb-16">
+              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                How the Trust Operates
+              </h2>
+              <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">The Trust operates through a structured model that defines how capital, delivery, and oversight are aligned within a controlled environment.</p>
             </div>
 
             <div className="pl-0 md:pl-[196px]">
