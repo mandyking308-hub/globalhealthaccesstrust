@@ -8,22 +8,28 @@ declare module 'jspdf' {
   }
 }
 
+// Neutralize spreadsheet formula-injection attempts by prefixing any cell
+// value that begins with =, +, -, @, tab, or CR with a single quote so
+// Excel/Sheets/Numbers treat it as plain text.
+const sanitizeCsvCell = (raw: unknown): string => {
+  if (raw === null || raw === undefined) return '';
+  let value = String(raw);
+  if (/^[=+\-@\t\r]/.test(value)) {
+    value = `'${value}`;
+  }
+  if (value.includes(',') || value.includes('"') || value.includes('\n') || value.includes('\r')) {
+    return `"${value.replace(/"/g, '""')}"`;
+  }
+  return value;
+};
+
 export const exportToCSV = (data: any[], filename: string) => {
   if (data.length === 0) return;
 
   const headers = Object.keys(data[0]);
   const csvContent = [
-    headers.join(','),
-    ...data.map(row => 
-      headers.map(header => {
-        const value = row[header];
-        // Escape commas and quotes
-        if (typeof value === 'string' && (value.includes(',') || value.includes('"'))) {
-          return `"${value.replace(/"/g, '""')}"`;
-        }
-        return value;
-      }).join(',')
-    )
+    headers.map(sanitizeCsvCell).join(','),
+    ...data.map(row => headers.map(header => sanitizeCsvCell(row[header])).join(','))
   ].join('\n');
 
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });

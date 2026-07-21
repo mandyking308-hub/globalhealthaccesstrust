@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Helmet } from "react-helmet-async";
+import { validatePassword, PASSWORD_REQUIREMENTS } from "@/lib/security";
 
 export const AuthPage = () => {
   const navigate = useNavigate();
@@ -96,8 +97,9 @@ export const AuthPage = () => {
       return;
     }
 
-    if (signupPassword.length < 6) {
-      setError("Password must be at least 6 characters");
+    const pwCheck = validatePassword(signupPassword);
+    if (!pwCheck.valid) {
+      setError(pwCheck.errors[0]);
       return;
     }
 
@@ -289,10 +291,10 @@ export const AuthPage = () => {
                       onChange={(e) => setSignupPassword(e.target.value)}
                       required
                       disabled={loading}
-                      minLength={6}
+                      minLength={PASSWORD_REQUIREMENTS.minLength}
                     />
                     <p className="text-xs text-muted-foreground">
-                      Minimum 6 characters
+                      Minimum {PASSWORD_REQUIREMENTS.minLength} characters, with an uppercase letter, a number, and a symbol.
                     </p>
                   </div>
 
