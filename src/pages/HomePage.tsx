@@ -392,47 +392,47 @@ export const HomePage = () => {
         {/* Donor Portal — editorial introduction to the secure private wing */}
         <section className="py-24 md:py-28 border-b border-foreground/10 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16">
-              <span className="eyebrow md:mt-3">Donor Portal</span>
-              <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-14 md:gap-20 items-start">
-                <div>
-                  <h2 className="mb-8 text-foreground max-w-[820px]">
-                    A secure private wing for those who fund the Trust's work.
-                  </h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl">
-                    Donors have access to a secure environment where progress, updates, and documentation are made available.
-                  </p>
-                  <div className="flex flex-wrap gap-4">
-                    <Link to="/donor-guide">
-                      <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                        Learn About the Donor Portal
-                      </Button>
-                    </Link>
-                    <Link to="/auth">
-                      <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                        Login
-                      </Button>
-                    </Link>
-                  </div>
+            <h2 className="display-condensed text-foreground mb-10" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+              Donor Portal
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-14 md:gap-20 items-start">
+              <div>
+                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 max-w-2xl">
+                  A secure private wing for those who fund the Trust's work.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl">
+                  Donors have access to a secure environment where progress, updates, and documentation are made available.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/donor-guide">
+                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
+                      Learn About the Donor Portal
+                    </Button>
+                  </Link>
+                  <Link to="/auth">
+                    <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
+                      Login
+                    </Button>
+                  </Link>
                 </div>
-
-                <ol className="divide-y divide-foreground/12 border-t border-b border-foreground/15">
-                  {[
-                    "View contributions",
-                    "Commission projects",
-                    "Receive updates",
-                    "Review history",
-                    "Manage preferences",
-                  ].map((item, i) => (
-                    <li key={item} className="grid grid-cols-[56px_1fr] gap-6 py-5">
-                      <span className="font-serif text-primary text-[18px] font-black tracking-tight pt-1">
-                        0{i + 1}
-                      </span>
-                      <span className="text-foreground text-[16.5px] leading-relaxed pt-1">{item}</span>
-                    </li>
-                  ))}
-                </ol>
               </div>
+
+              <ol className="divide-y divide-foreground/12 border-t border-b border-foreground/15">
+                {[
+                  "View contributions",
+                  "Commission projects",
+                  "Receive updates",
+                  "Review history",
+                  "Manage preferences",
+                ].map((item, i) => (
+                  <li key={item} className="grid grid-cols-[56px_1fr] gap-6 py-5">
+                    <span className="font-serif text-primary text-[18px] font-black tracking-tight pt-1">
+                      0{i + 1}
+                    </span>
+                    <span className="text-foreground text-[16.5px] leading-relaxed pt-1">{item}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </section>
