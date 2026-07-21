@@ -45,9 +45,8 @@ const GHATLogo = ({ className }: { className?: string }) => (
       fontWeight="800"
       letterSpacing="-0.02em"
       fill="hsl(var(--foreground))"
-      textTransform="uppercase"
     >
-      Global Health
+      GLOBAL HEALTH
     </text>
     <line x1="64" y1="38" x2="212" y2="38" stroke="hsl(var(--accent))" strokeWidth="1" opacity="0.45" />
     <text
@@ -58,10 +57,9 @@ const GHATLogo = ({ className }: { className?: string }) => (
       fontWeight="700"
       letterSpacing="0.18em"
       fill="hsl(var(--accent))"
-      textTransform="uppercase"
       fontStyle="italic"
     >
-      Access Trust
+      ACCESS TRUST
     </text>
   </svg>
 );
