@@ -68,9 +68,9 @@ export const Header = () => {
           <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-sans font-bold tracking-[0.18em] uppercase">
             <span className="opacity-80">Charitable Trust — England & Wales</span>
             <div className="flex items-center gap-6 opacity-90">
-              <Link to="/contact" className="hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
-              <Link to="/governance" className="hover:opacity-100 opacity-80 transition-opacity">Governance</Link>
-              <Link to="/publications" className="hover:opacity-100 opacity-80 transition-opacity">Publications</Link>
+              <Link to="/contact" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
+              <Link to="/governance" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Governance</Link>
+              <Link to="/publications" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Publications</Link>
             </div>
           </div>
         </div>
