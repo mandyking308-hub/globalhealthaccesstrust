@@ -7,58 +7,42 @@ import { SearchModal } from "@/components/common/SearchModal";
 
 const GHATLogo = ({ className }: { className?: string }) => (
   <svg
-    viewBox="0 0 330 64"
+    viewBox="0 0 360 64"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
     aria-hidden="true"
   >
-    {/* Icon: global ring + access node */}
-    <g transform="translate(6, 8)">
-      {/* Outer globe ring — subtle */}
-      <circle cx="24" cy="24" r="22" stroke="hsl(var(--primary))" strokeWidth="3" opacity="0.18" />
-      {/* Active arc suggesting access / movement */}
-      <path
-        d="M24 2 A22 22 0 0 1 46 24"
-        stroke="hsl(var(--accent))"
-        strokeWidth="3"
-        strokeLinecap="round"
-        fill="none"
-      />
-      {/* Horizontal equator */}
-      <line x1="2" y1="24" x2="46" y2="24" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.35" />
-      {/* Vertical meridian */}
-      <line x1="24" y1="2" x2="24" y2="46" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.35" />
-      {/* Access cross / node */}
-      <rect x="14" y="22" width="20" height="4" rx="2" fill="hsl(var(--accent))" />
-      <rect x="22" y="14" width="4" height="20" rx="2" fill="hsl(var(--accent))" />
-      {/* Central hub */}
-      <circle cx="24" cy="24" r="5" fill="hsl(var(--background))" stroke="hsl(var(--primary))" strokeWidth="2" />
+    {/* Icon: bold globe + access node */}
+    <g transform="translate(4, 8)">
+      <circle cx="24" cy="24" r="22" fill="hsl(var(--primary))" />
+      <ellipse cx="24" cy="24" rx="10" ry="22" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" opacity="0.55" fill="none" />
+      <line x1="2" y1="24" x2="46" y2="24" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" opacity="0.55" />
+      <line x1="24" y1="2" x2="24" y2="46" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" opacity="0.55" />
+      <rect x="10" y="20" width="28" height="8" rx="1" fill="hsl(var(--accent))" />
+      <rect x="20" y="10" width="8" height="28" rx="1" fill="hsl(var(--accent))" />
+      <circle cx="24" cy="24" r="4" fill="hsl(var(--primary-foreground))" />
     </g>
 
-    {/* Wordmark */}
     <text
       x="62"
       y="28"
       fontFamily="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
-      fontSize="19.5"
-      fontWeight="800"
-      letterSpacing="-0.02em"
+      fontSize="22"
+      fontWeight="900"
+      letterSpacing="-0.015em"
       fill="hsl(var(--foreground))"
     >
       GLOBAL HEALTH
     </text>
-    <line x1="62" y1="38" x2="300" y2="38" stroke="hsl(var(--accent))" strokeWidth="1" opacity="0.45" />
     <text
-      x="181"
+      x="62"
       y="52"
-      textAnchor="middle"
       fontFamily="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
-      fontSize="12"
-      fontWeight="700"
-      letterSpacing="0.18em"
-      fill="hsl(var(--accent))"
-      fontStyle="italic"
+      fontSize="22"
+      fontWeight="900"
+      letterSpacing="-0.015em"
+      fill="hsl(var(--primary))"
     >
       ACCESS TRUST
     </text>
@@ -83,7 +67,7 @@ export const Header = () => {
         {/* Utility strip */}
         <div className="hidden md:block border-b border-foreground/5 bg-primary text-primary-foreground">
           <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-sans font-bold tracking-[0.18em] uppercase">
-            <span className="opacity-80">Registered Charitable Trust — England & Wales</span>
+            <span className="opacity-80">Charitable Trust — England & Wales</span>
             <div className="flex items-center gap-6 opacity-90">
               <Link to="/contact" className="hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
               <Link to="/governance" className="hover:opacity-100 opacity-80 transition-opacity">Governance</Link>
