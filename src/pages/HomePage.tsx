@@ -129,14 +129,14 @@ export const HomePage = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
             {[
-              { img: clinicImage, cat: "Primary Healthcare", alt: "A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine", title: "Frontline maternal care in field clinics.", copy: "Clinical services delivered directly to displaced and underserved communities.", offset: false },
-              { img: systemsImage, cat: "Systems Infrastructure", alt: "Aid workers unloading medical supply pallets outside a damaged building in a Syrian town", title: "Rebuilding the systems that make care possible.", copy: "Supply, logistics, and infrastructure interventions in conflict-affected regions.", offset: true },
-              { img: ruralImage, cat: "Rural Access", alt: "A multi-region group of clinicians in a field training session", title: "Reaching communities beyond conventional provision.", copy: "Capacity-building for local clinicians where geography limits access.", offset: false },
+              { img: clinicImage, cat: "Primary Healthcare", alt: "A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine", title: "Frontline maternal care in field clinics.", copy: "Clinical services delivered directly to displaced and underserved communities." },
+              { img: systemsImage, cat: "Systems Infrastructure", alt: "Aid workers unloading medical supply pallets outside a damaged building in a Syrian town", title: "Rebuilding the systems that make care possible.", copy: "Supply, logistics, and infrastructure interventions in conflict-affected regions." },
+              { img: ruralImage, cat: "Rural Access", alt: "A multi-region group of clinicians in a field training session", title: "Reaching communities beyond conventional provision.", copy: "Capacity-building for local clinicians where geography limits access." },
             ].map((a) => (
-              <article key={a.cat} className={`group cursor-pointer ${a.offset ? "md:mt-16" : ""}`}>
-                <div className="mb-8 overflow-hidden aspect-[3/4] bg-muted">
+              <article key={a.cat} className="group cursor-pointer flex flex-col">
+                <div className="mb-7 overflow-hidden aspect-[4/5] bg-muted">
                   <img
                     src={a.img}
                     alt={a.alt}
@@ -144,22 +144,23 @@ export const HomePage = () => {
                     loading="lazy"
                   />
                 </div>
-                <span className="text-[10px] uppercase tracking-[0.22em] text-accent font-bold">
+                <span className="text-[11px] uppercase tracking-[0.22em] text-accent font-bold">
                   {a.cat}
                 </span>
                 <h3
-                  className="font-serif mt-4 mb-4 text-foreground group-hover:text-accent transition-colors"
-                  style={{ fontSize: "clamp(22px, 1.9vw, 30px)", lineHeight: 1.15, fontWeight: 400, letterSpacing: "-0.01em" }}
+                  className="font-serif mt-3 mb-3 text-foreground group-hover:text-accent transition-colors"
+                  style={{ fontSize: "clamp(22px, 1.9vw, 30px)", lineHeight: 1.2, fontWeight: 400, letterSpacing: "-0.01em" }}
                 >
                   {a.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="text-[15.5px] leading-relaxed text-muted-foreground">
                   {a.copy}
                 </p>
               </article>
             ))}
           </div>
         </section>
+
 
 
         {/* Purpose — dark editorial band */}
