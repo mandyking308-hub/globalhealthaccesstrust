@@ -24,32 +24,16 @@ export const TwoFactorSetup = ({ userId, onComplete }: TwoFactorSetupProps) => {
   const sendVerificationCode = async () => {
     setLoading(true);
     try {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("email")
-        .eq("id", userId)
-        .single();
-
-      if (!profile?.email) {
-        throw new Error("User email not found");
-      }
-
-      // Generate and store 2FA code
-      const code = Math.floor(100000 + Math.random() * 900000).toString();
-      const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
-
-      await supabase.from("two_factor_codes").insert({
-        user_id: userId,
-        code,
-        expires_at: expiresAt.toISOString(),
+      // Server-side generation, storage, and email delivery.
+      // The client never sees the code.
+      const { error } = await supabase.functions.invoke("send-2fa-code", {
+        body: {},
       });
-
-      // TODO: Send email with code via edge function
-      console.log("2FA Code:", code); // For testing
+      if (error) throw error;
 
       setSentCode(true);
       setStep("verify");
-      
+
       toast({
         title: "Verification code sent",
         description: "Check your email for the 6-digit code",
@@ -69,41 +53,24 @@ export const TwoFactorSetup = ({ userId, onComplete }: TwoFactorSetupProps) => {
   const verifyCode = async () => {
     setLoading(true);
     try {
-      const { data: codeData, error } = await supabase
-        .from("two_factor_codes")
-        .select("*")
-        .eq("user_id", userId)
-        .eq("code", verificationCode)
-        .eq("used", false)
-        .gt("expires_at", new Date().toISOString())
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+      // Server-side verification. The client cannot read codes from the DB.
+      const { error: verifyErr } = await supabase.functions.invoke("verify-2fa-code", {
+        body: { code: verificationCode },
+      });
+      if (verifyErr) throw new Error("Invalid or expired code");
 
-      if (error || !codeData) {
-        throw new Error("Invalid or expired code");
-      }
-
-      // Mark code as used
-      await supabase
-        .from("two_factor_codes")
-        .update({ used: true })
-        .eq("id", codeData.id);
-
-      // Generate recovery codes
+      // Generate recovery codes (CSPRNG)
       const codes = generateRecoveryCodes(10);
       setRecoveryCodes(codes);
 
-      // Store recovery codes
-      const recoveryCodeInserts = codes.map(code => ({
+      const recoveryCodeInserts = codes.map((code) => ({
         user_id: userId,
         code,
       }));
-      
       await supabase.from("recovery_codes").insert(recoveryCodeInserts);
 
       setStep("recovery");
-      
+
       toast({
         title: "2FA Enabled",
         description: "Two-factor authentication is now active",

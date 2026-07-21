@@ -227,15 +227,21 @@ export async function logAdminAction(
   }
 }
 
-// 2FA utilities
+// 2FA utilities — use CSPRNG for verification and recovery codes.
 export function generate6DigitCode(): string {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  const buf = new Uint32Array(1);
+  crypto.getRandomValues(buf);
+  return (100000 + (buf[0] % 900000)).toString();
 }
 
 export function generateRecoveryCodes(count: number = 10): string[] {
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no confusing chars
   const codes: string[] = [];
   for (let i = 0; i < count; i++) {
-    const code = Math.random().toString(36).substring(2, 10).toUpperCase();
+    const buf = new Uint32Array(8);
+    crypto.getRandomValues(buf);
+    let code = "";
+    for (let j = 0; j < 8; j++) code += alphabet[buf[j] % alphabet.length];
     codes.push(code);
   }
   return codes;

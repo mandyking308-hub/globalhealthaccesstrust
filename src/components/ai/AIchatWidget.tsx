@@ -50,16 +50,24 @@ export const AIChatWidget = ({
     const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/${endpoint}`;
 
     try {
+      // Send the caller's session JWT so the edge function can authenticate
+      // and authorize the request server-side. Fall back to the publishable
+      // key only for the pre-auth handshake (function will reject if no session).
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { data: { session } } = await supabase.auth.getSession();
+      const bearer = session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
       const resp = await fetch(CHAT_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+          Authorization: `Bearer ${bearer}`,
         },
         body: JSON.stringify({
           messages: [...messages, { role: "user", content: userMessage }],
-          donorId: userId,
-          volunteerId: userId,
+          // NOTE: identity is derived server-side from the JWT.
+          // These fields are ignored by the edge function.
         }),
       });
 
