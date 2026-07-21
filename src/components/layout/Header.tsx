@@ -4,6 +4,7 @@ import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NAVIGATION_ITEMS, SITE_CONFIG } from "@/lib/constants";
 import { SearchModal } from "@/components/common/SearchModal";
+import ghatLogo from "@/assets/ghat-logo.png";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,15 +37,19 @@ export const Header = () => {
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 h-[76px]">
           <div className="flex h-full items-center justify-between gap-10">
 
-            {/* Logo — OSF-style stacked heavy uppercase wordmark */}
+            {/* Logo — GHAT institutional mark */}
             <Link
               to="/"
-              className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
+              className="flex items-center hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <span className="font-sans text-[15px] font-black tracking-[0.02em] uppercase leading-[0.95]">
-                Global Health<br/>Access Trust
-              </span>
+              <img
+                src={ghatLogo}
+                alt="Global Health Access Trust"
+                width={220}
+                height={64}
+                className="h-14 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}
