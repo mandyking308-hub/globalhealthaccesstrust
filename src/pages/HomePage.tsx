@@ -65,7 +65,7 @@ export const HomePage = () => {
               <img
                 src={heroImage}
                 alt="A mother and child on a residential street in an Eastern European town affected by the Ukraine crisis"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover object-[70%_30%]"
                 loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-primary/10 to-transparent" />
