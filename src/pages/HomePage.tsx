@@ -64,13 +64,13 @@ export const HomePage = () => {
                 About the Trust
               </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-primary-foreground/10">
-              <div className="py-10 md:pr-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+              <div className="py-6 border-t border-primary-foreground/20">
                 <p className="text-primary-foreground/80 text-lg leading-relaxed">
                   The Trust deploys capital into lawful, ethical interventions that expand access to healthcare for underserved populations.
                 </p>
               </div>
-              <div className="py-10 md:pl-12">
+              <div className="py-6 border-t border-primary-foreground/20">
                 <p className="text-primary-foreground/80 text-lg leading-relaxed">
                   It operates through structured partnerships with health systems, academic institutions, and recognised delivery organisations across twelve countries.
                 </p>
