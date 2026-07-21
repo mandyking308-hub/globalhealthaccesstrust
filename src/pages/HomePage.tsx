@@ -18,41 +18,63 @@ export const HomePage = () => {
         schema={organizationSchema}
       />
       <div className="homepage-editorial flex flex-col">
-        {/* Hero — OSF-style split screen */}
+        {/* Hero — refined institutional split */}
         <section className="relative border-b border-foreground/10 bg-background">
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-5rem)]">
-            <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-24 order-2 lg:order-1">
-              <div className="max-w-xl">
-                <h1 className="mb-10 text-foreground">
-                  Global Health Access Trust
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] min-h-[calc(100vh-5rem)]">
+            <div className="flex flex-col justify-center px-6 md:px-12 lg:px-20 py-20 lg:py-28 order-2 lg:order-1">
+              <div className="max-w-[560px]">
+                <span className="eyebrow mb-8">Global Health Access Trust — Est. 2019</span>
+                <h1 className="mt-6 mb-8 text-foreground">
+                  Directing capital where healthcare is most critically needed.
                 </h1>
-                <p className="text-lg md:text-xl max-w-2xl text-muted-foreground leading-relaxed">
-                  A private charitable trust directing capital into healthcare access, system infrastructure, and capacity where it is most critically needed.
+                <p className="text-[17px] md:text-[19px] text-muted-foreground leading-[1.55] max-w-[520px]">
+                  A private charitable trust deploying structured funding into healthcare access, system infrastructure, and long-term capacity across twelve countries.
                 </p>
-                <p className="text-sm md:text-[15px] mt-4 text-muted-foreground/80 max-w-2xl leading-relaxed">
-                  A controlled platform for deploying capital into healthcare systems with oversight, accountability, and measurable impact.
+                <p className="text-[13px] mt-5 text-muted-foreground/70 max-w-[520px] leading-relaxed tracking-wide">
+                  A controlled platform for capital deployment with oversight, accountability, and measurable outcomes.
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 mt-10">
+                <div className="flex flex-col sm:flex-row gap-3 mt-12">
                   <Link to="/auth">
-                    <Button size="lg" className="min-w-[180px] rounded-none uppercase tracking-widest text-xs font-bold">
+                    <Button size="lg" className="h-12 px-8 rounded-none uppercase tracking-[0.18em] text-[11px] font-bold bg-primary hover:bg-primary/90">
                       Donor Portal
                     </Button>
                   </Link>
                   <Link to="/about-the-trust">
-                    <Button size="lg" variant="outline" className="min-w-[180px] rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background uppercase tracking-widest text-xs font-bold">
+                    <Button size="lg" variant="outline" className="h-12 px-8 rounded-none border-foreground/25 text-foreground hover:bg-foreground hover:text-background uppercase tracking-[0.18em] text-[11px] font-bold">
                       About the Trust
                     </Button>
                   </Link>
                 </div>
+                <div className="mt-16 pt-8 border-t border-foreground/10 grid grid-cols-3 gap-6 max-w-[500px]">
+                  <div>
+                    <div className="font-serif text-2xl font-extrabold text-foreground">12</div>
+                    <div className="text-[10.5px] uppercase tracking-[0.16em] text-muted-foreground mt-1">Countries</div>
+                  </div>
+                  <div>
+                    <div className="font-serif text-2xl font-extrabold text-foreground">40+</div>
+                    <div className="text-[10.5px] uppercase tracking-[0.16em] text-muted-foreground mt-1">Partners</div>
+                  </div>
+                  <div>
+                    <div className="font-serif text-2xl font-extrabold text-foreground">2019</div>
+                    <div className="text-[10.5px] uppercase tracking-[0.16em] text-muted-foreground mt-1">Established</div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="relative order-1 lg:order-2 min-h-[400px] lg:min-h-full overflow-hidden">
+            <div className="relative order-1 lg:order-2 min-h-[420px] lg:min-h-full overflow-hidden bg-primary">
               <img
                 src={heroImage}
                 alt="Community health worker consulting with a patient in a rural clinic"
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
               />
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 text-primary-foreground">
+                <p className="text-[10.5px] uppercase tracking-[0.22em] font-semibold opacity-80">Field Documentation</p>
+                <p className="text-sm mt-2 max-w-md opacity-95 leading-relaxed">
+                  Primary healthcare consultation, partner-operated clinic, Sub-Saharan Africa.
+                </p>
+              </div>
             </div>
           </div>
         </section>
