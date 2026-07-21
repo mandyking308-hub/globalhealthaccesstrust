@@ -275,11 +275,11 @@ export const HomePage = () => {
         {/* Operational Framework — vertical structured sequence */}
         <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-14">
-              <span className="eyebrow md:mt-3">Operational Framework</span>
-              <div>
-                <h2 className="mb-6 text-foreground max-w-[820px]">The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.</h2>
-              </div>
+            <div className="mb-14">
+              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                Operational Framework
+              </h2>
+              <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.</p>
             </div>
 
             <div className="pl-0 md:pl-[196px]">
