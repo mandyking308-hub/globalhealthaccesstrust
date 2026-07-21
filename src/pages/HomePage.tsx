@@ -66,15 +66,15 @@ export const HomePage = () => {
           ].map((s, i) => (
             <div
               key={s.cat}
-              className={`p-12 md:p-16 lg:p-20 flex flex-col justify-between ${i < 2 ? "border-b md:border-b-0 md:border-r border-foreground/10" : ""}`}
+              className={`p-10 md:p-12 lg:p-16 flex flex-col justify-between ${i < 2 ? "border-b md:border-b-0 md:border-r border-foreground/10" : ""}`}
             >
-              <span className="uppercase tracking-[0.22em] text-[10px] font-bold text-foreground mb-12">
+              <span className="uppercase tracking-[0.22em] text-[10px] font-bold text-foreground mb-10">
                 {s.cat}
               </span>
               <div>
                 <span
-                  className="font-serif block mb-4 text-foreground"
-                  style={{ fontSize: "clamp(72px, 7vw, 128px)", lineHeight: 0.9, fontWeight: 900, letterSpacing: "-0.01em" }}
+                  className="font-serif block mb-4 text-foreground display-condensed"
+                  style={{ fontSize: "clamp(52px, 5.4vw, 88px)", lineHeight: 0.9, fontWeight: 900, letterSpacing: "-0.015em" }}
                 >
                   {s.n}
                 </span>
@@ -89,16 +89,17 @@ export const HomePage = () => {
           ))}
         </section>
 
-        {/* Editorial pull-quote — heavy uppercase OSF-style */}
-        <section className="py-32 md:py-40 px-6 bg-background border-b border-foreground/10">
-          <div className="max-w-5xl mx-auto">
+        {/* Editorial pull-quote — restrained display serif */}
+        <section className="py-24 md:py-32 px-6 bg-background border-b border-foreground/10">
+          <div className="max-w-4xl mx-auto">
+            <span className="block h-px w-12 bg-accent mb-10" />
             <blockquote
-              className="font-serif text-foreground"
-              style={{ fontSize: "clamp(36px, 5.4vw, 84px)", lineHeight: 0.98, fontWeight: 900, letterSpacing: "-0.005em", textTransform: "uppercase" }}
+              className="text-foreground"
+              style={{ fontSize: "clamp(26px, 3.2vw, 48px)", lineHeight: 1.08, fontWeight: 800, letterSpacing: "-0.008em", textTransform: "uppercase" }}
             >
               Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital.
             </blockquote>
-            <div className="mt-16">
+            <div className="mt-12">
               <p className="uppercase tracking-[0.25em] text-xs font-bold text-foreground">
                 — The Board of Trustees
               </p>
@@ -114,8 +115,8 @@ export const HomePage = () => {
         <section className="p-6 md:p-16 lg:p-24 border-t border-foreground/10 bg-background">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
             <h2
-              className="font-serif text-foreground"
-              style={{ fontSize: "clamp(44px, 6vw, 96px)", lineHeight: 0.95, fontWeight: 300, letterSpacing: "-0.025em" }}
+              className="display-condensed text-foreground"
+              style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
             >
               Reports from<br />the Field
             </h2>
@@ -201,18 +202,20 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-              {[
-                { t: "Scope Definition", d: "Region, focus area, and intended outcomes are agreed in advance." },
-                { t: "Progress Reporting", d: "Milestones, field documentation, and updates are provided through a secure donor portal." },
-                { t: "Financial Transparency", d: "All fund allocations are documented and independently accounted for." },
-              ].map((c, i) => (
-                <div key={c.t} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent block mb-4">0{i + 1}</span>
-                  <h3 className="mb-4 text-foreground">{c.t}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{c.d}</p>
-                </div>
-              ))}
+            <div className="pl-0 md:pl-[196px]">
+              <ol className="timeline grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
+                {[
+                  { t: "Scope Definition", d: "Region, focus area, and intended outcomes are agreed in advance." },
+                  { t: "Progress Reporting", d: "Milestones, field documentation, and updates are provided through a secure donor portal." },
+                  { t: "Financial Transparency", d: "All fund allocations are documented and independently accounted for." },
+                ].map((c, i) => (
+                  <li key={c.t}>
+                    <span className="timeline-node">0{i + 1}</span>
+                    <h3 className="mb-3 text-foreground">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
 
             <div className="pl-0 md:pl-[196px] mt-16">
@@ -235,19 +238,21 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
-              {[
-                { t: "Structured Funding", d: "Capital is allocated to clearly defined projects with agreed scope, geography, and objectives prior to deployment." },
-                { t: "Project Oversight", d: "Each initiative is tracked against milestones, with delivery monitored through a structured reporting framework." },
-                { t: "Donor Visibility", d: "Donors have access to a secure environment where progress, updates, and documentation are made available." },
-                { t: "Accountability & Control", d: "All activity is documented, auditable, and aligned with legal and governance requirements." },
-              ].map((c, i) => (
-                <div key={c.t} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent block mb-4">0{i + 1}</span>
-                  <h3 className="mb-4 text-foreground">{c.t}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{c.d}</p>
-                </div>
-              ))}
+            <div className="pl-0 md:pl-[196px]">
+              <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+                {[
+                  { t: "Structured Funding", d: "Capital is allocated to clearly defined projects with agreed scope, geography, and objectives prior to deployment." },
+                  { t: "Project Oversight", d: "Each initiative is tracked against milestones, with delivery monitored through a structured reporting framework." },
+                  { t: "Donor Visibility", d: "Donors have access to a secure environment where progress, updates, and documentation are made available." },
+                  { t: "Accountability & Control", d: "All activity is documented, auditable, and aligned with legal and governance requirements." },
+                ].map((c, i) => (
+                  <li key={c.t}>
+                    <span className="timeline-node">0{i + 1}</span>
+                    <h3 className="mb-3 text-foreground">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
 
             <p className="pl-0 md:pl-[196px] text-sm text-muted-foreground/80 mt-12 leading-relaxed max-w-2xl">
@@ -266,19 +271,21 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
-              {[
-                { t: "Capital Allocation", d: "Funding is assigned to clearly defined initiatives with agreed scope and objectives." },
-                { t: "Project Structuring", d: "Delivery partners, geography, and operational frameworks are established." },
-                { t: "Monitoring & Reporting", d: "Progress is tracked against milestones with structured reporting." },
-                { t: "Outcome Verification", d: "Results are assessed to ensure accountability and measurable impact." },
-              ].map((c, i) => (
-                <div key={c.t} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent block mb-4">0{i + 1}</span>
-                  <h3 className="mb-4 text-foreground">{c.t}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{c.d}</p>
-                </div>
-              ))}
+            <div className="pl-0 md:pl-[196px]">
+              <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+                {[
+                  { t: "Capital Allocation", d: "Funding is assigned to clearly defined initiatives with agreed scope and objectives." },
+                  { t: "Project Structuring", d: "Delivery partners, geography, and operational frameworks are established." },
+                  { t: "Monitoring & Reporting", d: "Progress is tracked against milestones with structured reporting." },
+                  { t: "Outcome Verification", d: "Results are assessed to ensure accountability and measurable impact." },
+                ].map((c, i) => (
+                  <li key={c.t}>
+                    <span className="timeline-node">0{i + 1}</span>
+                    <h3 className="mb-3 text-foreground">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </section>
@@ -365,19 +372,22 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
-              {[
-                { t: "Initial Enquiry", d: "Engagement begins through a direct enquiry to the Trust." },
-                { t: "Review & Alignment", d: "Each enquiry is assessed to ensure alignment with the Trust's mandate and governance framework." },
-                { t: "Structured Engagement", d: "Funding relationships are formalised with defined scope, objectives, and reporting expectations." },
-                { t: "Project Deployment", d: "Capital is deployed into clearly defined initiatives with ongoing monitoring and accountability." },
-              ].map((c, i) => (
-                <div key={c.t} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent block mb-3">Step {i + 1}</span>
-                  <h3 className="mb-4 text-foreground">{c.t}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{c.d}</p>
-                </div>
-              ))}
+            <div className="pl-0 md:pl-[196px]">
+              <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+                {[
+                  { t: "Initial Enquiry", d: "Engagement begins through a direct enquiry to the Trust." },
+                  { t: "Review & Alignment", d: "Each enquiry is assessed to ensure alignment with the Trust's mandate and governance framework." },
+                  { t: "Structured Engagement", d: "Funding relationships are formalised with defined scope, objectives, and reporting expectations." },
+                  { t: "Project Deployment", d: "Capital is deployed into clearly defined initiatives with ongoing monitoring and accountability." },
+                ].map((c, i) => (
+                  <li key={c.t}>
+                    <span className="timeline-node">0{i + 1}</span>
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent block mb-2">Step {i + 1}</span>
+                    <h3 className="mb-3 text-foreground">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
 
             <div className="pl-0 md:pl-[196px] mt-16">
