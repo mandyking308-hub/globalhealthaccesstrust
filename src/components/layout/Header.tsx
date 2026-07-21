@@ -26,12 +26,11 @@ export const Header = () => {
             {/* Logo */}
             <Link
               to="/"
-              className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
+              className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <div className="w-8 h-8 bg-primary" aria-hidden="true" />
-              <span className="font-serif text-2xl font-bold tracking-tight uppercase">
-                {SITE_CONFIG.shortName}
+              <span className="font-serif text-[13px] font-black tracking-tight uppercase leading-[1.05]">
+                Global Health<br/>Access Trust
               </span>
             </Link>
 

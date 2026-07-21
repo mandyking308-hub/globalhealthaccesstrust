@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { IMPACT_STATS, PROGRAM_AREAS } from "@/lib/constants";
 import { SEO } from "@/components/SEO";
 import { organizationSchema } from "@/lib/seo";
-import heroImage from "@/assets/hero-territorial-overview.jpg";
-import clinicImage from "@/assets/delivery-healthcare-clinic.jpg";
-import systemsImage from "@/assets/delivery-landscape-systems.jpg";
-import ruralImage from "@/assets/delivery-rural-landscape.jpg";
+import heroImage from "@/assets/ghat-hero-community-health.jpg";
+import clinicImage from "@/assets/ghat-maternal-care.jpg";
+import systemsImage from "@/assets/ghat-infrastructure-delivery.jpg";
+import ruralImage from "@/assets/ghat-capacity-training.jpg";
 
 export const HomePage = () => {
   return (
@@ -18,37 +18,39 @@ export const HomePage = () => {
         schema={organizationSchema}
       />
       <div className="homepage-editorial flex flex-col">
-        {/* Hero */}
-        <section className="relative border-b border-foreground/10">
-          <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 lg:py-36 grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-            <div className="lg:col-span-7">
-              <h1 className="mb-8">
-                Global Health Access Trust
-              </h1>
-              <p className="text-lg md:text-xl max-w-2xl text-muted-foreground leading-relaxed">
-                A private charitable trust directing capital into healthcare access, system infrastructure, and capacity where it is most critically needed.
-              </p>
-              <p className="text-sm md:text-[15px] mt-4 text-muted-foreground/80 max-w-2xl leading-relaxed">
-                A controlled platform for deploying capital into healthcare systems with oversight, accountability, and measurable impact.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 mt-10">
-                <Link to="/auth">
-                  <Button size="lg" className="min-w-[180px] rounded-none">
-                    Donor Portal
-                  </Button>
-                </Link>
-                <Link to="/about-the-trust">
-                  <Button size="lg" variant="outline" className="min-w-[180px] rounded-none border-foreground/20 hover:bg-muted/30">
-                    About the Trust
-                  </Button>
-                </Link>
+        {/* Hero — OSF-style split screen */}
+        <section className="relative border-b border-foreground/10 bg-background">
+          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-5rem)]">
+            <div className="flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-24 order-2 lg:order-1">
+              <div className="max-w-xl">
+                <h1 className="mb-10 text-foreground">
+                  Global Health Access Trust
+                </h1>
+                <p className="text-lg md:text-xl max-w-2xl text-muted-foreground leading-relaxed">
+                  A private charitable trust directing capital into healthcare access, system infrastructure, and capacity where it is most critically needed.
+                </p>
+                <p className="text-sm md:text-[15px] mt-4 text-muted-foreground/80 max-w-2xl leading-relaxed">
+                  A controlled platform for deploying capital into healthcare systems with oversight, accountability, and measurable impact.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 mt-10">
+                  <Link to="/auth">
+                    <Button size="lg" className="min-w-[180px] rounded-none uppercase tracking-widest text-xs font-bold">
+                      Donor Portal
+                    </Button>
+                  </Link>
+                  <Link to="/about-the-trust">
+                    <Button size="lg" variant="outline" className="min-w-[180px] rounded-none border-foreground text-foreground hover:bg-foreground hover:text-background uppercase tracking-widest text-xs font-bold">
+                      About the Trust
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
-            <div className="lg:col-span-5">
+            <div className="relative order-1 lg:order-2 min-h-[400px] lg:min-h-full overflow-hidden">
               <img
                 src={heroImage}
-                alt="Aerial view of terraced agricultural landscape with rural health infrastructure"
-                className="w-full aspect-[4/5] object-cover"
+                alt="Community health worker consulting with a patient in a rural clinic"
+                className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
               />
             </div>
