@@ -46,6 +46,7 @@ export const NAVIGATION_ITEMS = [
     href: "/support-the-trust",
     submenu: [
       { label: "Support the Trust", href: "/support-the-trust" },
+      { label: "Donor Portal", href: "/donor-guide" },
       { label: "Donor Recognition", href: "/donor-recognition" }
     ]
   },
