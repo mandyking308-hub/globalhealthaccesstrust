@@ -72,7 +72,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
+        serif: ["EB Garamond", "Georgia", "Times New Roman", "Times", "serif"],
         sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Helvetica", "Arial", "sans-serif"],
       },
       borderRadius: {
