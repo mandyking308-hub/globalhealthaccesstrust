@@ -19,146 +19,154 @@ export const HomePage = () => {
       />
       <div className="homepage-editorial flex flex-col bg-background">
 
-        {/* Category ticker strip — OSF-style topical band */}
-        <div className="border-b border-foreground/10 bg-background">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-11 flex items-center gap-8 overflow-x-auto text-[10.5px] uppercase tracking-[0.22em] font-semibold text-muted-foreground">
-            <span className="text-accent">In Focus</span>
-            <span className="text-foreground">Ukraine</span>
-            <span>Primary Healthcare</span>
-            <span>Systems Infrastructure</span>
-            <span>Rural Access</span>
-            <span>Governance</span>
-            <span>Commissioned Projects</span>
-          </div>
-        </div>
-
-        {/* Featured Story Hero — full-bleed editorial */}
+        {/* Featured Story Hero — Institutional Archive */}
         <section className="relative bg-primary text-primary-foreground">
-          <div className="relative min-h-[86vh] lg:min-h-[92vh] overflow-hidden">
+          <div className="relative min-h-[85vh] overflow-hidden">
             <img
               src={heroImage}
               alt="A mother and child on a residential street in an Eastern European town affected by the Ukraine crisis"
-              className="absolute inset-0 w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-90"
               loading="eager"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/30" />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/30 to-transparent" />
 
-            <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 md:px-10 pt-24 pb-16 lg:pt-40 lg:pb-24 min-h-[86vh] lg:min-h-[92vh] flex flex-col justify-end">
-              <div className="max-w-[880px]">
-                <div className="flex items-center gap-4 mb-8">
-                  <span className="inline-block bg-accent text-accent-foreground px-3 py-1.5 text-[10.5px] uppercase tracking-[0.22em] font-bold">
-                    Featured
-                  </span>
-                  <span className="text-[10.5px] uppercase tracking-[0.22em] font-semibold text-primary-foreground/80">
-                    Ukraine — Field Response
-                  </span>
-                </div>
-                <h1 className="text-primary-foreground mb-10" style={{ fontSize: "clamp(44px, 6.4vw, 96px)" }}>
-                  Directing capital where healthcare is most critically needed.
-                </h1>
-                <p className="text-[18px] md:text-[21px] leading-[1.5] text-primary-foreground/90 max-w-[720px] mb-10">
-                  A private charitable trust deploying structured funding into healthcare access, system infrastructure, and long-term capacity across twelve countries.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Link to="/auth">
-                    <Button size="lg" className="h-12 px-8 rounded-none uppercase tracking-[0.18em] text-[11px] font-bold bg-accent text-accent-foreground hover:bg-accent/90 border-0">
-                      Donor Portal
-                    </Button>
-                  </Link>
-                  <Link to="/about-the-trust">
-                    <Button size="lg" variant="outline" className="h-12 px-8 rounded-none border-primary-foreground/60 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary uppercase tracking-[0.18em] text-[11px] font-bold">
-                      About the Trust
-                    </Button>
-                  </Link>
-                </div>
+            <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 pt-24 pb-20 lg:pt-40 lg:pb-24 min-h-[85vh] flex flex-col justify-end">
+              <div className="flex items-center gap-4 mb-8">
+                <span className="h-px w-12 bg-accent" />
+                <span className="uppercase tracking-[0.3em] text-white text-[10px] font-bold">
+                  Emergency Briefing — Ukraine
+                </span>
               </div>
-            </div>
-
-            <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 text-[10.5px] uppercase tracking-[0.22em] text-primary-foreground/70 font-semibold text-right">
-              <div>Field Documentation</div>
-              <div className="text-primary-foreground/50 mt-1">Displaced family · Eastern Ukraine</div>
+              <h1
+                className="text-white font-serif max-w-6xl"
+                style={{
+                  fontSize: "clamp(48px, 8.4vw, 132px)",
+                  lineHeight: 0.9,
+                  fontWeight: 300,
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                Directing capital where<br />healthcare is most needed.
+              </h1>
+              <div className="mt-12 flex flex-col md:flex-row gap-8 items-start md:items-center">
+                <Link to="/about-the-trust">
+                  <Button
+                    size="lg"
+                    className="rounded-none h-14 px-8 bg-accent text-accent-foreground hover:bg-primary uppercase tracking-[0.2em] text-[11px] font-bold border-0"
+                  >
+                    View Crisis Response
+                  </Button>
+                </Link>
+                <p className="text-white/70 text-sm max-w-sm border-l border-white/25 pl-6 leading-relaxed">
+                  A private charitable trust supporting healthcare access, infrastructure, and long-term capacity in the world's most vulnerable regions.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Impact numbers band — bold institutional data */}
-        <section className="bg-foreground text-background">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-14 md:py-16 grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8">
-            {[
-              { n: "12", l: "Countries" },
-              { n: "40+", l: "Delivery Partners" },
-              { n: "2019", l: "Established" },
-              { n: "100%", l: "Independently Audited" },
-            ].map((s) => (
-              <div key={s.l}>
-                <div className="font-serif text-background" style={{ fontSize: "clamp(42px, 5vw, 72px)", lineHeight: 0.95, fontWeight: 800, letterSpacing: "-0.03em" }}>
+        {/* Impact Statistics — three-column bordered archive band */}
+        <section className="grid grid-cols-1 md:grid-cols-3 border-b border-foreground/10 bg-background">
+          {[
+            { cat: "Reach", n: "12", label: "Countries Reached", d: "Deploying structured funding into healthcare access across sovereign nations in crisis." },
+            { cat: "Network", n: "40+", label: "Delivery Partners", d: "Vetted networks of clinical, academic, and delivery organisations operating in-field." },
+            { cat: "Investment", n: "2019", label: "Established", d: "Independent, audited philanthropic capital committed to lawful ethical interventions." },
+          ].map((s, i) => (
+            <div
+              key={s.cat}
+              className={`p-12 md:p-16 lg:p-20 flex flex-col justify-between ${i < 2 ? "border-b md:border-b-0 md:border-r border-foreground/10" : ""}`}
+            >
+              <span className="uppercase tracking-[0.22em] text-[10px] font-bold text-accent mb-12">
+                {s.cat}
+              </span>
+              <div>
+                <span
+                  className="font-serif block mb-4"
+                  style={{ fontSize: "clamp(56px, 5.4vw, 92px)", lineHeight: 1, fontWeight: 300, fontStyle: "italic", letterSpacing: "-0.02em" }}
+                >
                   {s.n}
-                </div>
-                <div className="mt-3 text-[10.5px] uppercase tracking-[0.22em] font-semibold text-background/70">
-                  {s.l}
-                </div>
+                </span>
+                <p className="text-sm uppercase tracking-[0.2em] font-semibold text-foreground">
+                  {s.label}
+                </p>
+                <p className="text-sm mt-4 leading-relaxed text-muted-foreground">
+                  {s.d}
+                </p>
               </div>
+            </div>
+          ))}
+        </section>
+
+        {/* Editorial pull-quote — centered italic archive */}
+        <section className="py-32 md:py-40 px-6 bg-white">
+          <div className="max-w-4xl mx-auto">
+            <div className="w-16 h-1 bg-accent mb-12 mx-auto" />
+            <blockquote
+              className="font-serif text-center text-foreground"
+              style={{ fontSize: "clamp(30px, 4.4vw, 64px)", lineHeight: 1.1, fontStyle: "italic", fontWeight: 300, letterSpacing: "-0.015em" }}
+            >
+              "Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital."
+            </blockquote>
+            <div className="mt-16 text-center">
+              <p className="uppercase tracking-[0.25em] text-xs font-bold text-foreground">
+                The Board of Trustees
+              </p>
+              <p className="text-xs opacity-50 mt-2 text-muted-foreground">
+                Global Health Access Trust
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Reports from the Field — asymmetric 3-column archive grid */}
+        <section className="p-6 md:p-16 lg:p-24 border-t border-foreground/10 bg-background">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
+            <h2
+              className="font-serif text-foreground"
+              style={{ fontSize: "clamp(44px, 6vw, 96px)", lineHeight: 0.95, fontWeight: 300, letterSpacing: "-0.025em" }}
+            >
+              Reports from<br />the Field
+            </h2>
+            <Link
+              to="/about-the-trust"
+              className="text-xs uppercase tracking-[0.22em] font-bold text-foreground border-b border-foreground pb-2 hover:text-accent hover:border-accent transition-colors"
+            >
+              See all field reports
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+            {[
+              { img: clinicImage, cat: "Primary Healthcare", alt: "A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine", title: "Frontline maternal care in field clinics.", copy: "Clinical services delivered directly to displaced and underserved communities.", offset: false },
+              { img: systemsImage, cat: "Systems Infrastructure", alt: "Aid workers unloading medical supply pallets outside a damaged building in a Syrian town", title: "Rebuilding the systems that make care possible.", copy: "Supply, logistics, and infrastructure interventions in conflict-affected regions.", offset: true },
+              { img: ruralImage, cat: "Rural Access", alt: "A multi-region group of clinicians in a field training session", title: "Reaching communities beyond conventional provision.", copy: "Capacity-building for local clinicians where geography limits access.", offset: false },
+            ].map((a) => (
+              <article key={a.cat} className={`group cursor-pointer ${a.offset ? "md:mt-16" : ""}`}>
+                <div className="mb-8 overflow-hidden aspect-[3/4] bg-muted">
+                  <img
+                    src={a.img}
+                    alt={a.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.22em] text-accent font-bold">
+                  {a.cat}
+                </span>
+                <h3
+                  className="font-serif mt-4 mb-4 text-foreground group-hover:text-accent transition-colors"
+                  style={{ fontSize: "clamp(22px, 1.9vw, 30px)", lineHeight: 1.15, fontWeight: 400, letterSpacing: "-0.01em" }}
+                >
+                  {a.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {a.copy}
+                </p>
+              </article>
             ))}
           </div>
         </section>
 
-        {/* Editorial pull-quote — statement of intent */}
-        <section className="bg-background border-b border-foreground/10 py-24 md:py-32">
-          <div className="max-w-[1200px] mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 items-start">
-            <span className="eyebrow whitespace-nowrap md:mt-4">A Statement of Intent</span>
-            <div>
-              <p className="font-serif text-foreground font-medium" style={{ fontSize: "clamp(28px, 3.6vw, 54px)", lineHeight: 1.12, letterSpacing: "-0.015em" }}>
-                Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital — from Ukraine to the wider regions where care is denied.
-              </p>
-              <div className="mt-10 flex items-center gap-4 text-[11px] uppercase tracking-[0.22em] text-muted-foreground font-semibold">
-                <span className="h-px w-10 bg-foreground/40" />
-                <span>The Board of Trustees</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Stories — 3-column editorial grid */}
-        <section className="bg-background py-20 md:py-28 border-b border-foreground/10">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-14">
-              <div>
-                <span className="eyebrow mb-4 block">Delivery</span>
-                <h2 className="text-foreground max-w-[780px]">
-                  Delivery is executed through established, vetted partners operating in complex and resource-constrained environments.
-                </h2>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
-              {[
-                { img: clinicImage, cat: "Primary Healthcare", alt: "A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine", copy: "Frontline clinical services delivered in underserved communities." },
-                { img: systemsImage, cat: "Systems Infrastructure", alt: "Aid workers unloading medical supply pallets outside a damaged building in a Syrian town", copy: "Strengthening the underlying systems that make care possible." },
-                { img: ruralImage, cat: "Rural Access", alt: "A multi-region group of clinicians in a field training session", copy: "Reaching populations where geography limits conventional provision." },
-              ].map((a) => (
-                <article key={a.cat} className="group cursor-pointer">
-                  <div className="aspect-[4/5] overflow-hidden mb-6 bg-muted">
-                    <img
-                      src={a.img}
-                      alt={a.alt}
-                      className="w-full h-full object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-block bg-accent text-accent-foreground px-2.5 py-1 text-[10px] uppercase tracking-[0.2em] font-bold">
-                      {a.cat}
-                    </span>
-                  </div>
-                  <h3 className="text-foreground mb-3 font-serif" style={{ fontSize: "clamp(22px, 1.9vw, 28px)", lineHeight: 1.15, fontWeight: 700, letterSpacing: "-0.01em" }}>
-                    {a.copy}
-                  </h3>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Purpose — dark editorial band */}
         <section className="bg-primary text-primary-foreground py-24 md:py-32">
