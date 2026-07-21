@@ -39,40 +39,40 @@ img {
 ======================================== */
 
 :root{
-  /* GHAT Luxury Design System */
-  --deep-navy: 210 58% 11%;       /* #05152F */
-  --royal-blue: 213 85% 29%;      /* #0B3C89 */
-  --clean-white: 0 0% 100%;       /* #FFFFFF */
-  --soft-grey: 210 20% 93%;       /* #E8ECEF */
-  --gold-accent: 40 33% 62%;      /* #C2A878 */
+  /* GHAT Editorial Design System - Ivory, Charcoal, Forest Green */
+  --ivory: 43 33% 97%;            /* #F9F7F2 */
+  --charcoal: 0 0% 10%;           /* #1A1A1A */
+  --forest: 150 47% 11%;          /* #0D2619 */
+  --forest-light: 153 30% 41%;    /* #40916C */
+  --green-accent: 153 30% 36%;    /* #2D6A4F */
   
-  /* Semantic tokens mapped to luxury palette */
-  --background: var(--clean-white);
-  --foreground: var(--deep-navy);
-  --card: var(--clean-white);
-  --card-foreground: var(--deep-navy);
-  --popover: var(--clean-white);
-  --popover-foreground: var(--deep-navy);
-  --primary: var(--royal-blue);
-  --primary-foreground: var(--clean-white);
-  --secondary: var(--soft-grey);
-  --secondary-foreground: var(--deep-navy);
-  --muted: var(--soft-grey);
-  --muted-foreground: 210 10% 46%;
-  --accent: var(--gold-accent);
-  --accent-foreground: var(--deep-navy);
-  --destructive: 0 84% 60%;
-  --destructive-foreground: var(--clean-white);
-  --border: 214 20% 85%;
-  --input: 214 20% 85%;
-  --ring: var(--royal-blue);
-  --radius: 0.5rem;
+  /* Semantic tokens mapped to editorial palette */
+  --background: var(--ivory);
+  --foreground: var(--charcoal);
+  --card: var(--ivory);
+  --card-foreground: var(--charcoal);
+  --popover: var(--ivory);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--forest);
+  --primary-foreground: var(--ivory);
+  --secondary: 43 20% 92%;
+  --secondary-foreground: var(--charcoal);
+  --muted: 43 20% 92%;
+  --muted-foreground: 0 0% 40%;
+  --accent: var(--green-accent);
+  --accent-foreground: var(--ivory);
+  --destructive: 0 74% 42%;
+  --destructive-foreground: var(--ivory);
+  --border: 0 0% 10% / 0.1;
+  --input: 0 0% 10% / 0.1;
+  --ring: var(--green-accent);
+  --radius: 0px;
   
   /* Shadows */
-  --shadow-soft: 0 2px 8px rgba(5, 21, 47, 0.08);
-  --shadow-medium: 0 4px 16px rgba(5, 21, 47, 0.12);
-  --shadow-strong: 0 8px 32px rgba(5, 21, 47, 0.16);
-  --shadow-gold: 0 4px 16px rgba(194, 168, 120, 0.2);
+  --shadow-soft: 0 2px 8px rgba(13, 38, 25, 0.08);
+  --shadow-medium: 0 4px 16px rgba(13, 38, 25, 0.12);
+  --shadow-strong: 0 8px 32px rgba(13, 38, 25, 0.16);
+  --shadow-gold: 0 4px 16px rgba(45, 106, 79, 0.2);
   
   /* Transitions */
   --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
