@@ -62,21 +62,21 @@ export const Header = () => {
         Skip to content
       </a>
 
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-foreground/10">
-        {/* Utility strip */}
-        <div className="hidden md:block border-b border-foreground/5 bg-primary text-primary-foreground">
-          <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-sans font-bold tracking-[0.18em] uppercase">
-            <span className="opacity-80">Charitable Trust — England & Wales</span>
-            <div className="flex items-center gap-6 opacity-90">
-              <Link to="/contact" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
-              <Link to="/governance" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Governance</Link>
-              <Link to="/publications" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Publications</Link>
+      <header className="sticky top-0 z-50 bg-background border-b border-foreground/10">
+        {/* Utility strip — clean ivory, restrained */}
+        <div className="hidden md:block border-b border-foreground/10 bg-background">
+          <div className="max-w-[1400px] mx-auto px-8 h-9 flex items-center justify-between text-[11.5px] font-sans font-semibold tracking-[0.14em] uppercase text-foreground/70">
+            <span>Charitable Trust — England & Wales</span>
+            <div className="flex items-center gap-7">
+              <Link to="/contact" className="no-underline hover:text-foreground transition-colors">Contact</Link>
+              <Link to="/governance" className="no-underline hover:text-foreground transition-colors">Governance</Link>
+              <Link to="/publications" className="no-underline hover:text-foreground transition-colors">Publications</Link>
             </div>
           </div>
         </div>
 
         {/* Main bar */}
-        <div className="max-w-[1400px] mx-auto px-6 md:px-8 h-[76px]">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8 h-[84px]">
           <div className="flex h-full items-center justify-between gap-10">
 
             {/* Logo — GHAT institutional wordmark */}
@@ -85,7 +85,7 @@ export const Header = () => {
               className="flex items-center hover:opacity-85 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <GHATLogo className="h-14 w-auto" />
+              <GHATLogo className="h-16 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -100,11 +100,11 @@ export const Header = () => {
                   >
                     <Link
                       to={item.href}
-                      className="flex items-center gap-1 px-4 py-2 text-[13px] font-sans font-black uppercase tracking-[0.06em] text-foreground/85 hover:text-foreground transition-colors duration-200 whitespace-nowrap"
+                      className="flex items-center gap-1 px-4 py-2 text-[15px] font-sans font-semibold text-foreground/85 hover:text-primary transition-colors duration-200 whitespace-nowrap no-underline"
                     >
                       {item.label}
                       {'submenu' in item && (
-                        <ChevronDown className="w-3 h-3 text-foreground/50" />
+                        <ChevronDown className="w-3.5 h-3.5 text-foreground/50" />
                       )}
                     </Link>
 
@@ -114,7 +114,7 @@ export const Header = () => {
                           <Link
                             key={subItem.href}
                             to={subItem.href}
-                            className="block px-5 py-2.5 text-[12.5px] text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors duration-150"
+                            className="block px-5 py-2.5 text-[14px] text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors duration-150 no-underline"
                             onClick={() => setActiveDropdown(null)}
                           >
                             {subItem.label}
@@ -128,21 +128,22 @@ export const Header = () => {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-5 flex-shrink-0 pl-4 lg:border-l lg:border-foreground/10">
+            <div className="flex items-center gap-4 flex-shrink-0 pl-4 lg:border-l lg:border-foreground/10">
               <button
                 onClick={() => setIsSearchOpen(true)}
                 aria-label="Search website"
-                className="h-9 w-9 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors"
+                className="h-10 w-10 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors"
               >
-                <Search className="w-4 h-4" />
+                <Search className="w-[18px] h-[18px]" />
               </button>
 
               <Link
                 to="/auth"
-                className="hidden md:inline-flex items-center h-9 px-4 bg-primary text-primary-foreground text-[12px] font-sans font-black uppercase tracking-[0.14em] hover:bg-primary/90 transition-colors"
+                className="hidden md:inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-sans font-semibold tracking-[0.08em] hover:bg-primary/90 transition-colors no-underline"
               >
-                Login
+                Donor Portal
               </Link>
+
 
               <button
                 className="lg:hidden h-9 w-9 flex items-center justify-center"

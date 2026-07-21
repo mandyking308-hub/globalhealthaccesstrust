@@ -90,16 +90,16 @@ export const HomePage = () => {
         </section>
 
         {/* Editorial pull-quote — restrained display serif */}
-        <section className="py-24 md:py-32 px-6 bg-background border-b border-foreground/10">
+        <section className="py-16 md:py-20 px-6 bg-background border-b border-foreground/10">
           <div className="max-w-4xl mx-auto">
-            <span className="block h-px w-12 bg-accent mb-10" />
+            <span className="block h-px w-12 bg-accent mb-8" />
             <blockquote
               className="text-foreground"
-              style={{ fontSize: "clamp(26px, 3.2vw, 48px)", lineHeight: 1.08, fontWeight: 800, letterSpacing: "-0.008em", textTransform: "uppercase" }}
+              style={{ fontSize: "clamp(24px, 2.9vw, 42px)", lineHeight: 1.12, fontWeight: 800, letterSpacing: "-0.008em", textTransform: "uppercase" }}
             >
               Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital.
             </blockquote>
-            <div className="mt-12">
+            <div className="mt-10">
               <p className="uppercase tracking-[0.25em] text-xs font-bold text-foreground">
                 — The Board of Trustees
               </p>
@@ -109,6 +109,7 @@ export const HomePage = () => {
             </div>
           </div>
         </section>
+
 
 
         {/* Reports from the Field — asymmetric 3-column archive grid */}
@@ -128,14 +129,14 @@ export const HomePage = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
             {[
-              { img: clinicImage, cat: "Primary Healthcare", alt: "A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine", title: "Frontline maternal care in field clinics.", copy: "Clinical services delivered directly to displaced and underserved communities.", offset: false },
-              { img: systemsImage, cat: "Systems Infrastructure", alt: "Aid workers unloading medical supply pallets outside a damaged building in a Syrian town", title: "Rebuilding the systems that make care possible.", copy: "Supply, logistics, and infrastructure interventions in conflict-affected regions.", offset: true },
-              { img: ruralImage, cat: "Rural Access", alt: "A multi-region group of clinicians in a field training session", title: "Reaching communities beyond conventional provision.", copy: "Capacity-building for local clinicians where geography limits access.", offset: false },
+              { img: clinicImage, cat: "Primary Healthcare", alt: "A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine", title: "Frontline maternal care in field clinics.", copy: "Clinical services delivered directly to displaced and underserved communities." },
+              { img: systemsImage, cat: "Systems Infrastructure", alt: "Aid workers unloading medical supply pallets outside a damaged building in a Syrian town", title: "Rebuilding the systems that make care possible.", copy: "Supply, logistics, and infrastructure interventions in conflict-affected regions." },
+              { img: ruralImage, cat: "Rural Access", alt: "A multi-region group of clinicians in a field training session", title: "Reaching communities beyond conventional provision.", copy: "Capacity-building for local clinicians where geography limits access." },
             ].map((a) => (
-              <article key={a.cat} className={`group cursor-pointer ${a.offset ? "md:mt-16" : ""}`}>
-                <div className="mb-8 overflow-hidden aspect-[3/4] bg-muted">
+              <article key={a.cat} className="group cursor-pointer flex flex-col">
+                <div className="mb-7 overflow-hidden aspect-[4/5] bg-muted">
                   <img
                     src={a.img}
                     alt={a.alt}
@@ -143,22 +144,23 @@ export const HomePage = () => {
                     loading="lazy"
                   />
                 </div>
-                <span className="text-[10px] uppercase tracking-[0.22em] text-accent font-bold">
+                <span className="text-[11px] uppercase tracking-[0.22em] text-accent font-bold">
                   {a.cat}
                 </span>
                 <h3
-                  className="font-serif mt-4 mb-4 text-foreground group-hover:text-accent transition-colors"
-                  style={{ fontSize: "clamp(22px, 1.9vw, 30px)", lineHeight: 1.15, fontWeight: 400, letterSpacing: "-0.01em" }}
+                  className="font-serif mt-3 mb-3 text-foreground group-hover:text-accent transition-colors"
+                  style={{ fontSize: "clamp(22px, 1.9vw, 30px)", lineHeight: 1.2, fontWeight: 400, letterSpacing: "-0.01em" }}
                 >
                   {a.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="text-[15.5px] leading-relaxed text-muted-foreground">
                   {a.copy}
                 </p>
               </article>
             ))}
           </div>
         </section>
+
 
 
         {/* Purpose — dark editorial band */}
@@ -220,7 +222,7 @@ export const HomePage = () => {
 
             <div className="pl-0 md:pl-[196px] mt-16">
               <Link to="/commission-projects">
-                <Button variant="outline" size="lg" className="rounded-none border-foreground/25 hover:bg-foreground hover:text-background uppercase tracking-[0.18em] text-[11px] font-bold h-12 px-8">
+                <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
                   Commissioned Projects
                 </Button>
               </Link>
@@ -261,10 +263,10 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Operational Framework */}
-        <section className="py-24 md:py-32 bg-secondary/60">
+        {/* Operational Framework — vertical structured sequence */}
+        <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-14">
               <span className="eyebrow md:mt-3">Operational Framework</span>
               <div>
                 <h2 className="mb-6 text-foreground max-w-[820px]">The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.</h2>
@@ -272,23 +274,24 @@ export const HomePage = () => {
             </div>
 
             <div className="pl-0 md:pl-[196px]">
-              <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+              <ol className="max-w-3xl divide-y divide-foreground/12 border-t border-b border-foreground/15">
                 {[
                   { t: "Capital Allocation", d: "Funding is assigned to clearly defined initiatives with agreed scope and objectives." },
                   { t: "Project Structuring", d: "Delivery partners, geography, and operational frameworks are established." },
                   { t: "Monitoring & Reporting", d: "Progress is tracked against milestones with structured reporting." },
                   { t: "Outcome Verification", d: "Results are assessed to ensure accountability and measurable impact." },
                 ].map((c, i) => (
-                  <li key={c.t}>
-                    <span className="timeline-node">0{i + 1}</span>
-                    <h3 className="mb-3 text-foreground">{c.t}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  <li key={c.t} className="grid grid-cols-[64px_1fr] md:grid-cols-[96px_240px_1fr] gap-6 md:gap-10 py-8">
+                    <span className="font-serif text-primary text-[22px] font-black tracking-tight pt-1">0{i + 1}</span>
+                    <h3 className="text-foreground m-0">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed col-span-2 md:col-span-1 m-0">{c.d}</p>
                   </li>
                 ))}
               </ol>
             </div>
           </div>
         </section>
+
 
         {/* Governance */}
         <section className="py-24 md:py-32 bg-background border-b border-foreground/10">
@@ -324,8 +327,8 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Funding Mandate */}
-        <section className="py-24 md:py-32 bg-secondary/60">
+        {/* Funding Mandate — alternating text-and-image editorial layout */}
+        <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
               <span className="eyebrow md:mt-3">Funding Mandate</span>
@@ -334,25 +337,46 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
-              {PROGRAM_AREAS.slice(0, 5).map((area, index) => (
-                <div key={area.id} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent block mb-3">0{index + 1}</span>
-                  <h3 className="mb-4 text-foreground">{area.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{area.description}</p>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+              {/* Documentary image — respectful field photograph */}
+              <div className="md:col-span-5 md:sticky md:top-28">
+                <div className="aspect-[4/5] overflow-hidden bg-muted">
+                  <img
+                    src={ruralImage}
+                    alt="Field clinicians engaged in a rural training session in an underserved region"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
-              ))}
+                <p className="mt-4 text-[12px] uppercase tracking-[0.22em] font-semibold text-muted-foreground">
+                  Field capacity, in delivery
+                </p>
+              </div>
+
+              {/* Mandate list — alternating editorial column */}
+              <ol className="md:col-span-7 divide-y divide-foreground/12 border-t border-b border-foreground/15">
+                {PROGRAM_AREAS.slice(0, 5).map((area, index) => (
+                  <li key={area.id} className="grid grid-cols-[56px_1fr] gap-6 py-8">
+                    <span className="font-serif text-primary text-[20px] font-black tracking-tight pt-1">0{index + 1}</span>
+                    <div>
+                      <h3 className="mb-3 text-foreground m-0">{area.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed m-0">{area.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
 
-            <div className="pl-0 md:pl-[196px] mt-16">
+            <div className="pl-0 md:pl-[196px] mt-14">
               <Link to="/what-we-do">
-                <Button variant="outline" size="lg" className="rounded-none border-foreground/25 hover:bg-foreground hover:text-background uppercase tracking-[0.18em] text-[11px] font-bold h-12 px-8">
+                <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
                   Full Mandate
                 </Button>
               </Link>
             </div>
           </div>
         </section>
+
 
         {/* Engagement & Funding Approach */}
         <section className="py-24 md:py-32 bg-background">
@@ -392,7 +416,7 @@ export const HomePage = () => {
 
             <div className="pl-0 md:pl-[196px] mt-16">
               <Link to="/contact">
-                <Button size="lg" className="rounded-none bg-primary hover:bg-primary/90 uppercase tracking-[0.18em] text-[11px] font-bold h-12 px-8">
+                <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
                   Initiate Engagement
                 </Button>
               </Link>
