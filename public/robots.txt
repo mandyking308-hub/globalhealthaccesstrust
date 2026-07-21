@@ -13,4 +13,4 @@ Disallow: /donation-form
 Disallow: /404
 Disallow: /500
 
-Sitemap: https://globalhealthaccesstrust.org/sitemap.xml
+Sitemap: https://globalhealthaccesstrust.com/sitemap.xml
