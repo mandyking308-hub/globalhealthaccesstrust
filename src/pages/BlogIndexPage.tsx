@@ -8,8 +8,8 @@ import { SEO } from "@/components/SEO";
 import { all50BlogPosts } from "@/data/complete50BlogPosts";
 
 export const BlogIndexPage = () => {
-  const displayedPosts = all50BlogPosts.slice(0, 12);
   const featuredPosts = all50BlogPosts.slice(0, 3);
+  const displayedPosts = all50BlogPosts.slice(3, 15);
 
   return (
     <div className="min-h-screen bg-background">

@@ -41,8 +41,8 @@ export const PrivacyPolicyPage = () => {
                 We are committed to protecting your privacy and handling your personal 
                 information in accordance with UK GDPR and the Data Protection Act 2018.
               </p>
-              <div className="mt-4 p-4 bg-accent/20 rounded-lg">
-                <p className="font-medium mb-2">Contact Details:</p>
+              <div className="mt-6 border-l-2 border-primary pl-4">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-primary mb-2">Contact Details</p>
                 <p>Global Health Access Trust</p>
                 <p>2 Harley Street, London, United Kingdom</p>
                 <p>
@@ -124,9 +124,8 @@ export const PrivacyPolicyPage = () => {
                 <li><strong>Right to withdraw consent:</strong> Where processing is based on consent</li>
               </ul>
               
-              <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                <h4 className="font-semibold mb-2 flex items-center">
-                  
+              <div className="mt-6 border-l-2 border-primary pl-4">
+                <h4 className="text-[11px] font-semibold uppercase tracking-[0.15em] text-primary mb-2">
                   How to Exercise Your Rights
                 </h4>
                 <p className="text-sm">

@@ -55,7 +55,7 @@ export const TrusteeBiographiesGrid = () => {
             <h3 className="text-xl font-serif font-bold text-primary mb-2">
               {trustee.name}
             </h3>
-            <p className="text-sm font-medium text-gold mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-primary mb-4">
               {trustee.role}
             </p>
             <p className="text-muted-foreground leading-relaxed mb-4 text-sm">
