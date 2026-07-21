@@ -7,14 +7,14 @@ import { SearchModal } from "@/components/common/SearchModal";
 
 const GHATLogo = ({ className }: { className?: string }) => (
   <svg
-    viewBox="0 0 220 64"
+    viewBox="0 0 330 64"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={className}
     aria-hidden="true"
   >
     {/* Icon: global ring + access node */}
-    <g transform="translate(8, 8)">
+    <g transform="translate(6, 8)">
       {/* Outer globe ring — subtle */}
       <circle cx="24" cy="24" r="22" stroke="hsl(var(--primary))" strokeWidth="3" opacity="0.18" />
       {/* Active arc suggesting access / movement */}
@@ -38,7 +38,7 @@ const GHATLogo = ({ className }: { className?: string }) => (
 
     {/* Wordmark */}
     <text
-      x="64"
+      x="62"
       y="28"
       fontFamily="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
       fontSize="19.5"
@@ -48,10 +48,11 @@ const GHATLogo = ({ className }: { className?: string }) => (
     >
       GLOBAL HEALTH
     </text>
-    <line x1="64" y1="38" x2="212" y2="38" stroke="hsl(var(--accent))" strokeWidth="1" opacity="0.45" />
+    <line x1="62" y1="38" x2="300" y2="38" stroke="hsl(var(--accent))" strokeWidth="1" opacity="0.45" />
     <text
-      x="138"
+      x="181"
       y="52"
+      textAnchor="middle"
       fontFamily="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
       fontSize="12"
       fontWeight="700"
