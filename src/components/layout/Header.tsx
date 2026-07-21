@@ -13,35 +13,34 @@ const GHATLogo = ({ className }: { className?: string }) => (
     className={className}
     aria-hidden="true"
   >
-    {/* Icon: bold globe + access node */}
+    {/* Icon: wireframe globe + emerald access node */}
     <g transform="translate(4, 8)">
-      <circle cx="24" cy="24" r="22" fill="hsl(var(--primary))" />
-      <ellipse cx="24" cy="24" rx="10" ry="22" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" opacity="0.55" fill="none" />
-      <line x1="2" y1="24" x2="46" y2="24" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" opacity="0.55" />
-      <line x1="24" y1="2" x2="24" y2="46" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" opacity="0.55" />
-      <rect x="10" y="20" width="28" height="8" rx="1" fill="hsl(var(--accent))" />
-      <rect x="20" y="10" width="8" height="28" rx="1" fill="hsl(var(--accent))" />
-      <circle cx="24" cy="24" r="4" fill="hsl(var(--primary-foreground))" />
+      <circle cx="24" cy="24" r="21" stroke="hsl(var(--primary))" strokeWidth="1.75" fill="none" />
+      <ellipse cx="24" cy="24" rx="9" ry="21" stroke="hsl(var(--primary))" strokeWidth="1.25" fill="none" opacity="0.7" />
+      <line x1="3" y1="24" x2="45" y2="24" stroke="hsl(var(--primary))" strokeWidth="1.25" opacity="0.7" />
+      <line x1="6" y1="12" x2="42" y2="12" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+      <line x1="6" y1="36" x2="42" y2="36" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+      <circle cx="24" cy="24" r="4.5" fill="hsl(var(--accent))" />
     </g>
 
     <text
       x="62"
       y="28"
       fontFamily="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
-      fontSize="22"
-      fontWeight="900"
-      letterSpacing="-0.015em"
+      fontSize="20"
+      fontWeight="800"
+      letterSpacing="-0.01em"
       fill="hsl(var(--foreground))"
     >
       GLOBAL HEALTH
     </text>
     <text
       x="62"
-      y="52"
+      y="50"
       fontFamily="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
-      fontSize="22"
-      fontWeight="900"
-      letterSpacing="-0.015em"
+      fontSize="20"
+      fontWeight="800"
+      letterSpacing="-0.01em"
       fill="hsl(var(--primary))"
     >
       ACCESS TRUST
@@ -69,9 +68,9 @@ export const Header = () => {
           <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-sans font-bold tracking-[0.18em] uppercase">
             <span className="opacity-80">Charitable Trust — England & Wales</span>
             <div className="flex items-center gap-6 opacity-90">
-              <Link to="/contact" className="hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
-              <Link to="/governance" className="hover:opacity-100 opacity-80 transition-opacity">Governance</Link>
-              <Link to="/publications" className="hover:opacity-100 opacity-80 transition-opacity">Publications</Link>
+              <Link to="/contact" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
+              <Link to="/governance" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Governance</Link>
+              <Link to="/publications" className="no-underline hover:opacity-100 opacity-80 transition-opacity">Publications</Link>
             </div>
           </div>
         </div>
