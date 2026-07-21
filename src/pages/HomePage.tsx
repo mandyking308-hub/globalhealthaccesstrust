@@ -60,8 +60,7 @@ export const HomePage = () => {
         <section className="ghat-hero" style={{ backgroundImage: `url(${heroImage})` }}>
           <div className="ghat-hero__shade" aria-hidden="true" />
           <div className="ghat-shell ghat-hero__content">
-            <p className="ghat-eyebrow">Global Health Access Trust</p>
-            <h1>Access to health is justice.</h1>
+            <h1>Global Health Access Trust</h1>
             <p className="ghat-hero__intro">
               A private charitable trust directing capital into healthcare access, system infrastructure, and capacity where it is most critically needed.
             </p>
@@ -73,16 +72,13 @@ export const HomePage = () => {
               <Link className="ghat-text-link ghat-text-link--light" to="/about-the-trust">About the Trust <span aria-hidden="true">↘</span></Link>
             </div>
           </div>
-          <div className="ghat-shell ghat-hero__foot">
-            <span>Capital</span><span>Delivery</span><span>Oversight</span><span>Measurable impact</span>
-          </div>
         </section>
 
         <section className="ghat-section ghat-section--ivory">
           <div className="ghat-shell ghat-split-intro">
             <div>
               <p className="ghat-eyebrow ghat-eyebrow--dark">01 · Purpose</p>
-              <h2>Capital directed with precision, dignity and long-term intent.</h2>
+              <h2>Purpose</h2>
             </div>
             <div className="ghat-intro-copy">
               <p className="ghat-lead">The Trust deploys capital into lawful, ethical interventions that expand access to healthcare for underserved populations.</p>
@@ -108,7 +104,7 @@ export const HomePage = () => {
 
         <section className="ghat-section ghat-section--white">
           <div className="ghat-shell ghat-heading-row">
-            <div><p className="ghat-eyebrow ghat-eyebrow--dark">02 · Operating model</p><h2>How the Trust operates</h2></div>
+            <div><p className="ghat-eyebrow ghat-eyebrow--dark">02 · Operating model</p><h2>How the Trust Operates</h2></div>
             <p>The Trust operates through a structured model that defines how capital, delivery, and oversight are aligned within a controlled environment.</p>
           </div>
 
@@ -138,7 +134,7 @@ export const HomePage = () => {
         <section className="ghat-section ghat-section--green">
           <div className="ghat-shell">
             <div className="ghat-heading-row">
-              <div><p className="ghat-eyebrow">03 · Operational framework</p><h2>From capital allocation to outcome verification.</h2></div>
+              <div><p className="ghat-eyebrow">03 · Operational framework</p><h2>Operational Framework</h2></div>
               <p>The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.</p>
             </div>
             <ol className="ghat-framework-grid">
@@ -155,7 +151,7 @@ export const HomePage = () => {
 
         <section className="ghat-section ghat-section--ivory">
           <div className="ghat-shell ghat-heading-row">
-            <div><p className="ghat-eyebrow ghat-eyebrow--dark">04 · Delivery</p><h2>Built for complex environments.</h2></div>
+            <div><p className="ghat-eyebrow ghat-eyebrow--dark">04 · Delivery</p><h2>Delivery</h2></div>
             <p>Delivery is executed through established, vetted partners operating in complex and resource-constrained environments.</p>
           </div>
           <div className="ghat-shell ghat-delivery-grid">
@@ -172,7 +168,7 @@ export const HomePage = () => {
           <div className="ghat-shell ghat-governance-grid">
             <div>
               <p className="ghat-eyebrow ghat-eyebrow--dark">05 · Governance</p>
-              <h2>Independent oversight. Institutional accountability.</h2>
+              <h2>Governance</h2>
               <p className="ghat-lead">The Trust is governed by an independent Board with expertise across healthcare, law, public policy, and institutional governance.</p>
               <p>All activities are conducted in accordance with the laws of England and Wales and subject to independent audit.</p>
               <Link className="ghat-button ghat-button--dark" to="/governance-legal-framework">Governance framework</Link>
@@ -191,7 +187,7 @@ export const HomePage = () => {
 
         <section className="ghat-section ghat-section--charcoal">
           <div className="ghat-shell ghat-heading-row">
-            <div><p className="ghat-eyebrow">06 · Funding mandate</p><h2>Defined areas of charitable intervention.</h2></div>
+            <div><p className="ghat-eyebrow">06 · Funding mandate</p><h2>Funding Mandate</h2></div>
             <p>All funding is directed exclusively toward defined areas of charitable intervention, aligned with long-term system impact.</p>
           </div>
           <div className="ghat-shell ghat-mandate-list">
@@ -212,7 +208,7 @@ export const HomePage = () => {
           <div className="ghat-shell ghat-engagement-grid">
             <div>
               <p className="ghat-eyebrow ghat-eyebrow--dark">07 · Engagement</p>
-              <h2>A structured and selective process.</h2>
+              <h2>Engagement &amp; Funding Approach</h2>
               <p className="ghat-lead">Engagement with the Trust is conducted through a structured and selective process.</p>
               <p>Relationships are established with individuals, institutions, and partners aligned with the Trust's mandate and governance framework.</p>
               <p>This approach ensures capital is deployed with precision, oversight, and long-term impact.</p>
@@ -225,9 +221,8 @@ export const HomePage = () => {
               ))}
             </ol>
           </div>
-          <div className="ghat-shell ghat-engagement-cta">
-            <div><p className="ghat-eyebrow ghat-eyebrow--dark">Initiate engagement</p><h2>Begin a conversation with the Trust.</h2></div>
-            <Link className="ghat-button ghat-button--dark" to="/contact">Contact the Trust</Link>
+          <div className="ghat-shell ghat-section-action">
+            <Link className="ghat-button ghat-button--dark" to="/contact">Initiate Engagement</Link>
           </div>
         </section>
       </div>
