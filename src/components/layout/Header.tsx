@@ -59,7 +59,7 @@ export const Header = () => {
                   >
                     <Link
                       to={item.href}
-                      className="flex items-center gap-1 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-foreground/75 hover:text-foreground transition-colors duration-200 whitespace-nowrap"
+                      className="flex items-center gap-1 px-4 py-2 text-[13px] font-serif font-black uppercase tracking-[0.06em] text-foreground/85 hover:text-foreground transition-colors duration-200 whitespace-nowrap"
                     >
                       {item.label}
                       {'submenu' in item && (
