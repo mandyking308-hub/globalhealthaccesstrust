@@ -19,24 +19,38 @@ export const Header = () => {
         Skip to content
       </a>
 
-      <header className="sticky top-0 z-50 bg-background border-b border-foreground/10 h-20">
-        <div className="max-w-7xl mx-auto px-6 h-full">
-          <div className="flex h-full items-center justify-between gap-8">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-foreground/10">
+        {/* Utility strip */}
+        <div className="hidden md:block border-b border-foreground/5 bg-primary text-primary-foreground">
+          <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-medium tracking-[0.18em] uppercase">
+            <span className="opacity-80">Registered Charitable Trust — England & Wales</span>
+            <div className="flex items-center gap-6 opacity-90">
+              <Link to="/contact" className="hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
+              <Link to="/governance" className="hover:opacity-100 opacity-80 transition-opacity">Governance</Link>
+              <Link to="/publications" className="hover:opacity-100 opacity-80 transition-opacity">Publications</Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Main bar */}
+        <div className="max-w-[1400px] mx-auto px-6 md:px-8 h-[76px]">
+          <div className="flex h-full items-center justify-between gap-10">
 
             {/* Logo */}
             <Link
               to="/"
-              className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
+              className="flex items-center gap-3 text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <span className="font-serif text-[13px] font-black tracking-tight uppercase leading-[1.05]">
+              <span className="inline-block w-[26px] h-[26px] bg-primary" aria-hidden="true" />
+              <span className="font-serif text-[13px] font-extrabold tracking-tight uppercase leading-[1.05]">
                 Global Health<br/>Access Trust
               </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center justify-center flex-1 max-w-3xl mx-auto">
-              <div className="flex items-center gap-0">
+            <nav className="hidden lg:flex items-center flex-1 justify-end">
+              <div className="flex items-center">
                 {NAVIGATION_ITEMS.map((item) => (
                   <div
                     key={item.href}
@@ -46,21 +60,21 @@ export const Header = () => {
                   >
                     <Link
                       to={item.href}
-                      className="flex items-center gap-1 px-4 py-2 text-sm font-medium uppercase tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-200 whitespace-nowrap"
+                      className="flex items-center gap-1 px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-foreground/75 hover:text-foreground transition-colors duration-200 whitespace-nowrap"
                     >
                       {item.label}
                       {'submenu' in item && (
-                        <ChevronDown className="w-3 h-3 text-muted-foreground/60" />
+                        <ChevronDown className="w-3 h-3 text-foreground/50" />
                       )}
                     </Link>
 
                     {'submenu' in item && activeDropdown === item.label && (
-                      <div className="absolute top-full left-0 mt-0 w-64 bg-background border border-foreground/10 shadow-soft py-2 z-50">
+                      <div className="absolute top-full left-0 mt-0 w-64 bg-background border border-foreground/10 shadow-medium py-2 z-50">
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.href}
                             to={subItem.href}
-                            className="block px-5 py-2.5 text-[13px] text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors duration-150"
+                            className="block px-5 py-2.5 text-[12.5px] text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors duration-150"
                             onClick={() => setActiveDropdown(null)}
                           >
                             {subItem.label}
@@ -74,36 +88,29 @@ export const Header = () => {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-6 flex-shrink-0">
-              <Button
-                variant="ghost"
-                size="sm"
+            <div className="flex items-center gap-5 flex-shrink-0 pl-4 lg:border-l lg:border-foreground/10">
+              <button
                 onClick={() => setIsSearchOpen(true)}
                 aria-label="Search website"
-                className="h-9 w-9 p-0 hover:bg-muted/50 transition-colors duration-200"
+                className="h-9 w-9 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors"
               >
-                <Search className="w-[16px] h-[16px]" />
-              </Button>
+                <Search className="w-4 h-4" />
+              </button>
 
-              <Link to="/auth" className="hidden md:inline-flex">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-auto px-0 text-sm font-semibold uppercase tracking-widest text-foreground border-b-2 border-foreground pb-0.5 rounded-none hover:bg-transparent hover:text-accent"
-                >
-                  Login
-                </Button>
+              <Link
+                to="/auth"
+                className="hidden md:inline-flex items-center h-9 px-4 bg-primary text-primary-foreground text-[11px] font-bold uppercase tracking-[0.18em] hover:bg-primary/90 transition-colors"
+              >
+                Login
               </Link>
 
-              <Button
-                variant="ghost"
-                size="sm"
-                className="lg:hidden h-9 w-9 p-0"
+              <button
+                className="lg:hidden h-9 w-9 flex items-center justify-center"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </Button>
+              </button>
             </div>
           </div>
 
