@@ -18,18 +18,21 @@ export const Header = () => {
       >
         Skip to content
       </a>
-      
-      <header className="sticky top-0 z-50 bg-background border-b border-border/30 h-16 md:h-18 lg:h-20">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-12 h-full">
+
+      <header className="sticky top-0 z-50 bg-background border-b border-foreground/10 h-20">
+        <div className="max-w-7xl mx-auto px-6 h-full">
           <div className="flex h-full items-center justify-between gap-8">
-            
+
             {/* Logo */}
-            <Link 
-              to="/" 
-              className="text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0 text-[15px] font-semibold tracking-wide uppercase"
+            <Link
+              to="/"
+              className="flex items-center gap-2 text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              GHAT
+              <div className="w-8 h-8 bg-primary" aria-hidden="true" />
+              <span className="font-serif text-2xl font-bold tracking-tight uppercase">
+                {SITE_CONFIG.shortName}
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -44,16 +47,16 @@ export const Header = () => {
                   >
                     <Link
                       to={item.href}
-                      className="flex items-center gap-1 px-4 py-2 text-[14px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 whitespace-nowrap"
+                      className="flex items-center gap-1 px-4 py-2 text-sm font-medium uppercase tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-200 whitespace-nowrap"
                     >
                       {item.label}
                       {'submenu' in item && (
                         <ChevronDown className="w-3 h-3 text-muted-foreground/60" />
                       )}
                     </Link>
-                    
+
                     {'submenu' in item && activeDropdown === item.label && (
-                      <div className="absolute top-full left-0 mt-0 w-64 bg-background border border-border/60 shadow-sm py-2 z-50">
+                      <div className="absolute top-full left-0 mt-0 w-64 bg-background border border-foreground/10 shadow-soft py-2 z-50">
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.href}
@@ -72,7 +75,7 @@ export const Header = () => {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-3 flex-shrink-0">
+            <div className="flex items-center gap-6 flex-shrink-0">
               <Button
                 variant="ghost"
                 size="sm"
@@ -84,15 +87,14 @@ export const Header = () => {
               </Button>
 
               <Link to="/auth" className="hidden md:inline-flex">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="h-9 px-4 text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-auto px-0 text-sm font-semibold uppercase tracking-widest text-foreground border-b-2 border-foreground pb-0.5 rounded-none hover:bg-transparent hover:text-accent"
                 >
                   Login
                 </Button>
               </Link>
-
 
               <Button
                 variant="ghost"
@@ -108,13 +110,13 @@ export const Header = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="lg:hidden border-t border-border/30 bg-background">
+            <div className="lg:hidden border-t border-foreground/10 bg-background">
               <div className="py-4 space-y-1">
                 {NAVIGATION_ITEMS.map((item) => (
                   <div key={item.href}>
                     <Link
                       to={item.href}
-                      className="flex items-center justify-between px-4 py-3 text-sm font-medium text-foreground hover:bg-muted/40 transition-colors"
+                      className="flex items-center justify-between px-4 py-3 text-sm font-medium uppercase tracking-wide text-foreground hover:bg-muted/40 transition-colors"
                       onClick={(e) => {
                         if ('submenu' in item) {
                           e.preventDefault();
@@ -130,7 +132,7 @@ export const Header = () => {
                       )}
                     </Link>
                     {'submenu' in item && activeDropdown === item.label && (
-                      <div className="ml-4 border-l border-border/30 pl-4 py-1 space-y-1">
+                      <div className="ml-4 border-l border-foreground/10 pl-4 py-1 space-y-1">
                         {item.submenu.map((subItem) => (
                           <Link
                             key={subItem.href}
@@ -145,7 +147,7 @@ export const Header = () => {
                     )}
                   </div>
                 ))}
-                <div className="px-4 pt-4 border-t border-border/30 mt-4 space-y-2">
+                <div className="px-4 pt-4 border-t border-foreground/10 mt-4 space-y-2">
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
                     <Button variant="outline" size="sm" className="w-full text-sm">
                       Login
