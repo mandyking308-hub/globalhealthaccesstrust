@@ -202,18 +202,20 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-              {[
-                { t: "Scope Definition", d: "Region, focus area, and intended outcomes are agreed in advance." },
-                { t: "Progress Reporting", d: "Milestones, field documentation, and updates are provided through a secure donor portal." },
-                { t: "Financial Transparency", d: "All fund allocations are documented and independently accounted for." },
-              ].map((c, i) => (
-                <div key={c.t} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent block mb-4">0{i + 1}</span>
-                  <h3 className="mb-4 text-foreground">{c.t}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{c.d}</p>
-                </div>
-              ))}
+            <div className="pl-0 md:pl-[196px]">
+              <ol className="timeline grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-10">
+                {[
+                  { t: "Scope Definition", d: "Region, focus area, and intended outcomes are agreed in advance." },
+                  { t: "Progress Reporting", d: "Milestones, field documentation, and updates are provided through a secure donor portal." },
+                  { t: "Financial Transparency", d: "All fund allocations are documented and independently accounted for." },
+                ].map((c, i) => (
+                  <li key={c.t}>
+                    <span className="timeline-node">0{i + 1}</span>
+                    <h3 className="mb-3 text-foreground">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
 
             <div className="pl-0 md:pl-[196px] mt-16">
@@ -236,24 +238,22 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
-              {[
-                { t: "Structured Funding", d: "Capital is allocated to clearly defined projects with agreed scope, geography, and objectives prior to deployment." },
-                { t: "Project Oversight", d: "Each initiative is tracked against milestones, with delivery monitored through a structured reporting framework." },
-                { t: "Donor Visibility", d: "Donors have access to a secure environment where progress, updates, and documentation are made available." },
-                { t: "Accountability & Control", d: "All activity is documented, auditable, and aligned with legal and governance requirements." },
-              ].map((c, i) => (
-                <div key={c.t} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent block mb-4">0{i + 1}</span>
-                  <h3 className="mb-4 text-foreground">{c.t}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{c.d}</p>
-                </div>
-              ))}
+            <div className="pl-0 md:pl-[196px]">
+              <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+                {[
+                  { t: "Structured Funding", d: "Capital is allocated to clearly defined projects with agreed scope, geography, and objectives prior to deployment." },
+                  { t: "Project Oversight", d: "Each initiative is tracked against milestones, with delivery monitored through a structured reporting framework." },
+                  { t: "Donor Visibility", d: "Donors have access to a secure environment where progress, updates, and documentation are made available." },
+                  { t: "Accountability & Control", d: "All activity is documented, auditable, and aligned with legal and governance requirements." },
+                ].map((c, i) => (
+                  <li key={c.t}>
+                    <span className="timeline-node">0{i + 1}</span>
+                    <h3 className="mb-3 text-foreground">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
-
-            <p className="pl-0 md:pl-[196px] text-sm text-muted-foreground/80 mt-12 leading-relaxed max-w-2xl">
-              The platform supports structured project management, reporting, and administrative oversight through a secure internal system.
-            </p>
           </div>
         </section>
 
