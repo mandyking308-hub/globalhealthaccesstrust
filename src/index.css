@@ -193,14 +193,18 @@ h1,h2,h3,h4,p,li{
 
 /* Institutional section containment — editorial ivory, matches homepage rhythm */
 .section-container {
-  background: hsl(var(--background));
+  background: transparent;
   border: none;
-  border-top: 1px solid hsl(var(--foreground) / 0.12);
   border-radius: 0;
-  padding: 2.5rem 0 2.75rem;
+  padding: 2rem 0 2.25rem;
   margin-bottom: 0;
+  position: relative;
 }
-.section-container + .section-container { margin-top: 0; }
+.section-container + .section-container {
+  margin-top: 0;
+  border-top: 1px solid hsl(var(--foreground) / 0.1);
+}
+
 .section-container p,
 .section-container li {
   max-width: 72ch;
