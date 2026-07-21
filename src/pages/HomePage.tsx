@@ -327,8 +327,8 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Funding Mandate */}
-        <section className="py-24 md:py-32 bg-secondary/60">
+        {/* Funding Mandate — alternating text-and-image editorial layout */}
+        <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
               <span className="eyebrow md:mt-3">Funding Mandate</span>
@@ -337,25 +337,46 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="pl-0 md:pl-[196px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
-              {PROGRAM_AREAS.slice(0, 5).map((area, index) => (
-                <div key={area.id} className="pt-8 border-t border-foreground/15">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent block mb-3">0{index + 1}</span>
-                  <h3 className="mb-4 text-foreground">{area.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{area.description}</p>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+              {/* Documentary image — respectful field photograph */}
+              <div className="md:col-span-5 md:sticky md:top-28">
+                <div className="aspect-[4/5] overflow-hidden bg-muted">
+                  <img
+                    src={ruralImage}
+                    alt="Field clinicians engaged in a rural training session in an underserved region"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
-              ))}
+                <p className="mt-4 text-[12px] uppercase tracking-[0.22em] font-semibold text-muted-foreground">
+                  Field capacity, in delivery
+                </p>
+              </div>
+
+              {/* Mandate list — alternating editorial column */}
+              <ol className="md:col-span-7 divide-y divide-foreground/12 border-t border-b border-foreground/15">
+                {PROGRAM_AREAS.slice(0, 5).map((area, index) => (
+                  <li key={area.id} className="grid grid-cols-[56px_1fr] gap-6 py-8">
+                    <span className="font-serif text-primary text-[20px] font-black tracking-tight pt-1">0{index + 1}</span>
+                    <div>
+                      <h3 className="mb-3 text-foreground m-0">{area.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed m-0">{area.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
 
-            <div className="pl-0 md:pl-[196px] mt-16">
+            <div className="pl-0 md:pl-[196px] mt-14">
               <Link to="/what-we-do">
-                <Button variant="outline" size="lg" className="rounded-none border-foreground/25 hover:bg-foreground hover:text-background uppercase tracking-[0.18em] text-[11px] font-bold h-12 px-8">
+                <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
                   Full Mandate
                 </Button>
               </Link>
             </div>
           </div>
         </section>
+
 
         {/* Engagement & Funding Approach */}
         <section className="py-24 md:py-32 bg-background">
