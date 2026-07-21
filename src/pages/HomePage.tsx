@@ -66,15 +66,15 @@ export const HomePage = () => {
           ].map((s, i) => (
             <div
               key={s.cat}
-              className={`p-12 md:p-16 lg:p-20 flex flex-col justify-between ${i < 2 ? "border-b md:border-b-0 md:border-r border-foreground/10" : ""}`}
+              className={`p-10 md:p-12 lg:p-16 flex flex-col justify-between ${i < 2 ? "border-b md:border-b-0 md:border-r border-foreground/10" : ""}`}
             >
-              <span className="uppercase tracking-[0.22em] text-[10px] font-bold text-foreground mb-12">
+              <span className="uppercase tracking-[0.22em] text-[10px] font-bold text-foreground mb-10">
                 {s.cat}
               </span>
               <div>
                 <span
-                  className="font-serif block mb-4 text-foreground"
-                  style={{ fontSize: "clamp(72px, 7vw, 128px)", lineHeight: 0.9, fontWeight: 900, letterSpacing: "-0.01em" }}
+                  className="font-serif block mb-4 text-foreground display-condensed"
+                  style={{ fontSize: "clamp(52px, 5.4vw, 88px)", lineHeight: 0.9, fontWeight: 900, letterSpacing: "-0.015em" }}
                 >
                   {s.n}
                 </span>
@@ -89,16 +89,17 @@ export const HomePage = () => {
           ))}
         </section>
 
-        {/* Editorial pull-quote — heavy uppercase OSF-style */}
-        <section className="py-32 md:py-40 px-6 bg-background border-b border-foreground/10">
-          <div className="max-w-5xl mx-auto">
+        {/* Editorial pull-quote — restrained display serif */}
+        <section className="py-24 md:py-32 px-6 bg-background border-b border-foreground/10">
+          <div className="max-w-4xl mx-auto">
+            <span className="block h-px w-12 bg-accent mb-10" />
             <blockquote
-              className="font-serif text-foreground"
-              style={{ fontSize: "clamp(36px, 5.4vw, 84px)", lineHeight: 0.98, fontWeight: 900, letterSpacing: "-0.005em", textTransform: "uppercase" }}
+              className="text-foreground"
+              style={{ fontSize: "clamp(26px, 3.2vw, 48px)", lineHeight: 1.08, fontWeight: 800, letterSpacing: "-0.008em", textTransform: "uppercase" }}
             >
               Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital.
             </blockquote>
-            <div className="mt-16">
+            <div className="mt-12">
               <p className="uppercase tracking-[0.25em] text-xs font-bold text-foreground">
                 — The Board of Trustees
               </p>
@@ -114,8 +115,8 @@ export const HomePage = () => {
         <section className="p-6 md:p-16 lg:p-24 border-t border-foreground/10 bg-background">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
             <h2
-              className="font-serif text-foreground"
-              style={{ fontSize: "clamp(44px, 6vw, 96px)", lineHeight: 0.95, fontWeight: 300, letterSpacing: "-0.025em" }}
+              className="display-condensed text-foreground"
+              style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
             >
               Reports from<br />the Field
             </h2>
