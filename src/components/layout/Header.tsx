@@ -22,7 +22,7 @@ export const Header = () => {
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-foreground/10">
         {/* Utility strip */}
         <div className="hidden md:block border-b border-foreground/5 bg-primary text-primary-foreground">
-          <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-medium tracking-[0.18em] uppercase">
+          <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-serif font-bold tracking-[0.18em] uppercase">
             <span className="opacity-80">Registered Charitable Trust — England & Wales</span>
             <div className="flex items-center gap-6 opacity-90">
               <Link to="/contact" className="hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
