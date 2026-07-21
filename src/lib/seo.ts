@@ -1,7 +1,7 @@
 // SEO constants and schemas
 export const SITE_CONFIG = {
   name: "Global Health Access Trust",
-  url: "https://globalhealthaccesstrust.org",
+  url: "https://globalhealthaccesstrust.com",
   description: "A charity building lasting access to healthcare for vulnerable and underserved populations worldwide",
   image: "/ghat-logo.png"
 };
@@ -12,8 +12,8 @@ export const organizationSchema = {
   "@type": "NGO",
   "name": "Global Health Access Trust",
   "alternateName": "GHAT",
-  "url": "https://globalhealthaccesstrust.org",
-  "logo": "https://globalhealthaccesstrust.org/ghat-logo.png",
+  "url": "https://globalhealthaccesstrust.com",
+  "logo": "https://globalhealthaccesstrust.com/ghat-logo.png",
   "description": "A charity building lasting access to healthcare for vulnerable and underserved populations worldwide through ethical healthcare interventions, capacity building, and systems strengthening.",
   "foundingDate": "2025",
   "foundingLocation": {
@@ -25,7 +25,7 @@ export const organizationSchema = {
     "addressCountry": "GB"
   },
   "sameAs": [
-    "https://globalhealthaccesstrust.org"
+    "https://globalhealthaccesstrust.com"
   ],
   "knowsAbout": [
     "Global Health",
@@ -68,7 +68,7 @@ export const generateArticleSchema = (article: {
   "@type": "Article",
   "headline": article.title,
   "description": article.description,
-  "image": article.image || "https://globalhealthaccesstrust.org/ghat-logo.png",
+  "image": article.image || "https://globalhealthaccesstrust.com/ghat-logo.png",
   "author": {
     "@type": "Person",
     "name": article.author
@@ -78,7 +78,7 @@ export const generateArticleSchema = (article: {
     "name": "Global Health Access Trust",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://globalhealthaccesstrust.org/ghat-logo.png"
+      "url": "https://globalhealthaccesstrust.com/ghat-logo.png"
     }
   },
   "datePublished": article.publishDate,

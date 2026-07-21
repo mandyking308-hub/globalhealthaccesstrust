@@ -4,7 +4,66 @@ import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NAVIGATION_ITEMS, SITE_CONFIG } from "@/lib/constants";
 import { SearchModal } from "@/components/common/SearchModal";
-import ghatLogo from "@/assets/ghat-logo.png";
+
+const GHATLogo = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 330 64"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    {/* Icon: global ring + access node */}
+    <g transform="translate(6, 8)">
+      {/* Outer globe ring — subtle */}
+      <circle cx="24" cy="24" r="22" stroke="hsl(var(--primary))" strokeWidth="3" opacity="0.18" />
+      {/* Active arc suggesting access / movement */}
+      <path
+        d="M24 2 A22 22 0 0 1 46 24"
+        stroke="hsl(var(--accent))"
+        strokeWidth="3"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* Horizontal equator */}
+      <line x1="2" y1="24" x2="46" y2="24" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.35" />
+      {/* Vertical meridian */}
+      <line x1="24" y1="2" x2="24" y2="46" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.35" />
+      {/* Access cross / node */}
+      <rect x="14" y="22" width="20" height="4" rx="2" fill="hsl(var(--accent))" />
+      <rect x="22" y="14" width="4" height="20" rx="2" fill="hsl(var(--accent))" />
+      {/* Central hub */}
+      <circle cx="24" cy="24" r="5" fill="hsl(var(--background))" stroke="hsl(var(--primary))" strokeWidth="2" />
+    </g>
+
+    {/* Wordmark */}
+    <text
+      x="62"
+      y="28"
+      fontFamily="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+      fontSize="19.5"
+      fontWeight="800"
+      letterSpacing="-0.02em"
+      fill="hsl(var(--foreground))"
+    >
+      GLOBAL HEALTH
+    </text>
+    <line x1="62" y1="38" x2="300" y2="38" stroke="hsl(var(--accent))" strokeWidth="1" opacity="0.45" />
+    <text
+      x="181"
+      y="52"
+      textAnchor="middle"
+      fontFamily="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif"
+      fontSize="12"
+      fontWeight="700"
+      letterSpacing="0.18em"
+      fill="hsl(var(--accent))"
+      fontStyle="italic"
+    >
+      ACCESS TRUST
+    </text>
+  </svg>
+);
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,19 +96,13 @@ export const Header = () => {
         <div className="max-w-[1400px] mx-auto px-6 md:px-8 h-[76px]">
           <div className="flex h-full items-center justify-between gap-10">
 
-            {/* Logo — GHAT institutional mark */}
+            {/* Logo — GHAT institutional wordmark */}
             <Link
               to="/"
-              className="flex items-center hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
+              className="flex items-center hover:opacity-85 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <img
-                src={ghatLogo}
-                alt="Global Health Access Trust"
-                width={220}
-                height={64}
-                className="h-14 w-auto object-contain"
-              />
+              <GHATLogo className="h-14 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
