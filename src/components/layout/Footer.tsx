@@ -40,9 +40,6 @@ export const Footer = () => {
           {/* Quick Links */}
           <div className="flex flex-col gap-4">
             <h5 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2">Navigation</h5>
-            <Link to="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Home
-            </Link>
             {FOOTER_SECTIONS.quickLinks.map((link) => (
               <Link
                 key={link.href}
