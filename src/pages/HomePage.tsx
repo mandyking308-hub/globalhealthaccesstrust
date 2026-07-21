@@ -341,11 +341,11 @@ export const HomePage = () => {
         {/* Funding Mandate — alternating text-and-image editorial layout */}
         <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
-              <span className="eyebrow md:mt-3">Funding Mandate</span>
-              <div>
-                <h2 className="mb-6 text-foreground max-w-[820px]">All funding is directed exclusively toward defined areas of charitable intervention, aligned with long-term system impact.</h2>
-              </div>
+            <div className="mb-16">
+              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                Funding Mandate
+              </h2>
+              <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">All funding is directed exclusively toward defined areas of charitable intervention, aligned with long-term system impact.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
