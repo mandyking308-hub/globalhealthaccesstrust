@@ -7,7 +7,6 @@ import { OnboardingTour } from "@/components/onboarding/OnboardingTour";
 import { donorOnboardingSteps } from "@/data/onboardingSteps";
 import { User } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,7 +37,7 @@ export const DonorDashboardPage = () => {
   const [totalDonated, setTotalDonated] = useState(0);
   const [loading, setLoading] = useState(true);
   const [profileEdit, setProfileEdit] = useState({ first_name: "", last_name: "", email: "" });
-  const { isComplete, isLoading: onboardingLoading, markOnboardingComplete, resetOnboarding } = useOnboarding("donor");
+  const { isComplete, isLoading: onboardingLoading, markOnboardingComplete } = useOnboarding("donor");
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
@@ -60,7 +59,7 @@ export const DonorDashboardPage = () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) { navigate("/auth"); return; }
     setUser(session.user);
-    
+
     const { data: profileData } = await supabase.from("profiles").select("*").eq("id", session.user.id).single();
     if (profileData) {
       setProfile(profileData);
@@ -109,7 +108,7 @@ export const DonorDashboardPage = () => {
 
   const donorTier = calculateDonorTier(totalDonated);
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" /></div>;
+  if (loading) return <div className="min-h-screen flex items-center justify-center donor-portal"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" /></div>;
 
   return (
     <>
@@ -123,128 +122,171 @@ export const DonorDashboardPage = () => {
           onClose={() => setShowOnboarding(false)}
         />
       )}
-      
-      <div className="min-h-screen bg-gradient-to-br from-primary/5 to-accent/10">
-      <Helmet><title>Donor Dashboard | Global Health Access Trust</title><meta name="robots" content="noindex, nofollow" /></Helmet>
-      <header className="bg-background border-b">
-        <div className="container-section py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            
-            <div><h1 className="text-2xl font-bold">Donor Portal</h1><p className="text-sm text-muted-foreground">Welcome back, {profile?.first_name}!</p></div>
-          </div>
-          <Button variant="outline" onClick={handleLogout}>Logout</Button>
-        </div>
-      </header>
 
-      <div className="container-section py-8">
-        <Card className="mb-6 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
-          <CardContent className="pt-6">
-            <div className="flex flex-col md:flex-row items-start justify-between gap-4">
-              <div className="flex-1">
-                <h2 className="text-xl font-semibold mb-2">Welcome to Your Donor Dashboard</h2>
-                <p className="text-muted-foreground mb-4">Thank you for your support. View contributions, track impact, and manage preferences.</p>
+      <div className="min-h-screen donor-portal">
+        <Helmet><title>Donor Dashboard | Global Health Access Trust</title><meta name="robots" content="noindex, nofollow" /></Helmet>
+
+        {/* Portal header — editorial, ivory, deep-emerald identity */}
+        <header className="bg-background border-b border-foreground/10">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-5 flex items-center justify-between gap-6">
+            <div>
+              <span className="portal-eyebrow">Secure Donor Portal</span>
+              <p className="mt-1 text-[15px] text-foreground">Welcome back, {profile?.first_name}!</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <Link to="/">
+                <Button variant="ghost" className="h-10 text-[13px] font-semibold uppercase tracking-[0.08em] text-foreground/70 hover:text-primary">Return to Site</Button>
+              </Link>
+              <Button variant="outline" onClick={handleLogout} className="h-10 border-foreground/20 text-[13px] font-semibold uppercase tracking-[0.08em]">Logout</Button>
+            </div>
+          </div>
+        </header>
+
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-10 md:py-14">
+
+          {/* Editorial welcome band */}
+          <section className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14 mb-12 pb-12 border-b border-foreground/10">
+            <span className="portal-eyebrow md:mt-2">Donor Portal</span>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+              <div className="max-w-xl">
+                <h1 className="no-display text-foreground mb-4" style={{ fontFamily: "var(--font-serif)", fontWeight: 900, textTransform: "uppercase", letterSpacing: "-0.01em", fontSize: "clamp(34px, 4vw, 56px)", lineHeight: 1 }}>
+                  Welcome to Your Donor Dashboard
+                </h1>
+                <p className="text-[16px] text-muted-foreground leading-relaxed mb-5">
+                  Thank you for your support. View contributions, track impact, and manage preferences.
+                </p>
                 <DonorTierBadge tierName={donorTier.name} totalDonated={totalDonated} />
               </div>
-              <Link to="/donor-guide"><Button variant="outline">Donor Guide</Button></Link>
+              <Link to="/donor-guide">
+                <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[12px] font-semibold uppercase h-11 px-6">
+                  Donor Guide
+                </Button>
+              </Link>
             </div>
-          </CardContent>
-        </Card>
+          </section>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
-          <Card className="shadow-soft hover:shadow-medium transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Donated</CardTitle>
-              
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">£{totalDonated.toLocaleString()}</div>
-              <p className="text-xs text-muted-foreground">All time</p>
-            </CardContent>
-          </Card>
-          <Card className="shadow-soft hover:shadow-medium transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Donations</CardTitle>
-              
-            </CardHeader>
-            <CardContent>
-              <div className="text-xl sm:text-2xl font-bold">{donations.length}</div>
-            </CardContent>
-          </Card>
-          <Card className="shadow-soft hover:shadow-medium transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Tier</CardTitle>
-              
-            </CardHeader>
-            <CardContent>
-              <div className="text-base sm:text-lg font-bold">{donorTier.name}</div>
-            </CardContent>
-          </Card>
-          <Card className="shadow-soft hover:shadow-medium transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Recent</CardTitle>
-              
-            </CardHeader>
-            <CardContent>
-              <div className="text-base sm:text-lg font-bold">{donations.length > 0 ? new Date(donations[0].created_at).toLocaleDateString() : 'N/A'}</div>
-            </CardContent>
-          </Card>
+          {/* Stat strip — bordered archive band, not floating cards */}
+          <section className="portal-stat-strip mb-12">
+            <div className="portal-stat">
+              <div className="portal-stat-label">Total Donated</div>
+              <div className="portal-stat-value">£{totalDonated.toLocaleString()}</div>
+              <p className="mt-2 text-xs text-muted-foreground">All time</p>
+            </div>
+            <div className="portal-stat">
+              <div className="portal-stat-label">Donations</div>
+              <div className="portal-stat-value">{donations.length}</div>
+            </div>
+            <div className="portal-stat">
+              <div className="portal-stat-label">Tier</div>
+              <div className="portal-stat-value" style={{ fontSize: "clamp(20px, 1.8vw, 26px)" }}>{donorTier.name}</div>
+            </div>
+            <div className="portal-stat">
+              <div className="portal-stat-label">Recent</div>
+              <div className="portal-stat-value" style={{ fontSize: "clamp(18px, 1.6vw, 22px)" }}>
+                {donations.length > 0 ? new Date(donations[0].created_at).toLocaleDateString() : 'N/A'}
+              </div>
+            </div>
+          </section>
+
+          {/* Tabs — underlined editorial navigation */}
+          <Tabs defaultValue="donate" className="portal-tabs space-y-8">
+            <TabsList className="w-full flex flex-wrap justify-start">
+              <TabsTrigger value="donate">Donate</TabsTrigger>
+              <TabsTrigger value="projects">My Projects</TabsTrigger>
+              <TabsTrigger value="commission">Commission</TabsTrigger>
+              <TabsTrigger value="history">History</TabsTrigger>
+              <TabsTrigger value="messages">Messages</TabsTrigger>
+              <TabsTrigger value="profile">Profile</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="donate">
+              <div className="portal-panel">
+                <span className="portal-eyebrow mb-3">Make a Donation</span>
+                <h2 className="text-foreground mt-2 mb-3" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>Ready to Make a Difference?</h2>
+                <Link to="/donation-form">
+                  <Button className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase h-11 px-8">
+                    Start Donation
+                  </Button>
+                </Link>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="projects"><CommissionedProjectsList /></TabsContent>
+
+            <TabsContent value="commission"><CommissionProjectForm /></TabsContent>
+
+            <TabsContent value="history">
+              <div className="portal-panel">
+                <span className="portal-eyebrow mb-4">Donation History</span>
+                <h2 className="text-foreground mt-2 mb-6" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>Donation History</h2>
+                {donations.length === 0
+                  ? <p className="text-muted-foreground">No donations yet</p>
+                  : <DonationHistoryTable donations={donations} donorName={`${profile?.first_name} ${profile?.last_name}`} />}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="messages">{user && <MessagesPanel userId={user.id} />}</TabsContent>
+
+            <TabsContent value="profile" className="space-y-6">
+              <div className="portal-panel">
+                <span className="portal-eyebrow mb-4">Personal Information</span>
+                <h2 className="text-foreground mt-2 mb-6" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>Personal Information</h2>
+                <div className="space-y-4 max-w-xl">
+                  <div className="space-y-2">
+                    <Label className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">First Name</Label>
+                    <Input value={profileEdit.first_name} onChange={(e) => setProfileEdit({ ...profileEdit, first_name: e.target.value })} className="h-11" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">Last Name</Label>
+                    <Input value={profileEdit.last_name} onChange={(e) => setProfileEdit({ ...profileEdit, last_name: e.target.value })} className="h-11" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label className="text-[11px] font-semibold uppercase tracking-[0.16em] text-foreground/70">Email</Label>
+                    <Input value={profileEdit.email} onChange={(e) => setProfileEdit({ ...profileEdit, email: e.target.value })} className="h-11" />
+                  </div>
+                  <Button onClick={handleProfileUpdate} className="bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase h-11 px-6 mt-2">
+                    Update Profile
+                  </Button>
+                </div>
+              </div>
+
+              <div className="portal-panel">
+                <span className="portal-eyebrow mb-4">Donor Benefits</span>
+                <h2 className="text-foreground mt-2 mb-4" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>Donor Benefits</h2>
+                <p className="text-foreground mb-3">As a {donorTier.name}, you receive:</p>
+                <ul className="space-y-2 pl-5 list-disc marker:text-primary text-muted-foreground">
+                  {donorTier.benefits.map((b, i) => <li key={i} className="text-[15px] leading-relaxed">{b}</li>)}
+                </ul>
+              </div>
+
+              <div className="portal-panel">
+                <span className="portal-eyebrow mb-4">GDPR & Privacy</span>
+                <h2 className="text-foreground mt-2 mb-6" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>GDPR & Privacy</h2>
+                <div className="flex flex-wrap gap-3">
+                  <Button variant="outline" onClick={handleDataExport} className="border-foreground/20 tracking-[0.08em] text-[12px] font-semibold uppercase">Export Data</Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="destructive" className="tracking-[0.08em] text-[12px] font-semibold uppercase">Delete Account</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                        <AlertDialogDescription>This will submit a deletion request processed within 30 days.</AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleAccountDeletion}>Submit Request</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
 
-        <Tabs defaultValue="donate" className="space-y-4 sm:space-y-6">
-          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1">
-            <TabsTrigger value="donate" className="text-xs sm:text-sm">
-              
-              <span className="hidden sm:inline">Donate</span>
-              <span className="sm:hidden">Give</span>
-            </TabsTrigger>
-            <TabsTrigger value="projects" className="text-xs sm:text-sm">
-              
-              <span className="hidden sm:inline">My Projects</span>
-              <span className="sm:hidden">Projects</span>
-            </TabsTrigger>
-            <TabsTrigger value="commission" className="text-xs sm:text-sm">
-              
-              <span className="hidden sm:inline">Commission</span>
-              <span className="sm:hidden">New</span>
-            </TabsTrigger>
-            <TabsTrigger value="history" className="text-xs sm:text-sm">
-              
-              <span className="hidden sm:inline">History</span>
-              <span className="sm:hidden">History</span>
-            </TabsTrigger>
-            <TabsTrigger value="messages" className="text-xs sm:text-sm">
-              
-              <span className="hidden sm:inline">Messages</span>
-              <span className="sm:hidden">Messages</span>
-            </TabsTrigger>
-            <TabsTrigger value="profile" className="text-xs sm:text-sm">
-              
-              <span className="hidden sm:inline">Profile</span>
-              <span className="sm:hidden">Profile</span>
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="donate"><Card><CardHeader><CardTitle>Make a Donation</CardTitle></CardHeader><CardContent><div className="text-center py-12"><h3 className="text-xl font-semibold mb-2">Ready to Make a Difference?</h3><Link to="/donation-form"><Button size="lg">Start Donation</Button></Link></div></CardContent></Card></TabsContent>
-          
-          <TabsContent value="projects"><CommissionedProjectsList /></TabsContent>
-          
-          <TabsContent value="commission"><CommissionProjectForm /></TabsContent>
-          
-          <TabsContent value="history"><Card><CardHeader><CardTitle>Donation History</CardTitle></CardHeader><CardContent>{donations.length === 0 ? <p className="text-muted-foreground">No donations yet</p> : <DonationHistoryTable donations={donations} donorName={`${profile?.first_name} ${profile?.last_name}`} />}</CardContent></Card></TabsContent>
-          
-          <TabsContent value="messages">{user && <MessagesPanel userId={user.id} />}</TabsContent>
-          
-          <TabsContent value="profile" className="space-y-4">
-            <Card><CardHeader><CardTitle>Personal Information</CardTitle></CardHeader><CardContent className="space-y-4"><div><Label>First Name</Label><Input value={profileEdit.first_name} onChange={(e) => setProfileEdit({ ...profileEdit, first_name: e.target.value })} /></div><div><Label>Last Name</Label><Input value={profileEdit.last_name} onChange={(e) => setProfileEdit({ ...profileEdit, last_name: e.target.value })} /></div><div><Label>Email</Label><Input value={profileEdit.email} onChange={(e) => setProfileEdit({ ...profileEdit, email: e.target.value })} /></div><Button onClick={handleProfileUpdate}>Update Profile</Button></CardContent></Card>
-            <Card><CardHeader><CardTitle>Donor Benefits</CardTitle></CardHeader><CardContent><p className="font-medium mb-2">As a {donorTier.name}, you receive:</p><ul className="list-disc list-inside">{donorTier.benefits.map((b, i) => <li key={i} className="text-sm text-muted-foreground">{b}</li>)}</ul></CardContent></Card>
-            <Card><CardHeader><CardTitle>GDPR & Privacy</CardTitle></CardHeader><CardContent className="space-y-4"><div className="flex gap-2"><Button variant="outline" size="sm" onClick={handleDataExport}>Export Data</Button><AlertDialog><AlertDialogTrigger asChild><Button variant="destructive" size="sm">Delete Account</Button></AlertDialogTrigger><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Are you sure?</AlertDialogTitle><AlertDialogDescription>This will submit a deletion request processed within 30 days.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Cancel</AlertDialogCancel><AlertDialogAction onClick={handleAccountDeletion}>Submit Request</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog></div></CardContent></Card>
-          </TabsContent>
-        </Tabs>
+        {user && <DonorAIWidget donorId={user.id} />}
       </div>
-      
-      {/* AI Assistant Widget */}
-      {user && <DonorAIWidget donorId={user.id} />}
-    </div>
     </>
   );
 };

@@ -27,7 +27,7 @@ export const DonationHistoryTable = ({ donations, donorName }: DonationHistoryTa
   const [filterStatus, setFilterStatus] = useState("all");
 
   const filteredDonations = donations.filter(d => {
-    const matchesSearch = 
+    const matchesSearch =
       d.purpose.toLowerCase().includes(searchTerm.toLowerCase()) ||
       d.amount.toString().includes(searchTerm);
     const matchesPurpose = filterPurpose === "all" || d.purpose === filterPurpose;
@@ -52,18 +52,23 @@ export const DonationHistoryTable = ({ donations, donorName }: DonationHistoryTa
     exportDonationsToPDF(filteredDonations, donorName);
   };
 
+  const statusClass = (s: string) =>
+    s === "completed" ? "portal-status portal-status--completed"
+      : s === "pending" ? "portal-status portal-status--pending"
+      : "portal-status portal-status--failed";
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {/* Filters */}
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-3">
         <Input
           placeholder="Search donations..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="md:max-w-xs"
+          className="md:max-w-xs h-11"
         />
         <Select value={filterPurpose} onValueChange={setFilterPurpose}>
-          <SelectTrigger className="md:max-w-xs">
+          <SelectTrigger className="md:max-w-xs h-11">
             <SelectValue placeholder="Filter by purpose" />
           </SelectTrigger>
           <SelectContent>
@@ -76,7 +81,7 @@ export const DonationHistoryTable = ({ donations, donorName }: DonationHistoryTa
           </SelectContent>
         </Select>
         <Select value={filterStatus} onValueChange={setFilterStatus}>
-          <SelectTrigger className="md:max-w-xs">
+          <SelectTrigger className="md:max-w-xs h-11">
             <SelectValue placeholder="Filter by status" />
           </SelectTrigger>
           <SelectContent>
@@ -86,23 +91,21 @@ export const DonationHistoryTable = ({ donations, donorName }: DonationHistoryTa
             <SelectItem value="failed">Failed</SelectItem>
           </SelectContent>
         </Select>
-        <div className="flex gap-2 ml-auto">
-          <Button variant="outline" size="sm" onClick={handleExportCSV}>
-            
+        <div className="flex gap-2 md:ml-auto">
+          <Button variant="outline" size="sm" onClick={handleExportCSV} className="h-11 border-foreground/20 tracking-[0.08em] text-[12px] font-semibold uppercase">
             CSV
           </Button>
-          <Button variant="outline" size="sm" onClick={handleExportPDF}>
-            
+          <Button variant="outline" size="sm" onClick={handleExportPDF} className="h-11 border-foreground/20 tracking-[0.08em] text-[12px] font-semibold uppercase">
             PDF
           </Button>
         </div>
       </div>
 
       {/* Table */}
-      <div className="rounded-md border">
+      <div className="border border-foreground/10">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="border-foreground/10">
               <TableHead>Date</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Purpose</TableHead>
@@ -113,13 +116,13 @@ export const DonationHistoryTable = ({ donations, donorName }: DonationHistoryTa
           <TableBody>
             {filteredDonations.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center text-muted-foreground">
+                <TableCell colSpan={5} className="text-center text-muted-foreground py-10">
                   No donations found
                 </TableCell>
               </TableRow>
             ) : (
               filteredDonations.map((donation) => (
-                <TableRow key={donation.id}>
+                <TableRow key={donation.id} className="border-foreground/10">
                   <TableCell>{new Date(donation.created_at).toLocaleDateString()}</TableCell>
                   <TableCell className="font-medium">
                     {donation.currency} {parseFloat(donation.amount.toString()).toLocaleString()}
@@ -127,11 +130,7 @@ export const DonationHistoryTable = ({ donations, donorName }: DonationHistoryTa
                   <TableCell>{donation.purpose.replace(/_/g, ' ')}</TableCell>
                   <TableCell>{donation.frequency.replace(/_/g, ' ')}</TableCell>
                   <TableCell>
-                    <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
-                      donation.status === 'completed' ? 'bg-green-100 text-green-800' :
-                      donation.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                      'bg-red-100 text-red-800'
-                    }`}>
+                    <span className={statusClass(donation.status)}>
                       {donation.status}
                     </span>
                   </TableCell>

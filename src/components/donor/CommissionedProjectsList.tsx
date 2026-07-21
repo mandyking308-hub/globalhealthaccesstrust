@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
@@ -21,18 +19,13 @@ interface CommissionedProject {
   end_date?: string;
 }
 
-const getStatusColor = (status: string) => {
+const getStatusClass = (status: string) => {
   switch (status.toLowerCase()) {
-    case "pending":
-      return "bg-yellow-100 text-yellow-800 border-yellow-300";
-    case "approved":
-      return "bg-blue-100 text-blue-800 border-blue-300";
-    case "in_progress":
-      return "bg-purple-100 text-purple-800 border-purple-300";
-    case "completed":
-      return "bg-green-100 text-green-800 border-green-300";
-    default:
-      return "bg-gray-100 text-gray-800 border-gray-300";
+    case "pending": return "portal-status portal-status--pending";
+    case "approved": return "portal-status portal-status--approved";
+    case "in_progress": return "portal-status portal-status--progress";
+    case "completed": return "portal-status portal-status--completed";
+    default: return "portal-status";
   }
 };
 
@@ -71,79 +64,87 @@ export const CommissionedProjectsList = () => {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        <Skeleton className="h-48 w-full" />
-        <Skeleton className="h-48 w-full" />
+        <Skeleton className="h-40 w-full" />
+        <Skeleton className="h-40 w-full" />
       </div>
     );
   }
 
   if (projects.length === 0) {
     return (
-      <Card className="shadow-soft">
-        <CardContent className="pt-8 pb-8 text-center">
-          <p className="text-muted-foreground mb-4">You haven't commissioned any projects yet.</p>
-          <p className="text-sm text-muted-foreground">
-            Commission your first project to start making a targeted impact with complete transparency.
-          </p>
-        </CardContent>
-      </Card>
+      <div className="portal-panel text-center py-16">
+        <span className="portal-eyebrow mb-4">My Projects</span>
+        <p className="text-foreground mt-3 mb-2 text-[16.5px]">You haven't commissioned any projects yet.</p>
+        <p className="text-sm text-muted-foreground max-w-md mx-auto">
+          Commission your first project to start making a targeted impact with complete transparency.
+        </p>
+      </div>
     );
   }
 
   return (
-    <div className="space-y-6">
-      {projects.map((project) => (
-        <Card key={project.id} className="shadow-soft hover:shadow-medium transition-shadow">
-          <CardHeader>
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <CardTitle className="font-serif text-xl mb-2">{project.title}</CardTitle>
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <Badge className={getStatusColor(project.status)} variant="outline">
+    <div className="portal-panel space-y-0 divide-y divide-foreground/10 p-0">
+      <div className="px-8 py-6">
+        <span className="portal-eyebrow">My Projects</span>
+      </div>
+      {projects.map((project, idx) => (
+        <article key={project.id} className="px-8 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-[80px_1fr] gap-6">
+            <span className="font-serif text-primary text-[22px] font-black tracking-tight">
+              {String(idx + 1).padStart(2, "0")}
+            </span>
+            <div>
+              <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
+                <h3 className="text-foreground m-0" style={{ fontSize: "clamp(19px, 1.6vw, 24px)", fontWeight: 600 }}>
+                  {project.title}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  <span className={getStatusClass(project.status)}>
                     {getStatusLabel(project.status)}
-                  </Badge>
-                  <Badge variant="outline" className="bg-accent/10 text-accent border-accent/30">
+                  </span>
+                  <span className="portal-status text-foreground/60">
                     {project.project_type}
-                  </Badge>
+                  </span>
                 </div>
               </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground line-clamp-2">{project.description}</p>
-            
-            <div className="grid md:grid-cols-2 gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                
-                <span>{project.country}, {project.region}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                
-                <span>{project.budget_range}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                
-                <span>Requested: {format(new Date(project.created_at), "MMM d, yyyy")}</span>
-              </div>
-              {project.status !== "pending" && (
-                <div className="flex items-center gap-2">
-                  
-                  <span>Updated: {format(new Date(project.updated_at), "MMM d, yyyy")}</span>
+
+              <p className="text-muted-foreground leading-relaxed mb-5 max-w-3xl">
+                {project.description}
+              </p>
+
+              <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3 text-sm border-t border-foreground/10 pt-4">
+                <div className="flex justify-between md:justify-start md:gap-4">
+                  <dt className="text-[11px] uppercase tracking-[0.16em] font-semibold text-foreground/60">Location</dt>
+                  <dd className="text-foreground">{project.country}, {project.region}</dd>
+                </div>
+                <div className="flex justify-between md:justify-start md:gap-4">
+                  <dt className="text-[11px] uppercase tracking-[0.16em] font-semibold text-foreground/60">Budget</dt>
+                  <dd className="text-foreground">{project.budget_range}</dd>
+                </div>
+                <div className="flex justify-between md:justify-start md:gap-4">
+                  <dt className="text-[11px] uppercase tracking-[0.16em] font-semibold text-foreground/60">Requested</dt>
+                  <dd className="text-foreground">{format(new Date(project.created_at), "MMM d, yyyy")}</dd>
+                </div>
+                {project.status !== "pending" && (
+                  <div className="flex justify-between md:justify-start md:gap-4">
+                    <dt className="text-[11px] uppercase tracking-[0.16em] font-semibold text-foreground/60">Updated</dt>
+                    <dd className="text-foreground">{format(new Date(project.updated_at), "MMM d, yyyy")}</dd>
+                  </div>
+                )}
+              </dl>
+
+              {project.status === "in_progress" && (
+                <div className="mt-5 space-y-2">
+                  <div className="flex justify-between text-xs uppercase tracking-[0.14em] font-semibold text-foreground/60">
+                    <span>Progress</span>
+                    <span>In Development</span>
+                  </div>
+                  <Progress value={45} className="h-1 rounded-none" />
                 </div>
               )}
             </div>
-
-            {project.status === "in_progress" && (
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Progress</span>
-                  <span className="font-medium">In Development</span>
-                </div>
-                <Progress value={45} className="h-2" />
-              </div>
-            )}
-          </CardContent>
-        </Card>
+          </div>
+        </article>
       ))}
     </div>
   );
