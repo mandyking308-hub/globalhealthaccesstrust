@@ -90,16 +90,16 @@ export const HomePage = () => {
         </section>
 
         {/* Editorial pull-quote — restrained display serif */}
-        <section className="py-24 md:py-32 px-6 bg-background border-b border-foreground/10">
+        <section className="py-16 md:py-20 px-6 bg-background border-b border-foreground/10">
           <div className="max-w-4xl mx-auto">
-            <span className="block h-px w-12 bg-accent mb-10" />
+            <span className="block h-px w-12 bg-accent mb-8" />
             <blockquote
               className="text-foreground"
-              style={{ fontSize: "clamp(26px, 3.2vw, 48px)", lineHeight: 1.08, fontWeight: 800, letterSpacing: "-0.008em", textTransform: "uppercase" }}
+              style={{ fontSize: "clamp(24px, 2.9vw, 42px)", lineHeight: 1.12, fontWeight: 800, letterSpacing: "-0.008em", textTransform: "uppercase" }}
             >
               Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital.
             </blockquote>
-            <div className="mt-12">
+            <div className="mt-10">
               <p className="uppercase tracking-[0.25em] text-xs font-bold text-foreground">
                 — The Board of Trustees
               </p>
@@ -109,6 +109,7 @@ export const HomePage = () => {
             </div>
           </div>
         </section>
+
 
 
         {/* Reports from the Field — asymmetric 3-column archive grid */}
