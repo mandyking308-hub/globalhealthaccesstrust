@@ -263,10 +263,10 @@ export const HomePage = () => {
           </div>
         </section>
 
-        {/* Operational Framework */}
-        <section className="py-24 md:py-32 bg-secondary/60">
+        {/* Operational Framework — vertical structured sequence */}
+        <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-14">
               <span className="eyebrow md:mt-3">Operational Framework</span>
               <div>
                 <h2 className="mb-6 text-foreground max-w-[820px]">The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.</h2>
@@ -274,23 +274,24 @@ export const HomePage = () => {
             </div>
 
             <div className="pl-0 md:pl-[196px]">
-              <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
+              <ol className="max-w-3xl divide-y divide-foreground/12 border-t border-b border-foreground/15">
                 {[
                   { t: "Capital Allocation", d: "Funding is assigned to clearly defined initiatives with agreed scope and objectives." },
                   { t: "Project Structuring", d: "Delivery partners, geography, and operational frameworks are established." },
                   { t: "Monitoring & Reporting", d: "Progress is tracked against milestones with structured reporting." },
                   { t: "Outcome Verification", d: "Results are assessed to ensure accountability and measurable impact." },
                 ].map((c, i) => (
-                  <li key={c.t}>
-                    <span className="timeline-node">0{i + 1}</span>
-                    <h3 className="mb-3 text-foreground">{c.t}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{c.d}</p>
+                  <li key={c.t} className="grid grid-cols-[64px_1fr] md:grid-cols-[96px_240px_1fr] gap-6 md:gap-10 py-8">
+                    <span className="font-serif text-primary text-[22px] font-black tracking-tight pt-1">0{i + 1}</span>
+                    <h3 className="text-foreground m-0">{c.t}</h3>
+                    <p className="text-muted-foreground leading-relaxed col-span-2 md:col-span-1 m-0">{c.d}</p>
                   </li>
                 ))}
               </ol>
             </div>
           </div>
         </section>
+
 
         {/* Governance */}
         <section className="py-24 md:py-32 bg-background border-b border-foreground/10">
