@@ -7,6 +7,7 @@ import heroImage from "@/assets/ghat-hero-community-health.jpg";
 import clinicImage from "@/assets/ghat-maternal-care.jpg";
 import systemsImage from "@/assets/ghat-infrastructure-delivery.jpg";
 import ruralImage from "@/assets/ghat-capacity-training.jpg";
+import mandateImage from "@/assets/delivery-healthcare-clinic.jpg";
 
 export const HomePage = () => {
   return (
@@ -342,8 +343,8 @@ export const HomePage = () => {
               <div className="md:col-span-5 md:sticky md:top-28">
                 <div className="aspect-[4/5] overflow-hidden bg-muted">
                   <img
-                    src={ruralImage}
-                    alt="Field clinicians engaged in a rural training session in an underserved region"
+                    src={mandateImage}
+                    alt="Healthcare delivery in an underserved clinical setting"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
