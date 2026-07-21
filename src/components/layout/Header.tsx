@@ -22,7 +22,7 @@ export const Header = () => {
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-foreground/10">
         {/* Utility strip */}
         <div className="hidden md:block border-b border-foreground/5 bg-primary text-primary-foreground">
-          <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-serif font-bold tracking-[0.18em] uppercase">
+          <div className="max-w-[1400px] mx-auto px-8 h-8 flex items-center justify-between text-[10.5px] font-sans font-bold tracking-[0.18em] uppercase">
             <span className="opacity-80">Registered Charitable Trust — England & Wales</span>
             <div className="flex items-center gap-6 opacity-90">
               <Link to="/contact" className="hover:opacity-100 opacity-80 transition-opacity">Contact</Link>
@@ -42,7 +42,7 @@ export const Header = () => {
               className="flex items-center text-foreground hover:opacity-80 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <span className="font-serif text-[15px] font-black tracking-[0.02em] uppercase leading-[0.95]">
+              <span className="font-sans text-[15px] font-black tracking-[0.02em] uppercase leading-[0.95]">
                 Global Health<br/>Access Trust
               </span>
             </Link>
@@ -59,7 +59,7 @@ export const Header = () => {
                   >
                     <Link
                       to={item.href}
-                      className="flex items-center gap-1 px-4 py-2 text-[13px] font-serif font-black uppercase tracking-[0.06em] text-foreground/85 hover:text-foreground transition-colors duration-200 whitespace-nowrap"
+                      className="flex items-center gap-1 px-4 py-2 text-[13px] font-sans font-black uppercase tracking-[0.06em] text-foreground/85 hover:text-foreground transition-colors duration-200 whitespace-nowrap"
                     >
                       {item.label}
                       {'submenu' in item && (
@@ -98,7 +98,7 @@ export const Header = () => {
 
               <Link
                 to="/auth"
-                className="hidden md:inline-flex items-center h-9 px-4 bg-primary text-primary-foreground text-[12px] font-serif font-black uppercase tracking-[0.14em] hover:bg-primary/90 transition-colors"
+                className="hidden md:inline-flex items-center h-9 px-4 bg-primary text-primary-foreground text-[12px] font-sans font-black uppercase tracking-[0.14em] hover:bg-primary/90 transition-colors"
               >
                 Login
               </Link>
