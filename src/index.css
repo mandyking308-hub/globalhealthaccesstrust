@@ -138,18 +138,22 @@ p, li { font-family: var(--font-sans); font-size: clamp(16px, 1.1vw, 18px); line
 .homepage-editorial .eyebrow,
 .eyebrow{font-size:12px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:hsl(var(--foreground)); display:inline-block; font-family:var(--font-sans);}
 
-/* Inner-page H1 — editorial display treatment, applied to any ContentLayout page */
-main > h1:first-child,
-.content-layout h1:first-of-type,
-[class*="ContentLayout"] h1:first-of-type {
+/* Inner-page H1 — editorial display treatment, site-wide (excluding hero overlays & homepage-editorial which scope their own) */
+h1:not(.hero__overlay h1):not(.homepage-editorial h1):not(.no-display) {
   font-family: var(--font-serif) !important;
   font-weight: 900 !important;
   text-transform: uppercase !important;
   letter-spacing: -0.01em !important;
-  font-size: clamp(38px, 5.4vw, 76px) !important;
+  font-size: clamp(38px, 5.4vw, 72px) !important;
   line-height: 0.98 !important;
   margin-bottom: 1.2rem !important;
+  color: hsl(var(--foreground));
 }
+
+/* Eyebrow above inner-page H1 when the page uses .section-container layout */
+.content-layout > h1:first-child::before,
+main .section-container:first-of-type h1::before { content: ""; }
+
 
 
 
