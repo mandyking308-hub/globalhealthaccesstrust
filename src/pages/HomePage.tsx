@@ -441,8 +441,10 @@ export const HomePage = () => {
         {/* Engagement & Funding Approach */}
         <section className="py-24 md:py-32 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
-              <span className="eyebrow md:mt-3">Engagement & Funding Approach</span>
+            <div className="mb-16">
+              <h2 className="display-condensed text-foreground mb-10" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                Engagement &amp; Funding Approach
+              </h2>
               <div className="max-w-3xl space-y-5">
                 <p className="text-lg md:text-xl text-foreground leading-relaxed">
                   Engagement with the Trust is conducted through a structured and selective process.
