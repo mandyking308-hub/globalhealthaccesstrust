@@ -88,34 +88,34 @@ export const AdminBrandingPage = () => {
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <Label>Primary (Deep Navy)</Label>
+                  <Label>Primary (Deep Emerald)</Label>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: '#05152F' }} />
-                    <code className="text-sm">#05152F</code>
+                    <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: '#064E3B' }} />
+                    <code className="text-sm">#064E3B</code>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Secondary (Royal Blue)</Label>
+                  <Label>Secondary (Teal)</Label>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: '#0B3C89' }} />
-                    <code className="text-sm">#0B3C89</code>
+                    <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: '#14B8A6' }} />
+                    <code className="text-sm">#14B8A6</code>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Accent (Gold)</Label>
+                  <Label>Accent (Bright Emerald)</Label>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: '#C2A878' }} />
-                    <code className="text-sm">#C2A878</code>
+                    <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: '#10B981' }} />
+                    <code className="text-sm">#10B981</code>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label>Surface (Soft Grey)</Label>
+                  <Label>Surface (Ivory)</Label>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: '#E8ECEF' }} />
-                    <code className="text-sm">#E8ECEF</code>
+                    <div className="w-12 h-12 rounded-lg border" style={{ backgroundColor: '#F9F7F2' }} />
+                    <code className="text-sm">#F9F7F2</code>
                   </div>
                 </div>
               </div>

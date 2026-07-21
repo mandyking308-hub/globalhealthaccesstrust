@@ -39,12 +39,12 @@ img {
 ======================================== */
 
 :root{
-  /* GHAT Editorial Design System - Ivory, Charcoal, Forest Green */
+  /* GHAT Editorial Design System - Ivory, Charcoal, Bright Emerald */
   --ivory: 43 33% 97%;            /* #F9F7F2 */
   --charcoal: 0 0% 10%;           /* #1A1A1A */
-  --forest: 150 47% 11%;          /* #0D2619 */
-  --forest-light: 153 30% 41%;    /* #40916C */
-  --green-accent: 153 30% 36%;    /* #2D6A4F */
+  --forest: 158 64% 24%;          /* #064E3B */
+  --forest-light: 160 84% 39%;    /* #14B8A6 */
+  --green-accent: 158 84% 38%;    /* #10B981 */
   
   /* Semantic tokens mapped to editorial palette */
   --background: var(--ivory);
@@ -69,10 +69,10 @@ img {
   --radius: 0px;
   
   /* Shadows */
-  --shadow-soft: 0 2px 8px rgba(13, 38, 25, 0.08);
-  --shadow-medium: 0 4px 16px rgba(13, 38, 25, 0.12);
-  --shadow-strong: 0 8px 32px rgba(13, 38, 25, 0.16);
-  --shadow-gold: 0 4px 16px rgba(45, 106, 79, 0.2);
+  --shadow-soft: 0 2px 8px rgba(6, 78, 59, 0.08);
+  --shadow-medium: 0 4px 16px rgba(6, 78, 59, 0.12);
+  --shadow-strong: 0 8px 32px rgba(6, 78, 59, 0.16);
+  --shadow-gold: 0 4px 16px rgba(16, 185, 129, 0.25);
   
   /* Transitions */
   --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
@@ -388,7 +388,7 @@ a:hover{text-decoration:none;}
 ======================================== */
 
 :root {
-  /* GHAT Editorial Design System - Ivory, Charcoal, Forest Green */
+  /* GHAT Editorial Design System - Ivory, Charcoal, Bright Emerald */
   --background: 43 33% 97%;       /* #F9F7F2 ivory */
   --foreground: 0 0% 10%;       /* #1A1A1A charcoal */
   
@@ -396,15 +396,15 @@ a:hover{text-decoration:none;}
   --card-foreground: 0 0% 10%;
   --card-border: 0 0% 10% / 0.08;
   
-  /* Primary Deep Forest Green: #0D2619 */
-  --primary: 150 47% 11%;
+  /* Primary Deep Emerald: #064E3B */
+  --primary: 158 64% 24%;
   --primary-foreground: 43 33% 97%;
-  --primary-700: 150 47% 16%;
-  --primary-50: 150 30% 96%;
+  --primary-700: 158 64% 18%;
+  --primary-50: 158 50% 96%;
   
-  /* Accent Brighter Green: #2D6A4F */
-  --gold: 153 30% 36%;
-  --gold-700: 153 30% 26%;
+  /* Accent Bright Emerald: #10B981 */
+  --gold: 158 84% 38%;
+  --gold-700: 160 84% 30%;
   --gold-foreground: 43 33% 97%;
   
   --secondary: 43 20% 92%;
@@ -414,24 +414,24 @@ a:hover{text-decoration:none;}
   --muted-foreground: 0 0% 40%;
   --muted-dark: 43 15% 85%;
   
-  --accent: 153 30% 36%;
+  --accent: 158 84% 38%;
   --accent-foreground: 43 33% 97%;
   
-  /* Success: #2D6A4F */
-  --success: 153 30% 36%;
+  /* Success: #10B981 */
+  --success: 158 84% 38%;
   --success-foreground: 43 33% 97%;
   
   /* Danger: #B3261E */
   --destructive: 0 74% 42%;
   --destructive-foreground: 43 33% 97%;
   
-  /* Info: #2D6A4F */
-  --info: 153 30% 36%;
+  /* Info: #14B8A6 */
+  --info: 160 84% 39%;
   --info-foreground: 43 33% 97%;
   
   --border: 0 0% 10% / 0.1;
   --input: 0 0% 10% / 0.1;
-  --ring: 153 30% 36%;
+  --ring: 158 84% 38%;
   
   /* Typography - Editorial Design System */
   --font-serif: "Fraunces", "Portrait", "Larken", Georgia, "Times New Roman", serif;
@@ -452,7 +452,7 @@ a:hover{text-decoration:none;}
   --gutter-desktop: 2rem;
 
   /* Focus */
-  --focus-ring: 2px solid #2D6A4F;
+  --focus-ring: 2px solid #10B981;
   --focus-offset: 2px;
   
   /* Spacing & Layout */
@@ -461,10 +461,10 @@ a:hover{text-decoration:none;}
   --radius-xl: 0px;
   
   /* Shadows - Exact Specifications */
-  --shadow-soft: 0 2px 8px rgba(13, 38, 25, 0.08);
-  --shadow-medium: 0 4px 16px rgba(13, 38, 25, 0.12);
-  --shadow-strong: 0 8px 32px rgba(13, 38, 25, 0.16);
-  --shadow-gold: 0 4px 16px rgba(45, 106, 79, 0.2);
+  --shadow-soft: 0 2px 8px rgba(6, 78, 59, 0.08);
+  --shadow-medium: 0 4px 16px rgba(6, 78, 59, 0.12);
+  --shadow-strong: 0 8px 32px rgba(6, 78, 59, 0.16);
+  --shadow-gold: 0 4px 16px rgba(16, 185, 129, 0.25);
   
   /* Animations */
   --ease-elegant: cubic-bezier(0.4, 0, 0.2, 1);
