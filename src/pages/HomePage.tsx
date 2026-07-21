@@ -416,7 +416,7 @@ export const HomePage = () => {
 
             <div className="pl-0 md:pl-[196px] mt-16">
               <Link to="/contact">
-                <Button size="lg" className="rounded-none bg-primary hover:bg-primary/90 uppercase tracking-[0.18em] text-[11px] font-bold h-12 px-8">
+                <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
                   Initiate Engagement
                 </Button>
               </Link>
