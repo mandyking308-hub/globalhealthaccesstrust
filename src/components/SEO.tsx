@@ -41,10 +41,6 @@ export const SEO = ({
       
       {/* SEO directives */}
       <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
-      
-      {/* Security Headers */}
-      <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
-      <meta httpEquiv="X-Frame-Options" content="DENY" />
       <meta name="referrer" content="strict-origin-when-cross-origin" />
       
       {/* Open Graph / Facebook */}
