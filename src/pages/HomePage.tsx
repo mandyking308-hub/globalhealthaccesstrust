@@ -19,48 +19,40 @@ export const HomePage = () => {
       />
       <div className="homepage-editorial flex flex-col bg-background">
 
-        {/* Featured Story Hero — Institutional Archive */}
-        <section className="relative bg-primary text-primary-foreground">
-          <div className="relative min-h-[85vh] overflow-hidden">
-            <img
-              src={heroImage}
-              alt="A mother and child on a residential street in an Eastern European town affected by the Ukraine crisis"
-              className="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-90"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/30 to-transparent" />
-
-            <div className="relative z-10 h-full max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 pt-24 pb-20 lg:pt-40 lg:pb-24 min-h-[85vh] flex flex-col justify-end">
-              <div className="flex items-center gap-4 mb-8">
-                <span className="h-px w-12 bg-accent" />
-                <span className="uppercase tracking-[0.3em] text-white text-[10px] font-bold">
-                  Emergency Briefing — Ukraine
-                </span>
-              </div>
-              <h1
-                className="text-white font-serif max-w-6xl"
-                style={{
-                  fontSize: "clamp(48px, 8.4vw, 132px)",
-                  lineHeight: 0.9,
-                  fontWeight: 300,
-                  letterSpacing: "-0.03em",
-                }}
-              >
-                Directing capital where<br />healthcare is most needed.
-              </h1>
-              <div className="mt-12 flex flex-col md:flex-row gap-8 items-start md:items-center">
-                <Link to="/about-the-trust">
-                  <Button
-                    size="lg"
-                    className="rounded-none h-14 px-8 bg-accent text-accent-foreground hover:bg-primary uppercase tracking-[0.2em] text-[11px] font-bold border-0"
+        {/* Featured Story Hero — OSF split-screen: text left, image right */}
+        <section className="relative bg-background border-b border-foreground/10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-108px)]">
+            {/* LEFT — headline over ivory */}
+            <div className="flex flex-col justify-center px-6 md:px-16 lg:px-24 py-20 lg:py-24 order-2 lg:order-1">
+              <div className="max-w-[640px]">
+                <div className="flex items-center gap-3 mb-8">
+                  <span className="h-px w-10 bg-foreground" />
+                  <span className="uppercase tracking-[0.28em] text-foreground text-[10px] font-bold">
+                    Emergency Briefing — Ukraine
+                  </span>
+                </div>
+                <h1 className="text-foreground">
+                  The Global Health Access Trust directs capital where healthcare is most critically needed.
+                </h1>
+                <div className="mt-12">
+                  <Link
+                    to="/about-the-trust"
+                    className="inline-block text-foreground text-[15px] font-semibold border-b-2 border-foreground pb-1 hover:text-accent hover:border-accent transition-colors"
                   >
-                    View Crisis Response
-                  </Button>
-                </Link>
-                <p className="text-white/70 text-sm max-w-sm border-l border-white/25 pl-6 leading-relaxed">
-                  A private charitable trust supporting healthcare access, infrastructure, and long-term capacity in the world's most vulnerable regions.
-                </p>
+                    Learn more about who we are
+                  </Link>
+                </div>
               </div>
+            </div>
+
+            {/* RIGHT — full-bleed image */}
+            <div className="relative order-1 lg:order-2 min-h-[45vh] lg:min-h-full overflow-hidden bg-muted">
+              <img
+                src={heroImage}
+                alt="A mother and child on a residential street in an Eastern European town affected by the Ukraine crisis"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+                loading="eager"
+              />
             </div>
           </div>
         </section>
@@ -76,17 +68,17 @@ export const HomePage = () => {
               key={s.cat}
               className={`p-12 md:p-16 lg:p-20 flex flex-col justify-between ${i < 2 ? "border-b md:border-b-0 md:border-r border-foreground/10" : ""}`}
             >
-              <span className="uppercase tracking-[0.22em] text-[10px] font-bold text-accent mb-12">
+              <span className="uppercase tracking-[0.22em] text-[10px] font-bold text-foreground mb-12">
                 {s.cat}
               </span>
               <div>
                 <span
-                  className="font-serif block mb-4"
-                  style={{ fontSize: "clamp(56px, 5.4vw, 92px)", lineHeight: 1, fontWeight: 300, fontStyle: "italic", letterSpacing: "-0.02em" }}
+                  className="font-serif block mb-4 text-foreground"
+                  style={{ fontSize: "clamp(72px, 7vw, 128px)", lineHeight: 0.9, fontWeight: 900, letterSpacing: "-0.01em" }}
                 >
                   {s.n}
                 </span>
-                <p className="text-sm uppercase tracking-[0.2em] font-semibold text-foreground">
+                <p className="text-sm uppercase tracking-[0.2em] font-bold text-foreground">
                   {s.label}
                 </p>
                 <p className="text-sm mt-4 leading-relaxed text-muted-foreground">
@@ -97,26 +89,26 @@ export const HomePage = () => {
           ))}
         </section>
 
-        {/* Editorial pull-quote — centered italic archive */}
-        <section className="py-32 md:py-40 px-6 bg-white">
-          <div className="max-w-4xl mx-auto">
-            <div className="w-16 h-1 bg-accent mb-12 mx-auto" />
+        {/* Editorial pull-quote — heavy uppercase OSF-style */}
+        <section className="py-32 md:py-40 px-6 bg-background border-b border-foreground/10">
+          <div className="max-w-5xl mx-auto">
             <blockquote
-              className="font-serif text-center text-foreground"
-              style={{ fontSize: "clamp(30px, 4.4vw, 64px)", lineHeight: 1.1, fontStyle: "italic", fontWeight: 300, letterSpacing: "-0.015em" }}
+              className="font-serif text-foreground"
+              style={{ fontSize: "clamp(36px, 5.4vw, 84px)", lineHeight: 0.98, fontWeight: 900, letterSpacing: "-0.005em", textTransform: "uppercase" }}
             >
-              "Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital."
+              Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital.
             </blockquote>
-            <div className="mt-16 text-center">
+            <div className="mt-16">
               <p className="uppercase tracking-[0.25em] text-xs font-bold text-foreground">
-                The Board of Trustees
+                — The Board of Trustees
               </p>
-              <p className="text-xs opacity-50 mt-2 text-muted-foreground">
+              <p className="text-xs opacity-60 mt-2 text-muted-foreground">
                 Global Health Access Trust
               </p>
             </div>
           </div>
         </section>
+
 
         {/* Reports from the Field — asymmetric 3-column archive grid */}
         <section className="p-6 md:p-16 lg:p-24 border-t border-foreground/10 bg-background">
