@@ -169,16 +169,24 @@ export const HomePage = () => {
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
               <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent md:mt-3">Purpose</span>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="pt-8 border-t border-primary-foreground/25">
-                  <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                    The Trust deploys capital into lawful, ethical interventions that expand access to healthcare for underserved populations.
-                  </p>
-                </div>
-                <div className="pt-8 border-t border-primary-foreground/25">
-                  <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                    It operates through structured partnerships with health systems, academic institutions, and recognised delivery organisations across twelve countries.
-                  </p>
+              <div>
+                <h2
+                  className="display-condensed text-primary-foreground mb-12"
+                  style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
+                >
+                  About the Trust
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  <div className="pt-8 border-t border-primary-foreground/25">
+                    <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
+                      The Trust deploys capital into lawful, ethical interventions that expand access to healthcare for underserved populations.
+                    </p>
+                  </div>
+                  <div className="pt-8 border-t border-primary-foreground/25">
+                    <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
+                      It operates through structured partnerships with health systems, academic institutions, and recognised delivery organisations across twelve countries.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -196,13 +204,13 @@ export const HomePage = () => {
         {/* Approach */}
         <section className="py-24 md:py-32 border-b border-foreground/10 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
-              <span className="eyebrow md:mt-3">Approach</span>
-              <div>
-                <h2 className="mb-6 text-foreground max-w-[820px]">
-                  Capital is deployed through structured, commission-based health interventions with defined scope, delivery oversight, and reporting.
-                </h2>
-              </div>
+            <div className="mb-16">
+              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                Approach
+              </h2>
+              <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">
+                Capital is deployed through structured, commission-based health interventions with defined scope, delivery oversight, and reporting.
+              </p>
             </div>
 
             <div className="pl-0 md:pl-[196px]">
@@ -234,11 +242,11 @@ export const HomePage = () => {
         {/* How the Trust Operates */}
         <section className="py-24 md:py-32 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
-              <span className="eyebrow md:mt-3">How the Trust Operates</span>
-              <div>
-                <h2 className="mb-6 text-foreground max-w-[820px]">The Trust operates through a structured model that defines how capital, delivery, and oversight are aligned within a controlled environment.</h2>
-              </div>
+            <div className="mb-16">
+              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                How the Trust Operates
+              </h2>
+              <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">The Trust operates through a structured model that defines how capital, delivery, and oversight are aligned within a controlled environment.</p>
             </div>
 
             <div className="pl-0 md:pl-[196px]">
@@ -267,11 +275,11 @@ export const HomePage = () => {
         {/* Operational Framework — vertical structured sequence */}
         <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-14">
-              <span className="eyebrow md:mt-3">Operational Framework</span>
-              <div>
-                <h2 className="mb-6 text-foreground max-w-[820px]">The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.</h2>
-              </div>
+            <div className="mb-14">
+              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                Operational Framework
+              </h2>
+              <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.</p>
             </div>
 
             <div className="pl-0 md:pl-[196px]">
@@ -297,8 +305,10 @@ export const HomePage = () => {
         {/* Governance */}
         <section className="py-24 md:py-32 bg-background border-b border-foreground/10">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
-              <span className="eyebrow md:mt-3">Governance</span>
+            <div className="mb-16">
+              <h2 className="display-condensed text-foreground mb-10" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                Governance
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
                 <div>
                   <p className="text-lg md:text-xl text-foreground leading-relaxed">
@@ -331,11 +341,11 @@ export const HomePage = () => {
         {/* Funding Mandate — alternating text-and-image editorial layout */}
         <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
-              <span className="eyebrow md:mt-3">Funding Mandate</span>
-              <div>
-                <h2 className="mb-6 text-foreground max-w-[820px]">All funding is directed exclusively toward defined areas of charitable intervention, aligned with long-term system impact.</h2>
-              </div>
+            <div className="mb-16">
+              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                Funding Mandate
+              </h2>
+              <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">All funding is directed exclusively toward defined areas of charitable intervention, aligned with long-term system impact.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
@@ -382,47 +392,47 @@ export const HomePage = () => {
         {/* Donor Portal — editorial introduction to the secure private wing */}
         <section className="py-24 md:py-28 border-b border-foreground/10 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16">
-              <span className="eyebrow md:mt-3">Donor Portal</span>
-              <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-14 md:gap-20 items-start">
-                <div>
-                  <h2 className="mb-8 text-foreground max-w-[820px]">
-                    A secure private wing for those who fund the Trust's work.
-                  </h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl">
-                    Donors have access to a secure environment where progress, updates, and documentation are made available.
-                  </p>
-                  <div className="flex flex-wrap gap-4">
-                    <Link to="/donor-guide">
-                      <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                        Learn About the Donor Portal
-                      </Button>
-                    </Link>
-                    <Link to="/auth">
-                      <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                        Login
-                      </Button>
-                    </Link>
-                  </div>
+            <h2 className="display-condensed text-foreground mb-10" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+              Donor Portal
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-14 md:gap-20 items-start">
+              <div>
+                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 max-w-2xl">
+                  A secure private wing for those who fund the Trust's work.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl">
+                  Donors have access to a secure environment where progress, updates, and documentation are made available.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/donor-guide">
+                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
+                      Learn About the Donor Portal
+                    </Button>
+                  </Link>
+                  <Link to="/auth">
+                    <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
+                      Login
+                    </Button>
+                  </Link>
                 </div>
-
-                <ol className="divide-y divide-foreground/12 border-t border-b border-foreground/15">
-                  {[
-                    "View contributions",
-                    "Commission projects",
-                    "Receive updates",
-                    "Review history",
-                    "Manage preferences",
-                  ].map((item, i) => (
-                    <li key={item} className="grid grid-cols-[56px_1fr] gap-6 py-5">
-                      <span className="font-serif text-primary text-[18px] font-black tracking-tight pt-1">
-                        0{i + 1}
-                      </span>
-                      <span className="text-foreground text-[16.5px] leading-relaxed pt-1">{item}</span>
-                    </li>
-                  ))}
-                </ol>
               </div>
+
+              <ol className="divide-y divide-foreground/12 border-t border-b border-foreground/15">
+                {[
+                  "View contributions",
+                  "Commission projects",
+                  "Receive updates",
+                  "Review history",
+                  "Manage preferences",
+                ].map((item, i) => (
+                  <li key={item} className="grid grid-cols-[56px_1fr] gap-6 py-5">
+                    <span className="font-serif text-primary text-[18px] font-black tracking-tight pt-1">
+                      0{i + 1}
+                    </span>
+                    <span className="text-foreground text-[16.5px] leading-relaxed pt-1">{item}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </section>
@@ -431,8 +441,10 @@ export const HomePage = () => {
         {/* Engagement & Funding Approach */}
         <section className="py-24 md:py-32 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16 mb-16">
-              <span className="eyebrow md:mt-3">Engagement & Funding Approach</span>
+            <div className="mb-16">
+              <h2 className="display-condensed text-foreground mb-10" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+                Engagement &amp; Funding Approach
+              </h2>
               <div className="max-w-3xl space-y-5">
                 <p className="text-lg md:text-xl text-foreground leading-relaxed">
                   Engagement with the Trust is conducted through a structured and selective process.
