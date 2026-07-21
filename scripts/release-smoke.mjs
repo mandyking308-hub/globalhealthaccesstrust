@@ -1,3 +1,4 @@
+import { writeFileSync } from "node:fs";
 import { chromium } from "playwright";
 
 const baseURL = process.env.SMOKE_BASE_URL || "http://127.0.0.1:4173";
@@ -106,8 +107,11 @@ for (const route of ["/donor-dashboard", "/donation-form"]) {
 await browser.close();
 
 if (failures.length) {
-  console.error("Release smoke tests failed:\n- " + failures.join("\n- "));
+  const report = "Release smoke tests failed:\n- " + failures.join("\n- ") + "\n";
+  writeFileSync("release-smoke-failures.txt", report, "utf8");
+  console.error(report);
   process.exit(1);
 }
 
+writeFileSync("release-smoke-failures.txt", "Release smoke tests passed.\n", "utf8");
 console.log(`Release smoke tests passed for ${publicRoutes.length} public routes, protected donor redirects, authentication controls and mobile layout.`);
