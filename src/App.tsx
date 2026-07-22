@@ -68,6 +68,9 @@ import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 import AdminLegalPage from "./pages/admin/AdminLegalPage";
 import LegalIndexPage from "./pages/LegalIndexPage";
 import LegalDocumentPage from "./pages/LegalDocumentPage";
+import { DonationSuccessPage } from "./pages/DonationSuccessPage";
+import { DonationCancelledPage } from "./pages/DonationCancelledPage";
+import AdminPaymentsPage from "./pages/admin/AdminPaymentsPage";
 
 const queryClient = new QueryClient();
 
@@ -142,6 +145,8 @@ const App = () => (
           {/* Donor Portal Routes (outside Layout - full page) */}
           <Route path="donate" element={<DonatePage />} />
           <Route path="donation-form" element={<DonationFormPage />} />
+          <Route path="donation-success" element={<DonationSuccessPage />} />
+          <Route path="donation-cancelled" element={<DonationCancelledPage />} />
           <Route path="donor-guide" element={<DonorGuidePage />} />
           <Route path="auth" element={<AuthPage />} />
           <Route path="donor-dashboard" element={<DonorDashboardPage />} />
@@ -170,7 +175,9 @@ const App = () => (
             <Route path="service-console" element={<AdminServiceConsolePage />} />
             <Route path="agreements" element={<AdminAgreementsPage />} />
             <Route path="legal" element={<AdminLegalPage />} />
+            <Route path="payments" element={<AdminPaymentsPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
+
           </Route>
           
           {/* Project Team Portal Routes (formerly Volunteer Portal) */}

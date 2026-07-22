@@ -87,9 +87,23 @@ export const AuthPage = () => {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [privacyAck, setPrivacyAck] = useState(false);
+
+  const safeReturnTo = (raw: string | null): string | null => {
+    if (!raw) return null;
+    // Only allow same-origin relative paths from an explicit allow-list of destinations.
+    const allowed = ["/donation-form", "/donor-dashboard", "/volunteer-dashboard", "/admin/dashboard"];
+    try {
+      if (!raw.startsWith("/")) return null;
+      const path = raw.split("?")[0].split("#")[0];
+      return allowed.some((a) => path === a || path.startsWith(a + "/")) ? raw : null;
+    } catch { return null; }
+  };
 
 
   const redirectByRole = async (userId: string) => {
+    const rt = safeReturnTo(searchParams.get("returnTo"));
+    if (rt) { navigate(rt); return; }
     const { data: roles } = await supabase
       .from("user_roles")
       .select("role")
@@ -153,6 +167,7 @@ export const AuthPage = () => {
     const pwCheck = validatePassword(signupPassword);
     if (!pwCheck.valid) return setError(pwCheck.errors[0]);
     if (!termsAccepted) return setError("You must agree to the Website and Portal Terms of Use to create an account");
+    if (!privacyAck) return setError("You must confirm you have read the Privacy Notice");
 
     setLoading(true);
     try {
@@ -245,6 +260,8 @@ export const AuthPage = () => {
             setSignupConfirmPassword={setSignupConfirmPassword}
             termsAccepted={termsAccepted}
             setTermsAccepted={setTermsAccepted}
+            privacyAck={privacyAck}
+            setPrivacyAck={setPrivacyAck}
           />
 
         )}
@@ -369,6 +386,7 @@ type FormProps = {
   signupPassword: string; setSignupPassword: (v: string) => void;
   signupConfirmPassword: string; setSignupConfirmPassword: (v: string) => void;
   termsAccepted: boolean; setTermsAccepted: (v: boolean) => void;
+  privacyAck: boolean; setPrivacyAck: (v: boolean) => void;
 };
 
 
@@ -529,8 +547,14 @@ const SignupForm = (props: FormProps) => (
         onCheckedChange={(c) => props.setTermsAccepted(c as boolean)} disabled={props.loading} />
       <label htmlFor="terms-accepted" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
         I agree to the{" "}
-        <a href="/terms-of-use" className="text-primary hover:underline" target="_blank">Website and Portal Terms of Use</a>
-        {" "}and confirm that I have read the{" "}
+        <a href="/terms-of-use" className="text-primary hover:underline" target="_blank">Website and Portal Terms of Use</a>. *
+      </label>
+    </div>
+    <div className="flex items-start space-x-2">
+      <Checkbox id="privacy-ack" checked={props.privacyAck}
+        onCheckedChange={(c) => props.setPrivacyAck(c as boolean)} disabled={props.loading} />
+      <label htmlFor="privacy-ack" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
+        I acknowledge that I have read the{" "}
         <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
       </label>
     </div>
@@ -539,7 +563,7 @@ const SignupForm = (props: FormProps) => (
       Personal information is processed for the specific purposes explained in the Privacy Notice, using
       the lawful bases described there.
     </p>
-    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.termsAccepted}>
+    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.termsAccepted || !props.privacyAck}>
       {props.loading ? "Creating account..." : "Create Account"}
     </Button>
   </form>
