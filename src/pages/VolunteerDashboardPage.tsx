@@ -12,6 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
 import { VolunteerAIWidget } from "@/components/ai/VolunteerAIWidget";
 import { VolunteerAssignedProjects } from "@/components/volunteer/VolunteerAssignedProjects";
+import { TeamAgreementPanel } from "@/components/agreement/TeamAgreementPanel";
+import { SupportCentrePanel } from "@/components/service/SupportCentrePanel";
 
 interface Volunteer {
   id: string;
@@ -28,6 +30,9 @@ export const VolunteerDashboardPage = () => {
   const { toast } = useToast();
   const [volunteer, setVolunteer] = useState<Volunteer | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState<string>("");
+  const [assignedProjects, setAssignedProjects] = useState<{ id: string; label: string }[]>([]);
+  const [selectedAgreementProject, setSelectedAgreementProject] = useState<string | null>(null);
   const { isComplete, isLoading: onboardingLoading, markOnboardingComplete, resetOnboarding } = useOnboarding("volunteer");
   const [showOnboarding, setShowOnboarding] = useState(false);
 
@@ -79,6 +84,20 @@ export const VolunteerDashboardPage = () => {
     }
 
     setVolunteer(volunteerData);
+    setUserId(session.user.id);
+
+    // Load assigned projects (agreement selector)
+    const { data: assigns } = await supabase
+      .from("volunteer_project_assignments")
+      .select("project_id, commissioned_projects(id,title)")
+      .eq("volunteer_id", volunteerData.id);
+    const list = (assigns || [])
+      .map((a: any) => a.commissioned_projects)
+      .filter(Boolean)
+      .map((p: any) => ({ id: p.id, label: p.title }));
+    setAssignedProjects(list);
+    if (list.length) setSelectedAgreementProject(list[0].id);
+
     setLoading(false);
   };
 
