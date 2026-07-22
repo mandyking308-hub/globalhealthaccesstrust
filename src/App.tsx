@@ -175,7 +175,9 @@ const App = () => (
             <Route path="service-console" element={<AdminServiceConsolePage />} />
             <Route path="agreements" element={<AdminAgreementsPage />} />
             <Route path="legal" element={<AdminLegalPage />} />
+            <Route path="payments" element={<AdminPaymentsPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
+
           </Route>
           
           {/* Project Team Portal Routes (formerly Volunteer Portal) */}
