@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 
 export const SafeguardingPage = () => (
   <div className="py-16">
-    <Helmet><title>Safeguarding Policy | Global Health Access Trust</title><meta name="description" content="Safeguarding policy of the Global Health Access Trust, ensuring zero tolerance for abuse and protection of vulnerable individuals." /><link rel="canonical" href="https://globalhealthaccesstrust.org/safeguarding" /><meta name="robots" content="index, follow" /></Helmet>
+    <Helmet><title>Safeguarding Policy | Global Health Access Trust</title><meta name="description" content="Safeguarding policy of the Global Health Access Trust, ensuring zero tolerance for abuse and protection of vulnerable individuals." /><link rel="canonical" href="https://globalhealthaccesstrust.com/safeguarding" /><meta name="robots" content="index, follow" /></Helmet>
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-left mb-12">
@@ -167,7 +167,7 @@ export const SafeguardingPage = () => (
 
 export const AntiFraudPage = () => (
   <div className="py-16">
-    <Helmet><title>Anti-Fraud & Anti-Corruption Policy | Global Health Access Trust</title><meta name="description" content="Anti-fraud and anti-corruption policy of the Global Health Access Trust." /><link rel="canonical" href="https://globalhealthaccesstrust.org/anti-fraud" /></Helmet>
+    <Helmet><title>Anti-Fraud & Anti-Corruption Policy | Global Health Access Trust</title><meta name="description" content="Anti-fraud and anti-corruption policy of the Global Health Access Trust." /><link rel="canonical" href="https://globalhealthaccesstrust.com/anti-fraud" /></Helmet>
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
@@ -194,7 +194,7 @@ export const AntiFraudPage = () => (
 
 export const WhistleblowingPage = () => (
   <div className="py-16">
-    <Helmet><title>Whistleblowing Policy | Global Health Access Trust</title><meta name="description" content="Whistleblowing policy of the Global Health Access Trust for reporting concerns about malpractice or wrongdoing." /><link rel="canonical" href="https://globalhealthaccesstrust.org/whistleblowing" /></Helmet>
+    <Helmet><title>Whistleblowing Policy | Global Health Access Trust</title><meta name="description" content="Whistleblowing policy of the Global Health Access Trust for reporting concerns about malpractice or wrongdoing." /><link rel="canonical" href="https://globalhealthaccesstrust.com/whistleblowing" /></Helmet>
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
@@ -348,7 +348,7 @@ export const WhistleblowingPage = () => (
 
 export const GovernancePage = () => (
   <div className="py-16">
-    <Helmet><title>Governance & Oversight | Global Health Access Trust</title><meta name="description" content="Governance and oversight framework of the Global Health Access Trust, ensuring accountability, transparency, and regulatory compliance." /><link rel="canonical" href="https://globalhealthaccesstrust.org/governance" /></Helmet>
+    <Helmet><title>Governance & Oversight | Global Health Access Trust</title><meta name="description" content="Governance and oversight framework of the Global Health Access Trust, ensuring accountability, transparency, and regulatory compliance." /><link rel="canonical" href="https://globalhealthaccesstrust.com/governance" /></Helmet>
     <div className="container-content">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">

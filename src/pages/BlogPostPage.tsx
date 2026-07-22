@@ -43,7 +43,7 @@ export const BlogPostPage = () => {
     description: post.summary,
     author: post.author,
     publishDate: post.publishDate,
-    url: `https://globalhealthaccesstrust.org/blog/${post.slug}`
+    url: `https://globalhealthaccesstrust.com/blog/${post.slug}`
   });
 
   return (

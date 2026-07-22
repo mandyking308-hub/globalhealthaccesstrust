@@ -27,7 +27,7 @@ export const SEO = ({
   article,
   schema 
 }: SEOProps) => {
-  const siteUrl = "https://globalhealthaccesstrust.org";
+  const siteUrl = "https://globalhealthaccesstrust.com";
   const fullTitle = title.includes("Global Health Access Trust") ? title : `${title} | Global Health Access Trust`;
   const canonicalUrl = canonical ? `${siteUrl}${canonical}` : undefined;
   const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;

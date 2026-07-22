@@ -111,20 +111,6 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-            <div className="flex flex-wrap gap-6 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary-foreground/60">
-              <Link to="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link>
-              <Link to="/cookie-policy" className="hover:text-primary-foreground transition-colors">Cookie Policy</Link>
-              <Link to="/terms-of-use" className="hover:text-primary-foreground transition-colors">Terms of Use</Link>
-              <Link to="/data-access-request" className="hover:text-primary-foreground transition-colors">Data Request</Link>
-            </div>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-primary-foreground/60">
-              © {new Date().getFullYear()} {SITE_CONFIG.name}
-            </p>
-          </div>
-        </div>
       </div>
     </footer>
   );

@@ -15,10 +15,12 @@ export const GovernanceLegalFrameworkPage = () => {
 
       <div className="section-container">
         <h2>Legal Status</h2>
-        <p>The Global Health Access Trust is a charitable trust established under the laws of England and Wales, with registration in progress with the Charity Commission (expected 2025).</p>
-        <p>It is constituted by a formal Trust Deed, and operates exclusively for charitable purposes as defined in section 3 of the Charities Act 2011.</p>
-        <p>All funds are administered in strict compliance with trust law, financial governance requirements, and HMRC-recognised charitable tax frameworks.</p>
+        <p>Global Health Access Trust is a charitable trust established under the laws of England and Wales. It is constituted by a formal Trust Deed and operates exclusively for charitable purposes and for the public benefit.</p>
+        <p>The Trust is administered by its Board of Trustees, who are responsible for the proper stewardship of its assets, compliance with the governing document and the lawful advancement of its charitable purposes.</p>
+        <p>The Trust's regulatory and registration particulars will be stated on this website when those particulars are formally confirmed and available for publication.</p>
+        <p>All funds are administered in accordance with the Trust Deed, applicable law, the Trust's financial controls and the decisions of the Board of Trustees.</p>
       </div>
+
 
       <div className="section-container">
         <h2>Regulatory Compliance</h2>
@@ -31,8 +33,9 @@ export const GovernanceLegalFrameworkPage = () => {
           <li>Data protection and GDPR</li>
           <li>Safeguarding and equality obligations (where applicable)</li>
         </ul>
-        <p>Annual financial statements and governance reports will be published upon registration and made available to the public.</p>
+        <p>Financial statements, governance reports and regulatory filings will be prepared, approved and published where required by law or determined appropriate by the Board of Trustees.</p>
       </div>
+
 
       <div className="section-container">
         <h2>Board of Trustees</h2>

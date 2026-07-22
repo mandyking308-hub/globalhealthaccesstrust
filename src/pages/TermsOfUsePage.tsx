@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 export const TermsOfUsePage = () => {
   return (
     <div className="py-16">
-      <Helmet><title>Terms of Use | Global Health Access Trust</title><meta name="description" content="Terms of Use governing your access to the Global Health Access Trust website." /><link rel="canonical" href="https://globalhealthaccesstrust.org/terms-of-use" /></Helmet>
+      <Helmet><title>Terms of Use | Global Health Access Trust</title><meta name="description" content="Terms of Use governing your access to the Global Health Access Trust website." /><link rel="canonical" href="https://globalhealthaccesstrust.com/terms-of-use" /></Helmet>
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">

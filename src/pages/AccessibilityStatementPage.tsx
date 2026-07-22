@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 export const AccessibilityStatementPage = () => {
   return (
     <div className="py-16">
-      <Helmet><title>Accessibility Statement | Global Health Access Trust</title><meta name="description" content="Accessibility statement for the Global Health Access Trust website, our commitment to inclusive digital access." /><link rel="canonical" href="https://globalhealthaccesstrust.org/accessibility-statement" /></Helmet>
+      <Helmet><title>Accessibility Statement | Global Health Access Trust</title><meta name="description" content="Accessibility statement for the Global Health Access Trust website, our commitment to inclusive digital access." /><link rel="canonical" href="https://globalhealthaccesstrust.com/accessibility-statement" /></Helmet>
       <div className="container-content">
         <div className="text-left mb-12">
           <div className="flex items-start mb-4">
