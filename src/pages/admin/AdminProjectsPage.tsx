@@ -243,10 +243,13 @@ const ProjectDetail = ({
   useEffect(() => { loadRelated(); }, [project.id]);
 
   const totalAllocated = allocations.reduce((s, a) => s + Number(a.amount || 0), 0);
-  const totalSpent = expenses
-    .filter((e) => ["approved", "committed", "paid"].includes(e.status))
+  const totalCommitted = expenses
+    .filter((e) => ["approved", "committed"].includes(e.status))
     .reduce((s, e) => s + Number(e.amount || 0), 0);
-  const balance = totalAllocated - totalSpent;
+  const totalSpent = expenses
+    .filter((e) => e.status === "paid")
+    .reduce((s, e) => s + Number(e.amount || 0), 0);
+  const remaining = totalAllocated - totalSpent - totalCommitted;
   const targetNum = Number(target) || 0;
   const percentFunded = targetNum > 0 ? Math.min(100, (totalAllocated / targetNum) * 100) : 0;
   const totalWeight = milestones.reduce((s, m) => s + Number(m.weight || 0), 0);
