@@ -199,14 +199,12 @@ export const DonorDashboardPage = () => {
           {/* Tabs — underlined editorial navigation */}
           <Tabs defaultValue="donate" className="portal-tabs space-y-8">
             <TabsList className="w-full flex flex-wrap justify-start">
-              <TabsTrigger value="donate">Donate</TabsTrigger>
+              <TabsTrigger value="donate">Make a Donation</TabsTrigger>
               <TabsTrigger value="projects">My Projects</TabsTrigger>
-              <TabsTrigger value="agreements">Agreement</TabsTrigger>
-              <TabsTrigger value="commission">Commission</TabsTrigger>
-              <TabsTrigger value="history">History</TabsTrigger>
-              <TabsTrigger value="messages">Messages</TabsTrigger>
-              <TabsTrigger value="support">Support</TabsTrigger>
-              <TabsTrigger value="profile">Profile</TabsTrigger>
+              <TabsTrigger value="commission">Commission a New Project</TabsTrigger>
+              <TabsTrigger value="history">Donation History</TabsTrigger>
+              <TabsTrigger value="messages">Project Messages</TabsTrigger>
+              <TabsTrigger value="profile">Account &amp; Preferences</TabsTrigger>
             </TabsList>
 
             <TabsContent value="donate">

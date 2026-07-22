@@ -95,7 +95,7 @@ export const FinancialControlsPage = () => (
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Donations are deposited into a designated charitable bank account</li>
                 <li>Restricted and unrestricted funds are tracked separately</li>
-                <li>Gift Aid claims are submitted in line with HMRC regulations</li>
+                <li>Any future Gift Aid claims would be submitted only after HMRC recognition is confirmed and required declarations are in place</li>
                 <li>Legacy income is recorded upon legal confirmation of the bequest</li>
               </ul>
             </CardContent>
@@ -140,7 +140,7 @@ export const FinancialControlsPage = () => (
               <h2 className="text-2xl font-serif font-bold mb-4">10. External Review & Audit</h2>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Annual financial statements are independently examined or audited</li>
-                <li>Reports are submitted to the Charity Commission in accordance with deadlines</li>
+                <li>Reports required by any regulator with jurisdiction over the Trust will be submitted in accordance with applicable deadlines</li>
                 <li>Findings are reviewed at a full board meeting and used to strengthen internal controls</li>
               </ul>
             </CardContent>
