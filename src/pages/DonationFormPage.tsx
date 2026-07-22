@@ -35,6 +35,7 @@ export const DonationFormPage = () => {
   const [notes, setNotes] = useState("");
   const [recognitionPreference, setRecognitionPreference] = useState("named");
   const [confirmTx, setConfirmTx] = useState(false);
+  const [acceptFundingTerms, setAcceptFundingTerms] = useState(false);
 
   const [draftId, setDraftId] = useState<string | null>(null);
   const [transferReference, setTransferReference] = useState<string | null>(null);
@@ -72,8 +73,8 @@ export const DonationFormPage = () => {
   };
 
   const createDraftAndConfirm = async () => {
-    if (!confirmTx) {
-      toast({ title: "Please confirm the transaction terms", variant: "destructive" });
+    if (!confirmTx || !acceptFundingTerms) {
+      toast({ title: "Please confirm the transaction details and accept the Donor and Project Funding Terms", variant: "destructive" });
       return;
     }
     setLoading(true);
@@ -89,6 +90,14 @@ export const DonationFormPage = () => {
       });
       if (draftErr) throw draftErr;
       const id = draft as unknown as string;
+
+      // Server-side authoritative acceptance of the Donor and Project Funding Terms.
+      const { error: acceptErr } = await supabase.rpc(
+        "accept_donor_project_funding_terms" as any,
+        { _draft_id: id },
+      );
+      if (acceptErr) throw acceptErr;
+
       const { error: confErr } = await supabase.rpc("donation_confirm_transaction", {
         _draft_id: id,
         _wording_version: WORDING_VERSION,
@@ -227,6 +236,19 @@ export const DonationFormPage = () => {
                 <Textarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} />
               </div>
 
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Future donations will be governed by the{" "}
+                <a
+                  href="/donor-project-funding-terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-primary"
+                >
+                  Donor and Project Funding Terms
+                </a>
+                . You will be asked to accept them at the confirmation step.
+              </p>
+
               <Button type="submit" className="w-full h-12">Continue</Button>
             </form>
           )}
@@ -256,9 +278,33 @@ export const DonationFormPage = () => {
                 </label>
               </div>
 
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="acceptFundingTerms"
+                  checked={acceptFundingTerms}
+                  onCheckedChange={(v) => setAcceptFundingTerms(v as boolean)}
+                />
+                <label htmlFor="acceptFundingTerms" className="text-sm leading-relaxed cursor-pointer">
+                  I agree to the{" "}
+                  <a
+                    href="/donor-project-funding-terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-primary"
+                  >
+                    Donor and Project Funding Terms
+                  </a>{" "}
+                  and confirm the donation details and allocation shown. *
+                </label>
+              </div>
+
               <div className="flex gap-3">
                 <Button variant="outline" onClick={() => setStep("details")} disabled={loading}>Back</Button>
-                <Button onClick={createDraftAndConfirm} disabled={loading || !confirmTx} className="flex-1 h-12">
+                <Button
+                  onClick={createDraftAndConfirm}
+                  disabled={loading || !confirmTx || !acceptFundingTerms}
+                  className="flex-1 h-12"
+                >
                   {loading ? "Recording…" : "Confirm and choose payment method"}
                 </Button>
               </div>

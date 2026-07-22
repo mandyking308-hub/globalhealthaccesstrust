@@ -809,6 +809,82 @@ export type Database = {
           },
         ]
       }
+      donation_funding_terms_acceptances: {
+        Row: {
+          acceptance_text_snapshot: string
+          accepted_at: string
+          amount_minor: number
+          created_at: string
+          currency: string
+          delivery_allocation_minor: number
+          document_id: string
+          donation_draft_id: string
+          frequency: string
+          id: string
+          operating_allocation_minor: number
+          proposed_project_id: string | null
+          purpose: string | null
+          user_id: string
+          version_id: string
+        }
+        Insert: {
+          acceptance_text_snapshot: string
+          accepted_at?: string
+          amount_minor: number
+          created_at?: string
+          currency: string
+          delivery_allocation_minor: number
+          document_id: string
+          donation_draft_id: string
+          frequency: string
+          id?: string
+          operating_allocation_minor: number
+          proposed_project_id?: string | null
+          purpose?: string | null
+          user_id: string
+          version_id: string
+        }
+        Update: {
+          acceptance_text_snapshot?: string
+          accepted_at?: string
+          amount_minor?: number
+          created_at?: string
+          currency?: string
+          delivery_allocation_minor?: number
+          document_id?: string
+          donation_draft_id?: string
+          frequency?: string
+          id?: string
+          operating_allocation_minor?: number
+          proposed_project_id?: string | null
+          purpose?: string | null
+          user_id?: string
+          version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donation_funding_terms_acceptances_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "legal_documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "donation_funding_terms_acceptances_donation_draft_id_fkey"
+            columns: ["donation_draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "donation_funding_terms_acceptances_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "legal_document_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       donation_transaction_confirmations: {
         Row: {
           confirmed_at: string
@@ -4664,6 +4740,10 @@ export type Database = {
       }
     }
     Functions: {
+      accept_donor_project_funding_terms: {
+        Args: { _draft_id: string }
+        Returns: string
+      }
       add_service_request_comment: {
         Args: {
           _body: string

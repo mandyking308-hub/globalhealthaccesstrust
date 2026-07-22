@@ -70,6 +70,7 @@ import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 import AdminLegalPage from "./pages/admin/AdminLegalPage";
 import LegalIndexPage from "./pages/LegalIndexPage";
 import LegalDocumentPage from "./pages/LegalDocumentPage";
+import DonorFundingTermsPage from "./pages/DonorFundingTermsPage";
 import { DonationSuccessPage } from "./pages/DonationSuccessPage";
 import { DonationCancelledPage } from "./pages/DonationCancelledPage";
 import AdminPaymentsPage from "./pages/admin/AdminPaymentsPage";
@@ -142,6 +143,7 @@ const App = () => (
           <Route path="governance" element={<GovernancePage />} />
           <Route path="legal" element={<LegalIndexPage />} />
           <Route path="legal/:slug" element={<LegalDocumentPage />} />
+          <Route path="donor-project-funding-terms" element={<DonorFundingTermsPage />} />
         </Route>
         
           {/* Donor Portal Routes (outside Layout - full page) */}
