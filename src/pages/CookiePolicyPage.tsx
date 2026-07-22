@@ -1,230 +1,212 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Helmet } from "react-helmet-async";
+import { ContentLayout } from "@/components/layout/ContentLayout";
+import { Link } from "react-router-dom";
+import { CookieSettingsLink } from "@/components/CookieSettingsLink";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
-export const CookiePolicyPage = () => {
+
+interface RegistryRow {
+  id: string;
+  storage_key: string;
+  provider: string;
+  purpose: string;
+  category: string;
+  duration: string;
+  is_first_party: boolean;
+  legal_basis: string;
+  active: boolean;
+}
+
+const CookiePolicyPage = () => {
+  const [rows, setRows] = useState<RegistryRow[]>([]);
+
+  useEffect(() => {
+    void supabase
+      .from("cookie_registry")
+      .select("id, storage_key, provider, purpose, category, duration, is_first_party, legal_basis, active")
+      .eq("active", true)
+      .order("category")
+      .then(({ data }) => setRows((data as RegistryRow[]) ?? []));
+  }, []);
+
   return (
-    <div className="py-16">
-      <Helmet><title>Cookie Policy | Global Health Access Trust</title><meta name="description" content="Cookie Policy of the Global Health Access Trust explaining how we use cookies and your choices." /><link rel="canonical" href="https://globalhealthaccesstrust.com/cookie-policy" /></Helmet>
-      <div className="container-content">
-        <div className="text-left mb-12">
-          <div className="flex items-start mb-4">
-            
-            <div>
-              <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-                Cookie Policy
-              </h1>
-              <p className="text-lg text-muted-foreground">
-                Last updated: <span className="font-medium">16 September 2024</span>
-              </p>
-            </div>
+    <ContentLayout>
+      <div className="max-w-[72ch] mx-auto py-16 space-y-8">
+        <header className="space-y-2">
+          <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Legal</p>
+          <h1 className="text-4xl md:text-5xl font-serif">Cookie Notice</h1>
+          <p className="text-sm text-muted-foreground">Version 1.0 · Effective 22 July 2026</p>
+        </header>
+
+        <Section n="1" title="Controller">
+          <p>
+            This Cookie Notice is issued by Global Health Access Trust ("the Trust", "we", "us") in respect of the
+            website at globalhealthaccesstrust.com and the connected donor, project team and administrator portals.
+            Correspondence: 2 Harley Street, London W1G 9PA. For data-protection contact, use the{" "}
+            <Link to="/data-access-request" className="underline">Data Request</Link> route.
+          </p>
+        </Section>
+
+        <Section n="2" title="Cookies and similar technologies">
+          <p>
+            "Cookies" in this notice covers cookies and any similar technologies that read or store information on your
+            device, including local storage, session storage and comparable browser storage used by the site.
+          </p>
+        </Section>
+
+        <Section n="3" title="Strictly necessary storage">
+          <p>
+            Some storage is essential to deliver the service you request: keeping you signed in to your portal,
+            remembering your cookie choices, and protecting the site against abuse. Because these items are necessary,
+            they do not require consent and cannot be turned off in the settings panel.
+          </p>
+        </Section>
+
+        <Section n="4" title="Functional storage">
+          <p>
+            Functional items remember non-essential choices, such as display preferences. They only run if you turn on
+            "Functional" in the settings panel.
+          </p>
+        </Section>
+
+        <Section n="5" title="Analytics">
+          <p>
+            We may use aggregated, privacy-respecting analytics to understand how the site is used. Analytics do not run
+            until you turn on "Analytics" in the settings panel. No analytics tags, pixels, or third-party scripts are
+            loaded before you consent.
+          </p>
+        </Section>
+
+        <Section n="6" title="Embedded content">
+          <p>
+            Pages may embed content from third parties (for example, video or maps). Where embedded content would set
+            cookies, it is only loaded after you turn on the corresponding category.
+          </p>
+        </Section>
+
+        <Section n="7" title="Security technologies">
+          <p>
+            We use technical measures to detect and prevent abuse of the site and portals. These operate as strictly
+            necessary and do not track you for advertising.
+          </p>
+        </Section>
+
+        <Section n="8" title="Payment-provider technologies">
+          <p>
+            When you initiate a Direct Debit setup or bank-transfer donation, payment providers may set their own
+            technologies on their hosted pages. Those pages are governed by the provider's own notices.
+          </p>
+        </Section>
+
+        <Section n="9" title="Authentication">
+          <p>
+            When you sign in, our authentication provider sets a session token so we can recognise you across pages of
+            the portal. This is strictly necessary; without it you cannot use the portal.
+          </p>
+        </Section>
+
+        <Section n="10" title="Cookie duration">
+          <p>
+            Some items last only as long as your browser session; others persist for up to one year. Specific durations
+            are shown in the inventory below.
+          </p>
+        </Section>
+
+        <Section n="11" title="Third-party providers">
+          <p>
+            The current inventory shows which providers, if any, set data on your device, and whether they are first or
+            third party. We only enable third-party items after you have consented to the relevant category.
+          </p>
+        </Section>
+
+        <Section n="12" title="Consent">
+          <p>
+            When you first visit the site, you can Accept all, Reject non-essential, or Manage each category. No
+            non-essential item runs until you consent.
+          </p>
+        </Section>
+
+        <Section n="13" title="Withdrawal">
+          <p>
+            You can change or withdraw your consent at any time using the{" "}
+            <CookieSettingsLink className="underline">Cookie settings</CookieSettingsLink> link in the footer or here.
+          </p>
+        </Section>
+
+        <Section n="14" title="Browser controls">
+          <p>
+            You can also control storage using your browser settings. Blocking strictly necessary items may prevent
+            parts of the site from working.
+          </p>
+        </Section>
+
+        <Section n="15" title="Updates">
+          <p>
+            If we materially change this notice, we will publish a new version with an updated effective date, and where
+            appropriate ask you to reconfirm your choices.
+          </p>
+        </Section>
+
+        <Section n="16" title="Contact">
+          <p>
+            To ask about this notice or exercise your rights, use{" "}
+            <Link to="/data-access-request" className="underline">Data Request</Link> or the{" "}
+            <Link to="/contact-the-trust" className="underline">contact route</Link>.
+          </p>
+        </Section>
+
+        <section className="pt-8 border-t">
+          <h2 className="text-2xl font-serif mb-4">Current inventory</h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            The following items are set by the site. We do not run non-essential items until you consent.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border">
+              <thead className="bg-muted">
+                <tr>
+                  <th className="text-left p-2 font-medium">Key</th>
+                  <th className="text-left p-2 font-medium">Provider</th>
+                  <th className="text-left p-2 font-medium">Category</th>
+                  <th className="text-left p-2 font-medium">Purpose</th>
+                  <th className="text-left p-2 font-medium">Duration</th>
+                  <th className="text-left p-2 font-medium">Party</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.length === 0 && (
+                  <tr>
+                    <td colSpan={6} className="p-3 text-muted-foreground">
+                      No active items registered.
+                    </td>
+                  </tr>
+                )}
+                {rows.map((r) => (
+                  <tr key={r.id} className="border-t align-top">
+                    <td className="p-2 font-mono text-xs">{r.storage_key}</td>
+                    <td className="p-2">{r.provider}</td>
+                    <td className="p-2 capitalize">{r.category}</td>
+                    <td className="p-2">{r.purpose}</td>
+                    <td className="p-2">{r.duration}</td>
+                    <td className="p-2">{r.is_first_party ? "First" : "Third"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </div>
-
-        <div className="prose max-w-none text-left space-y-8">
-          {/* What are cookies */}
-          <Card className="card-professional">
-            <CardHeader>
-              <CardTitle>What are Cookies?</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>
-                Cookies are small text files that are placed on your computer or mobile device 
-                when you visit a website. They are widely used to make websites work more 
-                efficiently and provide information to website owners about how their site is being used.
-              </p>
-            </CardContent>
-          </Card>
-
-          {/* Cookie Categories */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="card-professional">
-              <CardHeader>
-                <CardTitle className="flex items-center text-success">
-                  
-                  Essential Cookies
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm mb-3">
-                  These cookies are strictly necessary for the website to function properly. 
-                  They cannot be switched off and are set in response to actions you take.
-                </p>
-                <ul className="text-sm list-disc pl-5 space-y-1">
-                  <li>Security and authentication</li>
-                  <li>Form submission functionality</li>
-                  <li>Cookie consent preferences</li>
-                  <li>Load balancing</li>
-                </ul>
-                <p className="text-xs text-muted-foreground mt-3">
-                  <strong>Retention:</strong> Session or 1 year maximum
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="card-professional">
-              <CardHeader>
-                <CardTitle className="flex items-center text-info">
-                  
-                  Analytics Cookies
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm mb-3">
-                  These cookies help us understand how visitors use our website by 
-                  collecting anonymous information about page visits and user interactions.
-                </p>
-                <ul className="text-sm list-disc pl-5 space-y-1">
-                  <li>Page view statistics</li>
-                  <li>Traffic source information</li>
-                  <li>User journey analysis</li>
-                  <li>Performance metrics</li>
-                </ul>
-                <p className="text-xs text-muted-foreground mt-3">
-                  <strong>Retention:</strong> Up to 24 months
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Specific Cookies */}
-          <Card className="card-professional">
-            <CardHeader>
-              <CardTitle>Cookies We Use</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="text-left py-2 font-medium">Cookie Name</th>
-                      <th className="text-left py-2 font-medium">Purpose</th>
-                      <th className="text-left py-2 font-medium">Duration</th>
-                      <th className="text-left py-2 font-medium">Type</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y">
-                    <tr>
-                      <td className="py-2 font-mono">cookie-consent</td>
-                      <td className="py-2">Stores your cookie preferences</td>
-                      <td className="py-2">1 year</td>
-                      <td className="py-2">
-                        <span className="px-2 py-1 bg-success/10 text-success rounded text-xs">Essential</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 font-mono">_plausible_*</td>
-                      <td className="py-2">Privacy-friendly analytics</td>
-                      <td className="py-2">24 months</td>
-                      <td className="py-2">
-                        <span className="px-2 py-1 bg-info/10 text-info rounded text-xs">Analytics</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="py-2 font-mono">session_id</td>
-                      <td className="py-2">Maintains user session</td>
-                      <td className="py-2">Session</td>
-                      <td className="py-2">
-                        <span className="px-2 py-1 bg-success/10 text-success rounded text-xs">Essential</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Managing Cookies */}
-          <Card className="card-professional">
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                
-                Managing Your Cookie Preferences
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">
-                You can control cookies in several ways:
-              </p>
-              
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-semibold mb-2">Cookie Banner</h4>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    When you first visit our website, you'll see a cookie banner where you can 
-                    accept or decline non-essential cookies.
-                  </p>
-                  <Button variant="outline" size="sm">
-                    Manage Cookie Preferences
-                  </Button>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-2">Browser Settings</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Most browsers allow you to control cookies through their settings. 
-                    You can usually find these options in the 'Settings' or 'Preferences' menu.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold mb-2">Opt-out Links</h4>
-                  <ul className="text-sm space-y-1">
-                    <li>
-                      <a href="https://plausible.io/data-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                        Plausible Analytics Opt-out
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://www.youronlinechoices.com/" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                        Your Online Choices
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Google Consent Mode */}
-          <Card className="card-professional border-primary/20">
-            <CardHeader>
-              <CardTitle>Google Consent Mode v2</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="mb-4">
-                We implement Google Consent Mode v2 to ensure compliance with privacy regulations 
-                whilst maintaining measurement capabilities. This means:
-              </p>
-              <ul className="list-disc pl-6 space-y-2 text-sm">
-                <li>Analytics only function with your explicit consent</li>
-                <li>No personal data is processed without permission</li>
-                <li>Aggregated, privacy-preserving insights may still be collected</li>
-                <li>Your consent choices are respected across all Google services</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* Contact */}
-          <Card className="card-professional">
-            <CardHeader>
-              <CardTitle>Questions About Cookies?</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>
-                If you have any questions about our use of cookies, please{" "}
-                <a href="/contact" className="text-primary hover:underline">
-                  use the Contact Form
-                </a>.
-              </p>
-              <p className="mt-4 text-sm text-muted-foreground">
-                This Cookie Policy should be read alongside our{" "}
-                <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        </section>
       </div>
-    </div>
+    </ContentLayout>
   );
 };
+
+const Section = ({ n, title, children }: { n: string; title: string; children: React.ReactNode }) => (
+  <section>
+    <h2 className="text-xl font-serif mb-2">
+      <span className="text-muted-foreground mr-3">{n}.</span>
+      {title}
+    </h2>
+    <div className="text-[15px] leading-relaxed text-foreground/90 space-y-2">{children}</div>
+  </section>
+);
+
+export default CookiePolicyPage;

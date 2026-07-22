@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FOOTER_SECTIONS, SITE_CONFIG } from "@/lib/constants";
 import { useState } from "react";
+import { CookieSettingsLink } from "@/components/CookieSettingsLink";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -100,10 +101,12 @@ export const Footer = () => {
             <div className="flex flex-wrap gap-6 text-[10.5px] font-sans font-black uppercase tracking-[0.22em] text-primary-foreground/60">
               <Link to="/legal" className="hover:text-primary-foreground transition-colors">Legal Centre</Link>
               <Link to="/legal/privacy-notice" className="hover:text-primary-foreground transition-colors">Privacy Notice</Link>
-              <Link to="/legal/cookie-notice" className="hover:text-primary-foreground transition-colors">Cookie Notice</Link>
+              <Link to="/cookie-policy" className="hover:text-primary-foreground transition-colors">Cookie Notice</Link>
+              <CookieSettingsLink className="hover:text-primary-foreground transition-colors uppercase tracking-[0.22em]">Cookie Settings</CookieSettingsLink>
               <Link to="/legal/terms-of-use" className="hover:text-primary-foreground transition-colors">Terms of Use</Link>
               <Link to="/legal/complaints-policy" className="hover:text-primary-foreground transition-colors">Complaints</Link>
               <Link to="/data-access-request" className="hover:text-primary-foreground transition-colors">Data Request</Link>
+              <Link to="/preferences" className="hover:text-primary-foreground transition-colors">Communication Preferences</Link>
             </div>
             <p className="text-[10.5px] font-sans font-black uppercase tracking-[0.22em] text-primary-foreground/60">
               © {new Date().getFullYear()} {SITE_CONFIG.name}

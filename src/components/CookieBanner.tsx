@@ -1,195 +1,182 @@
-import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 
-interface CookiePreferences {
-  essential: boolean;
+const PREFERENCE_VERSION = "cookie-notice-1.0";
+const STORAGE_KEY = "ghat-cookie-consent";
+const TIMESTAMP_KEY = "ghat-consent-timestamp";
+const VERSION_KEY = "ghat-consent-version";
+export const OPEN_COOKIE_SETTINGS_EVENT = "ghat:open-cookie-settings";
+
+export interface CookiePreferences {
+  necessary: true;
+  functional: boolean;
   analytics: boolean;
-  marketing: boolean;
+  other: boolean;
 }
+
+const DEFAULT_PREFS: CookiePreferences = {
+  necessary: true,
+  functional: false,
+  analytics: false,
+  other: false,
+};
+
+export const getStoredPrefs = (): CookiePreferences | null => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const ver = localStorage.getItem(VERSION_KEY);
+    if (!raw || ver !== PREFERENCE_VERSION) return null;
+    const p = JSON.parse(raw);
+    return { necessary: true, functional: !!p.functional, analytics: !!p.analytics, other: !!p.other };
+  } catch {
+    return null;
+  }
+};
+
+const applyGtagConsent = (p: CookiePreferences) => {
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("consent", "update", {
+      analytics_storage: p.analytics ? "granted" : "denied",
+      ad_storage: p.other ? "granted" : "denied",
+      ad_user_data: p.other ? "granted" : "denied",
+      ad_personalization: p.other ? "granted" : "denied",
+      functionality_storage: p.functional ? "granted" : "denied",
+      security_storage: "granted",
+    });
+  }
+};
+
+const recordConsent = async (p: CookiePreferences, action: "accept_all" | "reject_non_essential" | "custom" | "withdraw") => {
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    await supabase.from("cookie_consent_events").insert({
+      user_id: user?.id ?? null,
+      necessary: true,
+      functional: p.functional,
+      analytics: p.analytics,
+      other: p.other,
+      action,
+      preference_version: PREFERENCE_VERSION,
+      user_agent: navigator.userAgent.slice(0, 500),
+    });
+  } catch {
+    // Non-blocking: local state is authoritative for the browser
+  }
+};
 
 export const CookieBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
-  const [showPreferences, setShowPreferences] = useState(false);
-  const [preferences, setPreferences] = useState<CookiePreferences>({
-    essential: true,
-    analytics: false,
-    marketing: false
-  });
+  const [showManage, setShowManage] = useState(false);
+  const [prefs, setPrefs] = useState<CookiePreferences>(DEFAULT_PREFS);
 
-  useEffect(() => {
-    const consent = localStorage.getItem('ghat-cookie-consent');
-    if (!consent) {
-      setShowBanner(true);
-    } else {
-      const savedPreferences = JSON.parse(consent);
-      setPreferences(savedPreferences);
-      // Initialize Google Consent Mode v2
-      if (window.gtag) {
-        window.gtag('consent', 'update', {
-          analytics_storage: savedPreferences.analytics ? 'granted' : 'denied',
-          ad_storage: savedPreferences.marketing ? 'granted' : 'denied',
-          ad_user_data: savedPreferences.marketing ? 'granted' : 'denied',
-          ad_personalization: savedPreferences.marketing ? 'granted' : 'denied'
-        });
-      }
-    }
+  const persist = useCallback((p: CookiePreferences, action: Parameters<typeof recordConsent>[1]) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+    localStorage.setItem(TIMESTAMP_KEY, new Date().toISOString());
+    localStorage.setItem(VERSION_KEY, PREFERENCE_VERSION);
+    applyGtagConsent(p);
+    setPrefs(p);
+    setShowBanner(false);
+    setShowManage(false);
+    void recordConsent(p, action);
+    window.dispatchEvent(new CustomEvent("ghat:consent-updated", { detail: p }));
   }, []);
 
-  const savePreferences = (prefs: CookiePreferences) => {
-    localStorage.setItem('ghat-cookie-consent', JSON.stringify(prefs));
-    localStorage.setItem('ghat-consent-timestamp', new Date().toISOString());
-    
-    // Update Google Consent Mode v2
-    if (window.gtag) {
-      window.gtag('consent', 'update', {
-        analytics_storage: prefs.analytics ? 'granted' : 'denied',
-        ad_storage: prefs.marketing ? 'granted' : 'denied',
-        ad_user_data: prefs.marketing ? 'granted' : 'denied',
-        ad_personalization: prefs.marketing ? 'granted' : 'denied'
-      });
+  useEffect(() => {
+    const stored = getStoredPrefs();
+    if (!stored) {
+      // Deny-by-default before any consent
+      applyGtagConsent(DEFAULT_PREFS);
+      setShowBanner(true);
+    } else {
+      setPrefs(stored);
+      applyGtagConsent(stored);
     }
 
-    setShowBanner(false);
-    setShowPreferences(false);
-  };
-
-  const acceptAll = () => {
-    const allAccepted = {
-      essential: true,
-      analytics: true,
-      marketing: true
+    const openHandler = () => {
+      const current = getStoredPrefs() ?? DEFAULT_PREFS;
+      setPrefs(current);
+      setShowManage(true);
     };
-    setPreferences(allAccepted);
-    savePreferences(allAccepted);
-  };
+    window.addEventListener(OPEN_COOKIE_SETTINGS_EVENT, openHandler);
+    return () => window.removeEventListener(OPEN_COOKIE_SETTINGS_EVENT, openHandler);
+  }, []);
 
-  const acceptEssential = () => {
-    const essentialOnly = {
-      essential: true,
-      analytics: false,
-      marketing: false
-    };
-    setPreferences(essentialOnly);
-    savePreferences(essentialOnly);
-  };
-
-  if (!showBanner) return null;
+  const acceptAll = () => persist({ necessary: true, functional: true, analytics: true, other: true }, "accept_all");
+  const rejectNonEssential = () => persist({ ...DEFAULT_PREFS }, "reject_non_essential");
+  const saveCustom = () => persist(prefs, "custom");
 
   return (
     <>
-      {/* Cookie Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-background/95 backdrop-blur border-t shadow-strong">
-        <Card className="max-w-4xl mx-auto">
-          <CardContent className="p-6">
-            <div className="flex items-start gap-4">
-              
-              <div className="flex-1">
-                <h3 className="font-semibold mb-2">We use cookies to enhance your experience</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  We use essential cookies for website functionality and, with your consent, 
-                  analytics cookies to improve our services. You can customize your preferences 
-                  or accept all cookies. See our{" "}
-                  <a href="/cookie-policy" className="text-primary hover:underline">Cookie Policy</a>{" "}
-                  for more details.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Button onClick={acceptAll} className="bg-primary text-primary-foreground">
-                    Accept All
-                  </Button>
-                  <Button onClick={acceptEssential} variant="outline">
-                    Essential Only
-                  </Button>
-                  <Button 
-                    onClick={() => setShowPreferences(true)} 
-                    variant="outline"
-                  >
-                    
-                    Customize
-                  </Button>
-                </div>
-              </div>
-              <Button
-                onClick={() => setShowBanner(false)}
-                variant="ghost"
-                size="sm"
-                className="flex-shrink-0"
-              >
-                <X className="w-4 h-4" />
+      {showBanner && (
+        <div
+          role="dialog"
+          aria-label="Cookie choices"
+          aria-live="polite"
+          className="fixed inset-x-0 bottom-0 z-50 bg-background border-t border-foreground/15 shadow-lg"
+        >
+          <div className="max-w-6xl mx-auto p-5 md:p-6 flex flex-col md:flex-row gap-4 md:items-center">
+            <div className="flex-1 text-sm leading-relaxed">
+              <p className="font-semibold mb-1">Your cookie choices</p>
+              <p className="text-muted-foreground">
+                We use strictly necessary storage to keep the site working. With your consent we also use functional,
+                analytics and other optional technologies. You can accept, reject non-essential, or manage each category.
+                Read the{" "}
+                <Link to="/cookie-policy" className="underline underline-offset-2">Cookie Notice</Link>.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2 md:flex-shrink-0">
+              <Button variant="outline" onClick={rejectNonEssential} className="min-w-[160px]">
+                Reject non-essential
+              </Button>
+              <Button variant="outline" onClick={() => setShowManage(true)} className="min-w-[160px]">
+                Manage choices
+              </Button>
+              <Button onClick={acceptAll} className="min-w-[160px]">
+                Accept all
               </Button>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </div>
+      )}
 
-      {/* Cookie Preferences Dialog */}
-      <Dialog open={showPreferences} onOpenChange={setShowPreferences}>
-        <DialogContent className="max-w-2xl">
+      <Dialog open={showManage} onOpenChange={setShowManage}>
+        <DialogContent className="max-w-xl">
           <DialogHeader>
-            <DialogTitle className="flex items-center">
-              
-              Cookie Preferences
-            </DialogTitle>
+            <DialogTitle>Manage cookie choices</DialogTitle>
+            <DialogDescription>
+              Strictly necessary items always run because they keep the site secure and functional. All other categories
+              are off unless you turn them on.
+            </DialogDescription>
           </DialogHeader>
-          <div className="space-y-6">
-            {/* Essential Cookies */}
-            <div className="flex items-start justify-between">
-              <div className="flex-1 mr-4">
-                <h4 className="font-semibold text-success">Essential Cookies</h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Required for website functionality, security, and form submissions. 
-                  These cannot be disabled.
-                </p>
-              </div>
-              <Switch checked={true} disabled />
-            </div>
-
-            {/* Analytics Cookies */}
-            <div className="flex items-start justify-between">
-              <div className="flex-1 mr-4">
-                <h4 className="font-semibold">Analytics Cookies</h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Help us understand how visitors use our website through privacy-friendly 
-                  analytics (Plausible Analytics).
-                </p>
-              </div>
-              <Switch 
-                checked={preferences.analytics}
-                onCheckedChange={(checked) => 
-                  setPreferences(prev => ({ ...prev, analytics: checked }))
-                }
-              />
-            </div>
-
-            {/* Marketing Cookies */}
-            <div className="flex items-start justify-between">
-              <div className="flex-1 mr-4">
-                <h4 className="font-semibold">Marketing Cookies</h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Used for advertising and measuring campaign effectiveness. 
-                  Currently not used on this website.
-                </p>
-              </div>
-              <Switch 
-                checked={preferences.marketing}
-                onCheckedChange={(checked) => 
-                  setPreferences(prev => ({ ...prev, marketing: checked }))
-                }
-                disabled
-              />
-            </div>
-
-            <div className="flex justify-end gap-3 pt-4 border-t">
-              <Button variant="outline" onClick={() => setShowPreferences(false)}>
-                Cancel
-              </Button>
-              <Button onClick={() => savePreferences(preferences)}>
-                Save Preferences
-              </Button>
-            </div>
+          <div className="space-y-5">
+            <Row label="Necessary" description="Session, security and cookie-preference storage. Always active." checked disabled />
+            <Row
+              label="Functional"
+              description="Remembers non-essential choices such as UI preferences."
+              checked={prefs.functional}
+              onChange={(v) => setPrefs((p) => ({ ...p, functional: v }))}
+            />
+            <Row
+              label="Analytics"
+              description="Anonymous, aggregated measurement of how the site is used."
+              checked={prefs.analytics}
+              onChange={(v) => setPrefs((p) => ({ ...p, analytics: v }))}
+            />
+            <Row
+              label="Other optional technologies"
+              description="Embedded content or optional integrations that store data on your device."
+              checked={prefs.other}
+              onChange={(v) => setPrefs((p) => ({ ...p, other: v }))}
+            />
+          </div>
+          <div className="flex flex-wrap gap-2 justify-end pt-4 border-t">
+            <Button variant="outline" onClick={rejectNonEssential}>Reject non-essential</Button>
+            <Button variant="outline" onClick={acceptAll}>Accept all</Button>
+            <Button onClick={saveCustom}>Save choices</Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -197,9 +184,30 @@ export const CookieBanner = () => {
   );
 };
 
-// Extend Window interface for gtag
+const Row = ({
+  label,
+  description,
+  checked,
+  onChange,
+  disabled,
+}: {
+  label: string;
+  description: string;
+  checked: boolean;
+  onChange?: (v: boolean) => void;
+  disabled?: boolean;
+}) => (
+  <div className="flex items-start justify-between gap-4">
+    <div className="flex-1">
+      <div className="font-medium">{label}</div>
+      <p className="text-sm text-muted-foreground mt-1">{description}</p>
+    </div>
+    <Switch checked={checked} onCheckedChange={onChange} disabled={disabled} />
+  </div>
+);
+
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
