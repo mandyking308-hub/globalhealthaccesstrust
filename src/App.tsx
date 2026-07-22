@@ -75,6 +75,8 @@ import { DonationSuccessPage } from "./pages/DonationSuccessPage";
 import { DonationCancelledPage } from "./pages/DonationCancelledPage";
 import AdminPaymentsPage from "./pages/admin/AdminPaymentsPage";
 import AdminHighValueAgreementsPage from "./pages/admin/AdminHighValueAgreementsPage";
+import AdminGiftAcceptancePage from "./pages/admin/AdminGiftAcceptancePage";
+import GiftAcceptancePolicyPage from "./pages/GiftAcceptancePolicyPage";
 
 const queryClient = new QueryClient();
 
