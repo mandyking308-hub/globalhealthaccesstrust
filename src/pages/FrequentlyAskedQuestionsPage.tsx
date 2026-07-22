@@ -18,7 +18,7 @@ export const FrequentlyAskedQuestionsPage = () => {
       <div className="section-container">
         <h2>About the Trust</h2>
         <h3>What is the Global Health Access Trust?</h3>
-        <p>The Global Health Access Trust is a charitable trust established in 2025 under English law to advance health, relieve illness, and preserve life—particularly among vulnerable or underserved populations. It is governed by its Trust Deed and administered by its Board of Trustees exclusively for charitable purposes.</p>
+        <p>The Global Health Access Trust is a charitable trust established under the laws of England and Wales to advance health, relieve illness, and preserve life—particularly among vulnerable or underserved populations. It is governed by its Trust Deed and administered by its Board of Trustees exclusively for charitable purposes.</p>
         <h3>What makes this Trust different from other health charities?</h3>
         <p>We are built as a permanent institution rather than a campaign or initiative. Our approach emphasises systems-building over dependency, dignity over publicity, and long-term sustainability over short-term visibility. We operate with strict governance standards and exist to serve, not to sell.</p>
         <h3>How is the Trust constituted?</h3>
@@ -42,7 +42,7 @@ export const FrequentlyAskedQuestionsPage = () => {
         <h3>Can I specify how my contribution is used?</h3>
         <p>Yes, supporters may direct restricted gifts to specific programmes or initiatives, subject to Board approval and formal documentation that aligns with our charitable objectives and includes reversion clauses if the original purpose becomes obsolete.</p>
         <h3>Do you provide tax receipts?</h3>
-        <p>Yes, all contributions are formally receipted. UK taxpayers can benefit from Gift Aid, which allows us to claim an additional 25p for every £1 contributed at no extra cost to the contributor.</p>
+        <p>Yes, contributions are formally receipted. The Trust does not currently operate a Gift Aid scheme; any future arrangement will be announced only when the required HMRC recognition and processes are in place.</p>
       </div>
 
       <div className="section-container">

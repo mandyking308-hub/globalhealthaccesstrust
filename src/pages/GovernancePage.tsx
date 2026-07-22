@@ -148,7 +148,7 @@ export const GovernancePage = () => {
             <div className="section-container">
               <h3 className="mb-3 text-foreground">Public Reporting</h3>
               <ul className="space-y-2 text-[15px] text-muted-foreground leading-[1.7]">
-                <li>• Annual reports filed with the Charity Commission</li>
+                <li>• Annual reports prepared by the Board of Trustees</li>
                 <li>• Financial statements per SORP requirements</li>
                 <li>• Impact reporting demonstrating outcomes</li>
                 <li>• Public access to governance documents</li>
@@ -176,7 +176,7 @@ export const GovernancePage = () => {
                 Please use the Contact Form
               </a>
               {" "}— include "Governance" in the subject line.
-              Annual reports are available on request and via the Charity Commission.
+              Annual reports are available on request from the Board of Trustees.
             </p>
           </div>
         </div>
