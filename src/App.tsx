@@ -66,6 +66,7 @@ import AdminServiceConsolePage from "./pages/admin/AdminServiceConsolePage";
 import AdminAgreementsPage from "./pages/admin/AdminAgreementsPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 import AdminLegalPage from "./pages/admin/AdminLegalPage";
+import AdminPrivacyGovernancePage from "./pages/admin/AdminPrivacyGovernancePage";
 import LegalIndexPage from "./pages/LegalIndexPage";
 import LegalDocumentPage from "./pages/LegalDocumentPage";
 
@@ -159,6 +160,7 @@ const App = () => (
             <Route path="ai" element={<AdminAIPage />} />
             <Route path="security" element={<AdminSecurityPage />} />
             <Route path="gdpr" element={<AdminGDPRPage />} />
+            <Route path="privacy-governance" element={<AdminPrivacyGovernancePage />} />
             <Route path="testing" element={<AdminTestingChecklistPage />} />
             <Route path="documentation" element={<AdminDocumentationPage />} />
             <Route path="presentations" element={<AdminPresentationsPage />} />

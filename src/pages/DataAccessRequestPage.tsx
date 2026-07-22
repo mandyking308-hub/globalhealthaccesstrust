@@ -1,70 +1,77 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
+const REQUEST_TYPES: { value: string; label: string; description: string }[] = [
+  { value: "access", label: "Access your personal data", description: "Receive a secure copy of the personal data we hold about you." },
+  { value: "rectification", label: "Correct inaccurate data", description: "Ask us to correct information that is wrong or incomplete." },
+  { value: "erasure", label: "Erasure of personal data", description: "Request deletion. Some records may be retained where a legal or governance obligation applies." },
+  { value: "restriction", label: "Restriction of processing", description: "Ask us to pause processing while a matter is reviewed." },
+  { value: "objection", label: "Object to processing", description: "Object to processing carried out under legitimate interests." },
+  { value: "portability", label: "Portability of data you provided", description: "Receive certain data you provided in a portable format." },
+  { value: "withdrawal_of_consent", label: "Withdraw consent", description: "Withdraw consent previously given (this does not affect earlier lawful processing)." },
+  { value: "automated_decision_review", label: "Automated decision review", description: "Ask a person to review a decision made by automated means." },
+  { value: "information_request", label: "Information about our processing", description: "Ask us how we use personal data." },
+  { value: "other", label: "Other data-protection request", description: "Any other data-protection matter." },
+];
+
 export const DataAccessRequestPage = () => {
   const { toast } = useToast();
-  const [requestType, setRequestType] = useState<"export" | "delete">("export");
-  const [email, setEmail] = useState("");
-  const [details, setDetails] = useState("");
+  const [requestType, setRequestType] = useState<string>("access");
+  const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
+  const [representative, setRepresentative] = useState("");
+  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
+  const [reference, setReference] = useState<string | null>(null);
 
-  useState(() => {
-    checkAuth();
-  });
-
-  const checkAuth = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (user) {
-      setIsLoggedIn(true);
-      setUserId(user.id);
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("email")
-        .eq("id", user.id)
-        .single();
-      if (profile) {
-        setEmail(profile.email);
+  useEffect(() => {
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setIsLoggedIn(true);
+        const { data: profile } = await supabase
+          .from("profiles").select("email, first_name, last_name").eq("id", user.id).maybeSingle();
+        if (profile) {
+          setContact(profile.email ?? "");
+          setName([profile.first_name, profile.last_name].filter(Boolean).join(" "));
+        }
       }
-    }
-  };
+    })();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     try {
-      const { error } = await supabase.from("gdpr_requests").insert({
-        user_id: userId,
-        email,
-        request_type: requestType,
-        request_details: details,
-        status: "pending",
+      const { data, error } = await supabase.rpc("submit_rights_request", {
+        _request_type: requestType,
+        _request_description: description,
+        _requester_contact: contact,
+        _requester_name: name,
+        _representative_name: representative || null,
+        _channel: "website",
       });
-
       if (error) throw error;
-
+      setReference(data as string);
       toast({
-        title: "Request Submitted",
-        description: `Your ${requestType === "export" ? "data export" : "data deletion"} request has been received. We will process it within 30 days.`,
+        title: "Request received",
+        description: "Your reference is " + data + ". We will contact you to confirm and, where required, verify your identity.",
       });
-
-      setDetails("");
-    } catch (error) {
-      console.error("Error submitting DSAR:", error);
+      setDescription("");
+    } catch (err: any) {
       toast({
-        title: "Submission Error",
-        description: "Your request could not be completed. A member of our team will review this shortly.",
+        title: "We could not submit your request",
+        description: err.message ?? "Please try again or contact us.",
         variant: "destructive",
       });
     } finally {
@@ -74,135 +81,99 @@ export const DataAccessRequestPage = () => {
 
   return (
     <>
-      <SEO 
-        title="Data Access Request - Global Health Access Trust"
-        description="Exercise your GDPR rights: request your data or deletion."
+      <SEO
+        title="Data-protection rights request | Global Health Access Trust"
+        description="Exercise your UK GDPR rights: access, correction, erasure, restriction, objection, portability, consent withdrawal and related requests."
       />
-      
       <div className="min-h-screen bg-background py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              
-              <h1 className="text-4xl font-serif text-foreground">Data Access Request</h1>
-            </div>
-            <p className="text-muted-foreground">
-              Exercise your GDPR rights to access or delete your personal data
+            <h1 className="text-4xl font-serif text-foreground">Data-protection rights request</h1>
+            <p className="mt-3 text-muted-foreground">
+              You may exercise your rights under the UK GDPR by completing this form. We aim to respond within one calendar month of confirming your request and, where required, verifying your identity. Complex requests may be extended by up to two further months, and we will explain any extension in writing.
             </p>
           </div>
 
-          <Alert className="mb-8">
-            
-            <AlertDescription>
-              Under UK GDPR, you have the right to access your personal data or request its deletion. 
-              We will respond to your request within 30 days.
-            </AlertDescription>
-          </Alert>
+          {reference && (
+            <Alert className="mb-6">
+              <AlertDescription>
+                Your reference number is <strong>{reference}</strong>. Please keep this for your records.
+              </AlertDescription>
+            </Alert>
+          )}
 
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif">Submit a Request</CardTitle>
-              <CardDescription>
-                Choose whether you'd like to export your data or request deletion
-              </CardDescription>
+              <CardTitle className="font-serif">Submit a request</CardTitle>
+              <CardDescription>All requests are handled by the Trust's data-protection lead.</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-4">
-                  <Label>Request Type</Label>
-                  <RadioGroup value={requestType} onValueChange={(value) => setRequestType(value as "export" | "delete")}>
-                    <div className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-accent cursor-pointer">
-                      <RadioGroupItem value="export" id="export" className="mt-1" />
-                      <div className="flex-1">
-                        <Label htmlFor="export" className="cursor-pointer">
-                          <div className="flex items-center gap-2 mb-1">
-                            
-                            <span className="font-semibold">Data Export</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground">
-                            Request a complete copy of all personal data we hold about you in a portable format
-                          </p>
-                        </Label>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-accent cursor-pointer">
-                      <RadioGroupItem value="delete" id="delete" className="mt-1" />
-                      <div className="flex-1">
-                        <Label htmlFor="delete" className="cursor-pointer">
-                          <div className="flex items-center gap-2 mb-1">
-                            
-                            <span className="font-semibold">Data Deletion</span>
-                          </div>
-                          <p className="text-sm text-muted-foreground">
-                            Request permanent deletion of your personal data (note: some data may be retained for legal compliance)
-                          </p>
-                        </Label>
-                      </div>
-                    </div>
-                  </RadioGroup>
+                <div className="space-y-2">
+                  <Label>Type of request</Label>
+                  <Select value={requestType} onValueChange={setRequestType}>
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      {REQUEST_TYPES.map(t => (
+                        <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <p className="text-sm text-muted-foreground">
+                    {REQUEST_TYPES.find(t => t.value === requestType)?.description}
+                  </p>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    required
-                    disabled={isLoggedIn}
-                  />
-                  {isLoggedIn && (
-                    <p className="text-xs text-muted-foreground">
-                      Using your registered email address
-                    </p>
-                  )}
+                  <Label htmlFor="name">Your name</Label>
+                  <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="details">Additional Details (Optional)</Label>
-                  <Textarea
-                    id="details"
-                    value={details}
-                    onChange={(e) => setDetails(e.target.value)}
-                    placeholder="Provide any additional information about your request..."
-                    rows={4}
-                  />
+                  <Label htmlFor="contact">Contact (email or postal address)</Label>
+                  <Input id="contact" value={contact} onChange={e => setContact(e.target.value)} required disabled={isLoggedIn} />
+                  {isLoggedIn && <p className="text-xs text-muted-foreground">Using your registered contact.</p>}
                 </div>
 
-                {requestType === "delete" && (
+                <div className="space-y-2">
+                  <Label htmlFor="representative">Acting on behalf of someone else? (optional)</Label>
+                  <Input id="representative" value={representative} onChange={e => setRepresentative(e.target.value)}
+                    placeholder="Name of the person you represent" />
+                  <p className="text-xs text-muted-foreground">
+                    If you are acting for another person, we will ask for evidence of your authority before we act.
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="description">Please describe your request</Label>
+                  <Textarea id="description" rows={5} value={description} onChange={e => setDescription(e.target.value)}
+                    placeholder="Include enough detail for us to locate the information (dates, subject matter, communications)."
+                    required minLength={5} />
+                </div>
+
+                {requestType === "erasure" && (
                   <Alert variant="destructive">
                     <AlertDescription>
-                      <strong>Important:</strong> Deleting your data is permanent and irreversible. 
-                      Your account access will be removed, but anonymized project data may be retained 
-                      to maintain project integrity and comply with charity regulations.
+                      Erasure is not always possible. Records required to meet legal, financial, safeguarding or governance obligations may be retained. We will explain what we can and cannot do.
                     </AlertDescription>
                   </Alert>
                 )}
 
                 <Button type="submit" disabled={loading} className="w-full">
-                  {loading ? "Submitting..." : "Submit Request"}
+                  {loading ? "Submitting…" : "Submit request"}
                 </Button>
               </form>
             </CardContent>
           </Card>
 
           <Card className="mt-6">
-            <CardHeader>
-              <CardTitle className="font-serif text-lg">What Happens Next?</CardTitle>
-            </CardHeader>
+            <CardHeader><CardTitle className="font-serif text-lg">What happens next</CardTitle></CardHeader>
             <CardContent>
               <ol className="list-decimal pl-6 space-y-2 text-sm text-muted-foreground">
-                <li>Your request is logged and reviewed by our data protection team</li>
-                <li>We verify your identity to ensure data security</li>
-                <li>
-                  {requestType === "export" 
-                    ? "We compile all your data into a secure, downloadable format" 
-                    : "We permanently remove your personal data from our systems"}
-                </li>
-                <li>You receive confirmation via email within 30 days</li>
+                <li>We acknowledge your request and, where necessary, ask you to confirm your identity.</li>
+                <li>Our data-protection lead reviews the request against the UK GDPR.</li>
+                <li>We search the relevant systems, apply any exemptions required, and prepare the response.</li>
+                <li>We deliver our response securely within one calendar month, unless we tell you we need longer.</li>
               </ol>
             </CardContent>
           </Card>

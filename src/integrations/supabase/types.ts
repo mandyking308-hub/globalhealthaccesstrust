@@ -953,6 +953,560 @@ export type Database = {
           },
         ]
       }
+      privacy_international_transfers: {
+        Row: {
+          assessed_by: string | null
+          contract_status: string | null
+          created_at: string
+          created_by: string | null
+          data_subject_categories: string[] | null
+          destination_country: string | null
+          effective_date: string | null
+          encryption_or_access_controls: string | null
+          frequency: string | null
+          id: string
+          mechanism_reference: string | null
+          notes: string | null
+          onward_transfer_countries: string[] | null
+          owner_user_id: string | null
+          personal_data_categories: string[] | null
+          purpose: string | null
+          recipient_name: string
+          recipient_role: string
+          review_date: string | null
+          risk_assessment_date: string | null
+          risk_assessment_reference: string | null
+          special_category_data: boolean
+          status: string
+          supplementary_safeguards: string | null
+          transfer_mechanism: string
+          transfer_method: string | null
+          transfer_reference: string
+          transfer_risk_assessment_status: string
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          assessed_by?: string | null
+          contract_status?: string | null
+          created_at?: string
+          created_by?: string | null
+          data_subject_categories?: string[] | null
+          destination_country?: string | null
+          effective_date?: string | null
+          encryption_or_access_controls?: string | null
+          frequency?: string | null
+          id?: string
+          mechanism_reference?: string | null
+          notes?: string | null
+          onward_transfer_countries?: string[] | null
+          owner_user_id?: string | null
+          personal_data_categories?: string[] | null
+          purpose?: string | null
+          recipient_name: string
+          recipient_role: string
+          review_date?: string | null
+          risk_assessment_date?: string | null
+          risk_assessment_reference?: string | null
+          special_category_data?: boolean
+          status?: string
+          supplementary_safeguards?: string | null
+          transfer_mechanism?: string
+          transfer_method?: string | null
+          transfer_reference: string
+          transfer_risk_assessment_status?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          assessed_by?: string | null
+          contract_status?: string | null
+          created_at?: string
+          created_by?: string | null
+          data_subject_categories?: string[] | null
+          destination_country?: string | null
+          effective_date?: string | null
+          encryption_or_access_controls?: string | null
+          frequency?: string | null
+          id?: string
+          mechanism_reference?: string | null
+          notes?: string | null
+          onward_transfer_countries?: string[] | null
+          owner_user_id?: string | null
+          personal_data_categories?: string[] | null
+          purpose?: string | null
+          recipient_name?: string
+          recipient_role?: string
+          review_date?: string | null
+          risk_assessment_date?: string | null
+          risk_assessment_reference?: string | null
+          special_category_data?: boolean
+          status?: string
+          supplementary_safeguards?: string | null
+          transfer_mechanism?: string
+          transfer_method?: string | null
+          transfer_reference?: string
+          transfer_risk_assessment_status?: string
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      privacy_processing_activities: {
+        Row: {
+          activity_code: string
+          activity_name: string
+          article_6_lawful_bases: string[] | null
+          created_at: string
+          created_by: string | null
+          criminal_offence_condition: string | null
+          criminal_offence_data: boolean
+          data_subject_categories: string[] | null
+          description: string | null
+          id: string
+          international_transfer_required: boolean
+          last_reviewed_at: string | null
+          last_reviewed_by: string | null
+          legitimate_interest_assessment_reference: string | null
+          next_review_at: string | null
+          owner_role: string | null
+          owner_user_id: string | null
+          personal_data_categories: string[] | null
+          purpose: string | null
+          recipients: string[] | null
+          recognised_legitimate_interest: string | null
+          related_transfer_ids: string[] | null
+          retention_rule_id: string | null
+          risk_level: string
+          security_measures_summary: string | null
+          special_category_condition: string | null
+          special_category_data: boolean
+          status: string
+          systems_used: string[] | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          activity_code: string
+          activity_name: string
+          article_6_lawful_bases?: string[] | null
+          created_at?: string
+          created_by?: string | null
+          criminal_offence_condition?: string | null
+          criminal_offence_data?: boolean
+          data_subject_categories?: string[] | null
+          description?: string | null
+          id?: string
+          international_transfer_required?: boolean
+          last_reviewed_at?: string | null
+          last_reviewed_by?: string | null
+          legitimate_interest_assessment_reference?: string | null
+          next_review_at?: string | null
+          owner_role?: string | null
+          owner_user_id?: string | null
+          personal_data_categories?: string[] | null
+          purpose?: string | null
+          recipients?: string[] | null
+          recognised_legitimate_interest?: string | null
+          related_transfer_ids?: string[] | null
+          retention_rule_id?: string | null
+          risk_level?: string
+          security_measures_summary?: string | null
+          special_category_condition?: string | null
+          special_category_data?: boolean
+          status?: string
+          systems_used?: string[] | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          activity_code?: string
+          activity_name?: string
+          article_6_lawful_bases?: string[] | null
+          created_at?: string
+          created_by?: string | null
+          criminal_offence_condition?: string | null
+          criminal_offence_data?: boolean
+          data_subject_categories?: string[] | null
+          description?: string | null
+          id?: string
+          international_transfer_required?: boolean
+          last_reviewed_at?: string | null
+          last_reviewed_by?: string | null
+          legitimate_interest_assessment_reference?: string | null
+          next_review_at?: string | null
+          owner_role?: string | null
+          owner_user_id?: string | null
+          personal_data_categories?: string[] | null
+          purpose?: string | null
+          recipients?: string[] | null
+          recognised_legitimate_interest?: string | null
+          related_transfer_ids?: string[] | null
+          retention_rule_id?: string | null
+          risk_level?: string
+          security_measures_summary?: string | null
+          special_category_condition?: string | null
+          special_category_data?: boolean
+          status?: string
+          systems_used?: string[] | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ppa_retention_rule_fk"
+            columns: ["retention_rule_id"]
+            isOneToOne: false
+            referencedRelation: "privacy_retention_rules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_retention_holds: {
+        Row: {
+          applied_at: string
+          applied_by: string | null
+          created_at: string
+          detailed_reason: string | null
+          hold_reference: string
+          id: string
+          reason: string
+          record_categories: string[] | null
+          release_reason: string | null
+          released_at: string | null
+          released_by: string | null
+          review_at: string | null
+          scope_id: string | null
+          scope_type: string
+          status: string
+          supporting_document_reference: string | null
+          updated_at: string
+        }
+        Insert: {
+          applied_at?: string
+          applied_by?: string | null
+          created_at?: string
+          detailed_reason?: string | null
+          hold_reference: string
+          id?: string
+          reason: string
+          record_categories?: string[] | null
+          release_reason?: string | null
+          released_at?: string | null
+          released_by?: string | null
+          review_at?: string | null
+          scope_id?: string | null
+          scope_type: string
+          status?: string
+          supporting_document_reference?: string | null
+          updated_at?: string
+        }
+        Update: {
+          applied_at?: string
+          applied_by?: string | null
+          created_at?: string
+          detailed_reason?: string | null
+          hold_reference?: string
+          id?: string
+          reason?: string
+          record_categories?: string[] | null
+          release_reason?: string | null
+          released_at?: string | null
+          released_by?: string | null
+          review_at?: string | null
+          scope_id?: string | null
+          scope_type?: string
+          status?: string
+          supporting_document_reference?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      privacy_retention_reviews: {
+        Row: {
+          audit_event_id: string | null
+          completed_at: string | null
+          created_at: string
+          decision: string | null
+          decision_reason: string | null
+          deferred_until: string | null
+          hold_id: string | null
+          hold_status: string | null
+          id: string
+          proposed_action: string | null
+          record_id: string | null
+          record_summary: string | null
+          record_type: string | null
+          related_donation_id: string | null
+          related_project_id: string | null
+          retention_rule_id: string | null
+          review_due_at: string | null
+          review_reference: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          sensitivity: string
+          status: string
+          subject_user_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          audit_event_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          decision?: string | null
+          decision_reason?: string | null
+          deferred_until?: string | null
+          hold_id?: string | null
+          hold_status?: string | null
+          id?: string
+          proposed_action?: string | null
+          record_id?: string | null
+          record_summary?: string | null
+          record_type?: string | null
+          related_donation_id?: string | null
+          related_project_id?: string | null
+          retention_rule_id?: string | null
+          review_due_at?: string | null
+          review_reference: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          sensitivity?: string
+          status?: string
+          subject_user_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          audit_event_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          decision?: string | null
+          decision_reason?: string | null
+          deferred_until?: string | null
+          hold_id?: string | null
+          hold_status?: string | null
+          id?: string
+          proposed_action?: string | null
+          record_id?: string | null
+          record_summary?: string | null
+          record_type?: string | null
+          related_donation_id?: string | null
+          related_project_id?: string | null
+          retention_rule_id?: string | null
+          review_due_at?: string | null
+          review_reference?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          sensitivity?: string
+          status?: string
+          subject_user_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_retention_reviews_hold_id_fkey"
+            columns: ["hold_id"]
+            isOneToOne: false
+            referencedRelation: "privacy_retention_holds"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_retention_reviews_retention_rule_id_fkey"
+            columns: ["retention_rule_id"]
+            isOneToOne: false
+            referencedRelation: "privacy_retention_rules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      privacy_retention_rules: {
+        Row: {
+          active: boolean
+          approved_at: string | null
+          approved_by: string | null
+          automatic_deletion_allowed: boolean
+          created_at: string
+          default_retention_unit: string
+          default_retention_value: number | null
+          description: string | null
+          id: string
+          last_reviewed_at: string | null
+          legal_or_governance_reason: string | null
+          next_review_at: string | null
+          notes: string | null
+          ordinary_action: string
+          record_category: string
+          related_privacy_notice_section: string | null
+          retention_start_event: string | null
+          review_required: boolean
+          rule_code: string
+          sensitive_exclusion: boolean
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          active?: boolean
+          approved_at?: string | null
+          approved_by?: string | null
+          automatic_deletion_allowed?: boolean
+          created_at?: string
+          default_retention_unit: string
+          default_retention_value?: number | null
+          description?: string | null
+          id?: string
+          last_reviewed_at?: string | null
+          legal_or_governance_reason?: string | null
+          next_review_at?: string | null
+          notes?: string | null
+          ordinary_action: string
+          record_category: string
+          related_privacy_notice_section?: string | null
+          retention_start_event?: string | null
+          review_required?: boolean
+          rule_code: string
+          sensitive_exclusion?: boolean
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          active?: boolean
+          approved_at?: string | null
+          approved_by?: string | null
+          automatic_deletion_allowed?: boolean
+          created_at?: string
+          default_retention_unit?: string
+          default_retention_value?: number | null
+          description?: string | null
+          id?: string
+          last_reviewed_at?: string | null
+          legal_or_governance_reason?: string | null
+          next_review_at?: string | null
+          notes?: string | null
+          ordinary_action?: string
+          record_category?: string
+          related_privacy_notice_section?: string | null
+          retention_start_event?: string | null
+          review_required?: boolean
+          rule_code?: string
+          sensitive_exclusion?: boolean
+          updated_at?: string
+          version?: number
+        }
+        Relationships: []
+      }
+      privacy_service_providers: {
+        Row: {
+          breach_notification_terms: string | null
+          contract_end_date: string | null
+          contract_reference: string | null
+          contract_start_date: string | null
+          contract_status: string
+          created_at: string
+          created_by: string | null
+          data_processing_terms_status: string | null
+          data_subject_categories: string[] | null
+          deletion_or_return_terms: string | null
+          hosting_countries: string[] | null
+          id: string
+          international_transfer: boolean
+          next_review_at: string | null
+          notes: string | null
+          owner_user_id: string | null
+          personal_data_categories: string[] | null
+          processing_countries: string[] | null
+          processing_purpose: string | null
+          provider_name: string
+          provider_role: string
+          related_transfer_id: string | null
+          risk_level: string
+          security_review_date: string | null
+          security_review_status: string
+          service_description: string | null
+          special_category_access: boolean
+          status: string
+          subprocessor_information: string | null
+          subprocessor_use: boolean
+          supporting_document_id: string | null
+          systems_or_products: string[] | null
+          transfer_mechanism: string | null
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          breach_notification_terms?: string | null
+          contract_end_date?: string | null
+          contract_reference?: string | null
+          contract_start_date?: string | null
+          contract_status?: string
+          created_at?: string
+          created_by?: string | null
+          data_processing_terms_status?: string | null
+          data_subject_categories?: string[] | null
+          deletion_or_return_terms?: string | null
+          hosting_countries?: string[] | null
+          id?: string
+          international_transfer?: boolean
+          next_review_at?: string | null
+          notes?: string | null
+          owner_user_id?: string | null
+          personal_data_categories?: string[] | null
+          processing_countries?: string[] | null
+          processing_purpose?: string | null
+          provider_name: string
+          provider_role: string
+          related_transfer_id?: string | null
+          risk_level?: string
+          security_review_date?: string | null
+          security_review_status?: string
+          service_description?: string | null
+          special_category_access?: boolean
+          status?: string
+          subprocessor_information?: string | null
+          subprocessor_use?: boolean
+          supporting_document_id?: string | null
+          systems_or_products?: string[] | null
+          transfer_mechanism?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          breach_notification_terms?: string | null
+          contract_end_date?: string | null
+          contract_reference?: string | null
+          contract_start_date?: string | null
+          contract_status?: string
+          created_at?: string
+          created_by?: string | null
+          data_processing_terms_status?: string | null
+          data_subject_categories?: string[] | null
+          deletion_or_return_terms?: string | null
+          hosting_countries?: string[] | null
+          id?: string
+          international_transfer?: boolean
+          next_review_at?: string | null
+          notes?: string | null
+          owner_user_id?: string | null
+          personal_data_categories?: string[] | null
+          processing_countries?: string[] | null
+          processing_purpose?: string | null
+          provider_name?: string
+          provider_role?: string
+          related_transfer_id?: string | null
+          risk_level?: string
+          security_review_date?: string | null
+          security_review_status?: string
+          service_description?: string | null
+          special_category_access?: boolean
+          status?: string
+          subprocessor_information?: string | null
+          subprocessor_use?: boolean
+          supporting_document_id?: string | null
+          systems_or_products?: string[] | null
+          transfer_mechanism?: string | null
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           cookie_consent: boolean | null
@@ -2231,6 +2785,197 @@ export type Database = {
         }
         Relationships: []
       }
+      rights_request_events: {
+        Row: {
+          actor_role: string | null
+          actor_user_id: string | null
+          created_at: string
+          detail: Json | null
+          event_type: string
+          id: string
+          request_id: string
+        }
+        Insert: {
+          actor_role?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          detail?: Json | null
+          event_type: string
+          id?: string
+          request_id: string
+        }
+        Update: {
+          actor_role?: string | null
+          actor_user_id?: string | null
+          created_at?: string
+          detail?: Json | null
+          event_type?: string
+          id?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rights_request_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "my_rights_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rights_request_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "rights_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rights_requests: {
+        Row: {
+          assigned_to: string | null
+          authority_verified_at: string | null
+          channel: string
+          clarification_received_at: string | null
+          clarification_requested_at: string | null
+          clock_paused_at: string | null
+          clock_resumed_at: string | null
+          clock_start_at: string | null
+          completed_at: string | null
+          created_at: string
+          decision: string
+          due_at: string | null
+          exemption_reasons: string[] | null
+          exemption_review: string | null
+          extended_due_at: string | null
+          extension_applied: boolean
+          extension_notified_at: string | null
+          extension_reason: string | null
+          id: string
+          identity_requested_at: string | null
+          identity_status: string
+          identity_verified_at: string | null
+          internal_notes: string | null
+          linked_gdpr_request_id: string | null
+          pause_reason: string | null
+          received_at: string
+          reference_number: string
+          representative_authority_status: string | null
+          representative_name: string | null
+          request_description: string
+          request_type: string
+          requester_contact: string
+          requester_name: string | null
+          requester_user_id: string | null
+          response_package_reference: string | null
+          response_summary: string | null
+          scope: string | null
+          searches_completed: string[] | null
+          secure_delivery_method: string | null
+          status: string
+          systems_to_search: string[] | null
+          third_party_information_review: string | null
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          authority_verified_at?: string | null
+          channel?: string
+          clarification_received_at?: string | null
+          clarification_requested_at?: string | null
+          clock_paused_at?: string | null
+          clock_resumed_at?: string | null
+          clock_start_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          decision?: string
+          due_at?: string | null
+          exemption_reasons?: string[] | null
+          exemption_review?: string | null
+          extended_due_at?: string | null
+          extension_applied?: boolean
+          extension_notified_at?: string | null
+          extension_reason?: string | null
+          id?: string
+          identity_requested_at?: string | null
+          identity_status?: string
+          identity_verified_at?: string | null
+          internal_notes?: string | null
+          linked_gdpr_request_id?: string | null
+          pause_reason?: string | null
+          received_at?: string
+          reference_number: string
+          representative_authority_status?: string | null
+          representative_name?: string | null
+          request_description: string
+          request_type: string
+          requester_contact: string
+          requester_name?: string | null
+          requester_user_id?: string | null
+          response_package_reference?: string | null
+          response_summary?: string | null
+          scope?: string | null
+          searches_completed?: string[] | null
+          secure_delivery_method?: string | null
+          status?: string
+          systems_to_search?: string[] | null
+          third_party_information_review?: string | null
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          authority_verified_at?: string | null
+          channel?: string
+          clarification_received_at?: string | null
+          clarification_requested_at?: string | null
+          clock_paused_at?: string | null
+          clock_resumed_at?: string | null
+          clock_start_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          decision?: string
+          due_at?: string | null
+          exemption_reasons?: string[] | null
+          exemption_review?: string | null
+          extended_due_at?: string | null
+          extension_applied?: boolean
+          extension_notified_at?: string | null
+          extension_reason?: string | null
+          id?: string
+          identity_requested_at?: string | null
+          identity_status?: string
+          identity_verified_at?: string | null
+          internal_notes?: string | null
+          linked_gdpr_request_id?: string | null
+          pause_reason?: string | null
+          received_at?: string
+          reference_number?: string
+          representative_authority_status?: string | null
+          representative_name?: string | null
+          request_description?: string
+          request_type?: string
+          requester_contact?: string
+          requester_name?: string | null
+          requester_user_id?: string | null
+          response_package_reference?: string | null
+          response_summary?: string | null
+          scope?: string | null
+          searches_completed?: string[] | null
+          secure_delivery_method?: string | null
+          status?: string
+          systems_to_search?: string[] | null
+          third_party_information_review?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rights_requests_linked_gdpr_request_id_fkey"
+            columns: ["linked_gdpr_request_id"]
+            isOneToOne: false
+            referencedRelation: "gdpr_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       system_alerts: {
         Row: {
           alert_type: string
@@ -2638,7 +3383,48 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      my_rights_requests: {
+        Row: {
+          clarification_needed: boolean | null
+          completed_at: string | null
+          decision: string | null
+          due_at: string | null
+          extended_due_at: string | null
+          id: string | null
+          identity_action_needed: boolean | null
+          received_at: string | null
+          reference_number: string | null
+          request_type: string | null
+          status: string | null
+        }
+        Insert: {
+          clarification_needed?: never
+          completed_at?: string | null
+          decision?: string | null
+          due_at?: string | null
+          extended_due_at?: string | null
+          id?: string | null
+          identity_action_needed?: never
+          received_at?: string | null
+          reference_number?: string | null
+          request_type?: string | null
+          status?: string | null
+        }
+        Update: {
+          clarification_needed?: never
+          completed_at?: string | null
+          decision?: string | null
+          due_at?: string | null
+          extended_due_at?: string | null
+          id?: string | null
+          identity_action_needed?: never
+          received_at?: string | null
+          reference_number?: string | null
+          request_type?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       add_service_request_comment: {
@@ -2768,7 +3554,11 @@ export type Database = {
         }[]
       }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
+      generate_hold_reference: { Args: never; Returns: string }
+      generate_review_reference: { Args: never; Returns: string }
+      generate_rights_request_reference: { Args: never; Returns: string }
       generate_service_request_reference: { Args: never; Returns: string }
+      generate_transfer_reference: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -2834,11 +3624,34 @@ export type Database = {
         Args: { _category: string; _request_id: string; _summary: string }
         Returns: undefined
       }
+      rr_add_event: {
+        Args: { _detail?: Json; _event_type: string; _request_id: string }
+        Returns: string
+      }
+      rr_apply_extension: {
+        Args: { _months?: number; _reason: string; _request_id: string }
+        Returns: undefined
+      }
+      rr_set_clock_start: {
+        Args: { _request_id: string; _start: string }
+        Returns: undefined
+      }
       submit_agreement_decision: {
         Args: {
           _comment: string
           _decision: Database["public"]["Enums"]["agreement_decision"]
           _version_id: string
+        }
+        Returns: string
+      }
+      submit_rights_request: {
+        Args: {
+          _channel?: string
+          _representative_name?: string
+          _request_description: string
+          _request_type: string
+          _requester_contact: string
+          _requester_name: string
         }
         Returns: string
       }
