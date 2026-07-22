@@ -30,6 +30,8 @@ import { ContactPage } from "./pages/ContactPage";
 import { ConstitutionPage } from "./pages/ConstitutionPage";
 import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage";
 import CookiePolicyPage from "./pages/CookiePolicyPage";
+import UnsubscribePage from "./pages/UnsubscribePage";
+import CommunicationPreferencesPage from "./pages/CommunicationPreferencesPage";
 import { TermsOfUsePage } from "./pages/TermsOfUsePage";
 import { AccessibilityStatementPage } from "./pages/AccessibilityStatementPage";
 import { SafeguardingPage, AntiFraudPage, WhistleblowingPage, GovernancePage } from "./pages/SafeguardingPage";
@@ -151,6 +153,8 @@ const App = () => (
           <Route path="auth" element={<AuthPage />} />
           <Route path="donor-dashboard" element={<DonorDashboardPage />} />
           <Route path="admin-dashboard" element={<AdminDashboardPage />} />
+          <Route path="unsubscribe" element={<UnsubscribePage />} />
+          <Route path="preferences" element={<CommunicationPreferencesPage />} />
           
           {/* New Admin Console Routes */}
           <Route path="admin" element={<AdminLayout />}>
