@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
+import { Button } from "@/components/ui/button";
+import { LEGAL_ENTITY } from "@/lib/legalEntity";
 
 export const ContactTheTrustPage = () => {
   return (
@@ -10,7 +13,7 @@ export const ContactTheTrustPage = () => {
         canonical="/contact-the-trust"
       />
       <h1>Contact the Trust</h1>
-      
+
       <p className="featured-text">Discreet. Professional. Accountable.</p>
 
       <p>We welcome confidential enquiries from:</p>
@@ -24,33 +27,46 @@ export const ContactTheTrustPage = () => {
       <p>All communication is treated with discretion and handled in accordance with data protection and safeguarding law.</p>
 
       <div className="section-container">
-        <h2>General Enquiries</h2>
-        <p>Global Health Access Trust<br />
-        2 Harley Street, London<br />
-        United Kingdom</p>
+        <h2>Contact Securely</h2>
+        <p>
+          The Trust does not publish a direct email address on the public website. Please use the secure enquiry form so your matter can be routed, recorded and handled by the appropriate authorised person.
+        </p>
+        <Button asChild>
+          <Link to="/contact">Open the Secure Contact Form</Link>
+        </Button>
       </div>
 
       <div className="section-container">
-        <h2>Legacy & Legal Enquiries</h2>
-        <p>Subject line: Legacy – Confidential</p>
-        <p>To contact the Chair of Trustees or for guidance on testamentary giving, please use the secure contact form or email above.</p>
+        <h2>Correspondence Address</h2>
+        <p>
+          {LEGAL_ENTITY.correspondenceAddress.lines.map((line) => (
+            <span key={line} className="block">{line}</span>
+          ))}
+        </p>
+        <p>This is the Trust&apos;s correspondence address.</p>
+      </div>
+
+      <div className="section-container">
+        <h2>Legacy &amp; Legal Enquiries</h2>
+        <p>When using the secure form, select <strong>Legal / Legacy Matters</strong> and mark the enquiry <strong>Legacy – Confidential</strong>.</p>
+        <p>To contact the Chair of Trustees or request guidance on testamentary giving, please use the secure contact form.</p>
       </div>
 
       <div className="section-container">
         <h2>Support the Trust</h2>
-        <p>All funding relationships are established through a structured engagement process aligned with the Trust's governance and charitable mandate.</p>
+        <p>All funding relationships are established through a structured engagement process aligned with the Trust&apos;s governance and charitable mandate.</p>
         <p>We welcome enquiries regarding:</p>
         <ul>
-          <li>Structured funding relationships (via formal engagement pathways)</li>
-          <li>Legacy giving (see suggested will wording on our Support the Trust page)</li>
-          <li>Restricted gifts for specific programmes, bursaries, or geographies</li>
-          <li>Founding benefactor capital (minimum thresholds apply)</li>
+          <li>Structured funding relationships through formal engagement pathways</li>
+          <li>Legacy giving</li>
+          <li>Restricted gifts for specific programmes, bursaries or geographies</li>
+          <li>Founding benefactor capital, subject to the Trust&apos;s acceptance and due-diligence processes</li>
         </ul>
-        <p>All contributions are receipted, independently accounted for, and held exclusively for charitable purposes. Influence is never accepted in exchange for support.</p>
-        <p>If you wish to discuss a significant gift, charitable vehicle, or family legacy, please contact us in confidence.</p>
+        <p>All accepted contributions are receipted, accounted for and held exclusively for charitable purposes. Influence is never accepted in exchange for support.</p>
+        <p>To discuss a significant gift, charitable vehicle or family legacy, please use the secure contact form.</p>
       </div>
 
-      <p className="featured-text">We respond to all serious enquiries within 48 hours.</p>
+      <p className="featured-text">We aim to acknowledge serious enquiries within two working days.</p>
     </ContentLayout>
   );
 };
