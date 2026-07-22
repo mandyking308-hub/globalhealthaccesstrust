@@ -37,8 +37,14 @@ export const AuthPage = () => {
       .select("role")
       .eq("user_id", userId);
 
-    const isAdmin = roles?.some(r => r.role === "admin" || r.role === "super_admin");
-    navigate(isAdmin ? "/admin/dashboard" : "/donor-dashboard");
+    const roleSet = new Set((roles ?? []).map(r => r.role));
+    if (roleSet.has("admin") || roleSet.has("super_admin")) {
+      navigate("/admin/dashboard");
+    } else if (roleSet.has("volunteer")) {
+      navigate("/volunteer-dashboard");
+    } else {
+      navigate("/donor-dashboard");
+    }
   };
 
   useEffect(() => {
