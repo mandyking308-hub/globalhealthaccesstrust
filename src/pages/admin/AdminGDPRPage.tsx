@@ -460,8 +460,23 @@ const RightsTab = () => {
     const months = Number(prompt("Extend by how many months? (1 or 2)", "1"));
     const { error } = await supabase.rpc("rr_apply_extension", { _request_id: detail.id, _reason: reason, _months: months });
     if (error) return toast({ title: "Failed", description: error.message, variant: "destructive" });
+    toast({ title: "Extension applied", description: "Now record the notification to the requester using \"Record extension notice\"." });
     load(); openDetail(detail);
   };
+  const recordExtNotice = async () => {
+    if (!detail) return;
+    if (!detail.extension_applied) return toast({ title: "Apply an extension first", variant: "destructive" });
+    const channel = prompt("Channel? portal / secure_email / post / telephone_confirmed / other", "secure_email");
+    if (!channel) return;
+    const note = prompt("Optional note (leave blank to skip)", "") || null;
+    const { error } = await supabase.rpc("rr_record_extension_notification", {
+      _request_id: detail.id, _notified_at: new Date().toISOString(), _channel: channel, _note: note,
+    });
+    if (error) return toast({ title: "Failed", description: error.message, variant: "destructive" });
+    toast({ title: "Notification recorded" });
+    load(); openDetail(detail);
+  };
+
 
   return (
     <Card>
