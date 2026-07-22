@@ -5,6 +5,7 @@ import { CookieConsentBanner } from "@/components/gdpr/CookieConsentBanner";
 import { CookieBanner } from "@/components/CookieBanner";
 import { Analytics } from "@/components/Analytics";
 import { ContentProtection } from "@/components/ContentProtection";
+import { TermsUpdateNotice } from "@/components/legal/TermsUpdateNotice";
 
 export const Layout = () => {
   return (
@@ -17,6 +18,7 @@ export const Layout = () => {
       <CookieBanner />
       <Analytics />
       <ContentProtection />
+      <TermsUpdateNotice />
     </div>
   );
 };

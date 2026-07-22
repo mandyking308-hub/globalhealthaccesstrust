@@ -87,6 +87,8 @@ export const AuthPage = () => {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [gdprConsent, setGdprConsent] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
 
   const redirectByRole = async (userId: string) => {
     const { data: roles } = await supabase
