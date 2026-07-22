@@ -511,6 +511,14 @@ const ProjectDetail = ({
           </ul>
         )}
       </section>
+
+      {/* Project messages */}
+      <section className="space-y-3">
+        <h3 className="font-medium">Project messages</h3>
+        {currentUserId && (
+          <ProjectMessagesThread projectId={project.id} currentUserId={currentUserId} currentRole="admin" />
+        )}
+      </section>
     </div>
   );
 };
