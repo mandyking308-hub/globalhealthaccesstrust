@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
@@ -10,7 +12,7 @@ export const ContactTheTrustPage = () => {
         canonical="/contact-the-trust"
       />
       <h1>Contact the Trust</h1>
-      
+
       <p className="featured-text">Discreet. Professional. Accountable.</p>
 
       <p>We welcome confidential enquiries from:</p>
@@ -25,15 +27,20 @@ export const ContactTheTrustPage = () => {
 
       <div className="section-container">
         <h2>General Enquiries</h2>
-        <p>Global Health Access Trust<br />
-        2 Harley Street, London<br />
-        United Kingdom</p>
+        <p>
+          Global Health Access Trust<br />
+          2 Harley Street, London<br />
+          United Kingdom
+        </p>
+        <Button asChild className="mt-4">
+          <Link to="/contact">Use the Secure Contact Form</Link>
+        </Button>
       </div>
 
       <div className="section-container">
-        <h2>Legacy & Legal Enquiries</h2>
+        <h2>Legacy &amp; Legal Enquiries</h2>
         <p>Subject line: Legacy – Confidential</p>
-        <p>To contact the Chair of Trustees or for guidance on testamentary giving, please use the secure contact form or email above.</p>
+        <p>To contact the Chair of Trustees or for guidance on testamentary giving, please use the secure contact form.</p>
       </div>
 
       <div className="section-container">
