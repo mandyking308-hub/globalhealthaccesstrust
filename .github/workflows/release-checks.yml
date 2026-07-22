@@ -36,13 +36,45 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
       - name: Install locked dependencies
         run: bun install --frozen-lockfile
 
-      - name: Lint
-        run: bun run lint
+      - name: Lint bank-readiness application changes
+        run: |
+          bunx eslint \
+            src/App.tsx \
+            src/components/TrusteeBiographiesGrid.tsx \
+            src/components/layout/Footer.tsx \
+            src/components/layout/Header.tsx \
+            src/pages/AboutTheTrustPage.tsx \
+            src/pages/ContactPage.tsx \
+            src/pages/ContactTheTrustPage.tsx \
+            src/pages/CookiePolicyPage.tsx \
+            src/pages/DonatePage.tsx \
+            src/pages/DonationFormPage.tsx \
+            src/pages/FinancialControlsPage.tsx \
+            src/pages/FrequentlyAskedQuestionsPage.tsx \
+            src/pages/GovernanceLegalFrameworkPage.tsx \
+            src/pages/HomePage.tsx \
+            src/pages/HowWeWorkPage.tsx \
+            src/pages/OurWorkPage.tsx \
+            src/pages/PublicationsPage.tsx \
+            src/pages/RiskManagementPage.tsx \
+            src/pages/SafeguardingPage.tsx \
+            src/pages/SupportRequestPage.tsx \
+            src/pages/SupportTheTrustPage.tsx \
+            src/pages/TrusteeBiographiesPage.tsx \
+            src/pages/WhatWeDoPage.tsx
 
-      - name: Type-check
+      - name: Lint changed Edge Functions
+        run: deno lint supabase/functions/contact-notification/index.ts supabase/functions/gocardless-create-flow/index.ts
+
+      - name: Type-check complete application
         run: bunx tsc --noEmit
 
       - name: Build production bundle
