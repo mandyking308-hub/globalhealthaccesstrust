@@ -11,7 +11,7 @@ interface CommissionedProject {
   description: string; budget_range: string; status: string; created_at: string; updated_at: string;
   funding_target: number | null; currency: string;
 }
-interface ProjectFinance { allocated: number; spent: number; delivery: number; }
+interface ProjectFinance { allocated: number; committed: number; spent: number; remaining: number; delivery: number; }
 type Evidence = {
   id: string; project_id: string; caption: string | null; activity_description: string | null;
   approved_general_location: string | null; date_taken: string | null; storage_path: string;
