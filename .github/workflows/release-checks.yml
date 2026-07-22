@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main]
+    branches: [main, bank-readiness-final]
   workflow_dispatch:
 
 permissions:
@@ -39,8 +39,7 @@ jobs:
       - name: Install locked dependencies
         run: bun install --frozen-lockfile
 
-      - name: Lint existing codebase
-        continue-on-error: true
+      - name: Lint
         run: bun run lint
 
       - name: Type-check
@@ -84,9 +83,8 @@ jobs:
         if: failure()
         run: cat /tmp/ghat-preview.log || true
 
-  # The custom domain is deployed by Lovable rather than by this GitHub workflow.
-  # Run this job deliberately after Lovable has synced and published the latest commit,
-  # preventing false failure emails while the live deployment is still catching up.
+  # This job tests the already-published custom domain and must be run manually
+  # only after Mandy has approved a future deployment.
   production-smoke:
     if: github.event_name == 'workflow_dispatch'
     needs: validate
