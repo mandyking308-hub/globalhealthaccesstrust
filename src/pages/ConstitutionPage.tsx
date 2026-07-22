@@ -136,8 +136,9 @@ export const ConstitutionPage = () => {
                   discrepancy, the English version shall prevail.
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  SHA-256 Checksum: a1b2c3d4e5f6789012345678901234567890123456789012345678901234567890
+                  Document reference: GHAT-CONSTITUTION-1.0
                 </p>
+
               </div>
             </div>
           </CardContent>
