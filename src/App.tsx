@@ -163,9 +163,11 @@ const App = () => (
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           
-          {/* Volunteer Portal Routes */}
+          {/* Project Team Portal Routes (formerly Volunteer Portal) */}
           <Route path="volunteer-apply" element={<VolunteersPage />} />
           <Route path="volunteer-dashboard" element={<VolunteerDashboardPage />} />
+          <Route path="project-team-login" element={<Navigate to="/auth?portal=team" replace />} />
+          <Route path="donor-login" element={<Navigate to="/auth?portal=donor" replace />} />
           
           {/* Admin Testing Route (Hidden) */}
           <Route path="testing-checklist" element={<TestingChecklistPage />} />
