@@ -437,11 +437,12 @@ const ProjectDetail = ({
       </header>
 
       {/* Funding & delivery summary */}
-      <section className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <section className="grid grid-cols-1 md:grid-cols-6 gap-4">
         <SummaryStat label="Funding target" value={targetNum ? money(targetNum, currency) : "—"} />
-        <SummaryStat label="Allocated" value={money(totalAllocated, currency)} sub={targetNum ? `${percentFunded.toFixed(0)}% of target` : undefined} />
-        <SummaryStat label="Approved spend" value={money(totalSpent, currency)} />
-        <SummaryStat label="Balance" value={money(balance, currency)} />
+        <SummaryStat label="Project allocation" value={money(totalAllocated, currency)} sub={targetNum ? `${percentFunded.toFixed(0)}% of target` : undefined} />
+        <SummaryStat label="Committed" value={money(totalCommitted, currency)} sub="approved / committed, not paid" />
+        <SummaryStat label="Spent" value={money(totalSpent, currency)} sub="paid only" />
+        <SummaryStat label="Remaining" value={money(remaining, currency)} />
         <SummaryStat label="Delivery" value={`${deliveryPercent.toFixed(0)}%`} sub={`${milestones.filter((m) => m.status === "completed").length}/${milestones.length} milestones`} />
       </section>
 
