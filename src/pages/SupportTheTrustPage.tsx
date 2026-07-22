@@ -57,7 +57,7 @@ export const SupportTheTrustPage = () => {
         <h2>Legacy Giving</h2>
         <p><strong>(Bequests Made by Will)</strong></p>
         <p>A gift in your will ensures your values endure beyond your lifetime. The following sample wording may be used with your solicitor:</p>
-        <p className="featured-text">"I give [the sum of £____ / ___% of my residuary estate] to the Global Health Access Trust, registered at 2 Harley Street, London, for its general charitable purposes. I declare that the receipt of the Chair of Trustees or other authorised officer shall be full discharge to my executors."</p>
+        <p className="featured-text">"I give [the sum of £____ / ___% of my residuary estate] to the Global Health Access Trust, a charitable trust established under the laws of England and Wales, with correspondence at 2 Harley Street, London, for its general charitable purposes. I declare that the receipt of the Chair of Trustees or other authorised officer shall be full discharge to my executors."</p>
         <p>We welcome confidential engagement with legal representatives and estate planners to ensure your wishes are honoured with the dignity they deserve.</p>
       </div>
 
