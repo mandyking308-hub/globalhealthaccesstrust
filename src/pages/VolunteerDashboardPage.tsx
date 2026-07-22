@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
 import { VolunteerAIWidget } from "@/components/ai/VolunteerAIWidget";
+import { VolunteerAssignedProjects } from "@/components/volunteer/VolunteerAssignedProjects";
 
 interface Volunteer {
   id: string;
@@ -235,16 +236,7 @@ export const VolunteerDashboardPage = () => {
             </TabsContent>
 
             <TabsContent value="my-projects">
-              <Card>
-                <CardHeader>
-                  <CardTitle>My Assigned Projects</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-center py-12">
-                    No projects assigned yet. Check the Available Projects tab to request assignments.
-                  </p>
-                </CardContent>
-              </Card>
+              <VolunteerAssignedProjects volunteerId={volunteer.id} />
             </TabsContent>
 
             <TabsContent value="messages">

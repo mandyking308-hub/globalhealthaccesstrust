@@ -170,6 +170,10 @@ const ProjectDetail = ({
   const [allocations, setAllocations] = useState<(Allocation & { donations: Donation | null })[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [availableDonations, setAvailableDonations] = useState<Donation[]>([]);
+  const [assignments, setAssignments] = useState<any[]>([]);
+  const [approvedVolunteers, setApprovedVolunteers] = useState<any[]>([]);
+  const [volunteerId, setVolunteerId] = useState("");
+  const [volRole, setVolRole] = useState("Field lead");
 
   // allocation form
   const [donationId, setDonationId] = useState<string>("");
@@ -182,7 +186,7 @@ const ProjectDetail = ({
   const [expDate, setExpDate] = useState(format(new Date(), "yyyy-MM-dd"));
 
   const loadRelated = async () => {
-    const [allocRes, expRes, donRes] = await Promise.all([
+    const [allocRes, expRes, donRes, assignRes, volRes] = await Promise.all([
       supabase
         .from("fund_allocations")
         .select("*, donations(*)")
@@ -198,10 +202,21 @@ const ProjectDetail = ({
         .select("*")
         .eq("status", "completed")
         .order("created_at", { ascending: false }),
+      supabase
+        .from("volunteer_project_assignments")
+        .select("id, assigned_role, created_at, volunteers(id, name, email)")
+        .eq("project_id", project.id),
+      supabase
+        .from("volunteers")
+        .select("id, name, email, status")
+        .eq("status", "approved")
+        .order("name"),
     ]);
     if (allocRes.data) setAllocations(allocRes.data as any);
     if (expRes.data) setExpenses(expRes.data as Expense[]);
     if (donRes.data) setAvailableDonations(donRes.data as Donation[]);
+    if (assignRes.data) setAssignments(assignRes.data as any);
+    if (volRes.data) setApprovedVolunteers(volRes.data as any);
   };
 
   useEffect(() => { loadRelated(); }, [project.id]);
@@ -285,6 +300,31 @@ const ProjectDetail = ({
       setExpAmount(""); setExpCategory(""); setExpDesc("");
       loadRelated();
     }
+  };
+
+  const assignVolunteer = async () => {
+    if (!volunteerId || !volRole.trim()) {
+      toast({ variant: "destructive", title: "Missing fields", description: "Pick a volunteer and a role." });
+      return;
+    }
+    const { error } = await supabase.from("volunteer_project_assignments").insert({
+      project_id: project.id,
+      volunteer_id: volunteerId,
+      assigned_role: volRole.trim(),
+    });
+    if (error) {
+      toast({ variant: "destructive", title: "Assignment failed", description: error.message });
+    } else {
+      toast({ title: "Volunteer assigned" });
+      setVolunteerId("");
+      loadRelated();
+    }
+  };
+
+  const removeAssignment = async (id: string) => {
+    const { error } = await supabase.from("volunteer_project_assignments").delete().eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Remove failed", description: error.message });
+    else { toast({ title: "Assignment removed" }); loadRelated(); }
   };
 
   return (
@@ -420,6 +460,49 @@ const ProjectDetail = ({
               ))}
             </tbody>
           </table>
+        )}
+      </section>
+
+      {/* Volunteer assignments */}
+      <section className="border rounded-md p-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-medium">Volunteer assignments</h3>
+          <span className="text-sm text-muted-foreground">{assignments.length} assigned</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_140px] gap-3 items-end">
+          <div>
+            <Label>Volunteer</Label>
+            <Select value={volunteerId} onValueChange={setVolunteerId}>
+              <SelectTrigger><SelectValue placeholder="Select approved volunteer" /></SelectTrigger>
+              <SelectContent>
+                {approvedVolunteers
+                  .filter((v) => !assignments.some((a) => a.volunteers?.id === v.id))
+                  .map((v) => (
+                    <SelectItem key={v.id} value={v.id}>{v.name} · {v.email}</SelectItem>
+                  ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label>Role</Label>
+            <Input value={volRole} onChange={(e) => setVolRole(e.target.value)} placeholder="e.g. Field lead" />
+          </div>
+          <Button onClick={assignVolunteer}>Assign</Button>
+        </div>
+
+        {assignments.length > 0 && (
+          <ul className="divide-y border-t mt-4">
+            {assignments.map((a) => (
+              <li key={a.id} className="py-3 flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium">{a.volunteers?.name || "Unknown"}</p>
+                  <p className="text-xs text-muted-foreground">{a.volunteers?.email} · {a.assigned_role}</p>
+                </div>
+                <Button size="sm" variant="ghost" onClick={() => removeAssignment(a.id)}>Remove</Button>
+              </li>
+            ))}
+          </ul>
         )}
       </section>
     </div>
