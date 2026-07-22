@@ -87,6 +87,8 @@ export const AuthPage = () => {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [gdprConsent, setGdprConsent] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
+
 
   const redirectByRole = async (userId: string) => {
     const { data: roles } = await supabase
@@ -152,6 +154,7 @@ export const AuthPage = () => {
     const pwCheck = validatePassword(signupPassword);
     if (!pwCheck.valid) return setError(pwCheck.errors[0]);
     if (!gdprConsent) return setError("You must accept the GDPR consent to register");
+    if (!termsAccepted) return setError("You must agree to the Website and Portal Terms of Use to create an account");
 
     setLoading(true);
     try {
@@ -164,11 +167,25 @@ export const AuthPage = () => {
             first_name: signupFirstName,
             last_name: signupLastName,
             gdpr_consent: gdprConsent,
+            terms_accepted: termsAccepted,
+            terms_version: "1.0",
           },
         },
       });
       if (error) throw error;
       if (data.session) {
+        // Record legal acceptance for the current published Terms.
+        // Non-blocking: swallow errors so account creation is not gated on the
+        // presence of a published legal_documents row.
+        try {
+          await supabase.rpc("record_legal_acceptance", {
+            _slug: "terms-of-use",
+            _role: "donor",
+            _user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 300) : undefined,
+          });
+        } catch {
+          /* non-blocking */
+        }
         toast({ title: "Welcome to GHAT", description: "Your account has been created." });
         await redirectByRole(data.session.user.id);
       } else {
@@ -180,6 +197,7 @@ export const AuthPage = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen flex flex-col donor-portal">
@@ -215,7 +233,10 @@ export const AuthPage = () => {
             setSignupConfirmPassword={setSignupConfirmPassword}
             gdprConsent={gdprConsent}
             setGdprConsent={setGdprConsent}
+            termsAccepted={termsAccepted}
+            setTermsAccepted={setTermsAccepted}
           />
+
         )}
       </main>
       <Footer />
@@ -338,7 +359,9 @@ type FormProps = {
   signupPassword: string; setSignupPassword: (v: string) => void;
   signupConfirmPassword: string; setSignupConfirmPassword: (v: string) => void;
   gdprConsent: boolean; setGdprConsent: (v: boolean) => void;
+  termsAccepted: boolean; setTermsAccepted: (v: boolean) => void;
 };
+
 
 const PortalForm = (props: FormProps) => {
   const cfg = PORTALS[props.portal];
@@ -497,15 +520,24 @@ const SignupForm = (props: FormProps) => (
         onCheckedChange={(c) => props.setGdprConsent(c as boolean)} disabled={props.loading} />
       <label htmlFor="gdpr-consent" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
         I consent to the processing of my personal data in accordance with the{" "}
-        <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Policy</a>
-        {" "}and{" "}
-        <a href="/terms-of-use" className="text-primary hover:underline" target="_blank">Terms of Use</a>. *
+        <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
       </label>
     </div>
-    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.gdprConsent}>
+    <div className="flex items-start space-x-2">
+      <Checkbox id="terms-accepted" checked={props.termsAccepted}
+        onCheckedChange={(c) => props.setTermsAccepted(c as boolean)} disabled={props.loading} />
+      <label htmlFor="terms-accepted" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
+        I agree to the{" "}
+        <a href="/terms-of-use" className="text-primary hover:underline" target="_blank">Website and Portal Terms of Use</a>
+        {" "}and confirm that I have read the{" "}
+        <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
+      </label>
+    </div>
+    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.gdprConsent || !props.termsAccepted}>
       {props.loading ? "Creating account..." : "Create Account"}
     </Button>
   </form>
 );
+
 
 export default AuthPage;
