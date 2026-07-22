@@ -452,6 +452,8 @@ export type Database = {
           exemption_review: string | null
           extended_due_at: string | null
           extension_applied: boolean
+          extension_notification_channel: string | null
+          extension_notification_note: string | null
           extension_notified_at: string | null
           extension_reason: string | null
           id: string
@@ -498,6 +500,8 @@ export type Database = {
           exemption_review?: string | null
           extended_due_at?: string | null
           extension_applied?: boolean
+          extension_notification_channel?: string | null
+          extension_notification_note?: string | null
           extension_notified_at?: string | null
           extension_reason?: string | null
           id?: string
@@ -544,6 +548,8 @@ export type Database = {
           exemption_review?: string | null
           extended_due_at?: string | null
           extension_applied?: boolean
+          extension_notification_channel?: string | null
+          extension_notification_note?: string | null
           extension_notified_at?: string | null
           extension_reason?: string | null
           id?: string
@@ -3583,12 +3589,73 @@ export type Database = {
         Args: { _category: string; _request_id: string; _summary: string }
         Returns: undefined
       }
+      retention_review_blocking_hold: {
+        Args: { _review_id: string }
+        Returns: boolean
+      }
       rr_add_event: {
         Args: { _detail?: Json; _event_type: string; _request_id: string }
         Returns: string
       }
       rr_apply_extension: {
         Args: { _months?: number; _reason: string; _request_id: string }
+        Returns: undefined
+      }
+      rr_generate_due_review_candidates: {
+        Args: never
+        Returns: {
+          candidates_created: number
+          rule_code: string
+          unmapped: boolean
+        }[]
+      }
+      rr_record_extension_notification: {
+        Args: {
+          _channel: string
+          _note?: string
+          _notified_at: string
+          _request_id: string
+        }
+        Returns: undefined
+      }
+      rr_review_create:
+        | {
+            Args: {
+              _proposed_action: string
+              _record_id: string
+              _record_summary: string
+              _record_type: string
+              _related_donation_id: string
+              _related_project_id: string
+              _retention_rule_id: string
+              _review_due_at: string
+              _sensitivity: string
+              _subject_user_id: string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              _proposed_action?: string
+              _record_id: string
+              _record_summary: string
+              _record_type: string
+              _related_donation_id?: string
+              _related_project_id?: string
+              _review_due_at?: string
+              _rule_code: string
+              _sensitivity?: string
+              _subject_user_id?: string
+            }
+            Returns: string
+          }
+      rr_review_decide: {
+        Args: {
+          _decision: string
+          _decision_reason: string
+          _deferred_until?: string
+          _review_id: string
+        }
         Returns: undefined
       }
       rr_set_clock_start: {

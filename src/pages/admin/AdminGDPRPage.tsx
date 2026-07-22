@@ -396,18 +396,58 @@ const HoldsTab = () => {
    7. RETENTION REVIEWS
    ============================================================ */
 const ReviewsTab = () => {
+  const { toast } = useToast();
   const [rows, setRows] = useState<any[]>([]);
-  useEffect(() => { supabase.from("privacy_retention_reviews").select("*").order("review_due_at", { nullsFirst: false }).then(({ data }) => setRows(data ?? [])); }, []);
+  const [busy, setBusy] = useState(false);
+  const load = async () =>
+    setRows((await supabase.from("privacy_retention_reviews").select("*").order("review_due_at", { nullsFirst: false })).data ?? []);
+  useEffect(() => { load(); }, []);
+
+  const decide = async (id: string, decision: string) => {
+    const reason = prompt(`Reason for "${decision}"?`); if (!reason) return;
+    let deferred: string | null = null;
+    if (decision === "defer") {
+      const d = prompt("New review date (YYYY-MM-DD)?"); if (!d) return;
+      deferred = new Date(d).toISOString();
+    }
+    const { error } = await supabase.rpc("rr_review_decide", {
+      _review_id: id, _decision: decision, _decision_reason: reason, _deferred_until: deferred,
+    });
+    if (error) return toast({ title: "Blocked", description: error.message, variant: "destructive" });
+    toast({ title: "Recorded" }); load();
+  };
+
+  const generate = async () => {
+    setBusy(true);
+    const { data, error } = await supabase.rpc("rr_generate_due_review_candidates");
+    setBusy(false);
+    if (error) return toast({ title: "Failed", description: error.message, variant: "destructive" });
+    const created = (data ?? []).filter((r: any) => !r.unmapped).reduce((s: number, r: any) => s + (r.candidates_created ?? 0), 0);
+    const unmapped = (data ?? []).filter((r: any) => r.unmapped).map((r: any) => r.rule_code);
+    toast({
+      title: `Generated ${created} candidate${created === 1 ? "" : "s"}`,
+      description: unmapped.length ? `Not yet mapped: ${unmapped.join(", ")}` : "All mapped categories checked.",
+    });
+    load();
+  };
+
   return (
     <Card>
-      <CardHeader><CardTitle className="font-serif">Retention review queue</CardTitle></CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="font-serif">Retention review queue</CardTitle>
+        <Button onClick={generate} disabled={busy}>{busy ? "Generating…" : "Generate due review candidates"}</Button>
+      </CardHeader>
       <CardContent>
+        <p className="text-sm text-muted-foreground mb-4">
+          Reviews propose an action for an administrator to confirm. Nothing is deleted automatically. Anonymisation or deletion is blocked when an active retention hold applies.
+        </p>
         {rows.length === 0 ? (
-          <p className="text-sm text-muted-foreground">The queue is empty. Reviews are added when records reach the trigger period defined by the retention schedule. Reviews propose an action for a person to confirm; no records are deleted automatically.</p>
+          <p className="text-sm text-muted-foreground">The queue is empty. Use “Generate due review candidates” to populate reviews from mapped categories, or create one from a specific record.</p>
         ) : (
           <Table>
             <TableHeader><TableRow>
-              <TableHead>Reference</TableHead><TableHead>Record</TableHead><TableHead>Due</TableHead><TableHead>Sensitivity</TableHead><TableHead>Status</TableHead>
+              <TableHead>Reference</TableHead><TableHead>Record</TableHead><TableHead>Due</TableHead>
+              <TableHead>Sensitivity</TableHead><TableHead>Status</TableHead><TableHead>Actions</TableHead>
             </TableRow></TableHeader>
             <TableBody>{rows.map(r => (
               <TableRow key={r.id}>
@@ -416,6 +456,18 @@ const ReviewsTab = () => {
                 <TableCell>{fmt(r.review_due_at)}</TableCell>
                 <TableCell><StatusBadge s={r.sensitivity} /></TableCell>
                 <TableCell><StatusBadge s={r.status} /></TableCell>
+                <TableCell className="space-x-1">
+                  {["due","in_review","defer"].includes(r.status) && (
+                    <>
+                      {r.status === "due" && <Button size="sm" variant="outline" onClick={() => decide(r.id, "begin_review")}>Begin</Button>}
+                      <Button size="sm" variant="outline" onClick={() => decide(r.id, "retain")}>Retain</Button>
+                      <Button size="sm" variant="outline" onClick={() => decide(r.id, "defer")}>Defer</Button>
+                      <Button size="sm" variant="outline" onClick={() => decide(r.id, "anonymise_approved")}>Anonymise</Button>
+                      <Button size="sm" variant="destructive" onClick={() => decide(r.id, "delete_approved")}>Delete</Button>
+                      <Button size="sm" variant="outline" onClick={() => decide(r.id, "excluded")}>Exclude</Button>
+                    </>
+                  )}
+                </TableCell>
               </TableRow>
             ))}</TableBody>
           </Table>
@@ -424,6 +476,7 @@ const ReviewsTab = () => {
     </Card>
   );
 };
+
 
 /* ============================================================
    8. RIGHTS REQUESTS (extended gdpr_requests)
@@ -460,8 +513,23 @@ const RightsTab = () => {
     const months = Number(prompt("Extend by how many months? (1 or 2)", "1"));
     const { error } = await supabase.rpc("rr_apply_extension", { _request_id: detail.id, _reason: reason, _months: months });
     if (error) return toast({ title: "Failed", description: error.message, variant: "destructive" });
+    toast({ title: "Extension applied", description: "Now record the notification to the requester using \"Record extension notice\"." });
     load(); openDetail(detail);
   };
+  const recordExtNotice = async () => {
+    if (!detail) return;
+    if (!detail.extension_applied) return toast({ title: "Apply an extension first", variant: "destructive" });
+    const channel = prompt("Channel? portal / secure_email / post / telephone_confirmed / other", "secure_email");
+    if (!channel) return;
+    const note = prompt("Optional note (leave blank to skip)", "") || null;
+    const { error } = await supabase.rpc("rr_record_extension_notification", {
+      _request_id: detail.id, _notified_at: new Date().toISOString(), _channel: channel, _note: note,
+    });
+    if (error) return toast({ title: "Failed", description: error.message, variant: "destructive" });
+    toast({ title: "Notification recorded" });
+    load(); openDetail(detail);
+  };
+
 
   return (
     <Card>
@@ -504,15 +572,40 @@ const RightsTab = () => {
                     <div><strong>Due:</strong> {fmt(detail.due_at)}</div>
                     <div><strong>Extended due:</strong> {fmt(detail.extended_due_at)}</div>
                   </div>
+
+                  {(() => {
+                    const warns: string[] = [];
+                    const eff = detail.extended_due_at ?? detail.due_at;
+                    if (eff) {
+                      const ms = new Date(eff).getTime() - Date.now();
+                      const days = ms / 86400000;
+                      if (days < 0) warns.push("Overdue");
+                      else if (days < 3) warns.push("Due within 3 days");
+                      else if (days < 7) warns.push("Due within 7 days");
+                    }
+                    if (detail.extension_applied && !detail.extension_notified_at) warns.push("Extension applied but notification not recorded");
+                    if (detail.identity_status === "requested" && !detail.identity_verified_at) warns.push("Identity requested but not resolved");
+                    if (detail.clock_paused_at && !detail.pause_reason) warns.push("Clock paused without a reason");
+                    if (["completed","refused","refused_in_part"].includes(detail.status) && !detail.secure_delivery_method) warns.push("Completed without secure-delivery information");
+                    return warns.length ? (
+                      <div className="rounded border border-amber-300 bg-amber-50 p-3 text-sm">
+                        <strong>Attention:</strong> {warns.join(" · ")}
+                      </div>
+                    ) : null;
+                  })()}
+
                   <div><Label>Request description</Label><Textarea readOnly value={detail.request_details ?? ""} rows={3} /></div>
+
 
                   <div className="flex flex-wrap gap-2">
                     <Button size="sm" variant="outline" onClick={() => patch({ identity_status: "requested", identity_requested_at: new Date().toISOString() }, "identity_requested")}>Request identity</Button>
                     <Button size="sm" variant="outline" onClick={() => patch({ identity_status: "verified", identity_verified_at: new Date().toISOString() }, "identity_verified")}>Mark identity verified</Button>
                     <Button size="sm" variant="outline" onClick={startClock}>Start clock</Button>
                     <Button size="sm" variant="outline" onClick={extend}>Apply extension</Button>
+                    <Button size="sm" variant="outline" onClick={recordExtNotice} disabled={!detail.extension_applied}>Record extension notice</Button>
                     <Button size="sm" variant="outline" onClick={() => patch({ status: "searching" }, "status_change", { to: "searching" })}>Begin search</Button>
                     <Button size="sm" variant="outline" onClick={() => patch({ status: "response_ready" }, "response_ready")}>Response ready</Button>
+
                     <Button size="sm" onClick={() => patch({ status: "completed", decision: "fulfil", completed_at: new Date().toISOString() }, "completed", { decision: "fulfil" })}>Complete – fulfil</Button>
                     <Button size="sm" variant="destructive" onClick={() => {
                       const reason = prompt("Refusal reason?"); if (!reason) return;
