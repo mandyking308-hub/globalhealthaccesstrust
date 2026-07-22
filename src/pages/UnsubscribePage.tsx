@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { SEO } from "@/lib/seo";
+
 
 type Status = "loading" | "ready" | "applied" | "already" | "invalid" | "expired" | "error";
 
@@ -45,8 +45,6 @@ const UnsubscribePage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <SEO title="Unsubscribe | Global Health Access Trust" canonical="/unsubscribe" />
-      <Header />
       <main className="flex-grow max-w-xl mx-auto px-6 py-20 w-full">
         <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-2">Communications</p>
         <h1 className="text-4xl font-serif mb-6">Unsubscribe</h1>

@@ -6,7 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Link, useNavigate } from "react-router-dom";
-import { SEO } from "@/lib/seo";
+
 
 interface Channel {
   code: string;
@@ -93,8 +93,6 @@ const CommunicationPreferencesPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <SEO title="Communication Preferences | Global Health Access Trust" canonical="/preferences" />
-      <Header />
       <main className="flex-grow max-w-2xl mx-auto px-6 py-16 w-full">
         <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground mb-2">Account</p>
         <h1 className="text-4xl font-serif mb-6">Communication Preferences</h1>

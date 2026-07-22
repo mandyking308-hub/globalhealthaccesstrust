@@ -29,7 +29,7 @@ import { PublicationsPage } from "./pages/PublicationsPage";
 import { ContactPage } from "./pages/ContactPage";
 import { ConstitutionPage } from "./pages/ConstitutionPage";
 import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage";
-import { CookiePolicyPage } from "./pages/CookiePolicyPage";
+import CookiePolicyPage from "./pages/CookiePolicyPage";
 import { TermsOfUsePage } from "./pages/TermsOfUsePage";
 import { AccessibilityStatementPage } from "./pages/AccessibilityStatementPage";
 import { SafeguardingPage, AntiFraudPage, WhistleblowingPage, GovernancePage } from "./pages/SafeguardingPage";

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CookieSettingsLink } from "@/components/CookieSettingsLink";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { SEO } from "@/lib/seo";
+
 
 interface RegistryRow {
   id: string;
