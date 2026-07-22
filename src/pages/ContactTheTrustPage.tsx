@@ -4,69 +4,66 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { LEGAL_ENTITY } from "@/lib/legalEntity";
 
-export const ContactTheTrustPage = () => {
-  return (
-    <ContentLayout>
-      <SEO
-        title="Contact the Trust"
-        description="Contact the Global Health Access Trust for general, legacy, legal, or partnership enquiries. All communication handled with discretion and GDPR compliance."
-        canonical="/contact-the-trust"
-      />
-      <h1>Contact the Trust</h1>
+export const ContactTheTrustPage = () => (
+  <ContentLayout>
+    <SEO
+      title="Contact the Trust"
+      description="Use the secure contact form for general, legal, legacy, banking, partnership or public-benefit enquiries concerning Global Health Access Trust."
+      canonical="/contact-the-trust"
+    />
+    <h1>Contact the Trust</h1>
+    <p className="featured-text">Secure, recorded and directed to the appropriate authorised person.</p>
 
-      <p className="featured-text">Discreet. Professional. Accountable.</p>
+    <p>We welcome genuine enquiries from:</p>
+    <ul>
+      <li>banks, legal and financial representatives;</li>
+      <li>family offices, foundations and philanthropic institutions;</li>
+      <li>trustees, executors and professional advisers;</li>
+      <li>academic, clinical, agricultural and health-system partners;</li>
+      <li>prospective volunteers and specialist contributors; and</li>
+      <li>members of the public seeking information about the Trust's charitable work.</li>
+    </ul>
 
-      <p>We welcome confidential enquiries from:</p>
-      <ul>
-        <li>Legal and financial representatives</li>
-        <li>Family offices and philanthropic institutions</li>
-        <li>Trustees and executors</li>
-        <li>Academic and health system partners</li>
-        <li>Members of the public seeking to understand our charitable work</li>
-      </ul>
-      <p>All communication is treated with discretion and handled in accordance with data protection and safeguarding law.</p>
+    <div className="section-container">
+      <h2>Contact securely</h2>
+      <p>
+        The Trust does not publish a direct GHAT email address on the public website. Please use the secure enquiry form so the matter can be recorded, classified and handled by an appropriately authorised person.
+      </p>
+      <p>
+        Do not include unnecessary sensitive personal information in an initial enquiry. Where supporting evidence is required, the Trust will provide an appropriate secure route after reviewing the matter.
+      </p>
+      <Button asChild>
+        <Link to="/contact">Open the Secure Contact Form</Link>
+      </Button>
+    </div>
 
-      <div className="section-container">
-        <h2>Contact Securely</h2>
-        <p>
-          The Trust does not publish a direct email address on the public website. Please use the secure enquiry form so your matter can be routed, recorded and handled by the appropriate authorised person.
-        </p>
-        <Button asChild>
-          <Link to="/contact">Open the Secure Contact Form</Link>
-        </Button>
-      </div>
+    <div className="section-container">
+      <h2>Correspondence address</h2>
+      <address className="not-italic">
+        {LEGAL_ENTITY.correspondenceAddress.lines.map((line) => <span key={line} className="block">{line}</span>)}
+      </address>
+      <p>This is a correspondence address only. It is not described as a registered office.</p>
+    </div>
 
-      <div className="section-container">
-        <h2>Correspondence Address</h2>
-        <p>
-          {LEGAL_ENTITY.correspondenceAddress.lines.map((line) => (
-            <span key={line} className="block">{line}</span>
-          ))}
-        </p>
-        <p>This is the Trust&apos;s correspondence address.</p>
-      </div>
+    <div className="section-container">
+      <h2>Banking and due-diligence enquiries</h2>
+      <p>
+        Banks and professional advisers may use the secure form to request the Trust Deed, trustee information, banking resolutions, source-of-funds controls, policy documents or other appropriate evidence. Confidential documents are supplied through controlled due-diligence channels rather than published openly.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Legacy &amp; Legal Enquiries</h2>
-        <p>When using the secure form, select <strong>Legal / Legacy Matters</strong> and mark the enquiry <strong>Legacy – Confidential</strong>.</p>
-        <p>To contact the Chair of Trustees or request guidance on testamentary giving, please use the secure contact form.</p>
-      </div>
+    <div className="section-container">
+      <h2>Funding and legacy enquiries</h2>
+      <p>
+        Public payment collection is not currently active. The Trustees are applying for a UK bank account in the legal name Global Health Access Trust. A proposed contribution is not treated as received until cleared funds have been reconciled through an approved account or provider.
+      </p>
+      <p>
+        The Trust does not currently operate Gift Aid. Executors, solicitors and prospective supporters should obtain independent advice and confirm the Trust's current particulars before entering a binding arrangement.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Support the Trust</h2>
-        <p>All funding relationships are established through a structured engagement process aligned with the Trust&apos;s governance and charitable mandate.</p>
-        <p>We welcome enquiries regarding:</p>
-        <ul>
-          <li>Structured funding relationships through formal engagement pathways</li>
-          <li>Legacy giving</li>
-          <li>Restricted gifts for specific programmes, bursaries or geographies</li>
-          <li>Founding benefactor capital, subject to the Trust&apos;s acceptance and due-diligence processes</li>
-        </ul>
-        <p>All accepted contributions are receipted, accounted for and held exclusively for charitable purposes. Influence is never accepted in exchange for support.</p>
-        <p>To discuss a significant gift, charitable vehicle or family legacy, please use the secure contact form.</p>
-      </div>
-
-      <p className="featured-text">We aim to acknowledge serious enquiries within two working days.</p>
-    </ContentLayout>
-  );
-};
+    <p className="text-sm text-muted-foreground">
+      Enquiries are reviewed according to their nature, urgency and the information available. The Trust does not publish a guaranteed response time.
+    </p>
+  </ContentLayout>
+);
