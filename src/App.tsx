@@ -80,6 +80,13 @@ import GiftAcceptancePolicyPage from "./pages/GiftAcceptancePolicyPage";
 import DonorDueDiligencePolicyPage from "./pages/DonorDueDiligencePolicyPage";
 import AdminDonorDueDiligencePage from "./pages/admin/AdminDonorDueDiligencePage";
 import ProjectTeamTermsPage from "./pages/ProjectTeamTermsPage";
+import SupportPage from "./pages/SupportPage";
+import SupportRequestPage from "./pages/SupportRequestPage";
+import ComplaintsIntakePage from "./pages/ComplaintsIntakePage";
+import ComplaintsPolicyPage from "./pages/ComplaintsPolicyPage";
+import ProtectedConcernsPage from "./pages/ProtectedConcernsPage";
+import SafeguardingReportPage from "./pages/SafeguardingReportPage";
+import AdminServiceOversightPage from "./pages/admin/AdminServiceOversightPage";
 
 const queryClient = new QueryClient();
 
