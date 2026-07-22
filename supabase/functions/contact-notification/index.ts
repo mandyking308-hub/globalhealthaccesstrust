@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-import-prefix
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import nodemailer from "npm:nodemailer@6.9.8";
@@ -39,7 +40,7 @@ const response = (status: number, body: Record<string, unknown>, origin: string 
   new Response(JSON.stringify(body), { status, headers: jsonHeaders(origin) });
 
 const clean = (value: unknown, max: number) =>
-  typeof value === "string" ? value.trim().replace(/\u0000/g, "").slice(0, max) : "";
+  typeof value === "string" ? value.trim().replaceAll("\u0000", "").slice(0, max) : "";
 
 const validEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 320;
 
