@@ -192,11 +192,16 @@ const ProjectDetail = ({
 
   const [allocations, setAllocations] = useState<(Allocation & { donations: Donation | null })[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [availableDonations, setAvailableDonations] = useState<Donation[]>([]);
   const [assignments, setAssignments] = useState<any[]>([]);
   const [approvedVolunteers, setApprovedVolunteers] = useState<any[]>([]);
   const [volunteerId, setVolunteerId] = useState("");
   const [volRole, setVolRole] = useState("Field lead");
+  const [volResponsibilities, setVolResponsibilities] = useState("");
+  const [volStart, setVolStart] = useState("");
+  const [volEnd, setVolEnd] = useState("");
+  const [volVisibility, setVolVisibility] = useState("role_only");
 
   // allocation form
   const [donationId, setDonationId] = useState<string>("");
@@ -207,6 +212,14 @@ const ProjectDetail = ({
   const [expCategory, setExpCategory] = useState("");
   const [expDesc, setExpDesc] = useState("");
   const [expDate, setExpDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  const [expDonorVisible, setExpDonorVisible] = useState(true);
+
+  // milestone form
+  const [msTitle, setMsTitle] = useState("");
+  const [msDesc, setMsDesc] = useState("");
+  const [msTarget, setMsTarget] = useState("");
+  const [msWeight, setMsWeight] = useState("1");
+  const [msEvidence, setMsEvidence] = useState(true);
 
   const loadRelated = async () => {
     const [allocRes, expRes, donRes, assignRes, volRes] = await Promise.all([
