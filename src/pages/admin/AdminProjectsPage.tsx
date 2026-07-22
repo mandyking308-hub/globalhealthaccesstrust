@@ -462,6 +462,49 @@ const ProjectDetail = ({
           </table>
         )}
       </section>
+
+      {/* Volunteer assignments */}
+      <section className="border rounded-md p-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-medium">Volunteer assignments</h3>
+          <span className="text-sm text-muted-foreground">{assignments.length} assigned</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_140px] gap-3 items-end">
+          <div>
+            <Label>Volunteer</Label>
+            <Select value={volunteerId} onValueChange={setVolunteerId}>
+              <SelectTrigger><SelectValue placeholder="Select approved volunteer" /></SelectTrigger>
+              <SelectContent>
+                {approvedVolunteers
+                  .filter((v) => !assignments.some((a) => a.volunteers?.id === v.id))
+                  .map((v) => (
+                    <SelectItem key={v.id} value={v.id}>{v.name} · {v.email}</SelectItem>
+                  ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label>Role</Label>
+            <Input value={volRole} onChange={(e) => setVolRole(e.target.value)} placeholder="e.g. Field lead" />
+          </div>
+          <Button onClick={assignVolunteer}>Assign</Button>
+        </div>
+
+        {assignments.length > 0 && (
+          <ul className="divide-y border-t mt-4">
+            {assignments.map((a) => (
+              <li key={a.id} className="py-3 flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium">{a.volunteers?.name || "Unknown"}</p>
+                  <p className="text-xs text-muted-foreground">{a.volunteers?.email} · {a.assigned_role}</p>
+                </div>
+                <Button size="sm" variant="ghost" onClick={() => removeAssignment(a.id)}>Remove</Button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 };
