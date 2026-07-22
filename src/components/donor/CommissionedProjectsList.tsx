@@ -207,10 +207,13 @@ export const CommissionedProjectsList = () => {
                         <p className="text-sm text-muted-foreground">Team not yet assigned.</p>
                       ) : (
                         <ul className="space-y-2 text-sm">
-                          {team.map((t, i) => (
-                            <li key={i} className="border-l-2 border-primary/40 pl-3">
-                              <p className="font-medium">{displayName(t.donor_visibility_mode, t.volunteers?.name || "")}</p>
+                          {team.map((t) => (
+                            <li key={t.assignment_id} className="border-l-2 border-primary/40 pl-3">
+                              <p className="font-medium">{t.display_name}</p>
                               <p className="text-xs text-muted-foreground">{t.assigned_role}</p>
+                              {t.responsibilities ? (
+                                <p className="text-xs text-muted-foreground mt-1">{t.responsibilities}</p>
+                              ) : null}
                             </li>
                           ))}
                         </ul>
