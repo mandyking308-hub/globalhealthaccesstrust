@@ -3940,128 +3940,242 @@ export type Database = {
       }
       project_agreement_versions: {
         Row: {
+          acceptance_terms: string | null
           agreement_id: string
+          amended_from_version_id: string | null
+          amendment_reason: string | null
+          anti_fraud_terms: string | null
+          audit_access_terms: string | null
+          background_need: string | null
           beneficiary_group: string | null
           budget_categories: Json | null
           change_control_procedure: string | null
           communication_arrangements: string | null
+          communications_terms: string | null
           complaint_procedure: string | null
+          complaints_terms: string | null
           confidentiality_terms: string | null
+          conflicts_of_interest_terms: string | null
+          consent_dignity_terms: string | null
           created_at: string
+          data_protection_terms: string | null
+          delays_terms: string | null
           deliverables: string | null
           delivery_allocation: number | null
+          delivery_partners: Json
           dependencies: string | null
+          donor_visibility_terms: string | null
           donor_visible_status: string | null
           escalation_procedure: string | null
           evidence_requirements: string | null
           exclusions: string | null
           expected_duration: string | null
+          expenses_terms: string | null
+          field_evidence_terms: string | null
+          financial_evidence_terms: string | null
           financial_reporting: string | null
           first_report_due: string | null
+          force_majeure_terms: string | null
           funding_target: number | null
+          geography: string | null
+          governing_law: string | null
           gross_donation: number | null
           id: string
+          incidents_terms: string | null
+          insurance_terms: string | null
+          intellectual_property_terms: string | null
           intended_outcomes: string | null
           is_donor_accepted: boolean | null
+          is_security_sensitive_location: boolean
           is_team_accepted: boolean | null
           is_trust_approved: boolean | null
           issued_at: string | null
           issued_by: string | null
           operating_allocation: number | null
+          permitted_expenditure: string | null
           planned_completion: string | null
           planned_start: string | null
+          procurement_terms: string | null
           project_id: string
+          project_team_roles: Json
+          publicity_terms: string | null
           purpose: string | null
+          reallocation_terms: string | null
+          records_retention_terms: string | null
           reporting_frequency: string | null
+          reporting_terms: string | null
           risks_private: string | null
           safe_location: string | null
           safeguarding_route: string | null
+          safeguarding_terms: string | null
+          sanctions_terms: string | null
           scope: string | null
+          security_sensitive_controls: string | null
+          suspension_terms: string | null
+          termination_terms: string | null
           title: string
+          trustee_authority_terms: string | null
+          unused_funds_terms: string | null
           updated_at: string
           version_number: number
         }
         Insert: {
+          acceptance_terms?: string | null
           agreement_id: string
+          amended_from_version_id?: string | null
+          amendment_reason?: string | null
+          anti_fraud_terms?: string | null
+          audit_access_terms?: string | null
+          background_need?: string | null
           beneficiary_group?: string | null
           budget_categories?: Json | null
           change_control_procedure?: string | null
           communication_arrangements?: string | null
+          communications_terms?: string | null
           complaint_procedure?: string | null
+          complaints_terms?: string | null
           confidentiality_terms?: string | null
+          conflicts_of_interest_terms?: string | null
+          consent_dignity_terms?: string | null
           created_at?: string
+          data_protection_terms?: string | null
+          delays_terms?: string | null
           deliverables?: string | null
           delivery_allocation?: number | null
+          delivery_partners?: Json
           dependencies?: string | null
+          donor_visibility_terms?: string | null
           donor_visible_status?: string | null
           escalation_procedure?: string | null
           evidence_requirements?: string | null
           exclusions?: string | null
           expected_duration?: string | null
+          expenses_terms?: string | null
+          field_evidence_terms?: string | null
+          financial_evidence_terms?: string | null
           financial_reporting?: string | null
           first_report_due?: string | null
+          force_majeure_terms?: string | null
           funding_target?: number | null
+          geography?: string | null
+          governing_law?: string | null
           gross_donation?: number | null
           id?: string
+          incidents_terms?: string | null
+          insurance_terms?: string | null
+          intellectual_property_terms?: string | null
           intended_outcomes?: string | null
           is_donor_accepted?: boolean | null
+          is_security_sensitive_location?: boolean
           is_team_accepted?: boolean | null
           is_trust_approved?: boolean | null
           issued_at?: string | null
           issued_by?: string | null
           operating_allocation?: number | null
+          permitted_expenditure?: string | null
           planned_completion?: string | null
           planned_start?: string | null
+          procurement_terms?: string | null
           project_id: string
+          project_team_roles?: Json
+          publicity_terms?: string | null
           purpose?: string | null
+          reallocation_terms?: string | null
+          records_retention_terms?: string | null
           reporting_frequency?: string | null
+          reporting_terms?: string | null
           risks_private?: string | null
           safe_location?: string | null
           safeguarding_route?: string | null
+          safeguarding_terms?: string | null
+          sanctions_terms?: string | null
           scope?: string | null
+          security_sensitive_controls?: string | null
+          suspension_terms?: string | null
+          termination_terms?: string | null
           title: string
+          trustee_authority_terms?: string | null
+          unused_funds_terms?: string | null
           updated_at?: string
           version_number: number
         }
         Update: {
+          acceptance_terms?: string | null
           agreement_id?: string
+          amended_from_version_id?: string | null
+          amendment_reason?: string | null
+          anti_fraud_terms?: string | null
+          audit_access_terms?: string | null
+          background_need?: string | null
           beneficiary_group?: string | null
           budget_categories?: Json | null
           change_control_procedure?: string | null
           communication_arrangements?: string | null
+          communications_terms?: string | null
           complaint_procedure?: string | null
+          complaints_terms?: string | null
           confidentiality_terms?: string | null
+          conflicts_of_interest_terms?: string | null
+          consent_dignity_terms?: string | null
           created_at?: string
+          data_protection_terms?: string | null
+          delays_terms?: string | null
           deliverables?: string | null
           delivery_allocation?: number | null
+          delivery_partners?: Json
           dependencies?: string | null
+          donor_visibility_terms?: string | null
           donor_visible_status?: string | null
           escalation_procedure?: string | null
           evidence_requirements?: string | null
           exclusions?: string | null
           expected_duration?: string | null
+          expenses_terms?: string | null
+          field_evidence_terms?: string | null
+          financial_evidence_terms?: string | null
           financial_reporting?: string | null
           first_report_due?: string | null
+          force_majeure_terms?: string | null
           funding_target?: number | null
+          geography?: string | null
+          governing_law?: string | null
           gross_donation?: number | null
           id?: string
+          incidents_terms?: string | null
+          insurance_terms?: string | null
+          intellectual_property_terms?: string | null
           intended_outcomes?: string | null
           is_donor_accepted?: boolean | null
+          is_security_sensitive_location?: boolean
           is_team_accepted?: boolean | null
           is_trust_approved?: boolean | null
           issued_at?: string | null
           issued_by?: string | null
           operating_allocation?: number | null
+          permitted_expenditure?: string | null
           planned_completion?: string | null
           planned_start?: string | null
+          procurement_terms?: string | null
           project_id?: string
+          project_team_roles?: Json
+          publicity_terms?: string | null
           purpose?: string | null
+          reallocation_terms?: string | null
+          records_retention_terms?: string | null
           reporting_frequency?: string | null
+          reporting_terms?: string | null
           risks_private?: string | null
           safe_location?: string | null
           safeguarding_route?: string | null
+          safeguarding_terms?: string | null
+          sanctions_terms?: string | null
           scope?: string | null
+          security_sensitive_controls?: string | null
+          suspension_terms?: string | null
+          termination_terms?: string | null
           title?: string
+          trustee_authority_terms?: string | null
+          unused_funds_terms?: string | null
           updated_at?: string
           version_number?: number
         }
@@ -4071,6 +4185,13 @@ export type Database = {
             columns: ["agreement_id"]
             isOneToOne: false
             referencedRelation: "project_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_agreement_versions_amended_from_version_id_fkey"
+            columns: ["amended_from_version_id"]
+            isOneToOne: false
+            referencedRelation: "project_agreement_versions"
             referencedColumns: ["id"]
           },
           {
@@ -6078,6 +6199,28 @@ export type Database = {
         Returns: boolean
       }
       can_manage_hvda: { Args: { _user_id: string }; Returns: boolean }
+      charter_activate: { Args: { _agreement_id: string }; Returns: undefined }
+      charter_amend: {
+        Args: { _agreement_id: string; _reason: string }
+        Returns: string
+      }
+      charter_donor_safe_view: { Args: { _project_id: string }; Returns: Json }
+      charter_milestone_progress: {
+        Args: { _project_id: string }
+        Returns: number
+      }
+      charter_record_decision: {
+        Args: {
+          _comment?: string
+          _decision: Database["public"]["Enums"]["agreement_decision"]
+          _version_id: string
+        }
+        Returns: string
+      }
+      charter_validate_finances: {
+        Args: { _version_id: string }
+        Returns: undefined
+      }
       compute_project_health: {
         Args: { _project_id: string }
         Returns: Database["public"]["Enums"]["project_health_state"]
