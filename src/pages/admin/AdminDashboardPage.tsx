@@ -93,13 +93,14 @@ export const AdminDashboardPage = () => {
     <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={onClick}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
-        <Icon className={`h-5 w-5 ${color}`} />
+        {Icon ? <Icon className={`h-5 w-5 ${color}`} /> : null}
       </CardHeader>
       <CardContent>
-        <div className="text-3xl font-bold font-serif">{value}</div>
+        <div className={`text-3xl font-bold font-serif ${!Icon ? color : ''}`}>{value}</div>
       </CardContent>
     </Card>
   );
+
 
   if (loading) {
     return (
