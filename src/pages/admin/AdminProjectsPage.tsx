@@ -175,6 +175,10 @@ const ProjectDetail = ({
   const [volunteerId, setVolunteerId] = useState("");
   const [volRole, setVolRole] = useState("Field lead");
 
+  // allocation form
+  const [donationId, setDonationId] = useState<string>("");
+  const [allocAmount, setAllocAmount] = useState<string>("");
+
   // expense form
   const [expAmount, setExpAmount] = useState("");
   const [expCategory, setExpCategory] = useState("");
