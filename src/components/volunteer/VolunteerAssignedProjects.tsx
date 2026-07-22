@@ -159,7 +159,7 @@ export const VolunteerAssignedProjects = ({ volunteerId }: { volunteerId: string
                       <li key={m.id} className="flex justify-between gap-3">
                         <span>
                           <span className="text-muted-foreground mr-2">{String(m.sequence).padStart(2, "0")}</span>
-                          {m.title}
+                          {m.milestone_title}
                           {m.evidence_required && <span className="ml-2 text-xs uppercase tracking-widest text-primary">Evidence required</span>}
                         </span>
                         <span className="capitalize text-xs text-muted-foreground">{m.status?.replace(/_/g, " ")}</span>
@@ -207,7 +207,7 @@ export const VolunteerAssignedProjects = ({ volunteerId }: { volunteerId: string
                         <Select value={milestoneId} onValueChange={setMilestoneId}>
                           <SelectTrigger><SelectValue placeholder="None" /></SelectTrigger>
                           <SelectContent>
-                            {milestones.map((m) => <SelectItem key={m.id} value={m.id}>{m.title}</SelectItem>)}
+                            {milestones.map((m) => <SelectItem key={m.id} value={m.id}>{m.milestone_title}</SelectItem>)}
                           </SelectContent>
                         </Select>
                       </div>
