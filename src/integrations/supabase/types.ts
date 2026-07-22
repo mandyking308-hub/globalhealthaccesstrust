@@ -47,6 +47,63 @@ export type Database = {
         }
         Relationships: []
       }
+      assignment_acceptances: {
+        Row: {
+          accepted_at: string
+          assignment_id: string
+          id: string
+          ip_hash: string | null
+          project_id: string
+          snapshot: Json
+          snapshot_hash: string
+          supersede_reason: string | null
+          superseded_at: string | null
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          accepted_at?: string
+          assignment_id: string
+          id?: string
+          ip_hash?: string | null
+          project_id: string
+          snapshot: Json
+          snapshot_hash: string
+          supersede_reason?: string | null
+          superseded_at?: string | null
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          accepted_at?: string
+          assignment_id?: string
+          id?: string
+          ip_hash?: string | null
+          project_id?: string
+          snapshot?: Json
+          snapshot_hash?: string
+          supersede_reason?: string | null
+          superseded_at?: string | null
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "assignment_acceptances_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_project_assignments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "assignment_acceptances_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_logs: {
         Row: {
           action: string
@@ -568,6 +625,116 @@ export type Database = {
           updated_by?: string | null
         }
         Relationships: []
+      }
+      delivery_partner_agreements: {
+        Row: {
+          amendment_reason: string | null
+          audit_terms: string | null
+          authorised_signatory_name: string | null
+          authorised_signatory_title: string | null
+          created_at: string
+          created_by: string | null
+          data_processing_terms: string | null
+          due_diligence_reviewed_at: string | null
+          due_diligence_summary: string | null
+          evidence_terms: string | null
+          finance_terms: string | null
+          id: string
+          incidents_terms: string | null
+          insurance_terms: string | null
+          partner_jurisdiction: string | null
+          partner_legal_name: string
+          partner_registration_ref: string | null
+          procurement_terms: string | null
+          project_id: string | null
+          reporting_terms: string | null
+          safeguarding_terms: string | null
+          sanctions_terms: string | null
+          scope_of_engagement: string | null
+          signed_at: string | null
+          signed_by: string | null
+          status: string
+          subcontracting_terms: string | null
+          termination_terms: string | null
+          unused_funds_terms: string | null
+          updated_at: string
+          version_number: number
+        }
+        Insert: {
+          amendment_reason?: string | null
+          audit_terms?: string | null
+          authorised_signatory_name?: string | null
+          authorised_signatory_title?: string | null
+          created_at?: string
+          created_by?: string | null
+          data_processing_terms?: string | null
+          due_diligence_reviewed_at?: string | null
+          due_diligence_summary?: string | null
+          evidence_terms?: string | null
+          finance_terms?: string | null
+          id?: string
+          incidents_terms?: string | null
+          insurance_terms?: string | null
+          partner_jurisdiction?: string | null
+          partner_legal_name: string
+          partner_registration_ref?: string | null
+          procurement_terms?: string | null
+          project_id?: string | null
+          reporting_terms?: string | null
+          safeguarding_terms?: string | null
+          sanctions_terms?: string | null
+          scope_of_engagement?: string | null
+          signed_at?: string | null
+          signed_by?: string | null
+          status?: string
+          subcontracting_terms?: string | null
+          termination_terms?: string | null
+          unused_funds_terms?: string | null
+          updated_at?: string
+          version_number?: number
+        }
+        Update: {
+          amendment_reason?: string | null
+          audit_terms?: string | null
+          authorised_signatory_name?: string | null
+          authorised_signatory_title?: string | null
+          created_at?: string
+          created_by?: string | null
+          data_processing_terms?: string | null
+          due_diligence_reviewed_at?: string | null
+          due_diligence_summary?: string | null
+          evidence_terms?: string | null
+          finance_terms?: string | null
+          id?: string
+          incidents_terms?: string | null
+          insurance_terms?: string | null
+          partner_jurisdiction?: string | null
+          partner_legal_name?: string
+          partner_registration_ref?: string | null
+          procurement_terms?: string | null
+          project_id?: string | null
+          reporting_terms?: string | null
+          safeguarding_terms?: string | null
+          sanctions_terms?: string | null
+          scope_of_engagement?: string | null
+          signed_at?: string | null
+          signed_by?: string | null
+          status?: string
+          subcontracting_terms?: string | null
+          termination_terms?: string | null
+          unused_funds_terms?: string | null
+          updated_at?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "delivery_partner_agreements_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       document_records: {
         Row: {
@@ -1475,6 +1642,56 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "communication_channels"
             referencedColumns: ["code"]
+          },
+        ]
+      }
+      evidence_access_log: {
+        Row: {
+          accessed_by: string | null
+          accessed_role: string
+          action: string
+          created_at: string
+          evidence_id: string
+          id: string
+          ip_hash: string | null
+          metadata: Json | null
+          token_expires_at: string | null
+          user_agent: string | null
+          variant: string
+        }
+        Insert: {
+          accessed_by?: string | null
+          accessed_role: string
+          action: string
+          created_at?: string
+          evidence_id: string
+          id?: string
+          ip_hash?: string | null
+          metadata?: Json | null
+          token_expires_at?: string | null
+          user_agent?: string | null
+          variant?: string
+        }
+        Update: {
+          accessed_by?: string | null
+          accessed_role?: string
+          action?: string
+          created_at?: string
+          evidence_id?: string
+          id?: string
+          ip_hash?: string | null
+          metadata?: Json | null
+          token_expires_at?: string | null
+          user_agent?: string | null
+          variant?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evidence_access_log_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: false
+            referencedRelation: "project_field_evidence"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -4514,12 +4731,17 @@ export type Database = {
           consent_status: string
           created_at: string
           date_taken: string | null
+          donor_derivative_path: string | null
           donor_visible: boolean
+          exif_scrubbed: boolean
           expense_id: string | null
           id: string
           milestone_id: string | null
           project_id: string
+          redaction_notes: string | null
           rejection_reason: string | null
+          retention_review_at: string | null
+          retention_status: string
           review_status: string
           safeguarding_status: string
           storage_path: string
@@ -4538,12 +4760,17 @@ export type Database = {
           consent_status?: string
           created_at?: string
           date_taken?: string | null
+          donor_derivative_path?: string | null
           donor_visible?: boolean
+          exif_scrubbed?: boolean
           expense_id?: string | null
           id?: string
           milestone_id?: string | null
           project_id: string
+          redaction_notes?: string | null
           rejection_reason?: string | null
+          retention_review_at?: string | null
+          retention_status?: string
           review_status?: string
           safeguarding_status?: string
           storage_path: string
@@ -4562,12 +4789,17 @@ export type Database = {
           consent_status?: string
           created_at?: string
           date_taken?: string | null
+          donor_derivative_path?: string | null
           donor_visible?: boolean
+          exif_scrubbed?: boolean
           expense_id?: string | null
           id?: string
           milestone_id?: string | null
           project_id?: string
+          redaction_notes?: string | null
           rejection_reason?: string | null
+          retention_review_at?: string | null
+          retention_status?: string
           review_status?: string
           safeguarding_status?: string
           storage_path?: string
@@ -6178,6 +6410,21 @@ export type Database = {
         Returns: boolean
       }
       apply_unsubscribe_token: { Args: { _token: string }; Returns: Json }
+      assignment_accept: {
+        Args: {
+          _assignment_id: string
+          _escalation_routes?: string
+          _evidence_duties?: string
+          _expense_authority?: string
+          _ip_hash?: string
+          _location?: string
+          _milestones?: Json
+          _reporting_terms?: string
+          _safeguarding_terms?: string
+          _user_agent?: string
+        }
+        Returns: string
+      }
       bank_transfer_record_receipt: {
         Args: {
           _amount_received_minor: number
@@ -6431,6 +6678,26 @@ export type Database = {
           responsibilities: string
         }[]
       }
+      dpa_set_status: {
+        Args: { _dpa_id: string; _new_status: string; _note?: string }
+        Returns: undefined
+      }
+      evidence_apply_redaction: {
+        Args: {
+          _derivative_path: string
+          _evidence_id: string
+          _notes?: string
+        }
+        Returns: undefined
+      }
+      evidence_grant_donor_view: {
+        Args: { _evidence_id: string; _ttl_seconds?: number }
+        Returns: Json
+      }
+      evidence_withdraw: {
+        Args: { _evidence_id: string; _reason: string }
+        Returns: undefined
+      }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
       generate_bank_transfer_reference: { Args: never; Returns: string }
       generate_dd_case_reference: { Args: never; Returns: string }
@@ -6577,6 +6844,7 @@ export type Database = {
         Args: { _project_id: string }
         Returns: number
       }
+      pt_accept_terms: { Args: never; Returns: string }
       publish_legal_version: { Args: { _version_id: string }; Returns: string }
       record_legal_acceptance: {
         Args: {
