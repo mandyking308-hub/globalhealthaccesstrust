@@ -24,6 +24,7 @@ const menuItems = [
   { title: "Gift Acceptance", url: "/admin/gift-acceptance" },
   { title: "Donor Due Diligence", url: "/admin/donor-due-diligence" },
   { title: "Service Console", url: "/admin/service-console" },
+  { title: "Support & Incidents", url: "/admin/support-oversight" },
   { title: "Contacts", url: "/admin/contacts" },
   { title: "Evidence", url: "/admin/evidence" },
   { title: "Messages", url: "/admin/messages" },
