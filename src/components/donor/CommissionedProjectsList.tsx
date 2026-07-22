@@ -48,6 +48,8 @@ export const CommissionedProjectsList = () => {
   const [projects, setProjects] = useState<CommissionedProject[]>([]);
   const [finance, setFinance] = useState<Record<string, ProjectFinance>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [openThread, setOpenThread] = useState<string | null>(null);
 
   useEffect(() => { fetchProjects(); }, []);
 
