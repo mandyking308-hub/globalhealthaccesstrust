@@ -14,7 +14,20 @@ const publicRoutes = [
   "/commission-projects",
   "/donor-guide",
   "/auth",
+  "/constitution",
+  "/publications",
+  "/legal",
+  "/terms-of-use",
   "/privacy-policy",
+  "/cookie-policy",
+  "/donor-project-funding-terms",
+  "/gift-acceptance-and-restricted-funds-policy",
+  "/donor-due-diligence-and-sanctions-policy",
+  "/project-team-terms",
+  "/legal/complaints-policy",
+  "/legal/safeguarding-policy",
+  "/legal/media-policy",
+  "/safeguarding",
   "/accessibility-statement",
 ];
 
@@ -62,6 +75,55 @@ async function checkPage(route) {
 }
 
 for (const route of publicRoutes) await checkPage(route);
+
+// Signed governing document: public page and the retained PDF must both be available.
+{
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  await page.goto(`${baseURL}/constitution`, { waitUntil: "networkidle" });
+  const signedHeading = await page.getByRole("heading", { name: /Constitution \(Signed\)/i }).isVisible().catch(() => false);
+  if (!signedHeading) failures.push("/constitution: signed Constitution heading is missing");
+
+  const pdfLinks = page.locator('a[href="/GHAT_Constitution_2025_Refined.pdf"]');
+  if ((await pdfLinks.count()) < 1) failures.push("/constitution: signed PDF link is missing");
+  await page.close();
+
+  try {
+    const pdfResponse = await fetch(`${baseURL}/GHAT_Constitution_2025_Refined.pdf`);
+    if (!pdfResponse.ok) failures.push(`/GHAT_Constitution_2025_Refined.pdf: HTTP ${pdfResponse.status}`);
+    const contentType = pdfResponse.headers.get("content-type") || "";
+    if (!contentType.toLowerCase().includes("pdf")) {
+      failures.push(`/GHAT_Constitution_2025_Refined.pdf: unexpected content type ${contentType || "missing"}`);
+    }
+    const bytes = Buffer.from(await pdfResponse.arrayBuffer());
+    if (bytes.subarray(0, 5).toString("ascii") !== "%PDF-") {
+      failures.push("/GHAT_Constitution_2025_Refined.pdf: file is not a valid PDF payload");
+    }
+  } catch (error) {
+    failures.push(`/GHAT_Constitution_2025_Refined.pdf: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
+// First public visit: cookie choice is expected; a global Terms pop-up is not.
+{
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  await page.goto(baseURL, { waitUntil: "networkidle" });
+  const cookieChoices = await page.getByRole("dialog", { name: "Cookie choices" }).isVisible().catch(() => false);
+  if (!cookieChoices) failures.push("/: first-visit cookie choices are missing");
+
+  const globalTermsNotice = await page.getByText("Updated Website and Portal Terms of Use are available.", { exact: true }).isVisible().catch(() => false);
+  if (globalTermsNotice) failures.push("/: global Terms update notice is incorrectly shown to a public visitor");
+
+  const rejectButton = page.getByRole("button", { name: "Reject non-essential", exact: true }).first();
+  if (await rejectButton.isVisible().catch(() => false)) {
+    await rejectButton.click();
+    await page.reload({ waitUntil: "networkidle" });
+    const bannerReturned = await page.getByRole("dialog", { name: "Cookie choices" }).isVisible().catch(() => false);
+    if (bannerReturned) failures.push("/: saved cookie choice was not respected after reload");
+  } else {
+    failures.push("/: Reject non-essential cookie control is missing");
+  }
+  await page.close();
+}
 
 // Authentication page: both existing account and account creation must remain available.
 {
@@ -114,4 +176,4 @@ if (failures.length) {
 }
 
 writeFileSync("release-smoke-failures.txt", "Release smoke tests passed.\n", "utf8");
-console.log(`Release smoke tests passed for ${publicRoutes.length} public routes, protected donor redirects, authentication controls and mobile layout.`);
+console.log(`Release smoke tests passed for ${publicRoutes.length} public routes, signed Constitution PDF, legal pages, cookie behaviour, protected donor redirects, authentication controls and mobile layout.`);
