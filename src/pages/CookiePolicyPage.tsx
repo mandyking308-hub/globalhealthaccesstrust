@@ -31,11 +31,6 @@ const CookiePolicyPage = () => {
 
   return (
     <ContentLayout>
-      <SEO
-        title="Cookie Notice | Global Health Access Trust"
-        description="Cookie Notice v1.0 (22 July 2026) for the Global Health Access Trust website and portals."
-        canonical="/cookie-policy"
-      />
       <div className="max-w-[72ch] mx-auto py-16 space-y-8">
         <header className="space-y-2">
           <p className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Legal</p>
