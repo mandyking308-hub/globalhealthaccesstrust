@@ -1,131 +1,100 @@
-# GHAT Completion & Legal Readiness — Delivery Plan
 
-The Project Charter, Delivery Agreement and Project Support Centre foundations are already built (database schema, RPCs, donor / team / admin UIs). What remains is the **Legal & Policy Centre**, **High-Value Donation Controls**, **Payment/Financial hardening**, the **Legal Acceptance ledger**, the **High-Value Donation Readiness launch gate**, and a full cross-portal test pass.
+## Output 3D — Donation lifecycle, Project Team application privacy, private CV storage
 
-Because of the size, this is delivered in 4 sequenced phases so each phase can be reviewed, tested and approved before the next begins. Each phase ends with typecheck + build + a targeted browser test.
+This is a large build. It is scoped strictly to what Output 3D requires and preserves every existing structure (Terms, Privacy Notice, legal registry, agreements, 20/80 allocation, donations, finance, roles, RLS, Privacy & Records).
 
----
-
-## Phase 1 — Legal Entity, Policy Centre & Acceptance ledger
-
-**Database**
-- `legal_entity_settings` (single admin-controlled row): legal_name, trading_name, legal_status, company_number, charity_number, regulator, registered_address, contact_email, insurance_summary, governing_law, jurisdiction, verified_at, verified_by. Empty by default. No fabricated values.
-- `legal_documents` (`slug`, `title`, `category`) and `legal_document_versions` (`version_number`, `body_markdown`, `effective_date`, `review_status` enum draft / internal_review / solicitor_review / trustee_approved / published / superseded, `approved_by`, `approved_at`, `material_change` boolean, `supersedes_version_id`).
-- `legal_acceptances` (user_id, document_id, version_id, role, project_id nullable, accepted_at, acceptance_text_snapshot, ip_hash, user_agent).
-- `legal_document_publication_gates` view: derived readiness for each doc (requires verified legal entity + trustee_approved status).
-
-**RPCs (SECURITY DEFINER)**
-- `publish_legal_version(_version_id)` — blocks publish unless legal entity verified and status = trustee_approved.
-- `record_legal_acceptance(_slug, _project_id, _acceptance_text)` — resolves current published version, writes acceptance.
-- `current_legal_version(_slug)` — public read of latest `published` version.
-
-**Admin UI (`/admin/legal`)**
-- Legal Entity Settings editor with red "UNVERIFIED — publication blocked" banner until every required field + verified_at is populated by a super-admin.
-- Documents list with per-doc versioning, diff view of previous/current body, review-status transitions.
-- Nine seed documents (empty draft bodies with structured placeholders — never invented facts):
-  1. Website Terms of Use
-  2. Donor and Project Funding Terms
-  3. Privacy Notice
-  4. Cookie Notice
-  5. Complaints Policy
-  6. Gift Acceptance, Refusal and Return Policy
-  7. Safeguarding and Protected Concerns Policy
-  8. Project Team Terms
-  9. Photography, Field Evidence and Media Policy
-- Donor Terms + Project Team Terms drafts include every clause required by the spec (allocations, restricted vs unrestricted, trustee control, change control, refund handling, no automatic Gift Aid promises, source-of-funds, sanctions, safeguarding, liability caveats, governing law placeholder).
-
-**Public UI**
-- `/legal` index and `/legal/:slug` pages rendering the currently `published` version + version footer ("Version X · Effective YYYY-MM-DD"). Falls back to a maintenance notice if no published version exists.
-- Footer links updated. Cookie banner links to `/legal/cookie-notice`.
-
-**Acceptance touchpoints**
-- Auth signup: mandatory tick of current Donor Funding Terms + Privacy Notice, written to `legal_acceptances`.
-- Donation form: re-accept Donor Funding Terms if a `material_change` version has been published since last acceptance.
-- Project Team application: acceptance of Project Team Terms + Safeguarding Policy.
-- Charter acceptance already records role/version — add a legal_acceptance row alongside for audit parity.
+No Stripe secrets are currently configured on the project (only `SMTP_PASSWORD`, `GOOGLE_SEARCH_CONSOLE_API_KEY`, `LOVABLE_API_KEY` exist). The build will therefore ship the full Stripe integration code and leave the card route "unavailable — configure to enable", with the bank-transfer track fully operational. **I will not fabricate keys, and I will not claim card payments are tested end-to-end until you add real Stripe test keys.**
 
 ---
 
-## Phase 2 — High-Value Donation & Financial Controls
+### 1. Database migrations (single migration)
 
-**Database**
-- `donation_review_thresholds` (currency, routine_max, enhanced_dd_min, trustee_approval_min) — admin editable.
-- Extend `donations` with `review_status` enum (routine, enhanced_due_diligence_required, source_of_funds_requested, sanctions_review, reputational_review, trustee_approval_required, approved, refused, returned, held), `payment_status` (received, reconciled, failed, chargeback, duplicate, suspicious_hold), `accepted_at`, `held_reason`, `released_at`.
-- `donation_review_records`: donor_identity_status, sof_status, beneficial_owner_notes, sanctions_status, pep_status, reputational_notes, trustee_decision, reason, reviewer, supporting_document_ids (link to `document_records` with `visibility = trust_confidential`), review_expiry_date.
-- `donation_refunds`: amount, reason, requested_by, first_approver, second_approver, executed_at, immutable trigger (no UPDATE after `executed_at`).
-- `restricted_fund_ledger` view aggregating allocations by fund class.
-- Trigger: on `donations INSERT`, auto-set `review_status` based on threshold; funds are **not** allocated to a project until `review_status = approved` AND `payment_status = reconciled`.
-- Storage bucket `donor-due-diligence` (private), RLS: admins + finance_officer only. Team members and ordinary donor accounts have zero access.
+New tables (all with GRANTs, RLS, policies, timestamps, triggers):
 
-**RPCs**
-- `admin_set_donation_review_status`, `admin_request_refund`, `admin_second_approve_refund` (rejects when `first_approver = auth.uid()`), `admin_release_reviewed_donation` (fires the 20/80 allocation only after approval).
+- `donation_drafts` — draft/transaction_confirmed/checkout_created/awaiting_payment/bank_transfer_instructions_requested/under_review/cancelled/expired/converted_to_donation. Stores `amount_minor`, currency, frequency, purpose, `proposed_project_id`, recognition prefs, computed `operating_allocation_minor` / `delivery_allocation_minor`, confirmation version + timestamp, expiry.
+- `donation_transaction_confirmations` — immutable snapshot per draft (donor_id, amounts, currency, frequency, purpose, wording version `donation-transaction-confirmation-1.0`, confirmed_at).
+- `payment_attempts` — provider, `provider_checkout_session_id`, `provider_payment_intent_id`, `provider_subscription_id`, amount, mode, status, admin-safe failure fields.
+- `payment_webhook_events` — event_id (unique), type, payload_hash, processed_at (idempotency).
+- `bank_transfer_requests` — GHAT reference, status pipeline, due-diligence fields, secure_delivery_channel, amount_expected/received/date/reference, reconciliation, approver, two-person approval fields.
+- `refund_records` — immutable adjustments (amount, reason, requested_by, approved_by, provider_refund_id, full/partial, allocation impact).
+- `payment_receipts` — receipt reference generator, links donation → immutable snapshot for PDF.
+- `volunteer_applications` — replaces the current mixed `volunteers.*` insert path for public applicants (application_id, submitted contact, role_of_interest, cv_object_path, cv_original_filename, status pipeline: received/under_review/clarification_requested/interview/checks_required/approved/declined/withdrawn/account_invited/account_activated).
+- `volunteer_application_declarations` — accuracy declaration + privacy acknowledgement, separately, with version + timestamps.
+- `volunteer_account_invitations` — single-use token hash, expires_at, consumed_at, role, scope.
 
-**UI**
-- `/admin/donations-review` queue with buckets: On Hold, Awaiting DD, Awaiting Sanctions, Awaiting Trustee, Approved, Refused/Returned.
-- Refund panel enforcing dual approval; second approver dropdown excludes requester.
-- Donor portal shows a neutral "Under review by the Trust" status for held donations, no DD detail.
-- Finance dashboard tab: reconciliation status, failed/chargeback/duplicate/suspicious counts.
+Extend existing:
+- `donations`: `donation_draft_id`, `payment_provider`, `provider_payment_intent_id`, `provider_subscription_id`, `payment_route` (card/bank_transfer), `receipt_reference`.
+- `donation_allocations`: index by donation, preserve committed/spent/remaining semantics.
+- `legal_documents`: seed a placeholder row for "Donor and Project Funding Terms" with `current_published_version_id = NULL` so acceptance UI is *not* invented before wording exists.
 
----
+New RPCs (SECURITY DEFINER, fixed search_path, revoked from PUBLIC):
+- `donation_calculate_allocation(_amount_minor bigint)` → returns operating (20%) / delivery (80%) using integer arithmetic.
+- `donation_draft_create(...)` / `donation_draft_update(...)` — server-side amount validation (min 50000 pence = £500).
+- `donation_confirm_transaction(_draft_id, _wording_version)` — writes the confirmation row atomically.
+- `donation_request_bank_transfer(_draft_id)` — creates `bank_transfer_requests` row with `GHAT-BT-YYYY-NNNNN` reference.
+- `bank_transfer_record_receipt(...)` — admin only, requires all reconciliation fields, writes audit, creates final donation + allocation.
+- `donation_finalize_from_provider(...)` — internal function called from the webhook edge function (uses service role) to convert draft → donation + allocation, idempotent on provider payment intent id.
+- `submit_volunteer_application(...)` — server-side gate: writes `volunteer_applications` + both declarations atomically; enforces private CV path.
+- `volunteer_application_cv_signed_url(_application_id)` — admin-only, returns short-lived signed URL, writes audit.
+- `refund_request(...)` / `refund_approve(...)` — records immutable adjustments; forbids negative delivery allocation without admin review flag.
 
-## Phase 3 — Support/Complaints polish & Launch Gate
+RLS summary:
+- `donation_drafts`, `payment_attempts`, `bank_transfer_requests`, `payment_receipts`, `refund_records`: donor sees own rows only; admin sees all; project team sees none.
+- `volunteer_applications`, `volunteer_application_declarations`, `volunteer_account_invitations`, `payment_webhook_events`: admin-only SELECT; INSERTs go through SECURITY DEFINER RPC / edge function.
+- Existing `donations` / `donation_allocations` policies preserved.
 
-**Support Centre completeness pass**
-- Confirm each support case type is available in donor + team forms (already wired) and adds a dedicated "Formal Complaint" flow with mandatory outcome-desired field and 20-day acknowledgement SLA per Complaints Policy.
-- Confidential concern queue visible only to admins with `safeguarding_officer` role; identity-restricted cases mask requester name for other admins.
-- Reopen/close audit already exists — add "Escalate to trustee" action recorded as a `service_request_event`.
+Audit events (into existing `audit_logs`): every state change listed in §23.
 
-**High-Value Donation Readiness gate (`/admin/launch-gate`)**
-- Live checklist reading actual DB state:
-  - Legal entity verified
-  - Donor Terms trustee_approved & published
-  - Privacy Notice published
-  - Complaints Policy published
-  - Gift Acceptance Policy trustee_approved
-  - Donation review thresholds configured
-  - Sanctions review workflow enabled (feature flag)
-  - Payment reconciliation smoke test passed (flag toggled by test RPC)
-  - Dual-approval refund test recorded
-  - Latest Charter acceptance test recorded (donor + team)
-  - Latest complaint case resolved end-to-end
-  - Confidential concern isolation test recorded
-  - Cross-user RLS test recorded
-  - Production build recorded
-- `donations` insert of `amount >= high_value_threshold` rejected with clear error until gate is READY.
+### 2. Storage
 
----
+- Create private bucket `project-team-applications` (5 MB size limit, allowed types PDF/DOC/DOCX enforced client + RPC).
+- Object key pattern: `applications/{application_id}/{gen_random_uuid()}.{ext}`. Original filename kept only as bucket-object metadata.
+- RLS on `storage.objects`: only admin (`is_admin(auth.uid())`) may SELECT; INSERTs restricted to the applicant during the submission RPC.
+- **Migration audit** (report-only, no destructive change): a script scans existing `volunteers.cv_url`. If any point at a public bucket, they are copied into the private bucket, the row updated to a private object path, and a report row inserted into `audit_logs`. Old objects are **not** deleted until the private copy is verified. Any that cannot be migrated are reported.
 
-## Phase 4 — Cross-portal test pass
+### 3. Edge functions
 
-Playwright suite covering the full journey:
-1. High-value donation → hold → DD approval → 20/80 allocation
-2. Donor + Team Charter acceptance → activation
-3. Change request → Trust decision → donor-visible summary
-4. Formal complaint → Trust response → resolution → satisfaction score
-5. Confidential team concern → visible only to safeguarding admin
-6. Donor cannot see worker PII, other donors' data, or DD documents
-7. Legal-version supersede requires fresh acceptance on next login
-8. Refund requires two distinct approvers
-9. Typecheck, production build, desktop/tablet/mobile screenshots
+- `create-donation-checkout` (verify_jwt=true) — reads draft ID, reloads authoritative amount, requires confirmation row, creates Stripe Checkout session (one-time or subscription with server-created price_data), returns `{ url }`. Fails safely with 503 + donor-safe message if `STRIPE_SECRET_KEY` is missing.
+- `stripe-webhook` (verify_jwt=false, service-role client) — verifies signature with `STRIPE_WEBHOOK_SECRET`, deduplicates on event id, dispatches to donation finalize / subscription / refund / dispute handlers. Never trusts unsigned payloads.
+- `donation-status` (verify_jwt=true) — success/cancelled pages call this to get the *server-verified* state; URL params alone never mark paid.
 
-Results written to `GHAT_LAUNCH_TEST_REPORT.md` with pass/fail per item.
+### 4. Frontend
 
----
+- `AuthPage`: preserve the existing combined Terms + Privacy Notice checkbox (unchecked, required, separate acceptance records). Add `returnTo` query parameter with an internal allow-list (`/donation-form`, `/donor-dashboard`, `/commission-projects`, `/volunteer-apply`). Reject anything else.
+- `DonationFormPage`: rebuild against the draft/confirm/checkout flow.
+  - Currency GBP.
+  - Amount validated ≥ £500 client + server.
+  - Live allocation preview using the server RPC on blur/change.
+  - Payment route selector: **Pay securely by card** (disabled with donor-safe message if Stripe not configured) / **Request bank-transfer instructions**.
+  - Separate unchecked "confirm transaction details" checkbox with wording exactly as specified.
+- `/donation/success` + `/donation/cancelled` pages (server-verified).
+- `DonationHistoryTable`: add processing / failed / cancelled / refunded / partially refunded / disputed / bank_transfer_instructions_requested badges. Total Donated counts only `paid` minus confirmed refunds.
+- `VolunteerApplyPage`: remove blanket "I agree to GDPR" checkbox. Two separate declarations: accuracy + privacy acknowledgement, both required. Link Privacy Notice → `/privacy-policy`. CV upload targets private bucket via authenticated `storage.upload` immediately followed by the `submit_volunteer_application` RPC.
+- Admin: extend `AdminDonorsPage` / add `AdminPaymentsPage` with drafts, sessions, attempts, subscriptions, bank-transfer queue, refunds, disputes, webhook event log, and a "Stripe configuration status" card. Add bank-transfer receipt recording with two-person approval hook (checkbox + optional second approver id). No provider credentials shown to admins.
+- Admin: `AdminVolunteersPage` gains "Request signed CV link" button → calls `volunteer_application_cv_signed_url` and opens the URL in a new tab; each request is audited.
 
-## Technical notes
+### 5. Project Team invitation + activation (§18–20)
 
-- All new tables follow the mandatory pattern: CREATE TABLE → GRANT (authenticated + service_role, no anon unless the doc is public) → ENABLE RLS → POLICY.
-- Legal document reads for the public site use a `current_legal_version(slug)` SECURITY DEFINER RPC so anon can read only rows with `review_status = 'published'`.
-- Due-diligence storage bucket policies restrict to admin + finance_officer; every download is logged via `log_admin_action`.
-- No fabricated legal facts anywhere: charity/company numbers, addresses and regulator status render from `legal_entity_settings` or show a visible "Details pending verification" placeholder.
-- Refund immutability enforced by a trigger raising on UPDATE of an executed refund row.
-- Each phase ends with `tsgo` + `npm run build`.
+- `volunteer_account_invitations` stores a SHA-256 hash of a single-use token generated with CSPRNG, `expires_at` = 7 days.
+- New `/team-activate?token=…` page: validates token via SECURITY DEFINER RPC, requires the applicant to set a password, tick Terms + Privacy Notice separately, and then creates their auth user + `user_roles` (`project_team` only, never admin) and links the volunteer record.
+- The **Project Team Terms** legal document row is seeded but has `current_published_version_id = NULL`, so no acceptance is recorded for it until you publish the wording in a later output.
 
-## Ask before I start
+### 6. Testing plan
 
-**Two decisions I need from you before Phase 1:**
+The 71-item test list in §24 will be executed and reported individually. Card-payment items 23, 24, 25, 26, 27, 28, 29, 30 will be marked **BLOCKED — Stripe secrets not configured** unless you add `STRIPE_SECRET_KEY` + `STRIPE_WEBHOOK_SECRET` before I run the tests. Everything else (signup, allocation math, bank-transfer flow, CV privacy, RLS, mobile/tablet/desktop layout, typecheck, production build) will be run and reported.
 
-1. **High-value threshold (GBP)** for the review workflow — common values are £5,000, £10,000 or £25,000.
-2. **Who can act as the two "authorised reviewers"** for legal-document sign-off — should this be limited to accounts with the existing `super_admin` role, or do you want a new `legal_reviewer` role?
+### Technical notes
 
-Once you answer those I will proceed with Phase 1 (Legal Entity + Policy Centre + Acceptance ledger) and stop for your review before Phase 2.
+- All monetary math uses `bigint` pence in the DB. Frontend formats for display only.
+- Idempotency: webhook event ids stored uniquely; `donation_finalize_from_provider` is a no-op if `provider_payment_intent_id` already produced a donation.
+- Search-path pinning on every new SECURITY DEFINER function; `REVOKE ALL … FROM PUBLIC`.
+- No blanket `USING (true)` policies added.
+- Zero new "Registered charity" text; no charity/company numbers; no bank details; no invented emails.
+
+### What I will NOT do
+
+- I will not enable Lovable's built-in Stripe/Paddle payments product (per §5, §6 — you specified real Stripe Checkout with your own configured keys; Lovable-managed Stripe would take over the account model).
+- I will not modify `supabase/config.toml`, the generated client, or the `.env`.
+- I will not publish Project Team Terms wording — the acceptance mechanism is prepared but idle until Output 3E installs the document.
+
+Reply "go" and I will execute the migration, ship the edge functions, rebuild the donation and application UIs, run the 71-item test pass with per-item PASS / FAIL / BLOCKED, then return the typecheck and production-build results.
