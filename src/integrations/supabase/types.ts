@@ -483,9 +483,11 @@ export type Database = {
       }
       legal_acceptances: {
         Row: {
+          acceptance_context: string | null
           acceptance_text_snapshot: string
           accepted_at: string
           document_id: string
+          event_type: string
           id: string
           ip_hash: string | null
           project_id: string | null
@@ -495,9 +497,11 @@ export type Database = {
           version_id: string
         }
         Insert: {
+          acceptance_context?: string | null
           acceptance_text_snapshot: string
           accepted_at?: string
           document_id: string
+          event_type?: string
           id?: string
           ip_hash?: string | null
           project_id?: string | null
@@ -507,9 +511,11 @@ export type Database = {
           version_id: string
         }
         Update: {
+          acceptance_context?: string | null
           acceptance_text_snapshot?: string
           accepted_at?: string
           document_id?: string
+          event_type?: string
           id?: string
           ip_hash?: string | null
           project_id?: string | null
@@ -2808,6 +2814,15 @@ export type Database = {
           _role?: string
           _slug: string
           _user_agent?: string
+        }
+        Returns: string
+      }
+      record_legal_event: {
+        Args: {
+          _context?: string
+          _event_type?: string
+          _role?: string
+          _slug: string
         }
         Returns: string
       }

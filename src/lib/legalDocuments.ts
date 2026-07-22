@@ -23,6 +23,15 @@ export const LEGAL_DOCUMENTS: LegalDocumentRecord[] = [
     audience: ["public", "donor", "project_team", "admin"],
     active: true,
   },
+  {
+    slug: "privacy-notice",
+    title: "Privacy Notice",
+    version: "1.0",
+    effectiveDate: "2026-07-22",
+    route: "/privacy-policy",
+    audience: ["public", "donor", "project_team", "admin"],
+    active: true,
+  },
 ];
 
 export const getLegalDocument = (slug: string): LegalDocumentRecord | undefined =>

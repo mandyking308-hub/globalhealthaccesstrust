@@ -86,7 +86,6 @@ export const AuthPage = () => {
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
-  const [gdprConsent, setGdprConsent] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
 
@@ -153,11 +152,11 @@ export const AuthPage = () => {
     if (signupPassword !== signupConfirmPassword) return setError("Passwords do not match");
     const pwCheck = validatePassword(signupPassword);
     if (!pwCheck.valid) return setError(pwCheck.errors[0]);
-    if (!gdprConsent) return setError("You must accept the GDPR consent to register");
     if (!termsAccepted) return setError("You must agree to the Website and Portal Terms of Use to create an account");
 
     setLoading(true);
     try {
+      const nowIso = new Date().toISOString();
       const { data, error } = await supabase.auth.signUp({
         email: signupEmail,
         password: signupPassword,
@@ -166,23 +165,36 @@ export const AuthPage = () => {
           data: {
             first_name: signupFirstName,
             last_name: signupLastName,
-            gdpr_consent: gdprConsent,
-            terms_accepted: termsAccepted,
+            terms_accepted: true,
+            terms_document_slug: "terms-of-use",
             terms_version: "1.0",
+            terms_accepted_at: nowIso,
+            privacy_document_slug: "privacy-notice",
+            privacy_version: "1.0",
+            privacy_acknowledged_at: nowIso,
           },
         },
       });
       if (error) throw error;
+      // Client-side fallback: record both events when we have an immediate session.
+      // The database trigger records them from auth metadata regardless, so this
+      // is best-effort and non-blocking.
       if (data.session) {
-        // Record legal acceptance for the current published Terms.
-        // Non-blocking: swallow errors so account creation is not gated on the
-        // presence of a published legal_documents row.
         try {
-          await supabase.rpc("record_legal_acceptance", {
-            _slug: "terms-of-use",
-            _role: "donor",
-            _user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 300) : undefined,
-          });
+          await Promise.all([
+            supabase.rpc("record_legal_event", {
+              _slug: "terms-of-use",
+              _event_type: "acceptance",
+              _context: "account_creation",
+              _role: "donor",
+            }),
+            supabase.rpc("record_legal_event", {
+              _slug: "privacy-notice",
+              _event_type: "acknowledgement",
+              _context: "account_creation",
+              _role: "donor",
+            }),
+          ]);
         } catch {
           /* non-blocking */
         }
@@ -231,8 +243,6 @@ export const AuthPage = () => {
             setSignupPassword={setSignupPassword}
             signupConfirmPassword={signupConfirmPassword}
             setSignupConfirmPassword={setSignupConfirmPassword}
-            gdprConsent={gdprConsent}
-            setGdprConsent={setGdprConsent}
             termsAccepted={termsAccepted}
             setTermsAccepted={setTermsAccepted}
           />
@@ -358,7 +368,6 @@ type FormProps = {
   signupEmail: string; setSignupEmail: (v: string) => void;
   signupPassword: string; setSignupPassword: (v: string) => void;
   signupConfirmPassword: string; setSignupConfirmPassword: (v: string) => void;
-  gdprConsent: boolean; setGdprConsent: (v: boolean) => void;
   termsAccepted: boolean; setTermsAccepted: (v: boolean) => void;
 };
 
@@ -516,14 +525,6 @@ const SignupForm = (props: FormProps) => (
         onChange={(e) => props.setSignupConfirmPassword(e.target.value)} required disabled={props.loading} className="h-11" />
     </div>
     <div className="flex items-start space-x-2 pt-2">
-      <Checkbox id="gdpr-consent" checked={props.gdprConsent}
-        onCheckedChange={(c) => props.setGdprConsent(c as boolean)} disabled={props.loading} />
-      <label htmlFor="gdpr-consent" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
-        I consent to the processing of my personal data in accordance with the{" "}
-        <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
-      </label>
-    </div>
-    <div className="flex items-start space-x-2">
       <Checkbox id="terms-accepted" checked={props.termsAccepted}
         onCheckedChange={(c) => props.setTermsAccepted(c as boolean)} disabled={props.loading} />
       <label htmlFor="terms-accepted" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
@@ -533,7 +534,12 @@ const SignupForm = (props: FormProps) => (
         <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
       </label>
     </div>
-    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.gdprConsent || !props.termsAccepted}>
+    <p className="text-[12px] text-muted-foreground leading-relaxed">
+      Creating an account does not constitute blanket consent to the processing of your personal data.
+      Personal information is processed for the specific purposes explained in the Privacy Notice, using
+      the lawful bases described there.
+    </p>
+    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.termsAccepted}>
       {props.loading ? "Creating account..." : "Create Account"}
     </Button>
   </form>

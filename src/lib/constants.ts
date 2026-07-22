@@ -72,7 +72,7 @@ export const FOOTER_SECTIONS = {
     { label: "Contact", href: "/contact" }
   ],
   governance: [
-    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Privacy Notice", href: "/privacy-policy" },
     { label: "Cookie Policy", href: "/cookie-policy" },
     { label: "Terms of Use", href: "/terms-of-use" },
     { label: "Accessibility Statement", href: "/accessibility-statement" },
