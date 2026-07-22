@@ -50,12 +50,19 @@ jobs:
       - name: Build production bundle
         run: bun run build
 
-      - name: Verify live legal documents
+      - name: Load live public configuration
         run: |
           set -a
           source .env
           set +a
-          node scripts/verify-live-legal.mjs
+          echo "VITE_SUPABASE_URL=$VITE_SUPABASE_URL" >> "$GITHUB_ENV"
+          echo "VITE_SUPABASE_PUBLISHABLE_KEY=$VITE_SUPABASE_PUBLISHABLE_KEY" >> "$GITHUB_ENV"
+
+      - name: Verify live legal documents
+        run: node scripts/verify-live-legal.mjs
+
+      - name: Verify live Edge Functions and RPCs
+        run: node scripts/verify-live-services.mjs
 
       - name: Install browser smoke-test tooling
         run: |
@@ -103,7 +110,7 @@ jobs:
               sha: context.sha,
               state: 'failure',
               context: 'GHAT release validation',
-              description: 'Build, legal publication or browser checks failed',
+              description: 'Build, live services, legal publication or browser checks failed',
             });
 
       - name: Report successful validation status
@@ -117,12 +124,11 @@ jobs:
               sha: context.sha,
               state: 'success',
               context: 'GHAT release validation',
-              description: 'Build, live legal and full-site browser checks passed',
+              description: 'Build, live services, legal and full-site browser checks passed',
             });
 
   # The custom domain is deployed by Lovable rather than by this GitHub workflow.
-  # Run this job deliberately after Lovable has synced and published the latest commit,
-  # preventing false failure emails while the live deployment is still catching up.
+  # Run this job deliberately after Lovable has synced and published the latest commit.
   production-smoke:
     if: github.event_name == 'workflow_dispatch'
     needs: validate
@@ -143,12 +149,19 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Verify live legal documents
+      - name: Load live public configuration
         run: |
           set -a
           source .env
           set +a
-          node scripts/verify-live-legal.mjs
+          echo "VITE_SUPABASE_URL=$VITE_SUPABASE_URL" >> "$GITHUB_ENV"
+          echo "VITE_SUPABASE_PUBLISHABLE_KEY=$VITE_SUPABASE_PUBLISHABLE_KEY" >> "$GITHUB_ENV"
+
+      - name: Verify live legal documents
+        run: node scripts/verify-live-legal.mjs
+
+      - name: Verify live Edge Functions and RPCs
+        run: node scripts/verify-live-services.mjs
 
       - name: Install browser smoke-test tooling
         run: |
