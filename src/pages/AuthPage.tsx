@@ -243,8 +243,6 @@ export const AuthPage = () => {
             setSignupPassword={setSignupPassword}
             signupConfirmPassword={signupConfirmPassword}
             setSignupConfirmPassword={setSignupConfirmPassword}
-            gdprConsent={gdprConsent}
-            setGdprConsent={setGdprConsent}
             termsAccepted={termsAccepted}
             setTermsAccepted={setTermsAccepted}
           />
