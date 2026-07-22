@@ -31,16 +31,24 @@ export const AdminPaymentsPage = () => {
 
   useEffect(() => { load(); }, []);
 
+  const [bankRef, setBankRef] = useState("");
+
   const recordReceipt = async (reqId: string) => {
     const minor = Math.round(parseFloat(amountGBP || "0") * 100);
     if (!minor) return toast({ title: "Enter amount received", variant: "destructive" });
+    if (!bankRef.trim()) return toast({ title: "Bank reference required", variant: "destructive" });
     const { error } = await supabase.rpc("bank_transfer_record_receipt", {
       _request_id: reqId,
-      _amount_minor_received: minor,
+      _amount_received_minor: minor,
+      _received_at: new Date().toISOString(),
+      _bank_reference: bankRef.trim(),
+      _reconciliation_notes: "",
+      _second_approver_id: null as any,
     });
     if (error) return toast({ title: "Failed", description: error.message, variant: "destructive" });
     toast({ title: "Receipt recorded" });
     setReceiving(null);
+    setBankRef("");
     setAmountGBP("");
     load();
   };
