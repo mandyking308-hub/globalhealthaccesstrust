@@ -525,14 +525,6 @@ const SignupForm = (props: FormProps) => (
         onChange={(e) => props.setSignupConfirmPassword(e.target.value)} required disabled={props.loading} className="h-11" />
     </div>
     <div className="flex items-start space-x-2 pt-2">
-      <Checkbox id="gdpr-consent" checked={props.gdprConsent}
-        onCheckedChange={(c) => props.setGdprConsent(c as boolean)} disabled={props.loading} />
-      <label htmlFor="gdpr-consent" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
-        I consent to the processing of my personal data in accordance with the{" "}
-        <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
-      </label>
-    </div>
-    <div className="flex items-start space-x-2">
       <Checkbox id="terms-accepted" checked={props.termsAccepted}
         onCheckedChange={(c) => props.setTermsAccepted(c as boolean)} disabled={props.loading} />
       <label htmlFor="terms-accepted" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
@@ -542,7 +534,12 @@ const SignupForm = (props: FormProps) => (
         <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
       </label>
     </div>
-    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.gdprConsent || !props.termsAccepted}>
+    <p className="text-[12px] text-muted-foreground leading-relaxed">
+      Creating an account does not constitute blanket consent to the processing of your personal data.
+      Personal information is processed for the specific purposes explained in the Privacy Notice, using
+      the lawful bases described there.
+    </p>
+    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.termsAccepted}>
       {props.loading ? "Creating account..." : "Create Account"}
     </Button>
   </form>
