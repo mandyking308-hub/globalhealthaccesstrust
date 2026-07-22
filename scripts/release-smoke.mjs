@@ -125,17 +125,29 @@ for (const route of publicRoutes) await checkPage(route);
   await page.close();
 }
 
-// Authentication page: both existing account and account creation must remain available.
+// Authentication: the chooser must be present, then the donor portal must expose login and signup.
 {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   await page.goto(`${baseURL}/auth`, { waitUntil: "networkidle" });
-  const loginVisible = await page.getByText("Login", { exact: true }).first().isVisible().catch(() => false);
-  const signUpVisible = await page.getByText("Sign Up", { exact: true }).first().isVisible().catch(() => false);
-  const emailField = await page.locator('input[type="email"]').first().isVisible().catch(() => false);
-  const passwordField = await page.locator('input[type="password"]').first().isVisible().catch(() => false);
-  if (!loginVisible) failures.push("/auth: Login option is not visible");
-  if (!signUpVisible) failures.push("/auth: Sign Up option is not visible");
-  if (!emailField || !passwordField) failures.push("/auth: login credentials fields are missing");
+
+  const chooserHeading = await page.getByRole("heading", { name: "Choose your portal" }).isVisible().catch(() => false);
+  if (!chooserHeading) failures.push("/auth: portal chooser is missing");
+
+  const donorPortalButton = page.getByRole("button", { name: /Donor Portal/i }).first();
+  if (await donorPortalButton.isVisible().catch(() => false)) {
+    await donorPortalButton.click();
+    await page.waitForURL(/\/auth\?portal=donor/, { timeout: 5_000 }).catch(() => undefined);
+
+    const loginVisible = await page.getByText("Login", { exact: true }).first().isVisible().catch(() => false);
+    const signUpVisible = await page.getByText("Sign Up", { exact: true }).first().isVisible().catch(() => false);
+    const emailField = await page.locator('input[type="email"]').first().isVisible().catch(() => false);
+    const passwordField = await page.locator('input[type="password"]').first().isVisible().catch(() => false);
+    if (!loginVisible) failures.push("/auth?portal=donor: Login option is not visible");
+    if (!signUpVisible) failures.push("/auth?portal=donor: Sign Up option is not visible");
+    if (!emailField || !passwordField) failures.push("/auth?portal=donor: login credentials fields are missing");
+  } else {
+    failures.push("/auth: Donor Portal choice is missing");
+  }
   await page.close();
 }
 
