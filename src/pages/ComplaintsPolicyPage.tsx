@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const sections = [
   ["1. Purpose", "This policy sets out how the Global Health Access Trust receives, investigates and responds to complaints. It is designed to be fair, accessible and proportionate."],
@@ -18,7 +20,7 @@ const sections = [
   ["14. Non-retaliation", "The Trust prohibits retaliation against anyone who raises a complaint in good faith. Any suspected retaliation should be raised through the protected concerns pathway."],
   ["15. Vexatious or repeated complaints", "The Trust may close vexatious, abusive or repeated complaints. Where this happens, the reasons will be recorded and the complainant informed."],
   ["16. Signposting", "Safeguarding matters, protected concerns and security incidents have dedicated pathways. This policy does not replace them."],
-  ["17. Contact", "For questions about this policy: contact@globalhealthaccesstrust.com. To make a complaint, use /complaints/new."],
+  ["17. Contact", "The Trust does not publish a direct email address on the public website. Questions about this policy should be submitted through the secure contact form. Formal complaints should be submitted through the dedicated complaint form."],
 ];
 
 export default function ComplaintsPolicyPage() {
@@ -33,14 +35,25 @@ export default function ComplaintsPolicyPage() {
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">Policy</p>
         <h1 className="text-4xl md:text-5xl font-serif mb-4">Complaints Policy</h1>
         <p className="text-sm text-muted-foreground mb-8">Version 1.0 · Effective 22 July 2026</p>
-        <Card><CardContent className="pt-6 space-y-6">
-          {sections.map(([h, b]) => (
-            <section key={h}>
-              <h2 className="font-serif text-xl mb-2">{h}</h2>
-              <p className="text-sm text-muted-foreground leading-relaxed">{b}</p>
-            </section>
-          ))}
-        </CardContent></Card>
+        <Card>
+          <CardContent className="pt-6 space-y-6">
+            {sections.map(([h, b]) => (
+              <section key={h}>
+                <h2 className="font-serif text-xl mb-2">{h}</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed">{b}</p>
+              </section>
+            ))}
+          </CardContent>
+        </Card>
+
+        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+          <Button asChild>
+            <Link to="/complaints/new">Make a Complaint</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link to="/contact">Ask a Policy Question</Link>
+          </Button>
+        </div>
       </div>
     </>
   );
