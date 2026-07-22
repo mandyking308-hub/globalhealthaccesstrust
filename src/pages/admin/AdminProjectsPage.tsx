@@ -60,6 +60,23 @@ type Expense = {
   description: string | null;
   incurred_on: string;
   created_at: string;
+  status: string;
+  donor_visible: boolean;
+  rejection_reason: string | null;
+};
+
+type Milestone = {
+  id: string;
+  project_id: string;
+  sequence: number;
+  title: string;
+  description: string | null;
+  target_date: string | null;
+  completion_date: string | null;
+  status: string;
+  weight: number;
+  evidence_required: boolean;
+  donor_visible: boolean;
 };
 
 const money = (n: number, ccy = "GBP") =>
