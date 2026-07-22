@@ -265,9 +265,33 @@ export const DonationFormPage = () => {
                 </label>
               </div>
 
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="acceptFundingTerms"
+                  checked={acceptFundingTerms}
+                  onCheckedChange={(v) => setAcceptFundingTerms(v as boolean)}
+                />
+                <label htmlFor="acceptFundingTerms" className="text-sm leading-relaxed cursor-pointer">
+                  I agree to the{" "}
+                  <a
+                    href="/donor-project-funding-terms"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-primary"
+                  >
+                    Donor and Project Funding Terms
+                  </a>{" "}
+                  and confirm the donation details and allocation shown. *
+                </label>
+              </div>
+
               <div className="flex gap-3">
                 <Button variant="outline" onClick={() => setStep("details")} disabled={loading}>Back</Button>
-                <Button onClick={createDraftAndConfirm} disabled={loading || !confirmTx} className="flex-1 h-12">
+                <Button
+                  onClick={createDraftAndConfirm}
+                  disabled={loading || !confirmTx || !acceptFundingTerms}
+                  className="flex-1 h-12"
+                >
                   {loading ? "Recording…" : "Confirm and choose payment method"}
                 </Button>
               </div>
