@@ -30,34 +30,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
-      - name: Set up Bun for sitemap generation
+      - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
       - name: Install locked dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Lint existing codebase
         continue-on-error: true
-        run: npm run lint
+        run: bun run lint
 
       - name: Type-check
-        run: npx tsc --noEmit
+        run: bunx tsc --noEmit
 
       - name: Build production bundle
-        run: npm run build
+        run: bun run build
 
       - name: Install browser smoke-test tooling
         run: |
-          npm install --no-save --package-lock=false playwright@1.52.0
-          npx playwright install --with-deps chromium
+          bun add --dev --no-save playwright@1.52.0
+          bunx playwright install --with-deps chromium
 
       - name: Start production preview
         run: |
-          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/ghat-preview.log 2>&1 &
+          bun run preview -- --host 127.0.0.1 --port 4173 > /tmp/ghat-preview.log 2>&1 &
           echo $! > /tmp/ghat-preview.pid
           for attempt in {1..30}; do
             if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
@@ -85,8 +84,11 @@ jobs:
         if: failure()
         run: cat /tmp/ghat-preview.log || true
 
+  # The custom domain is deployed by Lovable rather than by this GitHub workflow.
+  # Run this job deliberately after Lovable has synced and published the latest commit,
+  # preventing false failure emails while the live deployment is still catching up.
   production-smoke:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch'
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -100,23 +102,20 @@ jobs:
         with:
           node-version: 22
 
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
       - name: Install browser smoke-test tooling
         run: |
-          npm install --no-save --package-lock=false playwright@1.52.0
-          npx playwright install --with-deps chromium
+          bun add --dev --no-save playwright@1.52.0
+          bunx playwright install --with-deps chromium
 
-      - name: Wait for deployment and test custom domain
+      - name: Test the published custom domain
         env:
           SMOKE_BASE_URL: https://globalhealthaccesstrust.com
-        run: |
-          for attempt in {1..12}; do
-            echo "Production verification attempt ${attempt}/12"
-            if node scripts/release-smoke.mjs; then
-              exit 0
-            fi
-            sleep 20
-          done
-          exit 1
+        run: node scripts/release-smoke.mjs
 
       - name: Upload production smoke report
         if: always()
