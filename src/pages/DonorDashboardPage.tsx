@@ -258,6 +258,18 @@ export const DonorDashboardPage = () => {
 
             <TabsContent value="messages">{user && <MessagesPanel userId={user.id} />}</TabsContent>
 
+            <TabsContent value="support">
+              {user && (
+                <SupportCentrePanel
+                  role="donor"
+                  currentUserId={user.id}
+                  projectOptions={myProjects.map((p) => ({ id: p.id, label: p.title }))}
+                />
+              )}
+            </TabsContent>
+
+
+
             <TabsContent value="profile" className="space-y-6">
               <div className="portal-panel">
                 <span className="portal-eyebrow mb-4">Personal Information</span>
