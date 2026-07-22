@@ -152,6 +152,7 @@ const App = () => (
           <Route path="donor-project-funding-terms" element={<DonorFundingTermsPage />} />
           <Route path="gift-acceptance-and-restricted-funds-policy" element={<GiftAcceptancePolicyPage />} />
           <Route path="donor-due-diligence-and-sanctions-policy" element={<DonorDueDiligencePolicyPage />} />
+          <Route path="project-team-terms" element={<ProjectTeamTermsPage />} />
         </Route>
         
           {/* Donor Portal Routes (outside Layout - full page) */}
