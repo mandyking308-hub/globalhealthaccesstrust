@@ -18,7 +18,7 @@ export const FrequentlyAskedQuestionsPage = () => {
       <div className="section-container">
         <h2>About the Trust</h2>
         <h3>What is the Global Health Access Trust?</h3>
-        <p>The Global Health Access Trust is a charitable trust established in 2025 under English law to advance health, relieve illness, and preserve life—particularly among vulnerable or underserved populations. It is governed by its Trust Deed and administered by its Board of Trustees exclusively for charitable purposes.</p>
+        <p>The Global Health Access Trust is a charitable trust established under the laws of England and Wales to advance health, relieve illness, and preserve life—particularly among vulnerable or underserved populations. It is governed by its Trust Deed and administered by its Board of Trustees exclusively for charitable purposes.</p>
         <h3>What makes this Trust different from other health charities?</h3>
         <p>We are built as a permanent institution rather than a campaign or initiative. Our approach emphasises systems-building over dependency, dignity over publicity, and long-term sustainability over short-term visibility. We operate with strict governance standards and exist to serve, not to sell.</p>
         <h3>How is the Trust constituted?</h3>
