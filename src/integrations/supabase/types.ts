@@ -230,6 +230,68 @@ export type Database = {
         }
         Relationships: []
       }
+      donation_allocations: {
+        Row: {
+          allocation_status: string
+          amount_committed: number
+          amount_remaining: number
+          amount_spent: number
+          created_at: string
+          currency: string
+          donation_id: string
+          donor_id: string | null
+          gross_donation_amount: number
+          id: string
+          notes: string | null
+          operating_allocation_amount: number
+          operating_allocation_rate: number
+          project_delivery_allocation: number
+          updated_at: string
+        }
+        Insert: {
+          allocation_status?: string
+          amount_committed?: number
+          amount_remaining: number
+          amount_spent?: number
+          created_at?: string
+          currency?: string
+          donation_id: string
+          donor_id?: string | null
+          gross_donation_amount: number
+          id?: string
+          notes?: string | null
+          operating_allocation_amount: number
+          operating_allocation_rate?: number
+          project_delivery_allocation: number
+          updated_at?: string
+        }
+        Update: {
+          allocation_status?: string
+          amount_committed?: number
+          amount_remaining?: number
+          amount_spent?: number
+          created_at?: string
+          currency?: string
+          donation_id?: string
+          donor_id?: string | null
+          gross_donation_amount?: number
+          id?: string
+          notes?: string | null
+          operating_allocation_amount?: number
+          operating_allocation_rate?: number
+          project_delivery_allocation?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donation_allocations_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: true
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       donations: {
         Row: {
           amount: number
@@ -680,41 +742,68 @@ export type Database = {
       project_expenses: {
         Row: {
           amount: number
+          approved_at: string | null
+          approved_by: string | null
           category: string
           created_at: string
           currency: string
           description: string | null
+          donor_visible: boolean
           id: string
           incurred_on: string
+          override_reason: string | null
+          paid_at: string | null
           project_id: string
           receipt_url: string | null
           recorded_by: string | null
+          rejection_reason: string | null
+          status: string
+          submitted_at: string | null
+          submitted_by: string | null
           updated_at: string
         }
         Insert: {
           amount: number
+          approved_at?: string | null
+          approved_by?: string | null
           category: string
           created_at?: string
           currency?: string
           description?: string | null
+          donor_visible?: boolean
           id?: string
           incurred_on?: string
+          override_reason?: string | null
+          paid_at?: string | null
           project_id: string
           receipt_url?: string | null
           recorded_by?: string | null
+          rejection_reason?: string | null
+          status?: string
+          submitted_at?: string | null
+          submitted_by?: string | null
           updated_at?: string
         }
         Update: {
           amount?: number
+          approved_at?: string | null
+          approved_by?: string | null
           category?: string
           created_at?: string
           currency?: string
           description?: string | null
+          donor_visible?: boolean
           id?: string
           incurred_on?: string
+          override_reason?: string | null
+          paid_at?: string | null
           project_id?: string
           receipt_url?: string | null
           recorded_by?: string | null
+          rejection_reason?: string | null
+          status?: string
+          submitted_at?: string | null
+          submitted_by?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -727,32 +816,166 @@ export type Database = {
           },
         ]
       }
+      project_field_evidence: {
+        Row: {
+          activity_description: string | null
+          approved_at: string | null
+          approved_by: string | null
+          approved_general_location: string | null
+          caption: string | null
+          consent_status: string
+          created_at: string
+          date_taken: string | null
+          donor_visible: boolean
+          expense_id: string | null
+          id: string
+          milestone_id: string | null
+          project_id: string
+          rejection_reason: string | null
+          review_status: string
+          safeguarding_status: string
+          storage_path: string
+          storage_path_sanitised: string | null
+          updated_at: string
+          uploaded_by: string | null
+          withdrawal_reason: string | null
+          withdrawn_at: string | null
+        }
+        Insert: {
+          activity_description?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          approved_general_location?: string | null
+          caption?: string | null
+          consent_status?: string
+          created_at?: string
+          date_taken?: string | null
+          donor_visible?: boolean
+          expense_id?: string | null
+          id?: string
+          milestone_id?: string | null
+          project_id: string
+          rejection_reason?: string | null
+          review_status?: string
+          safeguarding_status?: string
+          storage_path: string
+          storage_path_sanitised?: string | null
+          updated_at?: string
+          uploaded_by?: string | null
+          withdrawal_reason?: string | null
+          withdrawn_at?: string | null
+        }
+        Update: {
+          activity_description?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          approved_general_location?: string | null
+          caption?: string | null
+          consent_status?: string
+          created_at?: string
+          date_taken?: string | null
+          donor_visible?: boolean
+          expense_id?: string | null
+          id?: string
+          milestone_id?: string | null
+          project_id?: string
+          rejection_reason?: string | null
+          review_status?: string
+          safeguarding_status?: string
+          storage_path?: string
+          storage_path_sanitised?: string | null
+          updated_at?: string
+          uploaded_by?: string | null
+          withdrawal_reason?: string | null
+          withdrawn_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_field_evidence_expense_id_fkey"
+            columns: ["expense_id"]
+            isOneToOne: false
+            referencedRelation: "project_expenses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_field_evidence_milestone_id_fkey"
+            columns: ["milestone_id"]
+            isOneToOne: false
+            referencedRelation: "project_milestones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_field_evidence_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_messages: {
         Row: {
+          approval_status: string
+          attachments: Json | null
           body: string
           created_at: string
           id: string
+          parent_message_id: string | null
           project_id: string
+          read_at: string | null
+          recipient_role: string | null
+          recipient_user_id: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
           sender_id: string
           sender_role: string
+          updated_at: string
+          visibility: string
         }
         Insert: {
+          approval_status?: string
+          attachments?: Json | null
           body: string
           created_at?: string
           id?: string
+          parent_message_id?: string | null
           project_id: string
+          read_at?: string | null
+          recipient_role?: string | null
+          recipient_user_id?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
           sender_id: string
           sender_role: string
+          updated_at?: string
+          visibility?: string
         }
         Update: {
+          approval_status?: string
+          attachments?: Json | null
           body?: string
           created_at?: string
           id?: string
+          parent_message_id?: string | null
           project_id?: string
+          read_at?: string | null
+          recipient_role?: string | null
+          recipient_user_id?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
           sender_id?: string
           sender_role?: string
+          updated_at?: string
+          visibility?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "project_messages_parent_message_id_fkey"
+            columns: ["parent_message_id"]
+            isOneToOne: false
+            referencedRelation: "project_messages"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "project_messages_project_id_fkey"
             columns: ["project_id"]
@@ -764,31 +987,58 @@ export type Database = {
       }
       project_milestones: {
         Row: {
+          approved_by: string | null
           completed_at: string | null
+          completion_date: string | null
           created_at: string
+          donor_visible: boolean
+          evidence_required: boolean
           id: string
           is_completed: boolean
           milestone_description: string | null
           milestone_title: string
           project_id: string
+          sequence: number
+          status: string
+          target_date: string | null
+          updated_at: string
+          weight: number
         }
         Insert: {
+          approved_by?: string | null
           completed_at?: string | null
+          completion_date?: string | null
           created_at?: string
+          donor_visible?: boolean
+          evidence_required?: boolean
           id?: string
           is_completed?: boolean
           milestone_description?: string | null
           milestone_title: string
           project_id: string
+          sequence?: number
+          status?: string
+          target_date?: string | null
+          updated_at?: string
+          weight?: number
         }
         Update: {
+          approved_by?: string | null
           completed_at?: string | null
+          completion_date?: string | null
           created_at?: string
+          donor_visible?: boolean
+          evidence_required?: boolean
           id?: string
           is_completed?: boolean
           milestone_description?: string | null
           milestone_title?: string
           project_id?: string
+          sequence?: number
+          status?: string
+          target_date?: string | null
+          updated_at?: string
+          weight?: number
         }
         Relationships: [
           {
@@ -1097,22 +1347,40 @@ export type Database = {
         Row: {
           assigned_role: string
           created_at: string
+          donor_visibility_mode: string
+          end_date: string | null
           id: string
           project_id: string
+          responsibilities: string | null
+          start_date: string | null
+          status: string
+          updated_at: string
           volunteer_id: string
         }
         Insert: {
           assigned_role: string
           created_at?: string
+          donor_visibility_mode?: string
+          end_date?: string | null
           id?: string
           project_id: string
+          responsibilities?: string | null
+          start_date?: string | null
+          status?: string
+          updated_at?: string
           volunteer_id: string
         }
         Update: {
           assigned_role?: string
           created_at?: string
+          donor_visibility_mode?: string
+          end_date?: string | null
           id?: string
           project_id?: string
+          responsibilities?: string | null
+          start_date?: string | null
+          status?: string
+          updated_at?: string
           volunteer_id?: string
         }
         Relationships: [
@@ -1314,6 +1582,10 @@ export type Database = {
           p_target_type: string
         }
         Returns: undefined
+      }
+      project_delivery_progress: {
+        Args: { _project_id: string }
+        Returns: number
       }
     }
     Enums: {

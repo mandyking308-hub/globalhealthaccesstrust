@@ -60,6 +60,23 @@ type Expense = {
   description: string | null;
   incurred_on: string;
   created_at: string;
+  status: string;
+  donor_visible: boolean;
+  rejection_reason: string | null;
+};
+
+type Milestone = {
+  id: string;
+  project_id: string;
+  sequence: number;
+  milestone_title: string;
+  milestone_description: string | null;
+  target_date: string | null;
+  completion_date: string | null;
+  status: string;
+  weight: number;
+  evidence_required: boolean;
+  donor_visible: boolean;
 };
 
 const money = (n: number, ccy = "GBP") =>
@@ -175,11 +192,16 @@ const ProjectDetail = ({
 
   const [allocations, setAllocations] = useState<(Allocation & { donations: Donation | null })[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [milestones, setMilestones] = useState<Milestone[]>([]);
   const [availableDonations, setAvailableDonations] = useState<Donation[]>([]);
   const [assignments, setAssignments] = useState<any[]>([]);
   const [approvedVolunteers, setApprovedVolunteers] = useState<any[]>([]);
   const [volunteerId, setVolunteerId] = useState("");
   const [volRole, setVolRole] = useState("Field lead");
+  const [volResponsibilities, setVolResponsibilities] = useState("");
+  const [volStart, setVolStart] = useState("");
+  const [volEnd, setVolEnd] = useState("");
+  const [volVisibility, setVolVisibility] = useState("role_only");
 
   // allocation form
   const [donationId, setDonationId] = useState<string>("");
@@ -190,36 +212,29 @@ const ProjectDetail = ({
   const [expCategory, setExpCategory] = useState("");
   const [expDesc, setExpDesc] = useState("");
   const [expDate, setExpDate] = useState(format(new Date(), "yyyy-MM-dd"));
+  const [expDonorVisible, setExpDonorVisible] = useState(true);
+
+  // milestone form
+  const [msTitle, setMsTitle] = useState("");
+  const [msDesc, setMsDesc] = useState("");
+  const [msTarget, setMsTarget] = useState("");
+  const [msWeight, setMsWeight] = useState("1");
+  const [msEvidence, setMsEvidence] = useState(true);
 
   const loadRelated = async () => {
-    const [allocRes, expRes, donRes, assignRes, volRes] = await Promise.all([
-      supabase
-        .from("fund_allocations")
-        .select("*, donations(*)")
-        .eq("project_id", project.id)
-        .order("created_at", { ascending: false }),
-      supabase
-        .from("project_expenses")
-        .select("*")
-        .eq("project_id", project.id)
-        .order("incurred_on", { ascending: false }),
-      supabase
-        .from("donations")
-        .select("*")
-        .eq("status", "completed")
-        .order("created_at", { ascending: false }),
-      supabase
-        .from("volunteer_project_assignments")
-        .select("id, assigned_role, created_at, volunteers(id, name, email)")
+    const [allocRes, expRes, msRes, donRes, assignRes, volRes] = await Promise.all([
+      supabase.from("fund_allocations").select("*, donations(*)").eq("project_id", project.id).order("created_at", { ascending: false }),
+      supabase.from("project_expenses").select("*").eq("project_id", project.id).order("incurred_on", { ascending: false }),
+      supabase.from("project_milestones").select("*").eq("project_id", project.id).order("sequence", { ascending: true }),
+      supabase.from("donations").select("*").eq("status", "completed").order("created_at", { ascending: false }),
+      supabase.from("volunteer_project_assignments")
+        .select("id, assigned_role, responsibilities, start_date, end_date, status, donor_visibility_mode, created_at, volunteers(id, name, email)")
         .eq("project_id", project.id),
-      supabase
-        .from("volunteers")
-        .select("id, name, email, status")
-        .eq("status", "approved")
-        .order("name"),
+      supabase.from("volunteers").select("id, name, email, status").eq("status", "approved").order("name"),
     ]);
     if (allocRes.data) setAllocations(allocRes.data as any);
     if (expRes.data) setExpenses(expRes.data as Expense[]);
+    if (msRes.data) setMilestones(msRes.data as Milestone[]);
     if (donRes.data) setAvailableDonations(donRes.data as Donation[]);
     if (assignRes.data) setAssignments(assignRes.data as any);
     if (volRes.data) setApprovedVolunteers(volRes.data as any);
@@ -228,10 +243,15 @@ const ProjectDetail = ({
   useEffect(() => { loadRelated(); }, [project.id]);
 
   const totalAllocated = allocations.reduce((s, a) => s + Number(a.amount || 0), 0);
-  const totalSpent = expenses.reduce((s, e) => s + Number(e.amount || 0), 0);
+  const totalSpent = expenses
+    .filter((e) => ["approved", "committed", "paid"].includes(e.status))
+    .reduce((s, e) => s + Number(e.amount || 0), 0);
   const balance = totalAllocated - totalSpent;
   const targetNum = Number(target) || 0;
   const percentFunded = targetNum > 0 ? Math.min(100, (totalAllocated / targetNum) * 100) : 0;
+  const totalWeight = milestones.reduce((s, m) => s + Number(m.weight || 0), 0);
+  const doneWeight = milestones.filter((m) => m.status === "completed").reduce((s, m) => s + Number(m.weight || 0), 0);
+  const deliveryPercent = totalWeight > 0 ? (doneWeight / totalWeight) * 100 : 0;
 
   const saveHeader = async () => {
     setSaving(true);
@@ -298,6 +318,10 @@ const ProjectDetail = ({
       description: expDesc || null,
       incurred_on: expDate,
       recorded_by: user?.id,
+      submitted_by: user?.id,
+      submitted_at: new Date().toISOString(),
+      status: "submitted",
+      donor_visible: expDonorVisible,
     });
     if (error) {
       toast({ variant: "destructive", title: "Expense failed", description: error.message });
@@ -306,6 +330,58 @@ const ProjectDetail = ({
       setExpAmount(""); setExpCategory(""); setExpDesc("");
       loadRelated();
     }
+  };
+
+  const setExpenseStatus = async (id: string, next: string, extra: Record<string, any> = {}) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    const patch: any = { status: next, ...extra };
+    if (next === "approved") { patch.approved_by = user?.id; patch.approved_at = new Date().toISOString(); }
+    if (next === "paid") patch.paid_at = new Date().toISOString();
+    const { error } = await supabase.from("project_expenses").update(patch).eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Update failed", description: error.message });
+    else loadRelated();
+  };
+
+  const toggleExpenseVisibility = async (id: string, v: boolean) => {
+    const { error } = await supabase.from("project_expenses").update({ donor_visible: v }).eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Update failed", description: error.message });
+    else loadRelated();
+  };
+
+  const addMilestone = async () => {
+    if (!msTitle.trim()) { toast({ variant: "destructive", title: "Title required" }); return; }
+    const nextSeq = (milestones.length ? Math.max(...milestones.map((m) => m.sequence || 0)) : 0) + 1;
+    const { error } = await supabase.from("project_milestones").insert({
+      project_id: project.id,
+      milestone_title: msTitle.trim(),
+      milestone_description: msDesc || null,
+      target_date: msTarget || null,
+      sequence: nextSeq,
+      weight: Number(msWeight) || 1,
+      evidence_required: msEvidence,
+      donor_visible: true,
+      status: "pending",
+    });
+    if (error) toast({ variant: "destructive", title: "Failed", description: error.message });
+    else {
+      toast({ title: "Milestone added" });
+      setMsTitle(""); setMsDesc(""); setMsTarget(""); setMsWeight("1"); setMsEvidence(true);
+      loadRelated();
+    }
+  };
+
+  const setMilestoneStatus = async (id: string, status: string) => {
+    const patch: any = { status };
+    if (status === "completed") patch.completion_date = format(new Date(), "yyyy-MM-dd");
+    const { error } = await supabase.from("project_milestones").update(patch).eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Failed", description: error.message });
+    else loadRelated();
+  };
+
+  const removeMilestone = async (id: string) => {
+    const { error } = await supabase.from("project_milestones").delete().eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Failed", description: error.message });
+    else loadRelated();
   };
 
   const assignVolunteer = async () => {
@@ -317,14 +393,25 @@ const ProjectDetail = ({
       project_id: project.id,
       volunteer_id: volunteerId,
       assigned_role: volRole.trim(),
+      responsibilities: volResponsibilities || null,
+      start_date: volStart || null,
+      end_date: volEnd || null,
+      donor_visibility_mode: volVisibility,
+      status: "active",
     });
     if (error) {
       toast({ variant: "destructive", title: "Assignment failed", description: error.message });
     } else {
       toast({ title: "Volunteer assigned" });
-      setVolunteerId("");
+      setVolunteerId(""); setVolResponsibilities(""); setVolStart(""); setVolEnd("");
       loadRelated();
     }
+  };
+
+  const updateAssignment = async (id: string, patch: Record<string, any>) => {
+    const { error } = await supabase.from("volunteer_project_assignments").update(patch).eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Update failed", description: error.message });
+    else loadRelated();
   };
 
   const removeAssignment = async (id: string) => {
@@ -346,12 +433,13 @@ const ProjectDetail = ({
         <p className="mt-4 text-[15px] max-w-3xl">{project.description}</p>
       </header>
 
-      {/* Funding summary */}
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {/* Funding & delivery summary */}
+      <section className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <SummaryStat label="Funding target" value={targetNum ? money(targetNum, currency) : "—"} />
         <SummaryStat label="Allocated" value={money(totalAllocated, currency)} sub={targetNum ? `${percentFunded.toFixed(0)}% of target` : undefined} />
-        <SummaryStat label="Spent" value={money(totalSpent, currency)} />
+        <SummaryStat label="Approved spend" value={money(totalSpent, currency)} />
         <SummaryStat label="Balance" value={money(balance, currency)} />
+        <SummaryStat label="Delivery" value={`${deliveryPercent.toFixed(0)}%`} sub={`${milestones.filter((m) => m.status === "completed").length}/${milestones.length} milestones`} />
       </section>
 
       {/* Header edit */}
@@ -430,7 +518,7 @@ const ProjectDetail = ({
           <span className="text-sm text-muted-foreground">{expenses.length} record{expenses.length === 1 ? "" : "s"}</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 items-end">
           <div>
             <Label>Amount</Label>
             <Input type="number" min="0" value={expAmount} onChange={(e) => setExpAmount(e.target.value)} />
@@ -447,13 +535,20 @@ const ProjectDetail = ({
             <Label>Date</Label>
             <Input type="date" value={expDate} onChange={(e) => setExpDate(e.target.value)} />
           </div>
+          <div className="flex items-center gap-2 pb-2">
+            <input type="checkbox" id="expDonorV" checked={expDonorVisible} onChange={(e) => setExpDonorVisible(e.target.checked)} />
+            <label htmlFor="expDonorV" className="text-xs">Donor-visible</label>
+          </div>
         </div>
-        <Button onClick={addExpense}>Record expense</Button>
+        <Button onClick={addExpense}>Submit expense</Button>
 
         {expenses.length > 0 && (
           <table className="w-full text-sm mt-4">
             <thead className="text-left text-xs uppercase tracking-widest text-muted-foreground">
-              <tr><th className="py-2">Date</th><th>Category</th><th>Description</th><th className="text-right">Amount</th></tr>
+              <tr>
+                <th className="py-2">Date</th><th>Category</th><th>Description</th>
+                <th>Status</th><th>Donor</th><th className="text-right">Amount</th><th></th>
+              </tr>
             </thead>
             <tbody className="divide-y">
               {expenses.map((e) => (
@@ -461,11 +556,87 @@ const ProjectDetail = ({
                   <td className="py-2">{format(new Date(e.incurred_on), "d MMM yyyy")}</td>
                   <td>{e.category}</td>
                   <td className="text-muted-foreground">{e.description || "—"}</td>
+                  <td>
+                    <Select value={e.status} onValueChange={(v) => setExpenseStatus(e.id, v)}>
+                      <SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        {["draft","submitted","under_review","approved","committed","paid","rejected","refunded"].map((s) =>
+                          <SelectItem key={s} value={s}>{s.replace(/_/g," ")}</SelectItem>
+                        )}
+                      </SelectContent>
+                    </Select>
+                  </td>
+                  <td>
+                    <input type="checkbox" checked={e.donor_visible} onChange={(ev) => toggleExpenseVisibility(e.id, ev.target.checked)} />
+                  </td>
                   <td className="text-right">{money(Number(e.amount), e.currency)}</td>
+                  <td className="text-right"></td>
                 </tr>
               ))}
             </tbody>
           </table>
+        )}
+      </section>
+
+      {/* Milestones */}
+      <section className="border rounded-md p-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-medium">Project milestones</h3>
+          <span className="text-sm text-muted-foreground">
+            Delivery {deliveryPercent.toFixed(0)}% · {milestones.length} milestone{milestones.length === 1 ? "" : "s"}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 items-end">
+          <div className="md:col-span-2">
+            <Label>Title</Label>
+            <Input value={msTitle} onChange={(e) => setMsTitle(e.target.value)} placeholder="e.g. First clinic run completed" />
+          </div>
+          <div>
+            <Label>Target date</Label>
+            <Input type="date" value={msTarget} onChange={(e) => setMsTarget(e.target.value)} />
+          </div>
+          <div>
+            <Label>Weight</Label>
+            <Input type="number" step="0.5" min="0" value={msWeight} onChange={(e) => setMsWeight(e.target.value)} />
+          </div>
+          <div className="flex items-center gap-2 pb-2">
+            <input type="checkbox" id="msEvidence" checked={msEvidence} onChange={(e) => setMsEvidence(e.target.checked)} />
+            <label htmlFor="msEvidence" className="text-xs">Evidence required</label>
+          </div>
+          <Button onClick={addMilestone}>Add</Button>
+        </div>
+        <div>
+          <Label>Description (optional)</Label>
+          <Textarea value={msDesc} onChange={(e) => setMsDesc(e.target.value)} rows={2} />
+        </div>
+
+        {milestones.length > 0 && (
+          <ol className="divide-y border-t mt-2">
+            {milestones.map((m) => (
+              <li key={m.id} className="py-3 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex-1 min-w-[240px]">
+                  <p className="text-sm font-medium">
+                    <span className="text-muted-foreground mr-2">{String(m.sequence).padStart(2, "0")}</span>
+                    {m.milestone_title}
+                    <span className="ml-2 text-xs text-muted-foreground">weight {m.weight}</span>
+                    {m.evidence_required && <span className="ml-2 text-[10px] uppercase tracking-widest text-primary">Evidence</span>}
+                  </p>
+                  {m.milestone_description && <p className="text-xs text-muted-foreground mt-1">{m.milestone_description}</p>}
+                  {m.target_date && <p className="text-[11px] text-muted-foreground mt-0.5">Target {format(new Date(m.target_date), "d MMM yyyy")}</p>}
+                </div>
+                <Select value={m.status} onValueChange={(v) => setMilestoneStatus(m.id, v)}>
+                  <SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {["pending","in_progress","completed","blocked","cancelled"].map((s) =>
+                      <SelectItem key={s} value={s}>{s.replace(/_/g," ")}</SelectItem>
+                    )}
+                  </SelectContent>
+                </Select>
+                <Button size="sm" variant="ghost" onClick={() => removeMilestone(m.id)}>Remove</Button>
+              </li>
+            ))}
+          </ol>
         )}
       </section>
 
@@ -476,7 +647,7 @@ const ProjectDetail = ({
           <span className="text-sm text-muted-foreground">{assignments.length} assigned</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_140px] gap-3 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
           <div>
             <Label>Volunteer</Label>
             <Select value={volunteerId} onValueChange={setVolunteerId}>
@@ -494,17 +665,53 @@ const ProjectDetail = ({
             <Label>Role</Label>
             <Input value={volRole} onChange={(e) => setVolRole(e.target.value)} placeholder="e.g. Field lead" />
           </div>
-          <Button onClick={assignVolunteer}>Assign</Button>
+          <div>
+            <Label>Donor visibility</Label>
+            <Select value={volVisibility} onValueChange={setVolVisibility}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="full_name">Full name</SelectItem>
+                <SelectItem value="first_name">First name only</SelectItem>
+                <SelectItem value="role_only">Role only</SelectItem>
+                <SelectItem value="anonymised">Anonymised</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label>Start date</Label>
+            <Input type="date" value={volStart} onChange={(e) => setVolStart(e.target.value)} />
+          </div>
+          <div>
+            <Label>End date</Label>
+            <Input type="date" value={volEnd} onChange={(e) => setVolEnd(e.target.value)} />
+          </div>
+          <div />
         </div>
+        <div>
+          <Label>Responsibilities</Label>
+          <Textarea value={volResponsibilities} onChange={(e) => setVolResponsibilities(e.target.value)} rows={2}
+            placeholder="What this team member is expected to deliver on this project" />
+        </div>
+        <Button onClick={assignVolunteer}>Assign</Button>
 
         {assignments.length > 0 && (
           <ul className="divide-y border-t mt-4">
             {assignments.map((a) => (
-              <li key={a.id} className="py-3 flex items-center justify-between">
-                <div>
+              <li key={a.id} className="py-3 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex-1 min-w-[220px]">
                   <p className="text-sm font-medium">{a.volunteers?.name || "Unknown"}</p>
-                  <p className="text-xs text-muted-foreground">{a.volunteers?.email} · {a.assigned_role}</p>
+                  <p className="text-xs text-muted-foreground">{a.assigned_role} · Donor sees: {a.donor_visibility_mode?.replace(/_/g, " ")}</p>
+                  {a.responsibilities && <p className="text-xs mt-1">{a.responsibilities}</p>}
                 </div>
+                <Select value={a.donor_visibility_mode || "role_only"} onValueChange={(v) => updateAssignment(a.id, { donor_visibility_mode: v })}>
+                  <SelectTrigger className="h-8 w-[150px] text-xs"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="full_name">Full name</SelectItem>
+                    <SelectItem value="first_name">First name only</SelectItem>
+                    <SelectItem value="role_only">Role only</SelectItem>
+                    <SelectItem value="anonymised">Anonymised</SelectItem>
+                  </SelectContent>
+                </Select>
                 <Button size="sm" variant="ghost" onClick={() => removeAssignment(a.id)}>Remove</Button>
               </li>
             ))}
