@@ -1,99 +1,82 @@
 import { Card, CardContent } from "@/components/ui/card";
 
-interface TrusteeProps {
+interface PersonProfile {
   name: string;
   role: string;
-  bio: string;
-  quote: string;
+  summary: string;
 }
 
-const constitutionalTrustees: TrusteeProps[] = [
+const trustees: PersonProfile[] = [
   {
     name: "Mandy King",
     role: "Chair of Trustees",
-    bio: "Mandy King is the Principal Group Owner and Business Operator of a portfolio of high-impact healthcare ventures. With over 25 years of experience spanning the NHS, care, education, and international operations, Mandy leads with vision and discipline. Her qualifications include a Master's in Business Administration, a Level 5 Award in Health and Social Care Management (Higher Distinction), and certifications from Microsoft and Cisco. As Chair of Trustees, she oversees strategic governance, public accountability, and charitable stewardship. Her focus on AI and machine learning drives innovation across platforms, contributing to equitable global health systems.",
-    quote: "Our Trust is guided by duty, not profile. We exist to protect the dignity of human life—lawfully, ethically, and enduringly."
+    summary:
+      "Mandy King chairs the Board and leads strategic governance, trustee coordination and the development of the Trust's operating framework. As Chair, she is accountable with the other Trustees for ensuring that decisions remain within the Trust Deed and serve the public benefit.",
   },
   {
     name: "Dr Jagdev Thukral",
-    role: "Trustee and Constitutional Signatory — Executive Lead",
-    bio: "Dr Thukral is a seasoned medical director with over 25 years of experience in both NHS and private mental health settings. With a Master's in Organisational Psychology and a Level 5 Award in Health and Social Care Management, he brings exceptional leadership in clinical governance and change management. As a Trustee and constitutional signatory, and in his executive lead capacity, Dr Thukral oversees programme strategy, clinical partnerships, and cross-border health initiatives. His career is defined by a consistent drive to advance equality, safety, and global healthcare outcomes.",
-    quote: "Access to care must be equitable, safe, and lawful. This Trust exists to make that a reality."
+    role: "Trustee",
+    summary:
+      "Dr Jagdev Thukral is a medical doctor and psychiatrist with NHS experience. He contributes clinical perspective, safeguarding awareness and healthcare-sector knowledge to trustee decisions.",
   },
   {
-    name: "John O'Sullivan",
-    role: "Trustee — Finance and Strategic Investment",
-    bio: "John O'Sullivan is a seasoned care-sector executive and finance director, having served as CEO across multiple large care groups. His expertise spans financial forecasting, investment oversight, and operational management within regulated healthcare environments. At the Trust, John leads on financial governance, audit strategy, and fiduciary stewardship.",
-    quote: "Every contribution is held with care, precision, and purpose. We are not just managing funds—we are safeguarding legacies."
+    name: "John O'Sullivan BA FCA",
+    role: "Trustee",
+    summary:
+      "John O'Sullivan is a chartered accountant. He contributes financial, governance and stewardship expertise to trustee oversight, including the development of appropriate banking and financial controls.",
   },
 ];
 
-const advisoryContributors: TrusteeProps[] = [
+const advisers: PersonProfile[] = [
   {
     name: "Rachael Duff",
-    role: "Compliance & Operational Governance",
-    bio: "Rachael Duff is a regulatory and compliance leader with over 24 years in operational and quality systems management across NHS, social care, and commercial healthcare. She has served as a Specialist Practice Manager Advisor for the CQC, participating in over 400 inspections. Rachael holds Level 4 certification in mediation and is a trained Expert Witness. Her oversight of compliance, governance, and quality assurance frameworks supports the Trust in operating at the highest legal and professional standards.",
-    quote: "We are custodians of care. Compliance is not a checkbox—it is the foundation of trust."
+    role: "Specialist adviser",
+    summary: "Provides specialist input on compliance and operational governance when requested by the Trustees.",
   },
   {
     name: "Dr Joy Wong",
-    role: "Psychological Health & Youth Mental Health",
-    bio: "Dr Joy Wong is a Chartered Health Psychologist and Associate Fellow of the British Psychological Society. With a Ph.D. in Public Health focused on youth mental health, she is registered with the Health and Care Professions Council (HCPC) and brings a culturally diverse lens to care provision. Dr Wong's clinical specialisms include DBT and CBT, and she contributes on integrating holistic, evidence-based psychological support within health access frameworks.",
-    quote: "Mental health is inseparable from public health. We build systems that recognise and respond to this truth."
+    role: "Specialist adviser",
+    summary: "Provides specialist input on psychological health and youth mental health when requested by the Trustees.",
   },
   {
     name: "Richard Banyard",
-    role: "Health Systems & Commissioning",
-    bio: "Richard Banyard is a former NHS Chief Executive and senior healthcare strategist with over 35 years of experience, including 10 years at Board level. With a Master's in Health Services Management and a PGCE, he has advised on commissioning, primary care transformation, and national health infrastructure projects. As a former educator and Head Examiner, Richard reinforces the Trust's commitment to knowledge, systems integrity, and enduring public benefit.",
-    quote: "Our work is built on evidence, service, and the discipline of public duty."
+    role: "Specialist adviser",
+    summary: "Provides specialist input on health systems and commissioning when requested by the Trustees.",
   },
 ];
 
-const TrusteeCard = ({ trustee }: { trustee: TrusteeProps }) => (
+const ProfileCard = ({ person }: { person: PersonProfile }) => (
   <Card className="card-professional">
     <CardContent className="p-6">
-      <h3 className="text-xl font-serif font-bold text-primary mb-2">
-        {trustee.name}
-      </h3>
+      <h3 className="text-xl font-serif font-bold text-primary mb-2">{person.name}</h3>
       <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-primary mb-4">
-        {trustee.role}
+        {person.role}
       </p>
-      <p className="text-muted-foreground leading-relaxed mb-4 text-sm">
-        {trustee.bio}
-      </p>
-      <blockquote className="border-l-4 border-primary/20 pl-4 italic text-sm text-muted-foreground">
-        "{trustee.quote}"
-      </blockquote>
+      <p className="text-sm leading-relaxed text-muted-foreground">{person.summary}</p>
     </CardContent>
   </Card>
 );
 
-export const TrusteeBiographiesGrid = () => {
-  return (
-    <div className="space-y-12 mt-8">
-      <section>
-        <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3">
-          Trustees and Constitutional Signatories
-        </h2>
-        <p className="text-muted-foreground mb-6 max-w-3xl">
-          The Trust is administered by its appointed Trustees. Mandy King, Dr Jagdev Thukral and John O'Sullivan are the current constitutional signatories identified in the Trust's records.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {constitutionalTrustees.map((t, i) => <TrusteeCard key={i} trustee={t} />)}
-        </div>
-      </section>
+export const TrusteeBiographiesGrid = () => (
+  <div className="space-y-12 mt-8">
+    <section>
+      <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3">Current Trustees</h2>
+      <p className="text-muted-foreground mb-6 max-w-3xl">
+        These three people constitute the current Board of Trustees and are the constitutional signatories identified in the Trust's records.
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {trustees.map((person) => <ProfileCard key={person.name} person={person} />)}
+      </div>
+    </section>
 
-      <section>
-        <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3">
-          Advisory and Specialist Contributors
-        </h2>
-        <p className="text-muted-foreground mb-6 max-w-3xl">
-          The Trust also benefits from the experience of specialist contributors who support its thinking across governance, compliance, healthcare, commissioning and programme design. Inclusion in this section does not, by itself, constitute appointment as a Trustee.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {advisoryContributors.map((t, i) => <TrusteeCard key={i} trustee={t} />)}
-        </div>
-      </section>
-    </div>
-  );
-};
+    <section>
+      <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3">Specialist advisers</h2>
+      <p className="text-muted-foreground mb-6 max-w-3xl">
+        Advisers may provide specialist input but are not Trustees, do not control Trust funds and cannot bind the Trust unless the Trustees give specific written authority.
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {advisers.map((person) => <ProfileCard key={person.name} person={person} />)}
+      </div>
+    </section>
+  </div>
+);
