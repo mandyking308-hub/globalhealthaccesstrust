@@ -154,6 +154,7 @@ export const AuthPage = () => {
     const pwCheck = validatePassword(signupPassword);
     if (!pwCheck.valid) return setError(pwCheck.errors[0]);
     if (!gdprConsent) return setError("You must accept the GDPR consent to register");
+    if (!termsAccepted) return setError("You must agree to the Website and Portal Terms of Use to create an account");
 
     setLoading(true);
     try {
@@ -166,11 +167,25 @@ export const AuthPage = () => {
             first_name: signupFirstName,
             last_name: signupLastName,
             gdpr_consent: gdprConsent,
+            terms_accepted: termsAccepted,
+            terms_version: "1.0",
           },
         },
       });
       if (error) throw error;
       if (data.session) {
+        // Record legal acceptance for the current published Terms.
+        // Non-blocking: swallow errors so account creation is not gated on the
+        // presence of a published legal_documents row.
+        try {
+          await supabase.rpc("record_legal_acceptance", {
+            _slug: "terms-of-use",
+            _role: "donor",
+            _user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 300) : undefined,
+          });
+        } catch {
+          /* non-blocking */
+        }
         toast({ title: "Welcome to GHAT", description: "Your account has been created." });
         await redirectByRole(data.session.user.id);
       } else {
@@ -182,6 +197,7 @@ export const AuthPage = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen flex flex-col donor-portal">
