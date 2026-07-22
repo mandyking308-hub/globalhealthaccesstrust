@@ -170,10 +170,10 @@ const ProjectDetail = ({
   const [allocations, setAllocations] = useState<(Allocation & { donations: Donation | null })[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [availableDonations, setAvailableDonations] = useState<Donation[]>([]);
-
-  // allocation form
-  const [donationId, setDonationId] = useState<string>("");
-  const [allocAmount, setAllocAmount] = useState<string>("");
+  const [assignments, setAssignments] = useState<any[]>([]);
+  const [approvedVolunteers, setApprovedVolunteers] = useState<any[]>([]);
+  const [volunteerId, setVolunteerId] = useState("");
+  const [volRole, setVolRole] = useState("Field lead");
 
   // expense form
   const [expAmount, setExpAmount] = useState("");
