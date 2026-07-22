@@ -198,7 +198,7 @@ export const VolunteerDashboardPage = () => {
                   </CardHeader>
                   <CardContent>
                     <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
-                      Active Volunteer
+                      Active Team Member
                     </Badge>
                   </CardContent>
                 </Card>
