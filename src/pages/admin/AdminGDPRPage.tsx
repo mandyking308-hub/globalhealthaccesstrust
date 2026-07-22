@@ -31,8 +31,8 @@ const OverviewTab = () => {
   useEffect(() => {
     (async () => {
       const [r1, r2, r3, r4, r5, r6, r7, r8] = await Promise.all([
-        supabase.from("gdpr_requests").select("id", { count: "exact", head: true }).not("status", "in", "(completed,refused,withdrawn)"),
-        supabase.from("gdpr_requests").select("id", { count: "exact", head: true }).lt("due_at", new Date().toISOString()).not("status", "in", "(completed,refused,withdrawn)"),
+        supabase.from("gdpr_requests").select("id", { count: "exact", head: true }).eq("is_test", false).not("status", "in", "(completed,refused,withdrawn)"),
+        supabase.from("gdpr_requests").select("id", { count: "exact", head: true }).eq("is_test", false).lt("due_at", new Date().toISOString()).not("status", "in", "(completed,refused,withdrawn)"),
         supabase.from("privacy_processing_activities").select("id", { count: "exact", head: true }).eq("status", "draft"),
         supabase.from("privacy_service_providers").select("id", { count: "exact", head: true }),
         supabase.from("privacy_international_transfers").select("id", { count: "exact", head: true }),
