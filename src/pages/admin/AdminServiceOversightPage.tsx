@@ -67,7 +67,7 @@ function IncidentOpener({ onOpened }: { onOpened: () => void }) {
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 {["security_incident","personal_data_breach","payment_incident","fraud","availability_outage","unauthorised_access","evidence_disclosure","lost_device","provider_incident"].map((k) =>
-                  <SelectItem key={k} value={k}>{k.replaceAll("_"," ")}</SelectItem>)}
+                  <SelectItem key={k} value={k}>{k.replace(/_/g," ")}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
