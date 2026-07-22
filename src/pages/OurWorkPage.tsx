@@ -2,92 +2,65 @@ import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
-export const OurWorkPage = () => {
-  return (
-    <ContentLayout>
-      <SEO
-        title="Our Work"
-        description="Explore the five funding pillars of the Global Health Access Trust: ethical healthcare access, capacity building, systems strengthening, research, and emergency relief."
-        canonical="/our-work"
-      />
-      <h1>Our Work</h1>
-      
-      <p className="featured-text">"We do not fund moments. We fund movements."</p>
+export const OurWorkPage = () => (
+  <ContentLayout>
+    <SEO
+      title="Our Work"
+      description="The established network, current pro bono work and future trustee-approved charitable scope of Global Health Access Trust."
+      canonical="/our-work"
+    />
+    <h1>Our Work</h1>
+    <p className="featured-text">Genuine history and current work, clearly separated from future trustee-approved projects.</p>
 
-      <p>The Global Health Access Trust was founded to advance lawful, measurable, and dignified access to healthcare—particularly for those outside the reach of stable systems or statutory support.</p>
-      <p>Our work is guided by five legally defined funding pillars and is delivered through trusted partners, registered institutions, and internationally recognised frameworks.</p>
-      <p>We prioritise impact over volume, and depth over display.</p>
+    <div className="section-container">
+      <h2>Charitable work since 2019</h2>
+      <p>
+        The charitable and public-benefit work that led to Global Health Access Trust began in 2019. GHAT itself was formally established under its Trust Deed with effect from 1 December 2024.
+      </p>
+      <p>
+        The earlier work includes the Clinicians Check international clinician network, with registrations numbering in the thousands, representation across 12 countries and more than 40 partner and organisational relationships.
+      </p>
+      <p>
+        These figures describe wider network reach and capacity. They are not presented as evidence that GHAT funded or completed projects in every country or through every relationship.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>1. Ethical Access to Healthcare</h2>
-        <p>We fund and facilitate initiatives that deliver healthcare access in areas where need is urgent and provision is absent, under strain, or unjustly withheld. We focus on:</p>
-        <ul>
-          <li>Subsidised treatment for excluded individuals</li>
-          <li>Support for mobile clinics and field hospitals</li>
-          <li>Legal funding for cross-border healthcare needs</li>
-          <li>Strategic access to diagnostics, supplies, and medicines</li>
-        </ul>
-      </div>
+    <div className="section-container">
+      <h2>Current pro bono work in Nigeria</h2>
+      <p>
+        The wider team is providing unpaid technical and operational support to an agricultural supply-chain organisation in Nigeria. The work is intended to improve visibility, coordination and controls across farmers, partners, logistics, quality assurance, buyer delivery and payment risk, helping to protect harvest outcomes and farmer livelihoods.
+      </p>
+      <p>
+        The organisation is not publicly named. No fee is being charged and no completed impact result is claimed. The work will be presented as a formal GHAT project only if the Trustees approve an appropriate project charter or minute.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>2. Building Capacity, Not Dependency</h2>
-        <p>Rather than funding dependence, we invest in training the next generation of carers and clinicians. Our work includes:</p>
-        <ul>
-          <li>Bursaries for medical and public health students</li>
-          <li>Training for mental health and trauma professionals</li>
-          <li>Capacity-building for systems delivery and leadership</li>
-          <li>Legal and cultural training in rights-based healthcare models</li>
-        </ul>
-      </div>
+    <div className="section-container">
+      <h2>Areas within the Trust's charitable mandate</h2>
+      <p>The Trustees may approve lawful work in areas including:</p>
+      <ul>
+        <li>access to healthcare and the relief of illness;</li>
+        <li>education and professional capacity in health and care;</li>
+        <li>health-system infrastructure, logistics and continuity;</li>
+        <li>research, public-benefit policy and lawful systems improvement; and</li>
+        <li>emergency or exceptional relief where healthcare access is disrupted.</li>
+      </ul>
+      <p>
+        These areas describe what the Trust may support. They are not a list of completed grants or active country programmes.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>3. Strengthening Health Systems</h2>
-        <p>We support lawful development of healthcare systems and services that benefit the public—not corporations, campaigns, or governments. We act where:</p>
-        <ul>
-          <li>Public systems have collapsed</li>
-          <li>Private access is inequitable</li>
-          <li>Infrastructure is failing</li>
-          <li>Emergency provisions are unsustainable</li>
-        </ul>
-      </div>
+    <div className="section-container">
+      <h2>Project approval</h2>
+      <p>
+        A proposed project must be assessed against the Trust Deed, public benefit, due diligence, sanctions, safeguarding, financial controls, delivery risk and available resources. Work proceeds as a formal GHAT project only after documented trustee approval and appropriate terms.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>4. Legal Scholarship & Strategic Reform</h2>
-        <p>Justice is foundational to health. We fund legal and policy work that strengthens the systems meant to protect life. This includes:</p>
-        <ul>
-          <li>Impact evaluations and system audits</li>
-          <li>Public health policy research</li>
-          <li>Access-to-care legal advocacy</li>
-          <li>Support for rights-based constitutional development</li>
-        </ul>
-      </div>
-
-      <div className="section-container">
-        <h2>5. Responding to Humanitarian Collapse</h2>
-        <p>When systems fail, we act. Our emergency relief protocols allow us to deliver healthcare aid through trusted, lawful, and auditable partners during:</p>
-        <ul>
-          <li>Armed conflict</li>
-          <li>Border-zone healthcare voids</li>
-          <li>Disease outbreak or systemic collapse</li>
-          <li>Natural disasters and refugee crises</li>
-        </ul>
-      </div>
-
-      <div className="section-container">
-        <h2>Readiness, Not Reaction</h2>
-        <p>The Trust is committed to deploying funds strategically, not reactively. All interventions are:</p>
-        <ul>
-          <li>Lawful and apolitical</li>
-          <li>Delivered through formal due diligence</li>
-          <li>Audited, reviewed, and governed with strict neutrality</li>
-          <li>Undertaken in the service of long-term public benefit</li>
-        </ul>
-        </div>
-
-        <div className="flex flex-wrap gap-4 mt-8">
-          <Link to="/support-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Support Our Work →</Link>
-          <Link to="/contact-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Contact the Trust →</Link>
-        </div>
-    </ContentLayout>
-  );
-};
+    <div className="flex flex-wrap gap-5 mt-8">
+      <Link to="/what-we-do" className="text-primary hover:underline">Full charitable mandate →</Link>
+      <Link to="/how-we-work" className="text-primary hover:underline">How projects are governed →</Link>
+      <Link to="/contact-the-trust" className="text-primary hover:underline">Contact the Trust →</Link>
+    </div>
+  </ContentLayout>
+);
