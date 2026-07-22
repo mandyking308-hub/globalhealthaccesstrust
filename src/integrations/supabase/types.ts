@@ -251,6 +251,297 @@ export type Database = {
         }
         Relationships: []
       }
+      communication_campaigns: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          audience_source: string
+          channel_code: string
+          created_at: string
+          id: string
+          lawful_basis: string
+          message_version: string
+          name: string
+          notes: string | null
+          send_completed_at: string | null
+          send_started_at: string | null
+          total_bounces: number | null
+          total_recipients: number | null
+          total_unsubscribes: number | null
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          audience_source: string
+          channel_code: string
+          created_at?: string
+          id?: string
+          lawful_basis: string
+          message_version: string
+          name: string
+          notes?: string | null
+          send_completed_at?: string | null
+          send_started_at?: string | null
+          total_bounces?: number | null
+          total_recipients?: number | null
+          total_unsubscribes?: number | null
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          audience_source?: string
+          channel_code?: string
+          created_at?: string
+          id?: string
+          lawful_basis?: string
+          message_version?: string
+          name?: string
+          notes?: string | null
+          send_completed_at?: string | null
+          send_started_at?: string | null
+          total_bounces?: number | null
+          total_recipients?: number | null
+          total_unsubscribes?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_campaigns_channel_code_fkey"
+            columns: ["channel_code"]
+            isOneToOne: false
+            referencedRelation: "communication_channels"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      communication_channels: {
+        Row: {
+          active: boolean
+          code: string
+          created_at: string
+          description: string | null
+          id: string
+          is_optional_marketing: boolean
+          is_project_update: boolean
+          is_service_message: boolean
+          label: string
+          medium: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          code: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_optional_marketing?: boolean
+          is_project_update?: boolean
+          is_service_message?: boolean
+          label: string
+          medium: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          code?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_optional_marketing?: boolean
+          is_project_update?: boolean
+          is_service_message?: boolean
+          label?: string
+          medium?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      communication_preferences: {
+        Row: {
+          channel_code: string
+          created_at: string
+          evidence_notes: string | null
+          id: string
+          lawful_basis: string | null
+          opted_in: boolean
+          set_at: string
+          set_by: string
+          set_by_user: string | null
+          source: string | null
+          updated_at: string
+          user_id: string
+          wording_version: string | null
+        }
+        Insert: {
+          channel_code: string
+          created_at?: string
+          evidence_notes?: string | null
+          id?: string
+          lawful_basis?: string | null
+          opted_in?: boolean
+          set_at?: string
+          set_by?: string
+          set_by_user?: string | null
+          source?: string | null
+          updated_at?: string
+          user_id: string
+          wording_version?: string | null
+        }
+        Update: {
+          channel_code?: string
+          created_at?: string
+          evidence_notes?: string | null
+          id?: string
+          lawful_basis?: string | null
+          opted_in?: boolean
+          set_at?: string
+          set_by?: string
+          set_by_user?: string | null
+          source?: string | null
+          updated_at?: string
+          user_id?: string
+          wording_version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_preferences_channel_code_fkey"
+            columns: ["channel_code"]
+            isOneToOne: false
+            referencedRelation: "communication_channels"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      communication_suppressions: {
+        Row: {
+          channel_code: string | null
+          contact_hash: string
+          contact_type: string
+          id: string
+          reason: string
+          source: string | null
+          suppressed_at: string
+        }
+        Insert: {
+          channel_code?: string | null
+          contact_hash: string
+          contact_type: string
+          id?: string
+          reason: string
+          source?: string | null
+          suppressed_at?: string
+        }
+        Update: {
+          channel_code?: string | null
+          contact_hash?: string
+          contact_type?: string
+          id?: string
+          reason?: string
+          source?: string | null
+          suppressed_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "communication_suppressions_channel_code_fkey"
+            columns: ["channel_code"]
+            isOneToOne: false
+            referencedRelation: "communication_channels"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      cookie_consent_events: {
+        Row: {
+          action: string
+          analytics: boolean
+          created_at: string
+          functional: boolean
+          id: string
+          necessary: boolean
+          other: boolean
+          preference_version: string
+          session_key: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          analytics?: boolean
+          created_at?: string
+          functional?: boolean
+          id?: string
+          necessary?: boolean
+          other?: boolean
+          preference_version?: string
+          session_key?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          analytics?: boolean
+          created_at?: string
+          functional?: boolean
+          id?: string
+          necessary?: boolean
+          other?: boolean
+          preference_version?: string
+          session_key?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      cookie_registry: {
+        Row: {
+          active: boolean
+          category: string
+          created_at: string
+          duration: string
+          id: string
+          is_first_party: boolean
+          last_reviewed_at: string
+          legal_basis: string
+          notes: string | null
+          provider: string
+          purpose: string
+          storage_key: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          category: string
+          created_at?: string
+          duration: string
+          id?: string
+          is_first_party?: boolean
+          last_reviewed_at?: string
+          legal_basis: string
+          notes?: string | null
+          provider: string
+          purpose: string
+          storage_key: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          category?: string
+          created_at?: string
+          duration?: string
+          id?: string
+          is_first_party?: boolean
+          last_reviewed_at?: string
+          legal_basis?: string
+          notes?: string | null
+          provider?: string
+          purpose?: string
+          storage_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       data_retention_settings: {
         Row: {
           description: string | null
@@ -642,6 +933,47 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "donation_drafts"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      email_unsubscribe_public_tokens: {
+        Row: {
+          channel_code: string | null
+          contact_hash: string
+          contact_type: string
+          created_at: string
+          expires_at: string
+          id: string
+          token: string
+          used_at: string | null
+        }
+        Insert: {
+          channel_code?: string | null
+          contact_hash: string
+          contact_type: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          token: string
+          used_at?: string | null
+        }
+        Update: {
+          channel_code?: string | null
+          contact_hash?: string
+          contact_type?: string
+          created_at?: string
+          expires_at?: string
+          id?: string
+          token?: string
+          used_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "email_unsubscribe_public_tokens_channel_code_fkey"
+            columns: ["channel_code"]
+            isOneToOne: false
+            referencedRelation: "communication_channels"
+            referencedColumns: ["code"]
           },
         ]
       }
@@ -3668,6 +4000,57 @@ export type Database = {
         }
         Relationships: []
       }
+      soft_optin_settings: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          collected_directly_recorded: boolean
+          created_at: string
+          enabled: boolean
+          every_message_contains_opt_out_recorded: boolean
+          evidence_notes: string | null
+          id: string
+          interest_or_support_recorded: boolean
+          only_own_charitable_purposes_recorded: boolean
+          opt_out_offered_at_collection_recorded: boolean
+          qualifies_as_charity_recorded: boolean
+          singleton: boolean
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          collected_directly_recorded?: boolean
+          created_at?: string
+          enabled?: boolean
+          every_message_contains_opt_out_recorded?: boolean
+          evidence_notes?: string | null
+          id?: string
+          interest_or_support_recorded?: boolean
+          only_own_charitable_purposes_recorded?: boolean
+          opt_out_offered_at_collection_recorded?: boolean
+          qualifies_as_charity_recorded?: boolean
+          singleton?: boolean
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          collected_directly_recorded?: boolean
+          created_at?: string
+          enabled?: boolean
+          every_message_contains_opt_out_recorded?: boolean
+          evidence_notes?: string | null
+          id?: string
+          interest_or_support_recorded?: boolean
+          only_own_charitable_purposes_recorded?: boolean
+          opt_out_offered_at_collection_recorded?: boolean
+          qualifies_as_charity_recorded?: boolean
+          singleton?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
       system_alerts: {
         Row: {
           alert_type: string
@@ -4298,6 +4681,7 @@ export type Database = {
         Args: { target_user_id: string }
         Returns: boolean
       }
+      apply_unsubscribe_token: { Args: { _token: string }; Returns: Json }
       bank_transfer_record_receipt: {
         Args: {
           _amount_received_minor: number
