@@ -89,6 +89,102 @@ export type Database = {
         }
         Relationships: []
       }
+      bank_transfer_requests: {
+        Row: {
+          amount_expected_minor: number | null
+          amount_minor: number
+          amount_received_minor: number | null
+          approver_id: string | null
+          bank_reference: string | null
+          created_at: string
+          currency: string
+          donation_draft_id: string
+          donor_id: string
+          due_diligence_status: string | null
+          frequency: Database["public"]["Enums"]["donation_frequency"]
+          id: string
+          instructions_sent_at: string | null
+          instructions_sent_by: string | null
+          purpose: Database["public"]["Enums"]["donation_purpose"]
+          received_at: string | null
+          reconciliation_notes: string | null
+          reconciliation_status: string | null
+          reference_number: string
+          resulting_donation_id: string | null
+          second_approver_id: string | null
+          secure_delivery_channel: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_expected_minor?: number | null
+          amount_minor: number
+          amount_received_minor?: number | null
+          approver_id?: string | null
+          bank_reference?: string | null
+          created_at?: string
+          currency?: string
+          donation_draft_id: string
+          donor_id: string
+          due_diligence_status?: string | null
+          frequency?: Database["public"]["Enums"]["donation_frequency"]
+          id?: string
+          instructions_sent_at?: string | null
+          instructions_sent_by?: string | null
+          purpose: Database["public"]["Enums"]["donation_purpose"]
+          received_at?: string | null
+          reconciliation_notes?: string | null
+          reconciliation_status?: string | null
+          reference_number?: string
+          resulting_donation_id?: string | null
+          second_approver_id?: string | null
+          secure_delivery_channel?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_expected_minor?: number | null
+          amount_minor?: number
+          amount_received_minor?: number | null
+          approver_id?: string | null
+          bank_reference?: string | null
+          created_at?: string
+          currency?: string
+          donation_draft_id?: string
+          donor_id?: string
+          due_diligence_status?: string | null
+          frequency?: Database["public"]["Enums"]["donation_frequency"]
+          id?: string
+          instructions_sent_at?: string | null
+          instructions_sent_by?: string | null
+          purpose?: Database["public"]["Enums"]["donation_purpose"]
+          received_at?: string | null
+          reconciliation_notes?: string | null
+          reconciliation_status?: string | null
+          reference_number?: string
+          resulting_donation_id?: string | null
+          second_approver_id?: string | null
+          secure_delivery_channel?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bank_transfer_requests_donation_draft_id_fkey"
+            columns: ["donation_draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bank_transfer_requests_resulting_donation_id_fkey"
+            columns: ["resulting_donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       commissioned_projects: {
         Row: {
           approved_at: string | null
@@ -292,17 +388,148 @@ export type Database = {
           },
         ]
       }
+      donation_drafts: {
+        Row: {
+          amount_minor: number
+          anonymous: boolean
+          confirmation_version: string | null
+          confirmed_at: string | null
+          created_at: string
+          currency: string
+          delivery_allocation_minor: number
+          donor_id: string
+          expires_at: string
+          frequency: Database["public"]["Enums"]["donation_frequency"]
+          id: string
+          notes: string | null
+          operating_allocation_minor: number
+          payment_route: string | null
+          proposed_project_id: string | null
+          purpose: Database["public"]["Enums"]["donation_purpose"]
+          recognition_preference: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_minor: number
+          anonymous?: boolean
+          confirmation_version?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          currency?: string
+          delivery_allocation_minor: number
+          donor_id: string
+          expires_at?: string
+          frequency?: Database["public"]["Enums"]["donation_frequency"]
+          id?: string
+          notes?: string | null
+          operating_allocation_minor: number
+          payment_route?: string | null
+          proposed_project_id?: string | null
+          purpose: Database["public"]["Enums"]["donation_purpose"]
+          recognition_preference?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_minor?: number
+          anonymous?: boolean
+          confirmation_version?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          currency?: string
+          delivery_allocation_minor?: number
+          donor_id?: string
+          expires_at?: string
+          frequency?: Database["public"]["Enums"]["donation_frequency"]
+          id?: string
+          notes?: string | null
+          operating_allocation_minor?: number
+          payment_route?: string | null
+          proposed_project_id?: string | null
+          purpose?: Database["public"]["Enums"]["donation_purpose"]
+          recognition_preference?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donation_drafts_proposed_project_id_fkey"
+            columns: ["proposed_project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      donation_transaction_confirmations: {
+        Row: {
+          confirmed_at: string
+          currency: string
+          delivery_allocation_minor: number
+          donation_draft_id: string
+          donor_id: string
+          frequency: Database["public"]["Enums"]["donation_frequency"]
+          gross_amount_minor: number
+          id: string
+          operating_allocation_minor: number
+          purpose: Database["public"]["Enums"]["donation_purpose"]
+          wording_version: string
+        }
+        Insert: {
+          confirmed_at?: string
+          currency: string
+          delivery_allocation_minor: number
+          donation_draft_id: string
+          donor_id: string
+          frequency: Database["public"]["Enums"]["donation_frequency"]
+          gross_amount_minor: number
+          id?: string
+          operating_allocation_minor: number
+          purpose: Database["public"]["Enums"]["donation_purpose"]
+          wording_version: string
+        }
+        Update: {
+          confirmed_at?: string
+          currency?: string
+          delivery_allocation_minor?: number
+          donation_draft_id?: string
+          donor_id?: string
+          frequency?: Database["public"]["Enums"]["donation_frequency"]
+          gross_amount_minor?: number
+          id?: string
+          operating_allocation_minor?: number
+          purpose?: Database["public"]["Enums"]["donation_purpose"]
+          wording_version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donation_transaction_confirmations_donation_draft_id_fkey"
+            columns: ["donation_draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       donations: {
         Row: {
           amount: number
+          amount_minor: number | null
           created_at: string
           currency: string
+          donation_draft_id: string | null
           donor_id: string | null
           frequency: Database["public"]["Enums"]["donation_frequency"]
           id: string
           notes: string | null
+          payment_provider: string | null
+          payment_route: string | null
           processed_at: string | null
+          provider_payment_intent_id: string | null
+          provider_subscription_id: string | null
           purpose: Database["public"]["Enums"]["donation_purpose"]
+          receipt_reference: string | null
           receipt_url: string | null
           status: string
           stripe_payment_id: string | null
@@ -310,14 +537,21 @@ export type Database = {
         }
         Insert: {
           amount: number
+          amount_minor?: number | null
           created_at?: string
           currency?: string
+          donation_draft_id?: string | null
           donor_id?: string | null
           frequency?: Database["public"]["Enums"]["donation_frequency"]
           id?: string
           notes?: string | null
+          payment_provider?: string | null
+          payment_route?: string | null
           processed_at?: string | null
+          provider_payment_intent_id?: string | null
+          provider_subscription_id?: string | null
           purpose: Database["public"]["Enums"]["donation_purpose"]
+          receipt_reference?: string | null
           receipt_url?: string | null
           status?: string
           stripe_payment_id?: string | null
@@ -325,20 +559,35 @@ export type Database = {
         }
         Update: {
           amount?: number
+          amount_minor?: number | null
           created_at?: string
           currency?: string
+          donation_draft_id?: string | null
           donor_id?: string | null
           frequency?: Database["public"]["Enums"]["donation_frequency"]
           id?: string
           notes?: string | null
+          payment_provider?: string | null
+          payment_route?: string | null
           processed_at?: string | null
+          provider_payment_intent_id?: string | null
+          provider_subscription_id?: string | null
           purpose?: Database["public"]["Enums"]["donation_purpose"]
+          receipt_reference?: string | null
           receipt_url?: string | null
           status?: string
           stripe_payment_id?: string | null
           stripe_subscription_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "donations_donation_draft_id_fkey"
+            columns: ["donation_draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       fund_allocations: {
         Row: {
@@ -968,6 +1217,163 @@ export type Database = {
           updated_at?: string
           user_id?: string
           volunteer_onboarding_complete?: boolean
+        }
+        Relationships: []
+      }
+      payment_attempts: {
+        Row: {
+          amount_minor: number
+          created_at: string
+          currency: string
+          donation_draft_id: string
+          donor_id: string
+          failure_code: string | null
+          failure_message: string | null
+          id: string
+          payment_mode: string
+          provider: string
+          provider_checkout_session_id: string | null
+          provider_payment_intent_id: string | null
+          provider_subscription_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_minor: number
+          created_at?: string
+          currency?: string
+          donation_draft_id: string
+          donor_id: string
+          failure_code?: string | null
+          failure_message?: string | null
+          id?: string
+          payment_mode: string
+          provider?: string
+          provider_checkout_session_id?: string | null
+          provider_payment_intent_id?: string | null
+          provider_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_minor?: number
+          created_at?: string
+          currency?: string
+          donation_draft_id?: string
+          donor_id?: string
+          failure_code?: string | null
+          failure_message?: string | null
+          id?: string
+          payment_mode?: string
+          provider?: string
+          provider_checkout_session_id?: string | null
+          provider_payment_intent_id?: string | null
+          provider_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_attempts_donation_draft_id_fkey"
+            columns: ["donation_draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_receipts: {
+        Row: {
+          anonymous: boolean
+          created_at: string
+          currency: string
+          delivery_allocation_minor: number
+          donation_id: string
+          donor_display_name: string | null
+          donor_id: string
+          gross_amount_minor: number
+          id: string
+          operating_allocation_minor: number
+          paid_at: string
+          payment_route: string
+          purpose: Database["public"]["Enums"]["donation_purpose"]
+          receipt_reference: string
+          refund_adjustments: Json
+        }
+        Insert: {
+          anonymous?: boolean
+          created_at?: string
+          currency: string
+          delivery_allocation_minor: number
+          donation_id: string
+          donor_display_name?: string | null
+          donor_id: string
+          gross_amount_minor: number
+          id?: string
+          operating_allocation_minor: number
+          paid_at: string
+          payment_route: string
+          purpose: Database["public"]["Enums"]["donation_purpose"]
+          receipt_reference?: string
+          refund_adjustments?: Json
+        }
+        Update: {
+          anonymous?: boolean
+          created_at?: string
+          currency?: string
+          delivery_allocation_minor?: number
+          donation_id?: string
+          donor_display_name?: string | null
+          donor_id?: string
+          gross_amount_minor?: number
+          id?: string
+          operating_allocation_minor?: number
+          paid_at?: string
+          payment_route?: string
+          purpose?: Database["public"]["Enums"]["donation_purpose"]
+          receipt_reference?: string
+          refund_adjustments?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_receipts_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_webhook_events: {
+        Row: {
+          event_type: string
+          id: string
+          payload_hash: string | null
+          processed_at: string | null
+          processing_error: string | null
+          provider: string
+          provider_event_id: string
+          received_at: string
+        }
+        Insert: {
+          event_type: string
+          id?: string
+          payload_hash?: string | null
+          processed_at?: string | null
+          processing_error?: string | null
+          provider?: string
+          provider_event_id: string
+          received_at?: string
+        }
+        Update: {
+          event_type?: string
+          id?: string
+          payload_hash?: string | null
+          processed_at?: string | null
+          processing_error?: string | null
+          provider?: string
+          provider_event_id?: string
+          received_at?: string
         }
         Relationships: []
       }
@@ -2944,6 +3350,62 @@ export type Database = {
         }
         Relationships: []
       }
+      refund_records: {
+        Row: {
+          allocation_impact_notes: string | null
+          amount_minor: number
+          approved_at: string | null
+          approved_by: string | null
+          completed_at: string | null
+          donation_id: string
+          full_refund: boolean
+          id: string
+          provider_refund_id: string | null
+          reason: string
+          requested_at: string
+          requested_by: string | null
+          status: string
+        }
+        Insert: {
+          allocation_impact_notes?: string | null
+          amount_minor: number
+          approved_at?: string | null
+          approved_by?: string | null
+          completed_at?: string | null
+          donation_id: string
+          full_refund?: boolean
+          id?: string
+          provider_refund_id?: string | null
+          reason: string
+          requested_at?: string
+          requested_by?: string | null
+          status?: string
+        }
+        Update: {
+          allocation_impact_notes?: string | null
+          amount_minor?: number
+          approved_at?: string | null
+          approved_by?: string | null
+          completed_at?: string | null
+          donation_id?: string
+          full_refund?: boolean
+          id?: string
+          provider_refund_id?: string | null
+          reason?: string
+          requested_at?: string
+          requested_by?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "refund_records_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rights_request_rate_limits: {
         Row: {
           contact_hash: string
@@ -3165,6 +3627,168 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      volunteer_account_invitations: {
+        Row: {
+          application_id: string
+          consumed_at: string | null
+          consumed_by_user_id: string | null
+          created_at: string
+          expires_at: string
+          id: string
+          invited_by: string
+          invited_email: string
+          role: Database["public"]["Enums"]["app_role"]
+          token_hash: string
+        }
+        Insert: {
+          application_id: string
+          consumed_at?: string | null
+          consumed_by_user_id?: string | null
+          created_at?: string
+          expires_at?: string
+          id?: string
+          invited_by: string
+          invited_email: string
+          role?: Database["public"]["Enums"]["app_role"]
+          token_hash: string
+        }
+        Update: {
+          application_id?: string
+          consumed_at?: string | null
+          consumed_by_user_id?: string | null
+          created_at?: string
+          expires_at?: string
+          id?: string
+          invited_by?: string
+          invited_email?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          token_hash?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_account_invitations_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_application_declarations: {
+        Row: {
+          application_id: string
+          declaration_type: string
+          declared_at: string
+          id: string
+          wording_version: string
+        }
+        Insert: {
+          application_id: string
+          declaration_type: string
+          declared_at?: string
+          id?: string
+          wording_version: string
+        }
+        Update: {
+          application_id?: string
+          declaration_type?: string
+          declared_at?: string
+          id?: string
+          wording_version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_application_declarations_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteer_applications: {
+        Row: {
+          area_of_interest: string | null
+          availability: string | null
+          country: string | null
+          created_at: string
+          cv_mime_type: string | null
+          cv_object_path: string | null
+          cv_original_filename: string | null
+          cv_size_bytes: number | null
+          email: string
+          experience: string | null
+          id: string
+          languages: string | null
+          linked_volunteer_id: string | null
+          motivation: string | null
+          name: string
+          phone: string | null
+          reviewer_notes: string | null
+          role_of_interest: string | null
+          skills: string | null
+          status: string
+          submitted_by_user_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          area_of_interest?: string | null
+          availability?: string | null
+          country?: string | null
+          created_at?: string
+          cv_mime_type?: string | null
+          cv_object_path?: string | null
+          cv_original_filename?: string | null
+          cv_size_bytes?: number | null
+          email: string
+          experience?: string | null
+          id?: string
+          languages?: string | null
+          linked_volunteer_id?: string | null
+          motivation?: string | null
+          name: string
+          phone?: string | null
+          reviewer_notes?: string | null
+          role_of_interest?: string | null
+          skills?: string | null
+          status?: string
+          submitted_by_user_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          area_of_interest?: string | null
+          availability?: string | null
+          country?: string | null
+          created_at?: string
+          cv_mime_type?: string | null
+          cv_object_path?: string | null
+          cv_original_filename?: string | null
+          cv_size_bytes?: number | null
+          email?: string
+          experience?: string | null
+          id?: string
+          languages?: string | null
+          linked_volunteer_id?: string | null
+          motivation?: string | null
+          name?: string
+          phone?: string | null
+          reviewer_notes?: string | null
+          role_of_interest?: string | null
+          skills?: string | null
+          status?: string
+          submitted_by_user_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteer_applications_linked_volunteer_id_fkey"
+            columns: ["linked_volunteer_id"]
+            isOneToOne: false
+            referencedRelation: "volunteers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       volunteer_project_assignments: {
         Row: {
@@ -3436,6 +4060,17 @@ export type Database = {
         Args: { target_user_id: string }
         Returns: boolean
       }
+      bank_transfer_record_receipt: {
+        Args: {
+          _amount_received_minor: number
+          _bank_reference: string
+          _received_at: string
+          _reconciliation_notes: string
+          _request_id: string
+          _second_approver_id: string
+        }
+        Returns: string
+      }
       can_access_project: {
         Args: { _project_id: string; _user_id: string }
         Returns: boolean
@@ -3493,6 +4128,45 @@ export type Database = {
           version_number: number
         }[]
       }
+      donation_calculate_allocation: {
+        Args: { _amount_minor: number }
+        Returns: {
+          delivery_minor: number
+          operating_minor: number
+        }[]
+      }
+      donation_confirm_transaction: {
+        Args: { _draft_id: string; _wording_version: string }
+        Returns: string
+      }
+      donation_draft_create: {
+        Args: {
+          _amount_minor: number
+          _anonymous: boolean
+          _frequency: Database["public"]["Enums"]["donation_frequency"]
+          _notes: string
+          _proposed_project_id: string
+          _purpose: Database["public"]["Enums"]["donation_purpose"]
+          _recognition_preference: string
+        }
+        Returns: string
+      }
+      donation_finalize_from_provider: {
+        Args: {
+          _amount_minor: number
+          _draft_id: string
+          _paid_at: string
+          _payment_intent_id: string
+          _payment_route: string
+          _provider: string
+          _subscription_id: string
+        }
+        Returns: string
+      }
+      donation_request_bank_transfer: {
+        Args: { _draft_id: string }
+        Returns: string
+      }
       donor_can_view_volunteer: {
         Args: { _donor_id: string; _volunteer_id: string }
         Returns: boolean
@@ -3546,8 +4220,10 @@ export type Database = {
         }[]
       }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
+      generate_bank_transfer_reference: { Args: never; Returns: string }
       generate_gdpr_reference: { Args: never; Returns: string }
       generate_hold_reference: { Args: never; Returns: string }
+      generate_receipt_reference: { Args: never; Returns: string }
       generate_review_reference: { Args: never; Returns: string }
       generate_service_request_reference: { Args: never; Returns: string }
       generate_transfer_reference: { Args: never; Returns: string }
@@ -3584,6 +4260,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      log_volunteer_cv_access: {
+        Args: { _application_id: string }
+        Returns: undefined
+      }
       needs_legal_reacceptance: { Args: { _slug: string }; Returns: boolean }
       project_delivery_progress: {
         Args: { _project_id: string }
@@ -3606,6 +4286,10 @@ export type Database = {
           _role?: string
           _slug: string
         }
+        Returns: string
+      }
+      refund_request: {
+        Args: { _amount_minor: number; _donation_id: string; _reason: string }
         Returns: string
       }
       reopen_service_request: {
@@ -3705,6 +4389,28 @@ export type Database = {
           _request_type: string
           _requester_contact: string
           _requester_name: string
+        }
+        Returns: string
+      }
+      submit_volunteer_application: {
+        Args: {
+          _accuracy_version: string
+          _area_of_interest: string
+          _availability: string
+          _country: string
+          _cv_mime_type: string
+          _cv_object_path: string
+          _cv_original_filename: string
+          _cv_size_bytes: number
+          _email: string
+          _experience: string
+          _languages: string
+          _motivation: string
+          _name: string
+          _phone: string
+          _privacy_version: string
+          _role_of_interest: string
+          _skills: string
         }
         Returns: string
       }
