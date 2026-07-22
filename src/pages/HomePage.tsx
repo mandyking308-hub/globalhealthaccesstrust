@@ -48,11 +48,34 @@ const priorityAreas = [
   },
 ];
 
+const networkFacts = [
+  {
+    value: "2019",
+    label: "Public-benefit work began",
+    detail: "The charitable work that led to GHAT began before the Trust was formally established.",
+  },
+  {
+    value: "12",
+    label: "Countries represented",
+    detail: "Representation across the wider international clinical network.",
+  },
+  {
+    value: "40+",
+    label: "Organisational relationships",
+    detail: "Partner and organisational relationships developed through the wider work.",
+  },
+  {
+    value: "3",
+    label: "Current Trustees",
+    detail: "Mandy King, Dr Jagdev Thukral and John O'Sullivan BA FCA.",
+  },
+];
+
 export const HomePage = () => (
   <>
     <SEO
       title="Global Health Access Trust"
-      description="Global Health Access Trust is a charitable trust governed by its Trust Deed and administered by its Trustees to advance healthcare access for the public benefit."
+      description="Global Health Access Trust is a trustee-governed charitable trust established in December 2024, building on charitable and public-benefit work undertaken since 2019."
       canonical="/"
       schema={organizationSchema}
     />
@@ -69,10 +92,13 @@ export const HomePage = () => (
                 </span>
               </div>
               <h1 className="text-foreground">
-                Trustee-led funding for accountable healthcare access.
+                Trustee-led work for accountable healthcare access.
               </h1>
               <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                The Trust commissions, governs and reports on defined health-access projects for the public benefit. Trustees retain responsibility for every charitable decision and every use of Trust funds.
+                Global Health Access Trust was formally established under its Trust Deed with effect from 1 December 2024, building upon charitable and public-benefit work undertaken since 2019.
+              </p>
+              <p className="mt-5 max-w-xl leading-relaxed text-muted-foreground">
+                The Trustees assess, approve, govern and report on defined work for the public benefit and retain responsibility for every charitable decision and every use of Trust funds.
               </p>
               <div className="mt-10 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="rounded-none">
@@ -98,15 +124,11 @@ export const HomePage = () => (
         </div>
       </section>
 
-      <section className="grid grid-cols-1 border-b border-foreground/10 bg-background md:grid-cols-3">
-        {[
-          { value: "3", label: "Current Trustees", detail: "Mandy King, Dr Jagdev Thukral and John O'Sullivan" },
-          { value: "1", label: "Governing Document", detail: "The signed Trust Deed and Constitution" },
-          { value: "20/80", label: "Funding Model", detail: "20% operating allocation and 80% project-delivery allocation" },
-        ].map((item, index) => (
+      <section className="grid grid-cols-1 border-b border-foreground/10 bg-background sm:grid-cols-2 lg:grid-cols-4">
+        {networkFacts.map((item, index) => (
           <div
             key={item.label}
-            className={`p-10 md:p-12 lg:p-16 ${index < 2 ? "border-b border-foreground/10 md:border-b-0 md:border-r" : ""}`}
+            className={`p-10 md:p-12 ${index < networkFacts.length - 1 ? "border-b border-foreground/10 sm:border-r lg:border-b-0" : ""}`}
           >
             <span className="display-condensed block text-5xl font-black text-foreground md:text-6xl">
               {item.value}
@@ -117,6 +139,28 @@ export const HomePage = () => (
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
           </div>
         ))}
+      </section>
+
+      <section className="border-b border-foreground/10 bg-secondary/40 py-24 md:py-28">
+        <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-12 px-6 md:grid-cols-[0.8fr_1.2fr] md:px-10">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+              History and wider network
+            </p>
+            <h2 className="mt-5 text-foreground">Public-benefit work since 2019.</h2>
+          </div>
+          <div className="space-y-5 text-[16px] leading-relaxed text-muted-foreground">
+            <p>
+              The charitable and public-benefit work that led to Global Health Access Trust began in 2019. Global Health Access Trust was formally established under its Trust Deed with effect from 1 December 2024.
+            </p>
+            <p>
+              The earlier work includes the Clinicians Check international clinician network. Registrations across that wider network number in the thousands, with representation in 12 countries and more than 40 partner and organisational relationships. Source exports are being reconciled and deduplicated before an exact registration total is published.
+            </p>
+            <p>
+              These figures describe the reach and capacity of the wider clinical and volunteer network. They are not presented as a claim that GHAT funded or completed projects in every represented country or through every relationship.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="border-b border-foreground/10 bg-primary py-24 text-primary-foreground md:py-28">
@@ -136,7 +180,7 @@ export const HomePage = () => (
               <Link to="/governance-legal-framework">Governance and legal framework</Link>
             </Button>
             <Button asChild variant="outline" className="rounded-none border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              <Link to="/trustee-biographies">Meet the Trustees</Link>
+              <Link to="/trustee-biographies">Trustees and advisers</Link>
             </Button>
           </div>
         </div>
@@ -163,7 +207,7 @@ export const HomePage = () => (
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Charitable scope</p>
           <h2 className="mt-5 text-foreground">Priority areas within the Trust's mandate.</h2>
           <p className="mt-6 max-w-3xl leading-relaxed text-muted-foreground">
-            These are areas in which the Trustees may commission work. They are not claims that a particular project, country programme or partnership is already active.
+            These are areas in which the Trustees may commission work. They are not claims that a particular country programme, grant or partnership is already active.
           </p>
           <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-3">
             {priorityAreas.map((area) => (
@@ -186,20 +230,40 @@ export const HomePage = () => (
       </section>
 
       <section className="border-b border-foreground/10 bg-background py-24 md:py-28">
-        <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-12 px-6 md:grid-cols-2 md:px-10">
+        <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-12 px-6 md:grid-cols-[0.8fr_1.2fr] md:px-10">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Financial integrity</p>
-            <h2 className="mt-5 text-foreground">Banking before fundraising.</h2>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Current pro bono work</p>
+            <h2 className="mt-5 text-foreground">Supporting agricultural supply-chain resilience in Nigeria.</h2>
           </div>
           <div className="space-y-5 text-[16px] leading-relaxed text-muted-foreground">
             <p>
-              The Trust is establishing banking arrangements in its own legal name. No public bank details are displayed and no public payment channel should be treated as active until the Trustees have verified and approved the relevant account and provider settings.
+              The Trust's wider team currently provides pro bono technical and operational support to an agricultural supply-chain organisation in Nigeria. No fee is being charged for this work.
+            </p>
+            <p>
+              The work is intended to strengthen visibility and coordination across farmers, partners, logistics, quality assurance, buyer delivery and payment-risk processes, helping to protect agricultural output and the livelihoods that depend upon it.
+            </p>
+            <p className="text-sm">
+              The organisation is not named publicly. Any decision to adopt this work as a formal GHAT project requires a documented trustee approval and project charter.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-foreground/10 bg-background py-24 md:py-28">
+        <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-12 px-6 md:grid-cols-2 md:px-10">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">Financial integrity</p>
+            <h2 className="mt-5 text-foreground">Banking before public fundraising.</h2>
+          </div>
+          <div className="space-y-5 text-[16px] leading-relaxed text-muted-foreground">
+            <p>
+              The Trustees are applying for a UK bank account in the legal name Global Health Access Trust. No public bank details are displayed and no public payment channel should be treated as active until the Trustees have verified and approved the account and provider settings.
             </p>
             <p>
               A proposed gift is not recorded as received income until cleared funds are reconciled. Mandates, draft instructions and pending collections are not treated as completed donations.
             </p>
             <p>
-              Restricted and unrestricted funds are recorded separately, material payments require documented approval, and accounts will be independently examined or audited where required by law or approved by the Trustees.
+              Restricted and unrestricted funds will be recorded separately, material payments will require documented approval, and accounts will be independently examined or audited where required by law or approved by the Trustees.
             </p>
             <Button asChild variant="outline" className="rounded-none">
               <Link to="/financial-controls">Financial controls</Link>
