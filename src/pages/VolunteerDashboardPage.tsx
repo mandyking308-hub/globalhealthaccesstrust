@@ -135,17 +135,15 @@ export const VolunteerDashboardPage = () => {
             <CardContent className="pt-6">
               <div className="flex flex-col md:flex-row items-start justify-between gap-4">
                 <div className="flex-1">
-                  <h2 className="text-xl font-semibold mb-2">Welcome to Your Volunteer Dashboard</h2>
+                  <h2 className="text-xl font-semibold mb-2">Project Team workspace</h2>
                   <p className="text-muted-foreground mb-4">
-                    View available projects, manage your assignments, and coordinate with the GHAT team.
+                    Access assigned projects, report progress, upload evidence, submit expenses, update milestones and communicate securely with the Trust Office.
                   </p>
                   <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
-                    
-                    Approved Volunteer
+                    Approved Team Member
                   </Badge>
                 </div>
                 <div className="flex items-center gap-2 px-6 py-4 bg-accent/10 rounded-lg border border-accent/20">
-                  
                   <div>
                     <p className="text-sm font-semibold">AI Field Support</p>
                     <p className="text-xs text-muted-foreground">Coming Online</p>
