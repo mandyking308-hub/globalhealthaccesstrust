@@ -236,6 +236,19 @@ export const DonationFormPage = () => {
                 <Textarea id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} rows={3} />
               </div>
 
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Future donations will be governed by the{" "}
+                <a
+                  href="/donor-project-funding-terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-primary"
+                >
+                  Donor and Project Funding Terms
+                </a>
+                . You will be asked to accept them at the confirmation step.
+              </p>
+
               <Button type="submit" className="w-full h-12">Continue</Button>
             </form>
           )}
