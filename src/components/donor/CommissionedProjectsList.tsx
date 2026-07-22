@@ -80,16 +80,16 @@ export const CommissionedProjectsList = () => {
         ]);
 
         const fin: Record<string, ProjectFinance> = {};
-        list.forEach((p) => { fin[p.id] = { allocated: 0, spent: 0, delivery: 0 }; });
+        list.forEach((p) => { fin[p.id] = { allocated: 0, committed: 0, spent: 0, remaining: 0, delivery: 0 }; });
         (allocs.data || []).forEach((a: any) => {
           if (a.project_id && fin[a.project_id]) fin[a.project_id].allocated += Number(a.amount || 0);
         });
         (exps.data || []).forEach((e: any) => {
-          // Only count donor-visible + approved/paid expenses in donor view
-          if (fin[e.project_id] && e.donor_visible && ["approved","committed","paid"].includes(e.status)) {
-            fin[e.project_id].spent += Number(e.amount || 0);
-          }
+          if (!fin[e.project_id] || !e.donor_visible) return;
+          if (e.status === "paid") fin[e.project_id].spent += Number(e.amount || 0);
+          else if (["approved", "committed"].includes(e.status)) fin[e.project_id].committed += Number(e.amount || 0);
         });
+        Object.values(fin).forEach((f) => { f.remaining = f.allocated - f.spent - f.committed; });
         const msByProj: Record<string, any[]> = {};
         (milestones.data || []).forEach((m: any) => { (msByProj[m.project_id] ||= []).push(m); });
         Object.entries(msByProj).forEach(([pid, ms]) => {
