@@ -3591,10 +3591,7 @@ export type Database = {
       }
       retention_review_blocking_hold: {
         Args: { _review_id: string }
-        Returns: {
-          hold_id: string
-          hold_reference: string
-        }[]
+        Returns: boolean
       }
       rr_add_event: {
         Args: { _detail?: Json; _event_type: string; _request_id: string }
@@ -3621,21 +3618,37 @@ export type Database = {
         }
         Returns: undefined
       }
-      rr_review_create: {
-        Args: {
-          _proposed_action: string
-          _record_id: string
-          _record_summary: string
-          _record_type: string
-          _related_donation_id: string
-          _related_project_id: string
-          _retention_rule_id: string
-          _review_due_at: string
-          _sensitivity: string
-          _subject_user_id: string
-        }
-        Returns: string
-      }
+      rr_review_create:
+        | {
+            Args: {
+              _proposed_action: string
+              _record_id: string
+              _record_summary: string
+              _record_type: string
+              _related_donation_id: string
+              _related_project_id: string
+              _retention_rule_id: string
+              _review_due_at: string
+              _sensitivity: string
+              _subject_user_id: string
+            }
+            Returns: string
+          }
+        | {
+            Args: {
+              _proposed_action?: string
+              _record_id: string
+              _record_summary: string
+              _record_type: string
+              _related_donation_id?: string
+              _related_project_id?: string
+              _review_due_at?: string
+              _rule_code: string
+              _sensitivity?: string
+              _subject_user_id?: string
+            }
+            Returns: string
+          }
       rr_review_decide: {
         Args: {
           _decision: string
