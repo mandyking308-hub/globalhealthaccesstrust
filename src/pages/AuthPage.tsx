@@ -102,6 +102,8 @@ export const AuthPage = () => {
 
 
   const redirectByRole = async (userId: string) => {
+    const rt = safeReturnTo(searchParams.get("returnTo"));
+    if (rt) { navigate(rt); return; }
     const { data: roles } = await supabase
       .from("user_roles")
       .select("role")
