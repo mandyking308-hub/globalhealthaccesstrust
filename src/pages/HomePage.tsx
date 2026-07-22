@@ -205,7 +205,7 @@ export const HomePage = () => {
         <section className="py-24 md:py-32 border-b border-foreground/10 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="mb-16">
-              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+              <h2 className="font-serif text-foreground mb-8" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.005em" }}>
                 Approach
               </h2>
               <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">
@@ -243,7 +243,7 @@ export const HomePage = () => {
         <section className="py-24 md:py-32 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="mb-16">
-              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+              <h2 className="font-serif text-foreground mb-8" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.005em" }}>
                 How the Trust Operates
               </h2>
               <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">The Trust operates through a structured model that defines how capital, delivery, and oversight are aligned within a controlled environment.</p>
@@ -276,7 +276,7 @@ export const HomePage = () => {
         <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="mb-14">
-              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+              <h2 className="font-serif text-foreground mb-8" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.005em" }}>
                 Operational Framework
               </h2>
               <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">The operational framework outlines how initiatives are executed in practice, from capital allocation through to outcome verification.</p>
@@ -306,7 +306,7 @@ export const HomePage = () => {
         <section className="py-24 md:py-32 bg-background border-b border-foreground/10">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="mb-16">
-              <h2 className="display-condensed text-foreground mb-10" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+              <h2 className="font-serif text-foreground mb-10" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.005em" }}>
                 Governance
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
@@ -342,7 +342,7 @@ export const HomePage = () => {
         <section className="py-24 md:py-28 bg-secondary/60">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="mb-16">
-              <h2 className="display-condensed text-foreground mb-8" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+              <h2 className="font-serif text-foreground mb-8" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.005em" }}>
                 Funding Mandate
               </h2>
               <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">All funding is directed exclusively toward defined areas of charitable intervention, aligned with long-term system impact.</p>
@@ -392,7 +392,7 @@ export const HomePage = () => {
         {/* Donor Portal — editorial introduction to the secure private wing */}
         <section className="py-24 md:py-28 border-b border-foreground/10 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <h2 className="display-condensed text-foreground mb-10" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+            <h2 className="font-serif text-foreground mb-10" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.005em" }}>
               Donor Portal
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-14 md:gap-20 items-start">
@@ -442,7 +442,7 @@ export const HomePage = () => {
         <section className="py-24 md:py-32 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="mb-16">
-              <h2 className="display-condensed text-foreground mb-10" style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}>
+              <h2 className="font-serif text-foreground mb-10" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.005em" }}>
                 Engagement &amp; Funding Approach
               </h2>
               <div className="max-w-3xl space-y-5">
