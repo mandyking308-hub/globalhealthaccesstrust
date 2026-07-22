@@ -59,7 +59,7 @@ export const FinancialControlsPage = () => (
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>All financial decisions must be authorised in accordance with Trustee resolutions</li>
                 <li>Public funds must be protected from loss, fraud, misuse, or waste</li>
-                <li>All financial records must comply with accounting standards and Charity Commission expectations</li>
+                <li>All financial records must comply with UK charity accounting standards applicable to the Trust's status</li>
                 <li>Trustees must ensure the charity remains solvent and financially sustainable</li>
               </ul>
             </CardContent>
