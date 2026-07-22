@@ -1,99 +1,131 @@
-# GHAT Project Delivery, Agreement & Service Management
+# GHAT Completion & Legal Readiness — Delivery Plan
 
-This is a substantial multi-phase build extending the existing funding, milestone, evidence and messaging system. I will not create parallel/duplicate systems — everything hangs off the existing `commissioned_projects`, `volunteer_project_assignments`, `donations`, `project_milestones`, `project_expenses`, `project_field_evidence` and `project_messages` tables.
+The Project Charter, Delivery Agreement and Project Support Centre foundations are already built (database schema, RPCs, donor / team / admin UIs). What remains is the **Legal & Policy Centre**, **High-Value Donation Controls**, **Payment/Financial hardening**, the **Legal Acceptance ledger**, the **High-Value Donation Readiness launch gate**, and a full cross-portal test pass.
 
-I will complete all phases in a single continuous run without pausing, and only report done once end-to-end tests pass on donor, Project Team and admin accounts.
+Because of the size, this is delivered in 4 sequenced phases so each phase can be reviewed, tested and approved before the next begins. Each phase ends with typecheck + build + a targeted browser test.
 
 ---
 
-## Phase A — Database foundation (single migration)
+## Phase 1 — Legal Entity, Policy Centre & Acceptance ledger
 
-New tables (all with GRANTs, RLS, timestamps, update triggers, audit log triggers):
+**Database**
+- `legal_entity_settings` (single admin-controlled row): legal_name, trading_name, legal_status, company_number, charity_number, regulator, registered_address, contact_email, insurance_summary, governing_law, jurisdiction, verified_at, verified_by. Empty by default. No fabricated values.
+- `legal_documents` (`slug`, `title`, `category`) and `legal_document_versions` (`version_number`, `body_markdown`, `effective_date`, `review_status` enum draft / internal_review / solicitor_review / trustee_approved / published / superseded, `approved_by`, `approved_at`, `material_change` boolean, `supersedes_version_id`).
+- `legal_acceptances` (user_id, document_id, version_id, role, project_id nullable, accepted_at, acceptance_text_snapshot, ip_hash, user_agent).
+- `legal_document_publication_gates` view: derived readiness for each doc (requires verified legal entity + trustee_approved status).
 
-1. `project_agreements` — one row per project, `current_version_id`, `status` (draft, issued, under_review, changes_requested, revised, accepted, active, superseded, terminated), `activated_at`.
-2. `project_agreement_versions` — immutable versioned snapshot of every charter field listed in the request (title, purpose, outcomes, safe_location, scope, exclusions, deliverables, beneficiary_group, funding_target, gross_donation, operating_allocation, delivery_allocation, budget_categories jsonb, planned_start, planned_completion, expected_duration, reporting_frequency, first_report_due, evidence_requirements, financial_reporting, communication_arrangements, dependencies, risks_private, escalation, change_control, complaint_procedure, safeguarding_route, confidentiality_terms, plan_version int, donor_visible_status, issued_at, issued_by). Milestones per version live in `project_agreement_milestones` (title, target_date, weight, sequence).
-3. `project_agreement_decisions` — immutable: version_id, user_id, role, decision (accept/request_changes/decline), comment, decided_at. Trust approval recorded as a special decision row.
-4. `project_change_requests` — project_id, from_version_id, field, original_value jsonb, proposed_value jsonb, reason, requested_by, requested_at, status (proposed/under_review/clarification_required/approved/rejected/withdrawn/implemented), decision_reason, approved_by, approved_at, requires_donor_reacceptance, requires_team_reacceptance, resulting_version_id.
-5. `project_comments` — polymorphic parent (`parent_type` enum: charter, agreement_version, milestone, project_update, expense, evidence, change_request, reporting_deadline; `parent_id` uuid), project_id, author_id, author_role, body, attachment_url, parent_comment_id, visibility (trust_internal, donor_trust, team_trust, shared_project, safeguarding_restricted, finance_restricted), approval_status (pending/approved/rejected), edited_at, mentions uuid[], read receipts in `project_comment_reads`.
-6. `project_service_requests` — full schema per the spec including generated `reference_number` (`GHAT-YYYY-NNNNNN` via sequence + trigger).
-7. `project_service_request_comments` — per spec, with comment_type enum.
-8. `project_service_request_events` — immutable event log.
-9. `project_service_policies` — configurable SLA per (request_type, priority): acknowledge_minutes, first_response_minutes, resolution_minutes, escalation_minutes, business_hours jsonb, timezone.
-10. `project_health_snapshots` — computed + manual override with `override_reason`, `donor_visible_explanation`, health enum.
-11. `project_notifications` — per-user in-app notifications with `read_at`, `link`, `category`.
-12. New role: extend `app_role` with `safeguarding_officer`, `finance_officer`. Add `has_any_role` helper.
+**RPCs (SECURITY DEFINER)**
+- `publish_legal_version(_version_id)` — blocks publish unless legal entity verified and status = trustee_approved.
+- `record_legal_acceptance(_slug, _project_id, _acceptance_text)` — resolves current published version, writes acceptance.
+- `current_legal_version(_slug)` — public read of latest `published` version.
 
-Security-definer RPCs (all `SET search_path = public`):
-- `donor_project_agreement(_project_id)` — returns latest donor-visible version with milestones, no private risks/notes.
-- `team_project_agreement(_assignment_id)` — team-safe version.
-- `submit_agreement_decision(_version_id, _decision, _comment)` — validates role, writes decision + audit, updates agreement status.
-- `admin_issue_agreement_version(...)` / `admin_approve_agreement(_version_id)` / `admin_activate_project(_project_id)`.
-- `create_service_request(...)` — assigns reference, computes SLA due timestamps, writes creation event, creates notifications.
-- `add_service_request_comment(...)` — enforces visibility rules, updates `last_response_at`, `waiting_on`, triggers events + notifications.
-- `resolve_service_request(...)`, `confirm_resolution(...)`, `reopen_service_request(...)`, `escalate_service_request(...)`.
-- `compute_project_health(_project_id)` — real signals only (overdue milestones, overdue reports, missing evidence, unresolved high-priority requests, agreement not accepted, budget pressure).
-- `list_my_service_requests(_scope)` — role-scoped.
-- `list_admin_service_queue(_bucket)` — admin queues.
+**Admin UI (`/admin/legal`)**
+- Legal Entity Settings editor with red "UNVERIFIED — publication blocked" banner until every required field + verified_at is populated by a super-admin.
+- Documents list with per-doc versioning, diff view of previous/current body, review-status transitions.
+- Nine seed documents (empty draft bodies with structured placeholders — never invented facts):
+  1. Website Terms of Use
+  2. Donor and Project Funding Terms
+  3. Privacy Notice
+  4. Cookie Notice
+  5. Complaints Policy
+  6. Gift Acceptance, Refusal and Return Policy
+  7. Safeguarding and Protected Concerns Policy
+  8. Project Team Terms
+  9. Photography, Field Evidence and Media Policy
+- Donor Terms + Project Team Terms drafts include every clause required by the spec (allocations, restricted vs unrestricted, trustee control, change control, refund handling, no automatic Gift Aid promises, source-of-funds, sanctions, safeguarding, liability caveats, governing law placeholder).
 
-RLS: donors see only their projects/agreements/decisions/approved changes/donor-visible comments/their own requests; project team see assigned; safeguarding and finance visibility levels enforced via `has_role` checks against new roles. Every table has explicit GRANTs.
+**Public UI**
+- `/legal` index and `/legal/:slug` pages rendering the currently `published` version + version footer ("Version X · Effective YYYY-MM-DD"). Falls back to a maintenance notice if no published version exists.
+- Footer links updated. Cookie banner links to `/legal/cookie-notice`.
 
-## Phase B — Shared UI primitives
+**Acceptance touchpoints**
+- Auth signup: mandatory tick of current Donor Funding Terms + Privacy Notice, written to `legal_acceptances`.
+- Donation form: re-accept Donor Funding Terms if a `material_change` version has been published since last acceptance.
+- Project Team application: acceptance of Project Team Terms + Safeguarding Policy.
+- Charter acceptance already records role/version — add a legal_acceptance row alongside for audit parity.
 
-- `src/lib/serviceRequests.ts` — types, enums, helpers, SLA formatting, priority/status labels.
-- `src/components/service/ServiceRequestForm.tsx` — reusable form (type, category, subject, description, priority, linked entity, attachment).
-- `src/components/service/ServiceRequestList.tsx` — role-scoped list with SLA badges, status pills.
-- `src/components/service/ServiceRequestDetail.tsx` — thread + events + comment composer with visibility selector (options filtered by role).
-- `src/components/agreement/AgreementView.tsx` — read-only editorial view of a version (donor-safe or team-safe).
-- `src/components/agreement/AgreementDecisionBar.tsx` — Accept / Request Changes / Decline with required comment on the latter two.
-- `src/components/agreement/ChangeRequestList.tsx` — approved-change history (donor-safe filtered).
-- `src/components/comments/PolymorphicComments.tsx` — used on milestones/evidence/expenses/updates.
-- `src/components/health/ProjectHealthBadge.tsx`.
+---
 
-## Phase C — Donor portal
+## Phase 2 — High-Value Donation & Financial Controls
 
-Extend `DonorDashboardPage.tsx` and `CommissionedProjectsList.tsx`:
-- Tabs additions: **Agreement**, **Discussion**, **Support Centre**.
-- Agreement tab: current version, status, agreed parameters, timescale, approved changes history, decision bar when awaiting donor.
-- Discussion tab: donor↔Trust approved comments on their projects.
-- Support Centre: create request (categories per spec), my open, awaiting my response, recently resolved. Satisfaction prompt after resolution.
+**Database**
+- `donation_review_thresholds` (currency, routine_max, enhanced_dd_min, trustee_approval_min) — admin editable.
+- Extend `donations` with `review_status` enum (routine, enhanced_due_diligence_required, source_of_funds_requested, sanctions_review, reputational_review, trustee_approval_required, approved, refused, returned, held), `payment_status` (received, reconciled, failed, chargeback, duplicate, suspicious_hold), `accepted_at`, `held_reason`, `released_at`.
+- `donation_review_records`: donor_identity_status, sof_status, beneficial_owner_notes, sanctions_status, pep_status, reputational_notes, trustee_decision, reason, reviewer, supporting_document_ids (link to `document_records` with `visibility = trust_confidential`), review_expiry_date.
+- `donation_refunds`: amount, reason, requested_by, first_approver, second_approver, executed_at, immutable trigger (no UPDATE after `executed_at`).
+- `restricted_fund_ledger` view aggregating allocations by fund class.
+- Trigger: on `donations INSERT`, auto-set `review_status` based on threshold; funds are **not** allocated to a project until `review_status = approved` AND `payment_status = reconciled`.
+- Storage bucket `donor-due-diligence` (private), RLS: admins + finance_officer only. Team members and ordinary donor accounts have zero access.
 
-## Phase D — Project Team portal
+**RPCs**
+- `admin_set_donation_review_status`, `admin_request_refund`, `admin_second_approve_refund` (rejects when `first_approver = auth.uid()`), `admin_release_reviewed_donation` (fires the 20/80 allocation only after approval).
 
-Extend `VolunteerDashboardPage.tsx` and `VolunteerAssignedProjects.tsx`:
-- New tabs: **Agreement Decisions**, **My Commitments** (responsibilities, timeline, milestones due, reports due), **Support Centre**, **Report a Concern Privately** (separate prominent entry with the confidentiality picker and honest labelling — no fake "anonymous").
-- Reuse `ServiceRequestForm` with team-specific categories including delay, resource, scope clarification, safety, safeguarding, misconduct, suspected misuse.
+**UI**
+- `/admin/donations-review` queue with buckets: On Hold, Awaiting DD, Awaiting Sanctions, Awaiting Trustee, Approved, Refused/Returned.
+- Refund panel enforcing dual approval; second approver dropdown excludes requester.
+- Donor portal shows a neutral "Under review by the Trust" status for held donations, no DD detail.
+- Finance dashboard tab: reconciliation status, failed/chargeback/duplicate/suspicious counts.
 
-## Phase E — Admin console
+---
 
-New `src/pages/admin/AdminServiceConsolePage.tsx` mounted at `/admin/service-console` (added to `AdminSidebar`). Queues: new, unassigned, awaiting first response, awaiting donor, awaiting team, investigating, overdue, escalated, complaints, safeguarding, finance, resolved. SLA warnings surfaced on the main `AdminDashboardPage`.
+## Phase 3 — Support/Complaints polish & Launch Gate
 
-New `src/pages/admin/AdminAgreementsPage.tsx` at `/admin/agreements`: draft/issue/approve versions, review change requests, activate projects. Extends existing `AdminProjectsPage` rather than replacing it — a new "Agreement" tab per project.
+**Support Centre completeness pass**
+- Confirm each support case type is available in donor + team forms (already wired) and adds a dedicated "Formal Complaint" flow with mandatory outcome-desired field and 20-day acknowledgement SLA per Complaints Policy.
+- Confidential concern queue visible only to admins with `safeguarding_officer` role; identity-restricted cases mask requester name for other admins.
+- Reopen/close audit already exists — add "Escalate to trustee" action recorded as a `service_request_event`.
 
-Safeguarding and Finance queues gated by `has_role(auth.uid(),'safeguarding_officer')` / `'finance_officer'`; normal admin cannot see restricted case bodies.
+**High-Value Donation Readiness gate (`/admin/launch-gate`)**
+- Live checklist reading actual DB state:
+  - Legal entity verified
+  - Donor Terms trustee_approved & published
+  - Privacy Notice published
+  - Complaints Policy published
+  - Gift Acceptance Policy trustee_approved
+  - Donation review thresholds configured
+  - Sanctions review workflow enabled (feature flag)
+  - Payment reconciliation smoke test passed (flag toggled by test RPC)
+  - Dual-approval refund test recorded
+  - Latest Charter acceptance test recorded (donor + team)
+  - Latest complaint case resolved end-to-end
+  - Confidential concern isolation test recorded
+  - Cross-user RLS test recorded
+  - Production build recorded
+- `donations` insert of `amount >= high_value_threshold` rejected with clear error until gate is READY.
 
-## Phase F — Health, notifications, audit
+---
 
-- `NotificationsBell` in headers of all three dashboards using `project_notifications` with realtime subscription.
-- `project_health_snapshots` recomputed on relevant writes via triggers; badge rendered in donor and admin project cards; only `donor_visible_explanation` shown to donors.
-- Audit triggers on all new tables writing to existing `audit_logs`.
+## Phase 4 — Cross-portal test pass
 
-## Phase G — Routing
+Playwright suite covering the full journey:
+1. High-value donation → hold → DD approval → 20/80 allocation
+2. Donor + Team Charter acceptance → activation
+3. Change request → Trust decision → donor-visible summary
+4. Formal complaint → Trust response → resolution → satisfaction score
+5. Confidential team concern → visible only to safeguarding admin
+6. Donor cannot see worker PII, other donors' data, or DD documents
+7. Legal-version supersede requires fresh acceptance on next login
+8. Refund requires two distinct approvers
+9. Typecheck, production build, desktop/tablet/mobile screenshots
 
-`src/App.tsx`: add `/admin/service-console`, `/admin/agreements`. Sidebar entries added.
-
-## Phase H — Testing (Playwright, all three seeded accounts)
-
-Automated end-to-end script covering the 27-point checklist. Screenshots captured at each step. Fix failures and rerun until green. Then `tsgo` typecheck and production build. Only then report done.
+Results written to `GHAT_LAUNCH_TEST_REPORT.md` with pass/fail per item.
 
 ---
 
 ## Technical notes
 
-- All new tables in `public` include `GRANT SELECT,INSERT,UPDATE,DELETE ... TO authenticated; GRANT ALL ... TO service_role;` — no anon grants.
-- Reference-number generation uses a Postgres sequence per year plus a `BEFORE INSERT` trigger.
-- SLA clocks stored as `first_response_due_at`/`resolution_due_at` timestamps computed at creation and on priority change; "paused while awaiting requester" implemented by tracking `waiting_on` transitions in `project_service_request_events` and subtracting accumulated waiting time in a view.
-- Visibility enforcement lives entirely in RLS + SECURITY DEFINER RPCs; the React layer only asks for what the current role can see.
-- No external email until SMTP templates are approved — notifications are in-app only.
-- Preserves all current donor privacy guarantees (still uses `donor_project_team` RPC; no volunteer PII added to any new donor-visible surface).
+- All new tables follow the mandatory pattern: CREATE TABLE → GRANT (authenticated + service_role, no anon unless the doc is public) → ENABLE RLS → POLICY.
+- Legal document reads for the public site use a `current_legal_version(slug)` SECURITY DEFINER RPC so anon can read only rows with `review_status = 'published'`.
+- Due-diligence storage bucket policies restrict to admin + finance_officer; every download is logged via `log_admin_action`.
+- No fabricated legal facts anywhere: charity/company numbers, addresses and regulator status render from `legal_entity_settings` or show a visible "Details pending verification" placeholder.
+- Refund immutability enforced by a trigger raising on UPDATE of an executed refund row.
+- Each phase ends with `tsgo` + `npm run build`.
 
-Given the size, expect this to run as one long build session with the migration approval step in the middle. After migration is approved I proceed straight through UI, wiring, tests and fixes.
+## Ask before I start
+
+**Two decisions I need from you before Phase 1:**
+
+1. **High-value threshold (GBP)** for the review workflow — common values are £5,000, £10,000 or £25,000.
+2. **Who can act as the two "authorised reviewers"** for legal-document sign-off — should this be limited to accounts with the existing `super_admin` role, or do you want a new `legal_reviewer` role?
+
+Once you answer those I will proceed with Phase 1 (Legal Entity + Policy Centre + Acceptance ledger) and stop for your review before Phase 2.
