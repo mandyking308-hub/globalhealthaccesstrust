@@ -162,13 +162,11 @@ export const VolunteerDashboardPage = () => {
                 <span className="sm:hidden">Home</span>
               </TabsTrigger>
               <TabsTrigger value="projects" className="text-xs sm:text-sm">
-                
-                <span className="hidden sm:inline">Available</span>
+                <span className="hidden sm:inline">Available Projects</span>
                 <span className="sm:hidden">Available</span>
               </TabsTrigger>
               <TabsTrigger value="my-projects" className="text-xs sm:text-sm">
-                
-                <span className="hidden sm:inline">My Projects</span>
+                <span className="hidden sm:inline">My Assigned Projects</span>
                 <span className="sm:hidden">Mine</span>
               </TabsTrigger>
               <TabsTrigger value="messages" className="text-xs sm:text-sm">
