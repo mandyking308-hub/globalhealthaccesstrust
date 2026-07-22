@@ -201,9 +201,11 @@ export const DonorDashboardPage = () => {
             <TabsList className="w-full flex flex-wrap justify-start">
               <TabsTrigger value="donate">Donate</TabsTrigger>
               <TabsTrigger value="projects">My Projects</TabsTrigger>
+              <TabsTrigger value="agreements">Agreement</TabsTrigger>
               <TabsTrigger value="commission">Commission</TabsTrigger>
               <TabsTrigger value="history">History</TabsTrigger>
               <TabsTrigger value="messages">Messages</TabsTrigger>
+              <TabsTrigger value="support">Support</TabsTrigger>
               <TabsTrigger value="profile">Profile</TabsTrigger>
             </TabsList>
 
@@ -221,7 +223,28 @@ export const DonorDashboardPage = () => {
 
             <TabsContent value="projects"><CommissionedProjectsList /></TabsContent>
 
+            <TabsContent value="agreements">
+              <div className="portal-panel">
+                <span className="portal-eyebrow mb-3">Project Charter</span>
+                {myProjects.length === 0 ? (
+                  <p className="text-muted-foreground mt-4">You have no commissioned projects yet.</p>
+                ) : (
+                  <>
+                    <div className="mb-4">
+                      <select value={selectedAgreementProject || ""} onChange={(e) => setSelectedAgreementProject(e.target.value)} className="border rounded px-3 py-2 text-sm">
+                        {myProjects.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
+                      </select>
+                    </div>
+                    {selectedAgreementProject && user && (
+                      <DonorAgreementPanel projectId={selectedAgreementProject} currentUserId={user.id} />
+                    )}
+                  </>
+                )}
+              </div>
+            </TabsContent>
+
             <TabsContent value="commission"><CommissionProjectForm /></TabsContent>
+
 
             <TabsContent value="history">
               <div className="portal-panel">
