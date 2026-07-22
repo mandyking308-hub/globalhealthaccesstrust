@@ -79,6 +79,7 @@ import AdminGiftAcceptancePage from "./pages/admin/AdminGiftAcceptancePage";
 import GiftAcceptancePolicyPage from "./pages/GiftAcceptancePolicyPage";
 import DonorDueDiligencePolicyPage from "./pages/DonorDueDiligencePolicyPage";
 import AdminDonorDueDiligencePage from "./pages/admin/AdminDonorDueDiligencePage";
+import ProjectTeamTermsPage from "./pages/ProjectTeamTermsPage";
 
 const queryClient = new QueryClient();
 
@@ -151,6 +152,7 @@ const App = () => (
           <Route path="donor-project-funding-terms" element={<DonorFundingTermsPage />} />
           <Route path="gift-acceptance-and-restricted-funds-policy" element={<GiftAcceptancePolicyPage />} />
           <Route path="donor-due-diligence-and-sanctions-policy" element={<DonorDueDiligencePolicyPage />} />
+          <Route path="project-team-terms" element={<ProjectTeamTermsPage />} />
         </Route>
         
           {/* Donor Portal Routes (outside Layout - full page) */}
