@@ -14,6 +14,7 @@ ALTER TABLE public.contact_submission_attempts ENABLE ROW LEVEL SECURITY;
 
 REVOKE ALL ON public.contact_submission_attempts FROM PUBLIC, anon, authenticated;
 GRANT ALL ON public.contact_submission_attempts TO service_role;
+GRANT USAGE, SELECT ON SEQUENCE public.contact_submission_attempts_id_seq TO service_role;
 
 -- Remove direct public inserts. The Edge Function inserts only validated records
 -- with a server-generated id, timestamp, priority and status.
