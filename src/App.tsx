@@ -74,6 +74,7 @@ import DonorFundingTermsPage from "./pages/DonorFundingTermsPage";
 import { DonationSuccessPage } from "./pages/DonationSuccessPage";
 import { DonationCancelledPage } from "./pages/DonationCancelledPage";
 import AdminPaymentsPage from "./pages/admin/AdminPaymentsPage";
+import AdminHighValueAgreementsPage from "./pages/admin/AdminHighValueAgreementsPage";
 
 const queryClient = new QueryClient();
 
