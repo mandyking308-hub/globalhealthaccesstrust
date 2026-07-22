@@ -187,6 +187,7 @@ const App = () => (
             <Route path="legal" element={<AdminLegalPage />} />
             <Route path="payments" element={<AdminPaymentsPage />} />
             <Route path="high-value-agreements" element={<AdminHighValueAgreementsPage />} />
+            <Route path="gift-acceptance" element={<AdminGiftAcceptancePage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
 
           </Route>
