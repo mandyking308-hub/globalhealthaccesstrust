@@ -1296,6 +1296,561 @@ export type Database = {
         }
         Relationships: []
       }
+      high_value_donation_agreements: {
+        Row: {
+          closed_at: string | null
+          created_at: string
+          current_version_id: string | null
+          designation_notes: string | null
+          designation_reasons: Database["public"]["Enums"]["hvda_designation_reason"][]
+          donor_display_name: string | null
+          donor_user_id: string | null
+          id: string
+          opened_by: string | null
+          reference: string | null
+          related_donation_draft_id: string | null
+          related_project_id: string | null
+          status: Database["public"]["Enums"]["hvda_status"]
+          updated_at: string
+        }
+        Insert: {
+          closed_at?: string | null
+          created_at?: string
+          current_version_id?: string | null
+          designation_notes?: string | null
+          designation_reasons?: Database["public"]["Enums"]["hvda_designation_reason"][]
+          donor_display_name?: string | null
+          donor_user_id?: string | null
+          id?: string
+          opened_by?: string | null
+          reference?: string | null
+          related_donation_draft_id?: string | null
+          related_project_id?: string | null
+          status?: Database["public"]["Enums"]["hvda_status"]
+          updated_at?: string
+        }
+        Update: {
+          closed_at?: string | null
+          created_at?: string
+          current_version_id?: string | null
+          designation_notes?: string | null
+          designation_reasons?: Database["public"]["Enums"]["hvda_designation_reason"][]
+          donor_display_name?: string | null
+          donor_user_id?: string | null
+          id?: string
+          opened_by?: string | null
+          reference?: string | null
+          related_donation_draft_id?: string | null
+          related_project_id?: string | null
+          status?: Database["public"]["Enums"]["hvda_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "high_value_donation_agreements_related_project_id_fkey"
+            columns: ["related_project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hvda_current_version_fk"
+            columns: ["current_version_id"]
+            isOneToOne: false
+            referencedRelation: "hvda_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hvda_amendments: {
+        Row: {
+          agreement_id: string
+          created_at: string
+          created_by: string
+          id: string
+          new_version_id: string
+          previous_version_id: string
+          reason: string
+          summary_of_changes: string
+        }
+        Insert: {
+          agreement_id: string
+          created_at?: string
+          created_by: string
+          id?: string
+          new_version_id: string
+          previous_version_id: string
+          reason: string
+          summary_of_changes: string
+        }
+        Update: {
+          agreement_id?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          new_version_id?: string
+          previous_version_id?: string
+          reason?: string
+          summary_of_changes?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hvda_amendments_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: false
+            referencedRelation: "high_value_donation_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hvda_amendments_new_version_id_fkey"
+            columns: ["new_version_id"]
+            isOneToOne: false
+            referencedRelation: "hvda_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hvda_amendments_previous_version_id_fkey"
+            columns: ["previous_version_id"]
+            isOneToOne: false
+            referencedRelation: "hvda_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hvda_approvals: {
+        Row: {
+          agreement_id: string
+          approval_type: Database["public"]["Enums"]["hvda_approval_type"]
+          comment: string | null
+          created_at: string
+          decided_at: string
+          decided_by: string
+          decision: Database["public"]["Enums"]["hvda_approval_decision"]
+          id: string
+          supporting_reference: string | null
+          version_id: string
+        }
+        Insert: {
+          agreement_id: string
+          approval_type: Database["public"]["Enums"]["hvda_approval_type"]
+          comment?: string | null
+          created_at?: string
+          decided_at?: string
+          decided_by: string
+          decision: Database["public"]["Enums"]["hvda_approval_decision"]
+          id?: string
+          supporting_reference?: string | null
+          version_id: string
+        }
+        Update: {
+          agreement_id?: string
+          approval_type?: Database["public"]["Enums"]["hvda_approval_type"]
+          comment?: string | null
+          created_at?: string
+          decided_at?: string
+          decided_by?: string
+          decision?: Database["public"]["Enums"]["hvda_approval_decision"]
+          id?: string
+          supporting_reference?: string | null
+          version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hvda_approvals_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: false
+            referencedRelation: "high_value_donation_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hvda_approvals_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "hvda_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hvda_conditions: {
+        Row: {
+          agreement_id: string
+          created_at: string
+          description: string
+          evidence_reference: string | null
+          id: string
+          notes: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          sequence: number
+          status: Database["public"]["Enums"]["hvda_condition_status"]
+          updated_at: string
+          version_id: string
+        }
+        Insert: {
+          agreement_id: string
+          created_at?: string
+          description: string
+          evidence_reference?: string | null
+          id?: string
+          notes?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          sequence: number
+          status?: Database["public"]["Enums"]["hvda_condition_status"]
+          updated_at?: string
+          version_id: string
+        }
+        Update: {
+          agreement_id?: string
+          created_at?: string
+          description?: string
+          evidence_reference?: string | null
+          id?: string
+          notes?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          sequence?: number
+          status?: Database["public"]["Enums"]["hvda_condition_status"]
+          updated_at?: string
+          version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hvda_conditions_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: false
+            referencedRelation: "high_value_donation_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hvda_conditions_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "hvda_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hvda_payment_schedule: {
+        Row: {
+          agreement_id: string
+          amount_minor: number
+          created_at: string
+          currency: string
+          due_date: string | null
+          id: string
+          notes: string | null
+          payment_route: string | null
+          received_at: string | null
+          sequence: number
+          status: string
+          updated_at: string
+          version_id: string
+        }
+        Insert: {
+          agreement_id: string
+          amount_minor: number
+          created_at?: string
+          currency?: string
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          payment_route?: string | null
+          received_at?: string | null
+          sequence: number
+          status?: string
+          updated_at?: string
+          version_id: string
+        }
+        Update: {
+          agreement_id?: string
+          amount_minor?: number
+          created_at?: string
+          currency?: string
+          due_date?: string | null
+          id?: string
+          notes?: string | null
+          payment_route?: string | null
+          received_at?: string | null
+          sequence?: number
+          status?: string
+          updated_at?: string
+          version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hvda_payment_schedule_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: false
+            referencedRelation: "high_value_donation_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hvda_payment_schedule_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "hvda_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hvda_signatures: {
+        Row: {
+          agreement_id: string
+          created_at: string
+          evidence_reference: string | null
+          id: string
+          method: string
+          recorded_by: string
+          signatory_name: string
+          signatory_role: Database["public"]["Enums"]["hvda_signatory_role"]
+          signatory_title: string | null
+          signatory_user_id: string | null
+          signed_at: string
+          version_id: string
+        }
+        Insert: {
+          agreement_id: string
+          created_at?: string
+          evidence_reference?: string | null
+          id?: string
+          method?: string
+          recorded_by: string
+          signatory_name: string
+          signatory_role: Database["public"]["Enums"]["hvda_signatory_role"]
+          signatory_title?: string | null
+          signatory_user_id?: string | null
+          signed_at?: string
+          version_id: string
+        }
+        Update: {
+          agreement_id?: string
+          created_at?: string
+          evidence_reference?: string | null
+          id?: string
+          method?: string
+          recorded_by?: string
+          signatory_name?: string
+          signatory_role?: Database["public"]["Enums"]["hvda_signatory_role"]
+          signatory_title?: string | null
+          signatory_user_id?: string | null
+          signed_at?: string
+          version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hvda_signatures_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: false
+            referencedRelation: "high_value_donation_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hvda_signatures_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "hvda_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hvda_versions: {
+        Row: {
+          agreement_id: string
+          amendments_clause: string | null
+          anti_fraud_representation: string | null
+          approved_evidence_clause: string | null
+          authored_at: string
+          authored_by: string | null
+          background: string | null
+          beneficial_ownership_details: string | null
+          beneficiary_privacy_clause: string | null
+          charitable_purpose: string | null
+          conditions_precedent_narrative: string | null
+          confidentiality_clause: string | null
+          created_at: string
+          currency: string | null
+          data_protection_clause: string | null
+          delivery_allocation_pct: number
+          donation_amount_minor: number | null
+          donor_authority_details: string | null
+          donor_identity_details: string | null
+          donor_party_name: string | null
+          entire_agreement_clause: string | null
+          force_majeure_clause: string | null
+          governing_law_clause: string | null
+          id: string
+          intended_project_or_purpose: string | null
+          is_locked: boolean
+          is_restricted: boolean | null
+          legal_review_completed_at: string | null
+          legal_review_firm: string | null
+          legal_review_notes: string | null
+          legal_review_reference: string | null
+          locked_at: string | null
+          no_donor_ownership_or_control_clause: string | null
+          no_partnership_agency_clause: string | null
+          no_unlawful_or_third_party_funds: string | null
+          notices_clause: string | null
+          operating_allocation_pct: number
+          payment_route: string | null
+          payment_schedule_narrative: string | null
+          project_budget: string | null
+          project_changes_clause: string | null
+          publicity_and_recognition_clause: string | null
+          reallocation_clause: string | null
+          refund_limitations_clause: string | null
+          refusal_clause: string | null
+          reporting_clause: string | null
+          restriction_details: string | null
+          return_of_funds_clause: string | null
+          sanctions_representation: string | null
+          signature_block_notes: string | null
+          source_of_funds_representation: string | null
+          source_of_wealth_information: string | null
+          suspension_clause: string | null
+          tax_and_gift_aid_clause: string | null
+          termination_clause: string | null
+          trust_party_name: string | null
+          trustee_discretion_clause: string | null
+          updated_at: string
+          version_number: number
+          warranties_clause: string | null
+        }
+        Insert: {
+          agreement_id: string
+          amendments_clause?: string | null
+          anti_fraud_representation?: string | null
+          approved_evidence_clause?: string | null
+          authored_at?: string
+          authored_by?: string | null
+          background?: string | null
+          beneficial_ownership_details?: string | null
+          beneficiary_privacy_clause?: string | null
+          charitable_purpose?: string | null
+          conditions_precedent_narrative?: string | null
+          confidentiality_clause?: string | null
+          created_at?: string
+          currency?: string | null
+          data_protection_clause?: string | null
+          delivery_allocation_pct?: number
+          donation_amount_minor?: number | null
+          donor_authority_details?: string | null
+          donor_identity_details?: string | null
+          donor_party_name?: string | null
+          entire_agreement_clause?: string | null
+          force_majeure_clause?: string | null
+          governing_law_clause?: string | null
+          id?: string
+          intended_project_or_purpose?: string | null
+          is_locked?: boolean
+          is_restricted?: boolean | null
+          legal_review_completed_at?: string | null
+          legal_review_firm?: string | null
+          legal_review_notes?: string | null
+          legal_review_reference?: string | null
+          locked_at?: string | null
+          no_donor_ownership_or_control_clause?: string | null
+          no_partnership_agency_clause?: string | null
+          no_unlawful_or_third_party_funds?: string | null
+          notices_clause?: string | null
+          operating_allocation_pct?: number
+          payment_route?: string | null
+          payment_schedule_narrative?: string | null
+          project_budget?: string | null
+          project_changes_clause?: string | null
+          publicity_and_recognition_clause?: string | null
+          reallocation_clause?: string | null
+          refund_limitations_clause?: string | null
+          refusal_clause?: string | null
+          reporting_clause?: string | null
+          restriction_details?: string | null
+          return_of_funds_clause?: string | null
+          sanctions_representation?: string | null
+          signature_block_notes?: string | null
+          source_of_funds_representation?: string | null
+          source_of_wealth_information?: string | null
+          suspension_clause?: string | null
+          tax_and_gift_aid_clause?: string | null
+          termination_clause?: string | null
+          trust_party_name?: string | null
+          trustee_discretion_clause?: string | null
+          updated_at?: string
+          version_number: number
+          warranties_clause?: string | null
+        }
+        Update: {
+          agreement_id?: string
+          amendments_clause?: string | null
+          anti_fraud_representation?: string | null
+          approved_evidence_clause?: string | null
+          authored_at?: string
+          authored_by?: string | null
+          background?: string | null
+          beneficial_ownership_details?: string | null
+          beneficiary_privacy_clause?: string | null
+          charitable_purpose?: string | null
+          conditions_precedent_narrative?: string | null
+          confidentiality_clause?: string | null
+          created_at?: string
+          currency?: string | null
+          data_protection_clause?: string | null
+          delivery_allocation_pct?: number
+          donation_amount_minor?: number | null
+          donor_authority_details?: string | null
+          donor_identity_details?: string | null
+          donor_party_name?: string | null
+          entire_agreement_clause?: string | null
+          force_majeure_clause?: string | null
+          governing_law_clause?: string | null
+          id?: string
+          intended_project_or_purpose?: string | null
+          is_locked?: boolean
+          is_restricted?: boolean | null
+          legal_review_completed_at?: string | null
+          legal_review_firm?: string | null
+          legal_review_notes?: string | null
+          legal_review_reference?: string | null
+          locked_at?: string | null
+          no_donor_ownership_or_control_clause?: string | null
+          no_partnership_agency_clause?: string | null
+          no_unlawful_or_third_party_funds?: string | null
+          notices_clause?: string | null
+          operating_allocation_pct?: number
+          payment_route?: string | null
+          payment_schedule_narrative?: string | null
+          project_budget?: string | null
+          project_changes_clause?: string | null
+          publicity_and_recognition_clause?: string | null
+          reallocation_clause?: string | null
+          refund_limitations_clause?: string | null
+          refusal_clause?: string | null
+          reporting_clause?: string | null
+          restriction_details?: string | null
+          return_of_funds_clause?: string | null
+          sanctions_representation?: string | null
+          signature_block_notes?: string | null
+          source_of_funds_representation?: string | null
+          source_of_wealth_information?: string | null
+          suspension_clause?: string | null
+          tax_and_gift_aid_clause?: string | null
+          termination_clause?: string | null
+          trust_party_name?: string | null
+          trustee_discretion_clause?: string | null
+          updated_at?: string
+          version_number?: number
+          warranties_clause?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hvda_versions_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: false
+            referencedRelation: "high_value_donation_agreements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       inbound_contacts: {
         Row: {
           additional_context: string | null
@@ -4777,6 +5332,7 @@ export type Database = {
         Args: { _project_id: string; _user_id: string }
         Returns: boolean
       }
+      can_manage_hvda: { Args: { _user_id: string }; Returns: boolean }
       compute_project_health: {
         Args: { _project_id: string }
         Returns: Database["public"]["Enums"]["project_health_state"]
@@ -4938,6 +5494,7 @@ export type Database = {
       generate_bank_transfer_reference: { Args: never; Returns: string }
       generate_gdpr_reference: { Args: never; Returns: string }
       generate_hold_reference: { Args: never; Returns: string }
+      generate_hvda_reference: { Args: never; Returns: string }
       generate_receipt_reference: { Args: never; Returns: string }
       generate_review_reference: { Args: never; Returns: string }
       generate_service_request_reference: { Args: never; Returns: string }
@@ -4953,6 +5510,52 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      hvda_create_amendment: {
+        Args: { _agreement_id: string; _reason: string; _summary: string }
+        Returns: string
+      }
+      hvda_donor_safe_copy: { Args: { _agreement_id: string }; Returns: Json }
+      hvda_open: {
+        Args: {
+          _designation_notes: string
+          _donor_display_name: string
+          _donor_user_id: string
+          _reasons: Database["public"]["Enums"]["hvda_designation_reason"][]
+          _related_draft_id: string
+          _related_project_id: string
+        }
+        Returns: string
+      }
+      hvda_record_approval: {
+        Args: {
+          _agreement_id: string
+          _approval_type: Database["public"]["Enums"]["hvda_approval_type"]
+          _comment: string
+          _decision: Database["public"]["Enums"]["hvda_approval_decision"]
+          _reference: string
+        }
+        Returns: string
+      }
+      hvda_record_signature: {
+        Args: {
+          _agreement_id: string
+          _evidence_reference: string
+          _method: string
+          _signatory_name: string
+          _signatory_role: Database["public"]["Enums"]["hvda_signatory_role"]
+          _signatory_title: string
+          _signatory_user_id: string
+        }
+        Returns: string
+      }
+      hvda_set_status: {
+        Args: {
+          _agreement_id: string
+          _new_status: Database["public"]["Enums"]["hvda_status"]
+          _note: string
+        }
+        Returns: undefined
       }
       increment_document_download: {
         Args: { doc_id: string }
@@ -5222,6 +5825,38 @@ export type Database = {
         | "research_policy"
         | "professional_education"
         | "where_most_needed"
+      hvda_approval_decision:
+        | "approved"
+        | "changes_requested"
+        | "declined"
+        | "noted"
+      hvda_approval_type:
+        | "due_diligence"
+        | "trustee_review"
+        | "legal_review"
+        | "approved_for_signature"
+      hvda_condition_status: "open" | "satisfied" | "waived" | "failed"
+      hvda_designation_reason:
+        | "amount"
+        | "donor_profile"
+        | "restrictions"
+        | "source_of_funds"
+        | "complexity"
+        | "international_features"
+        | "reputational_risk"
+        | "payment_schedule"
+        | "project_dependency"
+      hvda_signatory_role: "donor" | "trust"
+      hvda_status:
+        | "draft"
+        | "due_diligence"
+        | "trustee_review"
+        | "legal_review_requested"
+        | "approved_for_signature"
+        | "signed"
+        | "active"
+        | "completed"
+        | "terminated"
       legal_review_status:
         | "draft"
         | "internal_review"
@@ -5459,6 +6094,42 @@ export const Constants = {
         "research_policy",
         "professional_education",
         "where_most_needed",
+      ],
+      hvda_approval_decision: [
+        "approved",
+        "changes_requested",
+        "declined",
+        "noted",
+      ],
+      hvda_approval_type: [
+        "due_diligence",
+        "trustee_review",
+        "legal_review",
+        "approved_for_signature",
+      ],
+      hvda_condition_status: ["open", "satisfied", "waived", "failed"],
+      hvda_designation_reason: [
+        "amount",
+        "donor_profile",
+        "restrictions",
+        "source_of_funds",
+        "complexity",
+        "international_features",
+        "reputational_risk",
+        "payment_schedule",
+        "project_dependency",
+      ],
+      hvda_signatory_role: ["donor", "trust"],
+      hvda_status: [
+        "draft",
+        "due_diligence",
+        "trustee_review",
+        "legal_review_requested",
+        "approved_for_signature",
+        "signed",
+        "active",
+        "completed",
+        "terminated",
       ],
       legal_review_status: [
         "draft",

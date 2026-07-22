@@ -74,6 +74,7 @@ import DonorFundingTermsPage from "./pages/DonorFundingTermsPage";
 import { DonationSuccessPage } from "./pages/DonationSuccessPage";
 import { DonationCancelledPage } from "./pages/DonationCancelledPage";
 import AdminPaymentsPage from "./pages/admin/AdminPaymentsPage";
+import AdminHighValueAgreementsPage from "./pages/admin/AdminHighValueAgreementsPage";
 
 const queryClient = new QueryClient();
 
@@ -182,6 +183,7 @@ const App = () => (
             <Route path="agreements" element={<AdminAgreementsPage />} />
             <Route path="legal" element={<AdminLegalPage />} />
             <Route path="payments" element={<AdminPaymentsPage />} />
+            <Route path="high-value-agreements" element={<AdminHighValueAgreementsPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
 
           </Route>

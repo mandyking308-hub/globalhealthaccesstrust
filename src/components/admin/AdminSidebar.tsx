@@ -20,6 +20,7 @@ const menuItems = [
   { title: "Agreements", url: "/admin/agreements" },
   { title: "Legal Centre", url: "/admin/legal" },
   { title: "Payments", url: "/admin/payments" },
+  { title: "High-Value Agreements", url: "/admin/high-value-agreements" },
   { title: "Service Console", url: "/admin/service-console" },
   { title: "Contacts", url: "/admin/contacts" },
   { title: "Evidence", url: "/admin/evidence" },
