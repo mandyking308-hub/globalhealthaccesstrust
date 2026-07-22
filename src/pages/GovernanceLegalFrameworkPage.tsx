@@ -1,105 +1,99 @@
+import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
+import { LEGAL_ENTITY } from "@/lib/legalEntity";
 
-export const GovernanceLegalFrameworkPage = () => {
-  return (
-    <ContentLayout>
-      <SEO
-        title="Governance & Legal Framework"
-        description="Legal status, regulatory compliance, and governance framework of the Global Health Access Trust, a charitable trust under English and Welsh law."
-        canonical="/governance-legal-framework"
-      />
-      <h1>Governance & Legal Framework</h1>
-      
-      <p className="featured-text">"Governance is not a formality—it is a responsibility owed to the public."</p>
+export const GovernanceLegalFrameworkPage = () => (
+  <ContentLayout>
+    <SEO
+      title="Governance & Legal Framework"
+      description="The legal identity, trustee authority, banking controls and governance framework of Global Health Access Trust."
+      canonical="/governance-legal-framework"
+    />
+    <h1>Governance &amp; Legal Framework</h1>
+    <p className="featured-text">Trustee authority, documented decisions and controlled stewardship.</p>
 
-      <div className="section-container">
-        <h2>Legal Status</h2>
-        <p>Global Health Access Trust is a charitable trust established under the laws of England and Wales. It is constituted by a formal Trust Deed and operates exclusively for charitable purposes and for the public benefit.</p>
-        <p>The Trust is administered by its Board of Trustees, who are responsible for the proper stewardship of its assets, compliance with the governing document and the lawful advancement of its charitable purposes.</p>
-        <p>The Trust's regulatory and registration particulars will be stated on this website when those particulars are formally confirmed and available for publication.</p>
-        <p>All funds are administered in accordance with the Trust Deed, applicable law, the Trust's financial controls and the decisions of the Board of Trustees.</p>
+    <div className="section-container">
+      <h2>Legal status</h2>
+      <p>{LEGAL_ENTITY.publicLegalDescription}</p>
+      <p>
+        The Trust is not a company and does not claim a company number. It does not claim a Charity Commission registration number. Its signed Trust Deed is the governing document under which the Trustees act.
+      </p>
+      <p>
+        The public correspondence address is {LEGAL_ENTITY.correspondenceAddress.single}. It is not described as a registered office.
+      </p>
+    </div>
+
+    <div className="section-container">
+      <h2>Board of Trustees</h2>
+      <p>The current Board comprises Mandy King, Dr Jagdev Thukral and John O'Sullivan BA FCA.</p>
+      <p>The Trustees are collectively responsible for:</p>
+      <ul>
+        <li>acting within the Trust Deed and exclusively for charitable purposes;</li>
+        <li>considering public benefit and avoiding unauthorised private benefit;</li>
+        <li>approving banking mandates, signatories and payment controls;</li>
+        <li>approving material gifts, restrictions, projects and expenditure;</li>
+        <li>maintaining appropriate records, risk management and safeguarding oversight; and</li>
+        <li>ensuring that donor preferences do not displace trustee decision-making.</li>
+      </ul>
+      <Link to="/trustee-biographies" className="text-primary hover:underline">Trustee information →</Link>
+    </div>
+
+    <div className="section-container">
+      <h2>Banking authority</h2>
+      <p>
+        The Trustees are seeking a UK bank account in the legal name Global Health Access Trust. The account must not be opened in the name of an individual Trustee, adviser, associated company or trading style.
+      </p>
+      <ul>
+        <li>Bank signatories and online-banking users require documented trustee authority.</li>
+        <li>Dual control will be used for material payments and sensitive banking changes wherever the selected bank supports it.</li>
+        <li>Bank details will be held in controlled administration settings and will not be hardcoded into the public website.</li>
+        <li>No public payment collection will be activated before account details and settlement arrangements are verified.</li>
+        <li>Statements, reconciliations, approvals and supporting documents will form part of the Trust's accounting records.</li>
+      </ul>
+    </div>
+
+    <div className="section-container">
+      <h2>Financial governance</h2>
+      <ul>
+        <li>Funds are accepted only for purposes within the Trust Deed.</li>
+        <li>Restricted gifts are accepted only through an express trustee decision and are recorded separately.</li>
+        <li>Proposed, pending and failed payments are not treated as received donations.</li>
+        <li>Cleared funds are reconciled before a receipt or project allocation is finalised.</li>
+        <li>Material expenditure must be supported by records and appropriate approval.</li>
+        <li>Accounts will be prepared and independently examined or audited where required by law or approved by the Trustees.</li>
+      </ul>
+      <Link to="/financial-controls" className="text-primary hover:underline">Financial controls →</Link>
+    </div>
+
+    <div className="section-container">
+      <h2>Risk, due diligence and sanctions</h2>
+      <p>
+        The Trust applies a proportionate, risk-based approach to donor, partner and project due diligence. This may include identity, authority, source-of-funds, beneficial-ownership, sanctions, politically exposed person, adverse-information and conflict checks where relevant.
+      </p>
+      <p>
+        Screening does not replace trustee judgement. The Trustees may refuse, return or pause funding where legal, ethical, safeguarding, reputational or operational risk cannot be managed appropriately.
+      </p>
+      <Link to="/donor-due-diligence-and-sanctions-policy" className="text-primary hover:underline">Due diligence and sanctions policy →</Link>
+    </div>
+
+    <div className="section-container">
+      <h2>Records and accountability</h2>
+      <p>
+        The Trust maintains records of trustee decisions, legal-document versions, acceptances, project approvals, financial movements, complaints, safeguarding matters and other material governance events. Public information is separated from confidential, personal, legally privileged and safeguarding-restricted records.
+      </p>
+      <p>
+        Reports and filings will be prepared, approved and supplied where required by applicable law, a competent regulator, a bank or a binding agreement. The website does not claim that a filing or audit has occurred unless it has actually occurred.
+      </p>
+    </div>
+
+    <div className="section-container">
+      <h2>Governing document and policies</h2>
+      <div className="flex flex-wrap gap-5">
+        <Link to="/constitution" className="text-primary hover:underline">Signed Constitution →</Link>
+        <Link to="/legal" className="text-primary hover:underline">Legal Centre →</Link>
+        <Link to="/support" className="text-primary hover:underline">Complaints and protected pathways →</Link>
       </div>
-
-
-      <div className="section-container">
-        <h2>Regulatory Compliance</h2>
-        <p>The Trust is committed to full legal and regulatory compliance across all areas of operation. This includes:</p>
-        <ul>
-          <li>Charity law (Charities Act 2011 and related statutes)</li>
-          <li>Trustee fiduciary duty and conduct standards</li>
-          <li>Anti-Money Laundering (AML) compliance</li>
-          <li>Counter-Terrorism and Sanctions regulations</li>
-          <li>Data protection and GDPR</li>
-          <li>Safeguarding and equality obligations (where applicable)</li>
-        </ul>
-        <p>Financial statements, governance reports and regulatory filings will be prepared, approved and published where required by law or determined appropriate by the Board of Trustees.</p>
-      </div>
-
-
-      <div className="section-container">
-        <h2>Board of Trustees</h2>
-        <p>The Trust is overseen by a Board of Trustees, each of whom serves without private gain and under binding fiduciary obligation.</p>
-        <p>The Board is responsible for:</p>
-        <ul>
-          <li>Strategic oversight and mission alignment</li>
-          <li>Approval of all grant-making and disbursements</li>
-          <li>Legal compliance and risk management</li>
-          <li>Appointment of advisors and external auditors (as applicable)</li>
-        </ul>
-        <p>No Trustee may benefit financially from the Trust's operations, except where lawfully permitted by the Charity Commission and transparently disclosed.</p>
-      </div>
-
-      <div className="section-container">
-        <h2>Governance Principles</h2>
-        <p>All decisions taken by the Trust are guided by the following principles:</p>
-        <ul>
-          <li>Legal compliance in all jurisdictions of operation</li>
-          <li>Transparent and accountable use of charitable funds</li>
-          <li>Independence from political, commercial, or sectarian influence</li>
-          <li>Evidence-based programme design and delivery</li>
-          <li>Respect for human dignity and rights</li>
-          <li>Long-term sustainability and institutional continuity</li>
-        </ul>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="section-container">
-          <h2>Financial Governance</h2>
-          <p>The Trust operates under strict financial controls:</p>
-          <ul>
-            <li>Independent audit (when thresholds require)</li>
-            <li>Segregation of duties in financial management</li>
-            <li>Board-level approval for all significant expenditures</li>
-            <li>Transparent reporting to donors and regulators</li>
-            <li>Investment policies aligned with charitable purposes</li>
-          </ul>
-        </div>
-
-        <div className="section-container">
-          <h2>Risk Management</h2>
-          <p>The Trust maintains a formal risk register covering:</p>
-          <ul>
-            <li>Governance and compliance risks</li>
-            <li>Financial and operational risks</li>
-            <li>Reputational and safeguarding risks</li>
-            <li>Programme delivery and partnership risks</li>
-          </ul>
-          <p>Risk assessment is conducted quarterly and reported to the Board annually.</p>
-        </div>
-      </div>
-
-      <div className="section-container">
-        <h2>Accountability & Transparency</h2>
-        <p>The Trust is committed to openness and public accountability:</p>
-        <ul>
-          <li>Annual governance statement (published)</li>
-          <li>Financial accounts and trustee report (public filing)</li>
-          <li>Programme impact reports (available on request)</li>
-          <li>Complaints procedure and safeguarding policies (published)</li>
-        </ul>
-        <p>Any member of the public may request information about our governance, subject to data protection and confidentiality requirements.</p>
-      </div>
-    </ContentLayout>
-  );
-};
+    </div>
+  </ContentLayout>
+);
