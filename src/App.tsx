@@ -79,6 +79,7 @@ import AdminGiftAcceptancePage from "./pages/admin/AdminGiftAcceptancePage";
 import GiftAcceptancePolicyPage from "./pages/GiftAcceptancePolicyPage";
 import DonorDueDiligencePolicyPage from "./pages/DonorDueDiligencePolicyPage";
 import AdminDonorDueDiligencePage from "./pages/admin/AdminDonorDueDiligencePage";
+import ProjectTeamTermsPage from "./pages/ProjectTeamTermsPage";
 
 const queryClient = new QueryClient();
 
