@@ -526,8 +526,10 @@ const RightsTab = () => {
                     <Button size="sm" variant="outline" onClick={() => patch({ identity_status: "verified", identity_verified_at: new Date().toISOString() }, "identity_verified")}>Mark identity verified</Button>
                     <Button size="sm" variant="outline" onClick={startClock}>Start clock</Button>
                     <Button size="sm" variant="outline" onClick={extend}>Apply extension</Button>
+                    <Button size="sm" variant="outline" onClick={recordExtNotice} disabled={!detail.extension_applied}>Record extension notice</Button>
                     <Button size="sm" variant="outline" onClick={() => patch({ status: "searching" }, "status_change", { to: "searching" })}>Begin search</Button>
                     <Button size="sm" variant="outline" onClick={() => patch({ status: "response_ready" }, "response_ready")}>Response ready</Button>
+
                     <Button size="sm" onClick={() => patch({ status: "completed", decision: "fulfil", completed_at: new Date().toISOString() }, "completed", { decision: "fulfil" })}>Complete – fulfil</Button>
                     <Button size="sm" variant="destructive" onClick={() => {
                       const reason = prompt("Refusal reason?"); if (!reason) return;
