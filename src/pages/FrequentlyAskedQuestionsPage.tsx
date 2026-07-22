@@ -1,65 +1,96 @@
+import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
-export const FrequentlyAskedQuestionsPage = () => {
-  return (
-    <ContentLayout>
-      <SEO
-        title="Frequently Asked Questions"
-        description="Common questions about the Global Health Access Trust — our mission, governance, how to engage, volunteer, and support global healthcare access."
-        canonical="/frequently-asked-questions"
-      />
-      <h1>Frequently Asked Questions</h1>
-      
-      <p className="featured-text">"Clarity of purpose demands clarity of communication."</p>
+export const FrequentlyAskedQuestionsPage = () => (
+  <ContentLayout>
+    <SEO
+      title="Frequently Asked Questions"
+      description="Common questions about the legal identity, history, governance, banking and charitable work of Global Health Access Trust."
+      canonical="/frequently-asked-questions"
+    />
+    <h1>Frequently Asked Questions</h1>
+    <p className="featured-text">Clear answers about the Trust's status, governance and current stage of development.</p>
 
-      <p>The following questions address common enquiries about the Global Health Access Trust, our work, and how individuals and organisations can support our mission.</p>
+    <div className="section-container">
+      <h2>What is Global Health Access Trust?</h2>
+      <p>
+        Global Health Access Trust is a charitable trust established under the laws of England and Wales. It is governed by its Trust Deed and administered by its Board of Trustees exclusively for charitable purposes.
+      </p>
+      <p>
+        It is not a company and is not currently presented as a registered charity. The website does not display a company number or Charity Commission registration number.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>About the Trust</h2>
-        <h3>What is the Global Health Access Trust?</h3>
-        <p>The Global Health Access Trust is a charitable trust established under the laws of England and Wales to advance health, relieve illness, and preserve life—particularly among vulnerable or underserved populations. It is governed by its Trust Deed and administered by its Board of Trustees exclusively for charitable purposes.</p>
-        <h3>What makes this Trust different from other health charities?</h3>
-        <p>We are built as a permanent institution rather than a campaign or initiative. Our approach emphasises systems-building over dependency, dignity over publicity, and long-term sustainability over short-term visibility. We operate with strict governance standards and exist to serve, not to sell.</p>
-        <h3>How is the Trust constituted?</h3>
-        <p>The Trust is established under the laws of England and Wales as a charitable trust, governed by its Trust Deed. Its correspondence address is 2 Harley Street, London.</p>
-      </div>
+    <div className="section-container">
+      <h2>When did the work begin?</h2>
+      <p>
+        The charitable and public-benefit work that led to Global Health Access Trust began in 2019. Global Health Access Trust itself was formally established under its Trust Deed with effect from 1 December 2024.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Our Work</h2>
-        <h3>What type of healthcare programmes do you fund?</h3>
-        <p>We focus on five core areas: ethical access to healthcare, building capacity rather than dependency, strengthening health systems, legal scholarship and strategic reform, and responding to humanitarian collapse. All programmes must demonstrate clear public benefit and align with our charitable purposes.</p>
-        <h3>Do you accept unsolicited applications for funding?</h3>
-        <p>The Trust does not accept unsolicited applications at this time. We engage directly with pre-vetted individuals, institutions, or partners whose values align with our objectives and who meet our due diligence standards.</p>
-        <h3>Which countries or regions do you work in?</h3>
-        <p>While our mandate is global, we prioritise regions where the gap between need and access is greatest, particularly in areas affected by conflict, systemic healthcare collapse, or where vulnerable populations lack access to basic healthcare services.</p>
-      </div>
+    <div className="section-container">
+      <h2>Who governs the Trust?</h2>
+      <p>
+        The current Trustees are Mandy King, Chair of Trustees; Dr Jagdev Thukral; and John O'Sullivan BA FCA. They retain responsibility for charitable purpose, banking, financial stewardship, risk, safeguarding and project approval.
+      </p>
+      <p>
+        Rachael Duff, Dr Joy Wong and Richard Banyard are valued advisory and specialist contributors. They are not Trustees, do not control Trust funds and cannot bind GHAT without specific written trustee authority.
+      </p>
+      <Link to="/trustee-biographies" className="text-primary hover:underline">Read the full biographies →</Link>
+    </div>
 
-      <div className="section-container">
-        <h2>Supporting the Trust</h2>
-        <h3>How can I support the Trust?</h3>
-        <p>Engagement with the Trust follows a structured process. Initial contact can be made through our enquiry form. All funding relationships are formalised through appropriate legal documentation aligned with our charitable objectives.</p>
-        <h3>Can I specify how my contribution is used?</h3>
-        <p>Yes, supporters may direct restricted gifts to specific programmes or initiatives, subject to Board approval and formal documentation that aligns with our charitable objectives and includes reversion clauses if the original purpose becomes obsolete.</p>
-        <h3>Do you provide tax receipts?</h3>
-        <p>Yes, contributions are formally receipted. The Trust does not currently operate a Gift Aid scheme; any future arrangement will be announced only when the required HMRC recognition and processes are in place.</p>
-      </div>
+    <div className="section-container">
+      <h2>What is the wider clinical network?</h2>
+      <p>
+        The earlier Clinicians Check work created an international clinician and volunteer network with registrations numbering in the thousands, representation across 12 countries and more than 40 partner and organisational relationships.
+      </p>
+      <p>
+        These figures describe wider network reach and organisational capacity. They are not claims that GHAT has completed funded projects in every represented country.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Governance & Operations</h2>
-        <h3>Who governs the Trust?</h3>
-        <p>The Trust is overseen by a Board of Trustees comprising senior professionals with decades of experience in healthcare leadership, public policy, governance, and international systems. All Trustees serve under fiduciary duty and are bound by our governing constitution.</p>
-        <h3>How do you ensure transparency and accountability?</h3>
-        <p>We operate under strict financial controls including independent oversight, board-level approval for significant expenditures, transparent reporting to donors and regulators, and regular compliance audits. Annual governance statements and financial accounts are made publicly available.</p>
-      </div>
+    <div className="section-container">
+      <h2>What current work can be described publicly?</h2>
+      <p>
+        The wider team is providing unpaid technical and operational support to an agricultural supply-chain organisation in Nigeria. The work is intended to improve visibility and coordination across farmers, partners, logistics, quality assurance, buyer delivery and payment-risk processes. The organisation is not publicly named and completed results are not claimed.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Contact Information</h2>
-        <h3>How can I contact the Trust?</h3>
-        <p>For all enquiries, please contact us via our secure channels with appropriate subject lines. General enquiries, legacy questions, and partnership discussions are welcomed through our confidential contact procedures. We respond to all serious enquiries within 48 hours.</p>
-      </div>
+    <div className="section-container">
+      <h2>Does the Trust already have a bank account?</h2>
+      <p>
+        The Trustees are applying for a UK bank account in the legal name Global Health Access Trust. No public bank details or payment route should be treated as active until the account and provider settings have been verified and approved.
+      </p>
+    </div>
 
-      <p className="mt-8 text-sm text-muted-foreground">If your question is not answered here, please contact us directly. We welcome all genuine enquiries about our work and mission.</p>
-    </ContentLayout>
-  );
-};
+    <div className="section-container">
+      <h2>When is a donation recorded?</h2>
+      <p>
+        A pledge, mandate, payment instruction or pending transfer is not recorded as a completed donation. A donation is recorded only after cleared funds have been received and reconciled.
+      </p>
+    </div>
+
+    <div className="section-container">
+      <h2>Does GHAT operate Gift Aid?</h2>
+      <p>
+        No. GHAT does not currently operate a Gift Aid scheme. Gift Aid will not be claimed or advertised unless the required HMRC recognition, declarations and processes are in place.
+      </p>
+    </div>
+
+    <div className="section-container">
+      <h2>Have annual accounts or audits already been published?</h2>
+      <p>
+        The website does not claim that annual accounts, an independent examination, an audit or a regulatory filing has already been completed or published. Accounts and external review will be undertaken where required by law or approved by the Trustees.
+      </p>
+    </div>
+
+    <div className="section-container">
+      <h2>How can I contact the Trust?</h2>
+      <p>
+        Use the secure contact form. Direct GHAT email addresses and bank details are not printed on the public website. Enquiries are reviewed and answered according to their nature and priority; no guaranteed response time is published.
+      </p>
+      <Link to="/contact-the-trust" className="text-primary hover:underline">Contact the Trust securely →</Link>
+    </div>
+  </ContentLayout>
+);
