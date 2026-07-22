@@ -22,6 +22,7 @@ const menuItems = [
   { title: "Payments", url: "/admin/payments" },
   { title: "High-Value Agreements", url: "/admin/high-value-agreements" },
   { title: "Gift Acceptance", url: "/admin/gift-acceptance" },
+  { title: "Donor Due Diligence", url: "/admin/donor-due-diligence" },
   { title: "Service Console", url: "/admin/service-console" },
   { title: "Contacts", url: "/admin/contacts" },
   { title: "Evidence", url: "/admin/evidence" },
