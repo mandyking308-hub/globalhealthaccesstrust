@@ -147,6 +147,7 @@ const App = () => (
           <Route path="legal" element={<LegalIndexPage />} />
           <Route path="legal/:slug" element={<LegalDocumentPage />} />
           <Route path="donor-project-funding-terms" element={<DonorFundingTermsPage />} />
+          <Route path="gift-acceptance-and-restricted-funds-policy" element={<GiftAcceptancePolicyPage />} />
         </Route>
         
           {/* Donor Portal Routes (outside Layout - full page) */}
