@@ -139,16 +139,17 @@ export const Header = () => {
 
               <Link
                 to="/auth?portal=team"
-                className="hidden lg:inline-flex items-center h-10 px-4 border border-primary/40 text-primary text-[12.5px] font-sans font-semibold tracking-[0.08em] hover:bg-primary hover:text-primary-foreground transition-colors no-underline"
+                className="hidden sm:inline-flex items-center h-10 px-4 border border-primary/40 text-primary text-[12.5px] font-sans font-semibold tracking-[0.08em] hover:bg-primary hover:text-primary-foreground transition-colors no-underline"
               >
                 Project Team
               </Link>
               <Link
                 to="/auth?portal=donor"
-                className="hidden md:inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-sans font-semibold tracking-[0.08em] hover:bg-primary/90 transition-colors no-underline"
+                className="hidden sm:inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-sans font-semibold tracking-[0.08em] hover:bg-primary/90 transition-colors no-underline"
               >
                 Donor Portal
               </Link>
+
 
 
               <button
