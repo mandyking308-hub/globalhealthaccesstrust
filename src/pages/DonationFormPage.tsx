@@ -313,17 +313,30 @@ export const DonationFormPage = () => {
                 <div className="font-mono text-xl">{transferReference}</div>
               </div>
               <div className="text-[15px] leading-relaxed">
-                <p className="font-semibold mb-2">Please quote this reference on your transfer. Instructions:</p>
+                <p className="font-semibold mb-2">Please quote this reference on your transfer:</p>
                 <ul className="space-y-1">
-                  <li><strong>Beneficiary:</strong> Global Health Access Trust</li>
+                  <li><strong>Beneficiary:</strong> {bankDetails?.beneficiary_name ?? "Global Health Access Trust"}</li>
+                  {bankDetails?.bank_name && <li><strong>Bank:</strong> {bankDetails.bank_name}</li>}
+                  {bankDetails?.sort_code && <li><strong>Sort code:</strong> {bankDetails.sort_code}</li>}
+                  {bankDetails?.account_number && <li><strong>Account number:</strong> {bankDetails.account_number}</li>}
+                  {bankDetails?.iban && <li><strong>IBAN:</strong> {bankDetails.iban}</li>}
+                  {bankDetails?.bic && <li><strong>BIC:</strong> {bankDetails.bic}</li>}
                   <li><strong>Amount:</strong> {formatGBP(amountMinor)}</li>
                   <li><strong>Reference:</strong> {transferReference}</li>
                 </ul>
-                <p className="mt-4 text-muted-foreground text-sm">
-                  Full bank details (account, sort code, IBAN, BIC) will be issued by the Trust's finance team
-                  by secure email to the address on your donor account within one working day.
-                  Your gift will be reconciled and confirmed once received.
-                </p>
+                {!bankDetails && (
+                  <p className="mt-4 text-muted-foreground text-sm">
+                    Full bank details will be issued by the Trust's finance team by secure email to the
+                    address on your donor account within one working day. Your gift will be reconciled and
+                    confirmed once received. A bank-transfer instruction request is not a paid donation.
+                  </p>
+                )}
+                {bankDetails && (
+                  <p className="mt-4 text-muted-foreground text-sm">
+                    Please do not omit the reference — it is required to reconcile your gift. Your donation
+                    will be recorded only once funds are received and reconciled.
+                  </p>
+                )}
               </div>
               <Button onClick={() => navigate("/donor-dashboard")} className="w-full h-12">
                 Return to Donor Portal
