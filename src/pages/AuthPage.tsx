@@ -368,7 +368,6 @@ type FormProps = {
   signupEmail: string; setSignupEmail: (v: string) => void;
   signupPassword: string; setSignupPassword: (v: string) => void;
   signupConfirmPassword: string; setSignupConfirmPassword: (v: string) => void;
-  gdprConsent: boolean; setGdprConsent: (v: boolean) => void;
   termsAccepted: boolean; setTermsAccepted: (v: boolean) => void;
 };
 
