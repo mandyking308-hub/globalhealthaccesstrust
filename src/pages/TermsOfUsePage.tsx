@@ -736,11 +736,9 @@ export const TermsOfUsePage = () => {
         <P>For questions about these Terms, legal enquiries or governance enquiries, please contact the Trust through the <Link to="/contact-the-trust" className="text-primary hover:underline">secure contact form</Link>.</P>
         <P>Correspondence address:</P>
         <address className="mt-3 not-italic text-[16px] leading-[1.75] text-foreground/85">
-          {LEGAL_ENTITY.legalName}<br />
-          {LEGAL_ENTITY.correspondenceAddress.line1}<br />
-          {LEGAL_ENTITY.correspondenceAddress.city}<br />
-          {LEGAL_ENTITY.correspondenceAddress.country}<br />
-          {LEGAL_ENTITY.correspondenceAddress.countryLong}
+          {LEGAL_ENTITY.correspondenceAddress.lines.map((l, i) => (
+            <span key={i}>{l}<br /></span>
+          ))}
         </address>
         <P>This is the Trust’s correspondence address. It is not a registered office.</P>
 
