@@ -72,7 +72,23 @@ jobs:
             src/pages/WhatWeDoPage.tsx
 
       - name: Lint changed Edge Functions
-        run: deno lint supabase/functions/contact-notification/index.ts supabase/functions/gocardless-create-flow/index.ts
+        run: |
+          set +e
+          deno lint --json \
+            supabase/functions/contact-notification/index.ts \
+            supabase/functions/gocardless-create-flow/index.ts \
+            > edge-lint-report.json
+          status=$?
+          cat edge-lint-report.json
+          exit $status
+
+      - name: Upload Edge lint report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: edge-lint-report
+          path: edge-lint-report.json
+          if-no-files-found: error
 
       - name: Type-check complete application
         run: bunx tsc --noEmit
