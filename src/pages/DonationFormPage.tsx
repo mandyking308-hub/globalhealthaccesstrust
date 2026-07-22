@@ -73,8 +73,8 @@ export const DonationFormPage = () => {
   };
 
   const createDraftAndConfirm = async () => {
-    if (!confirmTx) {
-      toast({ title: "Please confirm the transaction terms", variant: "destructive" });
+    if (!confirmTx || !acceptFundingTerms) {
+      toast({ title: "Please confirm the transaction details and accept the Donor and Project Funding Terms", variant: "destructive" });
       return;
     }
     setLoading(true);
@@ -90,6 +90,14 @@ export const DonationFormPage = () => {
       });
       if (draftErr) throw draftErr;
       const id = draft as unknown as string;
+
+      // Server-side authoritative acceptance of the Donor and Project Funding Terms.
+      const { error: acceptErr } = await supabase.rpc(
+        "accept_donor_project_funding_terms" as any,
+        { _draft_id: id },
+      );
+      if (acceptErr) throw acceptErr;
+
       const { error: confErr } = await supabase.rpc("donation_confirm_transaction", {
         _draft_id: id,
         _wording_version: WORDING_VERSION,
