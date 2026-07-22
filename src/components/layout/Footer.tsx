@@ -106,6 +106,7 @@ export const Footer = () => {
               <Link to="/legal/terms-of-use" className="hover:text-primary-foreground transition-colors">Terms of Use</Link>
               <Link to="/donor-project-funding-terms" className="hover:text-primary-foreground transition-colors">Funding Terms</Link>
               <Link to="/gift-acceptance-and-restricted-funds-policy" className="hover:text-primary-foreground transition-colors">Gift Acceptance</Link>
+              <Link to="/donor-due-diligence-and-sanctions-policy" className="hover:text-primary-foreground transition-colors">Due Diligence</Link>
               <Link to="/legal/complaints-policy" className="hover:text-primary-foreground transition-colors">Complaints</Link>
               <Link to="/data-access-request" className="hover:text-primary-foreground transition-colors">Data Request</Link>
               <Link to="/preferences" className="hover:text-primary-foreground transition-colors">Communication Preferences</Link>

@@ -1012,6 +1012,431 @@ export type Database = {
           },
         ]
       }
+      donor_dd_cases: {
+        Row: {
+          adviser_details: string | null
+          adviser_involved: boolean
+          amount_minor: number | null
+          case_reference: string
+          created_at: string
+          created_by: string | null
+          currency: string | null
+          decided_at: string | null
+          decided_by: string | null
+          decision: string | null
+          decision_reason: string | null
+          donor_display_name: string
+          donor_type: Database["public"]["Enums"]["dd_donor_type"]
+          donor_user_id: string | null
+          expiry_or_recheck_date: string | null
+          id: string
+          is_anonymous: boolean
+          is_third_party_payer: boolean
+          next_review_due: string | null
+          overall_risk: Database["public"]["Enums"]["dd_risk_level"] | null
+          primary_country: string | null
+          related_donation_id: string | null
+          related_draft_id: string | null
+          related_hvda_id: string | null
+          risk_factors: Json
+          risk_rationale: string | null
+          screening_method: string
+          screening_provider_configured: boolean
+          status: Database["public"]["Enums"]["dd_case_status"]
+          trigger_reason: string | null
+          trustee_escalation_required: boolean
+          updated_at: string
+        }
+        Insert: {
+          adviser_details?: string | null
+          adviser_involved?: boolean
+          amount_minor?: number | null
+          case_reference?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string | null
+          decided_at?: string | null
+          decided_by?: string | null
+          decision?: string | null
+          decision_reason?: string | null
+          donor_display_name: string
+          donor_type?: Database["public"]["Enums"]["dd_donor_type"]
+          donor_user_id?: string | null
+          expiry_or_recheck_date?: string | null
+          id?: string
+          is_anonymous?: boolean
+          is_third_party_payer?: boolean
+          next_review_due?: string | null
+          overall_risk?: Database["public"]["Enums"]["dd_risk_level"] | null
+          primary_country?: string | null
+          related_donation_id?: string | null
+          related_draft_id?: string | null
+          related_hvda_id?: string | null
+          risk_factors?: Json
+          risk_rationale?: string | null
+          screening_method?: string
+          screening_provider_configured?: boolean
+          status?: Database["public"]["Enums"]["dd_case_status"]
+          trigger_reason?: string | null
+          trustee_escalation_required?: boolean
+          updated_at?: string
+        }
+        Update: {
+          adviser_details?: string | null
+          adviser_involved?: boolean
+          amount_minor?: number | null
+          case_reference?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string | null
+          decided_at?: string | null
+          decided_by?: string | null
+          decision?: string | null
+          decision_reason?: string | null
+          donor_display_name?: string
+          donor_type?: Database["public"]["Enums"]["dd_donor_type"]
+          donor_user_id?: string | null
+          expiry_or_recheck_date?: string | null
+          id?: string
+          is_anonymous?: boolean
+          is_third_party_payer?: boolean
+          next_review_due?: string | null
+          overall_risk?: Database["public"]["Enums"]["dd_risk_level"] | null
+          primary_country?: string | null
+          related_donation_id?: string | null
+          related_draft_id?: string | null
+          related_hvda_id?: string | null
+          risk_factors?: Json
+          risk_rationale?: string | null
+          screening_method?: string
+          screening_provider_configured?: boolean
+          status?: Database["public"]["Enums"]["dd_case_status"]
+          trigger_reason?: string | null
+          trustee_escalation_required?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donor_dd_cases_related_donation_id_fkey"
+            columns: ["related_donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "donor_dd_cases_related_draft_id_fkey"
+            columns: ["related_draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "donor_dd_cases_related_hvda_id_fkey"
+            columns: ["related_hvda_id"]
+            isOneToOne: false
+            referencedRelation: "high_value_donation_agreements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      donor_dd_events: {
+        Row: {
+          actor_user_id: string | null
+          case_id: string
+          created_at: string
+          detail: Json
+          event_type: string
+          id: string
+        }
+        Insert: {
+          actor_user_id?: string | null
+          case_id: string
+          created_at?: string
+          detail?: Json
+          event_type: string
+          id?: string
+        }
+        Update: {
+          actor_user_id?: string | null
+          case_id?: string
+          created_at?: string
+          detail?: Json
+          event_type?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donor_dd_events_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "donor_dd_cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      donor_dd_evidence: {
+        Row: {
+          case_id: string
+          detail: string | null
+          document_reference: string | null
+          evidence_type: string
+          id: string
+          obtained_from: string | null
+          proportionality_note: string | null
+          recorded_at: string
+          recorded_by: string | null
+          summary: string
+        }
+        Insert: {
+          case_id: string
+          detail?: string | null
+          document_reference?: string | null
+          evidence_type: string
+          id?: string
+          obtained_from?: string | null
+          proportionality_note?: string | null
+          recorded_at?: string
+          recorded_by?: string | null
+          summary: string
+        }
+        Update: {
+          case_id?: string
+          detail?: string | null
+          document_reference?: string | null
+          evidence_type?: string
+          id?: string
+          obtained_from?: string | null
+          proportionality_note?: string | null
+          recorded_at?: string
+          recorded_by?: string | null
+          summary?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donor_dd_evidence_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "donor_dd_cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      donor_dd_holds: {
+        Row: {
+          amount_minor: number | null
+          case_id: string
+          currency: string | null
+          donation_id: string | null
+          draft_id: string | null
+          id: string
+          placed_at: string
+          placed_by: string | null
+          reason: string
+          release_reason: string | null
+          released_at: string | null
+          released_by: string | null
+          status: Database["public"]["Enums"]["dd_hold_status"]
+        }
+        Insert: {
+          amount_minor?: number | null
+          case_id: string
+          currency?: string | null
+          donation_id?: string | null
+          draft_id?: string | null
+          id?: string
+          placed_at?: string
+          placed_by?: string | null
+          reason: string
+          release_reason?: string | null
+          released_at?: string | null
+          released_by?: string | null
+          status?: Database["public"]["Enums"]["dd_hold_status"]
+        }
+        Update: {
+          amount_minor?: number | null
+          case_id?: string
+          currency?: string | null
+          donation_id?: string | null
+          draft_id?: string | null
+          id?: string
+          placed_at?: string
+          placed_by?: string | null
+          reason?: string
+          release_reason?: string | null
+          released_at?: string | null
+          released_by?: string | null
+          status?: Database["public"]["Enums"]["dd_hold_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donor_dd_holds_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "donor_dd_cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "donor_dd_holds_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "donor_dd_holds_draft_id_fkey"
+            columns: ["draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      donor_dd_identity_records: {
+        Row: {
+          authority_evidence: string | null
+          case_id: string
+          country_of_residence: string | null
+          created_at: string
+          date_of_birth: string | null
+          evidence_document_reference: string | null
+          full_name: string
+          id: string
+          identity_evidence_summary: string | null
+          nationality: string | null
+          notes: string | null
+          organisation_name: string | null
+          organisation_type: string | null
+          ownership_percent: number | null
+          record_type: string
+          registered_address: string | null
+          registration_number: string | null
+          role_or_title: string | null
+          updated_at: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          authority_evidence?: string | null
+          case_id: string
+          country_of_residence?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          evidence_document_reference?: string | null
+          full_name: string
+          id?: string
+          identity_evidence_summary?: string | null
+          nationality?: string | null
+          notes?: string | null
+          organisation_name?: string | null
+          organisation_type?: string | null
+          ownership_percent?: number | null
+          record_type: string
+          registered_address?: string | null
+          registration_number?: string | null
+          role_or_title?: string | null
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          authority_evidence?: string | null
+          case_id?: string
+          country_of_residence?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          evidence_document_reference?: string | null
+          full_name?: string
+          id?: string
+          identity_evidence_summary?: string | null
+          nationality?: string | null
+          notes?: string | null
+          organisation_name?: string | null
+          organisation_type?: string | null
+          ownership_percent?: number | null
+          record_type?: string
+          registered_address?: string | null
+          registration_number?: string | null
+          role_or_title?: string | null
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donor_dd_identity_records_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "donor_dd_cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      donor_dd_screening: {
+        Row: {
+          case_id: string
+          created_at: string
+          evidence_reference: string | null
+          false_positive_reason: string | null
+          id: string
+          identity_record_id: string | null
+          match_details: string | null
+          method: string
+          performed_at: string
+          performed_by: string | null
+          provider: string | null
+          recheck_due: string | null
+          result: Database["public"]["Enums"]["dd_screening_result"]
+          screening_type: Database["public"]["Enums"]["dd_screening_type"]
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          evidence_reference?: string | null
+          false_positive_reason?: string | null
+          id?: string
+          identity_record_id?: string | null
+          match_details?: string | null
+          method?: string
+          performed_at?: string
+          performed_by?: string | null
+          provider?: string | null
+          recheck_due?: string | null
+          result?: Database["public"]["Enums"]["dd_screening_result"]
+          screening_type: Database["public"]["Enums"]["dd_screening_type"]
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          evidence_reference?: string | null
+          false_positive_reason?: string | null
+          id?: string
+          identity_record_id?: string | null
+          match_details?: string | null
+          method?: string
+          performed_at?: string
+          performed_by?: string | null
+          provider?: string | null
+          recheck_due?: string | null
+          result?: Database["public"]["Enums"]["dd_screening_result"]
+          screening_type?: Database["public"]["Enums"]["dd_screening_type"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donor_dd_screening_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "donor_dd_cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "donor_dd_screening_identity_record_id_fkey"
+            columns: ["identity_record_id"]
+            isOneToOne: false
+            referencedRelation: "donor_dd_identity_records"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       email_unsubscribe_public_tokens: {
         Row: {
           channel_code: string | null
@@ -5647,6 +6072,7 @@ export type Database = {
         Args: { _project_id: string; _user_id: string }
         Returns: boolean
       }
+      can_manage_donor_dd: { Args: { _user_id: string }; Returns: boolean }
       can_manage_gift_proposals: {
         Args: { _user_id: string }
         Returns: boolean
@@ -5704,6 +6130,59 @@ export type Database = {
           version_id: string
           version_number: number
         }[]
+      }
+      dd_open_case: {
+        Args: {
+          _amount_minor: number
+          _currency: string
+          _donor_display_name: string
+          _donor_type: Database["public"]["Enums"]["dd_donor_type"]
+          _donor_user_id?: string
+          _is_anonymous?: boolean
+          _is_third_party_payer?: boolean
+          _primary_country: string
+          _related_donation_id?: string
+          _related_draft_id?: string
+          _related_hvda_id?: string
+          _trigger_reason: string
+        }
+        Returns: string
+      }
+      dd_place_hold: {
+        Args: {
+          _amount_minor?: number
+          _case_id: string
+          _currency?: string
+          _donation_id?: string
+          _draft_id?: string
+          _reason: string
+        }
+        Returns: string
+      }
+      dd_record_decision: {
+        Args: { _case_id: string; _decision: string; _decision_reason: string }
+        Returns: undefined
+      }
+      dd_release_hold: {
+        Args: {
+          _final_status?: Database["public"]["Enums"]["dd_hold_status"]
+          _hold_id: string
+          _release_reason: string
+        }
+        Returns: undefined
+      }
+      dd_set_risk_and_status: {
+        Args: {
+          _case_id: string
+          _expiry_or_recheck_date: string
+          _next_review_due: string
+          _overall_risk: Database["public"]["Enums"]["dd_risk_level"]
+          _risk_factors: Json
+          _risk_rationale: string
+          _status: Database["public"]["Enums"]["dd_case_status"]
+          _trustee_escalation_required: boolean
+        }
+        Returns: undefined
       }
       donation_calculate_allocation: {
         Args: { _amount_minor: number }
@@ -5811,6 +6290,7 @@ export type Database = {
       }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
       generate_bank_transfer_reference: { Args: never; Returns: string }
+      generate_dd_case_reference: { Args: never; Returns: string }
       generate_gdpr_reference: { Args: never; Returns: string }
       generate_gift_proposal_reference: { Args: never; Returns: string }
       generate_hold_reference: { Args: never; Returns: string }
@@ -6190,6 +6670,36 @@ export type Database = {
         | "shared_project"
         | "safeguarding_restricted"
         | "finance_restricted"
+      dd_case_status:
+        | "draft"
+        | "information_requested"
+        | "under_review"
+        | "trustee_escalation"
+        | "approved"
+        | "declined"
+        | "returned"
+        | "on_hold"
+        | "closed"
+      dd_donor_type:
+        | "individual"
+        | "organisation"
+        | "trust"
+        | "estate"
+        | "anonymous"
+        | "third_party_payer"
+      dd_hold_status:
+        | "active"
+        | "released"
+        | "converted_to_return"
+        | "converted_to_decline"
+      dd_risk_level: "low" | "medium" | "high" | "prohibited_or_escalated"
+      dd_screening_result:
+        | "clear"
+        | "possible_match"
+        | "confirmed_match"
+        | "false_positive"
+        | "not_performed"
+      dd_screening_type: "sanctions" | "pep" | "adverse_media" | "watchlist"
       donation_frequency: "one_time" | "monthly" | "quarterly" | "annually"
       donation_purpose:
         | "healthcare_access"
@@ -6508,6 +7018,40 @@ export const Constants = {
         "safeguarding_restricted",
         "finance_restricted",
       ],
+      dd_case_status: [
+        "draft",
+        "information_requested",
+        "under_review",
+        "trustee_escalation",
+        "approved",
+        "declined",
+        "returned",
+        "on_hold",
+        "closed",
+      ],
+      dd_donor_type: [
+        "individual",
+        "organisation",
+        "trust",
+        "estate",
+        "anonymous",
+        "third_party_payer",
+      ],
+      dd_hold_status: [
+        "active",
+        "released",
+        "converted_to_return",
+        "converted_to_decline",
+      ],
+      dd_risk_level: ["low", "medium", "high", "prohibited_or_escalated"],
+      dd_screening_result: [
+        "clear",
+        "possible_match",
+        "confirmed_match",
+        "false_positive",
+        "not_performed",
+      ],
+      dd_screening_type: ["sanctions", "pep", "adverse_media", "watchlist"],
       donation_frequency: ["one_time", "monthly", "quarterly", "annually"],
       donation_purpose: [
         "healthcare_access",
