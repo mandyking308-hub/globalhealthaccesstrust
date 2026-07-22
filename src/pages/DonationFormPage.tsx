@@ -38,7 +38,9 @@ export const DonationFormPage = () => {
 
   const [draftId, setDraftId] = useState<string | null>(null);
   const [transferReference, setTransferReference] = useState<string | null>(null);
-  const [stripeUnavailableMsg, setStripeUnavailableMsg] = useState<string | null>(null);
+  const [bankDetails, setBankDetails] = useState<any>(null);
+  const [gcAvailable, setGcAvailable] = useState<boolean | null>(null);
+  const [gcMsg, setGcMsg] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -48,6 +50,7 @@ export const DonationFormPage = () => {
       }
       setUserId(session.user.id);
     });
+    supabase.rpc("gocardless_enabled").then(({ data }) => setGcAvailable(Boolean(data)));
   }, [navigate]);
 
   const amountMinor = Math.round(parseFloat(amountGBP || "0") * 100);
@@ -100,12 +103,12 @@ export const DonationFormPage = () => {
     }
   };
 
-  const chooseCard = async () => {
+  const chooseGoCardless = async () => {
     if (!draftId) return;
     setLoading(true);
-    setStripeUnavailableMsg(null);
+    setGcMsg(null);
     try {
-      const { data, error } = await supabase.functions.invoke("create-donation-checkout", {
+      const { data, error } = await supabase.functions.invoke("gocardless-create-flow", {
         body: { draft_id: draftId },
       });
       if (error) throw error;
@@ -113,13 +116,13 @@ export const DonationFormPage = () => {
         window.location.href = data.url;
         return;
       }
-      setStripeUnavailableMsg(
+      setGcMsg(
         data?.message ||
-          "Secure card payment is currently unavailable. Please use bank transfer, or contact the Trust."
+          "Direct Debit setup is not yet available. You may use secure bank transfer or return later.",
       );
     } catch (err: any) {
-      setStripeUnavailableMsg(
-        "Secure card payment is currently unavailable. Please use bank transfer, or contact the Trust."
+      setGcMsg(
+        "Direct Debit setup is not yet available. You may use secure bank transfer or return later.",
       );
     } finally {
       setLoading(false);
@@ -133,6 +136,9 @@ export const DonationFormPage = () => {
       const { data, error } = await supabase.rpc("donation_request_bank_transfer", { _draft_id: draftId });
       if (error) throw error;
       setTransferReference(data as unknown as string);
+      const { data: bd } = await supabase.rpc("donor_get_bank_details", { _draft_id: draftId });
+      const row = Array.isArray(bd) ? bd[0] : bd;
+      if (row?.show_details) setBankDetails(row);
       setStep("instructions");
     } catch (err: any) {
       toast({ title: "Unable to request bank transfer", description: err.message, variant: "destructive" });
