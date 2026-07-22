@@ -160,6 +160,7 @@ const App = () => (
             <Route path="ai" element={<AdminAIPage />} />
             <Route path="security" element={<AdminSecurityPage />} />
             <Route path="gdpr" element={<AdminGDPRPage />} />
+            <Route path="privacy-governance" element={<AdminPrivacyGovernancePage />} />
             <Route path="testing" element={<AdminTestingChecklistPage />} />
             <Route path="documentation" element={<AdminDocumentationPage />} />
             <Route path="presentations" element={<AdminPresentationsPage />} />
