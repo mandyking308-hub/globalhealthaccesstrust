@@ -236,16 +236,7 @@ export const VolunteerDashboardPage = () => {
             </TabsContent>
 
             <TabsContent value="my-projects">
-              <Card>
-                <CardHeader>
-                  <CardTitle>My Assigned Projects</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-center py-12">
-                    No projects assigned yet. Check the Available Projects tab to request assignments.
-                  </p>
-                </CardContent>
-              </Card>
+              <VolunteerAssignedProjects volunteerId={volunteer.id} />
             </TabsContent>
 
             <TabsContent value="messages">
