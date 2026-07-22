@@ -167,6 +167,14 @@ export const DataAccessRequestPage = () => {
                     required minLength={5} />
                 </div>
 
+                {/* Honeypot — leave empty. Hidden from real users and assistive tech. */}
+                <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", height: 0, overflow: "hidden" }}>
+                  <label htmlFor="website">Website (leave blank)</label>
+                  <input id="website" type="text" tabIndex={-1} autoComplete="off"
+                    value={website} onChange={e => setWebsite(e.target.value)} />
+                </div>
+
+
                 {requestType === "erasure" && (
                   <Alert variant="destructive">
                     <AlertDescription>
