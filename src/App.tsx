@@ -75,6 +75,8 @@ import { DonationSuccessPage } from "./pages/DonationSuccessPage";
 import { DonationCancelledPage } from "./pages/DonationCancelledPage";
 import AdminPaymentsPage from "./pages/admin/AdminPaymentsPage";
 import AdminHighValueAgreementsPage from "./pages/admin/AdminHighValueAgreementsPage";
+import AdminGiftAcceptancePage from "./pages/admin/AdminGiftAcceptancePage";
+import GiftAcceptancePolicyPage from "./pages/GiftAcceptancePolicyPage";
 
 const queryClient = new QueryClient();
 
@@ -145,6 +147,7 @@ const App = () => (
           <Route path="legal" element={<LegalIndexPage />} />
           <Route path="legal/:slug" element={<LegalDocumentPage />} />
           <Route path="donor-project-funding-terms" element={<DonorFundingTermsPage />} />
+          <Route path="gift-acceptance-and-restricted-funds-policy" element={<GiftAcceptancePolicyPage />} />
         </Route>
         
           {/* Donor Portal Routes (outside Layout - full page) */}
@@ -184,6 +187,7 @@ const App = () => (
             <Route path="legal" element={<AdminLegalPage />} />
             <Route path="payments" element={<AdminPaymentsPage />} />
             <Route path="high-value-agreements" element={<AdminHighValueAgreementsPage />} />
+            <Route path="gift-acceptance" element={<AdminGiftAcceptancePage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
 
           </Route>

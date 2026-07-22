@@ -1296,6 +1296,177 @@ export type Database = {
         }
         Relationships: []
       }
+      gift_proposal_events: {
+        Row: {
+          actor_role: string
+          actor_user_id: string
+          created_at: string
+          detail: Json
+          event_type: string
+          id: string
+          proposal_id: string
+        }
+        Insert: {
+          actor_role?: string
+          actor_user_id: string
+          created_at?: string
+          detail?: Json
+          event_type: string
+          id?: string
+          proposal_id: string
+        }
+        Update: {
+          actor_role?: string
+          actor_user_id?: string
+          created_at?: string
+          detail?: Json
+          event_type?: string
+          id?: string
+          proposal_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gift_proposal_events_proposal_id_fkey"
+            columns: ["proposal_id"]
+            isOneToOne: false
+            referencedRelation: "gift_proposals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      gift_proposals: {
+        Row: {
+          accepted_at: string | null
+          accepted_restriction_purpose: string | null
+          accepted_restriction_wording: string | null
+          amount_minor: number | null
+          classification: Database["public"]["Enums"]["gift_proposal_classification"]
+          closed_at: string | null
+          created_at: string
+          currency: string
+          decided_at: string | null
+          decided_by: string | null
+          decision: Database["public"]["Enums"]["gift_proposal_decision"]
+          decision_conditions: string | null
+          decision_reason: string | null
+          donor_display_name: string | null
+          donor_preference_is_binding: boolean
+          donor_preference_notes: string | null
+          donor_user_id: string | null
+          due_diligence_notes: string | null
+          financial_review_notes: string | null
+          gift_type: Database["public"]["Enums"]["gift_proposal_gift_type"]
+          hvda_agreement_id: string | null
+          id: string
+          non_cash_description: string | null
+          opened_by: string | null
+          project_feasibility_notes: string | null
+          proposed_restriction_purpose: string | null
+          proposed_restriction_wording: string | null
+          reference: string | null
+          related_donation_draft_id: string | null
+          related_donation_id: string | null
+          related_project_id: string | null
+          risk_flags: Json
+          status: Database["public"]["Enums"]["gift_proposal_status"]
+          updated_at: string
+        }
+        Insert: {
+          accepted_at?: string | null
+          accepted_restriction_purpose?: string | null
+          accepted_restriction_wording?: string | null
+          amount_minor?: number | null
+          classification?: Database["public"]["Enums"]["gift_proposal_classification"]
+          closed_at?: string | null
+          created_at?: string
+          currency?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          decision?: Database["public"]["Enums"]["gift_proposal_decision"]
+          decision_conditions?: string | null
+          decision_reason?: string | null
+          donor_display_name?: string | null
+          donor_preference_is_binding?: boolean
+          donor_preference_notes?: string | null
+          donor_user_id?: string | null
+          due_diligence_notes?: string | null
+          financial_review_notes?: string | null
+          gift_type?: Database["public"]["Enums"]["gift_proposal_gift_type"]
+          hvda_agreement_id?: string | null
+          id?: string
+          non_cash_description?: string | null
+          opened_by?: string | null
+          project_feasibility_notes?: string | null
+          proposed_restriction_purpose?: string | null
+          proposed_restriction_wording?: string | null
+          reference?: string | null
+          related_donation_draft_id?: string | null
+          related_donation_id?: string | null
+          related_project_id?: string | null
+          risk_flags?: Json
+          status?: Database["public"]["Enums"]["gift_proposal_status"]
+          updated_at?: string
+        }
+        Update: {
+          accepted_at?: string | null
+          accepted_restriction_purpose?: string | null
+          accepted_restriction_wording?: string | null
+          amount_minor?: number | null
+          classification?: Database["public"]["Enums"]["gift_proposal_classification"]
+          closed_at?: string | null
+          created_at?: string
+          currency?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          decision?: Database["public"]["Enums"]["gift_proposal_decision"]
+          decision_conditions?: string | null
+          decision_reason?: string | null
+          donor_display_name?: string | null
+          donor_preference_is_binding?: boolean
+          donor_preference_notes?: string | null
+          donor_user_id?: string | null
+          due_diligence_notes?: string | null
+          financial_review_notes?: string | null
+          gift_type?: Database["public"]["Enums"]["gift_proposal_gift_type"]
+          hvda_agreement_id?: string | null
+          id?: string
+          non_cash_description?: string | null
+          opened_by?: string | null
+          project_feasibility_notes?: string | null
+          proposed_restriction_purpose?: string | null
+          proposed_restriction_wording?: string | null
+          reference?: string | null
+          related_donation_draft_id?: string | null
+          related_donation_id?: string | null
+          related_project_id?: string | null
+          risk_flags?: Json
+          status?: Database["public"]["Enums"]["gift_proposal_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gift_proposals_hvda_agreement_id_fkey"
+            columns: ["hvda_agreement_id"]
+            isOneToOne: false
+            referencedRelation: "high_value_donation_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gift_proposals_related_donation_id_fkey"
+            columns: ["related_donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gift_proposals_related_project_id_fkey"
+            columns: ["related_project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       high_value_donation_agreements: {
         Row: {
           closed_at: string | null
@@ -4607,6 +4778,150 @@ export type Database = {
           },
         ]
       }
+      restricted_funds_ledger: {
+        Row: {
+          accepted_restriction: string
+          allocated_minor: number
+          approval_reference: string
+          approved_at: string
+          approved_by: string
+          committed_minor: number
+          created_at: string
+          currency: string
+          donation_id: string | null
+          gift_proposal_id: string | null
+          id: string
+          notes: string | null
+          original_amount_minor: number
+          purpose: string
+          reallocated_minor: number
+          reference: string | null
+          refunded_minor: number
+          related_project_id: string | null
+          remaining_minor: number | null
+          spent_minor: number
+          status: Database["public"]["Enums"]["restricted_fund_status"]
+          updated_at: string
+        }
+        Insert: {
+          accepted_restriction: string
+          allocated_minor?: number
+          approval_reference: string
+          approved_at?: string
+          approved_by: string
+          committed_minor?: number
+          created_at?: string
+          currency?: string
+          donation_id?: string | null
+          gift_proposal_id?: string | null
+          id?: string
+          notes?: string | null
+          original_amount_minor: number
+          purpose: string
+          reallocated_minor?: number
+          reference?: string | null
+          refunded_minor?: number
+          related_project_id?: string | null
+          remaining_minor?: number | null
+          spent_minor?: number
+          status?: Database["public"]["Enums"]["restricted_fund_status"]
+          updated_at?: string
+        }
+        Update: {
+          accepted_restriction?: string
+          allocated_minor?: number
+          approval_reference?: string
+          approved_at?: string
+          approved_by?: string
+          committed_minor?: number
+          created_at?: string
+          currency?: string
+          donation_id?: string | null
+          gift_proposal_id?: string | null
+          id?: string
+          notes?: string | null
+          original_amount_minor?: number
+          purpose?: string
+          reallocated_minor?: number
+          reference?: string | null
+          refunded_minor?: number
+          related_project_id?: string | null
+          remaining_minor?: number | null
+          spent_minor?: number
+          status?: Database["public"]["Enums"]["restricted_fund_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "restricted_funds_ledger_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "restricted_funds_ledger_gift_proposal_id_fkey"
+            columns: ["gift_proposal_id"]
+            isOneToOne: false
+            referencedRelation: "gift_proposals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "restricted_funds_ledger_related_project_id_fkey"
+            columns: ["related_project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      restricted_funds_ledger_changes: {
+        Row: {
+          actor_user_id: string
+          after_snapshot: Json
+          approval_reference: string | null
+          before_snapshot: Json
+          change_type: Database["public"]["Enums"]["restricted_fund_change_type"]
+          created_at: string
+          delta_amount_minor: number
+          id: string
+          ledger_id: string
+          reason: string
+        }
+        Insert: {
+          actor_user_id: string
+          after_snapshot: Json
+          approval_reference?: string | null
+          before_snapshot: Json
+          change_type: Database["public"]["Enums"]["restricted_fund_change_type"]
+          created_at?: string
+          delta_amount_minor?: number
+          id?: string
+          ledger_id: string
+          reason: string
+        }
+        Update: {
+          actor_user_id?: string
+          after_snapshot?: Json
+          approval_reference?: string | null
+          before_snapshot?: Json
+          change_type?: Database["public"]["Enums"]["restricted_fund_change_type"]
+          created_at?: string
+          delta_amount_minor?: number
+          id?: string
+          ledger_id?: string
+          reason?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "restricted_funds_ledger_changes_ledger_id_fkey"
+            columns: ["ledger_id"]
+            isOneToOne: false
+            referencedRelation: "restricted_funds_ledger"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rights_request_rate_limits: {
         Row: {
           contact_hash: string
@@ -5332,6 +5647,10 @@ export type Database = {
         Args: { _project_id: string; _user_id: string }
         Returns: boolean
       }
+      can_manage_gift_proposals: {
+        Args: { _user_id: string }
+        Returns: boolean
+      }
       can_manage_hvda: { Args: { _user_id: string }; Returns: boolean }
       compute_project_health: {
         Args: { _project_id: string }
@@ -5493,12 +5812,55 @@ export type Database = {
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
       generate_bank_transfer_reference: { Args: never; Returns: string }
       generate_gdpr_reference: { Args: never; Returns: string }
+      generate_gift_proposal_reference: { Args: never; Returns: string }
       generate_hold_reference: { Args: never; Returns: string }
       generate_hvda_reference: { Args: never; Returns: string }
       generate_receipt_reference: { Args: never; Returns: string }
+      generate_restricted_fund_reference: { Args: never; Returns: string }
       generate_review_reference: { Args: never; Returns: string }
       generate_service_request_reference: { Args: never; Returns: string }
       generate_transfer_reference: { Args: never; Returns: string }
+      gift_proposal_create: {
+        Args: {
+          _amount_minor: number
+          _currency: string
+          _donor_display_name: string
+          _donor_preference_notes: string
+          _donor_user_id: string
+          _gift_type: Database["public"]["Enums"]["gift_proposal_gift_type"]
+          _non_cash_description: string
+          _related_draft_id: string
+          _related_project_id: string
+        }
+        Returns: string
+      }
+      gift_proposal_trustee_decision: {
+        Args: {
+          _accepted_restriction_purpose: string
+          _accepted_restriction_wording: string
+          _approval_reference: string
+          _decision: Database["public"]["Enums"]["gift_proposal_decision"]
+          _decision_conditions: string
+          _decision_reason: string
+          _proposal_id: string
+          _related_donation_id: string
+        }
+        Returns: string
+      }
+      gift_proposal_update_workflow: {
+        Args: {
+          _classification: Database["public"]["Enums"]["gift_proposal_classification"]
+          _due_diligence_notes: string
+          _financial_review_notes: string
+          _project_feasibility_notes: string
+          _proposal_id: string
+          _proposed_restriction_purpose: string
+          _proposed_restriction_wording: string
+          _risk_flags: Json
+          _status: Database["public"]["Enums"]["gift_proposal_status"]
+        }
+        Returns: undefined
+      }
       gocardless_enabled: { Args: never; Returns: boolean }
       gocardless_prepare_arrangement: {
         Args: { _draft_id: string }
@@ -5622,6 +5984,16 @@ export type Database = {
       resolve_service_request: {
         Args: { _category: string; _request_id: string; _summary: string }
         Returns: undefined
+      }
+      restricted_fund_record_change: {
+        Args: {
+          _approval_reference: string
+          _change_type: Database["public"]["Enums"]["restricted_fund_change_type"]
+          _delta_amount_minor: number
+          _ledger_id: string
+          _reason: string
+        }
+        Returns: string
       }
       retention_review_blocking_hold: {
         Args: { _review_id: string }
@@ -5825,6 +6197,39 @@ export type Database = {
         | "research_policy"
         | "professional_education"
         | "where_most_needed"
+      gift_proposal_classification:
+        | "unclassified"
+        | "unrestricted"
+        | "restricted"
+        | "high_value"
+        | "refused"
+      gift_proposal_decision:
+        | "pending"
+        | "accept"
+        | "accept_with_conditions"
+        | "refuse"
+        | "return"
+        | "reallocate"
+        | "suspend"
+        | "hold"
+      gift_proposal_gift_type:
+        | "cash"
+        | "electronic_payment"
+        | "direct_debit"
+        | "bank_transfer"
+        | "foreign_currency"
+        | "non_cash"
+        | "conditional"
+        | "anonymous"
+        | "third_party"
+        | "other"
+      gift_proposal_status:
+        | "draft"
+        | "under_review"
+        | "pending_decision"
+        | "decided"
+        | "actioned"
+        | "closed"
       hvda_approval_decision:
         | "approved"
         | "changes_requested"
@@ -5873,6 +6278,22 @@ export type Database = {
         | "on_hold"
         | "completed"
         | "cancelled"
+      restricted_fund_change_type:
+        | "open"
+        | "allocate"
+        | "commit"
+        | "spend"
+        | "refund"
+        | "reallocate"
+        | "approve"
+        | "amend"
+        | "close"
+      restricted_fund_status:
+        | "active"
+        | "fully_spent"
+        | "reallocated"
+        | "refunded"
+        | "closed"
       service_comment_type:
         | "requester_comment"
         | "trust_response"
@@ -6095,6 +6516,43 @@ export const Constants = {
         "professional_education",
         "where_most_needed",
       ],
+      gift_proposal_classification: [
+        "unclassified",
+        "unrestricted",
+        "restricted",
+        "high_value",
+        "refused",
+      ],
+      gift_proposal_decision: [
+        "pending",
+        "accept",
+        "accept_with_conditions",
+        "refuse",
+        "return",
+        "reallocate",
+        "suspend",
+        "hold",
+      ],
+      gift_proposal_gift_type: [
+        "cash",
+        "electronic_payment",
+        "direct_debit",
+        "bank_transfer",
+        "foreign_currency",
+        "non_cash",
+        "conditional",
+        "anonymous",
+        "third_party",
+        "other",
+      ],
+      gift_proposal_status: [
+        "draft",
+        "under_review",
+        "pending_decision",
+        "decided",
+        "actioned",
+        "closed",
+      ],
       hvda_approval_decision: [
         "approved",
         "changes_requested",
@@ -6148,6 +6606,24 @@ export const Constants = {
         "on_hold",
         "completed",
         "cancelled",
+      ],
+      restricted_fund_change_type: [
+        "open",
+        "allocate",
+        "commit",
+        "spend",
+        "refund",
+        "reallocate",
+        "approve",
+        "amend",
+        "close",
+      ],
+      restricted_fund_status: [
+        "active",
+        "fully_spent",
+        "reallocated",
+        "refunded",
+        "closed",
       ],
       service_comment_type: [
         "requester_comment",
