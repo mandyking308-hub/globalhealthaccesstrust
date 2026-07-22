@@ -519,7 +519,30 @@ const RightsTab = () => {
                     <div><strong>Due:</strong> {fmt(detail.due_at)}</div>
                     <div><strong>Extended due:</strong> {fmt(detail.extended_due_at)}</div>
                   </div>
+
+                  {(() => {
+                    const warns: string[] = [];
+                    const eff = detail.extended_due_at ?? detail.due_at;
+                    if (eff) {
+                      const ms = new Date(eff).getTime() - Date.now();
+                      const days = ms / 86400000;
+                      if (days < 0) warns.push("Overdue");
+                      else if (days < 3) warns.push("Due within 3 days");
+                      else if (days < 7) warns.push("Due within 7 days");
+                    }
+                    if (detail.extension_applied && !detail.extension_notified_at) warns.push("Extension applied but notification not recorded");
+                    if (detail.identity_status === "requested" && !detail.identity_verified_at) warns.push("Identity requested but not resolved");
+                    if (detail.clock_paused_at && !detail.pause_reason) warns.push("Clock paused without a reason");
+                    if (["completed","refused","refused_in_part"].includes(detail.status) && !detail.secure_delivery_method) warns.push("Completed without secure-delivery information");
+                    return warns.length ? (
+                      <div className="rounded border border-amber-300 bg-amber-50 p-3 text-sm">
+                        <strong>Attention:</strong> {warns.join(" · ")}
+                      </div>
+                    ) : null;
+                  })()}
+
                   <div><Label>Request description</Label><Textarea readOnly value={detail.request_details ?? ""} rows={3} /></div>
+
 
                   <div className="flex flex-wrap gap-2">
                     <Button size="sm" variant="outline" onClick={() => patch({ identity_status: "requested", identity_requested_at: new Date().toISOString() }, "identity_requested")}>Request identity</Button>
