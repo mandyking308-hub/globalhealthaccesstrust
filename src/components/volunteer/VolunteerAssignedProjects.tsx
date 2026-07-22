@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
+import { ProjectMessagesThread } from "@/components/project/ProjectMessagesThread";
 
 type Assignment = {
   id: string;
