@@ -3,99 +3,61 @@ import { Button } from "@/components/ui/button";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
-export const SupportTheTrustPage = () => {
-  return (
-    <ContentLayout>
-      <SEO
-        title="Support the Trust"
-        description="The Global Health Access Trust engages with donors, institutions, and partners through a structured and selective process aligned with its governance and funding mandate."
-        canonical="/support-the-trust"
-      />
-      <h1>Support the Trust</h1>
-      
-      <p className="featured-text">"The Trust engages with a limited number of aligned partners through a structured process. Participation is based on alignment, scope, and the ability to deploy capital effectively within defined areas of intervention."</p>
+export const SupportTheTrustPage = () => (
+  <ContentLayout>
+    <SEO
+      title="Support the Trust"
+      description="How prospective supporters and partners may make an initial, governed enquiry to Global Health Access Trust."
+      canonical="/support-the-trust"
+    />
+    <h1>Support the Trust</h1>
+    <p className="featured-text">Initial engagement first. Verified banking and trustee approval before funds are accepted.</p>
 
-      <p>The Global Health Access Trust does not operate an open funding model. All funding relationships are established through a selective engagement process to ensure alignment with the Trust's mandate, governance framework, and charitable objectives.</p>
+    <p>
+      Global Health Access Trust welcomes enquiries from individuals, professional advisers, family offices, foundations, institutions and organisations whose interests align with its charitable purposes.
+    </p>
+    <p>
+      The Trustees are applying for a UK bank account in the legal name Global Health Access Trust. This page is an enquiry route, not an active payment request. No public bank details are displayed and no payment channel should be treated as active until verified and approved.
+    </p>
 
-      <div className="section-container">
-        <h2>Engagement Process</h2>
-        <p>Support for the Trust follows a defined pathway designed to ensure governance, transparency, and alignment with our charitable objectives.</p>
-      </div>
+    <div className="section-container">
+      <h2>Engagement process</h2>
+      <ol className="space-y-4">
+        <li><strong>1. Initial enquiry:</strong> submit a secure form explaining the proposed support or relationship.</li>
+        <li><strong>2. Trustee and compliance review:</strong> the Trust considers charitable fit, authority, conflicts, source of funds, sanctions, safeguarding and operational risk where relevant.</li>
+        <li><strong>3. Written terms:</strong> any accepted restriction, project purpose or material funding arrangement is documented appropriately.</li>
+        <li><strong>4. Verified receipt:</strong> a donation is recorded only after cleared funds have been received and reconciled through an approved account or provider.</li>
+      </ol>
+    </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-        <div className="section-container">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 1</span>
-          <h3 className="my-2 text-foreground">Initial Enquiry</h3>
-          <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Engagement begins through a direct enquiry to the Trust, submitted via the official contact form or through authorised channels.
-          </p>
-        </div>
-        <div className="section-container">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 2</span>
-          <h3 className="my-2 text-foreground">Review &amp; Alignment</h3>
-          <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Each enquiry is assessed to ensure alignment with the Trust's mandate, governance framework, and charitable objectives.
-          </p>
-        </div>
-        <div className="section-container">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 3</span>
-          <h3 className="my-2 text-foreground">Structured Engagement</h3>
-          <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Funding relationships are formalised with defined scope, objectives, and reporting expectations through appropriate legal documentation.
-          </p>
-        </div>
-        <div className="section-container">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 4</span>
-          <h3 className="my-2 text-foreground">Project Deployment</h3>
-          <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Capital is deployed into clearly defined initiatives with ongoing monitoring, accountability, and structured reporting.
-          </p>
-        </div>
-      </div>
+    <div className="section-container">
+      <h2>Restricted gifts and named purposes</h2>
+      <p>
+        A supporter may propose a particular charitable purpose, but any restriction requires trustee approval and clear written terms. A donor preference cannot displace the Trustees' legal responsibility or require the Trust to act outside its Trust Deed.
+      </p>
+      <p>
+        Appropriate alternative-use, return or reallocation provisions may be required if the original purpose becomes impossible, unlawful, unsafe or no longer serves the public benefit.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Legacy Giving</h2>
-        <p><strong>(Bequests Made by Will)</strong></p>
-        <p>A gift in your will ensures your values endure beyond your lifetime. The following sample wording may be used with your solicitor:</p>
-        <p className="featured-text">"I give [the sum of £____ / ___% of my residuary estate] to the Global Health Access Trust, a charitable trust established under the laws of England and Wales, with correspondence at 2 Harley Street, London, for its general charitable purposes. I declare that the receipt of the Chair of Trustees or other authorised officer shall be full discharge to my executors."</p>
-        <p>We welcome confidential engagement with legal representatives and estate planners to ensure your wishes are honoured with the dignity they deserve.</p>
-      </div>
+    <div className="section-container">
+      <h2>Legacy enquiries</h2>
+      <p>
+        Executors, solicitors and individuals considering a legacy may contact the Trust privately. No sample will wording on this website should be used without independent legal advice and confirmation that the Trust's current legal and banking particulars are correct at the time of execution.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Restricted Gifts &amp; Named Funds</h2>
-        <p>Support may also be directed to a specific area of charitable interest, subject to formal agreement.</p>
-        <p>Restricted gifts must:</p>
-        <ul>
-          <li>Align with the charitable objectives of the Trust</li>
-          <li>Be formally documented via Deed of Gift or Memorandum of Understanding</li>
-          <li>Include a clause of reversion in the event the original purpose becomes obsolete, unlawful, or no longer serves the public benefit</li>
-        </ul>
-      </div>
+    <div className="section-container">
+      <h2>Gift Aid and receipts</h2>
+      <p>
+        The Trust does not currently operate Gift Aid. A receipt or acknowledgement will be issued only after a payment has been verified and reconciled. A pledge, mandate or pending transfer is not a completed donation.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Founding Benefactors &amp; Endowments</h2>
-        <p>Individuals, family offices, and foundations who engage at scale may be invited to become Founding Benefactors of the Trust, subject to Board approval.</p>
-        <p>At no stage may benefactors exert influence over governance, grant-making, or strategy. The Trust remains strictly independent.</p>
-      </div>
-
-      <div className="section-container">
-        <h2>Documentation &amp; Stewardship</h2>
-        <p>Every contribution is:</p>
-        <ul>
-          <li>Logged, receipted, and formally acknowledged</li>
-          <li>Applied only to charitable purposes under law</li>
-          <li>Reported in annual governance and financial disclosures</li>
-        </ul>
-        <p>No supporter shall receive private benefit or inducement, and no contribution shall override the Trust's fiduciary independence.</p>
-      </div>
-
-      <div className="text-center mt-10">
-        <Link to="/contact">
-          <Button size="lg" variant="default">
-            Request Private Engagement
-          </Button>
-        </Link>
-      </div>
-    </ContentLayout>
-  );
-};
+    <div className="text-center mt-10">
+      <Button asChild size="lg">
+        <Link to="/contact-the-trust">Make a Secure Enquiry</Link>
+      </Button>
+    </div>
+  </ContentLayout>
+);
