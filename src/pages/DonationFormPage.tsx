@@ -276,18 +276,25 @@ export const DonationFormPage = () => {
                   </AlertDescription>
                 </Alert>
               )}
-              {stripeUnavailableMsg && (
+              {gcMsg && (
                 <Alert variant="destructive">
-                  <AlertDescription>{stripeUnavailableMsg}</AlertDescription>
+                  <AlertDescription>{gcMsg}</AlertDescription>
                 </Alert>
               )}
               <div className="grid md:grid-cols-2 gap-4">
-                <Button variant="outline" className="h-24 flex-col" onClick={chooseCard} disabled={loading}>
-                  <span className="font-semibold">Secure card payment</span>
-                  <span className="text-xs text-muted-foreground">via Stripe Checkout</span>
+                <Button
+                  variant="outline"
+                  className="h-24 flex-col"
+                  onClick={chooseGoCardless}
+                  disabled={loading || gcAvailable === false}
+                >
+                  <span className="font-semibold">Direct Debit</span>
+                  <span className="text-xs text-muted-foreground">
+                    {gcAvailable === false ? "Not yet available" : "GoCardless-hosted authorisation"}
+                  </span>
                 </Button>
                 <Button variant="outline" className="h-24 flex-col" onClick={chooseBankTransfer} disabled={loading}>
-                  <span className="font-semibold">Request bank transfer</span>
+                  <span className="font-semibold">Bank transfer</span>
                   <span className="text-xs text-muted-foreground">Instructions issued with reference</span>
                 </Button>
               </div>
