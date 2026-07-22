@@ -91,13 +91,17 @@ export type Database = {
       }
       commissioned_projects: {
         Row: {
+          approved_at: string | null
+          approved_by: string | null
           budget_range: string
           country: string
           created_at: string
+          currency: string
           dedication: string | null
           description: string
           donor_id: string
           end_date: string | null
+          funding_target: number | null
           id: string
           project_type: string
           region: string
@@ -108,13 +112,17 @@ export type Database = {
           urgency: string
         }
         Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
           budget_range: string
           country: string
           created_at?: string
+          currency?: string
           dedication?: string | null
           description: string
           donor_id: string
           end_date?: string | null
+          funding_target?: number | null
           id?: string
           project_type: string
           region: string
@@ -125,13 +133,17 @@ export type Database = {
           urgency: string
         }
         Update: {
+          approved_at?: string | null
+          approved_by?: string | null
           budget_range?: string
           country?: string
           created_at?: string
+          currency?: string
           dedication?: string | null
           description?: string
           donor_id?: string
           end_date?: string | null
+          funding_target?: number | null
           id?: string
           project_type?: string
           region?: string
@@ -274,6 +286,7 @@ export type Database = {
           donation_id: string
           id: string
           notes: string | null
+          project_id: string | null
           project_name: string
         }
         Insert: {
@@ -283,6 +296,7 @@ export type Database = {
           donation_id: string
           id?: string
           notes?: string | null
+          project_id?: string | null
           project_name: string
         }
         Update: {
@@ -292,6 +306,7 @@ export type Database = {
           donation_id?: string
           id?: string
           notes?: string | null
+          project_id?: string | null
           project_name?: string
         }
         Relationships: [
@@ -300,6 +315,13 @@ export type Database = {
             columns: ["donation_id"]
             isOneToOne: false
             referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fund_allocations_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
             referencedColumns: ["id"]
           },
         ]
@@ -654,6 +676,91 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      project_expenses: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          currency: string
+          description: string | null
+          id: string
+          incurred_on: string
+          project_id: string
+          receipt_url: string | null
+          recorded_by: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          category: string
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          incurred_on?: string
+          project_id: string
+          receipt_url?: string | null
+          recorded_by?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          currency?: string
+          description?: string | null
+          id?: string
+          incurred_on?: string
+          project_id?: string
+          receipt_url?: string | null
+          recorded_by?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_expenses_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_messages: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          project_id: string
+          sender_id: string
+          sender_role: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          project_id: string
+          sender_id: string
+          sender_role: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          project_id?: string
+          sender_id?: string
+          sender_role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_messages_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       project_milestones: {
         Row: {
@@ -1179,6 +1286,10 @@ export type Database = {
     Functions: {
       anonymize_user_data: {
         Args: { target_user_id: string }
+        Returns: boolean
+      }
+      can_access_project: {
+        Args: { _project_id: string; _user_id: string }
         Returns: boolean
       }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
