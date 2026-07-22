@@ -98,9 +98,11 @@ export const Footer = () => {
         <div className="pt-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div className="flex flex-wrap gap-6 text-[10.5px] font-sans font-black uppercase tracking-[0.22em] text-primary-foreground/60">
-              <Link to="/privacy-policy" className="hover:text-primary-foreground transition-colors">Privacy Policy</Link>
-              <Link to="/cookie-policy" className="hover:text-primary-foreground transition-colors">Cookie Policy</Link>
-              <Link to="/terms-of-use" className="hover:text-primary-foreground transition-colors">Terms of Use</Link>
+              <Link to="/legal" className="hover:text-primary-foreground transition-colors">Legal Centre</Link>
+              <Link to="/legal/privacy-notice" className="hover:text-primary-foreground transition-colors">Privacy Notice</Link>
+              <Link to="/legal/cookie-notice" className="hover:text-primary-foreground transition-colors">Cookie Notice</Link>
+              <Link to="/legal/terms-of-use" className="hover:text-primary-foreground transition-colors">Terms of Use</Link>
+              <Link to="/legal/complaints-policy" className="hover:text-primary-foreground transition-colors">Complaints</Link>
               <Link to="/data-access-request" className="hover:text-primary-foreground transition-colors">Data Request</Link>
             </div>
             <p className="text-[10.5px] font-sans font-black uppercase tracking-[0.22em] text-primary-foreground/60">

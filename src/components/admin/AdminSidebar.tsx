@@ -18,6 +18,7 @@ const menuItems = [
   { title: "Volunteers", url: "/admin/volunteers" },
   { title: "Projects", url: "/admin/projects" },
   { title: "Agreements", url: "/admin/agreements" },
+  { title: "Legal Centre", url: "/admin/legal" },
   { title: "Service Console", url: "/admin/service-console" },
   { title: "Contacts", url: "/admin/contacts" },
   { title: "Evidence", url: "/admin/evidence" },
