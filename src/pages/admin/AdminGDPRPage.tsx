@@ -396,18 +396,58 @@ const HoldsTab = () => {
    7. RETENTION REVIEWS
    ============================================================ */
 const ReviewsTab = () => {
+  const { toast } = useToast();
   const [rows, setRows] = useState<any[]>([]);
-  useEffect(() => { supabase.from("privacy_retention_reviews").select("*").order("review_due_at", { nullsFirst: false }).then(({ data }) => setRows(data ?? [])); }, []);
+  const [busy, setBusy] = useState(false);
+  const load = async () =>
+    setRows((await supabase.from("privacy_retention_reviews").select("*").order("review_due_at", { nullsFirst: false })).data ?? []);
+  useEffect(() => { load(); }, []);
+
+  const decide = async (id: string, decision: string) => {
+    const reason = prompt(`Reason for "${decision}"?`); if (!reason) return;
+    let deferred: string | null = null;
+    if (decision === "defer") {
+      const d = prompt("New review date (YYYY-MM-DD)?"); if (!d) return;
+      deferred = new Date(d).toISOString();
+    }
+    const { error } = await supabase.rpc("rr_review_decide", {
+      _review_id: id, _decision: decision, _decision_reason: reason, _deferred_until: deferred,
+    });
+    if (error) return toast({ title: "Blocked", description: error.message, variant: "destructive" });
+    toast({ title: "Recorded" }); load();
+  };
+
+  const generate = async () => {
+    setBusy(true);
+    const { data, error } = await supabase.rpc("rr_generate_due_review_candidates");
+    setBusy(false);
+    if (error) return toast({ title: "Failed", description: error.message, variant: "destructive" });
+    const created = (data ?? []).filter((r: any) => !r.unmapped).reduce((s: number, r: any) => s + (r.candidates_created ?? 0), 0);
+    const unmapped = (data ?? []).filter((r: any) => r.unmapped).map((r: any) => r.rule_code);
+    toast({
+      title: `Generated ${created} candidate${created === 1 ? "" : "s"}`,
+      description: unmapped.length ? `Not yet mapped: ${unmapped.join(", ")}` : "All mapped categories checked.",
+    });
+    load();
+  };
+
   return (
     <Card>
-      <CardHeader><CardTitle className="font-serif">Retention review queue</CardTitle></CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="font-serif">Retention review queue</CardTitle>
+        <Button onClick={generate} disabled={busy}>{busy ? "Generating…" : "Generate due review candidates"}</Button>
+      </CardHeader>
       <CardContent>
+        <p className="text-sm text-muted-foreground mb-4">
+          Reviews propose an action for an administrator to confirm. Nothing is deleted automatically. Anonymisation or deletion is blocked when an active retention hold applies.
+        </p>
         {rows.length === 0 ? (
-          <p className="text-sm text-muted-foreground">The queue is empty. Reviews are added when records reach the trigger period defined by the retention schedule. Reviews propose an action for a person to confirm; no records are deleted automatically.</p>
+          <p className="text-sm text-muted-foreground">The queue is empty. Use “Generate due review candidates” to populate reviews from mapped categories, or create one from a specific record.</p>
         ) : (
           <Table>
             <TableHeader><TableRow>
-              <TableHead>Reference</TableHead><TableHead>Record</TableHead><TableHead>Due</TableHead><TableHead>Sensitivity</TableHead><TableHead>Status</TableHead>
+              <TableHead>Reference</TableHead><TableHead>Record</TableHead><TableHead>Due</TableHead>
+              <TableHead>Sensitivity</TableHead><TableHead>Status</TableHead><TableHead>Actions</TableHead>
             </TableRow></TableHeader>
             <TableBody>{rows.map(r => (
               <TableRow key={r.id}>
@@ -416,6 +456,18 @@ const ReviewsTab = () => {
                 <TableCell>{fmt(r.review_due_at)}</TableCell>
                 <TableCell><StatusBadge s={r.sensitivity} /></TableCell>
                 <TableCell><StatusBadge s={r.status} /></TableCell>
+                <TableCell className="space-x-1">
+                  {["due","in_review","defer"].includes(r.status) && (
+                    <>
+                      {r.status === "due" && <Button size="sm" variant="outline" onClick={() => decide(r.id, "begin_review")}>Begin</Button>}
+                      <Button size="sm" variant="outline" onClick={() => decide(r.id, "retain")}>Retain</Button>
+                      <Button size="sm" variant="outline" onClick={() => decide(r.id, "defer")}>Defer</Button>
+                      <Button size="sm" variant="outline" onClick={() => decide(r.id, "anonymise_approved")}>Anonymise</Button>
+                      <Button size="sm" variant="destructive" onClick={() => decide(r.id, "delete_approved")}>Delete</Button>
+                      <Button size="sm" variant="outline" onClick={() => decide(r.id, "excluded")}>Exclude</Button>
+                    </>
+                  )}
+                </TableCell>
               </TableRow>
             ))}</TableBody>
           </Table>
@@ -424,6 +476,7 @@ const ReviewsTab = () => {
     </Card>
   );
 };
+
 
 /* ============================================================
    8. RIGHTS REQUESTS (extended gdpr_requests)
