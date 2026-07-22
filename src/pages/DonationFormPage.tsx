@@ -35,6 +35,7 @@ export const DonationFormPage = () => {
   const [notes, setNotes] = useState("");
   const [recognitionPreference, setRecognitionPreference] = useState("named");
   const [confirmTx, setConfirmTx] = useState(false);
+  const [acceptFundingTerms, setAcceptFundingTerms] = useState(false);
 
   const [draftId, setDraftId] = useState<string | null>(null);
   const [transferReference, setTransferReference] = useState<string | null>(null);
