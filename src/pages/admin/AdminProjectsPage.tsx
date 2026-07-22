@@ -186,7 +186,7 @@ const ProjectDetail = ({
   const [expDate, setExpDate] = useState(format(new Date(), "yyyy-MM-dd"));
 
   const loadRelated = async () => {
-    const [allocRes, expRes, donRes] = await Promise.all([
+    const [allocRes, expRes, donRes, assignRes, volRes] = await Promise.all([
       supabase
         .from("fund_allocations")
         .select("*, donations(*)")
@@ -202,10 +202,21 @@ const ProjectDetail = ({
         .select("*")
         .eq("status", "completed")
         .order("created_at", { ascending: false }),
+      supabase
+        .from("volunteer_project_assignments")
+        .select("id, assigned_role, created_at, volunteers(id, name, email)")
+        .eq("project_id", project.id),
+      supabase
+        .from("volunteers")
+        .select("id, name, email, status")
+        .eq("status", "approved")
+        .order("name"),
     ]);
     if (allocRes.data) setAllocations(allocRes.data as any);
     if (expRes.data) setExpenses(expRes.data as Expense[]);
     if (donRes.data) setAvailableDonations(donRes.data as Donation[]);
+    if (assignRes.data) setAssignments(assignRes.data as any);
+    if (volRes.data) setApprovedVolunteers(volRes.data as any);
   };
 
   useEffect(() => { loadRelated(); }, [project.id]);
