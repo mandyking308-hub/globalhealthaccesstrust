@@ -143,8 +143,6 @@ const AdminLegalPage = () => {
               {[
                 ["legal_name", "Legal name"], ["trading_name", "Trading name"],
                 ["legal_status", "Legal status (e.g. Charitable Trust)"],
-                ["company_number", "Company number (if any)"],
-                ["charity_number", "Charity number (if any)"],
                 ["regulator", "Regulator"],
                 ["registered_address", "Registered address"],
                 ["contact_email", "Contact email"],
