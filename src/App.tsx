@@ -212,6 +212,7 @@ const App = () => (
             <Route path="high-value-agreements" element={<AdminHighValueAgreementsPage />} />
             <Route path="gift-acceptance" element={<AdminGiftAcceptancePage />} />
             <Route path="donor-due-diligence" element={<AdminDonorDueDiligencePage />} />
+            <Route path="support-oversight" element={<AdminServiceOversightPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
 
           </Route>
