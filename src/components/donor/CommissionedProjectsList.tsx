@@ -11,7 +11,7 @@ interface CommissionedProject {
   description: string; budget_range: string; status: string; created_at: string; updated_at: string;
   funding_target: number | null; currency: string;
 }
-interface ProjectFinance { allocated: number; spent: number; delivery: number; }
+interface ProjectFinance { allocated: number; committed: number; spent: number; remaining: number; delivery: number; }
 type Evidence = {
   id: string; project_id: string; caption: string | null; activity_description: string | null;
   approved_general_location: string | null; date_taken: string | null; storage_path: string;
@@ -80,16 +80,16 @@ export const CommissionedProjectsList = () => {
         ]);
 
         const fin: Record<string, ProjectFinance> = {};
-        list.forEach((p) => { fin[p.id] = { allocated: 0, spent: 0, delivery: 0 }; });
+        list.forEach((p) => { fin[p.id] = { allocated: 0, committed: 0, spent: 0, remaining: 0, delivery: 0 }; });
         (allocs.data || []).forEach((a: any) => {
           if (a.project_id && fin[a.project_id]) fin[a.project_id].allocated += Number(a.amount || 0);
         });
         (exps.data || []).forEach((e: any) => {
-          // Only count donor-visible + approved/paid expenses in donor view
-          if (fin[e.project_id] && e.donor_visible && ["approved","committed","paid"].includes(e.status)) {
-            fin[e.project_id].spent += Number(e.amount || 0);
-          }
+          if (!fin[e.project_id] || !e.donor_visible) return;
+          if (e.status === "paid") fin[e.project_id].spent += Number(e.amount || 0);
+          else if (["approved", "committed"].includes(e.status)) fin[e.project_id].committed += Number(e.amount || 0);
         });
+        Object.values(fin).forEach((f) => { f.remaining = f.allocated - f.spent - f.committed; });
         const msByProj: Record<string, any[]> = {};
         (milestones.data || []).forEach((m: any) => { (msByProj[m.project_id] ||= []).push(m); });
         Object.entries(msByProj).forEach(([pid, ms]) => {
@@ -135,7 +135,7 @@ export const CommissionedProjectsList = () => {
     <div className="portal-panel space-y-0 divide-y divide-foreground/10 p-0">
       <div className="px-8 py-6"><span className="portal-eyebrow">My Projects</span></div>
       {projects.map((project, idx) => {
-        const f = finance[project.id] || { allocated: 0, spent: 0, delivery: 0 };
+        const f = finance[project.id] || { allocated: 0, committed: 0, spent: 0, remaining: 0, delivery: 0 };
         const ccy = project.currency || "GBP";
         const target = Number(project.funding_target || 0);
         const percent = target > 0 ? Math.min(100, (f.allocated / target) * 100) : 0;
@@ -165,8 +165,10 @@ export const CommissionedProjectsList = () => {
                   <Row label="Location" value={`${project.country}, ${project.region}`} />
                   <Row label="Budget band" value={project.budget_range} />
                   <Row label="Funding target" value={target > 0 ? money(target, ccy) : "Not yet set"} />
-                  <Row label="Allocated" value={money(f.allocated, ccy)} />
-                  <Row label="Reported spend" value={money(f.spent, ccy)} />
+                  <Row label="Project allocation" value={money(f.allocated, ccy)} />
+                  <Row label="Amount committed" value={money(f.committed, ccy)} />
+                  <Row label="Amount spent" value={money(f.spent, ccy)} />
+                  <Row label="Amount remaining" value={money(f.remaining, ccy)} />
                   <Row label="Requested" value={format(new Date(project.created_at), "MMM d, yyyy")} />
                 </dl>
 

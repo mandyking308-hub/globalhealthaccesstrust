@@ -1560,6 +1560,10 @@ export type Database = {
         Args: { _project_id: string; _user_id: string }
         Returns: boolean
       }
+      donor_can_view_volunteer: {
+        Args: { _donor_id: string; _volunteer_id: string }
+        Returns: boolean
+      }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
       has_role: {
         Args: {

@@ -243,10 +243,13 @@ const ProjectDetail = ({
   useEffect(() => { loadRelated(); }, [project.id]);
 
   const totalAllocated = allocations.reduce((s, a) => s + Number(a.amount || 0), 0);
-  const totalSpent = expenses
-    .filter((e) => ["approved", "committed", "paid"].includes(e.status))
+  const totalCommitted = expenses
+    .filter((e) => ["approved", "committed"].includes(e.status))
     .reduce((s, e) => s + Number(e.amount || 0), 0);
-  const balance = totalAllocated - totalSpent;
+  const totalSpent = expenses
+    .filter((e) => e.status === "paid")
+    .reduce((s, e) => s + Number(e.amount || 0), 0);
+  const remaining = totalAllocated - totalSpent - totalCommitted;
   const targetNum = Number(target) || 0;
   const percentFunded = targetNum > 0 ? Math.min(100, (totalAllocated / targetNum) * 100) : 0;
   const totalWeight = milestones.reduce((s, m) => s + Number(m.weight || 0), 0);
@@ -434,11 +437,12 @@ const ProjectDetail = ({
       </header>
 
       {/* Funding & delivery summary */}
-      <section className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <section className="grid grid-cols-1 md:grid-cols-6 gap-4">
         <SummaryStat label="Funding target" value={targetNum ? money(targetNum, currency) : "—"} />
-        <SummaryStat label="Allocated" value={money(totalAllocated, currency)} sub={targetNum ? `${percentFunded.toFixed(0)}% of target` : undefined} />
-        <SummaryStat label="Approved spend" value={money(totalSpent, currency)} />
-        <SummaryStat label="Balance" value={money(balance, currency)} />
+        <SummaryStat label="Project allocation" value={money(totalAllocated, currency)} sub={targetNum ? `${percentFunded.toFixed(0)}% of target` : undefined} />
+        <SummaryStat label="Committed" value={money(totalCommitted, currency)} sub="approved / committed, not paid" />
+        <SummaryStat label="Spent" value={money(totalSpent, currency)} sub="paid only" />
+        <SummaryStat label="Remaining" value={money(remaining, currency)} />
         <SummaryStat label="Delivery" value={`${deliveryPercent.toFixed(0)}%`} sub={`${milestones.filter((m) => m.status === "completed").length}/${milestones.length} milestones`} />
       </section>
 
