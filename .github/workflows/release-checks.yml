@@ -49,6 +49,13 @@ jobs:
       - name: Build production bundle
         run: bun run build
 
+      - name: Verify live legal documents
+        run: |
+          set -a
+          source .env
+          set +a
+          node scripts/verify-live-legal.mjs
+
       - name: Install browser smoke-test tooling
         run: |
           bun add --dev --no-save playwright@1.52.0
@@ -106,6 +113,13 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
+
+      - name: Verify live legal documents
+        run: |
+          set -a
+          source .env
+          set +a
+          node scripts/verify-live-legal.mjs
 
       - name: Install browser smoke-test tooling
         run: |
