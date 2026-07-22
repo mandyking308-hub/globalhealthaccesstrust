@@ -111,8 +111,8 @@ export const VolunteerDashboardPage = () => {
       )}
       
       <SEO
-        title="Volunteer Dashboard - Global Health Access Trust"
-        description="Your volunteer portal for managing projects and updates"
+        title="Project Team Portal - Global Health Access Trust"
+        description="Secure workspace for approved project teams to manage assigned projects, submit progress, upload field evidence and communicate with the Trust."
         canonical="/volunteer-dashboard"
       />
 
@@ -120,11 +120,10 @@ export const VolunteerDashboardPage = () => {
         <header className="border-b bg-card">
           <div className="container-section py-4 flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Volunteer Portal</h1>
-              <p className="text-sm text-muted-foreground">Welcome back, {volunteer.name}!</p>
+              <h1 className="text-2xl font-bold">Project Team Portal</h1>
+              <p className="text-sm text-muted-foreground">Welcome back, {volunteer.name}</p>
             </div>
             <Button variant="outline" onClick={handleLogout}>
-              
               Logout
             </Button>
           </div>
