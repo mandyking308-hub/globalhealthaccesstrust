@@ -1,12 +1,9 @@
-// deno-lint-ignore-file no-explicit-any
+// deno-lint-ignore-file no-explicit-any no-import-prefix
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
 
-// GoCardless-first payment adapter.
-// Creates a Direct Debit mandate (billing_request_flow) from a confirmed donation draft.
-// Trusts only the draft_id from the browser; reloads amount, frequency, ownership server-side.
-// If GoCardless credentials/config are absent, returns a graceful "unavailable" payload.
-
+// GoCardless remains unavailable unless an explicit server-side activation flag
+// is set after banking and settlement details have been verified by the Trustees.
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -20,54 +17,60 @@ Deno.serve(async (req) => {
 
     const { data: userData, error: userErr } = await supabase.auth.getUser();
     if (userErr || !userData.user) return json({ error: "unauthorised" }, 401);
-    const donorId = userData.user.id;
+
+    if (Deno.env.get("GOCARDLESS_ENABLED") !== "true") {
+      return json({
+        available: false,
+        message: "Direct Debit setup is not currently active.",
+      });
+    }
+
+    const token = Deno.env.get("GOCARDLESS_ACCESS_TOKEN");
+    const environment = Deno.env.get("GOCARDLESS_ENVIRONMENT") ?? "sandbox";
+    if (!token) {
+      return json({ available: false, message: "Direct Debit setup is not currently active." });
+    }
 
     const body = await req.json().catch(() => ({}));
     const draftId = String(body?.draft_id ?? "");
     if (!draftId) return json({ error: "draft_id required" }, 400);
 
-    // Confirm draft ownership + confirmation via RPC (SECURITY DEFINER)
-    const { data: draft, error: dErr } = await supabase
+    const donorId = userData.user.id;
+    const { data: draft, error: draftError } = await supabase
       .from("donation_drafts")
       .select("id, donor_id, amount_minor, currency, frequency, confirmed_at, status")
-      .eq("id", draftId).maybeSingle();
-    if (dErr || !draft) return json({ error: "draft not found" }, 404);
+      .eq("id", draftId)
+      .maybeSingle();
+
+    if (draftError || !draft) return json({ error: "draft not found" }, 404);
     if (draft.donor_id !== donorId) return json({ error: "not authorised" }, 403);
     if (!draft.confirmed_at) return json({ error: "draft not confirmed" }, 400);
 
-    // Check config
-    const token = Deno.env.get("GOCARDLESS_ACCESS_TOKEN");
-    const env = Deno.env.get("GOCARDLESS_ENVIRONMENT") ?? "sandbox";
-    if (!token) {
-      return json({
-        available: false,
-        message: "Direct Debit setup is not yet available. You may use secure bank transfer or return later.",
-      });
-    }
+    const { error: prepareError } = await supabase.rpc("gocardless_prepare_arrangement", { _draft_id: draftId });
+    if (prepareError) return json({ error: prepareError.message }, 400);
 
-    // Prepare arrangement / attempt record (idempotent-ish for this draft)
-    const { error: prepErr } = await supabase.rpc("gocardless_prepare_arrangement", { _draft_id: draftId });
-    if (prepErr) return json({ error: prepErr.message }, 400);
+    const host = environment === "live" ? "https://api.gocardless.com" : "https://api-sandbox.gocardless.com";
+    const requestOrigin = req.headers.get("origin");
+    const allowedOrigin = requestOrigin === "https://globalhealthaccesstrust.com" || requestOrigin === "https://www.globalhealthaccesstrust.com"
+      ? requestOrigin
+      : "https://globalhealthaccesstrust.com";
 
-    const gcHost = env === "live" ? "https://api.gocardless.com" : "https://api-sandbox.gocardless.com";
-    const origin = req.headers.get("origin") ?? new URL(req.url).origin;
-
-    // Create a Billing Request (payment or mandate depending on frequency)
-    const isRecurring = draft.frequency !== "one_time";
-    const brBody: any = {
+    const recurring = draft.frequency !== "one_time";
+    const billingRequestBody: any = {
       billing_requests: {
         mandate_request: { scheme: "bacs", currency: draft.currency },
       },
     };
-    if (!isRecurring) {
-      brBody.billing_requests.payment_request = {
+
+    if (!recurring) {
+      billingRequestBody.billing_requests.payment_request = {
         description: `GHAT donation (draft ${draftId.slice(0, 8)})`,
         amount: draft.amount_minor,
         currency: draft.currency,
       };
     }
 
-    const brRes = await fetch(`${gcHost}/billing_requests`, {
+    const billingRequestResponse = await fetch(`${host}/billing_requests`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -75,17 +78,18 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
         "Idempotency-Key": `draft-${draftId}`,
       },
-      body: JSON.stringify(brBody),
+      body: JSON.stringify(billingRequestBody),
     });
-    if (!brRes.ok) {
-      const t = await brRes.text();
-      return json({ available: true, error: "gocardless_error", detail: t }, 502);
-    }
-    const br = await brRes.json();
-    const brId = br.billing_requests.id;
 
-    // Create hosted flow
-    const flowRes = await fetch(`${gcHost}/billing_request_flows`, {
+    if (!billingRequestResponse.ok) {
+      const detail = await billingRequestResponse.text();
+      return json({ available: true, error: "gocardless_error", detail }, 502);
+    }
+
+    const billingRequest = await billingRequestResponse.json();
+    const billingRequestId = billingRequest.billing_requests.id;
+
+    const flowResponse = await fetch(`${host}/billing_request_flows`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -94,21 +98,22 @@ Deno.serve(async (req) => {
       },
       body: JSON.stringify({
         billing_request_flows: {
-          redirect_uri: `${origin}/donation-success?draft=${draftId}`,
-          exit_uri: `${origin}/donation-cancelled?draft=${draftId}`,
-          links: { billing_request: brId },
+          redirect_uri: `${allowedOrigin}/donation-success?draft=${draftId}`,
+          exit_uri: `${allowedOrigin}/donation-cancelled?draft=${draftId}`,
+          links: { billing_request: billingRequestId },
         },
       }),
     });
-    if (!flowRes.ok) {
-      const t = await flowRes.text();
-      return json({ available: true, error: "gocardless_flow_error", detail: t }, 502);
-    }
-    const flow = await flowRes.json();
 
+    if (!flowResponse.ok) {
+      const detail = await flowResponse.text();
+      return json({ available: true, error: "gocardless_flow_error", detail }, 502);
+    }
+
+    const flow = await flowResponse.json();
     return json({ available: true, url: flow.billing_request_flows.authorisation_url });
-  } catch (err: any) {
-    return json({ error: err?.message ?? "internal_error" }, 500);
+  } catch (error: any) {
+    return json({ error: error?.message ?? "internal_error" }, 500);
   }
 });
 
