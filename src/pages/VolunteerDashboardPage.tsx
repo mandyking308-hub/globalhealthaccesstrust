@@ -174,30 +174,13 @@ export const VolunteerDashboardPage = () => {
 
           {/* Main Tabs */}
           <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1">
-              <TabsTrigger value="overview" className="text-xs sm:text-sm">
-                
-                <span className="hidden sm:inline">Overview</span>
-                <span className="sm:hidden">Home</span>
-              </TabsTrigger>
-              <TabsTrigger value="projects" className="text-xs sm:text-sm">
-                <span className="hidden sm:inline">Available Projects</span>
-                <span className="sm:hidden">Available</span>
-              </TabsTrigger>
-              <TabsTrigger value="my-projects" className="text-xs sm:text-sm">
-                <span className="hidden sm:inline">My Assigned Projects</span>
-                <span className="sm:hidden">Mine</span>
-              </TabsTrigger>
-              <TabsTrigger value="messages" className="text-xs sm:text-sm">
-                
-                <span className="hidden sm:inline">Messages</span>
-                <span className="sm:hidden">Messages</span>
-              </TabsTrigger>
-              <TabsTrigger value="profile" className="text-xs sm:text-sm">
-                
-                <span className="hidden sm:inline">Profile</span>
-                <span className="sm:hidden">Profile</span>
-              </TabsTrigger>
+            <TabsList className="flex flex-wrap gap-1 h-auto">
+              <TabsTrigger value="overview" className="text-xs sm:text-sm">Overview</TabsTrigger>
+              <TabsTrigger value="my-projects" className="text-xs sm:text-sm">My Projects</TabsTrigger>
+              <TabsTrigger value="agreement" className="text-xs sm:text-sm">Agreement</TabsTrigger>
+              <TabsTrigger value="support" className="text-xs sm:text-sm">Support</TabsTrigger>
+              <TabsTrigger value="private" className="text-xs sm:text-sm">Report Privately</TabsTrigger>
+              <TabsTrigger value="profile" className="text-xs sm:text-sm">Profile</TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview">
@@ -253,18 +236,35 @@ export const VolunteerDashboardPage = () => {
               <VolunteerAssignedProjects volunteerId={volunteer.id} />
             </TabsContent>
 
-            <TabsContent value="messages">
+            <TabsContent value="agreement">
               <Card>
-                <CardHeader>
-                  <CardTitle>Messages</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-center py-12">
-                    All messages are coordinated through the admin team for privacy and compliance.
-                  </p>
+                <CardContent className="pt-6">
+                  {assignedProjects.length === 0 ? (
+                    <p className="text-muted-foreground">You have no assigned projects yet.</p>
+                  ) : (
+                    <>
+                      <div className="mb-4">
+                        <select value={selectedAgreementProject || ""} onChange={(e) => setSelectedAgreementProject(e.target.value)} className="border rounded px-3 py-2 text-sm">
+                          {assignedProjects.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                        </select>
+                      </div>
+                      {selectedAgreementProject && (
+                        <TeamAgreementPanel projectId={selectedAgreementProject} currentUserId={userId} />
+                      )}
+                    </>
+                  )}
                 </CardContent>
               </Card>
             </TabsContent>
+
+            <TabsContent value="support">
+              <SupportCentrePanel role="project_team" currentUserId={userId} projectOptions={assignedProjects} />
+            </TabsContent>
+
+            <TabsContent value="private">
+              <SupportCentrePanel role="project_team" currentUserId={userId} projectOptions={assignedProjects} />
+            </TabsContent>
+
 
             <TabsContent value="profile">
               <Card>
