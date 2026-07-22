@@ -70,6 +70,7 @@ import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 import AdminLegalPage from "./pages/admin/AdminLegalPage";
 import LegalIndexPage from "./pages/LegalIndexPage";
 import LegalDocumentPage from "./pages/LegalDocumentPage";
+import DonorFundingTermsPage from "./pages/DonorFundingTermsPage";
 import { DonationSuccessPage } from "./pages/DonationSuccessPage";
 import { DonationCancelledPage } from "./pages/DonationCancelledPage";
 import AdminPaymentsPage from "./pages/admin/AdminPaymentsPage";
