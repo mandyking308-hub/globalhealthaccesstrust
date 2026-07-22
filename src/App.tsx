@@ -11,20 +11,15 @@ import { VolunteersPage } from "./pages/VolunteersPage";
 import { VolunteerDashboardPage } from "./pages/VolunteerDashboardPage";
 import { CommissionProjectsPage } from "./pages/CommissionProjectsPage";
 import { HomePage } from "./pages/HomePage";
-import { AboutPage } from "./pages/AboutPage";
 import { AboutTheTrustPage } from "./pages/AboutTheTrustPage";
 import { TrusteeBiographiesPage } from "./pages/TrusteeBiographiesPage";
 import { GovernanceLegalFrameworkPage } from "./pages/GovernanceLegalFrameworkPage";
 import { OurWorkPage } from "./pages/OurWorkPage";
 import { HowWeWorkPage } from "./pages/HowWeWorkPage";
-import { DonorRecognitionPage } from "./pages/DonorRecognitionPage";
 import { SupportTheTrustPage } from "./pages/SupportTheTrustPage";
 import { FrequentlyAskedQuestionsPage } from "./pages/FrequentlyAskedQuestionsPage";
 import { ContactTheTrustPage } from "./pages/ContactTheTrustPage";
 import { WhatWeDoPage } from "./pages/WhatWeDoPage";
-import { BlogIndexPage } from "./pages/BlogIndexPage";
-import { BlogPostPage } from "./pages/BlogPostPage";
-import { GetInvolvedPage } from "./pages/GetInvolvedPage";
 import { PublicationsPage } from "./pages/PublicationsPage";
 import { ContactPage } from "./pages/ContactPage";
 import { ConstitutionPage } from "./pages/ConstitutionPage";
@@ -90,22 +85,14 @@ import AdminServiceOversightPage from "./pages/admin/AdminServiceOversightPage";
 
 const queryClient = new QueryClient();
 
-// Component to handle scroll-to-top on route changes
 const ScrollToTop = () => {
   const location = useLocation();
-  
+
   useEffect(() => {
-    // Set scroll restoration to manual
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    
-    // Scroll to top on route change (unless there's a hash)
-    if (!location.hash) {
-      window.scrollTo(0, 0);
-    }
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    if (!location.hash) window.scrollTo(0, 0);
   }, [location]);
-  
+
   return null;
 };
 
@@ -120,61 +107,57 @@ const App = () => (
           <Route path="learn-about-our-mission" element={<Navigate to="/about-the-trust" replace />} />
           <Route path="volunteers" element={<Navigate to="/volunteer-apply" replace />} />
           <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="about-the-trust" element={<AboutTheTrustPage />} />
-          <Route path="trustee-biographies" element={<TrusteeBiographiesPage />} />
-          <Route path="governance-legal-framework" element={<GovernanceLegalFrameworkPage />} />
-          <Route path="our-work" element={<OurWorkPage />} />
-          <Route path="how-we-work" element={<HowWeWorkPage />} />
-          <Route path="support-the-trust" element={<SupportTheTrustPage />} />
-          <Route path="donor-recognition" element={<DonorRecognitionPage />} />
-          <Route path="frequently-asked-questions" element={<FrequentlyAskedQuestionsPage />} />
-          <Route path="contact-the-trust" element={<ContactTheTrustPage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="what-we-do" element={<WhatWeDoPage />} />
-          <Route path="blog" element={<BlogIndexPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
-          <Route path="get-involved" element={<GetInvolvedPage />} />
-          <Route path="donate" element={<DonatePage />} />
-          <Route path="commission-projects" element={<CommissionProjectsPage />} />
-          <Route path="publications" element={<PublicationsPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="constitution" element={<ConstitutionPage />} />
-          
-          {/* Governance & Policy Pages */}
-          <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="cookie-policy" element={<CookiePolicyPage />} />
-          <Route path="terms-of-use" element={<TermsOfUsePage />} />
-          <Route path="data-access-request" element={<DataAccessRequestPage />} />
-          <Route path="accessibility-statement" element={<AccessibilityStatementPage />} />
-          <Route path="safeguarding" element={<SafeguardingPage />} />
-          <Route path="conflict-of-interest" element={<ConflictOfInterestPage />} />
-          <Route path="financial-controls" element={<FinancialControlsPage />} />
-          <Route path="risk-management" element={<RiskManagementPage />} />
-          <Route path="anti-fraud" element={<AntiFraudPage />} />
-          <Route path="whistleblowing" element={<WhistleblowingPage />} />
-          <Route path="governance" element={<GovernancePage />} />
-          <Route path="legal" element={<LegalIndexPage />} />
-          <Route path="legal/:slug" element={<LegalDocumentPage />} />
-          <Route path="donor-project-funding-terms" element={<DonorFundingTermsPage />} />
-          <Route path="gift-acceptance-and-restricted-funds-policy" element={<GiftAcceptancePolicyPage />} />
-          <Route path="donor-due-diligence-and-sanctions-policy" element={<DonorDueDiligencePolicyPage />} />
-          <Route path="project-team-terms" element={<ProjectTeamTermsPage />} />
-          <Route path="support" element={<SupportPage />} />
-          <Route path="support/new" element={<SupportRequestPage />} />
-          <Route path="complaints" element={<Navigate to="/legal/complaints-policy" replace />} />
-          <Route path="complaints/new" element={<ComplaintsIntakePage />} />
-          <Route path="legal/complaints-policy" element={<ComplaintsPolicyPage />} />
-          <Route path="protected-concerns" element={<Navigate to="/whistleblowing" replace />} />
-          <Route path="protected-concerns/new" element={<ProtectedConcernsPage />} />
-          <Route path="fraud-concerns" element={<Navigate to="/protected-concerns/new" replace />} />
-          <Route path="safeguarding/report" element={<SafeguardingReportPage />} />
-          <Route path="security-incidents" element={<Navigate to="/admin/support-oversight" replace />} />
-        </Route>
-        
-        
-          {/* Donor Portal Routes (outside Layout - full page) */}
-          <Route path="donate" element={<DonatePage />} />
+            <Route index element={<HomePage />} />
+            <Route path="about-the-trust" element={<AboutTheTrustPage />} />
+            <Route path="trustee-biographies" element={<TrusteeBiographiesPage />} />
+            <Route path="governance-legal-framework" element={<GovernanceLegalFrameworkPage />} />
+            <Route path="our-work" element={<OurWorkPage />} />
+            <Route path="how-we-work" element={<HowWeWorkPage />} />
+            <Route path="support-the-trust" element={<SupportTheTrustPage />} />
+            <Route path="donor-recognition" element={<Navigate to="/support-the-trust" replace />} />
+            <Route path="frequently-asked-questions" element={<FrequentlyAskedQuestionsPage />} />
+            <Route path="contact-the-trust" element={<ContactTheTrustPage />} />
+            <Route path="about" element={<Navigate to="/about-the-trust" replace />} />
+            <Route path="what-we-do" element={<WhatWeDoPage />} />
+            <Route path="blog" element={<Navigate to="/publications" replace />} />
+            <Route path="blog/:slug" element={<Navigate to="/publications" replace />} />
+            <Route path="get-involved" element={<Navigate to="/contact-the-trust" replace />} />
+            <Route path="donate" element={<DonatePage />} />
+            <Route path="commission-projects" element={<CommissionProjectsPage />} />
+            <Route path="publications" element={<PublicationsPage />} />
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="constitution" element={<ConstitutionPage />} />
+
+            <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="cookie-policy" element={<CookiePolicyPage />} />
+            <Route path="terms-of-use" element={<TermsOfUsePage />} />
+            <Route path="data-access-request" element={<DataAccessRequestPage />} />
+            <Route path="accessibility-statement" element={<AccessibilityStatementPage />} />
+            <Route path="safeguarding" element={<SafeguardingPage />} />
+            <Route path="conflict-of-interest" element={<ConflictOfInterestPage />} />
+            <Route path="financial-controls" element={<FinancialControlsPage />} />
+            <Route path="risk-management" element={<RiskManagementPage />} />
+            <Route path="anti-fraud" element={<AntiFraudPage />} />
+            <Route path="whistleblowing" element={<WhistleblowingPage />} />
+            <Route path="governance" element={<GovernancePage />} />
+            <Route path="legal" element={<LegalIndexPage />} />
+            <Route path="legal/:slug" element={<LegalDocumentPage />} />
+            <Route path="donor-project-funding-terms" element={<DonorFundingTermsPage />} />
+            <Route path="gift-acceptance-and-restricted-funds-policy" element={<GiftAcceptancePolicyPage />} />
+            <Route path="donor-due-diligence-and-sanctions-policy" element={<DonorDueDiligencePolicyPage />} />
+            <Route path="project-team-terms" element={<ProjectTeamTermsPage />} />
+            <Route path="support" element={<SupportPage />} />
+            <Route path="support/new" element={<SupportRequestPage />} />
+            <Route path="complaints" element={<Navigate to="/legal/complaints-policy" replace />} />
+            <Route path="complaints/new" element={<ComplaintsIntakePage />} />
+            <Route path="legal/complaints-policy" element={<ComplaintsPolicyPage />} />
+            <Route path="protected-concerns" element={<Navigate to="/whistleblowing" replace />} />
+            <Route path="protected-concerns/new" element={<ProtectedConcernsPage />} />
+            <Route path="fraud-concerns" element={<Navigate to="/protected-concerns/new" replace />} />
+            <Route path="safeguarding/report" element={<SafeguardingReportPage />} />
+            <Route path="security-incidents" element={<Navigate to="/protected-concerns/new" replace />} />
+          </Route>
+
           <Route path="donation-form" element={<DonationFormPage />} />
           <Route path="donation-success" element={<DonationSuccessPage />} />
           <Route path="donation-cancelled" element={<DonationCancelledPage />} />
@@ -184,8 +167,7 @@ const App = () => (
           <Route path="admin-dashboard" element={<AdminDashboardPage />} />
           <Route path="unsubscribe" element={<UnsubscribePage />} />
           <Route path="preferences" element={<CommunicationPreferencesPage />} />
-          
-          {/* New Admin Console Routes */}
+
           <Route path="admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="/admin/dashboard" replace />} />
             <Route path="dashboard" element={<NewAdminDashboardPage />} />
@@ -214,21 +196,15 @@ const App = () => (
             <Route path="donor-due-diligence" element={<AdminDonorDueDiligencePage />} />
             <Route path="support-oversight" element={<AdminServiceOversightPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
-
           </Route>
-          
-          {/* Project Team Portal Routes (formerly Volunteer Portal) */}
+
           <Route path="volunteer-apply" element={<VolunteersPage />} />
           <Route path="volunteer-dashboard" element={<VolunteerDashboardPage />} />
           <Route path="project-team-login" element={<Navigate to="/auth?portal=team" replace />} />
           <Route path="donor-login" element={<Navigate to="/auth?portal=donor" replace />} />
-          
-          {/* Admin Testing Route (Hidden) */}
           <Route path="testing-checklist" element={<TestingChecklistPage />} />
-        
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </TooltipProvider>
     </TranslationProvider>
   </QueryClientProvider>
