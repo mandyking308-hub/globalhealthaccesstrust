@@ -177,6 +177,22 @@ export const CommissionedProjectsList = () => {
                     <Progress value={percent} className="h-1 rounded-none" />
                   </div>
                 )}
+
+                <div className="mt-6 pt-5 border-t border-foreground/10">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="tracking-[0.1em] text-[11.5px] font-semibold uppercase h-9"
+                    onClick={() => setOpenThread(openThread === project.id ? null : project.id)}
+                  >
+                    {openThread === project.id ? "Hide messages" : "Messages with Trust Office"}
+                  </Button>
+                  {openThread === project.id && userId && (
+                    <div className="mt-4">
+                      <ProjectMessagesThread projectId={project.id} currentUserId={userId} currentRole="donor" />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </article>
