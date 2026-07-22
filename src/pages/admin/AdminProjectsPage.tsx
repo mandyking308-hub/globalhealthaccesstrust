@@ -167,6 +167,11 @@ const ProjectDetail = ({
   const [target, setTarget] = useState<string>(project.funding_target?.toString() ?? "");
   const [currency] = useState(project.currency || "GBP");
   const [saving, setSaving] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setCurrentUserId(data.user?.id ?? null));
+  }, []);
 
   const [allocations, setAllocations] = useState<(Allocation & { donations: Donation | null })[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
