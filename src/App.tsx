@@ -80,6 +80,13 @@ import GiftAcceptancePolicyPage from "./pages/GiftAcceptancePolicyPage";
 import DonorDueDiligencePolicyPage from "./pages/DonorDueDiligencePolicyPage";
 import AdminDonorDueDiligencePage from "./pages/admin/AdminDonorDueDiligencePage";
 import ProjectTeamTermsPage from "./pages/ProjectTeamTermsPage";
+import SupportPage from "./pages/SupportPage";
+import SupportRequestPage from "./pages/SupportRequestPage";
+import ComplaintsIntakePage from "./pages/ComplaintsIntakePage";
+import ComplaintsPolicyPage from "./pages/ComplaintsPolicyPage";
+import ProtectedConcernsPage from "./pages/ProtectedConcernsPage";
+import SafeguardingReportPage from "./pages/SafeguardingReportPage";
+import AdminServiceOversightPage from "./pages/admin/AdminServiceOversightPage";
 
 const queryClient = new QueryClient();
 
@@ -153,7 +160,18 @@ const App = () => (
           <Route path="gift-acceptance-and-restricted-funds-policy" element={<GiftAcceptancePolicyPage />} />
           <Route path="donor-due-diligence-and-sanctions-policy" element={<DonorDueDiligencePolicyPage />} />
           <Route path="project-team-terms" element={<ProjectTeamTermsPage />} />
+          <Route path="support" element={<SupportPage />} />
+          <Route path="support/new" element={<SupportRequestPage />} />
+          <Route path="complaints" element={<Navigate to="/legal/complaints-policy" replace />} />
+          <Route path="complaints/new" element={<ComplaintsIntakePage />} />
+          <Route path="legal/complaints-policy" element={<ComplaintsPolicyPage />} />
+          <Route path="protected-concerns" element={<Navigate to="/whistleblowing" replace />} />
+          <Route path="protected-concerns/new" element={<ProtectedConcernsPage />} />
+          <Route path="fraud-concerns" element={<Navigate to="/protected-concerns/new" replace />} />
+          <Route path="safeguarding/report" element={<SafeguardingReportPage />} />
+          <Route path="security-incidents" element={<Navigate to="/admin/support-oversight" replace />} />
         </Route>
+        
         
           {/* Donor Portal Routes (outside Layout - full page) */}
           <Route path="donate" element={<DonatePage />} />
@@ -194,6 +212,7 @@ const App = () => (
             <Route path="high-value-agreements" element={<AdminHighValueAgreementsPage />} />
             <Route path="gift-acceptance" element={<AdminGiftAcceptancePage />} />
             <Route path="donor-due-diligence" element={<AdminDonorDueDiligencePage />} />
+            <Route path="support-oversight" element={<AdminServiceOversightPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
 
           </Route>
