@@ -318,6 +318,10 @@ const ProjectDetail = ({
       description: expDesc || null,
       incurred_on: expDate,
       recorded_by: user?.id,
+      submitted_by: user?.id,
+      submitted_at: new Date().toISOString(),
+      status: "submitted",
+      donor_visible: expDonorVisible,
     });
     if (error) {
       toast({ variant: "destructive", title: "Expense failed", description: error.message });
@@ -326,6 +330,58 @@ const ProjectDetail = ({
       setExpAmount(""); setExpCategory(""); setExpDesc("");
       loadRelated();
     }
+  };
+
+  const setExpenseStatus = async (id: string, next: string, extra: Record<string, any> = {}) => {
+    const { data: { user } } = await supabase.auth.getUser();
+    const patch: any = { status: next, ...extra };
+    if (next === "approved") { patch.approved_by = user?.id; patch.approved_at = new Date().toISOString(); }
+    if (next === "paid") patch.paid_at = new Date().toISOString();
+    const { error } = await supabase.from("project_expenses").update(patch).eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Update failed", description: error.message });
+    else loadRelated();
+  };
+
+  const toggleExpenseVisibility = async (id: string, v: boolean) => {
+    const { error } = await supabase.from("project_expenses").update({ donor_visible: v }).eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Update failed", description: error.message });
+    else loadRelated();
+  };
+
+  const addMilestone = async () => {
+    if (!msTitle.trim()) { toast({ variant: "destructive", title: "Title required" }); return; }
+    const nextSeq = (milestones.length ? Math.max(...milestones.map((m) => m.sequence || 0)) : 0) + 1;
+    const { error } = await supabase.from("project_milestones").insert({
+      project_id: project.id,
+      milestone_title: msTitle.trim(),
+      milestone_description: msDesc || null,
+      target_date: msTarget || null,
+      sequence: nextSeq,
+      weight: Number(msWeight) || 1,
+      evidence_required: msEvidence,
+      donor_visible: true,
+      status: "pending",
+    });
+    if (error) toast({ variant: "destructive", title: "Failed", description: error.message });
+    else {
+      toast({ title: "Milestone added" });
+      setMsTitle(""); setMsDesc(""); setMsTarget(""); setMsWeight("1"); setMsEvidence(true);
+      loadRelated();
+    }
+  };
+
+  const setMilestoneStatus = async (id: string, status: string) => {
+    const patch: any = { status };
+    if (status === "completed") patch.completion_date = format(new Date(), "yyyy-MM-dd");
+    const { error } = await supabase.from("project_milestones").update(patch).eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Failed", description: error.message });
+    else loadRelated();
+  };
+
+  const removeMilestone = async (id: string) => {
+    const { error } = await supabase.from("project_milestones").delete().eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Failed", description: error.message });
+    else loadRelated();
   };
 
   const assignVolunteer = async () => {
@@ -337,14 +393,25 @@ const ProjectDetail = ({
       project_id: project.id,
       volunteer_id: volunteerId,
       assigned_role: volRole.trim(),
+      responsibilities: volResponsibilities || null,
+      start_date: volStart || null,
+      end_date: volEnd || null,
+      donor_visibility_mode: volVisibility,
+      status: "active",
     });
     if (error) {
       toast({ variant: "destructive", title: "Assignment failed", description: error.message });
     } else {
       toast({ title: "Volunteer assigned" });
-      setVolunteerId("");
+      setVolunteerId(""); setVolResponsibilities(""); setVolStart(""); setVolEnd("");
       loadRelated();
     }
+  };
+
+  const updateAssignment = async (id: string, patch: Record<string, any>) => {
+    const { error } = await supabase.from("volunteer_project_assignments").update(patch).eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Update failed", description: error.message });
+    else loadRelated();
   };
 
   const removeAssignment = async (id: string) => {
