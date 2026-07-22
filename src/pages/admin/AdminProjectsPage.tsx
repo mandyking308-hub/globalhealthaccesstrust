@@ -518,7 +518,7 @@ const ProjectDetail = ({
           <span className="text-sm text-muted-foreground">{expenses.length} record{expenses.length === 1 ? "" : "s"}</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 items-end">
           <div>
             <Label>Amount</Label>
             <Input type="number" min="0" value={expAmount} onChange={(e) => setExpAmount(e.target.value)} />
@@ -535,13 +535,20 @@ const ProjectDetail = ({
             <Label>Date</Label>
             <Input type="date" value={expDate} onChange={(e) => setExpDate(e.target.value)} />
           </div>
+          <div className="flex items-center gap-2 pb-2">
+            <input type="checkbox" id="expDonorV" checked={expDonorVisible} onChange={(e) => setExpDonorVisible(e.target.checked)} />
+            <label htmlFor="expDonorV" className="text-xs">Donor-visible</label>
+          </div>
         </div>
-        <Button onClick={addExpense}>Record expense</Button>
+        <Button onClick={addExpense}>Submit expense</Button>
 
         {expenses.length > 0 && (
           <table className="w-full text-sm mt-4">
             <thead className="text-left text-xs uppercase tracking-widest text-muted-foreground">
-              <tr><th className="py-2">Date</th><th>Category</th><th>Description</th><th className="text-right">Amount</th></tr>
+              <tr>
+                <th className="py-2">Date</th><th>Category</th><th>Description</th>
+                <th>Status</th><th>Donor</th><th className="text-right">Amount</th><th></th>
+              </tr>
             </thead>
             <tbody className="divide-y">
               {expenses.map((e) => (
@@ -549,11 +556,87 @@ const ProjectDetail = ({
                   <td className="py-2">{format(new Date(e.incurred_on), "d MMM yyyy")}</td>
                   <td>{e.category}</td>
                   <td className="text-muted-foreground">{e.description || "—"}</td>
+                  <td>
+                    <Select value={e.status} onValueChange={(v) => setExpenseStatus(e.id, v)}>
+                      <SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        {["draft","submitted","under_review","approved","committed","paid","rejected","refunded"].map((s) =>
+                          <SelectItem key={s} value={s}>{s.replace(/_/g," ")}</SelectItem>
+                        )}
+                      </SelectContent>
+                    </Select>
+                  </td>
+                  <td>
+                    <input type="checkbox" checked={e.donor_visible} onChange={(ev) => toggleExpenseVisibility(e.id, ev.target.checked)} />
+                  </td>
                   <td className="text-right">{money(Number(e.amount), e.currency)}</td>
+                  <td className="text-right"></td>
                 </tr>
               ))}
             </tbody>
           </table>
+        )}
+      </section>
+
+      {/* Milestones */}
+      <section className="border rounded-md p-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-medium">Project milestones</h3>
+          <span className="text-sm text-muted-foreground">
+            Delivery {deliveryPercent.toFixed(0)}% · {milestones.length} milestone{milestones.length === 1 ? "" : "s"}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 items-end">
+          <div className="md:col-span-2">
+            <Label>Title</Label>
+            <Input value={msTitle} onChange={(e) => setMsTitle(e.target.value)} placeholder="e.g. First clinic run completed" />
+          </div>
+          <div>
+            <Label>Target date</Label>
+            <Input type="date" value={msTarget} onChange={(e) => setMsTarget(e.target.value)} />
+          </div>
+          <div>
+            <Label>Weight</Label>
+            <Input type="number" step="0.5" min="0" value={msWeight} onChange={(e) => setMsWeight(e.target.value)} />
+          </div>
+          <div className="flex items-center gap-2 pb-2">
+            <input type="checkbox" id="msEvidence" checked={msEvidence} onChange={(e) => setMsEvidence(e.target.checked)} />
+            <label htmlFor="msEvidence" className="text-xs">Evidence required</label>
+          </div>
+          <Button onClick={addMilestone}>Add</Button>
+        </div>
+        <div>
+          <Label>Description (optional)</Label>
+          <Textarea value={msDesc} onChange={(e) => setMsDesc(e.target.value)} rows={2} />
+        </div>
+
+        {milestones.length > 0 && (
+          <ol className="divide-y border-t mt-2">
+            {milestones.map((m) => (
+              <li key={m.id} className="py-3 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex-1 min-w-[240px]">
+                  <p className="text-sm font-medium">
+                    <span className="text-muted-foreground mr-2">{String(m.sequence).padStart(2, "0")}</span>
+                    {m.milestone_title}
+                    <span className="ml-2 text-xs text-muted-foreground">weight {m.weight}</span>
+                    {m.evidence_required && <span className="ml-2 text-[10px] uppercase tracking-widest text-primary">Evidence</span>}
+                  </p>
+                  {m.milestone_description && <p className="text-xs text-muted-foreground mt-1">{m.milestone_description}</p>}
+                  {m.target_date && <p className="text-[11px] text-muted-foreground mt-0.5">Target {format(new Date(m.target_date), "d MMM yyyy")}</p>}
+                </div>
+                <Select value={m.status} onValueChange={(v) => setMilestoneStatus(m.id, v)}>
+                  <SelectTrigger className="h-8 w-[140px] text-xs"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {["pending","in_progress","completed","blocked","cancelled"].map((s) =>
+                      <SelectItem key={s} value={s}>{s.replace(/_/g," ")}</SelectItem>
+                    )}
+                  </SelectContent>
+                </Select>
+                <Button size="sm" variant="ghost" onClick={() => removeMilestone(m.id)}>Remove</Button>
+              </li>
+            ))}
+          </ol>
         )}
       </section>
 
@@ -564,7 +647,7 @@ const ProjectDetail = ({
           <span className="text-sm text-muted-foreground">{assignments.length} assigned</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_140px] gap-3 items-end">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
           <div>
             <Label>Volunteer</Label>
             <Select value={volunteerId} onValueChange={setVolunteerId}>
@@ -582,17 +665,53 @@ const ProjectDetail = ({
             <Label>Role</Label>
             <Input value={volRole} onChange={(e) => setVolRole(e.target.value)} placeholder="e.g. Field lead" />
           </div>
-          <Button onClick={assignVolunteer}>Assign</Button>
+          <div>
+            <Label>Donor visibility</Label>
+            <Select value={volVisibility} onValueChange={setVolVisibility}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="full_name">Full name</SelectItem>
+                <SelectItem value="first_name">First name only</SelectItem>
+                <SelectItem value="role_only">Role only</SelectItem>
+                <SelectItem value="anonymised">Anonymised</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label>Start date</Label>
+            <Input type="date" value={volStart} onChange={(e) => setVolStart(e.target.value)} />
+          </div>
+          <div>
+            <Label>End date</Label>
+            <Input type="date" value={volEnd} onChange={(e) => setVolEnd(e.target.value)} />
+          </div>
+          <div />
         </div>
+        <div>
+          <Label>Responsibilities</Label>
+          <Textarea value={volResponsibilities} onChange={(e) => setVolResponsibilities(e.target.value)} rows={2}
+            placeholder="What this team member is expected to deliver on this project" />
+        </div>
+        <Button onClick={assignVolunteer}>Assign</Button>
 
         {assignments.length > 0 && (
           <ul className="divide-y border-t mt-4">
             {assignments.map((a) => (
-              <li key={a.id} className="py-3 flex items-center justify-between">
-                <div>
+              <li key={a.id} className="py-3 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex-1 min-w-[220px]">
                   <p className="text-sm font-medium">{a.volunteers?.name || "Unknown"}</p>
-                  <p className="text-xs text-muted-foreground">{a.volunteers?.email} · {a.assigned_role}</p>
+                  <p className="text-xs text-muted-foreground">{a.assigned_role} · Donor sees: {a.donor_visibility_mode?.replace(/_/g, " ")}</p>
+                  {a.responsibilities && <p className="text-xs mt-1">{a.responsibilities}</p>}
                 </div>
+                <Select value={a.donor_visibility_mode || "role_only"} onValueChange={(v) => updateAssignment(a.id, { donor_visibility_mode: v })}>
+                  <SelectTrigger className="h-8 w-[150px] text-xs"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="full_name">Full name</SelectItem>
+                    <SelectItem value="first_name">First name only</SelectItem>
+                    <SelectItem value="role_only">Role only</SelectItem>
+                    <SelectItem value="anonymised">Anonymised</SelectItem>
+                  </SelectContent>
+                </Select>
                 <Button size="sm" variant="ghost" onClick={() => removeAssignment(a.id)}>Remove</Button>
               </li>
             ))}
