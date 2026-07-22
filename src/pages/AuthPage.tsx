@@ -86,7 +86,6 @@ export const AuthPage = () => {
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
-  const [gdprConsent, setGdprConsent] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
 
