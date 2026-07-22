@@ -7,7 +7,7 @@ export const AboutTheTrustPage = () => (
   <>
     <SEO
       title="About the Trust"
-      description="The legal identity, charitable purpose, Trustees and operating model of Global Health Access Trust."
+      description="The legal identity, history, charitable purpose, Trustees and operating model of Global Health Access Trust."
       canonical="/about-the-trust"
     />
     <ContentLayout>
@@ -17,15 +17,25 @@ export const AboutTheTrustPage = () => (
       </p>
 
       <div className="section-container">
-        <h2>Legal identity</h2>
-        <p>{LEGAL_ENTITY.publicLegalDescription}</p>
+        <h2>Formation and experience</h2>
         <p>
-          The Trust is not presented as a company and no company number or Charity Commission registration number is claimed. Its governing authority comes from its signed Trust Deed and the decisions of its Trustees.
+          Global Health Access Trust was formally established under its Trust Deed with effect from <strong>1 December 2024</strong>.
+        </p>
+        <p>
+          The people behind the Trust bring longstanding experience in charitable and public-benefit work, healthcare, social care, finance, compliance, public health, commissioning, education and organisational governance. That professional and charitable experience predates GHAT and is not presented as activity carried out by GHAT before its legal formation.
         </p>
       </div>
 
       <div className="section-container">
-        <h2>Trustees</h2>
+        <h2>Legal identity</h2>
+        <p>{LEGAL_ENTITY.publicLegalDescription}</p>
+        <p>
+          The Trust is not a company and no company number is claimed. It is not currently presented as a registered charity and no Charity Commission registration number is claimed. Its governing authority comes from its signed Trust Deed and the decisions of its Trustees.
+        </p>
+      </div>
+
+      <div className="section-container">
+        <h2>Trustees and specialist advisers</h2>
         <p>The current Trustees are:</p>
         <ul>
           <li>Mandy King — Chair of Trustees</li>
@@ -33,10 +43,13 @@ export const AboutTheTrustPage = () => (
           <li>John O'Sullivan BA FCA — Trustee</li>
         </ul>
         <p>
-          The Trustees are responsible for charitable purpose, public benefit, financial stewardship, risk, safeguarding, project approval and compliance with the Trust Deed.
+          The Trustees are responsible for charitable purpose, public benefit, financial stewardship, risk, safeguarding, project approval, banking authority and compliance with the Trust Deed.
+        </p>
+        <p>
+          The Trust also benefits from named advisory and specialist contributors whose professional biographies are published openly. Advisers provide input when requested but are not Trustees, do not control Trust funds and cannot bind the Trust without specific written authority.
         </p>
         <Link to="/trustee-biographies" className="text-primary hover:underline">
-          Trustee information →
+          Trustees and advisory contributors →
         </Link>
       </div>
 
@@ -68,7 +81,7 @@ export const AboutTheTrustPage = () => (
       <div className="section-container">
         <h2>Banking and receipt of funds</h2>
         <p>
-          The Trust is establishing a bank account in its own legal name. Public bank details and live payment collection will not be activated until the account and related payment settings have been independently verified and approved by the Trustees.
+          The Trustees are establishing a UK bank account in the legal name <strong>Global Health Access Trust</strong>. Public bank details and live payment collection will not be activated until the account and related payment settings have been verified and approved.
         </p>
         <p>
           A proposal, payment instruction, mandate or pending collection is not treated as charitable income. A donation is recorded only after cleared funds have been received and reconciled.
