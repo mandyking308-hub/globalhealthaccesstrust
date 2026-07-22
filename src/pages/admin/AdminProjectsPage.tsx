@@ -302,6 +302,31 @@ const ProjectDetail = ({
     }
   };
 
+  const assignVolunteer = async () => {
+    if (!volunteerId || !volRole.trim()) {
+      toast({ variant: "destructive", title: "Missing fields", description: "Pick a volunteer and a role." });
+      return;
+    }
+    const { error } = await supabase.from("volunteer_project_assignments").insert({
+      project_id: project.id,
+      volunteer_id: volunteerId,
+      assigned_role: volRole.trim(),
+    });
+    if (error) {
+      toast({ variant: "destructive", title: "Assignment failed", description: error.message });
+    } else {
+      toast({ title: "Volunteer assigned" });
+      setVolunteerId("");
+      loadRelated();
+    }
+  };
+
+  const removeAssignment = async (id: string) => {
+    const { error } = await supabase.from("volunteer_project_assignments").delete().eq("id", id);
+    if (error) toast({ variant: "destructive", title: "Remove failed", description: error.message });
+    else { toast({ title: "Assignment removed" }); loadRelated(); }
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
