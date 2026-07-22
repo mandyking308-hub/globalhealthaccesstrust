@@ -69,8 +69,8 @@ type Milestone = {
   id: string;
   project_id: string;
   sequence: number;
-  title: string;
-  description: string | null;
+  milestone_title: string;
+  milestone_description: string | null;
   target_date: string | null;
   completion_date: string | null;
   status: string;
