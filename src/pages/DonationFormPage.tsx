@@ -38,7 +38,9 @@ export const DonationFormPage = () => {
 
   const [draftId, setDraftId] = useState<string | null>(null);
   const [transferReference, setTransferReference] = useState<string | null>(null);
-  const [stripeUnavailableMsg, setStripeUnavailableMsg] = useState<string | null>(null);
+  const [bankDetails, setBankDetails] = useState<any>(null);
+  const [gcAvailable, setGcAvailable] = useState<boolean | null>(null);
+  const [gcMsg, setGcMsg] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -48,6 +50,7 @@ export const DonationFormPage = () => {
       }
       setUserId(session.user.id);
     });
+    supabase.rpc("gocardless_enabled").then(({ data }) => setGcAvailable(Boolean(data)));
   }, [navigate]);
 
   const amountMinor = Math.round(parseFloat(amountGBP || "0") * 100);
@@ -100,12 +103,12 @@ export const DonationFormPage = () => {
     }
   };
 
-  const chooseCard = async () => {
+  const chooseGoCardless = async () => {
     if (!draftId) return;
     setLoading(true);
-    setStripeUnavailableMsg(null);
+    setGcMsg(null);
     try {
-      const { data, error } = await supabase.functions.invoke("create-donation-checkout", {
+      const { data, error } = await supabase.functions.invoke("gocardless-create-flow", {
         body: { draft_id: draftId },
       });
       if (error) throw error;
@@ -113,13 +116,13 @@ export const DonationFormPage = () => {
         window.location.href = data.url;
         return;
       }
-      setStripeUnavailableMsg(
+      setGcMsg(
         data?.message ||
-          "Secure card payment is currently unavailable. Please use bank transfer, or contact the Trust."
+          "Direct Debit setup is not yet available. You may use secure bank transfer or return later.",
       );
     } catch (err: any) {
-      setStripeUnavailableMsg(
-        "Secure card payment is currently unavailable. Please use bank transfer, or contact the Trust."
+      setGcMsg(
+        "Direct Debit setup is not yet available. You may use secure bank transfer or return later.",
       );
     } finally {
       setLoading(false);
@@ -133,6 +136,9 @@ export const DonationFormPage = () => {
       const { data, error } = await supabase.rpc("donation_request_bank_transfer", { _draft_id: draftId });
       if (error) throw error;
       setTransferReference(data as unknown as string);
+      const { data: bd } = await supabase.rpc("donor_get_bank_details", { _draft_id: draftId });
+      const row = Array.isArray(bd) ? bd[0] : bd;
+      if (row?.show_details) setBankDetails(row);
       setStep("instructions");
     } catch (err: any) {
       toast({ title: "Unable to request bank transfer", description: err.message, variant: "destructive" });
@@ -270,18 +276,25 @@ export const DonationFormPage = () => {
                   </AlertDescription>
                 </Alert>
               )}
-              {stripeUnavailableMsg && (
+              {gcMsg && (
                 <Alert variant="destructive">
-                  <AlertDescription>{stripeUnavailableMsg}</AlertDescription>
+                  <AlertDescription>{gcMsg}</AlertDescription>
                 </Alert>
               )}
               <div className="grid md:grid-cols-2 gap-4">
-                <Button variant="outline" className="h-24 flex-col" onClick={chooseCard} disabled={loading}>
-                  <span className="font-semibold">Secure card payment</span>
-                  <span className="text-xs text-muted-foreground">via Stripe Checkout</span>
+                <Button
+                  variant="outline"
+                  className="h-24 flex-col"
+                  onClick={chooseGoCardless}
+                  disabled={loading || gcAvailable === false}
+                >
+                  <span className="font-semibold">Direct Debit</span>
+                  <span className="text-xs text-muted-foreground">
+                    {gcAvailable === false ? "Not yet available" : "GoCardless-hosted authorisation"}
+                  </span>
                 </Button>
                 <Button variant="outline" className="h-24 flex-col" onClick={chooseBankTransfer} disabled={loading}>
-                  <span className="font-semibold">Request bank transfer</span>
+                  <span className="font-semibold">Bank transfer</span>
                   <span className="text-xs text-muted-foreground">Instructions issued with reference</span>
                 </Button>
               </div>
@@ -300,17 +313,30 @@ export const DonationFormPage = () => {
                 <div className="font-mono text-xl">{transferReference}</div>
               </div>
               <div className="text-[15px] leading-relaxed">
-                <p className="font-semibold mb-2">Please quote this reference on your transfer. Instructions:</p>
+                <p className="font-semibold mb-2">Please quote this reference on your transfer:</p>
                 <ul className="space-y-1">
-                  <li><strong>Beneficiary:</strong> Global Health Access Trust</li>
+                  <li><strong>Beneficiary:</strong> {bankDetails?.beneficiary_name ?? "Global Health Access Trust"}</li>
+                  {bankDetails?.bank_name && <li><strong>Bank:</strong> {bankDetails.bank_name}</li>}
+                  {bankDetails?.sort_code && <li><strong>Sort code:</strong> {bankDetails.sort_code}</li>}
+                  {bankDetails?.account_number && <li><strong>Account number:</strong> {bankDetails.account_number}</li>}
+                  {bankDetails?.iban && <li><strong>IBAN:</strong> {bankDetails.iban}</li>}
+                  {bankDetails?.bic && <li><strong>BIC:</strong> {bankDetails.bic}</li>}
                   <li><strong>Amount:</strong> {formatGBP(amountMinor)}</li>
                   <li><strong>Reference:</strong> {transferReference}</li>
                 </ul>
-                <p className="mt-4 text-muted-foreground text-sm">
-                  Full bank details (account, sort code, IBAN, BIC) will be issued by the Trust's finance team
-                  by secure email to the address on your donor account within one working day.
-                  Your gift will be reconciled and confirmed once received.
-                </p>
+                {!bankDetails && (
+                  <p className="mt-4 text-muted-foreground text-sm">
+                    Full bank details will be issued by the Trust's finance team by secure email to the
+                    address on your donor account within one working day. Your gift will be reconciled and
+                    confirmed once received. A bank-transfer instruction request is not a paid donation.
+                  </p>
+                )}
+                {bankDetails && (
+                  <p className="mt-4 text-muted-foreground text-sm">
+                    Please do not omit the reference — it is required to reconcile your gift. Your donation
+                    will be recorded only once funds are received and reconciled.
+                  </p>
+                )}
               </div>
               <Button onClick={() => navigate("/donor-dashboard")} className="w-full h-12">
                 Return to Donor Portal
