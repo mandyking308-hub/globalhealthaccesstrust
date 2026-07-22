@@ -461,6 +461,7 @@ export type Database = {
           identity_status: string | null
           identity_verified_at: string | null
           internal_notes: string | null
+          is_test: boolean
           pause_reason: string | null
           processed_at: string | null
           processed_by: string | null
@@ -509,6 +510,7 @@ export type Database = {
           identity_status?: string | null
           identity_verified_at?: string | null
           internal_notes?: string | null
+          is_test?: boolean
           pause_reason?: string | null
           processed_at?: string | null
           processed_by?: string | null
@@ -557,6 +559,7 @@ export type Database = {
           identity_status?: string | null
           identity_verified_at?: string | null
           internal_notes?: string | null
+          is_test?: boolean
           pause_reason?: string | null
           processed_at?: string | null
           processed_by?: string | null
