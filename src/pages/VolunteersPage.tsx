@@ -6,13 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
 import { Loader2 } from "lucide-react";
@@ -21,11 +15,22 @@ import educationTrainingHero from "@/assets/education-training-hero.jpg";
 const AVAILABILITY_OPTIONS = ["Full-time", "Part-time", "Project-based"] as const;
 const AREA_OPTIONS = ["Field Work", "Operations", "Medical", "Research", "Fundraising", "Other"] as const;
 
+const ACCURACY_VERSION = "team-accuracy-1.0";
+const PRIVACY_VERSION = "team-privacy-ack-1.0";
+const MAX_CV_BYTES = 5 * 1024 * 1024;
+const ALLOWED_MIME = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
+
 export const VolunteersPage = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [cvFile, setCvFile] = useState<File | null>(null);
-  const [gdprConsent, setGdprConsent] = useState(false);
+  const [accuracy, setAccuracy] = useState(false);
+  const [privacyAck, setPrivacyAck] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -38,70 +43,85 @@ export const VolunteersPage = () => {
     availability: "",
     area_of_interest: "",
     motivation: "",
-    notes: "",
+    role_of_interest: "",
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-      if (!validTypes.includes(file.type)) {
-        toast({ title: "Invalid file type", description: "Please upload a PDF or Word document", variant: "destructive" });
-        return;
-      }
-      if (file.size > 5 * 1024 * 1024) {
-        toast({ title: "File too large", description: "Please upload a file smaller than 5MB", variant: "destructive" });
-        return;
-      }
-      setCvFile(file);
+    if (!file) return;
+    if (!ALLOWED_MIME.includes(file.type)) {
+      toast({ title: "Invalid file type", description: "PDF or Word only", variant: "destructive" });
+      return;
     }
+    if (file.size > MAX_CV_BYTES) {
+      toast({ title: "File too large", description: "Max 5MB", variant: "destructive" });
+      return;
+    }
+    setCvFile(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!gdprConsent) {
-      toast({ title: "Consent required", description: "Please agree to GDPR and data processing to continue.", variant: "destructive" });
+    if (!accuracy || !privacyAck) {
+      toast({
+        title: "Declarations required",
+        description: "Both declarations must be confirmed.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (!cvFile) {
+      toast({ title: "CV required", variant: "destructive" });
       return;
     }
     setIsSubmitting(true);
     try {
-      let cvUrl = null;
-      if (cvFile) {
-        const fileExt = cvFile.name.split('.').pop();
-        const fileName = `${Date.now()}.${fileExt}`;
-        const filePath = `public/${fileName}`;
-        const { error: uploadError } = await supabase.storage.from('volunteer-cvs').upload(filePath, cvFile);
-        if (uploadError) throw uploadError;
-        const { data: { publicUrl } } = supabase.storage.from('volunteer-cvs').getPublicUrl(filePath);
-        cvUrl = publicUrl;
-      }
+      // Upload to PRIVATE bucket. No public URL is created.
+      const { data: sessionData } = await supabase.auth.getSession();
+      const uid = sessionData.session?.user.id;
+      // Scope path to uid when signed in, otherwise to a random anon prefix
+      const prefix = uid ? `authenticated/${uid}` : `anonymous/${crypto.randomUUID()}`;
+      const ext = cvFile.name.split(".").pop() || "bin";
+      const objectPath = `${prefix}/${Date.now()}.${ext}`;
 
-      const { error } = await supabase.from("volunteers").insert({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || "",
-        country: formData.country,
-        skills: formData.skills,
-        experience: formData.experience,
-        languages: formData.languages,
-        availability: formData.availability || "Part-time",
-        area_of_interest: formData.area_of_interest || "Other",
-        motivation: formData.motivation || null,
-        notes: formData.notes || null,
-        cv_url: cvUrl,
-        status: 'pending',
-      } as any);
+      const { error: uploadErr } = await supabase.storage
+        .from("project-team-applications")
+        .upload(objectPath, cvFile, { contentType: cvFile.type, upsert: false });
+      if (uploadErr) throw uploadErr;
 
-      if (error) throw error;
-      toast({ title: "Application submitted successfully!", description: "Thank you for applying. We'll review your application and be in touch soon." });
-      setFormData({ name: "", email: "", phone: "", country: "", skills: "", experience: "", languages: "", availability: "", area_of_interest: "", motivation: "", notes: "" });
-      setCvFile(null);
-      setGdprConsent(false);
-      const fileInput = document.getElementById('cv-upload') as HTMLInputElement;
-      if (fileInput) fileInput.value = '';
+      const { error: rpcErr } = await supabase.rpc("submit_volunteer_application", {
+        _name: formData.name,
+        _email: formData.email,
+        _phone: formData.phone || null,
+        _country: formData.country,
+        _role_of_interest: formData.role_of_interest || formData.area_of_interest,
+        _area_of_interest: formData.area_of_interest || "Other",
+        _availability: formData.availability || "Part-time",
+        _skills: formData.skills,
+        _experience: formData.experience,
+        _languages: formData.languages,
+        _motivation: formData.motivation || null,
+        _cv_object_path: objectPath,
+        _cv_original_filename: cvFile.name,
+        _cv_mime_type: cvFile.type,
+        _cv_size_bytes: cvFile.size,
+        _accuracy_version: ACCURACY_VERSION,
+        _privacy_version: PRIVACY_VERSION,
+      });
+      if (rpcErr) throw rpcErr;
+
+      setSubmitted(true);
+      toast({
+        title: "Application received",
+        description: "Thank you. The Trust will review and be in touch.",
+      });
     } catch (error: any) {
-      console.error("Error submitting application:", error);
-      toast({ title: "Submission failed", description: error.message || "There was an error submitting your application. Please try again.", variant: "destructive" });
+      console.error("volunteer application error", error);
+      toast({
+        title: "Submission failed",
+        description: error.message || "Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -109,136 +129,153 @@ export const VolunteersPage = () => {
 
   return (
     <>
-      <SEO title="Become a Volunteer - Global Health Access Trust" description="Join a global community of skilled professionals supporting high-impact health interventions." canonical="/volunteer-apply" />
+      <SEO
+        title="Project Team Application — Global Health Access Trust"
+        description="Apply to join a project delivery team supporting commissioned health interventions."
+        canonical="/volunteer-apply"
+      />
       <div className="min-h-screen bg-background">
-        {/* Hero */}
-        <section className="relative min-h-[40vh] sm:min-h-[50vh] flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: `linear-gradient(rgba(5, 21, 47, 0.7), rgba(5, 21, 47, 0.7)), url(${educationTrainingHero})` }}>
+        <section
+          className="relative min-h-[40vh] sm:min-h-[50vh] flex items-center justify-center bg-cover bg-center"
+          style={{
+            backgroundImage: `linear-gradient(rgba(5, 21, 47, 0.7), rgba(5, 21, 47, 0.7)), url(${educationTrainingHero})`,
+          }}
+        >
           <div className="container max-w-4xl text-center px-4 sm:px-6 py-12 sm:py-16">
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">Join Us in Delivering Health With Heart</h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">Be part of a global community of skilled professionals supporting high-impact health interventions commissioned by our donors.</p>
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+              Project Team Application
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+              Skilled professionals supporting commissioned health interventions.
+            </p>
           </div>
         </section>
 
-        {/* Why Volunteer */}
-        <section className="py-12 sm:py-16 lg:py-20 bg-muted/30">
-          <div className="container max-w-6xl px-4 sm:px-6">
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-3 sm:mb-4">Why Volunteer With GHAT</h2>
-            <p className="text-base sm:text-lg text-muted-foreground text-center max-w-3xl mx-auto mb-12 sm:mb-16">Join a purpose-driven organization where your skills make a real difference.</p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {[
-                { title: "Meaningful Impact", desc: "Work on targeted, high-integrity projects with measurable outcomes that change lives." },
-                { title: "Flexible Roles", desc: "Field work, logistics, training, admin support, or remote assistance — find your fit." },
-                { title: "Full Support", desc: "Guided by our admin team and AI assistant every step of the way." },
-              ].map((item) => (
-                <Card key={item.title} className="text-center shadow-soft hover:shadow-medium transition-shadow">
-                  <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4" />
-                    <h3 className="font-serif text-lg sm:text-xl font-bold mb-2 sm:mb-3">{item.title}</h3>
-                    <p className="text-sm sm:text-base text-muted-foreground">{item.desc}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Application Form */}
         <section className="py-12 sm:py-16 lg:py-20">
           <div className="container max-w-3xl px-4 sm:px-6">
-            <Card className="shadow-medium">
-              <CardHeader>
-                <CardTitle className="font-serif text-2xl sm:text-3xl">Volunteer Application</CardTitle>
-                <CardDescription className="text-sm sm:text-base">Complete the form below to join our community of dedicated professionals.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Full Name *</Label>
-                    <Input id="name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
+            {submitted ? (
+              <Card className="shadow-medium">
+                <CardHeader>
+                  <CardTitle className="font-serif text-2xl">Application received</CardTitle>
+                  <CardDescription>
+                    Thank you. Your details and CV are held securely. A member of the Trust will contact you.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            ) : (
+              <Card className="shadow-medium">
+                <CardHeader>
+                  <CardTitle className="font-serif text-2xl sm:text-3xl">Application form</CardTitle>
+                  <CardDescription className="text-sm sm:text-base">
+                    Your CV is uploaded to secure private storage. Only authorised Trust administrators can retrieve it.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
-                      <Input id="email" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+                      <Label htmlFor="name">Full name *</Label>
+                      <Input id="name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
                     </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email *</Label>
+                        <Input id="email" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone</Label>
+                        <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+44 …" />
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+44 …" />
+                      <Label htmlFor="country">Country *</Label>
+                      <Input id="country" value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })} required />
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="country">Country *</Label>
-                    <Input id="country" value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })} required />
-                  </div>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label>Availability *</Label>
+                        <Select value={formData.availability} onValueChange={(v) => setFormData({ ...formData, availability: v })} required>
+                          <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                          <SelectContent>
+                            {AVAILABILITY_OPTIONS.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Area of interest *</Label>
+                        <Select value={formData.area_of_interest} onValueChange={(v) => setFormData({ ...formData, area_of_interest: v })} required>
+                          <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                          <SelectContent>
+                            {AREA_OPTIONS.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label>Availability *</Label>
-                      <Select value={formData.availability} onValueChange={(val) => setFormData({ ...formData, availability: val })} required>
-                        <SelectTrigger><SelectValue placeholder="Select availability" /></SelectTrigger>
-                        <SelectContent>
-                          {AVAILABILITY_OPTIONS.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor="role_of_interest">Role of interest</Label>
+                      <Input id="role_of_interest" value={formData.role_of_interest} onChange={(e) => setFormData({ ...formData, role_of_interest: e.target.value })} placeholder="e.g., Field Coordinator" />
                     </div>
+
                     <div className="space-y-2">
-                      <Label>Area of Interest *</Label>
-                      <Select value={formData.area_of_interest} onValueChange={(val) => setFormData({ ...formData, area_of_interest: val })} required>
-                        <SelectTrigger><SelectValue placeholder="Select area" /></SelectTrigger>
-                        <SelectContent>
-                          {AREA_OPTIONS.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}
-                        </SelectContent>
-                      </Select>
+                      <Label htmlFor="skills">Skills / profession *</Label>
+                      <Input id="skills" value={formData.skills} onChange={(e) => setFormData({ ...formData, skills: e.target.value })} required />
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="skills">Skills / Profession *</Label>
-                    <Input id="skills" value={formData.skills} onChange={(e) => setFormData({ ...formData, skills: e.target.value })} placeholder="e.g., Registered Nurse, Project Manager" required />
-                  </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="experience">Relevant experience *</Label>
+                      <Textarea id="experience" value={formData.experience} onChange={(e) => setFormData({ ...formData, experience: e.target.value })} rows={4} required />
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="experience">Relevant Experience *</Label>
-                    <Textarea id="experience" value={formData.experience} onChange={(e) => setFormData({ ...formData, experience: e.target.value })} rows={4} required placeholder="Describe your relevant experience…" />
-                  </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="languages">Languages *</Label>
+                      <Input id="languages" value={formData.languages} onChange={(e) => setFormData({ ...formData, languages: e.target.value })} required />
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="languages">Languages *</Label>
-                    <Input id="languages" value={formData.languages} onChange={(e) => setFormData({ ...formData, languages: e.target.value })} placeholder="e.g., English (Native), French (Fluent)" required />
-                  </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="motivation">Motivation</Label>
+                      <Textarea id="motivation" value={formData.motivation} onChange={(e) => setFormData({ ...formData, motivation: e.target.value })} rows={3} />
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="motivation">Motivation Statement</Label>
-                    <Textarea id="motivation" value={formData.motivation} onChange={(e) => setFormData({ ...formData, motivation: e.target.value })} rows={3} placeholder="Why do you want to volunteer with GHAT?" />
-                  </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="cv-upload">CV (PDF or Word, max 5MB) *</Label>
+                      <Input id="cv-upload" type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} required className="cursor-pointer" />
+                      {cvFile && <p className="text-sm text-green-700">{cvFile.name}</p>}
+                      <p className="text-xs text-muted-foreground">
+                        Held in private storage. No public link is created. Retrieved by administrators only, with an auditable signed URL.
+                      </p>
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="cv-upload">Upload CV (PDF or Word) *</Label>
-                    <Input id="cv-upload" type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} required className="cursor-pointer" />
-                    {cvFile && <p className="text-sm text-green-600">{cvFile.name}</p>}
-                    <p className="text-sm text-muted-foreground">Max 5MB · PDF, DOC, DOCX</p>
-                  </div>
+                    <div className="space-y-4 border-t border-border pt-6">
+                      <div className="flex items-start gap-3">
+                        <Checkbox id="accuracy" checked={accuracy} onCheckedChange={(v) => setAccuracy(v as boolean)} />
+                        <label htmlFor="accuracy" className="text-sm leading-relaxed cursor-pointer">
+                          <strong>Accuracy declaration.</strong> I confirm that the information supplied — including my CV — is
+                          true and accurate to the best of my knowledge. I understand that inaccurate information may result in
+                          the application being declined or, if I am appointed, my engagement being ended. *
+                        </label>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <Checkbox id="privacyAck" checked={privacyAck} onCheckedChange={(v) => setPrivacyAck(v as boolean)} />
+                        <label htmlFor="privacyAck" className="text-sm leading-relaxed cursor-pointer">
+                          <strong>Privacy acknowledgement.</strong> I acknowledge that I have read the{" "}
+                          <a href="/privacy-policy" className="underline" target="_blank" rel="noreferrer">Privacy Notice</a>{" "}
+                          and understand that my application, CV and correspondence will be processed by
+                          Global Health Access Trust for the purpose of assessing and, where relevant, coordinating my
+                          engagement on a project delivery team. *
+                        </label>
+                      </div>
+                    </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="notes">Additional Notes (Optional)</Label>
-                    <Textarea id="notes" value={formData.notes} onChange={(e) => setFormData({ ...formData, notes: e.target.value })} rows={3} />
-                  </div>
-
-                  <div className="flex items-start space-x-2 py-4">
-                    <Checkbox id="gdpr" checked={gdprConsent} onCheckedChange={(checked) => setGdprConsent(checked as boolean)} required />
-                    <label htmlFor="gdpr" className="text-sm leading-relaxed cursor-pointer">
-                      I agree to GDPR and data processing. I understand that my personal information will be stored securely and used only for volunteer coordination purposes. *
-                    </label>
-                  </div>
-
-                  <Button type="submit" size="lg" className="w-full min-h-[48px]" disabled={isSubmitting}>
-                    {isSubmitting ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Submitting Application...</>) : "Submit Application"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                    <Button type="submit" size="lg" className="w-full min-h-[48px]" disabled={isSubmitting}>
+                      {isSubmitting ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Submitting…</>) : "Submit application"}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </section>
       </div>
