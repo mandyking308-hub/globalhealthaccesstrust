@@ -17,6 +17,8 @@ const menuItems = [
   { title: "Donors", url: "/admin/donors" },
   { title: "Volunteers", url: "/admin/volunteers" },
   { title: "Projects", url: "/admin/projects" },
+  { title: "Agreements", url: "/admin/agreements" },
+  { title: "Service Console", url: "/admin/service-console" },
   { title: "Contacts", url: "/admin/contacts" },
   { title: "Evidence", url: "/admin/evidence" },
   { title: "Messages", url: "/admin/messages" },
