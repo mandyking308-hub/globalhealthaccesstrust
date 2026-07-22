@@ -201,9 +201,14 @@ export const Header = () => {
                   </div>
                 ))}
                 <div className="px-4 pt-4 border-t border-foreground/10 mt-4 space-y-2">
-                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                  <Link to="/auth?portal=donor" onClick={() => setIsMenuOpen(false)}>
+                    <Button size="sm" className="w-full text-sm bg-primary text-primary-foreground hover:bg-primary/90">
+                      Donor Login
+                    </Button>
+                  </Link>
+                  <Link to="/auth?portal=team" onClick={() => setIsMenuOpen(false)}>
                     <Button variant="outline" size="sm" className="w-full text-sm">
-                      Login
+                      Project Team Login
                     </Button>
                   </Link>
                 </div>
