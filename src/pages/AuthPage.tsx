@@ -152,11 +152,11 @@ export const AuthPage = () => {
     if (signupPassword !== signupConfirmPassword) return setError("Passwords do not match");
     const pwCheck = validatePassword(signupPassword);
     if (!pwCheck.valid) return setError(pwCheck.errors[0]);
-    if (!gdprConsent) return setError("You must accept the GDPR consent to register");
     if (!termsAccepted) return setError("You must agree to the Website and Portal Terms of Use to create an account");
 
     setLoading(true);
     try {
+      const nowIso = new Date().toISOString();
       const { data, error } = await supabase.auth.signUp({
         email: signupEmail,
         password: signupPassword,
@@ -165,23 +165,36 @@ export const AuthPage = () => {
           data: {
             first_name: signupFirstName,
             last_name: signupLastName,
-            gdpr_consent: gdprConsent,
-            terms_accepted: termsAccepted,
+            terms_accepted: true,
+            terms_document_slug: "terms-of-use",
             terms_version: "1.0",
+            terms_accepted_at: nowIso,
+            privacy_document_slug: "privacy-notice",
+            privacy_version: "1.0",
+            privacy_acknowledged_at: nowIso,
           },
         },
       });
       if (error) throw error;
+      // Client-side fallback: record both events when we have an immediate session.
+      // The database trigger records them from auth metadata regardless, so this
+      // is best-effort and non-blocking.
       if (data.session) {
-        // Record legal acceptance for the current published Terms.
-        // Non-blocking: swallow errors so account creation is not gated on the
-        // presence of a published legal_documents row.
         try {
-          await supabase.rpc("record_legal_acceptance", {
-            _slug: "terms-of-use",
-            _role: "donor",
-            _user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 300) : undefined,
-          });
+          await Promise.all([
+            supabase.rpc("record_legal_event", {
+              _slug: "terms-of-use",
+              _event_type: "acceptance",
+              _context: "account_creation",
+              _role: "donor",
+            }),
+            supabase.rpc("record_legal_event", {
+              _slug: "privacy-notice",
+              _event_type: "acknowledgement",
+              _context: "account_creation",
+              _role: "donor",
+            }),
+          ]);
         } catch {
           /* non-blocking */
         }
