@@ -39,7 +39,7 @@ const advisers: PersonProfile[] = [
     name: "Rachael Duff",
     role: "Specialist adviser — Compliance and operational governance",
     biography:
-      "Rachael Duff is a regulatory and compliance leader with more than 24 years of experience in operational and quality systems management across the NHS, social care and commercial healthcare. She has served as a Specialist Practice Manager Adviser for the Care Quality Commission and has participated in more than 400 inspections. She holds Level 4 certification in mediation and is trained as an expert witness.",
+      "Rachael Duff is a regulatory and compliance leader with more than 24 years of experience in operational and quality-systems management across the NHS, social care and commercial healthcare. She has served as a Specialist Practice Manager Adviser for the Care Quality Commission and has participated in more than 400 inspections. Rachael holds Level 4 certification in mediation and is trained as an expert witness. Her experience spans compliance, governance, quality assurance, operational systems and the practical application of regulatory standards.",
     contribution:
       "She may provide specialist input on compliance, governance, quality assurance and operational systems when requested by the Trustees.",
   },
@@ -47,7 +47,7 @@ const advisers: PersonProfile[] = [
     name: "Dr Joy Wong",
     role: "Specialist adviser — Psychological health and youth mental health",
     biography:
-      "Dr Joy Wong is a Chartered Health Psychologist and Associate Fellow of the British Psychological Society. She holds a PhD in Public Health focused on youth mental health, is registered with the Health and Care Professions Council and has experience in evidence-based psychological practice, including DBT and CBT.",
+      "Dr Joy Wong is a Chartered Health Psychologist and Associate Fellow of the British Psychological Society. She holds a PhD in Public Health focused on youth mental health and is registered with the Health and Care Professions Council. Her clinical specialisms include dialectical behaviour therapy and cognitive behavioural therapy, and she brings experience in evidence-based psychological practice, public health and culturally responsive approaches to care.",
     contribution:
       "She may provide specialist input on psychological health, youth mental health, public health and culturally responsive programme design when requested by the Trustees.",
   },
@@ -55,9 +55,9 @@ const advisers: PersonProfile[] = [
     name: "Richard Banyard",
     role: "Specialist adviser — Health systems and commissioning",
     biography:
-      "Richard Banyard is a former NHS Chief Executive and senior healthcare strategist with more than 35 years of experience, including extensive Board-level service. His background includes commissioning, primary-care transformation, health-service management, education and national health-infrastructure work.",
+      "Richard Banyard is a former NHS Chief Executive and senior healthcare strategist with more than 35 years of experience, including extensive Board-level service. He holds a Master's degree in Health Services Management and a Postgraduate Certificate in Education. His background includes commissioning, primary-care transformation, health-service management, education and national health-infrastructure work. He has also worked as an educator and Head Examiner, bringing experience in professional standards, institutional development and public-service delivery.",
     contribution:
-      "He may provide specialist input on health systems, commissioning, service design and institutional partnerships when requested by the Trustees.",
+      "He may provide specialist input on health systems, commissioning, service design, education and institutional partnerships when requested by the Trustees.",
   },
 ];
 
@@ -88,8 +88,8 @@ export const TrusteeBiographiesGrid = () => (
 
     <section>
       <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3">Advisory and specialist contributors</h2>
-      <p className="text-muted-foreground mb-6 max-w-3xl">
-        The Trust values the experience of its advisory and specialist contributors. They are not Trustees, do not control Trust funds and cannot bind the Trust unless the Trustees give specific written authority. Their biographies describe their professional experience and do not imply that their employers or former employers are partners of GHAT.
+      <p className="text-muted-foreground mb-6 max-w-4xl">
+        The Trust values the experience of its advisory and specialist contributors. They are not Trustees, do not control Trust funds, cannot bind Global Health Access Trust without specific written authority from the Trustees and are not bank signatories merely because they appear on this website. Their biographies describe their professional experience and do not imply that their employers or former employers are partners of GHAT.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {advisers.map((person) => <ProfileCard key={person.name} person={person} />)}
@@ -97,7 +97,7 @@ export const TrusteeBiographiesGrid = () => (
     </section>
 
     <p className="text-sm text-muted-foreground max-w-4xl">
-      The experience of the Trustees and advisers predates the formation of Global Health Access Trust. GHAT itself was formally established under its Trust Deed with effect from 1 December 2024.
+      The experience of the Trustees and advisers predates the formation of Global Health Access Trust. The charitable and public-benefit work that led to GHAT began in 2019; GHAT itself was formally established under its Trust Deed with effect from 1 December 2024.
     </p>
   </div>
 );
