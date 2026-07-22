@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
+import { ProjectMessagesThread } from "@/components/project/ProjectMessagesThread";
 
 type Project = {
   id: string;
@@ -166,6 +167,11 @@ const ProjectDetail = ({
   const [target, setTarget] = useState<string>(project.funding_target?.toString() ?? "");
   const [currency] = useState(project.currency || "GBP");
   const [saving, setSaving] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setCurrentUserId(data.user?.id ?? null));
+  }, []);
 
   const [allocations, setAllocations] = useState<(Allocation & { donations: Donation | null })[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
@@ -503,6 +509,14 @@ const ProjectDetail = ({
               </li>
             ))}
           </ul>
+        )}
+      </section>
+
+      {/* Project messages */}
+      <section className="space-y-3">
+        <h3 className="font-medium">Project messages</h3>
+        {currentUserId && (
+          <ProjectMessagesThread projectId={project.id} currentUserId={currentUserId} currentRole="admin" />
         )}
       </section>
     </div>

@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
+import { ProjectMessagesThread } from "@/components/project/ProjectMessagesThread";
 
 type Assignment = {
   id: string;
@@ -43,6 +44,12 @@ export const VolunteerAssignedProjects = ({ volunteerId }: { volunteerId: string
   const [noteType, setNoteType] = useState("field_note");
   const [file, setFile] = useState<File | null>(null);
   const [posting, setPosting] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [threadOpen, setThreadOpen] = useState<string | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null));
+  }, []);
 
   const load = async () => {
     setLoading(true);
@@ -206,6 +213,18 @@ export const VolunteerAssignedProjects = ({ volunteerId }: { volunteerId: string
                       </li>
                     ))}
                   </ul>
+                )}
+              </div>
+
+              <div className="border-t pt-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="text-sm font-medium">Project messages</h4>
+                  <Button size="sm" variant="outline" onClick={() => setThreadOpen(threadOpen === p.id ? null : p.id)}>
+                    {threadOpen === p.id ? "Hide" : "Open thread"}
+                  </Button>
+                </div>
+                {threadOpen === p.id && userId && (
+                  <ProjectMessagesThread projectId={p.id} currentUserId={userId} currentRole="volunteer" />
                 )}
               </div>
             </CardContent>

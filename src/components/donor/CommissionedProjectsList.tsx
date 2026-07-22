@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
+import { ProjectMessagesThread } from "@/components/project/ProjectMessagesThread";
 
 interface CommissionedProject {
   id: string;
@@ -46,6 +48,8 @@ export const CommissionedProjectsList = () => {
   const [projects, setProjects] = useState<CommissionedProject[]>([]);
   const [finance, setFinance] = useState<Record<string, ProjectFinance>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [openThread, setOpenThread] = useState<string | null>(null);
 
   useEffect(() => { fetchProjects(); }, []);
 
@@ -53,6 +57,7 @@ export const CommissionedProjectsList = () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
+      setUserId(user.id);
 
       const { data, error } = await supabase
         .from("commissioned_projects")
@@ -172,6 +177,22 @@ export const CommissionedProjectsList = () => {
                     <Progress value={percent} className="h-1 rounded-none" />
                   </div>
                 )}
+
+                <div className="mt-6 pt-5 border-t border-foreground/10">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="tracking-[0.1em] text-[11.5px] font-semibold uppercase h-9"
+                    onClick={() => setOpenThread(openThread === project.id ? null : project.id)}
+                  >
+                    {openThread === project.id ? "Hide messages" : "Messages with Trust Office"}
+                  </Button>
+                  {openThread === project.id && userId && (
+                    <div className="mt-4">
+                      <ProjectMessagesThread projectId={project.id} currentUserId={userId} currentRole="donor" />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </article>
