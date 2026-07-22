@@ -1,4 +1,4 @@
 project_id = "oaovlhbzqymwhuqmwwku"
 
-[functions.stripe-webhook]
+[functions.gocardless-webhook]
 verify_jwt = false
