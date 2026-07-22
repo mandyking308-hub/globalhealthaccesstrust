@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useOnboarding } from "@/hooks/useOnboarding";
 import { OnboardingTour } from "@/components/onboarding/OnboardingTour";
@@ -30,15 +31,15 @@ export const VolunteerDashboardPage = () => {
   const { toast } = useToast();
   const [volunteer, setVolunteer] = useState<Volunteer | null>(null);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState<string>("");
+  const [userId, setUserId] = useState("");
   const [assignedProjects, setAssignedProjects] = useState<{ id: string; label: string }[]>([]);
   const [selectedAgreementProject, setSelectedAgreementProject] = useState<string | null>(null);
-  const { isComplete, isLoading: onboardingLoading, markOnboardingComplete, resetOnboarding } = useOnboarding("volunteer");
+  const { isComplete, isLoading: onboardingLoading, markOnboardingComplete } = useOnboarding("volunteer");
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
     checkAuth();
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === "SIGNED_OUT") navigate("/auth");
     });
     return () => subscription.unsubscribe();
@@ -53,11 +54,10 @@ export const VolunteerDashboardPage = () => {
   const checkAuth = async () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
-      navigate("/auth");
+      navigate("/auth?portal=team");
       return;
     }
 
-    // Fetch volunteer profile
     const { data: volunteerData, error } = await supabase
       .from("volunteers")
       .select("*")
@@ -67,17 +67,17 @@ export const VolunteerDashboardPage = () => {
     if (error || !volunteerData) {
       toast({
         title: "Access denied",
-        description: "You need to be an approved volunteer to access this dashboard.",
+        description: "You need to be an approved project team member to access this dashboard.",
         variant: "destructive",
       });
       navigate("/volunteer-apply");
       return;
     }
 
-    if (volunteerData.status !== 'approved') {
+    if (volunteerData.status !== "approved") {
       toast({
         title: "Application pending",
-        description: "Your volunteer application is still under review. You'll be notified once approved.",
+        description: "Your project team application is still under review. You'll be notified once approved.",
       });
       navigate("/");
       return;
@@ -86,18 +86,18 @@ export const VolunteerDashboardPage = () => {
     setVolunteer(volunteerData);
     setUserId(session.user.id);
 
-    // Load assigned projects (agreement selector)
-    const { data: assigns } = await supabase
+    const { data: assignments } = await supabase
       .from("volunteer_project_assignments")
       .select("project_id, commissioned_projects(id,title)")
       .eq("volunteer_id", volunteerData.id);
-    const list = (assigns || [])
-      .map((a: any) => a.commissioned_projects)
-      .filter(Boolean)
-      .map((p: any) => ({ id: p.id, label: p.title }));
-    setAssignedProjects(list);
-    if (list.length) setSelectedAgreementProject(list[0].id);
 
+    const projects = (assignments || [])
+      .map((assignment: any) => assignment.commissioned_projects)
+      .filter(Boolean)
+      .map((project: any) => ({ id: project.id, label: project.title }));
+
+    setAssignedProjects(projects);
+    if (projects.length) setSelectedAgreementProject(projects[0].id);
     setLoading(false);
   };
 
@@ -109,7 +109,7 @@ export const VolunteerDashboardPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
       </div>
     );
   }
@@ -128,28 +128,33 @@ export const VolunteerDashboardPage = () => {
           onClose={() => setShowOnboarding(false)}
         />
       )}
-      
+
       <SEO
         title="Project Team Portal - Global Health Access Trust"
         description="Secure workspace for approved project teams to manage assigned projects, submit progress, upload field evidence and communicate with the Trust."
         canonical="/volunteer-dashboard"
       />
+      <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
 
       <div className="min-h-screen bg-background">
         <header className="border-b bg-card">
-          <div className="container-section py-4 flex items-center justify-between">
+          <div className="container-section py-4 flex items-center justify-between gap-4">
             <div>
               <h1 className="text-2xl font-bold">Project Team Portal</h1>
               <p className="text-sm text-muted-foreground">Welcome back, {volunteer.name}</p>
             </div>
-            <Button variant="outline" onClick={handleLogout}>
-              Logout
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" asChild>
+                <Link to="/">Return to Site</Link>
+              </Button>
+              <Button variant="outline" onClick={handleLogout}>Logout</Button>
+            </div>
           </div>
         </header>
 
-        <div className="container-section py-8">
-          {/* Welcome Card */}
+        <main className="container-section py-8">
           <Card className="mb-6 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
             <CardContent className="pt-6">
               <div className="flex flex-col md:flex-row items-start justify-between gap-4">
@@ -172,10 +177,10 @@ export const VolunteerDashboardPage = () => {
             </CardContent>
           </Card>
 
-          {/* Main Tabs */}
           <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6">
             <TabsList className="flex flex-wrap gap-1 h-auto">
               <TabsTrigger value="overview" className="text-xs sm:text-sm">Overview</TabsTrigger>
+              <TabsTrigger value="available-projects" className="text-xs sm:text-sm">Available Projects</TabsTrigger>
               <TabsTrigger value="my-projects" className="text-xs sm:text-sm">My Projects</TabsTrigger>
               <TabsTrigger value="agreement" className="text-xs sm:text-sm">Agreement</TabsTrigger>
               <TabsTrigger value="support" className="text-xs sm:text-sm">Support</TabsTrigger>
@@ -186,47 +191,28 @@ export const VolunteerDashboardPage = () => {
             <TabsContent value="overview">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 <Card className="shadow-soft hover:shadow-medium transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-sm font-medium">Skills</CardTitle>
-                  </CardHeader>
+                  <CardHeader><CardTitle className="text-sm font-medium">Skills</CardTitle></CardHeader>
+                  <CardContent><p className="text-sm text-muted-foreground">{volunteer.skills}</p></CardContent>
+                </Card>
+                <Card className="shadow-soft hover:shadow-medium transition-shadow">
+                  <CardHeader><CardTitle className="text-sm font-medium">Status</CardTitle></CardHeader>
                   <CardContent>
-                    <p className="text-sm text-muted-foreground">{volunteer.skills}</p>
+                    <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">Active Team Member</Badge>
                   </CardContent>
                 </Card>
-
                 <Card className="shadow-soft hover:shadow-medium transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-sm font-medium">Status</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
-                      Active Team Member
-                    </Badge>
-                  </CardContent>
-                </Card>
-
-                <Card className="shadow-soft hover:shadow-medium transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-sm font-medium">AI Assistant</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      
-                      <span>Coming Soon</span>
-                    </div>
-                  </CardContent>
+                  <CardHeader><CardTitle className="text-sm font-medium">AI Assistant</CardTitle></CardHeader>
+                  <CardContent><p className="text-sm text-muted-foreground">Coming Soon</p></CardContent>
                 </Card>
               </div>
             </TabsContent>
 
-            <TabsContent value="projects">
+            <TabsContent value="available-projects">
               <Card>
-                <CardHeader>
-                  <CardTitle>Available Projects</CardTitle>
-                </CardHeader>
+                <CardHeader><CardTitle>Available Projects</CardTitle></CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground text-center py-12">
-                    Project listings will be available once projects are commissioned and approved by admin.
+                    Project listings will be available once projects are commissioned and approved by administration.
                   </p>
                 </CardContent>
               </Card>
@@ -244,8 +230,15 @@ export const VolunteerDashboardPage = () => {
                   ) : (
                     <>
                       <div className="mb-4">
-                        <select value={selectedAgreementProject || ""} onChange={(e) => setSelectedAgreementProject(e.target.value)} className="border rounded px-3 py-2 text-sm">
-                          {assignedProjects.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+                        <select
+                          value={selectedAgreementProject || ""}
+                          onChange={(event) => setSelectedAgreementProject(event.target.value)}
+                          className="border rounded px-3 py-2 text-sm"
+                          aria-label="Select project team agreement"
+                        >
+                          {assignedProjects.map((project) => (
+                            <option key={project.id} value={project.id}>{project.label}</option>
+                          ))}
                         </select>
                       </div>
                       {selectedAgreementProject && (
@@ -262,39 +255,33 @@ export const VolunteerDashboardPage = () => {
             </TabsContent>
 
             <TabsContent value="private">
-              <SupportCentrePanel role="project_team" currentUserId={userId} projectOptions={assignedProjects} />
+              <Card>
+                <CardHeader><CardTitle>Confidential and protected reporting</CardTitle></CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Use the protected route for a confidential concern, or the safeguarding route where a child or adult at risk may be affected.
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Button asChild><Link to="/protected-concerns/new">Raise a Protected Concern</Link></Button>
+                    <Button variant="outline" asChild><Link to="/safeguarding/report">Make a Safeguarding Report</Link></Button>
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
-
 
             <TabsContent value="profile">
               <Card>
-                <CardHeader>
-                  <CardTitle>Your Profile</CardTitle>
-                </CardHeader>
+                <CardHeader><CardTitle>Your Profile</CardTitle></CardHeader>
                 <CardContent className="space-y-4">
-                  <div>
-                    <Label className="text-sm font-medium">Name</Label>
-                    <p className="text-sm text-muted-foreground">{volunteer.name}</p>
-                  </div>
-                  <div>
-                    <Label className="text-sm font-medium">Email</Label>
-                    <p className="text-sm text-muted-foreground">{volunteer.email}</p>
-                  </div>
-                  <div>
-                    <Label className="text-sm font-medium">Skills</Label>
-                    <p className="text-sm text-muted-foreground">{volunteer.skills}</p>
-                  </div>
-                  <div>
-                    <Label className="text-sm font-medium">Experience</Label>
-                    <p className="text-sm text-muted-foreground whitespace-pre-wrap">{volunteer.experience}</p>
-                  </div>
+                  <ProfileRow label="Name" value={volunteer.name} />
+                  <ProfileRow label="Email" value={volunteer.email} />
+                  <ProfileRow label="Skills" value={volunteer.skills} />
+                  <ProfileRow label="Experience" value={volunteer.experience} preserveWhitespace />
                   {volunteer.cv_url && (
                     <div>
-                      <Label className="text-sm font-medium">CV</Label>
+                      <div className="text-sm font-medium">CV</div>
                       <Button variant="outline" size="sm" asChild className="mt-2">
-                        <a href={volunteer.cv_url} target="_blank" rel="noopener noreferrer">
-                          Download CV
-                        </a>
+                        <a href={volunteer.cv_url} target="_blank" rel="noopener noreferrer">Download CV</a>
                       </Button>
                     </div>
                   )}
@@ -302,16 +289,17 @@ export const VolunteerDashboardPage = () => {
               </Card>
             </TabsContent>
           </Tabs>
-        </div>
-        
-        {/* AI Assistant Widget */}
-        {volunteer && <VolunteerAIWidget volunteerId={volunteer.id} />}
+        </main>
+
+        <VolunteerAIWidget volunteerId={volunteer.id} />
       </div>
     </>
   );
 };
 
-// Label component for profile section
-const Label = ({ className, children }: { className?: string; children: React.ReactNode }) => (
-  <div className={className}>{children}</div>
+const ProfileRow = ({ label, value, preserveWhitespace = false }: { label: string; value: string; preserveWhitespace?: boolean }) => (
+  <div>
+    <div className="text-sm font-medium">{label}</div>
+    <p className={`text-sm text-muted-foreground ${preserveWhitespace ? "whitespace-pre-wrap" : ""}`}>{value}</p>
+  </div>
 );
