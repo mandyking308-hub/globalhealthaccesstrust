@@ -386,6 +386,7 @@ type FormProps = {
   signupPassword: string; setSignupPassword: (v: string) => void;
   signupConfirmPassword: string; setSignupConfirmPassword: (v: string) => void;
   termsAccepted: boolean; setTermsAccepted: (v: boolean) => void;
+  privacyAck: boolean; setPrivacyAck: (v: boolean) => void;
 };
 
 
