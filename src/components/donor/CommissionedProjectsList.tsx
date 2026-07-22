@@ -16,7 +16,14 @@ type Evidence = {
   id: string; project_id: string; caption: string | null; activity_description: string | null;
   approved_general_location: string | null; date_taken: string | null; storage_path: string;
 };
-type TeamMember = { assigned_role: string; donor_visibility_mode: string; volunteers: { name: string; email: string } | null };
+type TeamMember = {
+  assignment_id: string;
+  project_id: string;
+  assigned_role: string;
+  responsibilities: string | null;
+  donor_visibility_mode: string;
+  display_name: string;
+};
 
 const money = (n: number, ccy = "GBP") =>
   new Intl.NumberFormat("en-GB", { style: "currency", currency: ccy, maximumFractionDigits: 0 }).format(n || 0);
@@ -32,13 +39,8 @@ const getStatusClass = (status: string) => {
 };
 const getStatusLabel = (s: string) => s.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
 
-const displayName = (mode: string, name: string) => {
-  if (!name) return "Field team member";
-  if (mode === "full_name") return name;
-  if (mode === "first_name") return name.split(" ")[0];
-  if (mode === "anonymised") return "Field team member";
-  return "Field team member";
-};
+// Display-name derivation now happens server-side in the donor_project_team RPC.
+
 
 export const CommissionedProjectsList = () => {
   const [projects, setProjects] = useState<CommissionedProject[]>([]);
@@ -74,9 +76,7 @@ export const CommissionedProjectsList = () => {
           supabase.from("project_field_evidence").select("*").in("project_id", ids)
             .eq("donor_visible", true).eq("review_status", "approved").is("withdrawn_at", null)
             .order("date_taken", { ascending: false }),
-          supabase.from("volunteer_project_assignments")
-            .select("project_id, assigned_role, donor_visibility_mode, volunteers(name, email)")
-            .in("project_id", ids),
+          supabase.rpc("donor_project_team", { _project_ids: ids }),
         ]);
 
         const fin: Record<string, ProjectFinance> = {};
@@ -207,10 +207,13 @@ export const CommissionedProjectsList = () => {
                         <p className="text-sm text-muted-foreground">Team not yet assigned.</p>
                       ) : (
                         <ul className="space-y-2 text-sm">
-                          {team.map((t, i) => (
-                            <li key={i} className="border-l-2 border-primary/40 pl-3">
-                              <p className="font-medium">{displayName(t.donor_visibility_mode, t.volunteers?.name || "")}</p>
+                          {team.map((t) => (
+                            <li key={t.assignment_id} className="border-l-2 border-primary/40 pl-3">
+                              <p className="font-medium">{t.display_name}</p>
                               <p className="text-xs text-muted-foreground">{t.assigned_role}</p>
+                              {t.responsibilities ? (
+                                <p className="text-xs text-muted-foreground mt-1">{t.responsibilities}</p>
+                              ) : null}
                             </li>
                           ))}
                         </ul>

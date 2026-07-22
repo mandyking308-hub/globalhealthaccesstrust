@@ -1352,6 +1352,7 @@ export type Database = {
           id: string
           project_id: string
           responsibilities: string | null
+          responsibilities_donor_visible: boolean
           start_date: string | null
           status: string
           updated_at: string
@@ -1365,6 +1366,7 @@ export type Database = {
           id?: string
           project_id: string
           responsibilities?: string | null
+          responsibilities_donor_visible?: boolean
           start_date?: string | null
           status?: string
           updated_at?: string
@@ -1378,6 +1380,7 @@ export type Database = {
           id?: string
           project_id?: string
           responsibilities?: string | null
+          responsibilities_donor_visible?: boolean
           start_date?: string | null
           status?: string
           updated_at?: string
@@ -1563,6 +1566,17 @@ export type Database = {
       donor_can_view_volunteer: {
         Args: { _donor_id: string; _volunteer_id: string }
         Returns: boolean
+      }
+      donor_project_team: {
+        Args: { _project_ids: string[] }
+        Returns: {
+          assigned_role: string
+          assignment_id: string
+          display_name: string
+          donor_visibility_mode: string
+          project_id: string
+          responsibilities: string
+        }[]
       }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
       has_role: {
