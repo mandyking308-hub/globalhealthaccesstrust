@@ -260,6 +260,8 @@ export const AuthPage = () => {
             setSignupConfirmPassword={setSignupConfirmPassword}
             termsAccepted={termsAccepted}
             setTermsAccepted={setTermsAccepted}
+            privacyAck={privacyAck}
+            setPrivacyAck={setPrivacyAck}
           />
 
         )}
