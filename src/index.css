@@ -196,22 +196,22 @@ p, li { font-family: var(--font-sans); font-size: clamp(16px, 1.1vw, 18px); line
 .homepage-editorial blockquote{
   line-height:1.06 !important;
 }
-/* Section-level headings — refined editorial sans, mixed case, calmer scale */
+/* Section-level headings — match inner-page editorial display treatment (Barlow Condensed, uppercase) */
 .homepage-editorial h2{
-  font-family:var(--font-sans) !important;
-  font-weight:500 !important;
-  text-transform:none !important;
-  font-size:clamp(28px,3.1vw,44px) !important;
-  line-height:1.22 !important;
-  letter-spacing:-0.018em !important;
+  font-family:var(--font-serif) !important;
+  font-weight:900 !important;
+  text-transform:uppercase !important;
+  font-size:clamp(32px,4vw,56px) !important;
+  line-height:1.02 !important;
+  letter-spacing:-0.01em !important;
   color:hsl(var(--foreground));
 }
 .homepage-editorial h3{
-  font-family:var(--font-sans) !important;
-  font-weight:600 !important;
-  text-transform:none !important;
-  font-size:clamp(19px,1.5vw,23px) !important;
-  line-height:1.4 !important;
+  font-family:var(--font-serif) !important;
+  font-weight:800 !important;
+  text-transform:uppercase !important;
+  font-size:clamp(20px,1.7vw,26px) !important;
+  line-height:1.1 !important;
   letter-spacing:-0.005em !important;
 }
 .homepage-editorial p{
