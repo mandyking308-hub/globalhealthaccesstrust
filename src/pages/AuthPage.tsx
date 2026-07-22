@@ -547,8 +547,14 @@ const SignupForm = (props: FormProps) => (
         onCheckedChange={(c) => props.setTermsAccepted(c as boolean)} disabled={props.loading} />
       <label htmlFor="terms-accepted" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
         I agree to the{" "}
-        <a href="/terms-of-use" className="text-primary hover:underline" target="_blank">Website and Portal Terms of Use</a>
-        {" "}and confirm that I have read the{" "}
+        <a href="/terms-of-use" className="text-primary hover:underline" target="_blank">Website and Portal Terms of Use</a>. *
+      </label>
+    </div>
+    <div className="flex items-start space-x-2">
+      <Checkbox id="privacy-ack" checked={props.privacyAck}
+        onCheckedChange={(c) => props.setPrivacyAck(c as boolean)} disabled={props.loading} />
+      <label htmlFor="privacy-ack" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
+        I acknowledge that I have read the{" "}
         <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
       </label>
     </div>
@@ -557,7 +563,7 @@ const SignupForm = (props: FormProps) => (
       Personal information is processed for the specific purposes explained in the Privacy Notice, using
       the lawful bases described there.
     </p>
-    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.termsAccepted}>
+    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.termsAccepted || !props.privacyAck}>
       {props.loading ? "Creating account..." : "Create Account"}
     </Button>
   </form>
