@@ -65,6 +65,9 @@ import { AdminManualPage } from "./pages/admin/AdminManualPage";
 import AdminServiceConsolePage from "./pages/admin/AdminServiceConsolePage";
 import AdminAgreementsPage from "./pages/admin/AdminAgreementsPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
+import AdminLegalPage from "./pages/admin/AdminLegalPage";
+import LegalIndexPage from "./pages/LegalIndexPage";
+import LegalDocumentPage from "./pages/LegalDocumentPage";
 
 const queryClient = new QueryClient();
 
@@ -132,6 +135,8 @@ const App = () => (
           <Route path="anti-fraud" element={<AntiFraudPage />} />
           <Route path="whistleblowing" element={<WhistleblowingPage />} />
           <Route path="governance" element={<GovernancePage />} />
+          <Route path="legal" element={<LegalIndexPage />} />
+          <Route path="legal/:slug" element={<LegalDocumentPage />} />
         </Route>
         
           {/* Donor Portal Routes (outside Layout - full page) */}
@@ -164,6 +169,7 @@ const App = () => (
             <Route path="manual" element={<AdminManualPage />} />
             <Route path="service-console" element={<AdminServiceConsolePage />} />
             <Route path="agreements" element={<AdminAgreementsPage />} />
+            <Route path="legal" element={<AdminLegalPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           
