@@ -28,8 +28,12 @@ const publicRoutes = [
   "/legal/safeguarding-policy",
   "/legal/media-policy",
   "/safeguarding",
+  "/contact-the-trust",
+  "/contact",
   "/accessibility-statement",
 ];
+
+const publicEmailPattern = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
 
 async function checkPage(route) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
@@ -64,6 +68,24 @@ async function checkPage(route) {
 
     const bodyText = (await page.locator("body").innerText()).trim();
     if (bodyText.length < 40) failures.push(`${route}: page rendered almost no content`);
+
+    const publicEmails = [...new Set(bodyText.match(publicEmailPattern) || [])];
+    if (publicEmails.length) {
+      failures.push(`${route}: public email address displayed: ${publicEmails.join(", ")}`);
+    }
+
+    const mailtoCount = await page.locator('a[href^="mailto:"]').count();
+    if (mailtoCount > 0) failures.push(`${route}: public mailto link is present`);
+
+    const oldDomainInText = /globalhealthaccesstrust\.org/i.test(bodyText);
+    const oldDomainLinks = await page.locator('a[href*="globalhealthaccesstrust.org"]').count();
+    if (oldDomainInText || oldDomainLinks > 0) {
+      failures.push(`${route}: obsolete .org identity is exposed`);
+    }
+
+    if (/registered correspondence address/i.test(bodyText)) {
+      failures.push(`${route}: correspondence address is incorrectly labelled as registered`);
+    }
 
     if (pageErrors.length) failures.push(`${route}: page errors: ${pageErrors.join(" | ")}`);
     if (consoleErrors.length) failures.push(`${route}: console errors: ${consoleErrors.join(" | ")}`);
@@ -101,6 +123,21 @@ for (const route of publicRoutes) await checkPage(route);
   } catch (error) {
     failures.push(`/GHAT_Constitution_2025_Refined.pdf: ${error instanceof Error ? error.message : String(error)}`);
   }
+}
+
+// Public contact surface: one secure CTA, no published mailbox.
+{
+  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  await page.goto(`${baseURL}/contact-the-trust`, { waitUntil: "networkidle" });
+  const secureCta = page.getByRole("link", { name: /Open the Secure Contact Form/i });
+  if (!(await secureCta.isVisible().catch(() => false))) {
+    failures.push("/contact-the-trust: secure contact-form CTA is missing");
+  }
+  const addressText = (await page.locator("body").innerText()).replace(/\s+/g, " ");
+  if (!addressText.includes("2 Harley Street")) {
+    failures.push("/contact-the-trust: canonical correspondence address is missing");
+  }
+  await page.close();
 }
 
 // First public visit: cookie choice is expected; a global Terms pop-up is not.
@@ -188,4 +225,4 @@ if (failures.length) {
 }
 
 writeFileSync("release-smoke-failures.txt", "Release smoke tests passed.\n", "utf8");
-console.log(`Release smoke tests passed for ${publicRoutes.length} public routes, signed Constitution PDF, legal pages, cookie behaviour, protected donor redirects, authentication controls and mobile layout.`);
+console.log(`Release smoke tests passed for ${publicRoutes.length} public routes, signed Constitution PDF, legal pages, contact privacy, cookie behaviour, protected donor redirects, authentication controls and mobile layout.`);
