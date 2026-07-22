@@ -481,6 +481,262 @@ export type Database = {
         }
         Relationships: []
       }
+      legal_acceptances: {
+        Row: {
+          acceptance_text_snapshot: string
+          accepted_at: string
+          document_id: string
+          id: string
+          ip_hash: string | null
+          project_id: string | null
+          role: string | null
+          user_agent: string | null
+          user_id: string
+          version_id: string
+        }
+        Insert: {
+          acceptance_text_snapshot: string
+          accepted_at?: string
+          document_id: string
+          id?: string
+          ip_hash?: string | null
+          project_id?: string | null
+          role?: string | null
+          user_agent?: string | null
+          user_id: string
+          version_id: string
+        }
+        Update: {
+          acceptance_text_snapshot?: string
+          accepted_at?: string
+          document_id?: string
+          id?: string
+          ip_hash?: string | null
+          project_id?: string | null
+          role?: string | null
+          user_agent?: string | null
+          user_id?: string
+          version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legal_acceptances_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "legal_documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "legal_acceptances_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "legal_acceptances_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "legal_document_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      legal_document_versions: {
+        Row: {
+          acceptance_text: string | null
+          approved_at: string | null
+          approved_by: string | null
+          body_markdown: string
+          created_at: string
+          created_by: string | null
+          document_id: string
+          effective_date: string | null
+          id: string
+          material_change: boolean
+          published_at: string | null
+          review_status: Database["public"]["Enums"]["legal_review_status"]
+          reviewer_id: string | null
+          reviewer_note: string | null
+          summary: string | null
+          superseded_at: string | null
+          supersedes_version_id: string | null
+          title: string
+          updated_at: string
+          version_number: number
+        }
+        Insert: {
+          acceptance_text?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          body_markdown?: string
+          created_at?: string
+          created_by?: string | null
+          document_id: string
+          effective_date?: string | null
+          id?: string
+          material_change?: boolean
+          published_at?: string | null
+          review_status?: Database["public"]["Enums"]["legal_review_status"]
+          reviewer_id?: string | null
+          reviewer_note?: string | null
+          summary?: string | null
+          superseded_at?: string | null
+          supersedes_version_id?: string | null
+          title: string
+          updated_at?: string
+          version_number: number
+        }
+        Update: {
+          acceptance_text?: string | null
+          approved_at?: string | null
+          approved_by?: string | null
+          body_markdown?: string
+          created_at?: string
+          created_by?: string | null
+          document_id?: string
+          effective_date?: string | null
+          id?: string
+          material_change?: boolean
+          published_at?: string | null
+          review_status?: Database["public"]["Enums"]["legal_review_status"]
+          reviewer_id?: string | null
+          reviewer_note?: string | null
+          summary?: string | null
+          superseded_at?: string | null
+          supersedes_version_id?: string | null
+          title?: string
+          updated_at?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legal_document_versions_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "legal_documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "legal_document_versions_supersedes_version_id_fkey"
+            columns: ["supersedes_version_id"]
+            isOneToOne: false
+            referencedRelation: "legal_document_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      legal_documents: {
+        Row: {
+          category: string
+          created_at: string
+          current_published_version_id: string | null
+          description: string | null
+          id: string
+          requires_donation_acceptance: boolean
+          requires_signup_acceptance: boolean
+          requires_team_acceptance: boolean
+          slug: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          current_published_version_id?: string | null
+          description?: string | null
+          id?: string
+          requires_donation_acceptance?: boolean
+          requires_signup_acceptance?: boolean
+          requires_team_acceptance?: boolean
+          slug: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          current_published_version_id?: string | null
+          description?: string | null
+          id?: string
+          requires_donation_acceptance?: boolean
+          requires_signup_acceptance?: boolean
+          requires_team_acceptance?: boolean
+          slug?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      legal_entity_settings: {
+        Row: {
+          charity_number: string | null
+          company_number: string | null
+          contact_email: string | null
+          created_at: string
+          enhanced_dd_threshold: number
+          governing_law: string | null
+          high_value_threshold: number
+          id: string
+          insurance_summary: string | null
+          jurisdiction: string | null
+          legal_name: string | null
+          legal_status: string | null
+          registered_address: string | null
+          regulator: string | null
+          singleton: boolean
+          trading_name: string | null
+          trustee_approval_threshold: number
+          updated_at: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          charity_number?: string | null
+          company_number?: string | null
+          contact_email?: string | null
+          created_at?: string
+          enhanced_dd_threshold?: number
+          governing_law?: string | null
+          high_value_threshold?: number
+          id?: string
+          insurance_summary?: string | null
+          jurisdiction?: string | null
+          legal_name?: string | null
+          legal_status?: string | null
+          registered_address?: string | null
+          regulator?: string | null
+          singleton?: boolean
+          trading_name?: string | null
+          trustee_approval_threshold?: number
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          charity_number?: string | null
+          company_number?: string | null
+          contact_email?: string | null
+          created_at?: string
+          enhanced_dd_threshold?: number
+          governing_law?: string | null
+          high_value_threshold?: number
+          id?: string
+          insurance_summary?: string | null
+          jurisdiction?: string | null
+          legal_name?: string | null
+          legal_status?: string | null
+          registered_address?: string | null
+          regulator?: string | null
+          singleton?: boolean
+          trading_name?: string | null
+          trustee_approval_threshold?: number
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           body: string
@@ -2434,6 +2690,25 @@ export type Database = {
         }
         Returns: string
       }
+      current_legal_version: {
+        Args: { _slug: string }
+        Returns: {
+          acceptance_text: string
+          body_markdown: string
+          category: string
+          document_id: string
+          effective_date: string
+          published_at: string
+          requires_donation_acceptance: boolean
+          requires_signup_acceptance: boolean
+          requires_team_acceptance: boolean
+          slug: string
+          summary: string
+          title: string
+          version_id: string
+          version_number: number
+        }[]
+      }
       donor_can_view_volunteer: {
         Args: { _donor_id: string; _volunteer_id: string }
         Returns: boolean
@@ -2510,6 +2785,7 @@ export type Database = {
         Returns: boolean
       }
       is_safeguarding_officer: { Args: { _user_id: string }; Returns: boolean }
+      legal_entity_is_verified: { Args: never; Returns: boolean }
       log_admin_action: {
         Args: {
           p_action: string
@@ -2520,9 +2796,20 @@ export type Database = {
         }
         Returns: undefined
       }
+      needs_legal_reacceptance: { Args: { _slug: string }; Returns: boolean }
       project_delivery_progress: {
         Args: { _project_id: string }
         Returns: number
+      }
+      publish_legal_version: { Args: { _version_id: string }; Returns: string }
+      record_legal_acceptance: {
+        Args: {
+          _project_id?: string
+          _role?: string
+          _slug: string
+          _user_agent?: string
+        }
+        Returns: string
       }
       reopen_service_request: {
         Args: { _reason: string; _request_id: string }
@@ -2628,6 +2915,13 @@ export type Database = {
         | "research_policy"
         | "professional_education"
         | "where_most_needed"
+      legal_review_status:
+        | "draft"
+        | "internal_review"
+        | "solicitor_review"
+        | "trustee_approved"
+        | "published"
+        | "superseded"
       message_status: "unread" | "read" | "archived"
       project_health_state:
         | "on_track"
@@ -2858,6 +3152,14 @@ export const Constants = {
         "research_policy",
         "professional_education",
         "where_most_needed",
+      ],
+      legal_review_status: [
+        "draft",
+        "internal_review",
+        "solicitor_review",
+        "trustee_approved",
+        "published",
+        "superseded",
       ],
       message_status: ["unread", "read", "archived"],
       project_health_state: [
