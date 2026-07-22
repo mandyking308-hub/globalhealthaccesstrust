@@ -66,6 +66,7 @@ import AdminServiceConsolePage from "./pages/admin/AdminServiceConsolePage";
 import AdminAgreementsPage from "./pages/admin/AdminAgreementsPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 import AdminLegalPage from "./pages/admin/AdminLegalPage";
+import AdminPrivacyGovernancePage from "./pages/admin/AdminPrivacyGovernancePage";
 import LegalIndexPage from "./pages/LegalIndexPage";
 import LegalDocumentPage from "./pages/LegalDocumentPage";
 
