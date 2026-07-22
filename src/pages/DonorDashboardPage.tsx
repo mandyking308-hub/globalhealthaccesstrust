@@ -19,6 +19,8 @@ import { calculateDonorTier } from "@/utils/donorTiers";
 import { CommissionProjectForm } from "@/components/donor/CommissionProjectForm";
 import { CommissionedProjectsList } from "@/components/donor/CommissionedProjectsList";
 import { DonorAIWidget } from "@/components/ai/DonorAIWidget";
+import { DonorAgreementPanel } from "@/components/agreement/DonorAgreementPanel";
+import { SupportCentrePanel } from "@/components/service/SupportCentrePanel";
 
 interface Profile {
   first_name: string;
