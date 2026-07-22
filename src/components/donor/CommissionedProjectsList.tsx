@@ -135,7 +135,7 @@ export const CommissionedProjectsList = () => {
     <div className="portal-panel space-y-0 divide-y divide-foreground/10 p-0">
       <div className="px-8 py-6"><span className="portal-eyebrow">My Projects</span></div>
       {projects.map((project, idx) => {
-        const f = finance[project.id] || { allocated: 0, spent: 0, delivery: 0 };
+        const f = finance[project.id] || { allocated: 0, committed: 0, spent: 0, remaining: 0, delivery: 0 };
         const ccy = project.currency || "GBP";
         const target = Number(project.funding_target || 0);
         const percent = target > 0 ? Math.min(100, (f.allocated / target) * 100) : 0;
@@ -165,8 +165,10 @@ export const CommissionedProjectsList = () => {
                   <Row label="Location" value={`${project.country}, ${project.region}`} />
                   <Row label="Budget band" value={project.budget_range} />
                   <Row label="Funding target" value={target > 0 ? money(target, ccy) : "Not yet set"} />
-                  <Row label="Allocated" value={money(f.allocated, ccy)} />
-                  <Row label="Reported spend" value={money(f.spent, ccy)} />
+                  <Row label="Project allocation" value={money(f.allocated, ccy)} />
+                  <Row label="Amount committed" value={money(f.committed, ccy)} />
+                  <Row label="Amount spent" value={money(f.spent, ccy)} />
+                  <Row label="Amount remaining" value={money(f.remaining, ccy)} />
                   <Row label="Requested" value={format(new Date(project.created_at), "MMM d, yyyy")} />
                 </dl>
 
