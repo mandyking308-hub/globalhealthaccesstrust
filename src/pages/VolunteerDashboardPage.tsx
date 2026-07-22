@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
 import { VolunteerAIWidget } from "@/components/ai/VolunteerAIWidget";
+import { VolunteerAssignedProjects } from "@/components/volunteer/VolunteerAssignedProjects";
 
 interface Volunteer {
   id: string;
