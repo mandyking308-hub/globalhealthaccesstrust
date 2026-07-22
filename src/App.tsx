@@ -62,6 +62,8 @@ import { AdminSystemHealthPage } from "./pages/admin/AdminSystemHealthPage";
 import { AdminLaunchChecklistPage } from "./pages/admin/AdminLaunchChecklistPage";
 import { AdminContactsPage } from "./pages/admin/AdminContactsPage";
 import { AdminManualPage } from "./pages/admin/AdminManualPage";
+import AdminServiceConsolePage from "./pages/admin/AdminServiceConsolePage";
+import AdminAgreementsPage from "./pages/admin/AdminAgreementsPage";
 import { DataAccessRequestPage } from "./pages/DataAccessRequestPage";
 
 const queryClient = new QueryClient();
@@ -160,6 +162,8 @@ const App = () => (
             <Route path="launch-checklist" element={<AdminLaunchChecklistPage />} />
             <Route path="contacts" element={<AdminContactsPage />} />
             <Route path="manual" element={<AdminManualPage />} />
+            <Route path="service-console" element={<AdminServiceConsolePage />} />
+            <Route path="agreements" element={<AdminAgreementsPage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
           </Route>
           

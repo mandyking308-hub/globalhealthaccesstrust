@@ -739,6 +739,460 @@ export type Database = {
         }
         Relationships: []
       }
+      project_agreement_decisions: {
+        Row: {
+          comment: string | null
+          decided_at: string
+          decision: Database["public"]["Enums"]["agreement_decision"]
+          id: string
+          project_id: string
+          role: string
+          user_id: string
+          version_id: string
+        }
+        Insert: {
+          comment?: string | null
+          decided_at?: string
+          decision: Database["public"]["Enums"]["agreement_decision"]
+          id?: string
+          project_id: string
+          role: string
+          user_id: string
+          version_id: string
+        }
+        Update: {
+          comment?: string | null
+          decided_at?: string
+          decision?: Database["public"]["Enums"]["agreement_decision"]
+          id?: string
+          project_id?: string
+          role?: string
+          user_id?: string
+          version_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_agreement_decisions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_agreement_decisions_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "project_agreement_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_agreement_milestones: {
+        Row: {
+          created_at: string
+          id: string
+          sequence: number
+          target_date: string | null
+          title: string
+          version_id: string
+          weight: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          sequence?: number
+          target_date?: string | null
+          title: string
+          version_id: string
+          weight?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          sequence?: number
+          target_date?: string | null
+          title?: string
+          version_id?: string
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_agreement_milestones_version_id_fkey"
+            columns: ["version_id"]
+            isOneToOne: false
+            referencedRelation: "project_agreement_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_agreement_versions: {
+        Row: {
+          agreement_id: string
+          beneficiary_group: string | null
+          budget_categories: Json | null
+          change_control_procedure: string | null
+          communication_arrangements: string | null
+          complaint_procedure: string | null
+          confidentiality_terms: string | null
+          created_at: string
+          deliverables: string | null
+          delivery_allocation: number | null
+          dependencies: string | null
+          donor_visible_status: string | null
+          escalation_procedure: string | null
+          evidence_requirements: string | null
+          exclusions: string | null
+          expected_duration: string | null
+          financial_reporting: string | null
+          first_report_due: string | null
+          funding_target: number | null
+          gross_donation: number | null
+          id: string
+          intended_outcomes: string | null
+          is_donor_accepted: boolean | null
+          is_team_accepted: boolean | null
+          is_trust_approved: boolean | null
+          issued_at: string | null
+          issued_by: string | null
+          operating_allocation: number | null
+          planned_completion: string | null
+          planned_start: string | null
+          project_id: string
+          purpose: string | null
+          reporting_frequency: string | null
+          risks_private: string | null
+          safe_location: string | null
+          safeguarding_route: string | null
+          scope: string | null
+          title: string
+          updated_at: string
+          version_number: number
+        }
+        Insert: {
+          agreement_id: string
+          beneficiary_group?: string | null
+          budget_categories?: Json | null
+          change_control_procedure?: string | null
+          communication_arrangements?: string | null
+          complaint_procedure?: string | null
+          confidentiality_terms?: string | null
+          created_at?: string
+          deliverables?: string | null
+          delivery_allocation?: number | null
+          dependencies?: string | null
+          donor_visible_status?: string | null
+          escalation_procedure?: string | null
+          evidence_requirements?: string | null
+          exclusions?: string | null
+          expected_duration?: string | null
+          financial_reporting?: string | null
+          first_report_due?: string | null
+          funding_target?: number | null
+          gross_donation?: number | null
+          id?: string
+          intended_outcomes?: string | null
+          is_donor_accepted?: boolean | null
+          is_team_accepted?: boolean | null
+          is_trust_approved?: boolean | null
+          issued_at?: string | null
+          issued_by?: string | null
+          operating_allocation?: number | null
+          planned_completion?: string | null
+          planned_start?: string | null
+          project_id: string
+          purpose?: string | null
+          reporting_frequency?: string | null
+          risks_private?: string | null
+          safe_location?: string | null
+          safeguarding_route?: string | null
+          scope?: string | null
+          title: string
+          updated_at?: string
+          version_number: number
+        }
+        Update: {
+          agreement_id?: string
+          beneficiary_group?: string | null
+          budget_categories?: Json | null
+          change_control_procedure?: string | null
+          communication_arrangements?: string | null
+          complaint_procedure?: string | null
+          confidentiality_terms?: string | null
+          created_at?: string
+          deliverables?: string | null
+          delivery_allocation?: number | null
+          dependencies?: string | null
+          donor_visible_status?: string | null
+          escalation_procedure?: string | null
+          evidence_requirements?: string | null
+          exclusions?: string | null
+          expected_duration?: string | null
+          financial_reporting?: string | null
+          first_report_due?: string | null
+          funding_target?: number | null
+          gross_donation?: number | null
+          id?: string
+          intended_outcomes?: string | null
+          is_donor_accepted?: boolean | null
+          is_team_accepted?: boolean | null
+          is_trust_approved?: boolean | null
+          issued_at?: string | null
+          issued_by?: string | null
+          operating_allocation?: number | null
+          planned_completion?: string | null
+          planned_start?: string | null
+          project_id?: string
+          purpose?: string | null
+          reporting_frequency?: string | null
+          risks_private?: string | null
+          safe_location?: string | null
+          safeguarding_route?: string | null
+          scope?: string | null
+          title?: string
+          updated_at?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_agreement_versions_agreement_id_fkey"
+            columns: ["agreement_id"]
+            isOneToOne: false
+            referencedRelation: "project_agreements"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_agreement_versions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_agreements: {
+        Row: {
+          activated_at: string | null
+          created_at: string
+          current_version_id: string | null
+          id: string
+          project_id: string
+          status: Database["public"]["Enums"]["agreement_status"]
+          updated_at: string
+        }
+        Insert: {
+          activated_at?: string | null
+          created_at?: string
+          current_version_id?: string | null
+          id?: string
+          project_id: string
+          status?: Database["public"]["Enums"]["agreement_status"]
+          updated_at?: string
+        }
+        Update: {
+          activated_at?: string | null
+          created_at?: string
+          current_version_id?: string | null
+          id?: string
+          project_id?: string
+          status?: Database["public"]["Enums"]["agreement_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_agreements_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_change_requests: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          decision_reason: string | null
+          donor_visible: boolean | null
+          field: string
+          from_version_id: string | null
+          id: string
+          original_value: Json | null
+          project_id: string
+          proposed_value: Json | null
+          reason: string | null
+          requested_at: string
+          requested_by: string
+          requested_by_role: string
+          requires_donor_reacceptance: boolean | null
+          requires_team_reacceptance: boolean | null
+          resulting_version_id: string | null
+          status: Database["public"]["Enums"]["change_request_status"]
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          decision_reason?: string | null
+          donor_visible?: boolean | null
+          field: string
+          from_version_id?: string | null
+          id?: string
+          original_value?: Json | null
+          project_id: string
+          proposed_value?: Json | null
+          reason?: string | null
+          requested_at?: string
+          requested_by: string
+          requested_by_role: string
+          requires_donor_reacceptance?: boolean | null
+          requires_team_reacceptance?: boolean | null
+          resulting_version_id?: string | null
+          status?: Database["public"]["Enums"]["change_request_status"]
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          decision_reason?: string | null
+          donor_visible?: boolean | null
+          field?: string
+          from_version_id?: string | null
+          id?: string
+          original_value?: Json | null
+          project_id?: string
+          proposed_value?: Json | null
+          reason?: string | null
+          requested_at?: string
+          requested_by?: string
+          requested_by_role?: string
+          requires_donor_reacceptance?: boolean | null
+          requires_team_reacceptance?: boolean | null
+          resulting_version_id?: string | null
+          status?: Database["public"]["Enums"]["change_request_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_change_requests_from_version_id_fkey"
+            columns: ["from_version_id"]
+            isOneToOne: false
+            referencedRelation: "project_agreement_versions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_change_requests_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_change_requests_resulting_version_id_fkey"
+            columns: ["resulting_version_id"]
+            isOneToOne: false
+            referencedRelation: "project_agreement_versions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_comment_reads: {
+        Row: {
+          comment_id: string
+          read_at: string
+          user_id: string
+        }
+        Insert: {
+          comment_id: string
+          read_at?: string
+          user_id: string
+        }
+        Update: {
+          comment_id?: string
+          read_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_comment_reads_comment_id_fkey"
+            columns: ["comment_id"]
+            isOneToOne: false
+            referencedRelation: "project_comments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_comments: {
+        Row: {
+          approval_status: string
+          attachment_url: string | null
+          author_id: string
+          author_role: string
+          body: string
+          created_at: string
+          edited_at: string | null
+          id: string
+          mentions: string[] | null
+          parent_comment_id: string | null
+          parent_id: string
+          parent_type: Database["public"]["Enums"]["comment_parent_type"]
+          project_id: string
+          updated_at: string
+          visibility: Database["public"]["Enums"]["comment_visibility"]
+        }
+        Insert: {
+          approval_status?: string
+          attachment_url?: string | null
+          author_id: string
+          author_role: string
+          body: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          mentions?: string[] | null
+          parent_comment_id?: string | null
+          parent_id: string
+          parent_type: Database["public"]["Enums"]["comment_parent_type"]
+          project_id: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["comment_visibility"]
+        }
+        Update: {
+          approval_status?: string
+          attachment_url?: string | null
+          author_id?: string
+          author_role?: string
+          body?: string
+          created_at?: string
+          edited_at?: string | null
+          id?: string
+          mentions?: string[] | null
+          parent_comment_id?: string | null
+          parent_id?: string
+          parent_type?: Database["public"]["Enums"]["comment_parent_type"]
+          project_id?: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["comment_visibility"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_comments_parent_comment_id_fkey"
+            columns: ["parent_comment_id"]
+            isOneToOne: false
+            referencedRelation: "project_comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_comments_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_expenses: {
         Row: {
           amount: number
@@ -913,6 +1367,47 @@ export type Database = {
           },
         ]
       }
+      project_health_snapshots: {
+        Row: {
+          created_at: string
+          donor_visible_explanation: string | null
+          health: Database["public"]["Enums"]["project_health_state"]
+          id: string
+          override_by: string | null
+          override_reason: string | null
+          project_id: string
+          signals: Json | null
+        }
+        Insert: {
+          created_at?: string
+          donor_visible_explanation?: string | null
+          health: Database["public"]["Enums"]["project_health_state"]
+          id?: string
+          override_by?: string | null
+          override_reason?: string | null
+          project_id: string
+          signals?: Json | null
+        }
+        Update: {
+          created_at?: string
+          donor_visible_explanation?: string | null
+          health?: Database["public"]["Enums"]["project_health_state"]
+          id?: string
+          override_by?: string | null
+          override_reason?: string | null
+          project_id?: string
+          signals?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_health_snapshots_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_messages: {
         Row: {
           approval_status: string
@@ -1046,6 +1541,335 @@ export type Database = {
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_notifications: {
+        Row: {
+          body: string | null
+          category: string
+          created_at: string
+          id: string
+          link: string | null
+          read_at: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          category: string
+          created_at?: string
+          id?: string
+          link?: string | null
+          read_at?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          category?: string
+          created_at?: string
+          id?: string
+          link?: string | null
+          read_at?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      project_service_policies: {
+        Row: {
+          acknowledge_minutes: number
+          business_hours: Json | null
+          created_at: string
+          escalation_minutes: number
+          first_response_minutes: number
+          id: string
+          priority: Database["public"]["Enums"]["service_request_priority"]
+          published: boolean
+          request_type: string
+          resolution_minutes: number
+          timezone: string
+          updated_at: string
+        }
+        Insert: {
+          acknowledge_minutes?: number
+          business_hours?: Json | null
+          created_at?: string
+          escalation_minutes?: number
+          first_response_minutes?: number
+          id?: string
+          priority: Database["public"]["Enums"]["service_request_priority"]
+          published?: boolean
+          request_type: string
+          resolution_minutes?: number
+          timezone?: string
+          updated_at?: string
+        }
+        Update: {
+          acknowledge_minutes?: number
+          business_hours?: Json | null
+          created_at?: string
+          escalation_minutes?: number
+          first_response_minutes?: number
+          id?: string
+          priority?: Database["public"]["Enums"]["service_request_priority"]
+          published?: boolean
+          request_type?: string
+          resolution_minutes?: number
+          timezone?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      project_service_request_comments: {
+        Row: {
+          attachment_url: string | null
+          author_id: string
+          author_role: string
+          body: string
+          comment_type: Database["public"]["Enums"]["service_comment_type"]
+          created_at: string
+          id: string
+          read_at: string | null
+          request_id: string
+          updated_at: string
+          visibility: Database["public"]["Enums"]["comment_visibility"]
+        }
+        Insert: {
+          attachment_url?: string | null
+          author_id: string
+          author_role: string
+          body: string
+          comment_type?: Database["public"]["Enums"]["service_comment_type"]
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          request_id: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["comment_visibility"]
+        }
+        Update: {
+          attachment_url?: string | null
+          author_id?: string
+          author_role?: string
+          body?: string
+          comment_type?: Database["public"]["Enums"]["service_comment_type"]
+          created_at?: string
+          id?: string
+          read_at?: string | null
+          request_id?: string
+          updated_at?: string
+          visibility?: Database["public"]["Enums"]["comment_visibility"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_service_request_comments_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "project_service_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_service_request_events: {
+        Row: {
+          actor_id: string | null
+          actor_role: string | null
+          created_at: string
+          detail: Json | null
+          event_type: string
+          id: string
+          request_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          actor_role?: string | null
+          created_at?: string
+          detail?: Json | null
+          event_type: string
+          id?: string
+          request_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          actor_role?: string | null
+          created_at?: string
+          detail?: Json | null
+          event_type?: string
+          id?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_service_request_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "project_service_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_service_requests: {
+        Row: {
+          assigned_team: string | null
+          assigned_user_id: string | null
+          category: string | null
+          closed_at: string | null
+          confidentiality_level: Database["public"]["Enums"]["service_request_confidentiality"]
+          created_at: string
+          description: string
+          donation_id: string | null
+          donor_visible: boolean | null
+          escalated_at: string | null
+          escalation_reason: string | null
+          evidence_id: string | null
+          expense_id: string | null
+          first_responded_at: string | null
+          first_response_due_at: string | null
+          id: string
+          last_response_at: string | null
+          milestone_id: string | null
+          priority: Database["public"]["Enums"]["service_request_priority"]
+          project_id: string | null
+          reference_number: string
+          reopened_at: string | null
+          request_type: string
+          requester_assignment_id: string | null
+          requester_role: string
+          requester_user_id: string
+          resolution_category: string | null
+          resolution_due_at: string | null
+          resolution_summary: string | null
+          resolved_at: string | null
+          satisfaction_feedback: string | null
+          satisfaction_score: number | null
+          severity: string | null
+          status: Database["public"]["Enums"]["service_request_status"]
+          subject: string
+          updated_at: string
+          waiting_on: string | null
+        }
+        Insert: {
+          assigned_team?: string | null
+          assigned_user_id?: string | null
+          category?: string | null
+          closed_at?: string | null
+          confidentiality_level?: Database["public"]["Enums"]["service_request_confidentiality"]
+          created_at?: string
+          description: string
+          donation_id?: string | null
+          donor_visible?: boolean | null
+          escalated_at?: string | null
+          escalation_reason?: string | null
+          evidence_id?: string | null
+          expense_id?: string | null
+          first_responded_at?: string | null
+          first_response_due_at?: string | null
+          id?: string
+          last_response_at?: string | null
+          milestone_id?: string | null
+          priority?: Database["public"]["Enums"]["service_request_priority"]
+          project_id?: string | null
+          reference_number?: string
+          reopened_at?: string | null
+          request_type: string
+          requester_assignment_id?: string | null
+          requester_role: string
+          requester_user_id: string
+          resolution_category?: string | null
+          resolution_due_at?: string | null
+          resolution_summary?: string | null
+          resolved_at?: string | null
+          satisfaction_feedback?: string | null
+          satisfaction_score?: number | null
+          severity?: string | null
+          status?: Database["public"]["Enums"]["service_request_status"]
+          subject: string
+          updated_at?: string
+          waiting_on?: string | null
+        }
+        Update: {
+          assigned_team?: string | null
+          assigned_user_id?: string | null
+          category?: string | null
+          closed_at?: string | null
+          confidentiality_level?: Database["public"]["Enums"]["service_request_confidentiality"]
+          created_at?: string
+          description?: string
+          donation_id?: string | null
+          donor_visible?: boolean | null
+          escalated_at?: string | null
+          escalation_reason?: string | null
+          evidence_id?: string | null
+          expense_id?: string | null
+          first_responded_at?: string | null
+          first_response_due_at?: string | null
+          id?: string
+          last_response_at?: string | null
+          milestone_id?: string | null
+          priority?: Database["public"]["Enums"]["service_request_priority"]
+          project_id?: string | null
+          reference_number?: string
+          reopened_at?: string | null
+          request_type?: string
+          requester_assignment_id?: string | null
+          requester_role?: string
+          requester_user_id?: string
+          resolution_category?: string | null
+          resolution_due_at?: string | null
+          resolution_summary?: string | null
+          resolved_at?: string | null
+          satisfaction_feedback?: string | null
+          satisfaction_score?: number | null
+          severity?: string | null
+          status?: Database["public"]["Enums"]["service_request_status"]
+          subject?: string
+          updated_at?: string
+          waiting_on?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_service_requests_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_service_requests_evidence_id_fkey"
+            columns: ["evidence_id"]
+            isOneToOne: false
+            referencedRelation: "project_field_evidence"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_service_requests_expense_id_fkey"
+            columns: ["expense_id"]
+            isOneToOne: false
+            referencedRelation: "project_expenses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_service_requests_milestone_id_fkey"
+            columns: ["milestone_id"]
+            isOneToOne: false
+            referencedRelation: "project_milestones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_service_requests_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "project_service_requests_requester_assignment_id_fkey"
+            columns: ["requester_assignment_id"]
+            isOneToOne: false
+            referencedRelation: "volunteer_project_assignments"
             referencedColumns: ["id"]
           },
         ]
@@ -1555,6 +2379,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_service_request_comment: {
+        Args: {
+          _body: string
+          _comment_type: Database["public"]["Enums"]["service_comment_type"]
+          _request_id: string
+          _visibility: Database["public"]["Enums"]["comment_visibility"]
+        }
+        Returns: string
+      }
+      admin_issue_agreement_version: {
+        Args: { _agreement_id: string }
+        Returns: undefined
+      }
       anonymize_user_data: {
         Args: { target_user_id: string }
         Returns: boolean
@@ -1563,9 +2400,80 @@ export type Database = {
         Args: { _project_id: string; _user_id: string }
         Returns: boolean
       }
+      compute_project_health: {
+        Args: { _project_id: string }
+        Returns: Database["public"]["Enums"]["project_health_state"]
+      }
+      compute_service_sla: {
+        Args: {
+          _priority: Database["public"]["Enums"]["service_request_priority"]
+          _request_type: string
+        }
+        Returns: {
+          first_response_due_at: string
+          resolution_due_at: string
+        }[]
+      }
+      confirm_service_resolution: {
+        Args: { _feedback: string; _request_id: string; _score: number }
+        Returns: undefined
+      }
+      create_service_request: {
+        Args: {
+          _category: string
+          _confidentiality: Database["public"]["Enums"]["service_request_confidentiality"]
+          _description: string
+          _donation_id: string
+          _evidence_id: string
+          _expense_id: string
+          _milestone_id: string
+          _priority: Database["public"]["Enums"]["service_request_priority"]
+          _project_id: string
+          _request_type: string
+          _subject: string
+        }
+        Returns: string
+      }
       donor_can_view_volunteer: {
         Args: { _donor_id: string; _volunteer_id: string }
         Returns: boolean
+      }
+      donor_project_agreement: {
+        Args: { _project_id: string }
+        Returns: {
+          activated_at: string
+          beneficiary_group: string
+          budget_categories: Json
+          communication_arrangements: string
+          complaint_procedure: string
+          confidentiality_terms: string
+          deliverables: string
+          delivery_allocation: number
+          donor_visible_status: string
+          evidence_requirements: string
+          exclusions: string
+          expected_duration: string
+          financial_reporting: string
+          first_report_due: string
+          funding_target: number
+          gross_donation: number
+          intended_outcomes: string
+          is_donor_accepted: boolean
+          is_trust_approved: boolean
+          issued_at: string
+          operating_allocation: number
+          planned_completion: string
+          planned_start: string
+          purpose: string
+          reporting_frequency: string
+          safe_location: string
+          safeguarding_route: string
+          scope: string
+          status: Database["public"]["Enums"]["agreement_status"]
+          title: string
+          version_id: string
+          version_number: number
+        }[]
       }
       donor_project_team: {
         Args: { _project_ids: string[] }
@@ -1579,6 +2487,7 @@ export type Database = {
         }[]
       }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
+      generate_service_request_reference: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1591,6 +2500,16 @@ export type Database = {
         Returns: undefined
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      is_finance_officer: { Args: { _user_id: string }; Returns: boolean }
+      is_project_donor: {
+        Args: { _project_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_project_team_member: {
+        Args: { _project_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_safeguarding_officer: { Args: { _user_id: string }; Returns: boolean }
       log_admin_action: {
         Args: {
           p_action: string
@@ -1605,9 +2524,103 @@ export type Database = {
         Args: { _project_id: string }
         Returns: number
       }
+      reopen_service_request: {
+        Args: { _reason: string; _request_id: string }
+        Returns: undefined
+      }
+      resolve_service_request: {
+        Args: { _category: string; _request_id: string; _summary: string }
+        Returns: undefined
+      }
+      submit_agreement_decision: {
+        Args: {
+          _comment: string
+          _decision: Database["public"]["Enums"]["agreement_decision"]
+          _version_id: string
+        }
+        Returns: string
+      }
+      team_project_agreement: {
+        Args: { _project_id: string }
+        Returns: {
+          activated_at: string
+          beneficiary_group: string
+          budget_categories: Json
+          communication_arrangements: string
+          deliverables: string
+          delivery_allocation: number
+          dependencies: string
+          escalation_procedure: string
+          evidence_requirements: string
+          exclusions: string
+          expected_duration: string
+          first_report_due: string
+          intended_outcomes: string
+          is_team_accepted: boolean
+          is_trust_approved: boolean
+          issued_at: string
+          planned_completion: string
+          planned_start: string
+          purpose: string
+          reporting_frequency: string
+          safe_location: string
+          safeguarding_route: string
+          scope: string
+          status: Database["public"]["Enums"]["agreement_status"]
+          title: string
+          version_id: string
+          version_number: number
+        }[]
+      }
     }
     Enums: {
-      app_role: "donor" | "admin" | "super_admin" | "volunteer"
+      agreement_decision:
+        | "accept"
+        | "request_changes"
+        | "decline"
+        | "trust_approve"
+      agreement_status:
+        | "draft"
+        | "issued"
+        | "under_review"
+        | "changes_requested"
+        | "revised"
+        | "accepted"
+        | "active"
+        | "superseded"
+        | "terminated"
+      app_role:
+        | "donor"
+        | "admin"
+        | "super_admin"
+        | "volunteer"
+        | "safeguarding_officer"
+        | "finance_officer"
+      change_request_status:
+        | "proposed"
+        | "under_review"
+        | "clarification_required"
+        | "approved"
+        | "rejected"
+        | "withdrawn"
+        | "implemented"
+      comment_parent_type:
+        | "charter"
+        | "agreement_version"
+        | "milestone"
+        | "project_update"
+        | "expense"
+        | "evidence"
+        | "change_request"
+        | "reporting_deadline"
+        | "service_request"
+      comment_visibility:
+        | "trust_internal"
+        | "donor_trust"
+        | "team_trust"
+        | "shared_project"
+        | "safeguarding_restricted"
+        | "finance_restricted"
       donation_frequency: "one_time" | "monthly" | "quarterly" | "annually"
       donation_purpose:
         | "healthcare_access"
@@ -1616,6 +2629,48 @@ export type Database = {
         | "professional_education"
         | "where_most_needed"
       message_status: "unread" | "read" | "archived"
+      project_health_state:
+        | "on_track"
+        | "attention_required"
+        | "at_risk"
+        | "off_track"
+        | "on_hold"
+        | "completed"
+        | "cancelled"
+      service_comment_type:
+        | "requester_comment"
+        | "trust_response"
+        | "internal_note"
+        | "request_for_information"
+        | "decision"
+        | "resolution"
+        | "escalation_note"
+        | "safeguarding_note"
+      service_request_confidentiality:
+        | "standard"
+        | "restricted_safeguarding"
+        | "restricted_finance"
+        | "identity_restricted"
+      service_request_priority:
+        | "routine"
+        | "normal"
+        | "high"
+        | "urgent"
+        | "critical"
+      service_request_status:
+        | "new"
+        | "triage"
+        | "assigned"
+        | "investigating"
+        | "awaiting_trust"
+        | "awaiting_donor"
+        | "awaiting_project_team"
+        | "awaiting_third_party"
+        | "proposed_resolution"
+        | "resolved"
+        | "closed"
+        | "reopened"
+        | "escalated"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1743,7 +2798,59 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["donor", "admin", "super_admin", "volunteer"],
+      agreement_decision: [
+        "accept",
+        "request_changes",
+        "decline",
+        "trust_approve",
+      ],
+      agreement_status: [
+        "draft",
+        "issued",
+        "under_review",
+        "changes_requested",
+        "revised",
+        "accepted",
+        "active",
+        "superseded",
+        "terminated",
+      ],
+      app_role: [
+        "donor",
+        "admin",
+        "super_admin",
+        "volunteer",
+        "safeguarding_officer",
+        "finance_officer",
+      ],
+      change_request_status: [
+        "proposed",
+        "under_review",
+        "clarification_required",
+        "approved",
+        "rejected",
+        "withdrawn",
+        "implemented",
+      ],
+      comment_parent_type: [
+        "charter",
+        "agreement_version",
+        "milestone",
+        "project_update",
+        "expense",
+        "evidence",
+        "change_request",
+        "reporting_deadline",
+        "service_request",
+      ],
+      comment_visibility: [
+        "trust_internal",
+        "donor_trust",
+        "team_trust",
+        "shared_project",
+        "safeguarding_restricted",
+        "finance_restricted",
+      ],
       donation_frequency: ["one_time", "monthly", "quarterly", "annually"],
       donation_purpose: [
         "healthcare_access",
@@ -1753,6 +2860,53 @@ export const Constants = {
         "where_most_needed",
       ],
       message_status: ["unread", "read", "archived"],
+      project_health_state: [
+        "on_track",
+        "attention_required",
+        "at_risk",
+        "off_track",
+        "on_hold",
+        "completed",
+        "cancelled",
+      ],
+      service_comment_type: [
+        "requester_comment",
+        "trust_response",
+        "internal_note",
+        "request_for_information",
+        "decision",
+        "resolution",
+        "escalation_note",
+        "safeguarding_note",
+      ],
+      service_request_confidentiality: [
+        "standard",
+        "restricted_safeguarding",
+        "restricted_finance",
+        "identity_restricted",
+      ],
+      service_request_priority: [
+        "routine",
+        "normal",
+        "high",
+        "urgent",
+        "critical",
+      ],
+      service_request_status: [
+        "new",
+        "triage",
+        "assigned",
+        "investigating",
+        "awaiting_trust",
+        "awaiting_donor",
+        "awaiting_project_team",
+        "awaiting_third_party",
+        "proposed_resolution",
+        "resolved",
+        "closed",
+        "reopened",
+        "escalated",
+      ],
     },
   },
 } as const

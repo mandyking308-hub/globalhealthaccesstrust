@@ -19,6 +19,8 @@ import { calculateDonorTier } from "@/utils/donorTiers";
 import { CommissionProjectForm } from "@/components/donor/CommissionProjectForm";
 import { CommissionedProjectsList } from "@/components/donor/CommissionedProjectsList";
 import { DonorAIWidget } from "@/components/ai/DonorAIWidget";
+import { DonorAgreementPanel } from "@/components/agreement/DonorAgreementPanel";
+import { SupportCentrePanel } from "@/components/service/SupportCentrePanel";
 
 interface Profile {
   first_name: string;
@@ -36,6 +38,8 @@ export const DonorDashboardPage = () => {
   const [donations, setDonations] = useState<any[]>([]);
   const [totalDonated, setTotalDonated] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [myProjects, setMyProjects] = useState<{ id: string; title: string }[]>([]);
+  const [selectedAgreementProject, setSelectedAgreementProject] = useState<string | null>(null);
   const [profileEdit, setProfileEdit] = useState({ first_name: "", last_name: "", email: "" });
   const { isComplete, isLoading: onboardingLoading, markOnboardingComplete } = useOnboarding("donor");
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -71,8 +75,12 @@ export const DonorDashboardPage = () => {
       setDonations(donationsData);
       setTotalDonated(donationsData.reduce((sum, d) => sum + Number(d.amount), 0));
     }
+    const { data: projs } = await supabase.from("commissioned_projects").select("id,title").eq("donor_id", session.user.id).order("created_at", { ascending: false });
+    if (projs) { setMyProjects(projs); if (projs.length) setSelectedAgreementProject(projs[0].id); }
+
     setLoading(false);
   };
+
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -193,9 +201,11 @@ export const DonorDashboardPage = () => {
             <TabsList className="w-full flex flex-wrap justify-start">
               <TabsTrigger value="donate">Donate</TabsTrigger>
               <TabsTrigger value="projects">My Projects</TabsTrigger>
+              <TabsTrigger value="agreements">Agreement</TabsTrigger>
               <TabsTrigger value="commission">Commission</TabsTrigger>
               <TabsTrigger value="history">History</TabsTrigger>
               <TabsTrigger value="messages">Messages</TabsTrigger>
+              <TabsTrigger value="support">Support</TabsTrigger>
               <TabsTrigger value="profile">Profile</TabsTrigger>
             </TabsList>
 
@@ -213,7 +223,28 @@ export const DonorDashboardPage = () => {
 
             <TabsContent value="projects"><CommissionedProjectsList /></TabsContent>
 
+            <TabsContent value="agreements">
+              <div className="portal-panel">
+                <span className="portal-eyebrow mb-3">Project Charter</span>
+                {myProjects.length === 0 ? (
+                  <p className="text-muted-foreground mt-4">You have no commissioned projects yet.</p>
+                ) : (
+                  <>
+                    <div className="mb-4">
+                      <select value={selectedAgreementProject || ""} onChange={(e) => setSelectedAgreementProject(e.target.value)} className="border rounded px-3 py-2 text-sm">
+                        {myProjects.map((p) => <option key={p.id} value={p.id}>{p.title}</option>)}
+                      </select>
+                    </div>
+                    {selectedAgreementProject && user && (
+                      <DonorAgreementPanel projectId={selectedAgreementProject} currentUserId={user.id} />
+                    )}
+                  </>
+                )}
+              </div>
+            </TabsContent>
+
             <TabsContent value="commission"><CommissionProjectForm /></TabsContent>
+
 
             <TabsContent value="history">
               <div className="portal-panel">
@@ -226,6 +257,18 @@ export const DonorDashboardPage = () => {
             </TabsContent>
 
             <TabsContent value="messages">{user && <MessagesPanel userId={user.id} />}</TabsContent>
+
+            <TabsContent value="support">
+              {user && (
+                <SupportCentrePanel
+                  role="donor"
+                  currentUserId={user.id}
+                  projectOptions={myProjects.map((p) => ({ id: p.id, label: p.title }))}
+                />
+              )}
+            </TabsContent>
+
+
 
             <TabsContent value="profile" className="space-y-6">
               <div className="portal-panel">
