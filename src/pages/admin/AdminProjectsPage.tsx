@@ -433,12 +433,13 @@ const ProjectDetail = ({
         <p className="mt-4 text-[15px] max-w-3xl">{project.description}</p>
       </header>
 
-      {/* Funding summary */}
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {/* Funding & delivery summary */}
+      <section className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <SummaryStat label="Funding target" value={targetNum ? money(targetNum, currency) : "—"} />
         <SummaryStat label="Allocated" value={money(totalAllocated, currency)} sub={targetNum ? `${percentFunded.toFixed(0)}% of target` : undefined} />
-        <SummaryStat label="Spent" value={money(totalSpent, currency)} />
+        <SummaryStat label="Approved spend" value={money(totalSpent, currency)} />
         <SummaryStat label="Balance" value={money(balance, currency)} />
+        <SummaryStat label="Delivery" value={`${deliveryPercent.toFixed(0)}%`} sub={`${milestones.filter((m) => m.status === "completed").length}/${milestones.length} milestones`} />
       </section>
 
       {/* Header edit */}
