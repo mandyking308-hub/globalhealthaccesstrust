@@ -1,93 +1,73 @@
+import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
 
-export const HowWeWorkPage = () => {
-  return (
-    <ContentLayout>
-      <SEO
-        title="How We Work"
-        description="Learn about the operational methodology of the Global Health Access Trust — disciplined, legally compliant, and high-impact charitable activity."
-        canonical="/how-we-work"
-      />
-      <h1>How We Work</h1>
-      
-      <p className="featured-text">"Our method is measured. Our purpose is enduring."</p>
+export const HowWeWorkPage = () => (
+  <ContentLayout>
+    <SEO
+      title="How We Work"
+      description="How Global Health Access Trust assesses, approves, controls and reports on proposed charitable projects."
+      canonical="/how-we-work"
+    />
+    <h1>How We Work</h1>
+    <p className="featured-text">Trustee decisions, documented authority and evidence before public claims.</p>
 
-      <p>The Global Health Access Trust exists to serve the public good through disciplined, legally compliant, and high-impact charitable activity. Our operations reflect a commitment to transparency, dignity, and careful stewardship.</p>
+    <div className="section-container">
+      <h2>1. Initial assessment</h2>
+      <p>
+        A proposal is considered against the Trust Deed, charitable purpose, public benefit, legal permissibility, safeguarding, sanctions, financial-crime risk, conflicts, delivery capacity and available resources.
+      </p>
+      <p>The Trust does not currently operate an open grant-application programme.</p>
+    </div>
 
-      <div className="section-container">
-        <h2>1. Purpose-Led Programming</h2>
-        <p>All activities undertaken by the Trust must fall within our charitable objects and advance the public benefit as defined in law.</p>
-        <p>We do not chase trends. We do not dilute our mission.</p>
-        <p>We remain tightly focused on five defined areas:</p>
-        <ul>
-          <li>Access to healthcare</li>
-          <li>Professional capacity in care</li>
-          <li>Health systems strengthening</li>
-          <li>Research and public scholarship</li>
-          <li>Emergency relief</li>
-        </ul>
-      </div>
+    <div className="section-container">
+      <h2>2. Due diligence</h2>
+      <p>
+        Proportionate checks may cover identity, authority, beneficial ownership, source of funds, sanctions, politically exposed persons, adverse information, partner capability, safeguarding and conflicts of interest.
+      </p>
+      <p>A relationship may be refused, paused or restricted where risk cannot be managed appropriately.</p>
+    </div>
 
-      <div className="section-container">
-        <h2>2. Receiving and Reviewing Proposals</h2>
-        <p>The Trust does not accept unsolicited applications at this time.</p>
-        <p>We engage directly with pre-vetted individuals, institutions, or partners whose values align with our objectives.</p>
-        <p>When proposals are solicited, they are reviewed against:</p>
-        <ul>
-          <li>Relevance to our charitable mission</li>
-          <li>Legal permissibility under UK charity law</li>
-          <li>Demonstrable public benefit and sustainability</li>
-          <li>Governance integrity of the proposed partner</li>
-        </ul>
-        <p>Each review is documented and presented to Trustees for resolution.</p>
-      </div>
+    <div className="section-container">
+      <h2>3. Trustee approval</h2>
+      <p>
+        A formal project proceeds only after the Trustees approve its purpose, responsibilities, budget, restrictions, delivery arrangements, evidence requirements and reporting framework. Approval is recorded through an appropriate resolution, minute, Project Charter or agreement.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>3. Grant-Making Process</h2>
-        <p>Grants or allocations are:</p>
-        <ul>
-          <li>Approved only by formal resolution of the Board of Trustees</li>
-          <li>Issued under a Grant Agreement or Deed of Gift</li>
-          <li>Disbursed in stages, where appropriate, subject to progress reports</li>
-          <li>Audited post-implementation to ensure outcomes and compliance</li>
-        </ul>
-        <p>We retain full discretion over the continuation, amendment, or withdrawal of support.</p>
-      </div>
+    <div className="section-container">
+      <h2>4. Controlled delivery</h2>
+      <ul>
+        <li>Access to project information is role-based.</li>
+        <li>Payments require appropriate authority and supporting evidence.</li>
+        <li>Restricted and unrestricted funds are recorded separately.</li>
+        <li>Committed, paid, remaining, refunded and reallocated amounts are distinguished.</li>
+        <li>Material changes require review and approval.</li>
+        <li>Safeguarding, privacy and security restrictions take priority over publicity.</li>
+      </ul>
+    </div>
 
-      <div className="section-container">
-        <h2>4. Partner Engagement</h2>
-        <p>The Trust works with:</p>
-        <ul>
-          <li>Established institutions, including hospitals, NGOs, and universities</li>
-          <li>Governmental or intergovernmental agencies where lawful and appropriate</li>
-          <li>Faith-based or local community structures, especially in crisis settings</li>
-        </ul>
-        <p>All partners must demonstrate:</p>
-        <ul>
-          <li>Legal registration and regulatory compliance</li>
-          <li>Safeguarding policies (if applicable)</li>
-          <li>Commitment to lawful, non-political service</li>
-        </ul>
-        <p className="featured-text">We are not a funding agency. We are a legacy institution. Partners must reflect that standard.</p>
-      </div>
+    <div className="section-container">
+      <h2>5. Reporting and evidence</h2>
+      <p>
+        Progress is assessed through defined milestones and appropriate evidence. Photographs, narrative updates and percentages do not, by themselves, establish financial verification or completed impact.
+      </p>
+      <p>
+        The Trust will not describe evidence as independently verified, a project as completed or an outcome as achieved unless the relevant review has genuinely occurred.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>5. Independence and Discretion</h2>
-        <p>The Trust does not:</p>
-        <ul>
-          <li>Accept influence in exchange for funding</li>
-          <li>Engage in advocacy inconsistent with Charity Commission rules</li>
-          <li>Publicly name grant recipients unless agreed and appropriate</li>
-          <li>Enter partnerships that compromise its independence</li>
-        </ul>
-        <p className="featured-text">We are built to endure. And with that comes the duty to act slowly, wisely, and with care.</p>
-      </div>
+    <div className="section-container">
+      <h2>6. Closure and learning</h2>
+      <p>
+        Project closure records the final position, including work completed, expenditure, outstanding obligations, remaining funds, restrictions, refunds or reallocations, material incidents and lessons for future trustee decisions.
+      </p>
+    </div>
 
-      <div className="section-container">
-        <h2>Final Note</h2>
-        <p>We welcome confidential expressions of interest from organisations, institutions, or intermediaries with aligned values. However, partnership is not transactional. It is a shared commitment to legacy, legality, and the public good.</p>
-      </div>
-    </ContentLayout>
-  );
-};
+    <div className="flex flex-wrap gap-5 mt-8">
+      <Link to="/governance-legal-framework" className="text-primary hover:underline">Governance framework →</Link>
+      <Link to="/financial-controls" className="text-primary hover:underline">Financial controls →</Link>
+      <Link to="/donor-due-diligence-and-sanctions-policy" className="text-primary hover:underline">Due diligence policy →</Link>
+    </div>
+  </ContentLayout>
+);
