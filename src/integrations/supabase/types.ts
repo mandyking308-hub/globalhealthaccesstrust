@@ -388,39 +388,189 @@ export type Database = {
           },
         ]
       }
-      gdpr_requests: {
+      gdpr_request_events: {
         Row: {
+          actor_role: string | null
+          actor_user_id: string | null
           created_at: string
-          email: string | null
+          detail: Json | null
+          event_type: string
           id: string
-          processed_at: string | null
-          processed_by: string | null
-          request_details: string | null
-          request_type: string
-          status: string
-          user_id: string
+          request_id: string
         }
         Insert: {
+          actor_role?: string | null
+          actor_user_id?: string | null
           created_at?: string
-          email?: string | null
+          detail?: Json | null
+          event_type: string
           id?: string
-          processed_at?: string | null
-          processed_by?: string | null
-          request_details?: string | null
-          request_type: string
-          status?: string
-          user_id: string
+          request_id: string
         }
         Update: {
+          actor_role?: string | null
+          actor_user_id?: string | null
           created_at?: string
-          email?: string | null
+          detail?: Json | null
+          event_type?: string
           id?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gdpr_request_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "gdpr_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "gdpr_request_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "my_gdpr_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      gdpr_requests: {
+        Row: {
+          assigned_to: string | null
+          authority_verified_at: string | null
+          channel: string | null
+          clarification_received_at: string | null
+          clarification_requested_at: string | null
+          clock_paused_at: string | null
+          clock_resumed_at: string | null
+          clock_start_at: string | null
+          completed_at: string | null
+          created_at: string
+          decision: string | null
+          due_at: string | null
+          email: string | null
+          exemption_reasons: string[] | null
+          exemption_review: string | null
+          extended_due_at: string | null
+          extension_applied: boolean
+          extension_notified_at: string | null
+          extension_reason: string | null
+          id: string
+          identity_requested_at: string | null
+          identity_status: string | null
+          identity_verified_at: string | null
+          internal_notes: string | null
+          pause_reason: string | null
+          processed_at: string | null
+          processed_by: string | null
+          received_at: string | null
+          reference_number: string | null
+          representative_authority_status: string | null
+          representative_name: string | null
+          request_details: string | null
+          request_type: string
+          requester_contact: string | null
+          requester_name: string | null
+          response_package_reference: string | null
+          response_summary: string | null
+          scope: string | null
+          secure_delivery_method: string | null
+          status: string
+          systems_to_search: string[] | null
+          third_party_information_review: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          assigned_to?: string | null
+          authority_verified_at?: string | null
+          channel?: string | null
+          clarification_received_at?: string | null
+          clarification_requested_at?: string | null
+          clock_paused_at?: string | null
+          clock_resumed_at?: string | null
+          clock_start_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          decision?: string | null
+          due_at?: string | null
+          email?: string | null
+          exemption_reasons?: string[] | null
+          exemption_review?: string | null
+          extended_due_at?: string | null
+          extension_applied?: boolean
+          extension_notified_at?: string | null
+          extension_reason?: string | null
+          id?: string
+          identity_requested_at?: string | null
+          identity_status?: string | null
+          identity_verified_at?: string | null
+          internal_notes?: string | null
+          pause_reason?: string | null
           processed_at?: string | null
           processed_by?: string | null
+          received_at?: string | null
+          reference_number?: string | null
+          representative_authority_status?: string | null
+          representative_name?: string | null
+          request_details?: string | null
+          request_type: string
+          requester_contact?: string | null
+          requester_name?: string | null
+          response_package_reference?: string | null
+          response_summary?: string | null
+          scope?: string | null
+          secure_delivery_method?: string | null
+          status?: string
+          systems_to_search?: string[] | null
+          third_party_information_review?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          assigned_to?: string | null
+          authority_verified_at?: string | null
+          channel?: string | null
+          clarification_received_at?: string | null
+          clarification_requested_at?: string | null
+          clock_paused_at?: string | null
+          clock_resumed_at?: string | null
+          clock_start_at?: string | null
+          completed_at?: string | null
+          created_at?: string
+          decision?: string | null
+          due_at?: string | null
+          email?: string | null
+          exemption_reasons?: string[] | null
+          exemption_review?: string | null
+          extended_due_at?: string | null
+          extension_applied?: boolean
+          extension_notified_at?: string | null
+          extension_reason?: string | null
+          id?: string
+          identity_requested_at?: string | null
+          identity_status?: string | null
+          identity_verified_at?: string | null
+          internal_notes?: string | null
+          pause_reason?: string | null
+          processed_at?: string | null
+          processed_by?: string | null
+          received_at?: string | null
+          reference_number?: string | null
+          representative_authority_status?: string | null
+          representative_name?: string | null
           request_details?: string | null
           request_type?: string
+          requester_contact?: string | null
+          requester_name?: string | null
+          response_package_reference?: string | null
+          response_summary?: string | null
+          scope?: string | null
+          secure_delivery_method?: string | null
           status?: string
-          user_id?: string
+          systems_to_search?: string[] | null
+          third_party_information_review?: string | null
+          updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
@@ -2785,197 +2935,6 @@ export type Database = {
         }
         Relationships: []
       }
-      rights_request_events: {
-        Row: {
-          actor_role: string | null
-          actor_user_id: string | null
-          created_at: string
-          detail: Json | null
-          event_type: string
-          id: string
-          request_id: string
-        }
-        Insert: {
-          actor_role?: string | null
-          actor_user_id?: string | null
-          created_at?: string
-          detail?: Json | null
-          event_type: string
-          id?: string
-          request_id: string
-        }
-        Update: {
-          actor_role?: string | null
-          actor_user_id?: string | null
-          created_at?: string
-          detail?: Json | null
-          event_type?: string
-          id?: string
-          request_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "rights_request_events_request_id_fkey"
-            columns: ["request_id"]
-            isOneToOne: false
-            referencedRelation: "my_rights_requests"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "rights_request_events_request_id_fkey"
-            columns: ["request_id"]
-            isOneToOne: false
-            referencedRelation: "rights_requests"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      rights_requests: {
-        Row: {
-          assigned_to: string | null
-          authority_verified_at: string | null
-          channel: string
-          clarification_received_at: string | null
-          clarification_requested_at: string | null
-          clock_paused_at: string | null
-          clock_resumed_at: string | null
-          clock_start_at: string | null
-          completed_at: string | null
-          created_at: string
-          decision: string
-          due_at: string | null
-          exemption_reasons: string[] | null
-          exemption_review: string | null
-          extended_due_at: string | null
-          extension_applied: boolean
-          extension_notified_at: string | null
-          extension_reason: string | null
-          id: string
-          identity_requested_at: string | null
-          identity_status: string
-          identity_verified_at: string | null
-          internal_notes: string | null
-          linked_gdpr_request_id: string | null
-          pause_reason: string | null
-          received_at: string
-          reference_number: string
-          representative_authority_status: string | null
-          representative_name: string | null
-          request_description: string
-          request_type: string
-          requester_contact: string
-          requester_name: string | null
-          requester_user_id: string | null
-          response_package_reference: string | null
-          response_summary: string | null
-          scope: string | null
-          searches_completed: string[] | null
-          secure_delivery_method: string | null
-          status: string
-          systems_to_search: string[] | null
-          third_party_information_review: string | null
-          updated_at: string
-        }
-        Insert: {
-          assigned_to?: string | null
-          authority_verified_at?: string | null
-          channel?: string
-          clarification_received_at?: string | null
-          clarification_requested_at?: string | null
-          clock_paused_at?: string | null
-          clock_resumed_at?: string | null
-          clock_start_at?: string | null
-          completed_at?: string | null
-          created_at?: string
-          decision?: string
-          due_at?: string | null
-          exemption_reasons?: string[] | null
-          exemption_review?: string | null
-          extended_due_at?: string | null
-          extension_applied?: boolean
-          extension_notified_at?: string | null
-          extension_reason?: string | null
-          id?: string
-          identity_requested_at?: string | null
-          identity_status?: string
-          identity_verified_at?: string | null
-          internal_notes?: string | null
-          linked_gdpr_request_id?: string | null
-          pause_reason?: string | null
-          received_at?: string
-          reference_number: string
-          representative_authority_status?: string | null
-          representative_name?: string | null
-          request_description: string
-          request_type: string
-          requester_contact: string
-          requester_name?: string | null
-          requester_user_id?: string | null
-          response_package_reference?: string | null
-          response_summary?: string | null
-          scope?: string | null
-          searches_completed?: string[] | null
-          secure_delivery_method?: string | null
-          status?: string
-          systems_to_search?: string[] | null
-          third_party_information_review?: string | null
-          updated_at?: string
-        }
-        Update: {
-          assigned_to?: string | null
-          authority_verified_at?: string | null
-          channel?: string
-          clarification_received_at?: string | null
-          clarification_requested_at?: string | null
-          clock_paused_at?: string | null
-          clock_resumed_at?: string | null
-          clock_start_at?: string | null
-          completed_at?: string | null
-          created_at?: string
-          decision?: string
-          due_at?: string | null
-          exemption_reasons?: string[] | null
-          exemption_review?: string | null
-          extended_due_at?: string | null
-          extension_applied?: boolean
-          extension_notified_at?: string | null
-          extension_reason?: string | null
-          id?: string
-          identity_requested_at?: string | null
-          identity_status?: string
-          identity_verified_at?: string | null
-          internal_notes?: string | null
-          linked_gdpr_request_id?: string | null
-          pause_reason?: string | null
-          received_at?: string
-          reference_number?: string
-          representative_authority_status?: string | null
-          representative_name?: string | null
-          request_description?: string
-          request_type?: string
-          requester_contact?: string
-          requester_name?: string | null
-          requester_user_id?: string | null
-          response_package_reference?: string | null
-          response_summary?: string | null
-          scope?: string | null
-          searches_completed?: string[] | null
-          secure_delivery_method?: string | null
-          status?: string
-          systems_to_search?: string[] | null
-          third_party_information_review?: string | null
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "rights_requests_linked_gdpr_request_id_fkey"
-            columns: ["linked_gdpr_request_id"]
-            isOneToOne: false
-            referencedRelation: "gdpr_requests"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       system_alerts: {
         Row: {
           alert_type: string
@@ -3383,7 +3342,7 @@ export type Database = {
       }
     }
     Views: {
-      my_rights_requests: {
+      my_gdpr_requests: {
         Row: {
           clarification_needed: boolean | null
           completed_at: string | null
@@ -3554,9 +3513,9 @@ export type Database = {
         }[]
       }
       export_user_data: { Args: { target_user_id: string }; Returns: Json }
+      generate_gdpr_reference: { Args: never; Returns: string }
       generate_hold_reference: { Args: never; Returns: string }
       generate_review_reference: { Args: never; Returns: string }
-      generate_rights_request_reference: { Args: never; Returns: string }
       generate_service_request_reference: { Args: never; Returns: string }
       generate_transfer_reference: { Args: never; Returns: string }
       has_role: {
