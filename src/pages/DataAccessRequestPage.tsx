@@ -33,6 +33,9 @@ export const DataAccessRequestPage = () => {
   const [loading, setLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [reference, setReference] = useState<string | null>(null);
+  // Bot protection: honeypot (must remain blank) + form open timestamp
+  const [website, setWebsite] = useState("");
+  const [formOpenedAt] = useState<number>(() => Date.now());
 
   useEffect(() => {
     (async () => {
@@ -51,6 +54,17 @@ export const DataAccessRequestPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Honeypot: silently ignore
+    if (website.trim() !== "") { setReference("SILENT-OK"); return; }
+    // Minimum time-on-page: 3 seconds. Silently ignore anything faster.
+    if (Date.now() - formOpenedAt < 3000) { setReference("SILENT-OK"); return; }
+    // Client-side throttle: 1 submission per 60s per browser
+    const key = "ghat_dpr_last_submit";
+    const last = Number(localStorage.getItem(key) || 0);
+    if (Date.now() - last < 60_000) {
+      toast({ title: "Please wait", description: "You can submit another request in a moment.", variant: "destructive" });
+      return;
+    }
     setLoading(true);
     try {
       const { data, error } = await supabase.rpc("submit_rights_request", {
@@ -62,6 +76,7 @@ export const DataAccessRequestPage = () => {
         _channel: "website",
       });
       if (error) throw error;
+      localStorage.setItem(key, String(Date.now()));
       setReference(data as string);
       toast({
         title: "Request received",
@@ -78,6 +93,7 @@ export const DataAccessRequestPage = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <>
