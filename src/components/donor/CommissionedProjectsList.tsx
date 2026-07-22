@@ -76,9 +76,7 @@ export const CommissionedProjectsList = () => {
           supabase.from("project_field_evidence").select("*").in("project_id", ids)
             .eq("donor_visible", true).eq("review_status", "approved").is("withdrawn_at", null)
             .order("date_taken", { ascending: false }),
-          supabase.from("volunteer_project_assignments")
-            .select("project_id, assigned_role, donor_visibility_mode, volunteers(name, email)")
-            .in("project_id", ids),
+          supabase.rpc("donor_project_team", { _project_ids: ids }),
         ]);
 
         const fin: Record<string, ProjectFinance> = {};
