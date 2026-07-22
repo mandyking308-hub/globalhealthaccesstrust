@@ -57,6 +57,7 @@ export const CommissionedProjectsList = () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
+      setUserId(user.id);
 
       const { data, error } = await supabase
         .from("commissioned_projects")
