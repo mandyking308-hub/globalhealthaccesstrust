@@ -16,7 +16,14 @@ type Evidence = {
   id: string; project_id: string; caption: string | null; activity_description: string | null;
   approved_general_location: string | null; date_taken: string | null; storage_path: string;
 };
-type TeamMember = { assigned_role: string; donor_visibility_mode: string; volunteers: { name: string; email: string } | null };
+type TeamMember = {
+  assignment_id: string;
+  project_id: string;
+  assigned_role: string;
+  responsibilities: string | null;
+  donor_visibility_mode: string;
+  display_name: string;
+};
 
 const money = (n: number, ccy = "GBP") =>
   new Intl.NumberFormat("en-GB", { style: "currency", currency: ccy, maximumFractionDigits: 0 }).format(n || 0);
