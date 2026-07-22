@@ -2941,6 +2941,30 @@ export type Database = {
         }
         Relationships: []
       }
+      rights_request_rate_limits: {
+        Row: {
+          contact_hash: string
+          created_at: string
+          id: string
+          request_count: number
+          window_start: string
+        }
+        Insert: {
+          contact_hash: string
+          created_at?: string
+          id?: string
+          request_count?: number
+          window_start?: string
+        }
+        Update: {
+          contact_hash?: string
+          created_at?: string
+          id?: string
+          request_count?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
       system_alerts: {
         Row: {
           alert_type: string
