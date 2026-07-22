@@ -39,13 +39,8 @@ const getStatusClass = (status: string) => {
 };
 const getStatusLabel = (s: string) => s.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
 
-const displayName = (mode: string, name: string) => {
-  if (!name) return "Field team member";
-  if (mode === "full_name") return name;
-  if (mode === "first_name") return name.split(" ")[0];
-  if (mode === "anonymised") return "Field team member";
-  return "Field team member";
-};
+// Display-name derivation now happens server-side in the donor_project_team RPC.
+
 
 export const CommissionedProjectsList = () => {
   const [projects, setProjects] = useState<CommissionedProject[]>([]);
