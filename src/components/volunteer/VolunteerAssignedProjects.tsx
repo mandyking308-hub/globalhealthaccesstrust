@@ -215,6 +215,18 @@ export const VolunteerAssignedProjects = ({ volunteerId }: { volunteerId: string
                   </ul>
                 )}
               </div>
+
+              <div className="border-t pt-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="text-sm font-medium">Project messages</h4>
+                  <Button size="sm" variant="outline" onClick={() => setThreadOpen(threadOpen === p.id ? null : p.id)}>
+                    {threadOpen === p.id ? "Hide" : "Open thread"}
+                  </Button>
+                </div>
+                {threadOpen === p.id && userId && (
+                  <ProjectMessagesThread projectId={p.id} currentUserId={userId} currentRole="volunteer" />
+                )}
+              </div>
             </CardContent>
           </Card>
         );
