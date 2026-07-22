@@ -222,34 +222,19 @@ const ProjectDetail = ({
   const [msEvidence, setMsEvidence] = useState(true);
 
   const loadRelated = async () => {
-    const [allocRes, expRes, donRes, assignRes, volRes] = await Promise.all([
-      supabase
-        .from("fund_allocations")
-        .select("*, donations(*)")
-        .eq("project_id", project.id)
-        .order("created_at", { ascending: false }),
-      supabase
-        .from("project_expenses")
-        .select("*")
-        .eq("project_id", project.id)
-        .order("incurred_on", { ascending: false }),
-      supabase
-        .from("donations")
-        .select("*")
-        .eq("status", "completed")
-        .order("created_at", { ascending: false }),
-      supabase
-        .from("volunteer_project_assignments")
-        .select("id, assigned_role, created_at, volunteers(id, name, email)")
+    const [allocRes, expRes, msRes, donRes, assignRes, volRes] = await Promise.all([
+      supabase.from("fund_allocations").select("*, donations(*)").eq("project_id", project.id).order("created_at", { ascending: false }),
+      supabase.from("project_expenses").select("*").eq("project_id", project.id).order("incurred_on", { ascending: false }),
+      supabase.from("project_milestones").select("*").eq("project_id", project.id).order("sequence", { ascending: true }),
+      supabase.from("donations").select("*").eq("status", "completed").order("created_at", { ascending: false }),
+      supabase.from("volunteer_project_assignments")
+        .select("id, assigned_role, responsibilities, start_date, end_date, status, donor_visibility_mode, created_at, volunteers(id, name, email)")
         .eq("project_id", project.id),
-      supabase
-        .from("volunteers")
-        .select("id, name, email, status")
-        .eq("status", "approved")
-        .order("name"),
+      supabase.from("volunteers").select("id, name, email, status").eq("status", "approved").order("name"),
     ]);
     if (allocRes.data) setAllocations(allocRes.data as any);
     if (expRes.data) setExpenses(expRes.data as Expense[]);
+    if (msRes.data) setMilestones(msRes.data as Milestone[]);
     if (donRes.data) setAvailableDonations(donRes.data as Donation[]);
     if (assignRes.data) setAssignments(assignRes.data as any);
     if (volRes.data) setApprovedVolunteers(volRes.data as any);
@@ -258,10 +243,15 @@ const ProjectDetail = ({
   useEffect(() => { loadRelated(); }, [project.id]);
 
   const totalAllocated = allocations.reduce((s, a) => s + Number(a.amount || 0), 0);
-  const totalSpent = expenses.reduce((s, e) => s + Number(e.amount || 0), 0);
+  const totalSpent = expenses
+    .filter((e) => ["approved", "committed", "paid"].includes(e.status))
+    .reduce((s, e) => s + Number(e.amount || 0), 0);
   const balance = totalAllocated - totalSpent;
   const targetNum = Number(target) || 0;
   const percentFunded = targetNum > 0 ? Math.min(100, (totalAllocated / targetNum) * 100) : 0;
+  const totalWeight = milestones.reduce((s, m) => s + Number(m.weight || 0), 0);
+  const doneWeight = milestones.filter((m) => m.status === "completed").reduce((s, m) => s + Number(m.weight || 0), 0);
+  const deliveryPercent = totalWeight > 0 ? (doneWeight / totalWeight) * 100 : 0;
 
   const saveHeader = async () => {
     setSaving(true);
