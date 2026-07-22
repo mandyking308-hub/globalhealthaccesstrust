@@ -326,6 +326,62 @@ export type Database = {
         }
         Relationships: []
       }
+      donation_adjustments: {
+        Row: {
+          adjustment_type: string
+          amount_minor: number
+          approved_by: string | null
+          created_at: string
+          currency: string
+          donation_id: string
+          id: string
+          occurred_at: string
+          provider: string
+          provider_reference: string | null
+          reason: string | null
+          recorded_by: string | null
+          updated_at: string
+        }
+        Insert: {
+          adjustment_type: string
+          amount_minor: number
+          approved_by?: string | null
+          created_at?: string
+          currency?: string
+          donation_id: string
+          id?: string
+          occurred_at?: string
+          provider: string
+          provider_reference?: string | null
+          reason?: string | null
+          recorded_by?: string | null
+          updated_at?: string
+        }
+        Update: {
+          adjustment_type?: string
+          amount_minor?: number
+          approved_by?: string | null
+          created_at?: string
+          currency?: string
+          donation_id?: string
+          id?: string
+          occurred_at?: string
+          provider?: string
+          provider_reference?: string | null
+          reason?: string | null
+          recorded_by?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donation_adjustments_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       donation_allocations: {
         Row: {
           allocation_status: string
@@ -1248,7 +1304,7 @@ export type Database = {
           failure_message?: string | null
           id?: string
           payment_mode: string
-          provider?: string
+          provider: string
           provider_checkout_session_id?: string | null
           provider_payment_intent_id?: string | null
           provider_subscription_id?: string | null
@@ -1276,6 +1332,66 @@ export type Database = {
           {
             foreignKeyName: "payment_attempts_donation_draft_id_fkey"
             columns: ["donation_draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payment_provider_events: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          payload: Json
+          processed_at: string | null
+          processing_result: string | null
+          provider: string
+          provider_event_id: string
+          related_donation_id: string | null
+          related_draft_id: string | null
+          signature_verified: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          payload: Json
+          processed_at?: string | null
+          processing_result?: string | null
+          provider: string
+          provider_event_id: string
+          related_donation_id?: string | null
+          related_draft_id?: string | null
+          signature_verified?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          payload?: Json
+          processed_at?: string | null
+          processing_result?: string | null
+          provider?: string
+          provider_event_id?: string
+          related_donation_id?: string | null
+          related_draft_id?: string | null
+          signature_verified?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payment_provider_events_related_donation_id_fkey"
+            columns: ["related_donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "payment_provider_events_related_draft_id_fkey"
+            columns: ["related_draft_id"]
             isOneToOne: false
             referencedRelation: "donation_drafts"
             referencedColumns: ["id"]
@@ -1343,6 +1459,63 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      payment_settings: {
+        Row: {
+          account_number: string | null
+          bank_name: string | null
+          beneficiary_name: string | null
+          bic: string | null
+          created_at: string
+          gocardless_enabled: boolean
+          gocardless_environment: string | null
+          iban: string | null
+          id: string
+          instructions_notes: string | null
+          show_details_to_donor_after_confirmation: boolean
+          singleton: boolean
+          sort_code: string | null
+          updated_at: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          account_number?: string | null
+          bank_name?: string | null
+          beneficiary_name?: string | null
+          bic?: string | null
+          created_at?: string
+          gocardless_enabled?: boolean
+          gocardless_environment?: string | null
+          iban?: string | null
+          id?: string
+          instructions_notes?: string | null
+          show_details_to_donor_after_confirmation?: boolean
+          singleton?: boolean
+          sort_code?: string | null
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          account_number?: string | null
+          bank_name?: string | null
+          beneficiary_name?: string | null
+          bic?: string | null
+          created_at?: string
+          gocardless_enabled?: boolean
+          gocardless_environment?: string | null
+          iban?: string | null
+          id?: string
+          instructions_notes?: string | null
+          show_details_to_donor_after_confirmation?: boolean
+          singleton?: boolean
+          sort_code?: string | null
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: []
       }
       payment_webhook_events: {
         Row: {
@@ -3350,6 +3523,71 @@ export type Database = {
         }
         Relationships: []
       }
+      recurring_payment_arrangements: {
+        Row: {
+          amount_minor: number
+          authorised_at: string | null
+          cancellation_reason: string | null
+          cancelled_at: string | null
+          created_at: string
+          currency: string
+          donor_id: string
+          id: string
+          interval: string
+          originating_draft_id: string | null
+          provider: string
+          provider_customer_id: string | null
+          provider_mandate_id: string | null
+          provider_subscription_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_minor: number
+          authorised_at?: string | null
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          created_at?: string
+          currency?: string
+          donor_id: string
+          id?: string
+          interval: string
+          originating_draft_id?: string | null
+          provider: string
+          provider_customer_id?: string | null
+          provider_mandate_id?: string | null
+          provider_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_minor?: number
+          authorised_at?: string | null
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
+          created_at?: string
+          currency?: string
+          donor_id?: string
+          id?: string
+          interval?: string
+          originating_draft_id?: string | null
+          provider?: string
+          provider_customer_id?: string | null
+          provider_mandate_id?: string | null
+          provider_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recurring_payment_arrangements_originating_draft_id_fkey"
+            columns: ["originating_draft_id"]
+            isOneToOne: false
+            referencedRelation: "donation_drafts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       refund_records: {
         Row: {
           allocation_impact_notes: string | null
@@ -4171,6 +4409,19 @@ export type Database = {
         Args: { _donor_id: string; _volunteer_id: string }
         Returns: boolean
       }
+      donor_get_bank_details: {
+        Args: { _draft_id: string }
+        Returns: {
+          account_number: string
+          bank_name: string
+          beneficiary_name: string
+          bic: string
+          iban: string
+          instructions_notes: string
+          show_details: boolean
+          sort_code: string
+        }[]
+      }
       donor_project_agreement: {
         Args: { _project_id: string }
         Returns: {
@@ -4227,6 +4478,11 @@ export type Database = {
       generate_review_reference: { Args: never; Returns: string }
       generate_service_request_reference: { Args: never; Returns: string }
       generate_transfer_reference: { Args: never; Returns: string }
+      gocardless_enabled: { Args: never; Returns: boolean }
+      gocardless_prepare_arrangement: {
+        Args: { _draft_id: string }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
