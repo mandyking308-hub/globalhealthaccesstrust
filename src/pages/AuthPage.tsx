@@ -87,6 +87,18 @@ export const AuthPage = () => {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [privacyAck, setPrivacyAck] = useState(false);
+
+  const safeReturnTo = (raw: string | null): string | null => {
+    if (!raw) return null;
+    // Only allow same-origin relative paths from an explicit allow-list of destinations.
+    const allowed = ["/donation-form", "/donor-dashboard", "/volunteer-dashboard", "/admin/dashboard"];
+    try {
+      if (!raw.startsWith("/")) return null;
+      const path = raw.split("?")[0].split("#")[0];
+      return allowed.some((a) => path === a || path.startsWith(a + "/")) ? raw : null;
+    } catch { return null; }
+  };
 
 
   const redirectByRole = async (userId: string) => {
