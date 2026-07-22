@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CookieSettingsLink } from "@/components/CookieSettingsLink";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-
+import { LEGAL_ENTITY } from "@/lib/legalEntity";
 
 interface RegistryRow {
   id: string;
@@ -40,10 +40,10 @@ const CookiePolicyPage = () => {
 
         <Section n="1" title="Controller">
           <p>
-            This Cookie Notice is issued by Global Health Access Trust ("the Trust", "we", "us") in respect of the
+            This Cookie Notice is issued by {LEGAL_ENTITY.legalName} ("the Trust", "we", "us") in respect of the
             website at globalhealthaccesstrust.com and the connected donor, project team and administrator portals.
-            Correspondence: 2 Harley Street, London W1G 9PA. For data-protection contact, use the{" "}
-            <Link to="/data-access-request" className="underline">Data Request</Link> route.
+            Correspondence: {LEGAL_ENTITY.correspondenceAddress.single}. This is a correspondence address only. For
+            data-protection contact, use the <Link to="/data-access-request" className="underline">Data Request</Link> route.
           </p>
         </Section>
 
@@ -79,8 +79,8 @@ const CookiePolicyPage = () => {
 
         <Section n="6" title="Embedded content">
           <p>
-            Pages may embed content from third parties (for example, video or maps). Where embedded content would set
-            cookies, it is only loaded after you turn on the corresponding category.
+            Pages may embed content from third parties, such as video or maps. Where embedded content would set cookies,
+            it is only loaded after you turn on the corresponding category.
           </p>
         </Section>
 
@@ -93,8 +93,9 @@ const CookiePolicyPage = () => {
 
         <Section n="8" title="Payment-provider technologies">
           <p>
-            When you initiate a Direct Debit setup or bank-transfer donation, payment providers may set their own
-            technologies on their hosted pages. Those pages are governed by the provider's own notices.
+            Public payment collection is not currently active. If and when a verified payment route is activated,
+            an authorised payment provider may set its own technologies on a hosted page. Any such page will be governed
+            by the provider's own privacy and cookie notices, and the website inventory will be updated accordingly.
           </p>
         </Section>
 
@@ -175,19 +176,17 @@ const CookiePolicyPage = () => {
               <tbody>
                 {rows.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="p-3 text-muted-foreground">
-                      No active items registered.
-                    </td>
+                    <td colSpan={6} className="p-3 text-muted-foreground">No active items registered.</td>
                   </tr>
                 )}
-                {rows.map((r) => (
-                  <tr key={r.id} className="border-t align-top">
-                    <td className="p-2 font-mono text-xs">{r.storage_key}</td>
-                    <td className="p-2">{r.provider}</td>
-                    <td className="p-2 capitalize">{r.category}</td>
-                    <td className="p-2">{r.purpose}</td>
-                    <td className="p-2">{r.duration}</td>
-                    <td className="p-2">{r.is_first_party ? "First" : "Third"}</td>
+                {rows.map((row) => (
+                  <tr key={row.id} className="border-t align-top">
+                    <td className="p-2 font-mono text-xs">{row.storage_key}</td>
+                    <td className="p-2">{row.provider}</td>
+                    <td className="p-2 capitalize">{row.category}</td>
+                    <td className="p-2">{row.purpose}</td>
+                    <td className="p-2">{row.duration}</td>
+                    <td className="p-2">{row.is_first_party ? "First" : "Third"}</td>
                   </tr>
                 ))}
               </tbody>
