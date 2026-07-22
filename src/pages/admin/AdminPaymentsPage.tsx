@@ -81,10 +81,14 @@ export const AdminPaymentsPage = () => {
                       </div>
                       <div>
                         {receiving === r.id ? (
-                          <div className="flex gap-2 items-end">
+                          <div className="flex gap-2 items-end flex-wrap">
                             <div>
                               <Label className="text-xs">Received (£)</Label>
                               <Input value={amountGBP} onChange={(e) => setAmountGBP(e.target.value)} className="h-8 w-32" />
+                            </div>
+                            <div>
+                              <Label className="text-xs">Bank ref</Label>
+                              <Input value={bankRef} onChange={(e) => setBankRef(e.target.value)} className="h-8 w-40" />
                             </div>
                             <Button size="sm" onClick={() => recordReceipt(r.id)}>Confirm</Button>
                             <Button size="sm" variant="ghost" onClick={() => setReceiving(null)}>Cancel</Button>
