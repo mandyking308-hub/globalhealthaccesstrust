@@ -72,7 +72,7 @@ export const AboutPage = () => {
               </p>
             </div>
             <div className="section-container">
-              <h3 className="mb-3 text-foreground">Registered Correspondence Address</h3>
+              <h3 className="mb-3 text-foreground">Correspondence Address</h3>
               <div className="text-[15px] text-muted-foreground leading-[1.7]">
                 <p>Global Health Access Trust</p>
                 <p>2 Harley Street, London</p>
