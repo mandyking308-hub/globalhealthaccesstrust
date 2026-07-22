@@ -191,6 +191,7 @@ const App = () => (
             <Route path="payments" element={<AdminPaymentsPage />} />
             <Route path="high-value-agreements" element={<AdminHighValueAgreementsPage />} />
             <Route path="gift-acceptance" element={<AdminGiftAcceptancePage />} />
+            <Route path="donor-due-diligence" element={<AdminDonorDueDiligencePage />} />
             <Route path="settings" element={<AdminSettingsPage />} />
 
           </Route>
