@@ -389,53 +389,73 @@ export const HomePage = () => {
         </section>
 
 
-        {/* Donor Portal — editorial introduction to the secure private wing */}
-        <section className="py-24 md:py-28 border-b border-foreground/10 bg-background">
+        {/* Portal access — Donor + Project Team, side by side */}
+        <section className="py-20 md:py-24 border-b border-foreground/10 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <h2 className="font-serif text-foreground mb-10" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.005em" }}>
-              Donor Portal
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-14 md:gap-20 items-start">
-              <div>
-                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 max-w-2xl">
-                  A secure private wing for those who fund the Trust's work.
+            <div className="max-w-3xl mb-12">
+              <span className="portal-eyebrow">Secure Access</span>
+              <h2 className="font-serif text-foreground mt-4" style={{ fontSize: "clamp(28px, 3vw, 44px)", lineHeight: 1.08, fontWeight: 500, letterSpacing: "-0.005em" }}>
+                Two portals. One authenticated system.
+              </h2>
+              <p className="text-muted-foreground mt-5 text-[16.5px] leading-relaxed">
+                Supporters and delivery teams sign in through separate workspaces. Trust administration remains discreet and available from the login page.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-foreground/15">
+              {/* Donor Portal panel */}
+              <div className="p-8 md:p-10 border-b md:border-b-0 md:border-r border-foreground/15 bg-background">
+                <span className="text-[10.5px] font-bold uppercase tracking-[0.24em] text-foreground/55">For supporters</span>
+                <h3 className="font-serif text-foreground mt-3" style={{ fontSize: "clamp(22px, 1.9vw, 28px)", fontWeight: 500, letterSpacing: "-0.005em" }}>
+                  Donor Portal
+                </h3>
+                <p className="text-muted-foreground text-[15px] leading-relaxed mt-4 max-w-md">
+                  View your donations, funding allocations, project expenditure, milestones, field photographs and reports.
                 </p>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-2xl">
-                  Donors have access to a secure environment where progress, updates, and documentation are made available.
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Link to="/donor-guide">
-                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                      Learn About the Donor Portal
+                <div className="flex flex-wrap gap-3 mt-8">
+                  <Link to="/auth?portal=donor">
+                    <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[12.5px] font-semibold h-11 px-6">
+                      Donor Login
                     </Button>
                   </Link>
-                  <Link to="/auth">
-                    <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                      Login
+                  <Link to="/donor-guide">
+                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[12.5px] font-semibold h-11 px-6">
+                      About the Donor Portal
                     </Button>
                   </Link>
                 </div>
               </div>
 
-              <ol className="divide-y divide-foreground/12 border-t border-b border-foreground/15">
-                {[
-                  "View contributions",
-                  "Commission projects",
-                  "Receive updates",
-                  "Review history",
-                  "Manage preferences",
-                ].map((item, i) => (
-                  <li key={item} className="grid grid-cols-[56px_1fr] gap-6 py-5">
-                    <span className="font-serif text-primary text-[18px] font-black tracking-tight pt-1">
-                      0{i + 1}
-                    </span>
-                    <span className="text-foreground text-[16.5px] leading-relaxed pt-1">{item}</span>
-                  </li>
-                ))}
-              </ol>
+              {/* Project Team Portal panel */}
+              <div className="p-8 md:p-10 bg-foreground/[0.02]">
+                <span className="text-[10.5px] font-bold uppercase tracking-[0.24em] text-foreground/55">For delivery teams</span>
+                <h3 className="font-serif text-foreground mt-3" style={{ fontSize: "clamp(22px, 1.9vw, 28px)", fontWeight: 500, letterSpacing: "-0.005em" }}>
+                  Project Team Portal
+                </h3>
+                <p className="text-muted-foreground text-[15px] leading-relaxed mt-4 max-w-md">
+                  Charity workers, field staff, healthcare professionals, approved volunteers, coordinators and delivery partners submit progress, evidence and expenses on assigned projects.
+                </p>
+                <div className="flex flex-wrap gap-3 mt-8">
+                  <Link to="/auth?portal=team">
+                    <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[12.5px] font-semibold h-11 px-6">
+                      Project Team Login
+                    </Button>
+                  </Link>
+                  <Link to="/volunteer-apply">
+                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[12.5px] font-semibold h-11 px-6">
+                      Apply to Join
+                    </Button>
+                  </Link>
+                </div>
+                <p className="text-[11.5px] text-muted-foreground mt-5 leading-relaxed">
+                  Accounts are not self-service. Access is granted by a Trust administrator once approved and assigned to a project.
+                </p>
+              </div>
             </div>
           </div>
         </section>
+
+
 
 
         {/* Engagement & Funding Approach */}
