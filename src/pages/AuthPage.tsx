@@ -233,7 +233,10 @@ export const AuthPage = () => {
             setSignupConfirmPassword={setSignupConfirmPassword}
             gdprConsent={gdprConsent}
             setGdprConsent={setGdprConsent}
+            termsAccepted={termsAccepted}
+            setTermsAccepted={setTermsAccepted}
           />
+
         )}
       </main>
       <Footer />
@@ -356,7 +359,9 @@ type FormProps = {
   signupPassword: string; setSignupPassword: (v: string) => void;
   signupConfirmPassword: string; setSignupConfirmPassword: (v: string) => void;
   gdprConsent: boolean; setGdprConsent: (v: boolean) => void;
+  termsAccepted: boolean; setTermsAccepted: (v: boolean) => void;
 };
+
 
 const PortalForm = (props: FormProps) => {
   const cfg = PORTALS[props.portal];
@@ -515,15 +520,24 @@ const SignupForm = (props: FormProps) => (
         onCheckedChange={(c) => props.setGdprConsent(c as boolean)} disabled={props.loading} />
       <label htmlFor="gdpr-consent" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
         I consent to the processing of my personal data in accordance with the{" "}
-        <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Policy</a>
-        {" "}and{" "}
-        <a href="/terms-of-use" className="text-primary hover:underline" target="_blank">Terms of Use</a>. *
+        <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
       </label>
     </div>
-    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.gdprConsent}>
+    <div className="flex items-start space-x-2">
+      <Checkbox id="terms-accepted" checked={props.termsAccepted}
+        onCheckedChange={(c) => props.setTermsAccepted(c as boolean)} disabled={props.loading} />
+      <label htmlFor="terms-accepted" className="text-sm leading-relaxed cursor-pointer text-muted-foreground">
+        I agree to the{" "}
+        <a href="/terms-of-use" className="text-primary hover:underline" target="_blank">Website and Portal Terms of Use</a>
+        {" "}and confirm that I have read the{" "}
+        <a href="/privacy-policy" className="text-primary hover:underline" target="_blank">Privacy Notice</a>. *
+      </label>
+    </div>
+    <Button type="submit" className="w-full h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.08em] text-[13px] font-semibold uppercase" disabled={props.loading || !props.gdprConsent || !props.termsAccepted}>
       {props.loading ? "Creating account..." : "Create Account"}
     </Button>
   </form>
 );
+
 
 export default AuthPage;
