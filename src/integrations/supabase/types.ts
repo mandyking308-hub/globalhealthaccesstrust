@@ -1607,7 +1607,13 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "donor" | "admin" | "super_admin" | "volunteer"
+      app_role:
+        | "donor"
+        | "admin"
+        | "super_admin"
+        | "volunteer"
+        | "safeguarding_officer"
+        | "finance_officer"
       donation_frequency: "one_time" | "monthly" | "quarterly" | "annually"
       donation_purpose:
         | "healthcare_access"
@@ -1743,7 +1749,14 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["donor", "admin", "super_admin", "volunteer"],
+      app_role: [
+        "donor",
+        "admin",
+        "super_admin",
+        "volunteer",
+        "safeguarding_officer",
+        "finance_officer",
+      ],
       donation_frequency: ["one_time", "monthly", "quarterly", "annually"],
       donation_purpose: [
         "healthcare_access",
