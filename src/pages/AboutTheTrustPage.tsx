@@ -1,83 +1,113 @@
 import { Link } from "react-router-dom";
 import { ContentLayout } from "@/components/layout/ContentLayout";
 import { SEO } from "@/components/SEO";
+import { LEGAL_ENTITY } from "@/lib/legalEntity";
 
-export const AboutTheTrustPage = () => {
-  return (
-    <>
-      <SEO 
-        title="About the Trust - Global Health Access Trust"
-        description="Learn about the Global Health Access Trust's origins, governance structure, charitable purpose, and commitment to building lasting healthcare access for vulnerable populations worldwide."
-        canonical="/about-the-trust"
-      />
-      <ContentLayout>
-        <h1>About the Trust</h1>
-        
-        <p className="featured-text">"A life of service begins with the solemnity of intention."</p>
+export const AboutTheTrustPage = () => (
+  <>
+    <SEO
+      title="About the Trust"
+      description="The legal identity, charitable purpose, Trustees and operating model of Global Health Access Trust."
+      canonical="/about-the-trust"
+    />
+    <ContentLayout>
+      <h1>About the Trust</h1>
+      <p className="featured-text">
+        A trustee-led charitable structure for accountable healthcare-access projects.
+      </p>
 
-        <div className="section-container">
-          <h2>Origins & Founding Vision</h2>
-          <p>The Global Health Access Trust was established in 2025 in response to a moral imperative: that health, healing, and human dignity must not be privileges of the few but protected rights of all. Founded by leaders in global health, governance, and social enterprise, the Trust was conceived not as a campaign or initiative—but as a long-term institution of public good.</p>
-          <p>Its creation was rooted in the belief that healthcare access is not a fleeting cause, but a matter of justice, continuity, and national and global conscience. In a world marked by systemic inequities, the Trust exists to serve quietly but resolutely—through stewardship, not spotlight.</p>
+      <div className="section-container">
+        <h2>Legal identity</h2>
+        <p>{LEGAL_ENTITY.publicLegalDescription}</p>
+        <p>
+          The Trust is not presented as a company and no company number or Charity Commission registration number is claimed. Its governing authority comes from its signed Trust Deed and the decisions of its Trustees.
+        </p>
+      </div>
+
+      <div className="section-container">
+        <h2>Trustees</h2>
+        <p>The current Trustees are:</p>
+        <ul>
+          <li>Mandy King — Chair of Trustees</li>
+          <li>Dr Jagdev Thukral — Trustee</li>
+          <li>John O'Sullivan BA FCA — Trustee</li>
+        </ul>
+        <p>
+          The Trustees are responsible for charitable purpose, public benefit, financial stewardship, risk, safeguarding, project approval and compliance with the Trust Deed.
+        </p>
+        <Link to="/trustee-biographies" className="text-primary hover:underline">
+          Trustee information →
+        </Link>
+      </div>
+
+      <div className="section-container">
+        <h2>Charitable purpose</h2>
+        <p>
+          The Trust exists to advance health, relieve illness and preserve life, particularly for people and communities facing barriers to appropriate healthcare. It may also advance education and capacity in health and care where doing so serves those charitable purposes.
+        </p>
+        <p>
+          Projects must be for public benefit, fall within the Trust Deed, be lawful in every relevant jurisdiction and avoid unauthorised private benefit or donor control.
+        </p>
+      </div>
+
+      <div className="section-container">
+        <h2>Operating model</h2>
+        <p>
+          GHAT uses a secure digital platform to assess, commission, govern and report on defined projects. The platform supports administration; it does not replace trustee judgement, legal agreements, safeguarding decisions or financial controls.
+        </p>
+        <ul>
+          <li>Project proposals are assessed before commitment.</li>
+          <li>Trustees approve purpose, restrictions, budget and delivery arrangements.</li>
+          <li>Approved work is documented through a Project Charter or appropriate agreement.</li>
+          <li>Progress is derived from milestones rather than fundraising percentages.</li>
+          <li>Financial records distinguish allocated, committed, spent, remaining, refunded and reallocated funds.</li>
+          <li>Donor visibility does not transfer legal control away from the Trustees.</li>
+        </ul>
+      </div>
+
+      <div className="section-container">
+        <h2>Banking and receipt of funds</h2>
+        <p>
+          The Trust is establishing a bank account in its own legal name. Public bank details and live payment collection will not be activated until the account and related payment settings have been independently verified and approved by the Trustees.
+        </p>
+        <p>
+          A proposal, payment instruction, mandate or pending collection is not treated as charitable income. A donation is recorded only after cleared funds have been received and reconciled.
+        </p>
+      </div>
+
+      <div className="section-container">
+        <h2>Governing document</h2>
+        <p>
+          The signed governing document is publicly available for banks, advisers, partners and other due-diligence reviewers. The authoritative PDF is retained separately from the website's policies and legal notices.
+        </p>
+        <div className="flex flex-wrap gap-4">
+          <Link to="/constitution" className="text-primary hover:underline">
+            View Constitution (Signed) →
+          </Link>
+          <a
+            href="/GHAT_Constitution_2025_Refined.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:underline"
+          >
+            Open signed PDF →
+          </a>
         </div>
+      </div>
 
-        <div className="section-container">
-          <h2>Our Structure & Leadership</h2>
-          <p>The Global Health Access Trust is governed by a formal Board of Trustees, drawn from fields including health policy, law, finance, and public service.</p>
-          <ul>
-            <li>Chair of Trustees</li>
-            <li>Executive Lead</li>
-            <li>Senior Governance Advisor</li>
-            <li>Legal Affairs Advisor</li>
-            <li>Trust Development Coordinator</li>
-          </ul>
-          <p>(Full list of Trustees available upon request or in our annual governance filing.)</p>
-          <p>All Trustees serve under fiduciary duty and are bound by the Trust's governing constitution, with oversight in accordance with the laws of England and Wales.</p>
-        </div>
+      <div className="section-container">
+        <h2>Correspondence</h2>
+        <p>{LEGAL_ENTITY.correspondenceAddress.lines.join(", ")}.</p>
+        <p>
+          This is the Trust's correspondence address. It is not described as a registered office.
+        </p>
+      </div>
 
-        <div className="section-container">
-          <h2>Charitable Purpose</h2>
-          <p>The charitable purpose of the Trust is:</p>
-          <p className="featured-text">"To advance health, relieve illness, and preserve life—particularly among vulnerable or underserved populations—through lawful and equitable means, as recognised under section 3 of the Charities Act 2011."</p>
-          <p>All funding and programme activity is directed solely toward these ends.</p>
-        </div>
-
-        <div className="section-container">
-          <h2>Public Benefit Statement</h2>
-          <p>In accordance with the Charity Commission's public benefit requirement, the Trust affirms that all of its charitable activities:</p>
-          <ul>
-            <li>Are exclusively for public benefit;</li>
-            <li>Provide measurable outcomes that improve health or healthcare access;</li>
-            <li>Are accessible without unjust exclusion, prejudice, or private gain;</li>
-            <li>Operate under principles of transparency, non-partisanship, and institutional independence.</li>
-          </ul>
-          <p className="featured-text">We exist to serve—not to sell. We work to restore dignity where it has been denied, and to strengthen systems where they have failed.</p>
-        </div>
-
-        <div className="section-container">
-          <h2>Our Approach</h2>
-          <p>The Trust takes a deliberately measured, disciplined approach to charitable intervention:</p>
-          <ul>
-            <li>We fund with purpose, not impulse.</li>
-            <li>We prioritise systems-building, not dependency.</li>
-            <li>We choose partnerships based on ethics, alignment, and legal compliance.</li>
-            <li>We operate with quiet fidelity to our mission—always guided by public duty, not profile.</li>
-          </ul>
-          <p>Every action is reviewed for legality, impact, and integrity. This is not philanthropy in passing; this is long-term stewardship for public good.</p>
-        </div>
-
-        <div className="section-container">
-          <h2>Constitution & Governance</h2>
-          <p>Global Health Access Trust is governed by a formal Constitution, which outlines our purpose, structure, and decision-making processes. This document sets out the roles of our trustees, how we operate, and our commitment to transparency and accountability.</p>
-          <p className="block"><a href="/GHAT_Constitution_2025_Refined.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-block py-2">Download Constitution (Adopted June 2025)</a></p>
-        </div>
-
-        <div className="flex flex-wrap gap-4 mt-8">
-          <Link to="/contact-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Contact the Trust →</Link>
-          <Link to="/governance" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">View Governance →</Link>
-          <Link to="/support-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Support the Trust →</Link>
-        </div>
-      </ContentLayout>
-    </>
-  );
-};
+      <div className="flex flex-wrap gap-5 mt-8">
+        <Link to="/governance-legal-framework" className="text-primary hover:underline">Governance framework →</Link>
+        <Link to="/financial-controls" className="text-primary hover:underline">Financial controls →</Link>
+        <Link to="/contact-the-trust" className="text-primary hover:underline">Contact the Trust →</Link>
+      </div>
+    </ContentLayout>
+  </>
+);
