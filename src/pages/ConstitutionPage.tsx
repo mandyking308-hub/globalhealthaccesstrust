@@ -53,40 +53,54 @@ export const ConstitutionPage = () => {
           <Card className="card-professional">
             <CardContent className="p-6 text-center">
               
-              <h3 className="font-semibold mb-1">Checksum</h3>
-              <p className="text-muted-foreground text-xs">sha256:a1b2c3...</p>
+              <h3 className="font-semibold mb-1">Document Reference</h3>
+              <p className="text-muted-foreground text-xs">GHAT-CONSTITUTION-1.0</p>
             </CardContent>
           </Card>
         </div>
 
-        {/* PDF Viewer Section */}
+        {/* Document Viewer Section */}
         <Card className="card-elevated mb-8">
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <span>Constitution Document</span>
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                
-                Download Signed PDF
+              <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                <a
+                  href="/GHAT_Constitution_2025_Refined.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Download PDF
+                </a>
               </Button>
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {/* PDF Viewer Placeholder */}
-            <div className="bg-muted rounded-lg h-96 flex items-center justify-center border-2 border-dashed border-muted-foreground/20">
-              <div className="text-center">
-                
-                <h3 className="text-lg font-semibold mb-2">PDF Viewer</h3>
-                <p className="text-muted-foreground mb-4">
-                  Interactive PDF viewer will display the signed Constitution document here.
+            <div className="bg-muted rounded-lg p-8 border border-border">
+              <div className="max-w-2xl mx-auto text-center">
+                <h3 className="text-lg font-semibold mb-3">Governing Document</h3>
+                <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                  The signed governing document is retained in the Trust's formal records. A copy may be requested from the Trust, subject to appropriate redaction of personal information where required.
                 </p>
-                <Button variant="outline">
-                  
-                  Download to View
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button asChild>
+                    <a
+                      href="/GHAT_Constitution_2025_Refined.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open PDF
+                    </a>
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <a href="/contact-the-trust">Request a Copy</a>
+                  </Button>
+                </div>
               </div>
             </div>
           </CardContent>
         </Card>
+
 
         {/* Version History */}
         <Card className="card-professional mb-8">
