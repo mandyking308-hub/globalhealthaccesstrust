@@ -44,6 +44,12 @@ export const VolunteerAssignedProjects = ({ volunteerId }: { volunteerId: string
   const [noteType, setNoteType] = useState("field_note");
   const [file, setFile] = useState<File | null>(null);
   const [posting, setPosting] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [threadOpen, setThreadOpen] = useState<string | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null));
+  }, []);
 
   const load = async () => {
     setLoading(true);
