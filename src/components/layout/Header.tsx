@@ -138,7 +138,13 @@ export const Header = () => {
               </button>
 
               <Link
-                to="/auth"
+                to="/auth?portal=team"
+                className="hidden lg:inline-flex items-center h-10 px-4 border border-primary/40 text-primary text-[12.5px] font-sans font-semibold tracking-[0.08em] hover:bg-primary hover:text-primary-foreground transition-colors no-underline"
+              >
+                Project Team
+              </Link>
+              <Link
+                to="/auth?portal=donor"
                 className="hidden md:inline-flex items-center h-10 px-5 bg-primary text-primary-foreground text-[13px] font-sans font-semibold tracking-[0.08em] hover:bg-primary/90 transition-colors no-underline"
               >
                 Donor Portal
@@ -195,9 +201,14 @@ export const Header = () => {
                   </div>
                 ))}
                 <div className="px-4 pt-4 border-t border-foreground/10 mt-4 space-y-2">
-                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                  <Link to="/auth?portal=donor" onClick={() => setIsMenuOpen(false)}>
+                    <Button size="sm" className="w-full text-sm bg-primary text-primary-foreground hover:bg-primary/90">
+                      Donor Login
+                    </Button>
+                  </Link>
+                  <Link to="/auth?portal=team" onClick={() => setIsMenuOpen(false)}>
                     <Button variant="outline" size="sm" className="w-full text-sm">
-                      Login
+                      Project Team Login
                     </Button>
                   </Link>
                 </div>

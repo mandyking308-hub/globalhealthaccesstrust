@@ -111,8 +111,8 @@ export const VolunteerDashboardPage = () => {
       )}
       
       <SEO
-        title="Volunteer Dashboard - Global Health Access Trust"
-        description="Your volunteer portal for managing projects and updates"
+        title="Project Team Portal - Global Health Access Trust"
+        description="Secure workspace for approved project teams to manage assigned projects, submit progress, upload field evidence and communicate with the Trust."
         canonical="/volunteer-dashboard"
       />
 
@@ -120,11 +120,10 @@ export const VolunteerDashboardPage = () => {
         <header className="border-b bg-card">
           <div className="container-section py-4 flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Volunteer Portal</h1>
-              <p className="text-sm text-muted-foreground">Welcome back, {volunteer.name}!</p>
+              <h1 className="text-2xl font-bold">Project Team Portal</h1>
+              <p className="text-sm text-muted-foreground">Welcome back, {volunteer.name}</p>
             </div>
             <Button variant="outline" onClick={handleLogout}>
-              
               Logout
             </Button>
           </div>
@@ -136,17 +135,15 @@ export const VolunteerDashboardPage = () => {
             <CardContent className="pt-6">
               <div className="flex flex-col md:flex-row items-start justify-between gap-4">
                 <div className="flex-1">
-                  <h2 className="text-xl font-semibold mb-2">Welcome to Your Volunteer Dashboard</h2>
+                  <h2 className="text-xl font-semibold mb-2">Project Team workspace</h2>
                   <p className="text-muted-foreground mb-4">
-                    View available projects, manage your assignments, and coordinate with the GHAT team.
+                    Access assigned projects, report progress, upload evidence, submit expenses, update milestones and communicate securely with the Trust Office.
                   </p>
                   <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
-                    
-                    Approved Volunteer
+                    Approved Team Member
                   </Badge>
                 </div>
                 <div className="flex items-center gap-2 px-6 py-4 bg-accent/10 rounded-lg border border-accent/20">
-                  
                   <div>
                     <p className="text-sm font-semibold">AI Field Support</p>
                     <p className="text-xs text-muted-foreground">Coming Online</p>
@@ -165,13 +162,11 @@ export const VolunteerDashboardPage = () => {
                 <span className="sm:hidden">Home</span>
               </TabsTrigger>
               <TabsTrigger value="projects" className="text-xs sm:text-sm">
-                
-                <span className="hidden sm:inline">Available</span>
+                <span className="hidden sm:inline">Available Projects</span>
                 <span className="sm:hidden">Available</span>
               </TabsTrigger>
               <TabsTrigger value="my-projects" className="text-xs sm:text-sm">
-                
-                <span className="hidden sm:inline">My Projects</span>
+                <span className="hidden sm:inline">My Assigned Projects</span>
                 <span className="sm:hidden">Mine</span>
               </TabsTrigger>
               <TabsTrigger value="messages" className="text-xs sm:text-sm">
@@ -203,7 +198,7 @@ export const VolunteerDashboardPage = () => {
                   </CardHeader>
                   <CardContent>
                     <Badge variant="outline" className="bg-green-100 text-green-800 border-green-300">
-                      Active Volunteer
+                      Active Team Member
                     </Badge>
                   </CardContent>
                 </Card>
