@@ -4,21 +4,50 @@ import { Input } from "@/components/ui/input";
 import { FOOTER_SECTIONS, SITE_CONFIG } from "@/lib/constants";
 import { useState } from "react";
 import { CookieSettingsLink } from "@/components/CookieSettingsLink";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
-  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [subscriptionStatus, setSubscriptionStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [subscriptionReference, setSubscriptionReference] = useState<string | null>(null);
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubscribed(true);
-    setTimeout(() => setIsSubscribed(false), 3000);
+  const handleNewsletterSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setSubscriptionStatus("submitting");
+    setSubscriptionReference(null);
+
+    try {
+      const normalizedEmail = email.trim().toLowerCase();
+      const { data, error } = await supabase.functions.invoke("contact-notification", {
+        body: {
+          name: "Institutional updates subscriber",
+          email: normalizedEmail,
+          phone: "",
+          organisation: "",
+          position: "",
+          nature_of_enquiry: "General Enquiry",
+          message: "Please add this email address to the Global Health Access Trust institutional updates list.",
+          additional_context: "Submitted through the website footer institutional updates form.",
+          consent: true,
+          honeypot: "",
+        },
+      });
+
+      if (error) throw error;
+      if (!data?.success) throw new Error(data?.message || "Request failed");
+
+      setSubscriptionReference(typeof data.reference === "string" ? data.reference : null);
+      setSubscriptionStatus("success");
+      setEmail("");
+    } catch (error) {
+      console.error("Institutional updates request failed", error);
+      setSubscriptionStatus("error");
+    }
   };
 
   return (
     <footer className="bg-primary text-primary-foreground pt-24 pb-10 mt-24 border-t border-primary-foreground/10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-8">
-        {/* Masthead */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 pb-16 border-b border-primary-foreground/15">
           <div className="lg:col-span-5">
             <div className="flex items-center gap-3 mb-8">
@@ -68,6 +97,7 @@ export const Footer = () => {
                 <div>{SITE_CONFIG.address.city}</div>
                 <div>{SITE_CONFIG.address.country}</div>
               </div>
+
               <form onSubmit={handleNewsletterSubmit} className="mt-4">
                 <p className="text-xs text-primary-foreground/70 mb-3 leading-relaxed">
                   Subscribe for institutional updates.
@@ -75,27 +105,45 @@ export const Footer = () => {
                 <div className="flex flex-col space-y-2">
                   <Input
                     type="email"
+                    aria-label="Email address for institutional updates"
                     placeholder="Email address"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                      if (subscriptionStatus !== "submitting") setSubscriptionStatus("idle");
+                    }}
                     required
+                    disabled={subscriptionStatus === "submitting"}
                     className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 text-sm h-10 rounded-none focus-visible:ring-primary-foreground/40"
                   />
                   <Button
                     type="submit"
                     size="sm"
-                    disabled={isSubscribed}
+                    disabled={subscriptionStatus === "submitting"}
                     className="text-[12px] font-sans tracking-[0.14em] uppercase font-black h-10 rounded-none bg-primary-foreground text-primary hover:bg-primary-foreground/90"
                   >
-                    {isSubscribed ? "Subscribed" : "Subscribe"}
+                    {subscriptionStatus === "submitting" ? "Submitting…" : "Subscribe"}
                   </Button>
+                </div>
+                <p className="mt-2 text-[11px] leading-relaxed text-primary-foreground/60">
+                  By submitting, you ask the Trust to contact you with institutional updates. See the{" "}
+                  <Link to="/legal/privacy-notice" className="underline hover:text-primary-foreground">Privacy Notice</Link>.
+                </p>
+                <div className="mt-2 min-h-5 text-[11px]" aria-live="polite">
+                  {subscriptionStatus === "success" && (
+                    <span className="text-primary-foreground/85">
+                      Request received{subscriptionReference ? ` — ${subscriptionReference}` : ""}.
+                    </span>
+                  )}
+                  {subscriptionStatus === "error" && (
+                    <span className="text-primary-foreground/85">The request could not be submitted. Please use the contact form.</span>
+                  )}
                 </div>
               </form>
             </div>
           </div>
         </div>
 
-        {/* Bottom */}
         <div className="pt-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div className="flex flex-wrap gap-6 text-[10.5px] font-sans font-black uppercase tracking-[0.22em] text-primary-foreground/60">
@@ -118,7 +166,6 @@ export const Footer = () => {
             </p>
           </div>
         </div>
-
       </div>
     </footer>
   );
