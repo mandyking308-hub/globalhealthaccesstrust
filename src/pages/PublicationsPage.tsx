@@ -1,256 +1,106 @@
-import { useState } from "react";
-import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Helmet } from "react-helmet-async";
+import { Card, CardContent } from "@/components/ui/card";
+import { ContentLayout } from "@/components/layout/ContentLayout";
+import { SEO } from "@/components/SEO";
 
-interface Document {
-  id: string;
-  title: string;
-  description: string;
-  type: string;
-  version: string;
-  date: string;
-  lastUpdated: string;
-  region?: string;
-  language: string;
-  tags: string[];
-  fileUrl?: string;
-  checksum: string;
-  size: string;
-}
-
-const documents: Document[] = [
+const documents = [
   {
-    id: "constitution-signed",
-    title: "Trust Constitution (Signed)",
-    description: "The governing document establishing our charitable purposes and legal framework as a charitable trust in England and Wales.",
-    type: "Constitution",
-    version: "1.0",
-    date: "2024-01-15",
-    lastUpdated: "2024-01-15",
-    language: "English",
-    tags: ["governance", "legal", "charitable purposes"],
-    fileUrl: "#",
-    checksum: "sha256:a3b5c2d1e9f8g7h6i5j4k3l2m1n0o9p8q7r6s5t4u3v2w1x0y9z8",
-    size: "2.4 MB"
+    title: "Constitution (Signed)",
+    status: "Authoritative governing document",
+    detail: "Effective 1 December 2024 · Version 1.0 · Reference GHAT-CONSTITUTION-1.0",
+    href: "/constitution",
   },
   {
-    id: "safeguarding-statement-2024",
-    title: "Safeguarding Statement 2024",
-    description: "Our commitment to safeguarding principles and procedures for protecting vulnerable individuals in all our activities.",
-    type: "Policy Statement",
-    version: "2.1",
-    date: "2024-09-01",
-    lastUpdated: "2024-09-01",
-    language: "English",
-    tags: ["safeguarding", "policy", "protection"],
-    fileUrl: "#",
-    checksum: "sha256:c5d7e4f3g2h1i0j9k8l7m6n5o4p3q2r1s0t9u8v7w6x5y4z3a2b1",
-    size: "1.8 MB"
-  }
+    title: "Governance and Legal Framework",
+    status: "Public governance summary",
+    detail: "Legal identity, trustee authority, banking, due diligence and accountability.",
+    href: "/governance-legal-framework",
+  },
+  {
+    title: "Financial Controls",
+    status: "Public control summary",
+    detail: "Banking application status, cleared-funds treatment, Gift Aid position, approvals and reporting.",
+    href: "/financial-controls",
+  },
+  {
+    title: "Donor Due Diligence and Sanctions Policy",
+    status: "Public policy",
+    detail: "Risk-based identity, authority, source-of-funds, sanctions and related checks.",
+    href: "/donor-due-diligence-and-sanctions-policy",
+  },
+  {
+    title: "Gift Acceptance and Restricted Funds Policy",
+    status: "Public policy",
+    detail: "Trustee approval, restrictions, refusal, return and reallocation principles.",
+    href: "/gift-acceptance-and-restricted-funds-policy",
+  },
+  {
+    title: "Support, Complaints and Protected Concerns",
+    status: "Public reporting routes",
+    detail: "Dedicated routes for complaints, safeguarding, fraud, whistleblowing and other concerns.",
+    href: "/support",
+  },
+  {
+    title: "Legal Centre",
+    status: "Versioned legal documents",
+    detail: "Published terms, privacy, cookies, safeguarding, complaints and Project Team documents.",
+    href: "/legal",
+  },
 ];
 
-export const PublicationsPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState("all");
-  const [selectedYear, setSelectedYear] = useState("all");
+export const PublicationsPage = () => (
+  <ContentLayout>
+    <SEO
+      title="Publications and Documents"
+      description="Verified public governance documents and policy routes for Global Health Access Trust."
+      canonical="/publications"
+    />
+    <h1>Publications and Documents</h1>
+    <p className="featured-text">Verified documents and public governance information only.</p>
 
-  const filteredDocuments = documents.filter(doc => {
-    const matchesSearch = doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doc.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doc.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    const matchesType = selectedType === "all" || doc.type === selectedType;
-    const matchesYear = selectedYear === "all" || doc.date.startsWith(selectedYear);
-    
-    return matchesSearch && matchesType && matchesYear;
-  });
+    <p>
+      This register does not use placeholder publications, invented checksums or illustrative annual reports. A document is described as published only where it is genuinely available through the website or the versioned Legal Centre.
+    </p>
 
-  const documentTypes = [...new Set(documents.map(doc => doc.type))];
-  const documentYears = [...new Set(documents.map(doc => doc.date.substring(0, 4)))].sort().reverse();
-
-  return (
-    <div className="py-16">
-      <Helmet><title>Publications & Documents | Global Health Access Trust</title><meta name="description" content="Access official publications, governance documents, annual reports, and policy statements from the Global Health Access Trust." /><link rel="canonical" href="https://globalhealthaccesstrust.com/publications" /></Helmet>
-      <div className="container-section">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Publications & Documents
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Access our official publications, governance documents, annual reports, 
-            and policy statements. All documents are available for download with 
-            integrity verification.
-          </p>
-        </div>
-
-        {/* Search and Filters */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <Card className="card-professional">
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="md:col-span-2">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input
-                      placeholder="Search documents..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
-                </div>
-                
-                <Select value={selectedType} onValueChange={setSelectedType}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Document Type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Types</SelectItem>
-                    {documentTypes.map(type => (
-                      <SelectItem key={type} value={type}>{type}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                <Select value={selectedYear} onValueChange={setSelectedYear}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Year" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Years</SelectItem>
-                    {documentYears.map(year => (
-                      <SelectItem key={year} value={year}>{year}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Documents Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredDocuments.map((doc) => (
-            <Card key={doc.id} className="card-elevated group hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  
-                  <Badge variant="secondary" className="text-xs">
-                    {doc.type}
-                  </Badge>
-                </div>
-                
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                  {doc.title}
-                </h3>
-                
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  {doc.description}
-                </p>
-                
-                <div className="space-y-2 mb-4 text-xs text-muted-foreground">
-                  <div className="flex items-center">
-                    
-                    Published: {new Date(doc.date).toLocaleDateString()}
-                  </div>
-                  <div className="flex items-center">
-                    
-                    Version {doc.version} • {doc.size}
-                  </div>
-                </div>
-                
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {doc.tags.slice(0, 3).map(tag => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                
-                <div className="flex gap-2">
-                  {doc.id === "constitution-signed" ? (
-                    <Link to="/constitution" className="flex-1">
-                      <Button size="sm" variant="outline" className="w-full">
-                        
-                        View
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Button size="sm" variant="outline" className="flex-1">
-                      
-                      View
-                    </Button>
-                  )}
-                  
-                  <Button size="sm" variant="outline">
-                    
-                  </Button>
-                </div>
-                
-                <div className="mt-3 pt-3 border-t text-xs text-muted-foreground">
-                  <div className="mb-1">
-                    <strong>Checksum (SHA-256):</strong>
-                  </div>
-                  <code className="break-all bg-muted/50 px-1 py-0.5 rounded text-xs">
-                    {doc.checksum.split(':')[1].substring(0, 16)}...
-                  </code>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {filteredDocuments.length === 0 && (
-          <div className="text-center py-12">
-            
-            <h3 className="text-lg font-semibold mb-2">No documents found</h3>
-            <p className="text-muted-foreground">
-              Try adjusting your search terms or filters to find what you're looking for.
-            </p>
-          </div>
-        )}
-
-        {/* Document Verification */}
-        <div className="max-w-4xl mx-auto">
-          <Card className="card-professional">
-            <CardContent className="p-8">
-              <h2 className="text-xl font-semibold mb-4">Document Verification</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-medium mb-2">Integrity Verification</h3>
-                  <p className="text-sm text-muted-foreground">
-                    All documents include SHA-256 checksums for integrity verification. 
-                    Download and verify checksums to ensure document authenticity.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-medium mb-2">Authoritative Language</h3>
-                  <p className="text-sm text-muted-foreground">
-                    The English version of all documents is authoritative. Translations 
-                    are provided for convenience but may not reflect the most current version.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="mt-6 pt-6 border-t">
-                <p className="text-sm text-muted-foreground">
-                  <strong>Report a Problem:</strong> If you encounter issues with document 
-                  access or have questions about content, please{" "}
-                  <Link to="/contact" className="text-primary hover:underline">
-                    contact our operations team
-                  </Link>.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+      {documents.map((document) => (
+        <Card key={document.title} className="card-professional">
+          <CardContent className="p-6">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary">{document.status}</p>
+            <h2 className="mt-3 text-2xl">{document.title}</h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{document.detail}</p>
+            <Button asChild variant="outline" className="mt-6">
+              <Link to={document.href}>View Document</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      ))}
     </div>
-  );
-};
+
+    <div className="section-container">
+      <h2>Signed Constitution PDF</h2>
+      <p>
+        The signed Constitution remains available at <code>/GHAT_Constitution_2025_Refined.pdf</code>. The PDF has not been replaced or altered as part of the bank-readiness work.
+      </p>
+      <Button asChild>
+        <a href="/GHAT_Constitution_2025_Refined.pdf" target="_blank" rel="noopener noreferrer">Open Signed PDF</a>
+      </Button>
+    </div>
+
+    <div className="section-container">
+      <h2>Accounts and external review</h2>
+      <p>
+        The website does not claim that annual accounts, an independent examination, an audit or a regulatory filing has already been completed or published. Such documents will be added only when they actually exist and are approved for public release.
+      </p>
+    </div>
+
+    <div className="section-container">
+      <h2>Due-diligence documents</h2>
+      <p>
+        Banks, professional advisers and other authorised reviewers may request appropriate private governance records through the secure contact route. Confidential resolutions, mandates and identity evidence are not published openly.
+      </p>
+      <Link to="/contact-the-trust" className="text-primary hover:underline">Request due-diligence information securely →</Link>
+    </div>
+  </ContentLayout>
+);
