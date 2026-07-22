@@ -509,6 +509,145 @@ export type Database = {
           },
         ]
       }
+      complaint_events: {
+        Row: {
+          actor_id: string | null
+          actor_role: string | null
+          complaint_id: string
+          created_at: string
+          detail: Json | null
+          event_type: string
+          id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          actor_role?: string | null
+          complaint_id: string
+          created_at?: string
+          detail?: Json | null
+          event_type: string
+          id?: string
+        }
+        Update: {
+          actor_id?: string | null
+          actor_role?: string | null
+          complaint_id?: string
+          created_at?: string
+          detail?: Json | null
+          event_type?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "complaint_events_complaint_id_fkey"
+            columns: ["complaint_id"]
+            isOneToOne: false
+            referencedRelation: "complaints"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      complaints: {
+        Row: {
+          accessibility_needs: string | null
+          ack_token: string | null
+          acknowledged_at: string | null
+          assigned_officer_id: string | null
+          category: string
+          closed_at: string | null
+          complainant_email: string | null
+          complainant_name: string | null
+          complainant_phone: string | null
+          complainant_user_id: string | null
+          complaint_about: string
+          conflict_notes: string | null
+          created_at: string
+          description: string
+          escalation_route: string | null
+          id: string
+          investigation_notes: string | null
+          is_anonymous: boolean
+          project_id: string | null
+          reference_number: string
+          requested_remedy: string | null
+          response_issued_at: string | null
+          response_summary: string | null
+          retention_basis: string | null
+          review_completed_at: string | null
+          review_outcome: string | null
+          status: Database["public"]["Enums"]["complaint_status"]
+          updated_at: string
+        }
+        Insert: {
+          accessibility_needs?: string | null
+          ack_token?: string | null
+          acknowledged_at?: string | null
+          assigned_officer_id?: string | null
+          category: string
+          closed_at?: string | null
+          complainant_email?: string | null
+          complainant_name?: string | null
+          complainant_phone?: string | null
+          complainant_user_id?: string | null
+          complaint_about: string
+          conflict_notes?: string | null
+          created_at?: string
+          description: string
+          escalation_route?: string | null
+          id?: string
+          investigation_notes?: string | null
+          is_anonymous?: boolean
+          project_id?: string | null
+          reference_number?: string
+          requested_remedy?: string | null
+          response_issued_at?: string | null
+          response_summary?: string | null
+          retention_basis?: string | null
+          review_completed_at?: string | null
+          review_outcome?: string | null
+          status?: Database["public"]["Enums"]["complaint_status"]
+          updated_at?: string
+        }
+        Update: {
+          accessibility_needs?: string | null
+          ack_token?: string | null
+          acknowledged_at?: string | null
+          assigned_officer_id?: string | null
+          category?: string
+          closed_at?: string | null
+          complainant_email?: string | null
+          complainant_name?: string | null
+          complainant_phone?: string | null
+          complainant_user_id?: string | null
+          complaint_about?: string
+          conflict_notes?: string | null
+          created_at?: string
+          description?: string
+          escalation_route?: string | null
+          id?: string
+          investigation_notes?: string | null
+          is_anonymous?: boolean
+          project_id?: string | null
+          reference_number?: string
+          requested_remedy?: string | null
+          response_issued_at?: string | null
+          response_summary?: string | null
+          retention_basis?: string | null
+          review_completed_at?: string | null
+          review_outcome?: string | null
+          status?: Database["public"]["Enums"]["complaint_status"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "complaints_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cookie_consent_events: {
         Row: {
           action: string
@@ -2718,6 +2857,131 @@ export type Database = {
           position?: string | null
           priority?: string
           status?: string
+        }
+        Relationships: []
+      }
+      incident_events: {
+        Row: {
+          actor_id: string | null
+          actor_role: string | null
+          created_at: string
+          detail: Json | null
+          event_type: string
+          id: string
+          incident_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          actor_role?: string | null
+          created_at?: string
+          detail?: Json | null
+          event_type: string
+          id?: string
+          incident_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          actor_role?: string | null
+          created_at?: string
+          detail?: Json | null
+          event_type?: string
+          id?: string
+          incident_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "incident_events_incident_id_fkey"
+            columns: ["incident_id"]
+            isOneToOne: false
+            referencedRelation: "incidents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      incidents: {
+        Row: {
+          affected_people_categories: string | null
+          affected_people_count: number | null
+          affected_persons_notified_at: string | null
+          affected_systems: string | null
+          approved_by: string | null
+          closed_at: string | null
+          containment_actions: string | null
+          created_at: string
+          detail: string
+          discovered_at: string
+          discovered_by: string | null
+          evidence_refs: string | null
+          id: string
+          kind: Database["public"]["Enums"]["incident_kind"]
+          lessons_learned: string | null
+          notification_decision: string | null
+          recovery_summary: string | null
+          reference_number: string
+          regulator_notification_required: boolean | null
+          regulator_notified_at: string | null
+          risk_assessment: string | null
+          severity: Database["public"]["Enums"]["incident_severity"]
+          short_summary: string
+          status: Database["public"]["Enums"]["incident_status"]
+          timeline: Json
+          updated_at: string
+        }
+        Insert: {
+          affected_people_categories?: string | null
+          affected_people_count?: number | null
+          affected_persons_notified_at?: string | null
+          affected_systems?: string | null
+          approved_by?: string | null
+          closed_at?: string | null
+          containment_actions?: string | null
+          created_at?: string
+          detail: string
+          discovered_at?: string
+          discovered_by?: string | null
+          evidence_refs?: string | null
+          id?: string
+          kind: Database["public"]["Enums"]["incident_kind"]
+          lessons_learned?: string | null
+          notification_decision?: string | null
+          recovery_summary?: string | null
+          reference_number?: string
+          regulator_notification_required?: boolean | null
+          regulator_notified_at?: string | null
+          risk_assessment?: string | null
+          severity?: Database["public"]["Enums"]["incident_severity"]
+          short_summary: string
+          status?: Database["public"]["Enums"]["incident_status"]
+          timeline?: Json
+          updated_at?: string
+        }
+        Update: {
+          affected_people_categories?: string | null
+          affected_people_count?: number | null
+          affected_persons_notified_at?: string | null
+          affected_systems?: string | null
+          approved_by?: string | null
+          closed_at?: string | null
+          containment_actions?: string | null
+          created_at?: string
+          detail?: string
+          discovered_at?: string
+          discovered_by?: string | null
+          evidence_refs?: string | null
+          id?: string
+          kind?: Database["public"]["Enums"]["incident_kind"]
+          lessons_learned?: string | null
+          notification_decision?: string | null
+          recovery_summary?: string | null
+          reference_number?: string
+          regulator_notification_required?: boolean | null
+          regulator_notified_at?: string | null
+          risk_assessment?: string | null
+          severity?: Database["public"]["Enums"]["incident_severity"]
+          short_summary?: string
+          status?: Database["public"]["Enums"]["incident_status"]
+          timeline?: Json
+          updated_at?: string
         }
         Relationships: []
       }
@@ -5197,6 +5461,7 @@ export type Database = {
           id: string
           last_response_at: string | null
           milestone_id: string | null
+          pathway: Database["public"]["Enums"]["support_pathway"] | null
           priority: Database["public"]["Enums"]["service_request_priority"]
           project_id: string | null
           reference_number: string
@@ -5236,6 +5501,7 @@ export type Database = {
           id?: string
           last_response_at?: string | null
           milestone_id?: string | null
+          pathway?: Database["public"]["Enums"]["support_pathway"] | null
           priority?: Database["public"]["Enums"]["service_request_priority"]
           project_id?: string | null
           reference_number?: string
@@ -5275,6 +5541,7 @@ export type Database = {
           id?: string
           last_response_at?: string | null
           milestone_id?: string | null
+          pathway?: Database["public"]["Enums"]["support_pathway"] | null
           priority?: Database["public"]["Enums"]["service_request_priority"]
           project_id?: string | null
           reference_number?: string
@@ -5377,6 +5644,113 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      protected_concern_events: {
+        Row: {
+          actor_id: string | null
+          actor_role: string | null
+          concern_id: string
+          created_at: string
+          detail: Json | null
+          event_type: string
+          id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          actor_role?: string | null
+          concern_id: string
+          created_at?: string
+          detail?: Json | null
+          event_type: string
+          id?: string
+        }
+        Update: {
+          actor_id?: string | null
+          actor_role?: string | null
+          concern_id?: string
+          created_at?: string
+          detail?: Json | null
+          event_type?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "protected_concern_events_concern_id_fkey"
+            columns: ["concern_id"]
+            isOneToOne: false
+            referencedRelation: "protected_concerns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      protected_concerns: {
+        Row: {
+          ack_token: string | null
+          assigned_officer_id: string | null
+          closed_at: string | null
+          concern_type: string
+          created_at: string
+          detail: string
+          id: string
+          investigation_notes: string | null
+          is_anonymous: boolean
+          outcome_summary: string | null
+          reference_number: string
+          referred_to: string | null
+          reporter_contact: string | null
+          reporter_name: string | null
+          reporter_user_id: string | null
+          retention_basis: string | null
+          status: Database["public"]["Enums"]["concern_status"]
+          summary: string
+          triage_notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          ack_token?: string | null
+          assigned_officer_id?: string | null
+          closed_at?: string | null
+          concern_type: string
+          created_at?: string
+          detail: string
+          id?: string
+          investigation_notes?: string | null
+          is_anonymous?: boolean
+          outcome_summary?: string | null
+          reference_number?: string
+          referred_to?: string | null
+          reporter_contact?: string | null
+          reporter_name?: string | null
+          reporter_user_id?: string | null
+          retention_basis?: string | null
+          status?: Database["public"]["Enums"]["concern_status"]
+          summary: string
+          triage_notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          ack_token?: string | null
+          assigned_officer_id?: string | null
+          closed_at?: string | null
+          concern_type?: string
+          created_at?: string
+          detail?: string
+          id?: string
+          investigation_notes?: string | null
+          is_anonymous?: boolean
+          outcome_summary?: string | null
+          reference_number?: string
+          referred_to?: string | null
+          reporter_contact?: string | null
+          reporter_name?: string | null
+          reporter_user_id?: string | null
+          retention_basis?: string | null
+          status?: Database["public"]["Enums"]["concern_status"]
+          summary?: string
+          triage_notes?: string | null
+          updated_at?: string
+        }
+        Relationships: []
       }
       rate_limit_tracking: {
         Row: {
@@ -5723,6 +6097,130 @@ export type Database = {
           window_start?: string
         }
         Relationships: []
+      }
+      safeguarding_case_events: {
+        Row: {
+          actor_id: string | null
+          actor_role: string | null
+          case_id: string
+          created_at: string
+          detail: Json | null
+          event_type: string
+          id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          actor_role?: string | null
+          case_id: string
+          created_at?: string
+          detail?: Json | null
+          event_type: string
+          id?: string
+        }
+        Update: {
+          actor_id?: string | null
+          actor_role?: string | null
+          case_id?: string
+          created_at?: string
+          detail?: Json | null
+          event_type?: string
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "safeguarding_case_events_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "safeguarding_cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      safeguarding_cases: {
+        Row: {
+          allegation_summary: string
+          chronology: Json
+          closed_at: string | null
+          created_at: string
+          decisions: string | null
+          id: string
+          immediate_actions: string | null
+          immediate_danger: boolean
+          is_anonymous: boolean
+          location: string | null
+          outcome: string | null
+          person_at_risk_age_band: string | null
+          person_at_risk_initials: string | null
+          project_id: string | null
+          reference_number: string
+          reporter_contact: string | null
+          reporter_name: string | null
+          reporter_user_id: string | null
+          retention_basis: string | null
+          retention_review_at: string | null
+          status: Database["public"]["Enums"]["safeguarding_status"]
+          statutory_referrals: string | null
+          updated_at: string
+        }
+        Insert: {
+          allegation_summary: string
+          chronology?: Json
+          closed_at?: string | null
+          created_at?: string
+          decisions?: string | null
+          id?: string
+          immediate_actions?: string | null
+          immediate_danger?: boolean
+          is_anonymous?: boolean
+          location?: string | null
+          outcome?: string | null
+          person_at_risk_age_band?: string | null
+          person_at_risk_initials?: string | null
+          project_id?: string | null
+          reference_number?: string
+          reporter_contact?: string | null
+          reporter_name?: string | null
+          reporter_user_id?: string | null
+          retention_basis?: string | null
+          retention_review_at?: string | null
+          status?: Database["public"]["Enums"]["safeguarding_status"]
+          statutory_referrals?: string | null
+          updated_at?: string
+        }
+        Update: {
+          allegation_summary?: string
+          chronology?: Json
+          closed_at?: string | null
+          created_at?: string
+          decisions?: string | null
+          id?: string
+          immediate_actions?: string | null
+          immediate_danger?: boolean
+          is_anonymous?: boolean
+          location?: string | null
+          outcome?: string | null
+          person_at_risk_age_band?: string | null
+          person_at_risk_initials?: string | null
+          project_id?: string | null
+          reference_number?: string
+          reporter_contact?: string | null
+          reporter_name?: string | null
+          reporter_user_id?: string | null
+          retention_basis?: string | null
+          retention_review_at?: string | null
+          status?: Database["public"]["Enums"]["safeguarding_status"]
+          statutory_referrals?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "safeguarding_cases_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "commissioned_projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       soft_optin_settings: {
         Row: {
@@ -6468,6 +6966,29 @@ export type Database = {
         Args: { _version_id: string }
         Returns: undefined
       }
+      complaint_set_status: {
+        Args: {
+          _id: string
+          _note?: string
+          _status: Database["public"]["Enums"]["complaint_status"]
+        }
+        Returns: undefined
+      }
+      complaint_submit: {
+        Args: {
+          _accessibility_needs?: string
+          _anonymous?: boolean
+          _category: string
+          _complainant_email?: string
+          _complainant_name?: string
+          _complainant_phone?: string
+          _complaint_about: string
+          _description: string
+          _project_id?: string
+          _requested_remedy?: string
+        }
+        Returns: Json
+      }
       compute_project_health: {
         Args: { _project_id: string }
         Returns: Database["public"]["Enums"]["project_health_state"]
@@ -6481,6 +7002,25 @@ export type Database = {
           first_response_due_at: string
           resolution_due_at: string
         }[]
+      }
+      concern_set_status: {
+        Args: {
+          _id: string
+          _note?: string
+          _status: Database["public"]["Enums"]["concern_status"]
+        }
+        Returns: undefined
+      }
+      concern_submit: {
+        Args: {
+          _anonymous?: boolean
+          _concern_type: string
+          _detail: string
+          _reporter_contact?: string
+          _reporter_name?: string
+          _summary: string
+        }
+        Returns: Json
       }
       confirm_service_resolution: {
         Args: { _feedback: string; _request_id: string; _score: number }
@@ -6706,6 +7246,7 @@ export type Database = {
       generate_hold_reference: { Args: never; Returns: string }
       generate_hvda_reference: { Args: never; Returns: string }
       generate_receipt_reference: { Args: never; Returns: string }
+      generate_ref: { Args: { _prefix: string }; Returns: string }
       generate_restricted_fund_reference: { Args: never; Returns: string }
       generate_review_reference: { Args: never; Returns: string }
       generate_service_request_reference: { Args: never; Returns: string }
@@ -6809,12 +7350,47 @@ export type Database = {
         }
         Returns: undefined
       }
+      incident_append_timeline: {
+        Args: { _entry: string; _id: string }
+        Returns: undefined
+      }
+      incident_open: {
+        Args: {
+          _affected_systems?: string
+          _detail: string
+          _kind: Database["public"]["Enums"]["incident_kind"]
+          _severity: Database["public"]["Enums"]["incident_severity"]
+          _short_summary: string
+        }
+        Returns: Json
+      }
+      incident_record_decision: {
+        Args: {
+          _decision_text: string
+          _id: string
+          _persons_notified_at?: string
+          _regulator_notified_at?: string
+          _regulator_required: boolean
+        }
+        Returns: undefined
+      }
+      incident_set_status: {
+        Args: {
+          _id: string
+          _note?: string
+          _status: Database["public"]["Enums"]["incident_status"]
+        }
+        Returns: undefined
+      }
       increment_document_download: {
         Args: { doc_id: string }
         Returns: undefined
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      is_complaints_officer: { Args: { _user: string }; Returns: boolean }
+      is_concerns_officer: { Args: { _user: string }; Returns: boolean }
       is_finance_officer: { Args: { _user_id: string }; Returns: boolean }
+      is_incident_officer: { Args: { _user: string }; Returns: boolean }
       is_project_donor: {
         Args: { _project_id: string; _user_id: string }
         Returns: boolean
@@ -6824,6 +7400,7 @@ export type Database = {
         Returns: boolean
       }
       is_safeguarding_officer: { Args: { _user_id: string }; Returns: boolean }
+      is_super_admin: { Args: { _user: string }; Returns: boolean }
       legal_entity_is_verified: { Args: never; Returns: boolean }
       log_admin_action: {
         Args: {
@@ -6959,6 +7536,32 @@ export type Database = {
         Args: { _request_id: string; _start: string }
         Returns: undefined
       }
+      safeguarding_add_chronology: {
+        Args: { _entry: string; _id: string }
+        Returns: undefined
+      }
+      safeguarding_report: {
+        Args: {
+          _allegation: string
+          _anonymous?: boolean
+          _immediate_danger?: boolean
+          _location?: string
+          _person_age_band?: string
+          _person_initials?: string
+          _project_id?: string
+          _reporter_contact?: string
+          _reporter_name?: string
+        }
+        Returns: Json
+      }
+      safeguarding_set_status: {
+        Args: {
+          _id: string
+          _note?: string
+          _status: Database["public"]["Enums"]["safeguarding_status"]
+        }
+        Returns: undefined
+      }
       submit_agreement_decision: {
         Args: {
           _comment: string
@@ -7056,6 +7659,8 @@ export type Database = {
         | "volunteer"
         | "safeguarding_officer"
         | "finance_officer"
+        | "complaints_officer"
+        | "incident_officer"
       change_request_status:
         | "proposed"
         | "under_review"
@@ -7081,6 +7686,25 @@ export type Database = {
         | "shared_project"
         | "safeguarding_restricted"
         | "finance_restricted"
+      complaint_status:
+        | "received"
+        | "acknowledged"
+        | "under_investigation"
+        | "awaiting_information"
+        | "response_issued"
+        | "under_review"
+        | "escalated"
+        | "closed"
+        | "withdrawn"
+      concern_status:
+        | "received"
+        | "triage"
+        | "under_review"
+        | "investigating"
+        | "referred"
+        | "closed"
+        | "not_upheld"
+        | "upheld"
       dd_case_status:
         | "draft"
         | "information_requested"
@@ -7183,6 +7807,25 @@ export type Database = {
         | "active"
         | "completed"
         | "terminated"
+      incident_kind:
+        | "security_incident"
+        | "personal_data_breach"
+        | "payment_incident"
+        | "fraud"
+        | "availability_outage"
+        | "unauthorised_access"
+        | "evidence_disclosure"
+        | "lost_device"
+        | "provider_incident"
+      incident_severity: "low" | "medium" | "high" | "critical"
+      incident_status:
+        | "open"
+        | "triage"
+        | "containing"
+        | "investigating"
+        | "recovering"
+        | "notified"
+        | "closed"
       legal_review_status:
         | "draft"
         | "internal_review"
@@ -7215,6 +7858,13 @@ export type Database = {
         | "reallocated"
         | "refunded"
         | "closed"
+      safeguarding_status:
+        | "received"
+        | "triaged"
+        | "under_review"
+        | "referred_statutory"
+        | "closed_no_action"
+        | "closed_action_taken"
       service_comment_type:
         | "requester_comment"
         | "trust_response"
@@ -7249,6 +7899,16 @@ export type Database = {
         | "closed"
         | "reopened"
         | "escalated"
+      support_pathway:
+        | "donor_account"
+        | "payment"
+        | "allocation"
+        | "project"
+        | "project_team"
+        | "evidence"
+        | "privacy"
+        | "technical"
+        | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -7400,6 +8060,8 @@ export const Constants = {
         "volunteer",
         "safeguarding_officer",
         "finance_officer",
+        "complaints_officer",
+        "incident_officer",
       ],
       change_request_status: [
         "proposed",
@@ -7428,6 +8090,27 @@ export const Constants = {
         "shared_project",
         "safeguarding_restricted",
         "finance_restricted",
+      ],
+      complaint_status: [
+        "received",
+        "acknowledged",
+        "under_investigation",
+        "awaiting_information",
+        "response_issued",
+        "under_review",
+        "escalated",
+        "closed",
+        "withdrawn",
+      ],
+      concern_status: [
+        "received",
+        "triage",
+        "under_review",
+        "investigating",
+        "referred",
+        "closed",
+        "not_upheld",
+        "upheld",
       ],
       dd_case_status: [
         "draft",
@@ -7544,6 +8227,27 @@ export const Constants = {
         "completed",
         "terminated",
       ],
+      incident_kind: [
+        "security_incident",
+        "personal_data_breach",
+        "payment_incident",
+        "fraud",
+        "availability_outage",
+        "unauthorised_access",
+        "evidence_disclosure",
+        "lost_device",
+        "provider_incident",
+      ],
+      incident_severity: ["low", "medium", "high", "critical"],
+      incident_status: [
+        "open",
+        "triage",
+        "containing",
+        "investigating",
+        "recovering",
+        "notified",
+        "closed",
+      ],
       legal_review_status: [
         "draft",
         "internal_review",
@@ -7579,6 +8283,14 @@ export const Constants = {
         "reallocated",
         "refunded",
         "closed",
+      ],
+      safeguarding_status: [
+        "received",
+        "triaged",
+        "under_review",
+        "referred_statutory",
+        "closed_no_action",
+        "closed_action_taken",
       ],
       service_comment_type: [
         "requester_comment",
@@ -7617,6 +8329,17 @@ export const Constants = {
         "closed",
         "reopened",
         "escalated",
+      ],
+      support_pathway: [
+        "donor_account",
+        "payment",
+        "allocation",
+        "project",
+        "project_team",
+        "evidence",
+        "privacy",
+        "technical",
+        "other",
       ],
     },
   },
