@@ -167,6 +167,7 @@ export const AuthPage = () => {
     const pwCheck = validatePassword(signupPassword);
     if (!pwCheck.valid) return setError(pwCheck.errors[0]);
     if (!termsAccepted) return setError("You must agree to the Website and Portal Terms of Use to create an account");
+    if (!privacyAck) return setError("You must confirm you have read the Privacy Notice");
 
     setLoading(true);
     try {
