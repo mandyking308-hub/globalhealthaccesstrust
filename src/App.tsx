@@ -145,6 +145,8 @@ const App = () => (
           {/* Donor Portal Routes (outside Layout - full page) */}
           <Route path="donate" element={<DonatePage />} />
           <Route path="donation-form" element={<DonationFormPage />} />
+          <Route path="donation-success" element={<DonationSuccessPage />} />
+          <Route path="donation-cancelled" element={<DonationCancelledPage />} />
           <Route path="donor-guide" element={<DonorGuidePage />} />
           <Route path="auth" element={<AuthPage />} />
           <Route path="donor-dashboard" element={<DonorDashboardPage />} />
