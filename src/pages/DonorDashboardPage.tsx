@@ -38,6 +38,8 @@ export const DonorDashboardPage = () => {
   const [donations, setDonations] = useState<any[]>([]);
   const [totalDonated, setTotalDonated] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [myProjects, setMyProjects] = useState<{ id: string; title: string }[]>([]);
+  const [selectedAgreementProject, setSelectedAgreementProject] = useState<string | null>(null);
   const [profileEdit, setProfileEdit] = useState({ first_name: "", last_name: "", email: "" });
   const { isComplete, isLoading: onboardingLoading, markOnboardingComplete } = useOnboarding("donor");
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -73,8 +75,12 @@ export const DonorDashboardPage = () => {
       setDonations(donationsData);
       setTotalDonated(donationsData.reduce((sum, d) => sum + Number(d.amount), 0));
     }
+    const { data: projs } = await supabase.from("commissioned_projects").select("id,title").eq("donor_id", session.user.id).order("created_at", { ascending: false });
+    if (projs) { setMyProjects(projs); if (projs.length) setSelectedAgreementProject(projs[0].id); }
+
     setLoading(false);
   };
+
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
