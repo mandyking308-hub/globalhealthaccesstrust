@@ -8,24 +8,26 @@ export const ContactTheTrustPage = () => {
     <ContentLayout>
       <SEO
         title="Contact the Trust"
-        description="Contact the Global Health Access Trust about project needs, professional contribution, partnerships, support, legal matters and confidential reporting routes."
+        description="Contact the Global Health Access Trust about healthcare-access and system projects, professional contribution, partnerships, support, legal matters and confidential reporting routes."
         canonical="/contact-the-trust"
       />
       <h1>Contact the Trust</h1>
 
       <p className="featured-text">Discreet. Professional. Accountable.</p>
 
-      <p>The Global Health Access Trust welcomes enquiries from individuals, communities, clinicians, professional contributors, institutions, supporters and advisers with a genuine interest in its charitable work.</p>
+      <p>The Global Health Access Trust welcomes enquiries from individuals, communities, professionals, institutions, supporters and advisers with a genuine interest in its charitable work.</p>
       <p>Enquiries may concern:</p>
       <ul>
-        <li>A defined health need or potential charitable project</li>
-        <li>Clinical, technical, research or professional contribution</li>
+        <li>A healthcare-access, infrastructure, workforce or community-system challenge</li>
+        <li>Technical, research, operational or professional contribution</li>
         <li>Joining a project team or volunteering with the Trust</li>
         <li>Organisational, institutional or community partnership</li>
         <li>Active-project support, commissioned projects or general donations</li>
         <li>Major, restricted, institutional or legacy support</li>
         <li>Legal, governance, media or general matters</li>
       </ul>
+      <p>The Trust enables better healthcare; it is not a medical practice or clinical service and does not provide individual diagnosis, treatment, prescribing, triage, personalised medical advice or emergency care.</p>
+      <p>Please do not submit symptoms, medical records or detailed patient-identifying health information through the general contact or project-proposition routes. Where a project includes clinical services, those services must be delivered and clinically governed by an appropriately licensed and regulated healthcare provider.</p>
       <p>Personal information is handled in accordance with the Trust's privacy, safeguarding and data-protection arrangements.</p>
 
       <div className="section-container">
@@ -35,16 +37,17 @@ export const ContactTheTrustPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
         <div className="section-container">
-          <h2>1. Bring a Need or Project Proposition</h2>
-          <p>Individuals, communities, clinicians and organisations may approach the Trust regarding a defined health need, delivery challenge or potential charitable project.</p>
+          <h2>1. Bring a Healthcare-Access or System Proposition</h2>
+          <p>Individuals, communities, professionals and organisations may approach the Trust regarding a defined healthcare-access, infrastructure, workforce, logistics, education, research or community-system challenge.</p>
           <p>Please explain:</p>
           <ul>
-            <li>The problem or need being addressed</li>
-            <li>The people or community affected</li>
+            <li>The access, service or system problem being addressed</li>
+            <li>The population, community or service context</li>
             <li>The country or setting</li>
-            <li>The proposed intervention or assistance required</li>
+            <li>The proposed charitable project or enabling support</li>
             <li>Any material urgency, safeguarding or delivery considerations</li>
           </ul>
+          <p>This route is not for personal medical cases, individual treatment requests, diagnosis, triage or the submission of medical records.</p>
           <p>Supporters who are ready to create and fund a new project can submit it through the commissioned-project system in the secure donor dashboard.</p>
           <p>An initial enquiry or submission does not constitute project approval. Projects proceed through scoping, charitable-purpose assessment, feasibility review, safeguarding, due diligence and Trustee consideration.</p>
           <div className="flex flex-wrap gap-3 mt-5">
@@ -66,6 +69,7 @@ export const ContactTheTrustPage = () => {
           </ul>
           <p>Participation may be voluntary, advisory, professional or project-based, depending on the approved project and the role required.</p>
           <p>Registration does not guarantee assignment. Project participation remains subject to identity and professional verification, safeguarding, appropriate agreements and a defined project need.</p>
+          <p>Clinical qualifications do not make the Trust a clinical provider. Any patient-facing clinical service must be delivered under the governance and responsibility of an appropriately regulated healthcare provider.</p>
           <div className="flex flex-wrap gap-3 mt-5">
             <Button asChild><Link to="/volunteer-apply">Apply to Join a Project Team</Link></Button>
             <Button asChild variant="outline"><Link to="/project-team-login">Project Team Login</Link></Button>
@@ -92,7 +96,7 @@ export const ContactTheTrustPage = () => {
           <p>The Trust welcomes approaches from organisations able to contribute expertise, delivery capability, research, technology, infrastructure, local access, logistics, professional teams or funding to defined charitable work.</p>
           <p>Potential partners may include:</p>
           <ul>
-            <li>Hospitals, clinics and health systems</li>
+            <li>Hospitals, clinics and health systems acting within their own regulatory responsibilities</li>
             <li>Universities and research institutions</li>
             <li>Charities, community organisations and faith-based bodies</li>
             <li>Technology, data and artificial-intelligence organisations</li>
@@ -100,7 +104,7 @@ export const ContactTheTrustPage = () => {
             <li>Public and international institutions</li>
             <li>Foundations, family offices and responsible businesses</li>
           </ul>
-          <p>Please describe the organisation, the proposed contribution, the problem to be addressed and the form of partnership envisaged.</p>
+          <p>Please describe the organisation, the proposed contribution, the system or access problem to be addressed and the form of partnership envisaged.</p>
           <p>Partnership discussions do not constitute approval or endorsement. Relationships remain subject to charitable alignment, independence, due diligence, safeguarding, legal review and Trustee oversight.</p>
           <Button asChild className="mt-5"><Link to="/contact">Discuss an Organisational Partnership</Link></Button>
         </div>
@@ -151,7 +155,8 @@ export const ContactTheTrustPage = () => {
           London, England<br />
           United Kingdom
         </p>
-        <p>The secure contact form may be used for general information, project needs and propositions, professional contribution, organisational partnerships, institutional and funding discussions, legal and legacy matters, and media or press enquiries.</p>
+        <p>The secure contact form may be used for general information, healthcare-access or system project propositions, professional contribution, organisational partnerships, institutional and funding discussions, legal and legacy matters, and media or press enquiries.</p>
+        <p>It must not be used for personal medical advice, symptoms, treatment requests, diagnosis, triage, emergencies or the submission of medical records.</p>
         <p>Please provide only the information necessary for the Trust to understand and direct the enquiry.</p>
         <Button asChild className="mt-4"><Link to="/contact">Use the Secure Contact Form</Link></Button>
       </div>
@@ -182,22 +187,24 @@ export const ContactTheTrustPage = () => {
 
       <div className="section-container">
         <h2>Project &amp; Professional Enquiries</h2>
-        <p>Clinicians, technologists, researchers, community organisations and other professional contributors may contact the Trust regarding a defined need, project proposition or potential contribution of expertise.</p>
+        <p>Professionals, technologists, researchers, community organisations and other contributors may contact the Trust regarding a healthcare-access, infrastructure, workforce or system proposition, or a potential contribution of expertise.</p>
         <p>Please explain:</p>
         <ul>
-          <li>The problem being addressed</li>
-          <li>The people or community affected</li>
-          <li>The proposed contribution or intervention</li>
+          <li>The access, infrastructure or system problem being addressed</li>
+          <li>The population, community or service context</li>
+          <li>The proposed enabling contribution or project</li>
           <li>Relevant professional or organisational capability</li>
           <li>Any material safeguarding, timing or delivery considerations</li>
         </ul>
+        <p>Do not submit personal medical cases, symptoms, medical records or requests for diagnosis, treatment or triage.</p>
         <p>The Trust may respond by seeking further information, beginning a scoping process, directing the applicant to the project-team system or determining that the proposition cannot presently be progressed.</p>
-        <p>An enquiry does not constitute appointment, partnership or project approval.</p>
+        <p>An enquiry does not constitute appointment, partnership, clinical engagement or project approval.</p>
       </div>
 
       <div className="section-container">
         <h2>Review and Response</h2>
         <p className="featured-text">Enquiries are reviewed and directed according to their nature, urgency and the appropriate governance, project, professional or safeguarding route.</p>
+        <p>The Trust is not an emergency or clinical response service. Anyone requiring urgent medical assistance should use the appropriate local emergency or healthcare service.</p>
         <p>Urgent safeguarding or protected concerns should not rely on the general enquiry queue and must use the dedicated confidential reporting route.</p>
         <p>The Trust does not guarantee that every project proposition, application or partnership approach can be progressed, but genuine enquiries will be considered with professionalism and care.</p>
       </div>
