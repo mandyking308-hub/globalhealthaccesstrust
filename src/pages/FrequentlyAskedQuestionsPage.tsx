@@ -6,57 +6,107 @@ export const FrequentlyAskedQuestionsPage = () => {
     <ContentLayout>
       <SEO
         title="Frequently Asked Questions"
-        description="Common questions about the Global Health Access Trust — our mission, governance, how to engage, volunteer, and support global healthcare access."
+        description="Common questions about the Global Health Access Trust, its charitable purpose, project model, responsible use of technology, governance and ways to support its work."
         canonical="/frequently-asked-questions"
       />
       <h1>Frequently Asked Questions</h1>
       
       <p className="featured-text">"Clarity of purpose demands clarity of communication."</p>
 
-      <p>The following questions address common enquiries about the Global Health Access Trust, our work, and how individuals and organisations can support our mission.</p>
+      <p>These questions explain the Trust's charitable purpose, project model, responsible use of technology, governance and the ways individuals and organisations can support or create charitable projects.</p>
 
       <div className="section-container">
         <h2>About the Trust</h2>
         <h3>What is the Global Health Access Trust?</h3>
-        <p>The Global Health Access Trust is a charitable trust established under the laws of England and Wales to advance health, relieve illness, and preserve life—particularly among vulnerable or underserved populations. It is governed by its Trust Deed and administered by its Board of Trustees exclusively for charitable purposes.</p>
+        <p>The Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales.</p>
+        <p>Its purposes are to advance health, relieve illness and preserve life. The Trust develops and supports projects for public benefit under the authority and oversight of its Board of Trustees.</p>
         <h3>What makes this Trust different from other health charities?</h3>
-        <p>We are built as a permanent institution rather than a campaign or initiative. Our approach emphasises systems-building over dependency, dignity over publicity, and long-term sustainability over short-term visibility. We operate with strict governance standards and exist to serve, not to sell.</p>
+        <p>The Trust is structured as a permanent institution rather than a temporary campaign.</p>
+        <p>It brings together clinical expertise, professional and community relationships, essential infrastructure, responsible artificial intelligence and accountable funding to solve defined problems.</p>
+        <p>We prioritise systems-building over dependency, human capability over displacement, dignity over publicity and sustained public benefit over short-term display.</p>
         <h3>How is the Trust constituted?</h3>
-        <p>The Trust is established under the laws of England and Wales as a charitable trust, governed by its Trust Deed. Its correspondence address is 2 Harley Street, London.</p>
+        <p>The Trust is governed by its signed Trust Deed, effective from 1 December 2024, together with its Board-approved governance, safeguarding, financial-control and risk policies.</p>
+        <p>Its correspondence address is Global Health Access Trust, 2 Harley Street, London, England, United Kingdom.</p>
       </div>
 
       <div className="section-container">
         <h2>Our Work</h2>
-        <h3>What type of healthcare programmes do you fund?</h3>
-        <p>We focus on five core areas: ethical access to healthcare, building capacity rather than dependency, strengthening health systems, legal scholarship and strategic reform, and responding to humanitarian collapse. All programmes must demonstrate clear public benefit and align with our charitable purposes.</p>
-        <h3>Do you accept unsolicited applications for funding?</h3>
-        <p>The Trust does not accept unsolicited applications at this time. We engage directly with pre-vetted individuals, institutions, or partners whose values align with our objectives and who meet our due diligence standards.</p>
+        <h3>What types of projects does the Trust undertake?</h3>
+        <p>The Trust develops, coordinates and supports work across six interconnected areas:</p>
+        <ul>
+          <li>Ethical access to healthcare</li>
+          <li>Clinical networks and human capability</li>
+          <li>Health systems and essential infrastructure</li>
+          <li>Responsible AI and health intelligence</li>
+          <li>Evidence, research and strategic reform</li>
+          <li>Humanitarian and war-affected response</li>
+        </ul>
+        <p>Every project must advance health, relieve illness or preserve life and demonstrate a clear route to public benefit.</p>
+        <h3>Can someone submit or create a project?</h3>
+        <p>Yes. A supporter can create and submit a commissioned project directly through the secure donor dashboard.</p>
+        <p>The form allows the supporter to define the location, intervention, intended purpose, budget, urgency and optional dedication. The Trust then scopes the project, conducts appropriate due diligence and submits it for Trustee review.</p>
+        <p>Clinicians, organisations, communities and professional contributors may also approach the Trust with a defined need or delivery proposition.</p>
         <h3>Which countries or regions do you work in?</h3>
-        <p>While our mandate is global, we prioritise regions where the gap between need and access is greatest, particularly in areas affected by conflict, systemic healthcare collapse, or where vulnerable populations lack access to basic healthcare services.</p>
+        <p>The Trust has a global mandate. Its history, professional relationships and practical work extend across twelve countries.</p>
+        <p>Projects are selected according to charitable need, feasibility, available capability, safeguarding and the potential for meaningful public benefit—not according to a fixed list of countries.</p>
       </div>
 
       <div className="section-container">
         <h2>Supporting the Trust</h2>
         <h3>How can I support the Trust?</h3>
-        <p>Engagement with the Trust follows a structured process. Initial contact can be made through our enquiry form. All funding relationships are formalised through appropriate legal documentation aligned with our charitable objectives.</p>
+        <p>Supporters have three principal routes:</p>
+        <ul>
+          <li>Contribute to an approved active project displayed on the website</li>
+          <li>Make a general donation that the Trustees can apply where need and opportunity are greatest</li>
+          <li>Create and commission a new project through the secure donor dashboard</li>
+        </ul>
+        <p>Institutional, restricted, major and legacy support can also be discussed directly with the Trust.</p>
         <h3>Can I specify how my contribution is used?</h3>
-        <p>Yes, supporters may direct restricted gifts to specific programmes or initiatives, subject to Board approval and formal documentation that aligns with our charitable objectives and includes reversion clauses if the original purpose becomes obsolete.</p>
+        <p>Yes. A supporter may contribute to a specific approved project, commission a new project or agree a formally restricted gift.</p>
+        <p>Any restriction must remain consistent with the Trust's charitable purpose and be accepted by the Trustees. Responsibility for charitable funds, safeguarding and final project decisions remains with the Trust.</p>
         <h3>Do you provide tax receipts?</h3>
-        <p>Yes, contributions are formally receipted. The Trust does not currently operate a Gift Aid scheme; any future arrangement will be announced only when the required HMRC recognition and processes are in place.</p>
+        <p>Accepted contributions are recorded and formally acknowledged.</p>
+        <p>The Trust does not currently operate a Gift Aid scheme. Any future Gift Aid arrangement will be announced only when the necessary HMRC recognition and operational processes are in place.</p>
+        <p>Supporters should obtain their own tax advice where the treatment of a contribution is important.</p>
       </div>
 
       <div className="section-container">
-        <h2>Governance & Operations</h2>
+        <h2>Projects and the Donor Portal</h2>
+        <h3>What happens after I submit a commissioned project?</h3>
+        <p>The project enters the Trust's system for feasibility review, charitable-purpose assessment, safeguarding, due diligence, budgeting and Trustee consideration.</p>
+        <p>Where approved, the Trust establishes the delivery structure, agreement, milestones, evidence requirements and funding arrangements.</p>
+        <h3>Can I follow a project after it is approved?</h3>
+        <p>Yes. Commissioners can use the secure dashboard to access their project records, agreements, messages and the progress, evidence and financial information appropriate to that project.</p>
+        <p>Supporters of active public projects receive the public or secure reporting made available for that project.</p>
+        <h3>Can I dedicate a project to someone?</h3>
+        <p>The commissioned-project form permits an optional dedication. A dedication or memorial remains subject to Trustee approval, charitable purpose, dignity and safeguarding.</p>
+      </div>
+
+      <div className="section-container">
+        <h2>Responsible Artificial Intelligence</h2>
+        <h3>How does the Trust use artificial intelligence?</h3>
+        <p>The Trust may use AI to identify needs, analyse information, support research, coordinate logistics, strengthen evidence and develop practical solutions.</p>
+        <p>AI-enabled systems may also form part of an approved charitable project.</p>
+        <p>Technology is used to expand human capability, not remove human responsibility. Clinical judgment, safeguarding, local leadership, financial authority and Trustee accountability remain human responsibilities.</p>
+      </div>
+
+      <div className="section-container">
+        <h2>Governance &amp; Operations</h2>
         <h3>Who governs the Trust?</h3>
-        <p>The Trust is overseen by a Board of Trustees comprising senior professionals with decades of experience in healthcare leadership, public policy, governance, and international systems. All Trustees serve under fiduciary duty and are bound by our governing constitution.</p>
+        <p>The appointed Trustees are Mandy King, Chair; Dr Jagdev Thukral, Trustee and Executive Lead; and John O'Sullivan BA FCA, Trustee—Finance.</p>
+        <p>They exercise collective responsibility for charitable purpose, strategy, safeguarding, financial stewardship, risk and institutional oversight.</p>
         <h3>How do you ensure transparency and accountability?</h3>
-        <p>We operate under strict financial controls including independent oversight, board-level approval for significant expenditures, transparent reporting to donors and regulators, and regular compliance audits. Annual governance statements and financial accounts are made publicly available.</p>
+        <p>Projects and significant expenditure are subject to documented approval, appropriate due diligence, financial controls, milestones, expenditure records and evidence requirements.</p>
+        <p>Donors receive reporting proportionate to their contribution and project. Governance information, accounts and other material are published where required by law, the Trust's governance framework or formal decision of the Board.</p>
+        <p>Transparency remains subject to safeguarding, confidentiality, data protection, clinical responsibility and personal safety.</p>
       </div>
 
       <div className="section-container">
         <h2>Contact Information</h2>
         <h3>How can I contact the Trust?</h3>
-        <p>For all enquiries, please contact us via our secure channels with appropriate subject lines. General enquiries, legacy questions, and partnership discussions are welcomed through our confidential contact procedures. We respond to all serious enquiries within 48 hours.</p>
+        <p>General enquiries, institutional and legacy discussions, project propositions and confidential matters can be submitted through the Trust's contact form.</p>
+        <p>Registered donors and project commissioners may also use the secure messaging area within their dashboard.</p>
+        <p>Safeguarding, protected-concern and sensitive recognition enquiries should use the relevant confidential subject line and reporting route.</p>
       </div>
 
       <p className="mt-8 text-sm text-muted-foreground">If your question is not answered here, please contact us directly. We welcome all genuine enquiries about our work and mission.</p>
