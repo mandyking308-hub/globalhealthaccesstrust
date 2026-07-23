@@ -8,14 +8,14 @@ export const GetInvolvedPage = () => {
     <ContentLayout>
       <SEO
         title="Get Involved"
-        description="Contribute expertise, capability, relationships or resources to healthcare-enabling charitable projects developed by the Global Health Access Trust."
+        description="Contribute expertise, capability, relationships or resources to charitable public-benefit projects developed by the Global Health Access Trust."
         canonical="/get-involved"
       />
 
       <h1>Get Involved</h1>
 
       <p className="featured-text">
-        Bring expertise, capability, relationships or resources to work that enables better healthcare.
+        Bring expertise, capability, relationships or resources to work that enables better health, safety, dignity and human capability.
       </p>
 
       <p>
@@ -78,33 +78,38 @@ export const GetInvolvedPage = () => {
         </div>
 
         <div className="section-container">
-          <h2>Support, Fund or Commission Work</h2>
+          <h2>Support, Pledge or Commission Work</h2>
           <p>Supporters may:</p>
           <ul>
-            <li>Contribute to an approved active project</li>
-            <li>Make a general donation</li>
+            <li>Pledge funding, time, expertise, equipment, premises or other resources</li>
+            <li>Offer support for an approved active project</li>
             <li>Create and commission a new charitable project</li>
             <li>Discuss major, restricted, institutional or legacy support</li>
           </ul>
           <p>
-            Donors may choose the recognition and privacy arrangements appropriate to their
-            contribution. Support does not confer ownership, governance authority or control
-            over charitable decisions.
+            Every pledge is reviewed before acceptance. Financial supporters are taken through
+            the appropriate donor-verification and due-diligence process before payment or transfer
+            instructions are provided.
+          </p>
+          <p>
+            Supporters may choose appropriate recognition and privacy arrangements. Support does
+            not confer ownership, governance authority or control over charitable decisions.
           </p>
           <div className="flex flex-wrap gap-3 mt-5">
             <Button asChild variant="outline"><Link to="/support-the-trust">Support the Trust</Link></Button>
-            <Button asChild><Link to="/donation-form">Make a Donation</Link></Button>
+            <Button asChild><Link to="/donate#pledge-form">Pledge a Contribution</Link></Button>
             <Button asChild variant="outline"><Link to="/commission-projects">Commission a Project</Link></Button>
             <Button asChild variant="outline"><Link to="/donor-login">Open Donor Portal</Link></Button>
           </div>
         </div>
 
         <div className="section-container">
-          <h2>Bring a Healthcare-Access or System Proposition</h2>
+          <h2>Bring a Public-Benefit Proposition</h2>
           <p>
             Individuals, communities and organisations may approach the Trust with a defined
-            healthcare-access, workforce, infrastructure, education, research, logistics or
-            community-system challenge.
+            healthcare-access, infrastructure, housing, food-system, education, technology,
+            workforce, logistics, humanitarian or community-system challenge connected to the
+            Trust's charitable purposes.
           </p>
           <p>
             Please explain the problem, the setting, the population or service affected, the
@@ -158,7 +163,7 @@ export const GetInvolvedPage = () => {
         </p>
         <p>
           Registering an interest does not guarantee appointment, project assignment,
-          partnership or funding.
+          partnership, acceptance of a contribution or funding.
         </p>
       </div>
 
@@ -178,7 +183,7 @@ export const GetInvolvedPage = () => {
         <p className="featured-text">
           Different people contribute in different ways. What matters is that every
           contribution serves a defined charitable purpose and strengthens the people and
-          systems on which better healthcare depends.
+          systems on which better health and public benefit depend.
         </p>
         <div className="flex flex-wrap gap-3 mt-5">
           <Button asChild><Link to="/contact-the-trust">Find the Right Route</Link></Button>
