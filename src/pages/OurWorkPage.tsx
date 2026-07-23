@@ -7,47 +7,50 @@ export const OurWorkPage = () => {
     <ContentLayout>
       <SEO
         title="Our Work"
-        description="Explore six areas of work developed by the Global Health Access Trust: healthcare access, clinical networks, health systems, responsible AI, research and humanitarian response."
+        description="Explore six areas of healthcare-enabling work developed by the Global Health Access Trust: access, professional networks, health systems, responsible AI, research and humanitarian response."
         canonical="/our-work"
       />
       <h1>Our Work</h1>
       
       <p className="featured-text">"We do not fund moments. We fund movements."</p>
 
-      <p>The Global Health Access Trust develops and supports defined projects that advance health, relieve illness and preserve life—particularly where stable systems are absent, failing or inaccessible.</p>
-      <p>Our work brings together clinical expertise, human capability, responsible artificial intelligence, essential infrastructure, trusted local relationships and accountable funding.</p>
-      <p>The Trust organises this work across six interconnected areas. Every project must demonstrate a clear route to public benefit and remain within the Trust's charitable purpose.</p>
+      <p>The Global Health Access Trust develops, funds and coordinates defined projects that advance health, relieve illness and preserve life—particularly where stable systems are absent, failing or inaccessible.</p>
+      <p>Our work brings together professional and clinical expertise, human capability, responsible artificial intelligence, essential infrastructure, trusted local relationships and accountable funding.</p>
+      <p>The Trust enables better healthcare; it is not a medical practice or clinical service and does not provide individual diagnosis, treatment, prescribing, triage or emergency care.</p>
+      <p>Where an approved project includes clinical services, those services are delivered by appropriately licensed and regulated healthcare providers. The provider retains responsibility for clinical decisions, consent, records, professional standards and patient care.</p>
+      <p>The Trust organises its work across six interconnected areas. Every project must demonstrate a clear route to public benefit and remain within the Trust's charitable purpose.</p>
       <p>We prioritise impact over volume, and depth over display.</p>
 
       <div className="section-container">
         <h2>1. Ethical Access to Healthcare</h2>
-        <p>We develop and support lawful interventions where access to care is absent, delayed, unaffordable or under severe pressure. This may include:</p>
+        <p>We develop, fund and coordinate lawful projects that improve access to care where it is absent, delayed, unaffordable or under severe pressure. This may include:</p>
         <ul>
-          <li>Treatment for excluded or vulnerable individuals</li>
-          <li>Mobile clinics, field services and local clinical provision</li>
-          <li>Lawful access to specialist knowledge or care across borders</li>
-          <li>Diagnostics, medicines, equipment and essential supplies</li>
+          <li>Funding or enabling treatment delivered by appropriately regulated providers</li>
+          <li>Supporting mobile, field or local services operated by qualified delivery organisations</li>
+          <li>Lawful referral and access routes to specialist knowledge or care</li>
+          <li>Responsible procurement and delivery of diagnostics, medicines, equipment and essential supplies through appropriate partners</li>
         </ul>
       </div>
 
       <div className="section-container">
-        <h2>2. Clinical Networks &amp; Human Capability</h2>
+        <h2>2. Healthcare Networks &amp; Human Capability</h2>
         <p>Lasting health outcomes depend upon people and institutions able to continue the work. Projects may support:</p>
         <ul>
-          <li>Clinical networks and access to specialist professional expertise</li>
+          <li>Professional networks and access to specialist expertise</li>
           <li>Education and training for clinicians, carers and community teams</li>
           <li>Mental health, trauma and neurodiversity capability</li>
           <li>Mentoring, knowledge transfer and local professional leadership</li>
         </ul>
+        <p>Training, coordination and professional contribution do not transfer clinical responsibility to the Trust.</p>
       </div>
 
       <div className="section-container">
         <h2>3. Health Systems &amp; Essential Infrastructure</h2>
         <p>Healthcare depends upon reliable facilities, supply arrangements and supporting systems. Where directly connected to health and public benefit, projects may support:</p>
         <ul>
-          <li>Clinical and community facilities</li>
+          <li>Healthcare and community facilities operated by appropriate providers or partners</li>
           <li>Medicine, equipment, food and essential supply systems</li>
-          <li>Safe accommodation and healthy environments required for treatment, recovery or prevention</li>
+          <li>Safe accommodation and healthy environments required for access, recovery or prevention</li>
           <li>Operational coordination, logistics and local service continuity</li>
         </ul>
       </div>
@@ -56,20 +59,20 @@ export const OurWorkPage = () => {
         <h2>4. Responsible AI &amp; Health Intelligence</h2>
         <p>The Trust develops and applies responsible technology where it can strengthen health, human capability and the systems on which communities depend. Projects may include:</p>
         <ul>
-          <li>Intelligence systems that identify needs, risks and service gaps</li>
-          <li>Tools that support clinicians, community teams and local decision-makers</li>
+          <li>Intelligence systems that identify population needs, operational risks and service gaps</li>
+          <li>Tools that support professionals, community teams and local decision-makers</li>
           <li>Coordination of food, medicine, logistics and essential supplies</li>
           <li>Evidence capture, early warning and accountable project reporting</li>
           <li>Education, neurodiversity and skills initiatives supported by artificial intelligence</li>
         </ul>
-        <p>Technology is used to expand human capability, not remove human responsibility. Clinical judgment, local leadership, safeguarding and trustee oversight remain central.</p>
+        <p>Technology is used to expand human capability, not remove human responsibility. The Trust does not use AI to provide individual diagnosis, treatment or triage. Any clinical decision is made solely by an appropriately regulated healthcare professional or provider operating within its own professional and legal responsibilities.</p>
       </div>
 
       <div className="section-container">
         <h2>5. Evidence, Research &amp; Strategic Reform</h2>
         <p>Evidence supports better delivery, stronger accountability and the removal of barriers to care. The Trust may support:</p>
         <ul>
-          <li>Health-needs assessments, impact evaluations and system reviews</li>
+          <li>Population and service-needs assessments, impact evaluations and system reviews</li>
           <li>Public-health and healthcare-access research</li>
           <li>Lawful policy and legal work addressing barriers to care</li>
           <li>Practical research into responsible technology and stronger health services</li>
@@ -78,10 +81,10 @@ export const OurWorkPage = () => {
 
       <div className="section-container">
         <h2>6. Humanitarian &amp; War-Affected Response</h2>
-        <p>Where conflict, disaster or institutional failure removes access to essential services, the Trust may support coordinated, lawful and auditable interventions involving:</p>
+        <p>Where conflict, disaster or institutional failure removes access to essential services, the Trust may support coordinated, lawful and auditable projects involving:</p>
         <ul>
-          <li>Clinical aid and essential health supplies</li>
-          <li>Field facilities and integrated service-centre capability</li>
+          <li>Access to healthcare delivered by qualified providers and the provision of essential health supplies</li>
+          <li>Field facilities and service-centre capability operated through appropriate delivery partners</li>
           <li>Food, hygiene and safe space where directly required to protect health or life</li>
           <li>Trusted local partners, logistics and communications</li>
         </ul>
@@ -93,7 +96,8 @@ export const OurWorkPage = () => {
         <ul>
           <li>A clear charitable purpose and defined scope</li>
           <li>Trustee approval and proportionate due diligence</li>
-          <li>A responsible team and safeguarding framework</li>
+          <li>A responsible delivery structure and safeguarding framework</li>
+          <li>Clear allocation of professional, operational and—where relevant—clinical responsibility</li>
           <li>Milestones, expenditure controls and evidence requirements</li>
           <li>A route to sustained public benefit</li>
         </ul>
