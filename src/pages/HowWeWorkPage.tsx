@@ -14,8 +14,6 @@ export const HowWeWorkPage = () => {
       <p className="featured-text">"Our method is measured. Our purpose is enduring."</p>
 
       <p>The Global Health Access Trust develops projects around clearly defined healthcare-access, infrastructure, workforce and system needs. We bring together people, professional expertise, responsible technology, local knowledge and accountable funding to create practical routes to public benefit.</p>
-      <p>The Trust is not a medical practice or clinical service. It does not provide individual diagnosis, treatment, prescribing, triage or emergency care.</p>
-      <p>Where an approved project includes clinical services, those services are delivered and clinically governed by appropriately licensed and regulated healthcare providers. The provider retains responsibility for clinical decisions, consent, records, professional standards and patient care.</p>
       <p>Projects move through disciplined stages of listening, scoping, approval, team formation, funding, delivery and evidence.</p>
 
       <div className="section-container">
@@ -44,7 +42,6 @@ export const HowWeWorkPage = () => {
           <li>The proposed budget and level of urgency</li>
           <li>An optional dedication or anonymity preference</li>
         </ul>
-        <p>The commissioned-project route is not a route for personal medical advice, diagnosis, treatment requests or the submission of individual medical records.</p>
         <p>Once submitted, the project enters the Trust's project system for scoping, due diligence and Trustee review. The Trust works with the supporter to test feasibility, define the charitable outcome, establish the delivery structure and agree appropriate milestones.</p>
         <p>Approved projects can then be followed through the secure dashboard, including project agreements, messages, progress updates, evidence and financial information appropriate to the project.</p>
         <p>The supporter creates and helps shape the project. Trustee approval, safeguarding, charitable purpose and control of charitable funds remain with the Trust.</p>
@@ -59,7 +56,7 @@ export const HowWeWorkPage = () => {
           <li>Proportionate due diligence on people, organisations and jurisdictions</li>
           <li>Safeguarding, data-protection and risk requirements</li>
           <li>Delivery responsibilities, milestones and evidence standards</li>
-          <li>Where relevant, the separate regulated provider responsible for clinical delivery and governance</li>
+          <li>Where relevant, the regulated provider responsible for clinical delivery and governance</li>
           <li>The appropriate agreement and funding structure</li>
         </ul>
         <p>Projects and significant allocations require Trustee approval. Funding may be restricted to a particular project and released in stages where appropriate.</p>
@@ -76,7 +73,7 @@ export const HowWeWorkPage = () => {
           <li>Local leaders, logistics providers and delivery partners</li>
         </ul>
         <p>Due diligence is proportionate to the role and risk. Participants must demonstrate appropriate capability, integrity, safeguarding and legal compliance.</p>
-        <p>Where clinical services form part of a project, the regulated provider—not the Trust—retains clinical governance, professional supervision, consent, medical-record and patient-care responsibilities.</p>
+        <p>Clinical services within a project remain under the governance, supervision and professional responsibility of the regulated provider delivering them.</p>
         <p>Contributors may remain publicly anonymous where confidentiality, professional discretion or personal safety requires it.</p>
       </div>
 
@@ -84,8 +81,7 @@ export const HowWeWorkPage = () => {
         <h2>5. Responsible AI &amp; Human Oversight</h2>
         <p>Artificial intelligence may be used to identify population or service needs, analyse information, support research, coordinate complex systems, improve logistics, develop solutions and strengthen evidence.</p>
         <p>The Trust may also develop AI-enabled tools as part of an approved charitable project, subject to appropriate legal, ethical, technical and safeguarding review.</p>
-        <p>The Trust does not use AI to provide individual diagnosis, treatment or triage. Any clinical decision is made solely by an appropriately regulated healthcare professional or provider operating within its own professional and legal responsibilities.</p>
-        <p>Technology supports people; it does not displace responsibility. Safeguarding decisions, local leadership, financial authority and Trustee accountability remain human responsibilities.</p>
+        <p>Where technology informs clinical work, clinical decisions remain with appropriately regulated healthcare professionals and providers. Safeguarding decisions, local leadership, financial authority and Trustee accountability remain human responsibilities.</p>
       </div>
 
       <div className="section-container">
@@ -110,7 +106,6 @@ export const HowWeWorkPage = () => {
           <li>Permit private benefit or inappropriate donor control</li>
           <li>Enter relationships that compromise its charitable independence</li>
           <li>Publish beneficiary, contributor or partner identities without an appropriate basis</li>
-          <li>Accept personal medical cases through its general project or contact systems</li>
           <li>Allow urgency, technology or publicity to override safeguarding and professional responsibility</li>
         </ul>
         <p className="featured-text">We are built to endure. And with that comes the duty to act wisely, carefully and with purpose.</p>
@@ -120,7 +115,7 @@ export const HowWeWorkPage = () => {
         <h2>Final Note</h2>
         <p>Supporters may fund existing work or create a new commissioned project through the secure donor dashboard.</p>
         <p>Organisations, clinicians, communities and professional contributors may approach the Trust with a defined healthcare-access, infrastructure, workforce or system proposition.</p>
-        <p>Every project remains subject to charitable purpose, feasibility, safeguarding, due diligence and Trustee approval. Any clinical component must be delivered and governed by an appropriately regulated provider.</p>
+        <p>Every project remains subject to charitable purpose, feasibility, safeguarding, due diligence and Trustee approval. Any clinical component is delivered and governed by an appropriately regulated provider.</p>
       </div>
     </ContentLayout>
   );
