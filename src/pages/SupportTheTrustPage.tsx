@@ -8,92 +8,104 @@ export const SupportTheTrustPage = () => {
     <ContentLayout>
       <SEO
         title="Support the Trust"
-        description="The Global Health Access Trust engages with donors, institutions, and partners through a structured and selective process aligned with its governance and funding mandate."
+        description="Support the Global Health Access Trust through donations, commissioned projects, restricted or institutional funding, and legacy giving."
         canonical="/support-the-trust"
       />
       <h1>Support the Trust</h1>
       
-      <p className="featured-text">"The Trust engages with a limited number of aligned partners through a structured process. Participation is based on alignment, scope, and the ability to deploy capital effectively within defined areas of intervention."</p>
+      <p className="featured-text">"Support may begin with a contribution, a commissioned project or a long-term institutional relationship. Every form of support is governed with the same care."</p>
 
-      <p>The Global Health Access Trust does not operate an open funding model. All funding relationships are established through a selective engagement process to ensure alignment with the Trust's mandate, governance framework, and charitable objectives.</p>
+      <p>Supporters can contribute to the Trust's existing work, create and commission a new project through the secure donor dashboard, or discuss institutional, restricted or legacy support.</p>
+      <p>Every contribution must advance the Trust's charitable purpose and remains subject to appropriate financial controls, gift acceptance, due diligence and Trustee oversight.</p>
 
       <div className="section-container">
         <h2>Engagement Process</h2>
-        <p>Support for the Trust follows a defined pathway designed to ensure governance, transparency, and alignment with our charitable objectives.</p>
+        <p>The route depends on the type of support. Individual donations can be made through the website. Commissioned projects are created through the secure donor dashboard. Major, institutional, restricted and legacy gifts may require direct engagement and additional documentation.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 1</span>
-          <h3 className="my-2 text-foreground">Initial Enquiry</h3>
+          <h3 className="my-2 text-foreground">Choose How to Support</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Engagement begins through a direct enquiry to the Trust, submitted via the official contact form or through authorised channels.
+            Supporters may make a general donation, support an existing area of work, create a commissioned project, or approach the Trust regarding institutional, restricted or legacy support.
           </p>
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 2</span>
-          <h3 className="my-2 text-foreground">Review &amp; Alignment</h3>
+          <h3 className="my-2 text-foreground">Submit Securely</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Each enquiry is assessed to ensure alignment with the Trust's mandate, governance framework, and charitable objectives.
+            Donations are made through the approved payment process. Commissioned projects are submitted through the donor dashboard with the proposed location, intervention, purpose, budget and urgency.
           </p>
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 3</span>
-          <h3 className="my-2 text-foreground">Structured Engagement</h3>
+          <h3 className="my-2 text-foreground">Review &amp; Approval</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Funding relationships are formalised with defined scope, objectives, and reporting expectations through appropriate legal documentation.
+            Commissioned projects, restricted gifts and significant funding relationships are reviewed for charitable purpose, feasibility, safeguarding, due diligence and financial risk. Appropriate agreements and reporting arrangements are established where required.
           </p>
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 4</span>
-          <h3 className="my-2 text-foreground">Project Deployment</h3>
+          <h3 className="my-2 text-foreground">Stewardship &amp; Visibility</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Capital is deployed into clearly defined initiatives with ongoing monitoring, accountability, and structured reporting.
+            Contributions are recorded and applied to approved charitable purposes. Supporters receive appropriate acknowledgements, project information, milestones, evidence and financial visibility through secure systems where applicable.
           </p>
         </div>
       </div>
 
       <div className="section-container">
         <h2>Legacy Giving</h2>
-        <p><strong>(Bequests Made by Will)</strong></p>
-        <p>A gift in your will ensures your values endure beyond your lifetime. The following sample wording may be used with your solicitor:</p>
-        <p className="featured-text">"I give [the sum of £____ / ___% of my residuary estate] to the Global Health Access Trust, a charitable trust established under the laws of England and Wales, with correspondence at 2 Harley Street, London, for its general charitable purposes. I declare that the receipt of the Chair of Trustees or other authorised officer shall be full discharge to my executors."</p>
-        <p>We welcome confidential engagement with legal representatives and estate planners to ensure your wishes are honoured with the dignity they deserve.</p>
+        <p>A gift made through a will may support the Trust's general charitable purposes or an agreed area of work.</p>
+        <p>Wills and estates require independent legal advice. The Trust can provide its correct legal name, governing-document information and correspondence address and can liaise confidentially with a supporter's solicitor or estate adviser.</p>
+        <p>Any restriction attached to a legacy must remain capable of lawful and effective charitable application if circumstances change.</p>
       </div>
 
       <div className="section-container">
         <h2>Restricted Gifts &amp; Named Funds</h2>
-        <p>Support may also be directed to a specific area of charitable interest, subject to formal agreement.</p>
+        <p>A contribution may be restricted to an approved project or area of charitable work, subject to formal agreement and Trustee acceptance.</p>
         <p>Restricted gifts must:</p>
         <ul>
-          <li>Align with the charitable objectives of the Trust</li>
-          <li>Be formally documented via Deed of Gift or Memorandum of Understanding</li>
-          <li>Include a clause of reversion in the event the original purpose becomes obsolete, unlawful, or no longer serves the public benefit</li>
+          <li>Advance the Trust's charitable purpose</li>
+          <li>Define the intended use clearly</li>
+          <li>Be recorded separately and applied only to the agreed purpose</li>
+          <li>Permit an appropriate alternative charitable use if the original purpose becomes impossible, unlawful or no longer effective</li>
         </ul>
+        <p>Supporters may express clear wishes and receive appropriate visibility, but responsibility for charitable funds remains with the Trustees.</p>
       </div>
 
       <div className="section-container">
-        <h2>Founding Benefactors &amp; Endowments</h2>
-        <p>Individuals, family offices, and foundations who engage at scale may be invited to become Founding Benefactors of the Trust, subject to Board approval.</p>
-        <p>At no stage may benefactors exert influence over governance, grant-making, or strategy. The Trust remains strictly independent.</p>
+        <h2>Major Gifts, Family Offices &amp; Foundations</h2>
+        <p>The Trust welcomes structured engagement with individuals, family offices, foundations and institutions seeking to support work at significant scale.</p>
+        <p>Arrangements may include major gifts, multi-year commitments, restricted project funding or endowment discussions, subject to due diligence, formal agreement and Board approval.</p>
+        <p>Recognition or project involvement does not confer governance authority, ownership of charitable work or control over Trustee decisions.</p>
       </div>
 
       <div className="section-container">
         <h2>Documentation &amp; Stewardship</h2>
-        <p>Every contribution is:</p>
+        <p>Every accepted contribution is:</p>
         <ul>
-          <li>Logged, receipted, and formally acknowledged</li>
-          <li>Applied only to charitable purposes under law</li>
-          <li>Reported in annual governance and financial disclosures</li>
+          <li>Recorded and acknowledged</li>
+          <li>Allocated in accordance with its approved purpose</li>
+          <li>Supported by appropriate financial and expenditure records</li>
+          <li>Reported through secure or public channels proportionate to the contribution and project</li>
+          <li>Protected by the Trust's financial controls and governance framework</li>
         </ul>
-        <p>No supporter shall receive private benefit or inducement, and no contribution shall override the Trust's fiduciary independence.</p>
+        <p>No contribution may provide inappropriate private benefit, override safeguarding or compromise the Trust's charitable independence.</p>
       </div>
 
-      <div className="text-center mt-10">
-        <Link to="/contact">
-          <Button size="lg" variant="default">
-            Request Private Engagement
-          </Button>
+      <div className="flex flex-wrap justify-center gap-4 mt-10">
+        <Link to="/donation-form">
+          <Button size="lg" variant="default">Make a Donation</Button>
+        </Link>
+        <Link to="/donor-login">
+          <Button size="lg" variant="outline">Open Donor Portal</Button>
+        </Link>
+        <Link to="/commission-projects">
+          <Button size="lg" variant="outline">Commission a Project</Button>
+        </Link>
+        <Link to="/contact-the-trust">
+          <Button size="lg" variant="outline">Discuss Institutional or Legacy Support</Button>
         </Link>
       </div>
     </ContentLayout>
