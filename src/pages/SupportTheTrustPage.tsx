@@ -24,19 +24,22 @@ export const SupportTheTrustPage = () => {
       </p>
       <p>
         Every accepted contribution must advance the Trust's charitable purposes and remains
-        subject to appropriate gift acceptance, due diligence, financial controls, safeguarding
-        and Trustee oversight.
+        subject to appropriate gift acceptance, verification, due diligence, financial controls,
+        safeguarding and Trustee oversight.
       </p>
 
       <div className="section-container">
         <h2>Engagement Process</h2>
         <p>
-          The route depends on the contribution. A supporter may pledge money, time, expertise,
+          The first public step is a pledge. A supporter may pledge money, time, expertise,
           equipment, premises, technology, services, logistics or relationships for the Trust to
-          review. Supporters ready to make a financial contribution may use the secure funding
-          process. Commissioned projects are created through the donor dashboard. Major,
-          institutional, restricted and legacy contributions may require direct engagement and
-          additional documentation.
+          review. The Trust then determines the appropriate verification, due-diligence,
+          agreement and acceptance process before any money or resource is transferred.
+        </p>
+        <p>
+          Commissioned projects are developed through the donor dashboard. Major, institutional,
+          restricted and legacy contributions may require direct engagement and additional
+          documentation.
         </p>
       </div>
 
@@ -52,32 +55,29 @@ export const SupportTheTrustPage = () => {
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 2</span>
-          <h3 className="my-2 text-foreground">Pledge or Contribute Securely</h3>
+          <h3 className="my-2 text-foreground">Submit a Pledge</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            A pledge records an expression of interest for review and follow-up. Financial
-            contributions use the approved secure funding process. Commissioned-project
-            propositions are submitted through the donor dashboard with the proposed need,
-            location, purpose, resources, budget and timing.
+            A pledge records an expression of interest for review and follow-up. It does not
+            require immediate payment or transfer and does not oblige the Trust to accept the
+            proposed contribution.
           </p>
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 3</span>
-          <h3 className="my-2 text-foreground">Review &amp; Approval</h3>
+          <h3 className="my-2 text-foreground">Verification &amp; Due Diligence</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Proposed gifts, resources, commissioned projects, restrictions and significant
-            relationships are reviewed for charitable purpose, suitability, feasibility,
-            safeguarding, due diligence, financial risk and the total cost of acceptance.
-            Appropriate agreements are established where required.
+            The Trust may verify identity, organisation, authority, source and nature of funds or
+            assets, sanctions exposure, restrictions, safeguarding, suitability and the total cost
+            of acceptance. The checks are proportionate to the contribution and associated risk.
           </p>
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 4</span>
-          <h3 className="my-2 text-foreground">Acceptance, Stewardship &amp; Visibility</h3>
+          <h3 className="my-2 text-foreground">Acceptance &amp; Transfer</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            A contribution is recorded only after formal acceptance and, where applicable,
-            receipt or transfer. Supporters receive appropriate acknowledgement, project
-            information, milestones, evidence and financial visibility through secure systems
-            where relevant.
+            Where a contribution can be accepted, the Trust confirms the approved purpose, terms,
+            recognition arrangements and secure payment, transfer or delivery process. A
+            contribution is recorded only after formal acceptance and receipt or transfer.
           </p>
         </div>
       </div>
@@ -91,7 +91,7 @@ export const SupportTheTrustPage = () => {
 
       <div className="section-container">
         <h2>Restricted Gifts &amp; Named Funds</h2>
-        <p>A contribution may be restricted to an approved project or area of charitable work, subject to formal agreement and Trustee acceptance.</p>
+        <p>A proposed contribution may be restricted to an approved project or area of charitable work, subject to formal agreement and Trustee acceptance.</p>
         <p>Restricted gifts must:</p>
         <ul>
           <li>Advance the Trust's charitable purpose</li>
@@ -105,7 +105,7 @@ export const SupportTheTrustPage = () => {
       <div className="section-container">
         <h2>Major Gifts, Family Offices &amp; Foundations</h2>
         <p>The Trust welcomes structured engagement with individuals, family offices, foundations and institutions seeking to support work at significant scale.</p>
-        <p>Arrangements may include major gifts, multi-year commitments, restricted project funding, equipment or infrastructure support, access to premises, professional capability or endowment discussions, subject to due diligence, formal agreement and Board approval.</p>
+        <p>Arrangements may include major gifts, multi-year commitments, restricted project funding, equipment or infrastructure support, access to premises, professional capability or endowment discussions, subject to verification, due diligence, formal agreement and Board approval.</p>
         <p>Recognition or project involvement does not confer governance authority, ownership of charitable work or control over Trustee decisions.</p>
       </div>
 
@@ -123,11 +123,8 @@ export const SupportTheTrustPage = () => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 mt-10">
-        <Link to="/donate">
-          <Button size="lg" variant="default">Pledge or Make a Contribution</Button>
-        </Link>
-        <Link to="/donation-form">
-          <Button size="lg" variant="outline">Make a Financial Contribution</Button>
+        <Link to="/donate#pledge-form">
+          <Button size="lg" variant="default">Pledge a Contribution</Button>
         </Link>
         <Link to="/commission-projects">
           <Button size="lg" variant="outline">Commission a Public-Benefit Project</Button>
