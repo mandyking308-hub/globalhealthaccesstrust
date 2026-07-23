@@ -1,255 +1,231 @@
-import { useState } from "react";
-import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Helmet } from "react-helmet-async";
 
-interface Document {
-  id: string;
+interface PublicationLink {
   title: string;
   description: string;
-  type: string;
-  version: string;
-  date: string;
-  lastUpdated: string;
-  region?: string;
-  language: string;
-  tags: string[];
-  fileUrl?: string;
-  checksum: string;
-  size: string;
+  to: string;
 }
 
-const documents: Document[] = [
+const governanceDocuments: PublicationLink[] = [
   {
-    id: "constitution-signed",
-    title: "Trust Constitution (Signed)",
-    description: "The governing document establishing our charitable purposes and legal framework as a charitable trust in England and Wales.",
-    type: "Constitution",
-    version: "1.0",
-    date: "2024-01-15",
-    lastUpdated: "2024-01-15",
-    language: "English",
-    tags: ["governance", "legal", "charitable purposes"],
-    fileUrl: "#",
-    checksum: "sha256:a3b5c2d1e9f8g7h6i5j4k3l2m1n0o9p8q7r6s5t4u3v2w1x0y9z8",
-    size: "2.4 MB"
+    title: "Governance & Legal Framework",
+    description: "The Trust's legal status, regulatory responsibilities and institutional controls.",
+    to: "/governance-legal-framework",
   },
   {
-    id: "safeguarding-statement-2024",
-    title: "Safeguarding Statement 2024",
-    description: "Our commitment to safeguarding principles and procedures for protecting vulnerable individuals in all our activities.",
-    type: "Policy Statement",
-    version: "2.1",
-    date: "2024-09-01",
-    lastUpdated: "2024-09-01",
-    language: "English",
-    tags: ["safeguarding", "policy", "protection"],
-    fileUrl: "#",
-    checksum: "sha256:c5d7e4f3g2h1i0j9k8l7m6n5o4p3q2r1s0t9u8v7w6x5y4z3a2b1",
-    size: "1.8 MB"
-  }
+    title: "Governance & Oversight",
+    description: "How the Board exercises authority, records decisions and oversees projects and risk.",
+    to: "/governance",
+  },
+  {
+    title: "Trustee Biographies",
+    description: "The appointed Trustees responsible for the Trust's charitable purpose and stewardship.",
+    to: "/trustee-biographies",
+  },
+  {
+    title: "Legal, Privacy & Governance Index",
+    description: "The versioned index of published and in-preparation legal and governance documents.",
+    to: "/legal",
+  },
 ];
 
+const policiesAndControls: PublicationLink[] = [
+  { title: "Safeguarding", description: "The Trust's safeguarding responsibilities and reporting framework.", to: "/safeguarding" },
+  { title: "Financial Controls", description: "Controls governing approval, expenditure, records and financial oversight.", to: "/financial-controls" },
+  { title: "Risk Management", description: "The framework for identifying, reviewing and escalating institutional risk.", to: "/risk-management" },
+  { title: "Conflict of Interest", description: "Requirements for declaring, recording and managing conflicts.", to: "/conflict-of-interest" },
+  { title: "Anti-Fraud", description: "The Trust's approach to preventing, identifying and responding to fraud.", to: "/anti-fraud" },
+  { title: "Whistleblowing", description: "Protected routes for raising serious concerns about conduct or governance.", to: "/whistleblowing" },
+  { title: "Complaints Policy", description: "How concerns and complaints are received, reviewed and resolved.", to: "/legal/complaints-policy" },
+  { title: "Privacy Policy", description: "How the Trust processes and protects personal information.", to: "/privacy-policy" },
+];
+
+const donorAndProjectDocuments: PublicationLink[] = [
+  {
+    title: "Donor Project Funding Terms",
+    description: "The terms governing significant project funding and commissioned-project relationships.",
+    to: "/donor-project-funding-terms",
+  },
+  {
+    title: "Gift Acceptance & Restricted Funds Policy",
+    description: "How the Trust assesses, accepts and administers restricted and significant gifts.",
+    to: "/gift-acceptance-and-restricted-funds-policy",
+  },
+  {
+    title: "Donor Due Diligence & Sanctions Policy",
+    description: "The Trust's proportionate donor-verification, sanctions and financial-crime controls.",
+    to: "/donor-due-diligence-and-sanctions-policy",
+  },
+  {
+    title: "Project Team Terms",
+    description: "The terms applying to approved project-team participation and secure project work.",
+    to: "/project-team-terms",
+  },
+  {
+    title: "Donor Recognition",
+    description: "Recognition, anonymity, dedications and the protection of charitable independence.",
+    to: "/donor-recognition",
+  },
+  {
+    title: "How We Work",
+    description: "How projects are developed, approved, funded, delivered and evidenced.",
+    to: "/how-we-work",
+  },
+];
+
+const PublicationGrid = ({ links }: { links: PublicationLink[] }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+    {links.map((document) => (
+      <Card key={document.to} className="card-professional h-full">
+        <CardContent className="p-6 flex h-full flex-col">
+          <h3 className="text-lg font-semibold mb-2">{document.title}</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1">{document.description}</p>
+          <Link to={document.to} className="text-sm font-semibold text-primary hover:underline">
+            View document →
+          </Link>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+);
+
 export const PublicationsPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState("all");
-  const [selectedYear, setSelectedYear] = useState("all");
-
-  const filteredDocuments = documents.filter(doc => {
-    const matchesSearch = doc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doc.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doc.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    
-    const matchesType = selectedType === "all" || doc.type === selectedType;
-    const matchesYear = selectedYear === "all" || doc.date.startsWith(selectedYear);
-    
-    return matchesSearch && matchesType && matchesYear;
-  });
-
-  const documentTypes = [...new Set(documents.map(doc => doc.type))];
-  const documentYears = [...new Set(documents.map(doc => doc.date.substring(0, 4)))].sort().reverse();
-
   return (
     <div className="py-16">
-      <Helmet><title>Publications & Documents | Global Health Access Trust</title><meta name="description" content="Access official publications, governance documents, annual reports, and policy statements from the Global Health Access Trust." /><link rel="canonical" href="https://globalhealthaccesstrust.com/publications" /></Helmet>
+      <Helmet>
+        <title>Publications & Documents | Global Health Access Trust</title>
+        <meta
+          name="description"
+          content="Official governing documents, policies, reports and project publications approved for public release by the Global Health Access Trust."
+        />
+        <link rel="canonical" href="https://globalhealthaccesstrust.com/publications" />
+      </Helmet>
+
       <div className="container-section">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Publications & Documents
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Access our official publications, governance documents, annual reports, 
-            and policy statements. All documents are available for download with 
-            integrity verification.
+          <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">Publications &amp; Documents</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-5">
+            Official governing documents, policies, reports and project publications approved for public release by the Board of Trustees.
+          </p>
+          <p className="text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Materials are published only when final, authorised and suitable for public access. Some information may be redacted or withheld where required to protect confidentiality, safeguarding, legal privilege, data protection or personal safety.
           </p>
         </div>
 
-        {/* Search and Filters */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <Card className="card-professional">
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="md:col-span-2">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input
-                      placeholder="Search documents..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
-                </div>
-                
-                <Select value={selectedType} onValueChange={setSelectedType}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Document Type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Types</SelectItem>
-                    {documentTypes.map(type => (
-                      <SelectItem key={type} value={type}>{type}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                <Select value={selectedYear} onValueChange={setSelectedYear}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Year" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Years</SelectItem>
-                    {documentYears.map(year => (
-                      <SelectItem key={year} value={year}>{year}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+        <section className="mb-12">
+          <Card className="card-elevated">
+            <CardContent className="p-8">
+              <span className="text-xs uppercase tracking-widest text-muted-foreground">Governing Document</span>
+              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Trust Constitution</h2>
+              <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+                The signed governing document establishes the Trust's charitable purposes, Trustee powers and institutional framework.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
+                <div><strong>Effective date</strong><br /><span className="text-muted-foreground">1 December 2024</span></div>
+                <div><strong>Version</strong><br /><span className="text-muted-foreground">1.0 — Original</span></div>
+                <div><strong>Document reference</strong><br /><span className="text-muted-foreground">GHAT-CONSTITUTION-1.0</span></div>
               </div>
+              <Button asChild>
+                <Link to="/constitution">View the Constitution</Link>
+              </Button>
             </CardContent>
           </Card>
-        </div>
+        </section>
 
-        {/* Documents Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {filteredDocuments.map((doc) => (
-            <Card key={doc.id} className="card-elevated group hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  
-                  <Badge variant="secondary" className="text-xs">
-                    {doc.type}
-                  </Badge>
-                </div>
-                
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                  {doc.title}
-                </h3>
-                
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                  {doc.description}
-                </p>
-                
-                <div className="space-y-2 mb-4 text-xs text-muted-foreground">
-                  <div className="flex items-center">
-                    
-                    Published: {new Date(doc.date).toLocaleDateString()}
-                  </div>
-                  <div className="flex items-center">
-                    
-                    Version {doc.version} • {doc.size}
-                  </div>
-                </div>
-                
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {doc.tags.slice(0, 3).map(tag => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                
-                <div className="flex gap-2">
-                  {doc.id === "constitution-signed" ? (
-                    <Link to="/constitution" className="flex-1">
-                      <Button size="sm" variant="outline" className="w-full">
-                        
-                        View
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Button size="sm" variant="outline" className="flex-1">
-                      
-                      View
-                    </Button>
-                  )}
-                  
-                  <Button size="sm" variant="outline">
-                    
-                  </Button>
-                </div>
-                
-                <div className="mt-3 pt-3 border-t text-xs text-muted-foreground">
-                  <div className="mb-1">
-                    <strong>Checksum (SHA-256):</strong>
-                  </div>
-                  <code className="break-all bg-muted/50 px-1 py-0.5 rounded text-xs">
-                    {doc.checksum.split(':')[1].substring(0, 16)}...
-                  </code>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <section className="mb-12">
+          <h2 className="text-3xl font-serif font-bold mb-3">Governance &amp; Institutional Documents</h2>
+          <p className="text-muted-foreground leading-relaxed max-w-3xl">
+            The following pages explain the Trust's legal status, Board responsibilities, decision-making and institutional accountability.
+          </p>
+          <PublicationGrid links={governanceDocuments} />
+        </section>
 
-        {filteredDocuments.length === 0 && (
-          <div className="text-center py-12">
-            
-            <h3 className="text-lg font-semibold mb-2">No documents found</h3>
-            <p className="text-muted-foreground">
-              Try adjusting your search terms or filters to find what you're looking for.
-            </p>
-          </div>
-        )}
+        <section className="mb-12">
+          <h2 className="text-3xl font-serif font-bold mb-3">Policies &amp; Controls</h2>
+          <p className="text-muted-foreground leading-relaxed max-w-3xl">
+            The Trust publishes policies and control frameworks where public access supports accountability, safe engagement and proper understanding of its operations.
+          </p>
+          <PublicationGrid links={policiesAndControls} />
+        </section>
 
-        {/* Document Verification */}
-        <div className="max-w-4xl mx-auto">
+        <section className="mb-12">
+          <h2 className="text-3xl font-serif font-bold mb-3">Donor &amp; Project Documents</h2>
+          <p className="text-muted-foreground leading-relaxed max-w-3xl">
+            These documents govern significant funding relationships, restricted contributions, donor due diligence and participation in project delivery.
+          </p>
+          <PublicationGrid links={donorAndProjectDocuments} />
+        </section>
+
+        <section className="mb-12">
           <Card className="card-professional">
             <CardContent className="p-8">
-              <h2 className="text-xl font-semibold mb-4">Document Verification</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-medium mb-2">Integrity Verification</h3>
-                  <p className="text-sm text-muted-foreground">
-                    All documents include SHA-256 checksums for integrity verification. 
-                    Download and verify checksums to ensure document authenticity.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="font-medium mb-2">Authoritative Language</h3>
-                  <p className="text-sm text-muted-foreground">
-                    The English version of all documents is authoritative. Translations 
-                    are provided for convenience but may not reflect the most current version.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="mt-6 pt-6 border-t">
-                <p className="text-sm text-muted-foreground">
-                  <strong>Report a Problem:</strong> If you encounter issues with document 
-                  access or have questions about content, please{" "}
-                  <Link to="/contact" className="text-primary hover:underline">
-                    contact our operations team
-                  </Link>.
-                </p>
+              <h2 className="text-3xl font-serif font-bold mb-4">Reports, Research &amp; Project Publications</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">This section will hold approved institutional and project material, including:</p>
+              <ul className="list-disc pl-6 space-y-2 text-muted-foreground mb-6">
+                <li>Annual reports and financial publications</li>
+                <li>Public project summaries and evidence reports</li>
+                <li>Research papers and strategic briefings</li>
+                <li>Responsible-AI and health-intelligence publications</li>
+                <li>Humanitarian and field reports</li>
+                <li>Evaluations, lessons learned and completed-project records</li>
+              </ul>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Publications will be added only after appropriate review and approval. Drafts, internal working materials and secure donor or project-team records will not be presented as final public publications.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Public reporting will protect beneficiary confidentiality, professional discretion, safeguarding and personal safety.
+              </p>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="mb-12">
+          <Card className="card-professional">
+            <CardContent className="p-8">
+              <h2 className="text-3xl font-serif font-bold mb-4">Document Status &amp; Authenticity</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">Each publication will display the information appropriate to that document, which may include:</p>
+              <ul className="list-disc pl-6 space-y-2 text-muted-foreground mb-6">
+                <li>Approval or publication date</li>
+                <li>Effective date</li>
+                <li>Version number or document reference</li>
+                <li>Review or replacement status</li>
+                <li>Authoritative language</li>
+                <li>Whether the document is current, archived or superseded</li>
+              </ul>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Where a final downloadable file is provided, any file size or checksum displayed will be generated from that actual published file.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                The English version is authoritative unless the document expressly states otherwise. Translations may be provided for accessibility and convenience.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Superseded material may be retained in an archive where this supports transparency and institutional record-keeping.
+              </p>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section>
+          <Card className="card-elevated">
+            <CardContent className="p-8">
+              <h2 className="text-3xl font-serif font-bold mb-4">Questions or Corrections</h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Questions about document status, access or content may be submitted through the secure contact form.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                Suspected misconduct, fraud, safeguarding concerns or protected disclosures should use the relevant confidential reporting route rather than the general publications enquiry route.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Button asChild><Link to="/contact-the-trust">Contact the Trust</Link></Button>
+                <Button asChild variant="outline"><Link to="/legal">View Legal &amp; Governance Documents</Link></Button>
+                <Button asChild variant="outline"><Link to="/protected-concerns/new">Report a Protected Concern</Link></Button>
               </div>
             </CardContent>
           </Card>
-        </div>
+        </section>
       </div>
     </div>
   );
