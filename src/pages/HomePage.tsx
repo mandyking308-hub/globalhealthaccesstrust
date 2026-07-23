@@ -14,7 +14,7 @@ export const HomePage = () => {
     <>
       <SEO
         title="Global Health Access Trust"
-        description="A charitable trust building the systems that make healthcare possible by aligning clinical expertise, essential infrastructure, responsible technology and capital."
+        description="A charitable trust developing, funding and coordinating the systems that enable better healthcare through professional expertise, essential infrastructure, responsible technology and capital."
         canonical="/"
         schema={organizationSchema}
       />
@@ -36,7 +36,7 @@ export const HomePage = () => {
                   The Global Health Access Trust builds the systems that make healthcare possible.
                 </h1>
                 <p className="mt-8 max-w-[560px] text-lg md:text-xl leading-relaxed text-foreground/80">
-                  Aligning clinical expertise, essential infrastructure, responsible technology and capital where need is greatest.
+                  Aligning professional and clinical expertise, essential infrastructure, responsible technology and capital where need is greatest.
                 </p>
                 <div className="mt-12">
                   <Link
@@ -65,7 +65,7 @@ export const HomePage = () => {
         <section className="grid grid-cols-1 md:grid-cols-3 border-b border-foreground/10 bg-background">
           {[
             { cat: "Reach", n: "12", label: "Countries Reached", d: "Practical work and professional relationships across twelve countries." },
-            { cat: "Network", n: "40+", label: "Delivery Relationships", d: "Clinical, technical, faith-based and community relationships supporting delivery." },
+            { cat: "Network", n: "40+", label: "Delivery Relationships", d: "Professional, technical, faith-based and community relationships supporting delivery." },
             { cat: "Development", n: "2019", label: "Network Expansion", d: "The point at which longstanding work began developing into a coordinated international network." },
           ].map((s, i) => (
             <div
@@ -140,9 +140,9 @@ export const HomePage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
             {[
-              { img: clinicImage, cat: "Primary Healthcare", alt: "A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine", title: "Frontline maternal care in field clinics.", copy: "Clinical services delivered directly to displaced and underserved communities." },
+              { img: clinicImage, cat: "Healthcare Access", alt: "A nurse examining a mother and newborn in a field maternity clinic in eastern Ukraine", title: "Enabling maternal healthcare in field settings.", copy: "Access supported through appropriately regulated local and field providers." },
               { img: systemsImage, cat: "Systems Infrastructure", alt: "Aid workers unloading medical supply pallets outside a damaged building in a Syrian town", title: "Rebuilding the systems that make care possible.", copy: "Supply, logistics, and infrastructure interventions in conflict-affected regions." },
-              { img: ruralImage, cat: "Rural Access", alt: "A multi-region group of clinicians in a field training session", title: "Reaching communities beyond conventional provision.", copy: "Capacity-building for local clinicians where geography limits access." },
+              { img: ruralImage, cat: "Rural Access", alt: "A multi-region group of clinicians in a field training session", title: "Reaching communities beyond conventional provision.", copy: "Capacity-building for local professionals where geography limits access." },
             ].map((a) => (
               <article key={a.cat} className="group cursor-pointer flex flex-col">
                 <div className="mb-7 overflow-hidden aspect-[4/5] bg-muted">
@@ -187,7 +187,7 @@ export const HomePage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div className="pt-8 border-t border-primary-foreground/25">
                     <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                      The Trust develops projects where clinical care is inseparable from land, infrastructure, education, food systems and human capability.
+                      The Trust develops projects where healthcare access is inseparable from infrastructure, education, food systems, technology and human capability.
                     </p>
                   </div>
                   <div className="pt-8 border-t border-primary-foreground/25">
@@ -196,6 +196,9 @@ export const HomePage = () => {
                     </p>
                   </div>
                 </div>
+                <p className="mt-10 pt-8 border-t border-primary-foreground/25 text-primary-foreground/85 text-base md:text-lg leading-relaxed max-w-4xl">
+                  The Trust enables better healthcare but is not a medical practice or clinical service. Where an approved project includes clinical services, those services are delivered and clinically governed by appropriately licensed and regulated healthcare providers.
+                </p>
               </div>
             </div>
             <div className="pl-0 md:pl-[196px]">
@@ -217,7 +220,7 @@ export const HomePage = () => {
                 Approach
               </h2>
               <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">
-                Projects begin with a defined health need and proceed through disciplined scoping, partnership, delivery and evidence.
+                Projects begin with a defined healthcare-access, infrastructure, workforce or system need and proceed through disciplined scoping, partnership, delivery and evidence.
               </p>
             </div>
 
@@ -362,7 +365,7 @@ export const HomePage = () => {
                 <div className="aspect-[4/5] overflow-hidden bg-muted">
                   <img
                     src={mandateImage}
-                    alt="Healthcare delivery in an underserved clinical setting"
+                    alt="Healthcare support in an underserved setting"
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -441,7 +444,7 @@ export const HomePage = () => {
                   Project Team Portal
                 </h3>
                 <p className="text-muted-foreground text-[15px] leading-relaxed mt-4 max-w-md">
-                  Charity workers, field staff, healthcare professionals, approved volunteers, coordinators and delivery partners submit progress, evidence and expenses on assigned projects.
+                  Charity workers, field staff, healthcare professionals, approved volunteers, coordinators and delivery partners submit progress, evidence and expenses on assigned projects. Any clinical services remain under the responsibility of the relevant regulated provider.
                 </p>
                 <div className="flex flex-wrap gap-3 mt-8">
                   <Link to="/auth?portal=team">
