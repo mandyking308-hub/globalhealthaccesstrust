@@ -50,14 +50,14 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build website
-        run: npm run build
+        run: bunx vite build
 
       - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+        run: bunx playwright install --with-deps chromium
 
       - name: Start production preview
         run: |
-          npx vite preview --host 0.0.0.0 --port 4173 > /tmp/ghat-preview.log 2>&1 &
+          bunx vite preview --host 0.0.0.0 --port 4173 > /tmp/ghat-preview.log 2>&1 &
           echo $! > /tmp/ghat-preview.pid
           for attempt in {1..40}; do
             if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
@@ -100,10 +100,7 @@ jobs:
               waitUntil: 'networkidle',
               timeout: 60000,
             });
-            await page.screenshot({
-              path: `preview-images/${name}.png`,
-              fullPage: true,
-            });
+            await page.screenshot({ path: `preview-images/${name}.png`, fullPage: true });
             results.push({
               name,
               path,
@@ -117,7 +114,7 @@ jobs:
           await browser.close();
           await writeFile('preview-images/preview-report.json', JSON.stringify(results, null, 2));
           EOF
-          node render-preview.mjs
+          bun render-preview.mjs
 
       - name: Upload finished-site previews
         uses: actions/upload-artifact@v4
