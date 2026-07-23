@@ -39,7 +39,6 @@ import { FinancialControlsPage } from "./pages/FinancialControlsPage";
 import { RiskManagementPage } from "./pages/RiskManagementPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { DonatePage } from "./pages/DonatePage";
-import { DonationFormPage } from "./pages/DonationFormPage";
 import { DonorGuidePage } from "./pages/DonorGuidePage";
 import { AuthPage } from "./pages/AuthPage";
 import { DonorDashboardPage } from "./pages/DonorDashboardPage";
@@ -166,7 +165,7 @@ const App = () => (
             <Route path="security-incidents" element={<Navigate to="/admin/support-oversight" replace />} />
           </Route>
 
-          <Route path="donation-form" element={<DonationFormPage />} />
+          <Route path="donation-form" element={<Navigate to="/donate#pledge-form" replace />} />
           <Route path="donation-success" element={<DonationSuccessPage />} />
           <Route path="donation-cancelled" element={<DonationCancelledPage />} />
           <Route path="donor-guide" element={<DonorGuidePage />} />
