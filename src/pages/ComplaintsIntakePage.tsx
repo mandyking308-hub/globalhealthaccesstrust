@@ -87,26 +87,26 @@ export default function ComplaintsIntakePage() {
         </p>
         <form onSubmit={submit} className="space-y-5">
           <div>
-            <Label>Complaint is about</Label>
+            <Label htmlFor="complaint-about">Complaint is about</Label>
             <Select value={complaint_about} onValueChange={setAbout}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger id="complaint-about" aria-label="Complaint is about"><SelectValue /></SelectTrigger>
               <SelectContent>{ABOUT.map((a) => <SelectItem key={a} value={a}>{a}</SelectItem>)}</SelectContent>
             </Select>
           </div>
           <div>
-            <Label>Category</Label>
+            <Label htmlFor="complaint-category">Category</Label>
             <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger id="complaint-category" aria-label="Complaint category"><SelectValue /></SelectTrigger>
               <SelectContent>{CATS.map((c) => <SelectItem key={c.v} value={c.v}>{c.l}</SelectItem>)}</SelectContent>
             </Select>
           </div>
           <div>
-            <Label>What happened</Label>
-            <Textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={7} maxLength={4000} required />
+            <Label htmlFor="complaint-description">What happened</Label>
+            <Textarea id="complaint-description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} rows={7} maxLength={4000} required />
           </div>
           <div>
-            <Label>What outcome would you like</Label>
-            <Textarea value={requested_remedy} onChange={(e) => setRemedy(e.target.value)} rows={3} maxLength={1000} />
+            <Label htmlFor="requested-remedy">What outcome would you like</Label>
+            <Textarea id="requested-remedy" name="requested_remedy" value={requested_remedy} onChange={(e) => setRemedy(e.target.value)} rows={3} maxLength={1000} />
           </div>
           <div className="flex items-center gap-2">
             <Checkbox id="anon" checked={anonymous} onCheckedChange={(v) => setAnon(v === true)} />
@@ -115,12 +115,12 @@ export default function ComplaintsIntakePage() {
           {!anonymous && (
             <div className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
-                <div><Label>Name</Label><Input value={name} onChange={(e) => setName(e.target.value)} maxLength={200} /></div>
-                <div><Label>Email</Label><Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={200} /></div>
+                <div><Label htmlFor="complainant-name">Name</Label><Input id="complainant-name" name="name" value={name} onChange={(e) => setName(e.target.value)} maxLength={200} /></div>
+                <div><Label htmlFor="complainant-email">Email</Label><Input id="complainant-email" name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={200} /></div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
-                <div><Label>Phone (optional)</Label><Input value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} /></div>
-                <div><Label>Accessibility needs (optional)</Label><Input value={accessibility} onChange={(e) => setAccess(e.target.value)} maxLength={200} /></div>
+                <div><Label htmlFor="complainant-phone">Phone (optional)</Label><Input id="complainant-phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} maxLength={40} /></div>
+                <div><Label htmlFor="accessibility-needs">Accessibility needs (optional)</Label><Input id="accessibility-needs" name="accessibility_needs" value={accessibility} onChange={(e) => setAccess(e.target.value)} maxLength={200} /></div>
               </div>
             </div>
           )}
