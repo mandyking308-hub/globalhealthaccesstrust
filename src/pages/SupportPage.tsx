@@ -36,10 +36,10 @@ const pathways = [
     body: "Report suspected financial fraud, misuse of donations or supplier irregularities. Routes to the same restricted queue as protected concerns.",
   },
   {
-    to: "/security-incidents",
+    to: "/protected-concerns/new",
     icon: Server,
     title: "Security and Data Incidents",
-    body: "Report a suspected security or data breach affecting Trust systems or personal data. Handled by designated incident officers.",
+    body: "Report a suspected security or data breach affecting Trust systems or personal data. The report enters the restricted protected-concerns queue for designated officers.",
   },
 ];
 
@@ -57,19 +57,15 @@ export default function SupportPage() {
       <div className="container-content py-16 max-w-6xl mx-auto">
         <header className="mb-12 max-w-3xl">
           <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-3">Support &amp; concerns</p>
-          <h1 className="text-4xl md:text-5xl font-serif mb-6 leading-tight">
-            Pick the pathway that fits your matter.
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-serif mb-6 leading-tight">Pick the pathway that fits your matter.</h1>
           <p className="text-lg text-muted-foreground">
-            The Trust operates dedicated pathways so each matter reaches the right people. Each pathway
-            issues a reference number and confirms next steps. If a person is in immediate danger, contact
-            local emergency services first.
+            The Trust operates dedicated pathways so each matter reaches the right people. Each pathway issues a reference number and confirms next steps. If a person is in immediate danger, contact local emergency services first.
           </p>
         </header>
         <div className="grid gap-6 md:grid-cols-2">
           {pathways.map(({ to, icon: Icon, title, body, accent }) => (
             <Link
-              key={to}
+              key={title}
               to={to}
               className={`block rounded-lg border transition-colors hover:border-primary ${
                 accent ? "border-destructive/40 bg-destructive/5" : "border-border"
@@ -86,9 +82,7 @@ export default function SupportPage() {
           ))}
         </div>
         <p className="mt-12 text-xs text-muted-foreground max-w-3xl">
-          The Trust does not publish guaranteed resolution times. Acknowledgement is normally within a small
-          number of working days. Confidentiality is protected as far as safety and legal obligations allow,
-          but is not absolute.
+          The Trust does not publish guaranteed resolution times. Acknowledgement is normally within a small number of working days. Confidentiality is protected as far as safety and legal obligations allow, but is not absolute.
         </p>
       </div>
     </>
