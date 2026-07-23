@@ -10,12 +10,20 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
-import { DonorTierBadge } from "@/components/donor/DonorTierBadge";
 import { DonationHistoryTable } from "@/components/donor/DonationHistoryTable";
 import { MessagesPanel } from "@/components/donor/MessagesPanel";
-import { calculateDonorTier } from "@/utils/donorTiers";
 import { CommissionProjectForm } from "@/components/donor/CommissionProjectForm";
 import { CommissionedProjectsList } from "@/components/donor/CommissionedProjectsList";
 import { DonorAIWidget } from "@/components/ai/DonorAIWidget";
@@ -46,8 +54,10 @@ export const DonorDashboardPage = () => {
 
   useEffect(() => {
     checkAuth();
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_OUT") navigate("/auth");
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_OUT") navigate("/auth?portal=donor");
       setUser(session?.user ?? null);
     });
     return () => subscription.unsubscribe();
@@ -60,9 +70,11 @@ export const DonorDashboardPage = () => {
   }, [onboardingLoading, isComplete, user]);
 
   const checkAuth = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
     if (!session) {
-      navigate("/auth");
+      navigate("/auth?portal=donor");
       return;
     }
     setUser(session.user);
@@ -70,7 +82,11 @@ export const DonorDashboardPage = () => {
     const { data: profileData } = await supabase.from("profiles").select("*").eq("id", session.user.id).single();
     if (profileData) {
       setProfile(profileData);
-      setProfileEdit({ first_name: profileData.first_name, last_name: profileData.last_name, email: profileData.email });
+      setProfileEdit({
+        first_name: profileData.first_name,
+        last_name: profileData.last_name,
+        email: profileData.email,
+      });
     }
 
     const { data: donationsData } = await supabase
@@ -115,7 +131,7 @@ export const DonorDashboardPage = () => {
 
   const handleDataExport = () => {
     const blob = new Blob(
-      [JSON.stringify({ profile, donations, exported_at: new Date().toISOString() }, null, 2)],
+      [JSON.stringify({ profile, donations, projects: myProjects, exported_at: new Date().toISOString() }, null, 2)],
       { type: "application/json" },
     );
     const link = document.createElement("a");
@@ -137,8 +153,6 @@ export const DonorDashboardPage = () => {
       toast({ title: "Deletion request submitted" });
     }
   };
-
-  const donorTier = calculateDonorTier(totalDonated);
 
   if (loading) {
     return (
@@ -192,12 +206,11 @@ export const DonorDashboardPage = () => {
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
               <div className="max-w-xl">
                 <h1 className="no-display text-foreground mb-4" style={{ fontFamily: "var(--font-serif)", fontWeight: 900, textTransform: "uppercase", letterSpacing: "-0.01em", fontSize: "clamp(34px, 4vw, 56px)", lineHeight: 1 }}>
-                  Welcome to Your Donor Dashboard
+                  Your Donor Dashboard
                 </h1>
-                <p className="text-[16px] text-muted-foreground leading-relaxed mb-5">
-                  Thank you for your support. View contributions, track impact, and manage preferences.
+                <p className="text-[16px] text-muted-foreground leading-relaxed">
+                  View accepted financial contributions, commissioned projects, agreements, secure messages and account preferences.
                 </p>
-                <DonorTierBadge tierName={donorTier.name} totalDonated={totalDonated} />
               </div>
               <Link to="/donor-guide">
                 <Button variant="outline" className="border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[12px] font-semibold uppercase h-11 px-6">
@@ -209,47 +222,50 @@ export const DonorDashboardPage = () => {
 
           <section className="portal-stat-strip mb-12">
             <div className="portal-stat">
-              <div className="portal-stat-label">Total Donated</div>
+              <div className="portal-stat-label">Accepted Funding</div>
               <div className="portal-stat-value">£{totalDonated.toLocaleString()}</div>
-              <p className="mt-2 text-xs text-muted-foreground">All time</p>
+              <p className="mt-2 text-xs text-muted-foreground">Recorded and reconciled</p>
             </div>
             <div className="portal-stat">
-              <div className="portal-stat-label">Donations</div>
+              <div className="portal-stat-label">Financial Contributions</div>
               <div className="portal-stat-value">{donations.length}</div>
             </div>
             <div className="portal-stat">
-              <div className="portal-stat-label">Tier</div>
-              <div className="portal-stat-value" style={{ fontSize: "clamp(20px, 1.8vw, 26px)" }}>{donorTier.name}</div>
+              <div className="portal-stat-label">Commissioned Projects</div>
+              <div className="portal-stat-value">{myProjects.length}</div>
             </div>
             <div className="portal-stat">
-              <div className="portal-stat-label">Recent</div>
+              <div className="portal-stat-label">Most Recent</div>
               <div className="portal-stat-value" style={{ fontSize: "clamp(18px, 1.6vw, 22px)" }}>
                 {donations.length > 0 ? new Date(donations[0].created_at).toLocaleDateString() : "N/A"}
               </div>
             </div>
           </section>
 
-          <Tabs defaultValue="donate" className="portal-tabs space-y-8">
+          <Tabs defaultValue="pledge" className="portal-tabs space-y-8">
             <TabsList className="w-full flex flex-wrap justify-start">
-              <TabsTrigger value="donate">Make a Donation</TabsTrigger>
+              <TabsTrigger value="pledge">Pledge Further Support</TabsTrigger>
               <TabsTrigger value="projects">My Projects</TabsTrigger>
               <TabsTrigger value="agreements">Project Agreement</TabsTrigger>
               <TabsTrigger value="commission">Commission a New Project</TabsTrigger>
-              <TabsTrigger value="history">Donation History</TabsTrigger>
+              <TabsTrigger value="history">Contribution History</TabsTrigger>
               <TabsTrigger value="messages">Project Messages</TabsTrigger>
               <TabsTrigger value="support">Support</TabsTrigger>
               <TabsTrigger value="profile">Account &amp; Preferences</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="donate">
+            <TabsContent value="pledge">
               <div className="portal-panel">
-                <span className="portal-eyebrow mb-3">Make a Donation</span>
+                <span className="portal-eyebrow mb-3">Further Support</span>
                 <h2 className="text-foreground mt-2 mb-3" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>
-                  Ready to Make a Difference?
+                  Pledge an Additional Contribution
                 </h2>
-                <Link to="/donation-form">
-                  <Button className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase h-11 px-8">
-                    Start Donation
+                <p className="text-muted-foreground max-w-2xl leading-relaxed">
+                  Submit a new pledge for funding, time, expertise, equipment, premises, technology, services or another resource. The Trust will review the proposal and confirm any verification, agreement or transfer process required.
+                </p>
+                <Link to="/donate#pledge-form">
+                  <Button className="mt-5 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase h-11 px-8">
+                    Open Pledge Form
                   </Button>
                 </Link>
               </div>
@@ -292,12 +308,12 @@ export const DonorDashboardPage = () => {
 
             <TabsContent value="history">
               <div className="portal-panel">
-                <span className="portal-eyebrow mb-4">Donation History</span>
+                <span className="portal-eyebrow mb-4">Financial Contribution History</span>
                 <h2 className="text-foreground mt-2 mb-6" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>
-                  Donation History
+                  Accepted and Reconciled Contributions
                 </h2>
                 {donations.length === 0 ? (
-                  <p className="text-muted-foreground">No donations yet</p>
+                  <p className="text-muted-foreground">No accepted financial contributions are recorded yet.</p>
                 ) : (
                   <DonationHistoryTable donations={donations} donorName={`${profile?.first_name} ${profile?.last_name}`} />
                 )}
@@ -341,19 +357,6 @@ export const DonorDashboardPage = () => {
                     Update Profile
                   </Button>
                 </div>
-              </div>
-
-              <div className="portal-panel">
-                <span className="portal-eyebrow mb-4">Donor Benefits</span>
-                <h2 className="text-foreground mt-2 mb-4" style={{ fontSize: "clamp(22px, 2vw, 30px)", fontWeight: 500 }}>
-                  Donor Benefits
-                </h2>
-                <p className="text-foreground mb-3">As a {donorTier.name}, you receive:</p>
-                <ul className="space-y-2 pl-5 list-disc marker:text-primary text-muted-foreground">
-                  {donorTier.benefits.map((benefit, index) => (
-                    <li key={index} className="text-[15px] leading-relaxed">{benefit}</li>
-                  ))}
-                </ul>
               </div>
 
               <div className="portal-panel">
