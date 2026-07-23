@@ -16,8 +16,6 @@ export const OurWorkPage = () => {
 
       <p>The Global Health Access Trust develops, funds and coordinates defined projects that advance health, relieve illness and preserve life—particularly where stable systems are absent, failing or inaccessible.</p>
       <p>Our work brings together professional and clinical expertise, human capability, responsible artificial intelligence, essential infrastructure, trusted local relationships and accountable funding.</p>
-      <p>The Trust enables better healthcare; it is not a medical practice or clinical service and does not provide individual diagnosis, treatment, prescribing, triage or emergency care.</p>
-      <p>Where an approved project includes clinical services, those services are delivered by appropriately licensed and regulated healthcare providers. The provider retains responsibility for clinical decisions, consent, records, professional standards and patient care.</p>
       <p>The Trust organises its work across six interconnected areas. Every project must demonstrate a clear route to public benefit and remain within the Trust's charitable purpose.</p>
       <p>We prioritise impact over volume, and depth over display.</p>
 
@@ -41,7 +39,6 @@ export const OurWorkPage = () => {
           <li>Mental health, trauma and neurodiversity capability</li>
           <li>Mentoring, knowledge transfer and local professional leadership</li>
         </ul>
-        <p>Training, coordination and professional contribution do not transfer clinical responsibility to the Trust.</p>
       </div>
 
       <div className="section-container">
@@ -65,7 +62,7 @@ export const OurWorkPage = () => {
           <li>Evidence capture, early warning and accountable project reporting</li>
           <li>Education, neurodiversity and skills initiatives supported by artificial intelligence</li>
         </ul>
-        <p>Technology is used to expand human capability, not remove human responsibility. The Trust does not use AI to provide individual diagnosis, treatment or triage. Any clinical decision is made solely by an appropriately regulated healthcare professional or provider operating within its own professional and legal responsibilities.</p>
+        <p>Technology is used to expand human capability, not remove human responsibility. Where tools inform clinical work, decisions remain with appropriately regulated healthcare professionals and providers.</p>
       </div>
 
       <div className="section-container">
