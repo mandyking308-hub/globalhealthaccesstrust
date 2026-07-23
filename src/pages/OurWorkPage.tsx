@@ -7,87 +7,102 @@ export const OurWorkPage = () => {
     <ContentLayout>
       <SEO
         title="Our Work"
-        description="Explore the five funding pillars of the Global Health Access Trust: ethical healthcare access, capacity building, systems strengthening, research, and emergency relief."
+        description="Explore six areas of work developed by the Global Health Access Trust: healthcare access, clinical networks, health systems, responsible AI, research and humanitarian response."
         canonical="/our-work"
       />
       <h1>Our Work</h1>
       
       <p className="featured-text">"We do not fund moments. We fund movements."</p>
 
-      <p>The Global Health Access Trust was founded to advance lawful, measurable, and dignified access to healthcare—particularly for those outside the reach of stable systems or statutory support.</p>
-      <p>Our work is guided by five legally defined funding pillars and is delivered through trusted partners, registered institutions, and internationally recognised frameworks.</p>
+      <p>The Global Health Access Trust develops and supports defined projects that advance health, relieve illness and preserve life—particularly where stable systems are absent, failing or inaccessible.</p>
+      <p>Our work brings together clinical expertise, human capability, responsible artificial intelligence, essential infrastructure, trusted local relationships and accountable funding.</p>
+      <p>The Trust organises this work across six interconnected areas. Every project must demonstrate a clear route to public benefit and remain within the Trust's charitable purpose.</p>
       <p>We prioritise impact over volume, and depth over display.</p>
 
       <div className="section-container">
         <h2>1. Ethical Access to Healthcare</h2>
-        <p>We fund and facilitate initiatives that deliver healthcare access in areas where need is urgent and provision is absent, under strain, or unjustly withheld. We focus on:</p>
+        <p>We develop and support lawful interventions where access to care is absent, delayed, unaffordable or under severe pressure. This may include:</p>
         <ul>
-          <li>Subsidised treatment for excluded individuals</li>
-          <li>Support for mobile clinics and field hospitals</li>
-          <li>Legal funding for cross-border healthcare needs</li>
-          <li>Strategic access to diagnostics, supplies, and medicines</li>
+          <li>Treatment for excluded or vulnerable individuals</li>
+          <li>Mobile clinics, field services and local clinical provision</li>
+          <li>Lawful access to specialist knowledge or care across borders</li>
+          <li>Diagnostics, medicines, equipment and essential supplies</li>
         </ul>
       </div>
 
       <div className="section-container">
-        <h2>2. Building Capacity, Not Dependency</h2>
-        <p>Rather than funding dependence, we invest in training the next generation of carers and clinicians. Our work includes:</p>
+        <h2>2. Clinical Networks &amp; Human Capability</h2>
+        <p>Lasting health outcomes depend upon people and institutions able to continue the work. Projects may support:</p>
         <ul>
-          <li>Bursaries for medical and public health students</li>
-          <li>Training for mental health and trauma professionals</li>
-          <li>Capacity-building for systems delivery and leadership</li>
-          <li>Legal and cultural training in rights-based healthcare models</li>
+          <li>Clinical networks and access to specialist professional expertise</li>
+          <li>Education and training for clinicians, carers and community teams</li>
+          <li>Mental health, trauma and neurodiversity capability</li>
+          <li>Mentoring, knowledge transfer and local professional leadership</li>
         </ul>
       </div>
 
       <div className="section-container">
-        <h2>3. Strengthening Health Systems</h2>
-        <p>We support lawful development of healthcare systems and services that benefit the public—not corporations, campaigns, or governments. We act where:</p>
+        <h2>3. Health Systems &amp; Essential Infrastructure</h2>
+        <p>Healthcare depends upon reliable facilities, supply arrangements and supporting systems. Where directly connected to health and public benefit, projects may support:</p>
         <ul>
-          <li>Public systems have collapsed</li>
-          <li>Private access is inequitable</li>
-          <li>Infrastructure is failing</li>
-          <li>Emergency provisions are unsustainable</li>
+          <li>Clinical and community facilities</li>
+          <li>Medicine, equipment, food and essential supply systems</li>
+          <li>Safe accommodation and healthy environments required for treatment, recovery or prevention</li>
+          <li>Operational coordination, logistics and local service continuity</li>
         </ul>
       </div>
 
       <div className="section-container">
-        <h2>4. Legal Scholarship & Strategic Reform</h2>
-        <p>Justice is foundational to health. We fund legal and policy work that strengthens the systems meant to protect life. This includes:</p>
+        <h2>4. Responsible AI &amp; Health Intelligence</h2>
+        <p>The Trust develops and applies responsible technology where it can strengthen health, human capability and the systems on which communities depend. Projects may include:</p>
         <ul>
-          <li>Impact evaluations and system audits</li>
-          <li>Public health policy research</li>
-          <li>Access-to-care legal advocacy</li>
-          <li>Support for rights-based constitutional development</li>
+          <li>Intelligence systems that identify needs, risks and service gaps</li>
+          <li>Tools that support clinicians, community teams and local decision-makers</li>
+          <li>Coordination of food, medicine, logistics and essential supplies</li>
+          <li>Evidence capture, early warning and accountable project reporting</li>
+          <li>Education, neurodiversity and skills initiatives supported by artificial intelligence</li>
+        </ul>
+        <p>Technology is used to expand human capability, not remove human responsibility. Clinical judgment, local leadership, safeguarding and trustee oversight remain central.</p>
+      </div>
+
+      <div className="section-container">
+        <h2>5. Evidence, Research &amp; Strategic Reform</h2>
+        <p>Evidence supports better delivery, stronger accountability and the removal of barriers to care. The Trust may support:</p>
+        <ul>
+          <li>Health-needs assessments, impact evaluations and system reviews</li>
+          <li>Public-health and healthcare-access research</li>
+          <li>Lawful policy and legal work addressing barriers to care</li>
+          <li>Practical research into responsible technology and stronger health services</li>
         </ul>
       </div>
 
       <div className="section-container">
-        <h2>5. Responding to Humanitarian Collapse</h2>
-        <p>When systems fail, we act. Our emergency relief protocols allow us to deliver healthcare aid through trusted, lawful, and auditable partners during:</p>
+        <h2>6. Humanitarian &amp; War-Affected Response</h2>
+        <p>Where conflict, disaster or institutional failure removes access to essential services, the Trust may support coordinated, lawful and auditable interventions involving:</p>
         <ul>
-          <li>Armed conflict</li>
-          <li>Border-zone healthcare voids</li>
-          <li>Disease outbreak or systemic collapse</li>
-          <li>Natural disasters and refugee crises</li>
+          <li>Clinical aid and essential health supplies</li>
+          <li>Field facilities and integrated service-centre capability</li>
+          <li>Food, hygiene and safe space where directly required to protect health or life</li>
+          <li>Trusted local partners, logistics and communications</li>
         </ul>
       </div>
 
       <div className="section-container">
         <h2>Readiness, Not Reaction</h2>
-        <p>The Trust is committed to deploying funds strategically, not reactively. All interventions are:</p>
+        <p>The Trust does not equate urgency with disorder. Each intervention is developed with:</p>
         <ul>
-          <li>Lawful and apolitical</li>
-          <li>Delivered through formal due diligence</li>
-          <li>Audited, reviewed, and governed with strict neutrality</li>
-          <li>Undertaken in the service of long-term public benefit</li>
+          <li>A clear charitable purpose and defined scope</li>
+          <li>Trustee approval and proportionate due diligence</li>
+          <li>A responsible team and safeguarding framework</li>
+          <li>Milestones, expenditure controls and evidence requirements</li>
+          <li>A route to sustained public benefit</li>
         </ul>
-        </div>
+      </div>
 
-        <div className="flex flex-wrap gap-4 mt-8">
-          <Link to="/support-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Support Our Work →</Link>
-          <Link to="/contact-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Contact the Trust →</Link>
-        </div>
+      <div className="flex flex-wrap gap-4 mt-8">
+        <Link to="/support-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Support Our Work →</Link>
+        <Link to="/contact-the-trust" className="inline-block text-sm font-medium text-primary hover:underline underline-offset-4">Contact the Trust →</Link>
+      </div>
     </ContentLayout>
   );
 };
