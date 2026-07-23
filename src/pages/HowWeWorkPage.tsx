@@ -6,87 +6,114 @@ export const HowWeWorkPage = () => {
     <ContentLayout>
       <SEO
         title="How We Work"
-        description="Learn about the operational methodology of the Global Health Access Trust — disciplined, legally compliant, and high-impact charitable activity."
+        description="How the Global Health Access Trust develops, commissions, approves, funds and oversees charitable projects through people, responsible technology and accountable evidence."
         canonical="/how-we-work"
       />
       <h1>How We Work</h1>
       
       <p className="featured-text">"Our method is measured. Our purpose is enduring."</p>
 
-      <p>The Global Health Access Trust exists to serve the public good through disciplined, legally compliant, and high-impact charitable activity. Our operations reflect a commitment to transparency, dignity, and careful stewardship.</p>
+      <p>The Global Health Access Trust develops projects around clearly defined needs. We bring together people, professional expertise, responsible technology, local knowledge and accountable funding to create practical routes to public benefit.</p>
+      <p>Projects move through disciplined stages of listening, scoping, approval, team formation, funding, delivery and evidence.</p>
 
       <div className="section-container">
-        <h2>1. Purpose-Led Programming</h2>
-        <p>All activities undertaken by the Trust must fall within our charitable objects and advance the public benefit as defined in law.</p>
-        <p>We do not chase trends. We do not dilute our mission.</p>
-        <p>We remain tightly focused on five defined areas:</p>
+        <h2>1. Purpose-Led Project Development</h2>
+        <p>Every project must advance health, relieve illness or preserve life and demonstrate a clear route to public benefit.</p>
+        <p>Before work begins, the Trust defines:</p>
         <ul>
-          <li>Access to healthcare</li>
-          <li>Professional capacity in care</li>
-          <li>Health systems strengthening</li>
-          <li>Research and public scholarship</li>
-          <li>Emergency relief</li>
+          <li>The need and intended health outcome</li>
+          <li>The people and communities the project exists to serve</li>
+          <li>The expertise, systems and resources required</li>
+          <li>The legal, safeguarding and delivery risks</li>
+          <li>The evidence by which progress will be assessed</li>
         </ul>
+        <p>Our six areas of work are set out on the Our Work page. They guide project development without limiting the Trust's ability to respond intelligently to complex needs.</p>
       </div>
 
       <div className="section-container">
-        <h2>2. Receiving and Reviewing Proposals</h2>
-        <p>The Trust does not accept unsolicited applications at this time.</p>
-        <p>We engage directly with pre-vetted individuals, institutions, or partners whose values align with our objectives.</p>
-        <p>When proposals are solicited, they are reviewed against:</p>
+        <h2>2. Creating and Commissioning Projects</h2>
+        <p>Supporters can create and submit a commissioned project directly through the Trust's secure donor dashboard.</p>
+        <p>The project form enables a supporter to define:</p>
         <ul>
-          <li>Relevance to our charitable mission</li>
-          <li>Legal permissibility under UK charity law</li>
-          <li>Demonstrable public benefit and sustainability</li>
-          <li>Governance integrity of the proposed partner</li>
+          <li>The project title and intended purpose</li>
+          <li>The region and country</li>
+          <li>The type of intervention</li>
+          <li>The people or need the project is intended to address</li>
+          <li>The proposed budget and level of urgency</li>
+          <li>An optional dedication or anonymity preference</li>
         </ul>
-        <p>Each review is documented and presented to Trustees for resolution.</p>
+        <p>Once submitted, the project enters the Trust's project system for scoping, due diligence and Trustee review. The Trust works with the supporter to test feasibility, define the charitable outcome, establish the delivery structure and agree appropriate milestones.</p>
+        <p>Approved projects can then be followed through the secure dashboard, including project agreements, messages, progress updates, evidence and financial information appropriate to the project.</p>
+        <p>The supporter creates and helps shape the project. Trustee approval, safeguarding, charitable purpose and control of charitable funds remain with the Trust.</p>
       </div>
 
       <div className="section-container">
-        <h2>3. Grant-Making Process</h2>
-        <p>Grants or allocations are:</p>
+        <h2>3. Scoping, Approval &amp; Funding</h2>
+        <p>The Trust may develop, commission, coordinate or fund a project. Not every project is structured as a conventional grant.</p>
+        <p>Before approval, the Trust establishes:</p>
         <ul>
-          <li>Approved only by formal resolution of the Board of Trustees</li>
-          <li>Issued under a Grant Agreement or Deed of Gift</li>
-          <li>Disbursed in stages, where appropriate, subject to progress reports</li>
-          <li>Audited post-implementation to ensure outcomes and compliance</li>
+          <li>A defined scope, budget and intended outcome</li>
+          <li>Proportionate due diligence on people, organisations and jurisdictions</li>
+          <li>Safeguarding, data-protection and risk requirements</li>
+          <li>Delivery responsibilities, milestones and evidence standards</li>
+          <li>The appropriate agreement and funding structure</li>
         </ul>
-        <p>We retain full discretion over the continuation, amendment, or withdrawal of support.</p>
+        <p>Projects and significant allocations require Trustee approval. Funding may be restricted to a particular project and released in stages where appropriate.</p>
       </div>
 
       <div className="section-container">
-        <h2>4. Partner Engagement</h2>
-        <p>The Trust works with:</p>
+        <h2>4. Teams &amp; Delivery Relationships</h2>
+        <p>The Trust forms teams around the requirements of each project. These may include:</p>
         <ul>
-          <li>Established institutions, including hospitals, NGOs, and universities</li>
-          <li>Governmental or intergovernmental agencies where lawful and appropriate</li>
-          <li>Faith-based or local community structures, especially in crisis settings</li>
+          <li>Clinicians and other professional specialists</li>
+          <li>Technologists, researchers and operational contributors</li>
+          <li>Hospitals, universities, charities and public institutions</li>
+          <li>Faith-based organisations and community structures</li>
+          <li>Local leaders, logistics providers and delivery partners</li>
         </ul>
-        <p>All partners must demonstrate:</p>
-        <ul>
-          <li>Legal registration and regulatory compliance</li>
-          <li>Safeguarding policies (if applicable)</li>
-          <li>Commitment to lawful, non-political service</li>
-        </ul>
-        <p className="featured-text">We are not a funding agency. We are a legacy institution. Partners must reflect that standard.</p>
+        <p>Due diligence is proportionate to the role and risk. Participants must demonstrate appropriate capability, integrity, safeguarding and legal compliance.</p>
+        <p>Contributors may remain publicly anonymous where confidentiality, professional discretion or personal safety requires it.</p>
       </div>
 
       <div className="section-container">
-        <h2>5. Independence and Discretion</h2>
+        <h2>5. Responsible AI &amp; Human Oversight</h2>
+        <p>Artificial intelligence may be used to identify needs, analyse information, support research, coordinate complex systems, improve logistics, develop solutions and strengthen evidence.</p>
+        <p>The Trust may also develop AI-enabled interventions as part of an approved charitable project.</p>
+        <p>Technology supports people; it does not displace responsibility. Clinical judgment, safeguarding decisions, local leadership, financial authority and Trustee accountability remain human responsibilities.</p>
+      </div>
+
+      <div className="section-container">
+        <h2>6. Evidence, Learning &amp; Accountability</h2>
+        <p>Each approved project is assigned milestones, reporting requirements and evidence standards proportionate to its scale and risk.</p>
+        <p>Records may include:</p>
+        <ul>
+          <li>Project decisions and approvals</li>
+          <li>Funding allocations and expenditure</li>
+          <li>Delivery milestones and field updates</li>
+          <li>Photographs, documents and other appropriate evidence</li>
+          <li>Risks, changes and lessons learned</li>
+        </ul>
+        <p>Donors receive appropriate project visibility through secure systems. Public reporting is provided where appropriate without compromising confidentiality, safeguarding, clinical responsibility or personal safety.</p>
+      </div>
+
+      <div className="section-container">
+        <h2>7. Independence, Confidentiality &amp; Dignity</h2>
         <p>The Trust does not:</p>
         <ul>
-          <li>Accept influence in exchange for funding</li>
-          <li>Engage in advocacy inconsistent with Charity Commission rules</li>
-          <li>Publicly name grant recipients unless agreed and appropriate</li>
-          <li>Enter partnerships that compromise its independence</li>
+          <li>Surrender Trustee authority in exchange for funding</li>
+          <li>Permit private benefit or inappropriate donor control</li>
+          <li>Enter relationships that compromise its charitable independence</li>
+          <li>Publish beneficiary, contributor or partner identities without an appropriate basis</li>
+          <li>Allow urgency, technology or publicity to override safeguarding and professional responsibility</li>
         </ul>
-        <p className="featured-text">We are built to endure. And with that comes the duty to act slowly, wisely, and with care.</p>
+        <p className="featured-text">We are built to endure. And with that comes the duty to act wisely, carefully and with purpose.</p>
       </div>
 
       <div className="section-container">
         <h2>Final Note</h2>
-        <p>We welcome confidential expressions of interest from organisations, institutions, or intermediaries with aligned values. However, partnership is not transactional. It is a shared commitment to legacy, legality, and the public good.</p>
+        <p>Supporters may fund existing work or create a new commissioned project through the secure donor dashboard.</p>
+        <p>Organisations, clinicians, communities and professional contributors may also approach the Trust with a defined need or delivery proposition.</p>
+        <p>Every project remains subject to charitable purpose, feasibility, safeguarding, due diligence and Trustee approval.</p>
       </div>
     </ContentLayout>
   );
