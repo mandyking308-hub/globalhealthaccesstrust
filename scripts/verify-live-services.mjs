@@ -1,8 +1,13 @@
+import { writeFileSync } from "node:fs";
+
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const anonKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const reportPath = "live-service-failures.txt";
 
 if (!supabaseUrl || !anonKey) {
-  console.error("Missing VITE_SUPABASE_URL or VITE_SUPABASE_PUBLISHABLE_KEY");
+  const report = "Live service checks failed:\n- Missing VITE_SUPABASE_URL or VITE_SUPABASE_PUBLISHABLE_KEY\n";
+  writeFileSync(reportPath, report, "utf8");
+  console.error(report);
   process.exit(1);
 }
 
@@ -73,8 +78,11 @@ await checkFunction("gocardless-create-flow", [200, 204]);
 await checkRpc("gocardless_enabled", {}, (payload) => typeof payload === "boolean");
 
 if (failures.length) {
-  console.error("Live service checks failed:\n- " + failures.join("\n- "));
+  const report = "Live service checks failed:\n- " + failures.join("\n- ") + "\n";
+  writeFileSync(reportPath, report, "utf8");
+  console.error(report);
   process.exit(1);
 }
 
+writeFileSync(reportPath, "Live service checks passed.\n", "utf8");
 console.log("Live service checks passed.");
