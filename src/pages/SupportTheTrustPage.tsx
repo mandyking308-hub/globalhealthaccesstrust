@@ -8,19 +8,36 @@ export const SupportTheTrustPage = () => {
     <ContentLayout>
       <SEO
         title="Support the Trust"
-        description="Support the Global Health Access Trust through donations, commissioned projects, restricted or institutional funding, and legacy giving."
+        description="Support the Global Health Access Trust with funding, time, expertise, equipment, premises, technology, services, relationships, commissioned projects or legacy giving."
         canonical="/support-the-trust"
       />
       <h1>Support the Trust</h1>
-      
-      <p className="featured-text">"Support may begin with a contribution, a commissioned project or a long-term institutional relationship. Every form of support is governed with the same care."</p>
 
-      <p>Supporters can contribute to the Trust's existing work, create and commission a new project through the secure donor dashboard, or discuss institutional, restricted or legacy support.</p>
-      <p>Every contribution must advance the Trust's charitable purpose and remains subject to appropriate financial controls, gift acceptance, due diligence and Trustee oversight.</p>
+      <p className="featured-text">
+        Support may begin with funding, time, expertise, equipment, premises, relationships, a commissioned project or a long-term institutional commitment. Every form of support is governed with the same care.
+      </p>
+
+      <p>
+        Supporters may contribute to existing work, pledge practical or professional resources,
+        create and commission a new project through the secure donor dashboard, or discuss major,
+        restricted, institutional or legacy support.
+      </p>
+      <p>
+        Every accepted contribution must advance the Trust's charitable purposes and remains
+        subject to appropriate gift acceptance, due diligence, financial controls, safeguarding
+        and Trustee oversight.
+      </p>
 
       <div className="section-container">
         <h2>Engagement Process</h2>
-        <p>The route depends on the type of support. Individual donations can be made through the website. Commissioned projects are created through the secure donor dashboard. Major, institutional, restricted and legacy gifts may require direct engagement and additional documentation.</p>
+        <p>
+          The route depends on the contribution. A supporter may pledge money, time, expertise,
+          equipment, premises, technology, services, logistics or relationships for the Trust to
+          review. Supporters ready to make a financial contribution may use the secure funding
+          process. Commissioned projects are created through the donor dashboard. Major,
+          institutional, restricted and legacy contributions may require direct engagement and
+          additional documentation.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
@@ -28,28 +45,39 @@ export const SupportTheTrustPage = () => {
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 1</span>
           <h3 className="my-2 text-foreground">Choose How to Support</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Supporters may make a general donation, support an existing area of work, create a commissioned project, or approach the Trust regarding institutional, restricted or legacy support.
+            Offer funding, time, expertise, equipment, premises, technology, operational support,
+            relationships or a combination of resources. You may also support an approved area of
+            work, commission a new project or discuss legacy and institutional support.
           </p>
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 2</span>
-          <h3 className="my-2 text-foreground">Submit Securely</h3>
+          <h3 className="my-2 text-foreground">Pledge or Contribute Securely</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Donations are made through the approved payment process. Commissioned projects are submitted through the donor dashboard with the proposed location, intervention, purpose, budget and urgency.
+            A pledge records an expression of interest for review and follow-up. Financial
+            contributions use the approved secure funding process. Commissioned-project
+            propositions are submitted through the donor dashboard with the proposed need,
+            location, purpose, resources, budget and timing.
           </p>
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 3</span>
           <h3 className="my-2 text-foreground">Review &amp; Approval</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Commissioned projects, restricted gifts and significant funding relationships are reviewed for charitable purpose, feasibility, safeguarding, due diligence and financial risk. Appropriate agreements and reporting arrangements are established where required.
+            Proposed gifts, resources, commissioned projects, restrictions and significant
+            relationships are reviewed for charitable purpose, suitability, feasibility,
+            safeguarding, due diligence, financial risk and the total cost of acceptance.
+            Appropriate agreements are established where required.
           </p>
         </div>
         <div className="section-container">
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">Step 4</span>
-          <h3 className="my-2 text-foreground">Stewardship &amp; Visibility</h3>
+          <h3 className="my-2 text-foreground">Acceptance, Stewardship &amp; Visibility</h3>
           <p className="text-[15px] text-muted-foreground leading-[1.7]">
-            Contributions are recorded and applied to approved charitable purposes. Supporters receive appropriate acknowledgements, project information, milestones, evidence and financial visibility through secure systems where applicable.
+            A contribution is recorded only after formal acceptance and, where applicable,
+            receipt or transfer. Supporters receive appropriate acknowledgement, project
+            information, milestones, evidence and financial visibility through secure systems
+            where relevant.
           </p>
         </div>
       </div>
@@ -71,13 +99,13 @@ export const SupportTheTrustPage = () => {
           <li>Be recorded separately and applied only to the agreed purpose</li>
           <li>Permit an appropriate alternative charitable use if the original purpose becomes impossible, unlawful or no longer effective</li>
         </ul>
-        <p>Supporters may express clear wishes and receive appropriate visibility, but responsibility for charitable funds remains with the Trustees.</p>
+        <p>Supporters may express clear wishes and receive appropriate visibility, but responsibility for charitable funds and resources remains with the Trustees.</p>
       </div>
 
       <div className="section-container">
         <h2>Major Gifts, Family Offices &amp; Foundations</h2>
         <p>The Trust welcomes structured engagement with individuals, family offices, foundations and institutions seeking to support work at significant scale.</p>
-        <p>Arrangements may include major gifts, multi-year commitments, restricted project funding or endowment discussions, subject to due diligence, formal agreement and Board approval.</p>
+        <p>Arrangements may include major gifts, multi-year commitments, restricted project funding, equipment or infrastructure support, access to premises, professional capability or endowment discussions, subject to due diligence, formal agreement and Board approval.</p>
         <p>Recognition or project involvement does not confer governance authority, ownership of charitable work or control over Trustee decisions.</p>
       </div>
 
@@ -86,8 +114,8 @@ export const SupportTheTrustPage = () => {
         <p>Every accepted contribution is:</p>
         <ul>
           <li>Recorded and acknowledged</li>
-          <li>Allocated in accordance with its approved purpose</li>
-          <li>Supported by appropriate financial and expenditure records</li>
+          <li>Allocated or used in accordance with its approved purpose</li>
+          <li>Supported by appropriate financial, ownership, condition or delivery records</li>
           <li>Reported through secure or public channels proportionate to the contribution and project</li>
           <li>Protected by the Trust's financial controls and governance framework</li>
         </ul>
@@ -95,14 +123,14 @@ export const SupportTheTrustPage = () => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 mt-10">
-        <Link to="/donation-form">
-          <Button size="lg" variant="default">Make a Donation</Button>
+        <Link to="/donate">
+          <Button size="lg" variant="default">Pledge or Make a Contribution</Button>
         </Link>
-        <Link to="/donor-login">
-          <Button size="lg" variant="outline">Open Donor Portal</Button>
+        <Link to="/donation-form">
+          <Button size="lg" variant="outline">Make a Financial Contribution</Button>
         </Link>
         <Link to="/commission-projects">
-          <Button size="lg" variant="outline">Commission a Project</Button>
+          <Button size="lg" variant="outline">Commission a Public-Benefit Project</Button>
         </Link>
         <Link to="/contact-the-trust">
           <Button size="lg" variant="outline">Discuss Institutional or Legacy Support</Button>
