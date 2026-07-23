@@ -3,7 +3,7 @@ import { chromium } from "playwright";
 
 const baseURL = (process.env.SMOKE_BASE_URL || "http://127.0.0.1:4173").replace(/\/$/, "");
 const isProduction = /^https:\/\/(www\.)?globalhealthaccesstrust\.com$/i.test(baseURL);
-const supabaseURL = (process.env.VITE_SUPABASE_URL || "https://example.supabase.co").replace(/\/$/, "");
+const supabaseURL = "https://example.supabase.co";
 const browser = await chromium.launch({ headless: true });
 const failures = [];
 const checkedRoutes = new Set();
@@ -175,9 +175,7 @@ async function checkPage(route) {
       timeout: 45_000,
     });
 
-    if (!response || !response.ok()) {
-      failures.push(`${route}: HTTP ${response?.status() ?? "no response"}`);
-    }
+    if (!response || !response.ok()) failures.push(`${route}: HTTP ${response?.status() ?? "no response"}`);
 
     const title = await page.title();
     if (!title.trim()) failures.push(`${route}: missing document title`);
@@ -214,9 +212,7 @@ for (const route of retiredBlogRoutes) {
   const page = await browser.newPage();
   await page.goto(`${baseURL}${route}`, { waitUntil: "networkidle" });
   const bodyText = await page.locator("body").innerText();
-  if (!/page not found|404 — not found/i.test(bodyText)) {
-    failures.push(`${route}: removed Blog route is still reachable or redirecting`);
-  }
+  if (!/page not found|404 — not found/i.test(bodyText)) failures.push(`${route}: removed Blog route is still reachable or redirecting`);
   await page.close();
 }
 
@@ -256,13 +252,9 @@ for (const route of formRoutes) {
     const pdfResponse = await fetch(`${baseURL}/GHAT_Constitution_2025_Refined.pdf`);
     if (!pdfResponse.ok) failures.push(`/GHAT_Constitution_2025_Refined.pdf: HTTP ${pdfResponse.status}`);
     const contentType = pdfResponse.headers.get("content-type") || "";
-    if (!contentType.toLowerCase().includes("pdf")) {
-      failures.push(`/GHAT_Constitution_2025_Refined.pdf: unexpected content type ${contentType || "missing"}`);
-    }
+    if (!contentType.toLowerCase().includes("pdf")) failures.push(`/GHAT_Constitution_2025_Refined.pdf: unexpected content type ${contentType || "missing"}`);
     const bytes = Buffer.from(await pdfResponse.arrayBuffer());
-    if (bytes.subarray(0, 5).toString("ascii") !== "%PDF-") {
-      failures.push("/GHAT_Constitution_2025_Refined.pdf: file is not a valid PDF payload");
-    }
+    if (bytes.subarray(0, 5).toString("ascii") !== "%PDF-") failures.push("/GHAT_Constitution_2025_Refined.pdf: file is not a valid PDF payload");
   } catch (error) {
     failures.push(`/GHAT_Constitution_2025_Refined.pdf: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -376,23 +368,15 @@ async function installDummySupabase(page, persona) {
       await route.fulfill({ status: 204, headers: corsHeaders, body: "" });
       return;
     }
-
     if (url.pathname.includes("/auth/v1/user")) {
       await route.fulfill({ status: 200, headers: corsHeaders, body: JSON.stringify(session.user) });
       return;
     }
-
     if (url.pathname.includes("/auth/v1/token")) {
       await route.fulfill({ status: 200, headers: corsHeaders, body: JSON.stringify(session) });
       return;
     }
-
-    if (url.pathname.includes("/rest/v1/rpc/")) {
-      await route.fulfill({ status: 200, headers: corsHeaders, body: "[]" });
-      return;
-    }
-
-    if (url.pathname.includes("/storage/v1/")) {
+    if (url.pathname.includes("/rest/v1/rpc/") || url.pathname.includes("/storage/v1/")) {
       await route.fulfill({ status: 200, headers: corsHeaders, body: "[]" });
       return;
     }
@@ -401,19 +385,12 @@ async function installDummySupabase(page, persona) {
     const table = tableMatch?.[1] || "";
     const accept = request.headers().accept || "";
     const singular = accept.includes("application/vnd.pgrst.object+json");
-
     let data = singular ? {} : [];
+
     if (table === "user_roles") {
       data = singular ? { role: persona === "admin" ? "super_admin" : persona } : [{ role: persona === "admin" ? "super_admin" : persona }];
     } else if (table === "profiles") {
-      const profile = {
-        id: session.user.id,
-        first_name: "Test",
-        last_name: persona,
-        email: session.user.email,
-        phone: "+44 0000 000000",
-        country: "United Kingdom",
-      };
+      const profile = { id: session.user.id, first_name: "Test", last_name: persona, email: session.user.email, phone: "+44 0000 000000", country: "United Kingdom" };
       data = singular ? profile : [profile];
     } else if (table === "volunteers") {
       const volunteer = {
@@ -428,19 +405,14 @@ async function installDummySupabase(page, persona) {
       };
       data = singular ? volunteer : [volunteer];
     } else if (table === "onboarding_status") {
-      const onboarding = {
-        donor_onboarding_complete: true,
-        volunteer_onboarding_complete: true,
-        admin_onboarding_complete: true,
-      };
+      const onboarding = { donor_onboarding_complete: true, volunteer_onboarding_complete: true, admin_onboarding_complete: true };
       data = singular ? onboarding : [onboarding];
     }
 
-    const body = method === "HEAD" ? "" : JSON.stringify(data);
     await route.fulfill({
       status: 200,
       headers: { ...corsHeaders, "content-range": "0-0/0", preference: "return=representation" },
-      body,
+      body: method === "HEAD" ? "" : JSON.stringify(data),
     });
   });
 }
@@ -532,9 +504,7 @@ if (!isProduction) {
     } else {
       const sitemap = await response.text();
       for (const route of requiredSitemapRoutes) {
-        if (!sitemap.includes(`${baseURL}${route}`) && !sitemap.includes(`https://globalhealthaccesstrust.com${route}`)) {
-          failures.push(`/sitemap.xml: missing ${route}`);
-        }
+        if (!sitemap.includes(`${baseURL}${route}`) && !sitemap.includes(`https://globalhealthaccesstrust.com${route}`)) failures.push(`/sitemap.xml: missing ${route}`);
       }
       for (const privateRoute of ["/auth", "/donor-dashboard", "/volunteer-dashboard", "/admin/dashboard", "/blog"]) {
         if (sitemap.includes(privateRoute)) failures.push(`/sitemap.xml: private or removed route exposed: ${privateRoute}`);
