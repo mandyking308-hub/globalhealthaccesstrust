@@ -151,11 +151,7 @@ function collectRuntimeErrors(page) {
   page.on("console", (message) => {
     if (message.type() !== "error") return;
     const text = message.text();
-    if (
-      !text.includes("Failed to load resource") &&
-      !text.includes("ERR_NAME_NOT_RESOLVED") &&
-      !text.includes("example.supabase.co")
-    ) {
+    if (!text.includes("Failed to load resource") && !text.includes("ERR_NAME_NOT_RESOLVED") && !text.includes("example.supabase.co")) {
       consoleErrors.push(text);
     }
   });
@@ -165,24 +161,14 @@ function collectRuntimeErrors(page) {
 async function checkPage(route) {
   if (checkedRoutes.has(route)) return;
   checkedRoutes.add(route);
-
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const { pageErrors, consoleErrors } = collectRuntimeErrors(page);
-
   try {
-    const response = await page.goto(`${baseURL}${route}`, {
-      waitUntil: "networkidle",
-      timeout: 45_000,
-    });
-
+    const response = await page.goto(`${baseURL}${route}`, { waitUntil: "networkidle", timeout: 45_000 });
     if (!response || !response.ok()) failures.push(`${route}: HTTP ${response?.status() ?? "no response"}`);
-
     const title = await page.title();
     if (!title.trim()) failures.push(`${route}: missing document title`);
-
-    const main = page.locator("main");
-    if ((await main.count()) === 0) failures.push(`${route}: missing <main> landmark`);
-
+    if ((await page.locator("main").count()) === 0) failures.push(`${route}: missing <main> landmark`);
     const bodyText = (await page.locator("body").innerText()).trim();
     if (bodyText.length < 40) failures.push(`${route}: page rendered almost no content`);
     if (/page not found|404 — not found/i.test(bodyText)) failures.push(`${route}: rendered the not-found page`);
@@ -191,12 +177,14 @@ async function checkPage(route) {
       buttons.filter((button) => {
         const text = (button.textContent || "").trim();
         const aria = button.getAttribute("aria-label") || "";
+        const labelledBy = button.getAttribute("aria-labelledby") || "";
         const title = button.getAttribute("title") || "";
-        return !text && !aria && !title;
+        const externalLabel = button.id ? document.querySelector(`label[for="${CSS.escape(button.id)}"]`)?.textContent?.trim() || "" : "";
+        const wrappingLabel = button.closest("label")?.textContent?.trim() || "";
+        return !text && !aria && !labelledBy && !title && !externalLabel && !wrappingLabel;
       }).length,
     );
     if (unnamedButtons > 0) failures.push(`${route}: ${unnamedButtons} button(s) have no accessible name`);
-
     if (pageErrors.length) failures.push(`${route}: page errors: ${pageErrors.join(" | ")}`);
     if (consoleErrors.length) failures.push(`${route}: console errors: ${consoleErrors.join(" | ")}`);
   } catch (error) {
@@ -228,14 +216,19 @@ for (const [from, expected] of redirectExpectations) {
 for (const route of formRoutes) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 1000 } });
   await page.goto(`${baseURL}${route}`, { waitUntil: "networkidle" });
-  const formCount = await page.locator("form").count();
-  if (formCount < 1) failures.push(`${route}: expected public form is missing`);
-  const submitCount = await page.locator('button[type="submit"], input[type="submit"]').count();
-  if (submitCount < 1) failures.push(`${route}: form submit control is missing`);
+  if ((await page.locator("form").count()) < 1) failures.push(`${route}: expected public form is missing`);
+  if ((await page.locator('button[type="submit"], input[type="submit"]').count()) < 1) failures.push(`${route}: form submit control is missing`);
   const invalidRequired = await page.locator("[required]").evaluateAll((fields) =>
-    fields.filter((field) => !field.getAttribute("name") && !field.getAttribute("id")).length,
+    fields.filter((field) => {
+      const id = field.getAttribute("id") || "";
+      const name = field.getAttribute("name") || "";
+      const aria = field.getAttribute("aria-label") || field.getAttribute("aria-labelledby") || "";
+      const externalLabel = id ? document.querySelector(`label[for="${CSS.escape(id)}"]`)?.textContent?.trim() || "" : "";
+      const wrappingLabel = field.closest("label")?.textContent?.trim() || "";
+      return !id && !name && !aria && !externalLabel && !wrappingLabel;
+    }).length,
   );
-  if (invalidRequired > 0) failures.push(`${route}: ${invalidRequired} required field(s) lack an id or name`);
+  if (invalidRequired > 0) failures.push(`${route}: ${invalidRequired} required field(s) lack an accessible identifier`);
   await page.close();
 }
 
@@ -244,10 +237,8 @@ for (const route of formRoutes) {
   await page.goto(`${baseURL}/constitution`, { waitUntil: "networkidle" });
   const signedHeading = await page.getByRole("heading", { name: /Constitution \(Signed\)/i }).isVisible().catch(() => false);
   if (!signedHeading) failures.push("/constitution: signed Constitution heading is missing");
-  const pdfLinks = page.locator('a[href="/GHAT_Constitution_2025_Refined.pdf"]');
-  if ((await pdfLinks.count()) < 1) failures.push("/constitution: signed PDF link is missing");
+  if ((await page.locator('a[href="/GHAT_Constitution_2025_Refined.pdf"]').count()) < 1) failures.push("/constitution: signed PDF link is missing");
   await page.close();
-
   try {
     const pdfResponse = await fetch(`${baseURL}/GHAT_Constitution_2025_Refined.pdf`);
     if (!pdfResponse.ok) failures.push(`/GHAT_Constitution_2025_Refined.pdf: HTTP ${pdfResponse.status}`);
@@ -335,25 +326,14 @@ function makeDummySession(persona) {
     created_at: new Date().toISOString(),
   };
   const accessToken = `${base64url({ alg: "HS256", typ: "JWT" })}.${base64url({ sub: user.id, aud: "authenticated", role: "authenticated", email: user.email, exp: now + 7200, iat: now })}.test-signature`;
-  return {
-    access_token: accessToken,
-    refresh_token: "test-refresh-token",
-    token_type: "bearer",
-    expires_in: 7200,
-    expires_at: now + 7200,
-    user,
-  };
+  return { access_token: accessToken, refresh_token: "test-refresh-token", token_type: "bearer", expires_in: 7200, expires_at: now + 7200, user };
 }
 
 async function installDummySupabase(page, persona) {
   const session = makeDummySession(persona);
   const projectRef = new URL(supabaseURL).hostname.split(".")[0];
   const storageKey = `sb-${projectRef}-auth-token`;
-  await page.addInitScript(({ key, value }) => localStorage.setItem(key, JSON.stringify(value)), {
-    key: storageKey,
-    value: session,
-  });
-
+  await page.addInitScript(({ key, value }) => localStorage.setItem(key, JSON.stringify(value)), { key: storageKey, value: session });
   await page.route(`${supabaseURL}/**`, async (route) => {
     const request = route.request();
     const url = new URL(request.url());
@@ -363,7 +343,6 @@ async function installDummySupabase(page, persona) {
       "access-control-allow-headers": "authorization, apikey, content-type, prefer, x-client-info",
       "content-type": "application/json",
     };
-
     if (method === "OPTIONS") {
       await route.fulfill({ status: 204, headers: corsHeaders, body: "" });
       return;
@@ -386,11 +365,19 @@ async function installDummySupabase(page, persona) {
     const accept = request.headers().accept || "";
     const singular = accept.includes("application/vnd.pgrst.object+json");
     let data = singular ? {} : [];
-
     if (table === "user_roles") {
       data = singular ? { role: persona === "admin" ? "super_admin" : persona } : [{ role: persona === "admin" ? "super_admin" : persona }];
     } else if (table === "profiles") {
-      const profile = { id: session.user.id, first_name: "Test", last_name: persona, email: session.user.email, phone: "+44 0000 000000", country: "United Kingdom" };
+      const profile = {
+        id: session.user.id,
+        first_name: "Test",
+        last_name: persona,
+        email: session.user.email,
+        phone: "+44 0000 000000",
+        country: "United Kingdom",
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
       data = singular ? profile : [profile];
     } else if (table === "volunteers") {
       const volunteer = {
@@ -399,16 +386,24 @@ async function installDummySupabase(page, persona) {
         name: "Test Project Team Member",
         email: session.user.email,
         status: "approved",
+        phone: "+44 0000 000000",
+        country: "United Kingdom",
         skills: "Clinical, operational and technical support",
         experience: "Dummy record used only by the automated dashboard smoke test.",
+        languages: "English",
         cv_url: "",
+        notes: null,
+        availability: "Project-based",
+        area_of_interest: "Healthcare Access and Health Systems",
+        motivation: "Automated test fixture",
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
       };
       data = singular ? volunteer : [volunteer];
     } else if (table === "onboarding_status") {
       const onboarding = { donor_onboarding_complete: true, volunteer_onboarding_complete: true, admin_onboarding_complete: true };
       data = singular ? onboarding : [onboarding];
     }
-
     await route.fulfill({
       status: 200,
       headers: { ...corsHeaders, "content-range": "0-0/0", preference: "return=representation" },
@@ -430,7 +425,6 @@ async function checkDummyDashboard(route, persona, headingPattern, tabs = false)
     const body = await page.locator("body").innerText();
     if (/page not found|404 — not found/i.test(body)) failures.push(`${route}: authenticated dashboard rendered not-found page`);
     if (/^Loading\.\.\.$/m.test(body)) failures.push(`${route}: authenticated dashboard remained stuck on Loading`);
-
     if (tabs) {
       const tabButtons = page.getByRole("tab");
       const count = await tabButtons.count();
@@ -442,7 +436,6 @@ async function checkDummyDashboard(route, persona, headingPattern, tabs = false)
         }
       }
     }
-
     if (pageErrors.length) failures.push(`${route}: dummy-data page errors: ${pageErrors.join(" | ")}`);
     if (consoleErrors.length) failures.push(`${route}: dummy-data console errors: ${consoleErrors.join(" | ")}`);
   } catch (error) {
@@ -476,14 +469,12 @@ if (!isProduction) {
     }
     await page.close();
   }
-
   const known = new Set([
     ...publicRoutes,
     ...protectedRoutes,
     ...redirectExpectations.map(([from]) => from),
     ...redirectExpectations.map(([, to]) => to.split("#")[0]),
   ]);
-
   for (const destination of internalLinks) {
     const pathname = new URL(destination, baseURL).pathname;
     if (/\.(pdf|png|jpe?g|webp|svg|ico|xml|txt)$/i.test(pathname)) {
