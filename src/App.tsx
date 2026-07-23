@@ -11,7 +11,6 @@ import { VolunteersPage } from "./pages/VolunteersPage";
 import { VolunteerDashboardPage } from "./pages/VolunteerDashboardPage";
 import { CommissionProjectsPage } from "./pages/CommissionProjectsPage";
 import { HomePage } from "./pages/HomePage";
-import { AboutPage } from "./pages/AboutPage";
 import { AboutTheTrustPage } from "./pages/AboutTheTrustPage";
 import { TrusteeBiographiesPage } from "./pages/TrusteeBiographiesPage";
 import { GovernanceLegalFrameworkPage } from "./pages/GovernanceLegalFrameworkPage";
@@ -21,7 +20,6 @@ import { DonorRecognitionPage } from "./pages/DonorRecognitionPage";
 import { SupportTheTrustPage } from "./pages/SupportTheTrustPage";
 import { FrequentlyAskedQuestionsPage } from "./pages/FrequentlyAskedQuestionsPage";
 import { ContactTheTrustPage } from "./pages/ContactTheTrustPage";
-import { WhatWeDoPage } from "./pages/WhatWeDoPage";
 import { BlogIndexPage } from "./pages/BlogIndexPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { GetInvolvedPage } from "./pages/GetInvolvedPage";
@@ -127,8 +125,8 @@ const App = () => (
             <Route path="donor-recognition" element={<DonorRecognitionPage />} />
             <Route path="frequently-asked-questions" element={<FrequentlyAskedQuestionsPage />} />
             <Route path="contact-the-trust" element={<ContactTheTrustPage />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="what-we-do" element={<WhatWeDoPage />} />
+            <Route path="about" element={<Navigate to="/about-the-trust" replace />} />
+            <Route path="what-we-do" element={<Navigate to="/our-work" replace />} />
             <Route path="blog" element={<BlogIndexPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="get-involved" element={<GetInvolvedPage />} />
