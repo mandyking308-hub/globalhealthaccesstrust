@@ -14,7 +14,7 @@ export const HomePage = () => {
     <>
       <SEO
         title="Global Health Access Trust"
-        description="A private charitable trust directing capital into healthcare access, system infrastructure, and capacity building where it is most critically needed."
+        description="A charitable trust building the systems that make healthcare possible by aligning clinical expertise, essential infrastructure, responsible technology and capital."
         canonical="/"
         schema={organizationSchema}
       />
@@ -33,8 +33,11 @@ export const HomePage = () => {
                   </span>
                 </div>
                 <h1 className="text-foreground">
-                  The Global Health Access Trust directs capital where healthcare is most critically needed.
+                  The Global Health Access Trust builds the systems that make healthcare possible.
                 </h1>
+                <p className="mt-8 max-w-[560px] text-lg md:text-xl leading-relaxed text-foreground/80">
+                  Aligning clinical expertise, essential infrastructure, responsible technology and capital where need is greatest.
+                </p>
                 <div className="mt-12">
                   <Link
                     to="/about-the-trust"
@@ -61,9 +64,9 @@ export const HomePage = () => {
         {/* Impact Statistics — three-column bordered archive band */}
         <section className="grid grid-cols-1 md:grid-cols-3 border-b border-foreground/10 bg-background">
           {[
-            { cat: "Reach", n: "12", label: "Countries Reached", d: "Deploying structured funding into healthcare access across sovereign nations in crisis." },
-            { cat: "Network", n: "40+", label: "Delivery Partners", d: "Vetted networks of clinical, academic, and delivery organisations operating in-field." },
-            { cat: "Investment", n: "2019", label: "Established", d: "Independent, audited philanthropic capital committed to lawful ethical interventions." },
+            { cat: "Reach", n: "12", label: "Countries Reached", d: "Practical work and professional relationships across twelve countries." },
+            { cat: "Network", n: "40+", label: "Delivery Relationships", d: "Clinical, technical, faith-based and community relationships supporting delivery." },
+            { cat: "Development", n: "2019", label: "Network Expansion", d: "The point at which longstanding work began developing into a coordinated international network." },
           ].map((s, i) => (
             <div
               key={s.cat}
@@ -98,7 +101,7 @@ export const HomePage = () => {
               className="text-foreground"
               style={{ fontSize: "clamp(24px, 2.9vw, 42px)", lineHeight: 1.12, fontWeight: 800, letterSpacing: "-0.008em", textTransform: "uppercase" }}
             >
-              Health is the foundation of every open society. Where conflict, displacement and system collapse remove that foundation, the Trust responds with structured, accountable capital.
+              The Trust builds on decades of voluntary, self-funded and pro bono service—now applied through larger, structured projects with clear purpose, oversight and evidence.
             </blockquote>
             <div className="mt-10">
               <p className="uppercase tracking-[0.25em] text-xs font-bold text-foreground">
@@ -116,12 +119,17 @@ export const HomePage = () => {
         {/* Reports from the Field — asymmetric 3-column archive grid */}
         <section className="p-6 md:p-16 lg:p-24 border-t border-foreground/10 bg-background">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
-            <h2
-              className="display-condensed text-foreground"
-              style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
-            >
-              Reports from<br />the Field
-            </h2>
+            <div className="max-w-3xl">
+              <h2
+                className="display-condensed text-foreground"
+                style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
+              >
+                Reports from<br />the Field
+              </h2>
+              <p className="mt-6 text-[16.5px] leading-relaxed text-muted-foreground">
+                Selected records of practical work, professional contribution and institutional learning. Identities are withheld where confidentiality, safety or professional discretion requires it.
+              </p>
+            </div>
             <Link
               to="/about-the-trust"
               className="text-xs uppercase tracking-[0.22em] font-bold text-foreground border-b border-foreground pb-2 hover:text-accent hover:border-accent transition-colors"
@@ -179,12 +187,12 @@ export const HomePage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div className="pt-8 border-t border-primary-foreground/25">
                     <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                      The Trust deploys capital into lawful, ethical interventions that expand access to healthcare for underserved populations.
+                      The Trust develops projects where clinical care is inseparable from land, infrastructure, education, food systems and human capability.
                     </p>
                   </div>
                   <div className="pt-8 border-t border-primary-foreground/25">
                     <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                      It operates through structured partnerships with health systems, academic institutions, and recognised delivery organisations across twelve countries.
+                      Technology, including artificial intelligence, strengthens research, coordination, logistics and evidence. Human judgment, local leadership and professional responsibility remain central.
                     </p>
                   </div>
                 </div>
@@ -209,7 +217,7 @@ export const HomePage = () => {
                 Approach
               </h2>
               <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px]">
-                Capital is deployed through structured, commission-based health interventions with defined scope, delivery oversight, and reporting.
+                Projects begin with a defined health need and proceed through disciplined scoping, partnership, delivery and evidence.
               </p>
             </div>
 
