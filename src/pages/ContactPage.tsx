@@ -140,11 +140,8 @@ export const ContactPage = () => {
         <div className="container-section">
           <div className="max-w-4xl mx-auto text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">Contact the Trust</h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed mb-5">
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
               Use this secure form for general enquiries, healthcare-access or system project propositions, professional contribution, organisational partnerships, funding discussions, legal or legacy matters and media enquiries.
-            </p>
-            <p className="text-base text-muted-foreground leading-relaxed">
-              The Trust enables better healthcare but is not a medical practice or clinical service. This form is not for diagnosis, treatment, prescribing, triage, personalised medical advice or emergencies.
             </p>
           </div>
         </div>
@@ -162,11 +159,8 @@ export const ContactPage = () => {
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   This form may be used by individuals, communities, professionals, organisations, supporters and advisers.
                 </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
+                <p className="text-muted-foreground leading-relaxed">
                   Existing donors and project commissioners should normally use secure dashboard messaging for matters relating to an existing contribution or project.
-                </p>
-                <p className="text-sm font-medium text-foreground leading-relaxed">
-                  Do not submit symptoms, medical records, treatment requests or detailed patient-identifying health information.
                 </p>
               </div>
 
@@ -222,7 +216,7 @@ export const ContactPage = () => {
                       Enquiries are reviewed and directed according to their nature, urgency and the appropriate governance, project or professional route.
                     </p>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                      Response times vary according to complexity and available capacity. The form is not an emergency or clinical service.
+                      Response times vary according to complexity and available capacity.
                     </p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       Urgent safeguarding matters and protected concerns must use the dedicated confidential reporting route.
@@ -237,14 +231,8 @@ export const ContactPage = () => {
                 <CardContent className="p-8">
                   <h2 className="text-2xl font-serif font-bold mb-3 text-left">Submit an Enquiry</h2>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-8">
-                    Complete the fields below as accurately and concisely as possible. Submission does not constitute project approval, appointment, partnership, funding acceptance, professional engagement or a clinical relationship.
+                    Complete the fields below as accurately and concisely as possible. Submission does not constitute project approval, appointment, partnership, funding acceptance or professional engagement.
                   </p>
-
-                  <Alert className="mb-8">
-                    <AlertDescription className="text-sm">
-                      <strong>Not a medical service:</strong> Do not use this form for symptoms, diagnosis, treatment, prescribing, triage, emergencies or the submission of medical records. Seek assistance from the appropriate local healthcare or emergency service.
-                    </AlertDescription>
-                  </Alert>
 
                   <form onSubmit={handleSubmit} className="space-y-10">
                     <input
