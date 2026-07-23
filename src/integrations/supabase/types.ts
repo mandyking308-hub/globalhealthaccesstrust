@@ -648,6 +648,24 @@ export type Database = {
           },
         ]
       }
+      contact_submission_attempts: {
+        Row: {
+          created_at: string
+          id: number
+          ip_hash: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          ip_hash: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          ip_hash?: string
+        }
+        Relationships: []
+      }
       cookie_consent_events: {
         Row: {
           action: string
