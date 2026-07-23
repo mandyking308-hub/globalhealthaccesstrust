@@ -10,6 +10,12 @@ import { Search } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { calculateDonorTier } from "@/utils/donorTiers";
 
+const formatActivityDate = (value?: string | null) => {
+  if (!value) return "—";
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString();
+};
+
 export const AdminDonorsPage = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(true);
@@ -37,11 +43,11 @@ export const AdminDonorsPage = () => {
               supabase.from("commissioned_projects").select("id", { count: "exact", head: true }).eq("donor_id", profile.id),
             ]);
 
-            const totalDonations = donationsRes.data?.reduce((sum, d) => sum + Number(d.amount), 0) || 0;
+            const totalDonations = donationsRes.data?.reduce((sum, donation) => sum + Number(donation.amount), 0) || 0;
             const tier = calculateDonorTier(totalDonations);
 
             return { ...profile, totalDonations, projectCount: projectsRes.count || 0, tier };
-          })
+          }),
         );
 
         setDonors(donorsWithData);
@@ -64,11 +70,11 @@ export const AdminDonorsPage = () => {
     setSelectedDonor(donor);
   };
 
-  const filteredDonors = donors.filter((d) =>
+  const filteredDonors = donors.filter((donor) =>
     searchTerm === "" ||
-    d.first_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    d.last_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    d.email?.toLowerCase().includes(searchTerm.toLowerCase())
+    donor.first_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    donor.last_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    donor.email?.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -82,7 +88,13 @@ export const AdminDonorsPage = () => {
         <CardHeader>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
-            <Input placeholder="Search donors..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10" />
+            <Input
+              aria-label="Search donors"
+              placeholder="Search donors..."
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              className="pl-10"
+            />
           </div>
         </CardHeader>
         <CardContent>
@@ -101,15 +113,15 @@ export const AdminDonorsPage = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredDonors.map((d) => (
-                  <TableRow key={d.id}>
-                    <TableCell className="font-medium">{d.first_name} {d.last_name}</TableCell>
-                    <TableCell>{d.email}</TableCell>
-                    <TableCell><Badge variant="outline">{d.tier}</Badge></TableCell>
-                    <TableCell>{d.projectCount}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{new Date(d.updated_at).toLocaleDateString()}</TableCell>
+                {filteredDonors.map((donor) => (
+                  <TableRow key={donor.id}>
+                    <TableCell className="font-medium">{donor.first_name} {donor.last_name}</TableCell>
+                    <TableCell>{donor.email}</TableCell>
+                    <TableCell><Badge variant="outline">{donor.tier?.name || "Unclassified"}</Badge></TableCell>
+                    <TableCell>{donor.projectCount}</TableCell>
+                    <TableCell className="text-sm text-muted-foreground">{formatActivityDate(donor.updated_at || donor.created_at)}</TableCell>
                     <TableCell className="text-right">
-                      <Button size="sm" variant="ghost" onClick={() => loadDonorDetails(d)}>
+                      <Button size="sm" variant="ghost" onClick={() => loadDonorDetails(donor)}>
                         View
                       </Button>
                     </TableCell>
@@ -135,7 +147,7 @@ export const AdminDonorsPage = () => {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Tier</p>
-                  <Badge>{selectedDonor.tier}</Badge>
+                  <Badge>{selectedDonor.tier?.name || "Unclassified"}</Badge>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Total Contributions</p>
@@ -153,16 +165,16 @@ export const AdminDonorsPage = () => {
                   <p className="text-muted-foreground text-center py-8">No projects</p>
                 ) : (
                   <div className="space-y-3">
-                    {donorProjects.map((p) => (
-                      <Card key={p.id}>
+                    {donorProjects.map((project) => (
+                      <Card key={project.id}>
                         <CardContent className="pt-4">
                           <div className="flex items-start justify-between">
                             <div>
-                              <h4 className="font-medium">{p.title}</h4>
-                              <p className="text-sm text-muted-foreground mt-1">{p.region} • {p.country}</p>
+                              <h4 className="font-medium">{project.title}</h4>
+                              <p className="text-sm text-muted-foreground mt-1">{project.region} • {project.country}</p>
                             </div>
-                            <Badge variant={p.status === "completed" ? "default" : p.status === "in_progress" ? "secondary" : "outline"}>
-                              {p.status}
+                            <Badge variant={project.status === "completed" ? "default" : project.status === "in_progress" ? "secondary" : "outline"}>
+                              {project.status}
                             </Badge>
                           </div>
                         </CardContent>
