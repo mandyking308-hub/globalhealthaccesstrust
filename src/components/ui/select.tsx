@@ -4,7 +4,12 @@ import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-const Select = SelectPrimitive.Root;
+type SelectProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>;
+
+const Select = ({ name, ...props }: SelectProps) => {
+  const generatedName = React.useId().replace(/:/g, "");
+  return <SelectPrimitive.Root name={name || `select-${generatedName}`} {...props} />;
+};
 
 const SelectGroup = SelectPrimitive.Group;
 
