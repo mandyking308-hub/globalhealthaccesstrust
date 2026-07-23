@@ -1,19 +1,19 @@
-// Constants for GHAT website
+// Shared, approved constants for the GHAT website.
 
 export const SITE_CONFIG = {
   name: "Global Health Access Trust",
   shortName: "GHAT",
-  description: "Access to health is justice — not charity.",
+  description: "A charitable trust that develops, funds and coordinates projects which enable better healthcare.",
   url: "https://globalhealthaccesstrust.com",
   address: {
     line1: "2 Harley Street",
     city: "London",
-    country: "England, United Kingdom"
+    country: "England, United Kingdom",
   },
   social: {
-    linkedin: "#",
-    twitter: "#"
-  }
+    linkedin: "",
+    twitter: "",
+  },
 } as const;
 
 export const NAVIGATION_ITEMS = [
@@ -22,218 +22,195 @@ export const NAVIGATION_ITEMS = [
     href: "/about-the-trust",
     submenu: [
       { label: "About the Trust", href: "/about-the-trust" },
-      { label: "Trustee Biographies", href: "/trustee-biographies" }
-    ]
+      { label: "Trustee Biographies", href: "/trustee-biographies" },
+    ],
   },
   {
-    label: "Governance", 
+    label: "Governance",
     href: "/governance-legal-framework",
     submenu: [
       { label: "Governance & Legal Framework", href: "/governance-legal-framework" },
-      { label: "Governance & Oversight", href: "/governance" }
-    ]
+      { label: "Governance & Oversight", href: "/governance" },
+    ],
   },
   {
     label: "Our Work",
-    href: "/our-work", 
+    href: "/our-work",
     submenu: [
       { label: "Our Work", href: "/our-work" },
-      { label: "How We Work", href: "/how-we-work" }
-    ]
+      { label: "How We Work", href: "/how-we-work" },
+    ],
   },
   {
     label: "Support",
     href: "/support-the-trust",
     submenu: [
       { label: "Support the Trust", href: "/support-the-trust" },
-      { label: "Donor Portal", href: "/donor-guide" },
-      { label: "Donor Recognition", href: "/donor-recognition" }
-    ]
+      { label: "Pledge a Contribution", href: "/donate" },
+      { label: "Donor Portal Guide", href: "/donor-guide" },
+      { label: "Donor Recognition", href: "/donor-recognition" },
+    ],
   },
   {
     label: "Help",
     href: "/frequently-asked-questions",
     submenu: [
       { label: "Frequently Asked Questions", href: "/frequently-asked-questions" },
-      { label: "Contact", href: "/contact-the-trust" }
-    ]
+      { label: "Contact", href: "/contact-the-trust" },
+    ],
   },
-  { label: "Blog", href: "/blog" }
 ] as const;
 
 export const FOOTER_SECTIONS = {
   quickLinks: [
     { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "What We Do", href: "/what-we-do" },
-    { label: "Impact", href: "/blog" },
+    { label: "About the Trust", href: "/about-the-trust" },
+    { label: "Our Work", href: "/our-work" },
+    { label: "How We Work", href: "/how-we-work" },
     { label: "Get Involved", href: "/get-involved" },
+    { label: "Support the Trust", href: "/support-the-trust" },
     { label: "Publications & Documents", href: "/publications" },
-    { label: "Contact", href: "/contact" }
+    { label: "Contact", href: "/contact-the-trust" },
   ],
   governance: [
-    { label: "Privacy Notice", href: "/privacy-policy" },
-    { label: "Cookie Policy", href: "/cookie-policy" },
-    { label: "Terms of Use", href: "/terms-of-use" },
+    { label: "Governance & Legal Framework", href: "/governance-legal-framework" },
+    { label: "Governance & Oversight", href: "/governance" },
+    { label: "Privacy Notice", href: "/legal/privacy-notice" },
+    { label: "Cookie Notice", href: "/cookie-policy" },
+    { label: "Terms of Use", href: "/legal/terms-of-use" },
     { label: "Accessibility Statement", href: "/accessibility-statement" },
     { label: "Safeguarding", href: "/safeguarding" },
-    { label: "Conflict of Interest", href: "/conflict-of-interest" },
     { label: "Financial Controls", href: "/financial-controls" },
     { label: "Risk Management", href: "/risk-management" },
+    { label: "Conflicts of Interest", href: "/conflict-of-interest" },
     { label: "Whistleblowing", href: "/whistleblowing" },
     { label: "Anti-Fraud & Anti-Corruption", href: "/anti-fraud" },
-    { label: "Governance & Oversight", href: "/governance" },
-    { label: "Constitution", href: "/constitution" }
-  ]
+    { label: "Trust Deed", href: "/constitution" },
+  ],
 } as const;
 
 export const IMPACT_STATS = [
   {
-    number: "Principled", 
-    label: "Governance",
-    description: "Independent oversight, ethical standards, and institutional accountability"
+    number: "12",
+    label: "Countries",
+    description: "Work, learning and relationships developed across twelve countries",
   },
   {
-    number: "Enduring",
-    label: "Legacy",
-    description: "Structured for long-term operation and intergenerational continuity"
+    number: "40+",
+    label: "Relationships",
+    description: "Delivery, professional and network relationships supporting public-benefit work",
   },
   {
-    number: "Uncompromising", 
-    label: "Mission",
-    description: "Healthcare access as a matter of justice, not discretion"
-  }
-];
+    number: "Thousands",
+    label: "Contributors",
+    description: "Clinicians and other contributors connected through professional networks",
+  },
+] as const;
 
 export const NEW_IMPACT_STATS = [
-  {
-    icon: "Globe",
-    text: "Operating across 12 countries with partnerships in over 100 jurisdictions"
-  },
-  {
-    icon: "Users",
-    text: "Connected to a network of 20,000+ health organisations"
-  },
-  {
-    icon: "Heart",
-    text: "Over 1 million individuals reached through funded programmes"
-  },
-  {
-    icon: "TrendingUp",
-    text: "85% of all contributions directed to frontline health delivery"
-  }
-];
+  { icon: "Globe", text: "Work, learning and relationships across 12 countries" },
+  { icon: "Users", text: "More than 40 delivery and network relationships" },
+  { icon: "Heart", text: "Thousands of clinicians and contributors connected through professional networks" },
+  { icon: "TrendingUp", text: "Public-benefit work spanning health, infrastructure, education, food systems and responsible technology" },
+] as const;
 
 export const PROGRAM_AREAS = [
   {
     id: "healthcare-access",
-    title: "Access to Healthcare and the Relief of Sickness",
+    title: "Healthcare Access and Health Systems",
     icon: "Heart",
-    description: "To relieve illness and preserve life by ensuring that individuals—regardless of geography, circumstance, or means—may access timely, ethical, and competent healthcare.",
+    description: "Projects that enable better healthcare by strengthening access, workforce capability, facilities, equipment, referral pathways and accountable health systems.",
     outcomes: [
-      "The provision or subsidisation of healthcare services to those who are excluded from adequate statutory provision",
-      "The support of clinical programmes and public health outreach initiatives in underserved or vulnerable communities", 
-      "The acquisition or funding of medical supplies, diagnostics, or technologies where there exists a demonstrable need",
-      "The establishment or enhancement of healthcare infrastructure in regions where such systems are absent, overwhelmed, or in crisis"
-    ]
+      "Improved access to appropriate healthcare through regulated providers",
+      "Stronger workforce, facilities, equipment and enabling infrastructure",
+      "Better coordination, referral, information and supply systems",
+    ],
   },
   {
-    id: "education-training", 
-    title: "Education and Professional Capacity in Health and Care",
-    icon: "Users",
-    description: "To advance education, particularly in the fields of medicine, public health, and healthcare delivery, through the support of individuals and institutions engaged in the formation and development of health professionals.",
+    id: "infrastructure-living-conditions",
+    title: "Infrastructure, Housing and Safe Living Conditions",
+    icon: "Building",
+    description: "Land, buildings, housing and essential infrastructure where these directly support health, safety, recovery, education, humanitarian relief or community resilience.",
     outcomes: [
-      "The provision of grants, bursaries, or scholarships to persons undertaking recognised training in medicine, nursing, allied health, public health, or mental health disciplines",
-      "The funding of training institutions or professional development programmes that enhance access, equity, or quality within health systems",
-      "The support of academic partnerships, exchanges, and vocational pathways aimed at building sustainable local healthcare capacity", 
-      "Collaboration with universities, hospitals, NGOs, or other lawful training entities"
-    ]
+      "Safer and more suitable living or working environments",
+      "Essential premises and infrastructure for public-benefit activity",
+      "Reduced health risks arising from unsafe or unstable conditions",
+    ],
   },
   {
-    id: "systems-strengthening",
-    title: "Health Systems Strengthening and Public Infrastructure Development", 
+    id: "food-water-systems",
+    title: "Food, Agriculture, Water and Essential Systems",
     icon: "Globe",
-    description: "To support the lawful development, maintenance, and strengthening of health systems and public institutions where access to care is compromised due to infrastructural fragility, displacement, underfunding, or systemic failure.",
+    description: "Work that strengthens food security, agriculture, nutrition, water, sanitation, utilities, storage and supply systems connected to health and dignified living.",
     outcomes: [
-      "The funding of clinics, records systems, logistics infrastructure, or mobile services in support of public health",
-      "Strategic collaboration with governmental, intergovernmental, or registered third-party organisations to deliver population-level health improvements",
-      "Support for lawful innovations that enhance transparency, delivery, or continuity in healthcare provision",
-      "Neutral, apolitical, and compliant assistance that does not undermine legitimate public institutions"
-    ]
+      "More resilient food and agricultural systems",
+      "Improved access to nutrition, safe water and sanitation",
+      "Better storage, logistics and availability of essential resources",
+    ],
   },
   {
-    id: "policy-research",
-    title: "Research, Legal Scholarship, and Public Benefit Policy Work",
-    icon: "TrendingUp", 
-    description: "To promote and fund research, legal inquiry, and the structured dissemination of knowledge that contributes to the understanding and resolution of health inequality, systems injustice, or the denial of access to care.",
+    id: "education-livelihoods",
+    title: "Education, Skills, Livelihoods and Human Capability",
+    icon: "Users",
+    description: "Education, training, professional development, employment pathways and enterprise capability where these relieve vulnerability and directly advance health and public benefit.",
     outcomes: [
-      "Commissioned legal or policy research examining the intersection of law, ethics, and health access",
-      "Collaboration with academic or governmental bodies to conduct impact studies, system audits, or human rights evaluations",
-      "Publication or broadcast of findings that serve to advance lawful policy reform, institutional accountability, or access to remedies",
-      "Research that serves exclusively charitable purposes without party-political activity or commercial interest"
-    ]
+      "Greater professional, practical and community capability",
+      "Sustainable livelihoods connected to health and resilience",
+      "Education and training that strengthen long-term public benefit",
+    ],
   },
   {
-    id: "emergency-relief",
-    title: "Emergency and Exceptional Relief",
+    id: "responsible-technology",
+    title: "Responsible AI, Technology and Data",
+    icon: "TrendingUp",
+    description: "Technology and artificial intelligence used to support research, coordination, evidence, communication, logistics and accountable delivery while keeping human judgment central.",
+    outcomes: [
+      "Better visibility, coordination and evidence",
+      "Technology that expands human capability rather than replacing responsibility",
+      "Secure and proportionate systems suited to the real project need",
+    ],
+  },
+  {
+    id: "humanitarian-reform",
+    title: "Humanitarian Response, Research and Systems Reform",
     icon: "ArrowRight",
-    description: "In circumstances of humanitarian emergency, systemic collapse, armed conflict, or public health disaster, the Trust may, upon formal resolution by the Board of Trustees, allocate funds to deliver time-sensitive or critical healthcare access.",
+    description: "Humanitarian support, community protection, research, legal inquiry and practical systems reform in settings affected by conflict, displacement, exclusion or serious institutional failure.",
     outcomes: [
-      "Emergency provision of medical services, supplies, or personnel",
-      "Collaboration with multilateral agencies (e.g. WHO, Red Cross) or recognised field partners",
-      "Support delivered via lawful ecclesiastical, faith-based, or diplomatic channels",
-      "Targeted assistance to displaced populations or border-zone healthcare voids that is apolitical, impartial, and compliant with international humanitarian law"
-    ]
-  }
-];
+      "Accountable support in urgent and conflict-affected settings",
+      "Protection and support for vulnerable communities",
+      "Research and reform that improve access, resilience and accountability",
+    ],
+  },
+] as const;
 
-export const TESTIMONIALS = [
-  {
-    quote: "The Trust's approach to capacity building has fundamentally changed how we think about sustainable healthcare development. Their focus on dignity and local ownership creates lasting change.",
-    author: "Dr. Patricia Mbeki",
-    role: "Regional Health Director",
-    organization: "East African Health Network"
-  },
-  {
-    quote: "What sets GHAT apart is their commitment to institutional integrity. Every partnership is built on mutual respect, transparency, and a shared commitment to healthcare justice.",
-    author: "Professor David Kumar", 
-    role: "Director of Global Health Policy",
-    organization: "South Asian Medical Institute"
-  },
-  {
-    quote: "In crisis situations, GHAT provides not just resources but genuine partnership. Their emergency response maintains the highest standards of care even under the most challenging circumstances.",
-    author: "Dr. Maria Santos",
-    role: "Emergency Response Coordinator", 
-    organization: "Latin American Crisis Response Network"
-  },
-  {
-    quote: "The research programmes supported by GHAT have directly influenced national health policy. Their commitment to evidence-based advocacy creates real change for communities.",
-    author: "Dr. Ahmed Hassan",
-    role: "Policy Research Lead",
-    organization: "MENA Health Policy Institute" 
-  }
-];
+// No testimonials are published unless they are genuine, approved and evidenced.
+export const TESTIMONIALS: Array<{
+  quote: string;
+  author: string;
+  role: string;
+  organization: string;
+}> = [];
 
 export const TRUSTEES = [
   {
-    name: "Professor Margaret Whitfield",
+    name: "Mandy King",
     role: "Chair of Trustees",
-    bio: "Former Director of Global Health at Imperial College London with 25 years' experience in international development and health systems strengthening.",
-    expertise: "Global Health Systems, Medical Education, Governance"
+    bio: "An experienced business operator and technology strategist whose work spans healthcare, social care, education, artificial intelligence and international operations.",
+    expertise: "Institutional Strategy, Technology, AI, Enterprise and International Operations",
   },
   {
-    name: "Sir Robert Henderson CBE", 
-    role: "Trustee",
-    bio: "Retired senior civil servant with extensive experience in international development and diplomatic service across Africa and Asia.",
-    expertise: "International Development, Diplomatic Relations, Risk Management"
+    name: "Dr Jagdev Thukral",
+    role: "Trustee and Executive Lead",
+    bio: "An NHS psychiatrist with more than 25 years of clinical experience across public and private mental health services.",
+    expertise: "Clinical Strategy, Safeguarding, Mental Health and Professional Partnerships",
   },
   {
-    name: "Dr. Fatima Al-Rashid",
-    role: "Trustee", 
-    bio: "Consultant in public health medicine and former WHO regional advisor with expertise in emergency response and health system resilience.",
-    expertise: "Public Health, Emergency Response, Health System Resilience"
-  }
-];
+    name: "John O'Sullivan BA FCA",
+    role: "Trustee — Finance and Governance",
+    bio: "A senior financial and governance professional supporting the Trust on financial stewardship, audit, risk and long-term institutional planning.",
+    expertise: "Finance, Audit, Risk and Governance",
+  },
+] as const;
 
 // 110 Languages for multilingual support
 export const LANGUAGES = [
@@ -319,7 +296,7 @@ export const LANGUAGES = [
   { code: 'st', name: 'Sotho', nativeName: 'Sesotho', rtl: false },
   { code: 'tn', name: 'Tswana', nativeName: 'Setswana', rtl: false },
   { code: 've', name: 'Venda', nativeName: 'Tshivenḓa', rtl: false },
-  { code: 'ts', name: 'Tsonga', nativeName: 'Xitsonga', rtl: false },
+  { code: 'ts', name: 'Tsonga', nativeName: 'Xigitsonga', rtl: false },
   { code: 'nr', name: 'South Ndebele', nativeName: 'IsiNdebele', rtl: false },
   { code: 'nso', name: 'Northern Sotho', nativeName: 'Sepedi', rtl: false },
   { code: 'am', name: 'Amharic', nativeName: 'አማርኛ', rtl: false },
@@ -358,28 +335,20 @@ export const LANGUAGES = [
   { code: 'ceb', name: 'Cebuano', nativeName: 'Cebuano', rtl: false },
   { code: 'hil', name: 'Hiligaynon', nativeName: 'Hiligaynon', rtl: false },
   { code: 'war', name: 'Waray', nativeName: 'Winaray', rtl: false },
-  { code: 'pam', name: 'Kapampangan', nativeName: 'Kapampangan', rtl: false }
-];
+  { code: 'pam', name: 'Kapampangan', nativeName: 'Kapampangan', rtl: false },
+] as const;
 
 export const CONTACT_INFO = {
   address: {
-    line1: "Global Health Access Trust", 
+    line1: "Global Health Access Trust",
     line2: "2 Harley Street",
     city: "London",
-    country: "United Kingdom"
-  }
-};
+    country: "United Kingdom",
+  },
+} as const;
 
-export const SOCIAL_LINKS = [
-  { platform: "LinkedIn", url: "#", icon: "Linkedin" },
-  { platform: "Twitter", url: "#", icon: "Twitter" }, 
-  { platform: "Facebook", url: "#", icon: "Facebook" }
-];
+// Social accounts are not published until verified and approved.
+export const SOCIAL_LINKS: Array<{ platform: string; url: string; icon: string }> = [];
 
-export const DONATION_TIERS = [
-  { amount: 25, description: "Basic support" },
-  { amount: 50, description: "Training programs" },
-  { amount: 100, description: "Emergency response" },
-  { amount: 250, description: "System strengthening" },
-  { amount: 500, description: "Full program support" }
-];
+// Fixed public donation tiers are not used while the Trust operates a pledge-first process.
+export const DONATION_TIERS: Array<{ amount: number; description: string }> = [];
