@@ -85,22 +85,22 @@ export default function SafeguardingReportPage() {
             <Label htmlFor="danger" className="text-sm font-normal">The person is in immediate danger right now</Label>
           </div>
           <div>
-            <Label>What has happened / your concern</Label>
-            <Textarea value={allegation} onChange={(e) => setAllegation(e.target.value)} rows={8} maxLength={4000} required />
+            <Label htmlFor="safeguarding-concern">What has happened / your concern</Label>
+            <Textarea id="safeguarding-concern" name="allegation" value={allegation} onChange={(e) => setAllegation(e.target.value)} rows={8} maxLength={4000} required />
           </div>
           <div className="grid md:grid-cols-2 gap-4">
-            <div><Label>Location</Label><Input value={location} onChange={(e) => setLoc(e.target.value)} maxLength={200} /></div>
+            <div><Label htmlFor="safeguarding-location">Location</Label><Input id="safeguarding-location" name="location" value={location} onChange={(e) => setLoc(e.target.value)} maxLength={200} /></div>
             <div>
-              <Label>Person at risk — age band</Label>
+              <Label htmlFor="person-age-band">Person at risk — age band</Label>
               <Select value={age_band} onValueChange={setAge}>
-                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectTrigger id="person-age-band" aria-label="Person at risk age band"><SelectValue /></SelectTrigger>
                 <SelectContent>{AGE_BANDS.map((a) => <SelectItem key={a} value={a}>{a}</SelectItem>)}</SelectContent>
               </Select>
             </div>
           </div>
           <div>
-            <Label>Person at risk — initials only</Label>
-            <Input value={initials} onChange={(e) => setInitials(e.target.value)} maxLength={10} />
+            <Label htmlFor="person-initials">Person at risk — initials only</Label>
+            <Input id="person-initials" name="person_initials" value={initials} onChange={(e) => setInitials(e.target.value)} maxLength={10} />
           </div>
           <div className="flex items-center gap-2">
             <Checkbox id="anon" checked={anonymous} onCheckedChange={(v) => setAnon(v === true)} />
@@ -108,8 +108,8 @@ export default function SafeguardingReportPage() {
           </div>
           {!anonymous && (
             <div className="grid md:grid-cols-2 gap-4">
-              <div><Label>Your name</Label><Input value={name} onChange={(e) => setName(e.target.value)} maxLength={200} /></div>
-              <div><Label>Your contact</Label><Input value={contact} onChange={(e) => setContact(e.target.value)} maxLength={200} /></div>
+              <div><Label htmlFor="safeguarding-reporter-name">Your name</Label><Input id="safeguarding-reporter-name" name="reporter_name" value={name} onChange={(e) => setName(e.target.value)} maxLength={200} /></div>
+              <div><Label htmlFor="safeguarding-reporter-contact">Your contact</Label><Input id="safeguarding-reporter-contact" name="reporter_contact" value={contact} onChange={(e) => setContact(e.target.value)} maxLength={200} /></div>
             </div>
           )}
           <Button type="submit" disabled={busy}>{busy ? "Sending..." : "Submit safeguarding report"}</Button>
