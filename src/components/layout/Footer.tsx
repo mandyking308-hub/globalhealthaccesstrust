@@ -6,7 +6,7 @@ import { useState } from "react";
 import { CookieSettingsLink } from "@/components/CookieSettingsLink";
 import { supabase } from "@/integrations/supabase/client";
 
-const publicQuickLinks = FOOTER_SECTIONS.quickLinks.filter((link) => link.href !== "/blog");
+const publicQuickLinks = FOOTER_SECTIONS.quickLinks;
 
 export const Footer = () => {
   const [email, setEmail] = useState("");
@@ -58,7 +58,7 @@ export const Footer = () => {
               </span>
             </div>
             <p className="font-sans text-3xl md:text-4xl leading-[0.98] font-black uppercase max-w-xl tracking-[-0.005em]">
-              Structured funding for the systems that make healthcare possible.
+              Structured support for the systems that make healthcare possible.
             </p>
             <p className="text-sm text-primary-foreground/70 mt-8 max-w-md leading-relaxed">
               {SITE_CONFIG.description}
