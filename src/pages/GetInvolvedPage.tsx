@@ -166,12 +166,11 @@ export const GetInvolvedPage = () => {
         <h2>Stay Informed</h2>
         <p>
           Approved reports, research, project publications and institutional updates are made
-          available through the Trust's Blog, Publications page and institutional-updates
-          service.
+          available through the Publications &amp; Documents page and the Trust's institutional-updates service.
         </p>
         <div className="flex flex-wrap gap-3 mt-4">
-          <Button asChild><Link to="/blog">Read the Blog</Link></Button>
-          <Button asChild variant="outline"><Link to="/publications">View Publications</Link></Button>
+          <Button asChild><Link to="/publications">View Publications &amp; Documents</Link></Button>
+          <Button asChild variant="outline"><Link to="/contact-the-trust">Find the Right Route</Link></Button>
         </div>
       </div>
 
