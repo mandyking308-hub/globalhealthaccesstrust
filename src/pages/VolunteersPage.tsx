@@ -46,8 +46,8 @@ export const VolunteersPage = () => {
     role_of_interest: "",
   });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (!file) return;
     if (!ALLOWED_MIME.includes(file.type)) {
       toast({ title: "Invalid file type", description: "PDF or Word only", variant: "destructive" });
@@ -60,8 +60,8 @@ export const VolunteersPage = () => {
     setCvFile(file);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     if (!accuracy || !privacyAck) {
       toast({
         title: "Declarations required",
@@ -74,22 +74,21 @@ export const VolunteersPage = () => {
       toast({ title: "CV required", variant: "destructive" });
       return;
     }
+
     setIsSubmitting(true);
     try {
-      // Upload to PRIVATE bucket. No public URL is created.
       const { data: sessionData } = await supabase.auth.getSession();
-      const uid = sessionData.session?.user.id;
-      // Scope path to uid when signed in, otherwise to a random anon prefix
-      const prefix = uid ? `authenticated/${uid}` : `anonymous/${crypto.randomUUID()}`;
-      const ext = cvFile.name.split(".").pop() || "bin";
-      const objectPath = `${prefix}/${Date.now()}.${ext}`;
+      const userId = sessionData.session?.user.id;
+      const prefix = userId ? `authenticated/${userId}` : `anonymous/${crypto.randomUUID()}`;
+      const extension = cvFile.name.split(".").pop() || "bin";
+      const objectPath = `${prefix}/${Date.now()}.${extension}`;
 
-      const { error: uploadErr } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from("project-team-applications")
         .upload(objectPath, cvFile, { contentType: cvFile.type, upsert: false });
-      if (uploadErr) throw uploadErr;
+      if (uploadError) throw uploadError;
 
-      const { error: rpcErr } = await supabase.rpc("submit_volunteer_application", {
+      const { error: rpcError } = await supabase.rpc("submit_volunteer_application", {
         _name: formData.name,
         _email: formData.email,
         _phone: formData.phone || null,
@@ -108,7 +107,7 @@ export const VolunteersPage = () => {
         _accuracy_version: ACCURACY_VERSION,
         _privacy_version: PRIVACY_VERSION,
       });
-      if (rpcErr) throw rpcErr;
+      if (rpcError) throw rpcError;
 
       setSubmitted(true);
       toast({
@@ -116,7 +115,7 @@ export const VolunteersPage = () => {
         description: "Thank you. The Trust will review and be in touch.",
       });
     } catch (error: any) {
-      console.error("volunteer application error", error);
+      console.error("project team application error", error);
       toast({
         title: "Submission failed",
         description: error.message || "Please try again.",
@@ -134,7 +133,7 @@ export const VolunteersPage = () => {
         description="Apply to join a project delivery team supporting commissioned health interventions."
         canonical="/volunteer-apply"
       />
-      <div className="min-h-screen bg-background">
+      <main className="min-h-screen bg-background">
         <section
           className="relative min-h-[40vh] sm:min-h-[50vh] flex items-center justify-center bg-cover bg-center"
           style={{
@@ -174,41 +173,41 @@ export const VolunteersPage = () => {
                   <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                     <div className="space-y-2">
                       <Label htmlFor="name">Full name *</Label>
-                      <Input id="name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} required />
+                      <Input id="name" value={formData.name} onChange={(event) => setFormData({ ...formData, name: event.target.value })} required />
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="email">Email *</Label>
-                        <Input id="email" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
+                        <Input id="email" type="email" value={formData.email} onChange={(event) => setFormData({ ...formData, email: event.target.value })} required />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="phone">Phone</Label>
-                        <Input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+44 …" />
+                        <Input id="phone" type="tel" value={formData.phone} onChange={(event) => setFormData({ ...formData, phone: event.target.value })} placeholder="+44 …" />
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="country">Country *</Label>
-                      <Input id="country" value={formData.country} onChange={(e) => setFormData({ ...formData, country: e.target.value })} required />
+                      <Input id="country" value={formData.country} onChange={(event) => setFormData({ ...formData, country: event.target.value })} required />
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label>Availability *</Label>
-                        <Select value={formData.availability} onValueChange={(v) => setFormData({ ...formData, availability: v })} required>
+                        <Select value={formData.availability} onValueChange={(value) => setFormData({ ...formData, availability: value })} required>
                           <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
                           <SelectContent>
-                            {AVAILABILITY_OPTIONS.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+                            {AVAILABILITY_OPTIONS.map((option) => <SelectItem key={option} value={option}>{option}</SelectItem>)}
                           </SelectContent>
                         </Select>
                       </div>
                       <div className="space-y-2">
                         <Label>Area of interest *</Label>
-                        <Select value={formData.area_of_interest} onValueChange={(v) => setFormData({ ...formData, area_of_interest: v })} required>
+                        <Select value={formData.area_of_interest} onValueChange={(value) => setFormData({ ...formData, area_of_interest: value })} required>
                           <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
                           <SelectContent>
-                            {AREA_OPTIONS.map((o) => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+                            {AREA_OPTIONS.map((option) => <SelectItem key={option} value={option}>{option}</SelectItem>)}
                           </SelectContent>
                         </Select>
                       </div>
@@ -216,27 +215,27 @@ export const VolunteersPage = () => {
 
                     <div className="space-y-2">
                       <Label htmlFor="role_of_interest">Role of interest</Label>
-                      <Input id="role_of_interest" value={formData.role_of_interest} onChange={(e) => setFormData({ ...formData, role_of_interest: e.target.value })} placeholder="e.g., Field Coordinator" />
+                      <Input id="role_of_interest" value={formData.role_of_interest} onChange={(event) => setFormData({ ...formData, role_of_interest: event.target.value })} placeholder="e.g., Field Coordinator" />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="skills">Skills / profession *</Label>
-                      <Input id="skills" value={formData.skills} onChange={(e) => setFormData({ ...formData, skills: e.target.value })} required />
+                      <Input id="skills" value={formData.skills} onChange={(event) => setFormData({ ...formData, skills: event.target.value })} required />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="experience">Relevant experience *</Label>
-                      <Textarea id="experience" value={formData.experience} onChange={(e) => setFormData({ ...formData, experience: e.target.value })} rows={4} required />
+                      <Textarea id="experience" value={formData.experience} onChange={(event) => setFormData({ ...formData, experience: event.target.value })} rows={4} required />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="languages">Languages *</Label>
-                      <Input id="languages" value={formData.languages} onChange={(e) => setFormData({ ...formData, languages: e.target.value })} required />
+                      <Input id="languages" value={formData.languages} onChange={(event) => setFormData({ ...formData, languages: event.target.value })} required />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="motivation">Motivation</Label>
-                      <Textarea id="motivation" value={formData.motivation} onChange={(e) => setFormData({ ...formData, motivation: e.target.value })} rows={3} />
+                      <Textarea id="motivation" value={formData.motivation} onChange={(event) => setFormData({ ...formData, motivation: event.target.value })} rows={3} />
                     </div>
 
                     <div className="space-y-2">
@@ -250,27 +249,23 @@ export const VolunteersPage = () => {
 
                     <div className="space-y-4 border-t border-border pt-6">
                       <div className="flex items-start gap-3">
-                        <Checkbox id="accuracy" checked={accuracy} onCheckedChange={(v) => setAccuracy(v as boolean)} />
+                        <Checkbox id="accuracy" checked={accuracy} onCheckedChange={(value) => setAccuracy(value === true)} />
                         <label htmlFor="accuracy" className="text-sm leading-relaxed cursor-pointer">
-                          <strong>Accuracy declaration.</strong> I confirm that the information supplied — including my CV — is
-                          true and accurate to the best of my knowledge. I understand that inaccurate information may result in
-                          the application being declined or, if I am appointed, my engagement being ended. *
+                          <strong>Accuracy declaration.</strong> I confirm that the information supplied — including my CV — is true and accurate to the best of my knowledge. I understand that inaccurate information may result in the application being declined or, if I am appointed, my engagement being ended. *
                         </label>
                       </div>
                       <div className="flex items-start gap-3">
-                        <Checkbox id="privacyAck" checked={privacyAck} onCheckedChange={(v) => setPrivacyAck(v as boolean)} />
+                        <Checkbox id="privacyAck" checked={privacyAck} onCheckedChange={(value) => setPrivacyAck(value === true)} />
                         <label htmlFor="privacyAck" className="text-sm leading-relaxed cursor-pointer">
                           <strong>Privacy acknowledgement.</strong> I acknowledge that I have read the{" "}
-                          <a href="/privacy-policy" className="underline" target="_blank" rel="noreferrer">Privacy Notice</a>{" "}
-                          and understand that my application, CV and correspondence will be processed by
-                          Global Health Access Trust for the purpose of assessing and, where relevant, coordinating my
-                          engagement on a project delivery team. *
+                          <a href="/legal/privacy-notice" className="underline" target="_blank" rel="noreferrer">Privacy Notice</a>{" "}
+                          and understand that my application, CV and correspondence will be processed by Global Health Access Trust for the purpose of assessing and, where relevant, coordinating my engagement on a project delivery team. *
                         </label>
                       </div>
                     </div>
 
                     <Button type="submit" size="lg" className="w-full min-h-[48px]" disabled={isSubmitting}>
-                      {isSubmitting ? (<><Loader2 className="mr-2 h-4 w-4 animate-spin" />Submitting…</>) : "Submit application"}
+                      {isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Submitting…</> : "Submit application"}
                     </Button>
                   </form>
                 </CardContent>
@@ -278,7 +273,7 @@ export const VolunteersPage = () => {
             )}
           </div>
         </section>
-      </div>
+      </main>
     </>
   );
 };
