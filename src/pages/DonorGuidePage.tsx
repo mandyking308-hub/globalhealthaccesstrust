@@ -4,58 +4,41 @@ import { Footer } from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
 
 export const DonorGuidePage = () => {
-  const recognitionTiers = [
-    {
-      tier: "Core Donor",
-      amount: "£500 – £4,999",
-      recognition: "Thank-you message, project updates"
-    },
-    {
-      tier: "Founding Supporter",
-      amount: "£5,000 – £24,999",
-      recognition: "Impact reports, early access to events"
-    },
-    {
-      tier: "Strategic Partner",
-      amount: "£25,000 – £99,999",
-      recognition: "Naming opportunities, private briefings"
-    },
-    {
-      tier: "Legacy Builder",
-      amount: "£100,000 – £999,999",
-      recognition: "Direct updates, advisory participation opportunities"
-    },
-    {
-      tier: "Visionary Donor",
-      amount: "£1 million+",
-      recognition: "Bespoke partnership, legacy recognition, co-designed impact programs"
-    }
-  ];
-
   const features = [
-    { title: "Secure Login", body: "Private donor access with password protection." },
-    { title: "Funding Portal", body: "Structured funding submission with secure processing." },
     {
-      title: "Donation Preferences",
-      body: "Choose where your funds are directed:",
-      list: [
-        "Healthcare Access",
-        "Humanitarian Crisis (e.g. Ukraine)",
-        "Research & Policy",
-        "Professional Education",
-        "Where Most Needed",
-      ],
+      title: "Make a Donation",
+      body: "Access the Trust's approved donation route and review contributions associated with your account.",
     },
-    { title: "Donation History", body: "Review past contributions and download receipts instantly." },
-    { title: "Messaging & Updates", body: "Receive personal notes, project updates, and event invitations." },
-    { title: "Recognition Tier", body: "Your profile displays your donor tier with tailored benefits." },
+    {
+      title: "My Projects",
+      body: "View commissioned projects connected to your account, their status and the information made available for each project.",
+    },
+    {
+      title: "Project Agreements",
+      body: "Review the project charter or agreement associated with an approved commissioned project.",
+    },
+    {
+      title: "Commission a New Project",
+      body: "Submit a project by defining its location, purpose, intervention, intended impact, budget, urgency and optional dedication.",
+    },
+    {
+      title: "Project Messages and Updates",
+      body: "Communicate securely with the Trust and receive appropriate project milestones, approved evidence and delivery updates.",
+    },
+    {
+      title: "Donation History",
+      body: "Review recorded contributions and associated account information.",
+    },
+    {
+      title: "Support and Preferences",
+      body: "Request assistance and manage communications, privacy and account preferences.",
+    },
   ];
 
   return (
     <div className="min-h-screen flex flex-col donor-portal">
       <Header />
       <main className="flex-grow">
-
         {/* Hero */}
         <section className="border-b border-foreground/10 bg-background">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28">
@@ -63,19 +46,25 @@ export const DonorGuidePage = () => {
               <span className="portal-eyebrow md:mt-2">Donor Portal</span>
               <div className="max-w-3xl">
                 <h1 className="no-display text-foreground mb-6" style={{ fontFamily: "var(--font-serif)", fontWeight: 900, textTransform: "uppercase", letterSpacing: "-0.01em", fontSize: "clamp(40px, 5.4vw, 78px)", lineHeight: 0.98 }}>
-                  Welcome to the Donor Console
+                  Your Secure Donor Portal
                 </h1>
                 <p className="text-[13px] uppercase tracking-[0.22em] font-bold text-primary mb-8">
                   Global Health Access Trust
                 </p>
                 <p className="text-[18px] text-foreground leading-relaxed mb-4 max-w-2xl">
-                  Every supporter begins their journey by creating a secure account. This is required for all engagement.
+                  Supporters may contribute to an active project, make a general donation to the Trust, or create and commission a new charitable project.
+                </p>
+                <p className="text-[15.5px] text-muted-foreground leading-relaxed mb-4 max-w-2xl">
+                  The secure donor portal provides access to commissioned projects, project agreements, messages, contribution history, support and account preferences.
+                </p>
+                <p className="text-[15.5px] text-muted-foreground leading-relaxed mb-4 max-w-2xl">
+                  An account is required to commission and manage a project through the dashboard. General donations, active-project support and public enquiries can begin directly through the website.
                 </p>
                 <p className="text-[15.5px] text-muted-foreground leading-relaxed max-w-2xl">
-                  Our platform is encrypted, GDPR-compliant, and designed to handle structured funding relationships with full discretion and accountability.
+                  The portal provides appropriate visibility while protecting personal information, safeguarding, confidentiality and the dignity of the people involved.
                 </p>
                 <div className="mt-10 flex flex-wrap gap-4">
-                  <Link to="/auth">
+                  <Link to="/donor-login">
                     <Button className="h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase px-8">
                       Login to Portal
                     </Button>
@@ -91,74 +80,94 @@ export const DonorGuidePage = () => {
           </div>
         </section>
 
+        {/* Ways to Support */}
+        <section className="py-20 md:py-24 border-b border-foreground/10 bg-secondary/40">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14 mb-14">
+              <span className="portal-eyebrow md:mt-2">Ways to Support</span>
+              <h2 className="text-foreground max-w-3xl" style={{ fontWeight: 500, fontSize: "clamp(26px, 2.8vw, 40px)", letterSpacing: "-0.018em", lineHeight: 1.2 }}>
+                Three Routes to Meaningful Support
+              </h2>
+            </div>
+
+            <div className="md:pl-[196px] grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="section-container">
+                <h3 className="text-foreground mb-3">Support an Active Project</h3>
+                <p className="text-[15.5px] text-muted-foreground leading-relaxed">
+                  Contribute to an approved project displayed on the Trust's website and follow the public information made available as it progresses.
+                </p>
+              </div>
+              <div className="section-container">
+                <h3 className="text-foreground mb-3">Support the Trust's General Work</h3>
+                <p className="text-[15.5px] text-muted-foreground leading-relaxed">
+                  Make an unrestricted contribution that the Trustees can apply where charitable need and opportunity are greatest.
+                </p>
+              </div>
+              <div className="section-container">
+                <h3 className="text-foreground mb-3">Commission a New Project</h3>
+                <p className="text-[15.5px] text-muted-foreground leading-relaxed">
+                  Create and submit a project through the secure donor dashboard by defining its location, purpose, intervention, budget and urgency. Submitted projects proceed through scoping, due diligence and Trustee approval.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Dashboard Features */}
         <section className="py-20 md:py-24 border-b border-foreground/10">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14 mb-14">
               <span className="portal-eyebrow md:mt-2">Dashboard</span>
               <h2 className="text-foreground max-w-3xl" style={{ fontWeight: 500, fontSize: "clamp(26px, 2.8vw, 40px)", letterSpacing: "-0.018em", lineHeight: 1.2 }}>
-                Your Donor Dashboard Includes:
+                What You Can Do in the Donor Portal
               </h2>
             </div>
 
             <div className="md:pl-[196px] grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-0 border-t border-foreground/12">
-              {features.map((f, i) => (
-                <div key={f.title} className={`py-8 border-b border-foreground/12 ${i % 2 === 0 ? "md:border-r md:pr-14" : ""}`}>
+              {features.map((feature, index) => (
+                <div key={feature.title} className={`py-8 border-b border-foreground/12 ${index % 2 === 0 ? "md:border-r md:pr-14" : ""}`}>
                   <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary block mb-3">
-                    {String(i + 1).padStart(2, "0")}
+                    {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="text-foreground mb-3" style={{ fontSize: "clamp(19px, 1.5vw, 23px)", fontWeight: 600 }}>
-                    {f.title}
+                    {feature.title}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed text-[15.5px]">
-                    {f.body}
+                    {feature.body}
                   </p>
-                  {f.list && (
-                    <ul className="mt-3 space-y-1.5">
-                      {f.list.map((item) => (
-                        <li key={item} className="text-[14.5px] text-muted-foreground flex items-start">
-                          <span className="text-primary mr-2">→</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Recognition Tiers */}
+        {/* Recognition */}
         <section className="py-20 md:py-24 border-b border-foreground/10 bg-secondary/40">
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-14">
               <span className="portal-eyebrow md:mt-2">Recognition</span>
-              <h2 className="text-foreground max-w-3xl" style={{ fontWeight: 500, fontSize: "clamp(26px, 2.8vw, 40px)", letterSpacing: "-0.018em", lineHeight: 1.2 }}>
-                Donor Recognition Tiers
-              </h2>
-            </div>
-
-            <div className="md:pl-[196px]">
-              <div className="border-t border-foreground/15 border-b divide-y divide-foreground/12">
-                <div className="grid grid-cols-12 py-4 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/60">
-                  <div className="col-span-4">Tier Name</div>
-                  <div className="col-span-3">Amount</div>
-                  <div className="col-span-5">Recognition</div>
-                </div>
-                {recognitionTiers.map((t) => (
-                  <div key={t.tier} className="grid grid-cols-12 py-6 items-baseline">
-                    <div className="col-span-4 font-serif font-bold text-foreground text-[16.5px]">{t.tier}</div>
-                    <div className="col-span-3 text-[15.5px] text-foreground">{t.amount}</div>
-                    <div className="col-span-5 text-[15px] text-muted-foreground leading-relaxed">{t.recognition}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 border-l-2 border-primary pl-6 max-w-2xl">
-                <p className="text-[15.5px] text-foreground leading-relaxed">
-                  If you&apos;d like to discuss major donations, our board will connect with you personally. We&apos;re here to build something meaningful, together.
+              <div className="max-w-3xl">
+                <h2 className="text-foreground mb-6" style={{ fontWeight: 500, fontSize: "clamp(26px, 2.8vw, 40px)", letterSpacing: "-0.018em", lineHeight: 1.2 }}>
+                  Recognition, Privacy &amp; Choice
+                </h2>
+                <p className="text-[16.5px] text-foreground leading-relaxed mb-5">
+                  Recognition is based on the supporter's wishes, the nature of the contribution and the dignity of the work—not simply on the amount given.
                 </p>
+                <p className="text-[15.5px] text-muted-foreground leading-relaxed mb-3">Supporters may choose:</p>
+                <ul className="space-y-2 text-[15.5px] text-muted-foreground leading-relaxed mb-6">
+                  <li>• Public recognition where appropriate</li>
+                  <li>• Recognition by organisation or family name</li>
+                  <li>• Limited recognition within project records</li>
+                  <li>• Complete anonymity</li>
+                </ul>
+                <p className="text-[15.5px] text-muted-foreground leading-relaxed mb-8">
+                  Naming, acknowledgement or project involvement does not confer ownership, governance authority or control over charitable decisions.
+                </p>
+                <Link to="/donor-recognition">
+                  <Button variant="outline" className="h-11 border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.1em] text-[13px] font-semibold uppercase px-8">
+                    View Donor Recognition
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -171,10 +180,16 @@ export const DonorGuidePage = () => {
               <span className="portal-eyebrow md:mt-2">Final Notes</span>
               <div className="max-w-3xl space-y-5">
                 <p className="text-[16.5px] text-foreground leading-relaxed">
-                  All donation records are stored securely. You can manage your preferences, receive updates, and track your impact.
+                  The portal provides a secure record of information associated with a supporter's account, contributions and commissioned projects.
                 </p>
                 <p className="text-[16.5px] text-muted-foreground leading-relaxed">
-                  We honour our donors with full transparency and care. Thank you for being part of the future of global health access.
+                  Supporters of active projects receive the public or secure reporting appropriate to that project. Commissioners receive additional visibility through their dashboard and project records.
+                </p>
+                <p className="text-[16.5px] text-muted-foreground leading-relaxed">
+                  Reporting does not override safeguarding, confidentiality, data protection, clinical responsibility or personal safety.
+                </p>
+                <p className="text-[16.5px] text-muted-foreground leading-relaxed">
+                  Supporters can manage their communication and privacy preferences within the dashboard.
                 </p>
               </div>
             </div>
@@ -191,7 +206,7 @@ export const DonorGuidePage = () => {
                   Please use the Messaging section of your dashboard or our Contact Form for any queries or requests.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Link to="/donor-dashboard">
+                  <Link to="/donor-login">
                     <Button className="h-11 bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.1em] text-[13px] font-semibold uppercase px-8">
                       Go to Dashboard
                     </Button>
