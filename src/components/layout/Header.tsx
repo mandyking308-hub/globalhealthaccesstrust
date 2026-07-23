@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { NAVIGATION_ITEMS, SITE_CONFIG } from "@/lib/constants";
 import { SearchModal } from "@/components/common/SearchModal";
 
+const publicNavigationItems = NAVIGATION_ITEMS.filter((item) => item.href !== "/blog");
+
 const GHATLogo = ({ className }: { className?: string }) => (
   <svg
     viewBox="0 0 360 64"
@@ -91,7 +93,7 @@ export const Header = () => {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center flex-1 justify-end">
               <div className="flex items-center">
-                {NAVIGATION_ITEMS.map((item) => (
+                {publicNavigationItems.map((item) => (
                   <div
                     key={item.href}
                     className="relative"
@@ -150,8 +152,6 @@ export const Header = () => {
                 Donor Portal
               </Link>
 
-
-
               <button
                 className="lg:hidden h-9 w-9 flex items-center justify-center"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -166,7 +166,7 @@ export const Header = () => {
           {isMenuOpen && (
             <div className="lg:hidden border-t border-foreground/10 bg-background">
               <div className="py-4 space-y-1">
-                {NAVIGATION_ITEMS.map((item) => (
+                {publicNavigationItems.map((item) => (
                   <div key={item.href}>
                     <Link
                       to={item.href}
