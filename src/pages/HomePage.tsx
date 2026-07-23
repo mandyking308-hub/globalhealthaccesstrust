@@ -196,9 +196,6 @@ export const HomePage = () => {
                     </p>
                   </div>
                 </div>
-                <p className="mt-10 pt-8 border-t border-primary-foreground/25 text-primary-foreground/85 text-base md:text-lg leading-relaxed max-w-4xl">
-                  The Trust enables better healthcare but is not a medical practice or clinical service. Where an approved project includes clinical services, those services are delivered and clinically governed by appropriately licensed and regulated healthcare providers.
-                </p>
               </div>
             </div>
             <div className="pl-0 md:pl-[196px]">
@@ -444,7 +441,7 @@ export const HomePage = () => {
                   Project Team Portal
                 </h3>
                 <p className="text-muted-foreground text-[15px] leading-relaxed mt-4 max-w-md">
-                  Charity workers, field staff, healthcare professionals, approved volunteers, coordinators and delivery partners submit progress, evidence and expenses on assigned projects. Any clinical services remain under the responsibility of the relevant regulated provider.
+                  Charity workers, field staff, healthcare professionals, approved volunteers, coordinators and delivery partners submit progress, evidence and expenses on assigned projects.
                 </p>
                 <div className="flex flex-wrap gap-3 mt-8">
                   <Link to="/auth?portal=team">
