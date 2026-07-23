@@ -18,7 +18,7 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     env:
       VITE_SUPABASE_URL: https://example.supabase.co
       VITE_SUPABASE_PUBLISHABLE_KEY: release-check-placeholder-key
@@ -38,19 +38,30 @@ jobs:
           bun-version: latest
 
       - name: Install locked dependencies
+        id: install
+        continue-on-error: true
         run: bun install --frozen-lockfile
 
       - name: Lint existing codebase
+        if: steps.install.outcome == 'success'
         continue-on-error: true
         run: bun run lint
 
       - name: Type-check
+        id: typecheck
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
         run: bunx tsc --noEmit
 
       - name: Build production bundle
+        id: build
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
         run: bun run build
 
       - name: Load live public configuration
+        id: live_config
+        continue-on-error: true
         run: |
           set -a
           source .env
@@ -59,17 +70,29 @@ jobs:
           echo "VITE_SUPABASE_PUBLISHABLE_KEY=$VITE_SUPABASE_PUBLISHABLE_KEY" >> "$GITHUB_ENV"
 
       - name: Verify live legal documents
+        id: legal
+        if: steps.live_config.outcome == 'success'
+        continue-on-error: true
         run: node scripts/verify-live-legal.mjs
 
       - name: Verify live Edge Functions and RPCs
+        id: services
+        if: steps.live_config.outcome == 'success'
+        continue-on-error: true
         run: node scripts/verify-live-services.mjs
 
       - name: Install browser smoke-test tooling
+        id: browser_tools
+        if: steps.install.outcome == 'success' && steps.build.outcome == 'success'
+        continue-on-error: true
         run: |
           bun add --dev --no-save playwright@1.52.0
           bunx playwright install --with-deps chromium
 
       - name: Start production preview
+        id: preview
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
         run: |
           bun run preview -- --host 127.0.0.1 --port 4173 > /tmp/ghat-preview.log 2>&1 &
           echo $! > /tmp/ghat-preview.pid
@@ -83,6 +106,9 @@ jobs:
           exit 1
 
       - name: Run browser smoke tests
+        id: smoke
+        if: steps.preview.outcome == 'success' && steps.browser_tools.outcome == 'success'
+        continue-on-error: true
         env:
           SMOKE_BASE_URL: http://127.0.0.1:4173
         run: node scripts/release-smoke.mjs
@@ -96,11 +122,131 @@ jobs:
           if-no-files-found: ignore
 
       - name: Show preview log on failure
-        if: failure()
+        if: always() && steps.preview.outcome == 'failure'
         run: cat /tmp/ghat-preview.log || true
 
-      - name: Report failed validation status
-        if: github.event_name == 'push' && failure()
+      - name: Report build failure
+        if: always() && (steps.install.outcome != 'success' || steps.typecheck.outcome != 'success' || steps.build.outcome != 'success')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT build and type-check',
+              description: 'Dependency install, type-check or production build failed',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report build success
+        if: always() && steps.install.outcome == 'success' && steps.typecheck.outcome == 'success' && steps.build.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT build and type-check',
+              description: 'Production build and TypeScript checks passed',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report legal publication failure
+        if: always() && (steps.live_config.outcome != 'success' || steps.legal.outcome != 'success')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT live legal documents',
+              description: 'One or more required legal documents are not published live',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report legal publication success
+        if: always() && steps.live_config.outcome == 'success' && steps.legal.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT live legal documents',
+              description: 'All required legal documents are published with full content',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report live service failure
+        if: always() && (steps.live_config.outcome != 'success' || steps.services.outcome != 'success')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT live services',
+              description: 'A required Edge Function or public RPC is not responding',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report live service success
+        if: always() && steps.live_config.outcome == 'success' && steps.services.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT live services',
+              description: 'Contact, payment and public RPC endpoints are responding',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report browser smoke failure
+        if: always() && steps.smoke.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT full-site browser smoke',
+              description: 'Public routes, portals, mobile layout or document checks failed',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report browser smoke success
+        if: always() && steps.smoke.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT full-site browser smoke',
+              description: 'Public routes, portal guards, documents and mobile checks passed',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report overall validation failure
+        if: always() && (steps.install.outcome != 'success' || steps.typecheck.outcome != 'success' || steps.build.outcome != 'success' || steps.legal.outcome != 'success' || steps.services.outcome != 'success' || steps.smoke.outcome != 'success')
         uses: actions/github-script@v7
         with:
           script: |
@@ -110,11 +256,12 @@ jobs:
               sha: context.sha,
               state: 'failure',
               context: 'GHAT release validation',
-              description: 'Build, live services, legal publication or browser checks failed',
+              description: 'One or more required release stages failed',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
             });
 
-      - name: Report successful validation status
-        if: github.event_name == 'push' && success()
+      - name: Report overall validation success
+        if: always() && steps.install.outcome == 'success' && steps.typecheck.outcome == 'success' && steps.build.outcome == 'success' && steps.legal.outcome == 'success' && steps.services.outcome == 'success' && steps.smoke.outcome == 'success'
         uses: actions/github-script@v7
         with:
           script: |
@@ -125,7 +272,12 @@ jobs:
               state: 'success',
               context: 'GHAT release validation',
               description: 'Build, live services, legal and full-site browser checks passed',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
             });
+
+      - name: Fail validation job
+        if: always() && (steps.install.outcome != 'success' || steps.typecheck.outcome != 'success' || steps.build.outcome != 'success' || steps.legal.outcome != 'success' || steps.services.outcome != 'success' || steps.smoke.outcome != 'success')
+        run: exit 1
 
   # The custom domain is deployed by Lovable rather than by this GitHub workflow.
   # Run this job deliberately after Lovable has synced and published the latest commit.
