@@ -11,19 +11,19 @@ const constitutionalTrustees: TrusteeProps[] = [
   {
     name: "Mandy King",
     role: "Chair of Trustees",
-    bio: "Mandy King is the Principal Group Owner and Business Operator of a portfolio of high-impact healthcare ventures. With over 25 years of experience spanning the NHS, care, education, and international operations, Mandy leads with vision and discipline. Her qualifications include a Master's in Business Administration, a Level 5 Award in Health and Social Care Management (Higher Distinction), and certifications from Microsoft and Cisco. As Chair of Trustees, she oversees strategic governance, public accountability, and charitable stewardship. Her focus on AI and machine learning drives innovation across platforms, contributing to equitable global health systems.",
+    bio: "Mandy King is an experienced business operator and technology strategist whose work spans healthcare, social care, education, artificial intelligence and international operations. As Chair, she leads institutional strategy, governance and the development of long-term charitable programmes.",
     quote: "Our Trust is guided by duty, not profile. We exist to protect the dignity of human life—lawfully, ethically, and enduringly."
   },
   {
     name: "Dr Jagdev Thukral",
-    role: "Trustee and Constitutional Signatory — Executive Lead",
-    bio: "Dr Thukral is a seasoned medical director with over 25 years of experience in both NHS and private mental health settings. With a Master's in Organisational Psychology and a Level 5 Award in Health and Social Care Management, he brings exceptional leadership in clinical governance and change management. As a Trustee and constitutional signatory, and in his executive lead capacity, Dr Thukral oversees programme strategy, clinical partnerships, and cross-border health initiatives. His career is defined by a consistent drive to advance equality, safety, and global healthcare outcomes.",
+    role: "Trustee and Executive Lead",
+    bio: "Dr Jagdev Thukral is an NHS psychiatrist with more than 25 years of clinical experience across public and private mental health services. As Executive Lead, he supports clinical strategy, safeguarding, professional partnerships and the development of health programmes.",
     quote: "Access to care must be equitable, safe, and lawful. This Trust exists to make that a reality."
   },
   {
-    name: "John O'Sullivan",
-    role: "Trustee — Finance and Strategic Investment",
-    bio: "John O'Sullivan is a seasoned care-sector executive and finance director, having served as CEO across multiple large care groups. His expertise spans financial forecasting, investment oversight, and operational management within regulated healthcare environments. At the Trust, John leads on financial governance, audit strategy, and fiduciary stewardship.",
+    name: "John O'Sullivan BA FCA",
+    role: "Trustee — Finance and Governance",
+    bio: "John O'Sullivan BA FCA brings senior financial, commercial and governance experience. He supports the Board on financial stewardship, audit, risk and long-term institutional planning.",
     quote: "Every contribution is held with care, precision, and purpose. We are not just managing funds—we are safeguarding legacies."
   },
 ];
@@ -76,7 +76,7 @@ export const TrusteeBiographiesGrid = () => {
           Trustees and Constitutional Signatories
         </h2>
         <p className="text-muted-foreground mb-6 max-w-3xl">
-          The Trust is administered by its appointed Trustees. Mandy King, Dr Jagdev Thukral and John O'Sullivan are the current constitutional signatories identified in the Trust's records.
+          Mandy King, Dr Jagdev Thukral and John O'Sullivan BA FCA are the Trust's appointed Trustees and constitutional signatories. Trustee authority is exercised collectively and in accordance with the Trust Deed and published governance framework.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {constitutionalTrustees.map((t, i) => <TrusteeCard key={i} trustee={t} />)}
