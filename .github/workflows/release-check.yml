@@ -16,7 +16,7 @@ env:
 jobs:
   build-and-preview:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -73,9 +73,6 @@ jobs:
         if: steps.build.outputs.exit_code != '0'
         run: exit 1
 
-      - name: Install Chromium
-        run: bunx playwright install --with-deps chromium
-
       - name: Start production preview
         run: |
           bunx vite preview --host 0.0.0.0 --port 4173 > /tmp/ghat-preview.log 2>&1 &
@@ -104,7 +101,11 @@ jobs:
             ['project-team-application', '/volunteer-apply'],
           ];
 
-          const browser = await chromium.launch({ headless: true });
+          const browser = await chromium.launch({
+            executablePath: '/usr/bin/google-chrome',
+            headless: true,
+            args: ['--no-sandbox'],
+          });
           const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
           const results = [];
 
