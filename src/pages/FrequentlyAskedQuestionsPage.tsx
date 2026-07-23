@@ -20,12 +20,10 @@ export const FrequentlyAskedQuestionsPage = () => {
         <h3>What is the Global Health Access Trust?</h3>
         <p>The Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales.</p>
         <p>Its purposes are to advance health, relieve illness and preserve life. The Trust develops, funds and coordinates projects for public benefit under the authority and oversight of its Board of Trustees.</p>
-        <h3>Is the Trust a medical practice or doctors' service?</h3>
-        <p>No. The Trust enables better healthcare but is not a medical practice, clinic, telemedicine service or emergency service. It does not provide individual diagnosis, treatment, prescribing, triage or personalised medical advice.</p>
-        <p>Where an approved project includes clinical services, those services are delivered and clinically governed by appropriately licensed and regulated healthcare providers. The provider retains responsibility for clinical decisions, consent, records, professional standards and patient care.</p>
         <h3>What makes this Trust different from other health charities?</h3>
         <p>The Trust is structured as a permanent institution rather than a temporary campaign.</p>
         <p>It brings together professional and clinical expertise, community relationships, essential infrastructure, responsible artificial intelligence and accountable funding to solve defined healthcare-access and system problems.</p>
+        <p>Where a project includes clinical services, those services are delivered and governed by appropriately licensed healthcare providers within their own professional and legal responsibilities.</p>
         <p>We prioritise systems-building over dependency, human capability over displacement, dignity over publicity and sustained public benefit over short-term display.</p>
         <h3>How is the Trust constituted?</h3>
         <p>The Trust is governed by its signed Trust Deed, effective from 1 December 2024, together with its Board-approved governance, safeguarding, financial-control and risk policies.</p>
@@ -47,8 +45,8 @@ export const FrequentlyAskedQuestionsPage = () => {
         <p>Every project must advance health, relieve illness or preserve life and demonstrate a clear route to public benefit.</p>
         <h3>Can someone submit or create a project?</h3>
         <p>Yes. A supporter can create and submit a commissioned project directly through the secure donor dashboard.</p>
-        <p>The form is intended for healthcare-access, infrastructure, workforce, education, research or system projects. It allows the supporter to define the location, public-benefit purpose, type of intervention, budget, urgency and optional dedication.</p>
-        <p>The commissioned-project route is not for personal medical advice, individual treatment requests or the submission of medical records. The Trust then scopes the project, conducts appropriate due diligence and submits it for Trustee review.</p>
+        <p>The form is designed for healthcare-access, infrastructure, workforce, education, research or system projects. It allows the supporter to define the location, public-benefit purpose, type of intervention, budget, urgency and optional dedication.</p>
+        <p>The Trust then scopes the project, conducts appropriate due diligence and submits it for Trustee review.</p>
         <p>Clinicians, organisations, communities and professional contributors may also approach the Trust with a defined healthcare-access, service or delivery proposition.</p>
         <h3>Which countries or regions do you work in?</h3>
         <p>The Trust has a global mandate. Its history, professional relationships and practical work extend across twelve countries.</p>
@@ -78,7 +76,7 @@ export const FrequentlyAskedQuestionsPage = () => {
         <h2>Projects and the Donor Portal</h2>
         <h3>What happens after I submit a commissioned project?</h3>
         <p>The project enters the Trust's system for feasibility review, charitable-purpose assessment, safeguarding, due diligence, budgeting and Trustee consideration.</p>
-        <p>Where approved, the Trust establishes the delivery structure, agreement, milestones, evidence requirements and funding arrangements. Where a project contains a clinical component, an appropriately regulated provider must be identified to retain clinical responsibility.</p>
+        <p>Where approved, the Trust establishes the delivery structure, agreement, milestones, evidence requirements and funding arrangements. Where a project contains a clinical component, an appropriately regulated provider is identified to retain clinical responsibility.</p>
         <h3>Can I follow a project after it is approved?</h3>
         <p>Yes. Commissioners can use the secure dashboard to access their project records, agreements, messages and the progress, evidence and financial information appropriate to that project.</p>
         <p>Supporters of active public projects receive the public or secure reporting made available for that project.</p>
@@ -91,7 +89,7 @@ export const FrequentlyAskedQuestionsPage = () => {
         <h3>How does the Trust use artificial intelligence?</h3>
         <p>The Trust may use AI to identify population or service needs, analyse information, support research, coordinate logistics, strengthen evidence and develop practical solutions.</p>
         <p>AI-enabled tools may also form part of an approved charitable project, subject to appropriate legal, ethical, technical and safeguarding review.</p>
-        <p>The Trust does not use AI to provide individual diagnosis, treatment or triage. Any clinical decision is made solely by an appropriately regulated healthcare professional or provider operating within its own professional and legal responsibilities.</p>
+        <p>Where technology informs clinical work, clinical decisions remain with appropriately regulated healthcare professionals and providers.</p>
       </div>
 
       <div className="section-container">
@@ -109,7 +107,6 @@ export const FrequentlyAskedQuestionsPage = () => {
         <h2>Contact Information</h2>
         <h3>How can I contact the Trust?</h3>
         <p>General enquiries, institutional and legacy discussions, healthcare-access or system project propositions and confidential matters can be submitted through the Trust's contact form.</p>
-        <p>The general contact form is not a medical, diagnostic, treatment, triage or emergency service. Please do not submit symptoms, medical records or detailed patient-identifying health information.</p>
         <p>Registered donors and project commissioners may also use the secure messaging area within their dashboard.</p>
         <p>Safeguarding, protected-concern and sensitive recognition enquiries should use the relevant confidential subject line and reporting route.</p>
       </div>
