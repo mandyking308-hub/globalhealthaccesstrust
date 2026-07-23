@@ -6,6 +6,8 @@ import { useState } from "react";
 import { CookieSettingsLink } from "@/components/CookieSettingsLink";
 import { supabase } from "@/integrations/supabase/client";
 
+const publicQuickLinks = FOOTER_SECTIONS.quickLinks.filter((link) => link.href !== "/blog");
+
 export const Footer = () => {
   const [email, setEmail] = useState("");
   const [subscriptionStatus, setSubscriptionStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -66,7 +68,7 @@ export const Footer = () => {
           <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
             <div className="flex flex-col gap-3">
               <h5 className="text-[10.5px] font-sans font-black uppercase tracking-[0.22em] text-primary-foreground/60 mb-2">Navigation</h5>
-              {FOOTER_SECTIONS.quickLinks.map((link) => (
+              {publicQuickLinks.map((link) => (
                 <Link
                   key={link.href}
                   to={link.href}
