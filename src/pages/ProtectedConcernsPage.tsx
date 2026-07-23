@@ -87,19 +87,19 @@ export default function ProtectedConcernsPage() {
         </Alert>
         <form onSubmit={submit} className="space-y-5">
           <div>
-            <Label>Type of concern</Label>
+            <Label htmlFor="concern-type">Type of concern</Label>
             <Select value={concern_type} onValueChange={setType}>
-              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectTrigger id="concern-type" aria-label="Type of concern"><SelectValue /></SelectTrigger>
               <SelectContent>{TYPES.map((t) => <SelectItem key={t.v} value={t.v}>{t.l}</SelectItem>)}</SelectContent>
             </Select>
           </div>
           <div>
-            <Label>Short summary</Label>
-            <Input value={summary} onChange={(e) => setSummary(e.target.value)} maxLength={200} required />
+            <Label htmlFor="concern-summary">Short summary</Label>
+            <Input id="concern-summary" name="summary" value={summary} onChange={(e) => setSummary(e.target.value)} maxLength={200} required />
           </div>
           <div>
-            <Label>Full detail (dates, people, evidence references)</Label>
-            <Textarea value={detail} onChange={(e) => setDetail(e.target.value)} rows={9} maxLength={6000} required />
+            <Label htmlFor="concern-detail">Full detail (dates, people, evidence references)</Label>
+            <Textarea id="concern-detail" name="detail" value={detail} onChange={(e) => setDetail(e.target.value)} rows={9} maxLength={6000} required />
           </div>
           <div className="flex items-center gap-2">
             <Checkbox id="anon" checked={anonymous} onCheckedChange={(v) => setAnon(v === true)} />
@@ -107,8 +107,8 @@ export default function ProtectedConcernsPage() {
           </div>
           {!anonymous && (
             <div className="grid md:grid-cols-2 gap-4">
-              <div><Label>Name</Label><Input value={name} onChange={(e) => setName(e.target.value)} maxLength={200} /></div>
-              <div><Label>Contact (email or phone)</Label><Input value={contact} onChange={(e) => setContact(e.target.value)} maxLength={200} /></div>
+              <div><Label htmlFor="reporter-name">Name</Label><Input id="reporter-name" name="reporter_name" value={name} onChange={(e) => setName(e.target.value)} maxLength={200} /></div>
+              <div><Label htmlFor="reporter-contact">Contact (email or phone)</Label><Input id="reporter-contact" name="reporter_contact" value={contact} onChange={(e) => setContact(e.target.value)} maxLength={200} /></div>
             </div>
           )}
           <Button type="submit" disabled={busy}>{busy ? "Sending..." : "Submit concern"}</Button>
