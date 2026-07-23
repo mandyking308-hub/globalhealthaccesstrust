@@ -12,13 +12,13 @@ export const TrusteeBiographiesPage = () => {
       />
       <h1>Trustee Biographies</h1>
       
-      <p className="text-lg mb-8">"The strength of a charitable trust lies in the integrity of its stewards. Our Trustees are senior professionals with decades of experience in healthcare leadership, public policy, governance, and international systems. Their duty is not only to guide the Trust, but to protect its mission—and the lives it exists to serve."</p>
+      <p className="text-lg mb-8">The Trust is governed by appointed Trustees who carry collective responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight. Their work is supported by specialist advisers where additional expertise is required.</p>
 
       <TrusteeBiographiesGrid />
 
       <p className="mt-8">A full register of trustee declarations, including interests and annual governance statements, is available upon request.</p>
       
-      <p>Only Mandy King, Dr. Jagdev Thukral, and John O'Sullivan currently act as operational signatories to the Trust's Constitution. The remaining trustees serve in an advisory or non-executive capacity.</p>
+      <p>Specialist contributors support the Trust in an advisory capacity and do not hold trustee authority unless separately appointed in accordance with the Trust Deed.</p>
     </ContentLayout>
   );
 };
