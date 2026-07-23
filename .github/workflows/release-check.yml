@@ -25,13 +25,15 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha: context.sha,
               state: 'pending',
               context: 'GHAT finished-site preview',
-              description: 'Building and rendering the finished website'
+              description: 'Building and rendering the finished website',
+              target_url: targetUrl
             });
 
       - name: Set up Bun
@@ -64,7 +66,7 @@ jobs:
       - name: Render finished-site previews
         run: |
           mkdir -p preview-images
-          cat > /tmp/render-preview.mjs <<'EOF'
+          cat > render-preview.mjs <<'EOF'
           import { chromium } from 'playwright';
           import { writeFile } from 'node:fs/promises';
 
@@ -110,7 +112,7 @@ jobs:
           await browser.close();
           await writeFile('preview-images/preview-report.json', JSON.stringify(results, null, 2));
           EOF
-          bun /tmp/render-preview.mjs
+          bun render-preview.mjs
 
       - name: Upload finished-site previews
         uses: actions/upload-artifact@v4
@@ -125,13 +127,15 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha: context.sha,
               state: 'success',
               context: 'GHAT finished-site preview',
-              description: 'Build passed and finished-site previews were rendered'
+              description: 'Build passed and finished-site previews were rendered',
+              target_url: targetUrl
             });
 
       - name: Mark preview check failed
@@ -139,11 +143,13 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha: context.sha,
               state: 'failure',
               context: 'GHAT finished-site preview',
-              description: 'Build or finished-site preview rendering failed'
+              description: 'Build or finished-site preview rendering failed',
+              target_url: targetUrl
             });
