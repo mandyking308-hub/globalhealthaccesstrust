@@ -4,7 +4,6 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { all50BlogPosts } from "@/data/complete50BlogPosts";
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -12,52 +11,211 @@ interface SearchModalProps {
 }
 
 interface SiteSearchResult {
-  type: "page" | "blog" | "document";
+  type: "page" | "document";
   title: string;
   url: string;
   excerpt: string;
-  date?: string;
   keywords?: string;
 }
 
-const PAGE_INDEX: SiteSearchResult[] = [
-  { type: "page", title: "About the Trust", url: "/about-the-trust", excerpt: "The Trust's purpose, history, structure and approach to healthcare access.", keywords: "mission history charity charitable trust" },
-  { type: "page", title: "Trustee Biographies", url: "/trustee-biographies", excerpt: "Trustees, constitutional signatories and specialist contributors.", keywords: "board governance advisers people" },
-  { type: "page", title: "Our Work", url: "/our-work", excerpt: "Healthcare access, capacity building, health systems, research and emergency relief.", keywords: "countries network programmes projects" },
-  { type: "page", title: "How We Work", url: "/how-we-work", excerpt: "How projects, partnerships, oversight and reporting are structured.", keywords: "delivery partners monitoring" },
-  { type: "page", title: "Support the Trust", url: "/support-the-trust", excerpt: "Ways to engage with and support the Trust's work.", keywords: "funding donation legacy gift" },
-  { type: "page", title: "Donor Portal Guide", url: "/donor-guide", excerpt: "How the secure Donor Portal works.", keywords: "dashboard login contribution" },
-  { type: "page", title: "Project Team Application", url: "/volunteer-apply", excerpt: "Apply to join a commissioned project delivery team.", keywords: "volunteer field worker clinician cv" },
-  { type: "page", title: "Contact the Trust", url: "/contact", excerpt: "Submit a secure general, partnership, funding, legal or media enquiry.", keywords: "message address enquiry" },
-  { type: "page", title: "Frequently Asked Questions", url: "/frequently-asked-questions", excerpt: "Answers to common questions about the Trust and its work.", keywords: "faq help" },
-  { type: "page", title: "Publications and Documents", url: "/publications", excerpt: "Governance, policy and public documents.", keywords: "reports policies" },
-  { type: "document", title: "Signed Constitution", url: "/constitution", excerpt: "The Trust's authoritative governing document, effective 1 December 2024.", keywords: "trust deed governing document GHAT-CONSTITUTION-1.0" },
-  { type: "document", title: "Legal, Privacy and Governance Centre", url: "/legal", excerpt: "Versioned terms, policies, privacy and governance documents.", keywords: "legal centre" },
-  { type: "document", title: "Privacy Notice", url: "/legal/privacy-notice", excerpt: "How the Trust processes and protects personal data.", keywords: "UK GDPR data protection" },
-  { type: "document", title: "Website and Portal Terms of Use", url: "/legal/terms-of-use", excerpt: "Terms governing use of the public website and secure portals.", keywords: "website portal terms" },
-  { type: "document", title: "Donor and Project Funding Terms", url: "/donor-project-funding-terms", excerpt: "Terms governing structured gifts, allocation, use, reporting and refunds.", keywords: "donation funding 20 80" },
-  { type: "document", title: "Gift Acceptance and Restricted Funds Policy", url: "/gift-acceptance-and-restricted-funds-policy", excerpt: "How gifts are accepted, refused, restricted, suspended or returned.", keywords: "restricted unrestricted gift policy" },
-  { type: "document", title: "Donor Due Diligence and Sanctions Policy", url: "/donor-due-diligence-and-sanctions-policy", excerpt: "Risk-based donor checks, source of funds and sanctions controls.", keywords: "KYC AML PEP compliance" },
-  { type: "document", title: "Project Team Terms", url: "/project-team-terms", excerpt: "Conduct, safeguarding, evidence, expenses and confidentiality terms for project teams.", keywords: "volunteer staff terms" },
-  { type: "document", title: "Complaints Policy", url: "/legal/complaints-policy", excerpt: "How complaints are received, investigated, answered and escalated.", keywords: "complaint grievance" },
-  { type: "document", title: "Safeguarding", url: "/safeguarding", excerpt: "The Trust's safeguarding framework and reporting route.", keywords: "child adult risk report concern" },
-  { type: "document", title: "Financial Controls", url: "/financial-controls", excerpt: "The Trust's financial control and oversight framework.", keywords: "banking accounts audit budget" },
-  { type: "document", title: "Risk Management", url: "/risk-management", excerpt: "How operational, financial, legal and safeguarding risks are managed.", keywords: "risk register controls" },
-  { type: "document", title: "Whistleblowing", url: "/whistleblowing", excerpt: "Protected reporting and non-retaliation arrangements.", keywords: "fraud wrongdoing concern" },
-  { type: "page", title: "Project Support", url: "/support", excerpt: "Support, complaints, protected concerns and safeguarding pathways.", keywords: "help incident issue" },
-  { type: "page", title: "Data-protection Rights Request", url: "/data-access-request", excerpt: "Exercise access, correction, erasure and other UK GDPR rights.", keywords: "subject access SAR privacy data" },
+const SEARCH_INDEX: SiteSearchResult[] = [
+  {
+    type: "page",
+    title: "About the Trust",
+    url: "/about-the-trust",
+    excerpt: "The Trust's purpose, history, structure and approach to enabling better healthcare.",
+    keywords: "mission history charitable trust public benefit",
+  },
+  {
+    type: "page",
+    title: "Trustee Biographies",
+    url: "/trustee-biographies",
+    excerpt: "The Trustees, constitutional signatories and specialist advisers supporting the Trust.",
+    keywords: "Mandy King Jagdev Thukral John O'Sullivan board governance advisers",
+  },
+  {
+    type: "page",
+    title: "Our Work",
+    url: "/our-work",
+    excerpt: "Public-benefit work spanning healthcare access, infrastructure, housing, food systems, education, livelihoods, responsible technology and humanitarian response.",
+    keywords: "projects countries systems AI agriculture water logistics research community",
+  },
+  {
+    type: "page",
+    title: "How We Work",
+    url: "/how-we-work",
+    excerpt: "How needs are scoped, projects structured, contributors verified and delivery evidenced.",
+    keywords: "delivery partners milestones safeguards monitoring evidence",
+  },
+  {
+    type: "page",
+    title: "Support the Trust",
+    url: "/support-the-trust",
+    excerpt: "Support through funding, time, expertise, equipment, premises, technology, services or relationships.",
+    keywords: "support pledge contribution donor gift legacy resources",
+  },
+  {
+    type: "page",
+    title: "Pledge a Contribution",
+    url: "/donate",
+    excerpt: "Pledge money, time, expertise, equipment, premises, technology, services or other practical support for review.",
+    keywords: "donate funding volunteer equipment land premises due diligence verification",
+  },
+  {
+    type: "page",
+    title: "Commission a Public-Benefit Project",
+    url: "/commission-projects",
+    excerpt: "Propose and help shape a structured charitable project for scoping and Trustee review.",
+    keywords: "commission project infrastructure housing food education AI humanitarian research",
+  },
+  {
+    type: "page",
+    title: "Get Involved",
+    url: "/get-involved",
+    excerpt: "Routes for professional contributors, volunteers, organisations, supporters and project propositions.",
+    keywords: "partnership contributor expert volunteer organisation",
+  },
+  {
+    type: "page",
+    title: "Project Team & Contributor Application",
+    url: "/volunteer-apply",
+    excerpt: "Register interest in contributing professional, technical, practical or local capability to approved work.",
+    keywords: "application volunteer clinician engineer researcher technologist CV experience",
+  },
+  {
+    type: "page",
+    title: "Donor Portal Guide",
+    url: "/donor-guide",
+    excerpt: "How the secure supporter workspace, verification process, commissioned projects and contribution records operate.",
+    keywords: "dashboard login pledge contribution agreement due diligence",
+  },
+  {
+    type: "page",
+    title: "Donor Recognition",
+    url: "/donor-recognition",
+    excerpt: "Recognition, dedication, privacy and anonymity choices for accepted support.",
+    keywords: "anonymous acknowledgement family organisation dedication",
+  },
+  {
+    type: "page",
+    title: "Contact the Trust",
+    url: "/contact-the-trust",
+    excerpt: "Find the appropriate route for general, partnership, project, support, governance or legal matters.",
+    keywords: "contact enquiry help partnership",
+  },
+  {
+    type: "page",
+    title: "Secure Contact Form",
+    url: "/contact",
+    excerpt: "Submit a secure enquiry to the Trust for review and response.",
+    keywords: "message form enquiry organisation",
+  },
+  {
+    type: "page",
+    title: "Frequently Asked Questions",
+    url: "/frequently-asked-questions",
+    excerpt: "Answers to common questions about the Trust, its scope, governance and engagement routes.",
+    keywords: "FAQ help questions",
+  },
+  {
+    type: "page",
+    title: "Publications & Documents",
+    url: "/publications",
+    excerpt: "Approved governing documents, policies, reports and institutional material.",
+    keywords: "publication reports policies documents",
+  },
+  {
+    type: "document",
+    title: "Trust Deed",
+    url: "/constitution",
+    excerpt: "The Trust's authoritative governing document, effective 1 December 2024.",
+    keywords: "constitution governing document objects advance health relieve illness preserve life",
+  },
+  {
+    type: "document",
+    title: "Legal, Privacy and Governance Centre",
+    url: "/legal",
+    excerpt: "Versioned terms, policies, privacy and governance documents.",
+    keywords: "legal centre compliance",
+  },
+  {
+    type: "document",
+    title: "Privacy Notice",
+    url: "/legal/privacy-notice",
+    excerpt: "How the Trust processes and protects personal data.",
+    keywords: "UK GDPR data protection privacy",
+  },
+  {
+    type: "document",
+    title: "Website and Portal Terms of Use",
+    url: "/legal/terms-of-use",
+    excerpt: "Terms governing use of the public website and secure portals.",
+    keywords: "website portal terms",
+  },
+  {
+    type: "document",
+    title: "Donor and Project Funding Terms",
+    url: "/donor-project-funding-terms",
+    excerpt: "Terms governing the review, acceptance, use, reporting and stewardship of contributions and project funding.",
+    keywords: "donor contribution funding terms restriction acceptance",
+  },
+  {
+    type: "document",
+    title: "Gift Acceptance and Restricted Funds Policy",
+    url: "/gift-acceptance-and-restricted-funds-policy",
+    excerpt: "How contributions are accepted, refused, restricted, suspended or returned.",
+    keywords: "restricted unrestricted gift contribution policy",
+  },
+  {
+    type: "document",
+    title: "Donor Due Diligence and Sanctions Policy",
+    url: "/donor-due-diligence-and-sanctions-policy",
+    excerpt: "Risk-based donor checks, source-of-funds review and sanctions controls.",
+    keywords: "KYC AML PEP compliance verification",
+  },
+  {
+    type: "document",
+    title: "Project Team Terms",
+    url: "/project-team-terms",
+    excerpt: "Conduct, safeguarding, evidence, expenses and confidentiality terms for project contributors.",
+    keywords: "volunteer professional contributor staff terms",
+  },
+  {
+    type: "document",
+    title: "Complaints Policy",
+    url: "/legal/complaints-policy",
+    excerpt: "How complaints are received, investigated, answered and escalated.",
+    keywords: "complaint grievance",
+  },
+  {
+    type: "document",
+    title: "Safeguarding",
+    url: "/safeguarding",
+    excerpt: "The Trust's safeguarding framework and reporting route.",
+    keywords: "child adult risk report concern",
+  },
+  {
+    type: "document",
+    title: "Financial Controls",
+    url: "/financial-controls",
+    excerpt: "The Trust's financial-control and oversight framework.",
+    keywords: "banking accounts audit budget finance",
+  },
+  {
+    type: "document",
+    title: "Risk Management",
+    url: "/risk-management",
+    excerpt: "How operational, financial, legal and safeguarding risks are managed.",
+    keywords: "risk register controls",
+  },
+  {
+    type: "document",
+    title: "Whistleblowing",
+    url: "/whistleblowing",
+    excerpt: "Protected reporting and non-retaliation arrangements.",
+    keywords: "fraud wrongdoing concern protected disclosure",
+  },
 ];
-
-const BLOG_INDEX: SiteSearchResult[] = all50BlogPosts.map((post) => ({
-  type: "blog",
-  title: post.title,
-  url: `/blog/${post.slug}`,
-  excerpt: post.summary,
-  date: post.publishDate,
-  keywords: [...post.categories, ...post.tags, post.region, post.programArea].filter(Boolean).join(" "),
-}));
-
-const SEARCH_INDEX = [...PAGE_INDEX, ...BLOG_INDEX];
 
 export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
   const [query, setQuery] = useState("");
@@ -91,7 +249,7 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="sr-only">Search GHAT Website</DialogTitle>
+          <DialogTitle className="sr-only">Search the GHAT website</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -99,8 +257,8 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
             <Input
               type="search"
-              aria-label="Search pages, articles and documents"
-              placeholder="Search pages, articles, and documents..."
+              aria-label="Search pages and documents"
+              placeholder="Search pages and documents..."
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               className="pl-10 pr-10"
@@ -141,19 +299,18 @@ export const SearchModal = ({ isOpen, onClose }: SearchModalProps) => {
                       <span className="text-xs text-muted-foreground capitalize bg-muted px-2 py-1 rounded">{result.type}</span>
                     </div>
                     <p className="text-sm text-muted-foreground line-clamp-2">{result.excerpt}</p>
-                    {result.date && <p className="text-xs text-muted-foreground mt-2">{new Date(result.date).toLocaleDateString("en-GB")}</p>}
                   </Link>
                 ))}
               </>
             )}
 
             {!query && (
-              <div className="text-center py-8 text-muted-foreground">Start typing to search pages, articles, and documents</div>
+              <div className="text-center py-8 text-muted-foreground">Start typing to search pages and documents</div>
             )}
           </div>
 
           <div className="text-xs text-muted-foreground border-t pt-4">
-            <p><strong>Search tips:</strong> Search by subject, region, policy name, programme or document title.</p>
+            <p><strong>Search tips:</strong> Search by subject, project area, policy name or document title.</p>
           </div>
         </div>
       </DialogContent>
