@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  statuses: write
 
 jobs:
   verify:
@@ -30,6 +31,7 @@ jobs:
           echo "VITE_SUPABASE_PUBLISHABLE_KEY=$VITE_SUPABASE_PUBLISHABLE_KEY" >> "$GITHUB_ENV"
 
       - name: Verify live services
+        id: verify_services
         continue-on-error: true
         run: node scripts/verify-live-services.mjs
 
@@ -40,3 +42,33 @@ jobs:
           name: live-service-report
           path: live-service-failures.txt
           if-no-files-found: error
+
+      - name: Report diagnostic failure
+        if: always() && steps.verify_services.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT live service diagnostic',
+              description: 'Download the live-service-report artifact for the exact failure',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report diagnostic success
+        if: always() && steps.verify_services.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT live service diagnostic',
+              description: 'All required live services are responding',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
