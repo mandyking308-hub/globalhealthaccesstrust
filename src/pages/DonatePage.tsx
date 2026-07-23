@@ -19,60 +19,52 @@ import { toast } from "sonner";
 
 const contributionRoutes = [
   {
-    title: "Funding",
+    title: "Financial Support",
     description:
-      "Make a one-time or recurring financial contribution, support an approved area of work, fund an existing project or discuss a restricted contribution.",
-    action: "Make a Financial Contribution",
-    href: "/donation-form",
+      "Pledge a one-time, recurring, project-specific, restricted or general financial contribution. The Trust will contact you and complete the appropriate donor-verification process before accepting funds or issuing payment instructions.",
+    action: "Pledge Financial Support",
   },
   {
     title: "Time and Professional Expertise",
     description:
       "Offer professional, technical or practical time in health systems, technology, responsible AI, research, education, engineering, construction, agriculture, housing, finance, law, logistics, communications, safeguarding, operations or project delivery.",
     action: "Pledge Time or Expertise",
-    href: "#pledge-form",
   },
   {
     title: "Equipment and Essential Supplies",
     description:
       "Offer suitable equipment, materials, technology, communications tools, educational resources, infrastructure components, agricultural resources, storage systems, humanitarian supplies or appropriately sourced healthcare equipment.",
     action: "Offer Equipment or Supplies",
-    href: "#pledge-form",
   },
   {
     title: "Premises, Land and Facilities",
     description:
       "Offer temporary or longer-term access to premises, land, workspace, storage, accommodation, training facilities or other suitable locations through a donated, licensed, leased or reduced-cost arrangement.",
     action: "Offer Premises or Land",
-    href: "#pledge-form",
   },
   {
     title: "Technology, Data and Digital Capability",
     description:
       "Contribute software, systems, infrastructure, responsible AI capability, data expertise, communications tools or technical development that can improve research, coordination, evidence, logistics and accountable delivery.",
     action: "Offer Technology or Digital Support",
-    href: "#pledge-form",
   },
   {
     title: "Services, Logistics and Operational Support",
     description:
       "Offer transport, warehousing, construction, procurement, manufacturing, professional services, communications, translation, design, administration or other practical delivery capability.",
     action: "Offer Services or Operational Support",
-    href: "#pledge-form",
   },
   {
     title: "Relationships and Access",
     description:
       "Introduce the Trust to communities, professional contributors, funders, public bodies, educational institutions, suppliers or responsible delivery partners who may help an approved project progress.",
     action: "Offer an Introduction or Relationship",
-    href: "#pledge-form",
   },
   {
     title: "Project Sponsorship and Restricted Support",
     description:
-      "Support a defined project, location, workstream or charitable purpose through funding, resources or a combination of contributions, subject to Trustee review and formal acceptance.",
+      "Pledge support for a defined project, location, workstream or charitable purpose through funding, resources or a combination of contributions, subject to Trustee review and formal acceptance.",
     action: "Discuss Project Sponsorship",
-    href: "#pledge-form",
   },
 ];
 
@@ -157,7 +149,7 @@ export const DonatePage = () => {
           nature_of_enquiry: "Donation or Active Project Support",
           message,
           additional_context:
-            "Submitted through the Pledge or Make a Contribution page. This is an expression of interest and not a completed donation or accepted gift.",
+            "Submitted through the contribution-pledge page. This is an expression of interest only. No contribution has been accepted and no payment instructions should be issued until donor verification, due diligence and formal acceptance are complete.",
           consent: pledge.consent,
           honeypot: pledge.honeypot,
         },
@@ -185,28 +177,26 @@ export const DonatePage = () => {
   return (
     <ContentLayout>
       <SEO
-        title="Pledge or Make a Contribution"
-        description="Support the Global Health Access Trust with funding, time, expertise, equipment, premises, technology, services, logistics, relationships or other practical resources."
+        title="Pledge a Contribution"
+        description="Pledge funding, time, expertise, equipment, premises, technology, services, logistics, relationships or other practical support to the Global Health Access Trust."
         canonical="/donate"
       />
 
-      <h1>Pledge or Make a Contribution</h1>
-
+      <h1>Pledge a Contribution</h1>
       <p className="featured-text">Support can take many forms.</p>
-
       <p>
-        The Global Health Access Trust welcomes contributions of funding, time, expertise,
-        equipment, premises, technology, professional services, relationships and practical
-        resources that can strengthen approved charitable work.
+        The Global Health Access Trust welcomes pledges of funding, time, expertise, equipment,
+        premises, technology, professional services, relationships and practical resources that
+        may strengthen approved charitable work.
       </p>
       <p>
-        You may make an immediate financial contribution or pledge another form of support for
-        the Trust to review with you.
+        Submitting a pledge does not require you to transfer money or resources. The Trust will
+        review the proposed contribution and, where appropriate, contact you to begin the donor,
+        contributor or organisational verification process and agree the next steps.
       </p>
 
       <div className="flex flex-wrap gap-3 my-8">
         <Button asChild><a href="#pledge-form">Pledge a Contribution</a></Button>
-        <Button asChild variant="outline"><Link to="/donation-form">Make a Financial Contribution</Link></Button>
         <Button asChild variant="outline"><Link to="/commission-projects">Commission a Public-Benefit Project</Link></Button>
         <Button asChild variant="outline"><Link to="/contact-the-trust">Discuss Major or Institutional Support</Link></Button>
       </div>
@@ -223,10 +213,6 @@ export const DonatePage = () => {
           public-benefit purpose rather than assuming that every supporter must contribute in the
           same way.
         </p>
-        <p>
-          Individuals, families, professional contributors, businesses, institutions,
-          landowners, suppliers, community organisations and foundations may all offer support.
-        </p>
       </div>
 
       <h2 className="mt-12">Ways to Contribute</h2>
@@ -236,10 +222,21 @@ export const DonatePage = () => {
             <h3>{route.title}</h3>
             <p>{route.description}</p>
             <Button asChild variant="outline" className="mt-4">
-              {route.href.startsWith("#") ? <a href={route.href}>{route.action}</a> : <Link to={route.href}>{route.action}</Link>}
+              <a href="#pledge-form">{route.action}</a>
             </Button>
           </div>
         ))}
+      </div>
+
+      <div className="section-container">
+        <h2>How Financial Pledges Work</h2>
+        <ol className="space-y-3 list-decimal pl-5">
+          <li>You submit an initial pledge and indicate the proposed amount, purpose and any restrictions.</li>
+          <li>The Trust reviews the proposed relationship and decides what level of donor verification and due diligence is appropriate.</li>
+          <li>The Trust may request identity, organisation, authority, source-of-funds, sanctions, purpose or other supporting information.</li>
+          <li>Where the contribution can be accepted, the Trust confirms the terms, recognition arrangements and approved payment or transfer route.</li>
+          <li>No financial contribution is treated as accepted or received until the required review is complete and the Trust has confirmed the next step.</li>
+        </ol>
       </div>
 
       <div id="pledge-form" className="section-container scroll-mt-32">
@@ -249,21 +246,17 @@ export const DonatePage = () => {
           an expression of interest. It does not oblige you to transfer money or resources, and
           it does not require the Trust to accept the contribution.
         </p>
-        <p>
-          Once reviewed, the Trust may contact you to clarify the offer, identify an appropriate
-          project or agree the next steps.
-        </p>
 
         {isSubmitted ? (
           <div className="mt-8 border border-foreground/15 p-6 md:p-8 bg-muted/20">
             <h3>Contribution Pledge Received</h3>
             <p>
-              Thank you. The Trust will review the proposed contribution and use the contact
-              details provided where clarification or a suitable next step is available.
+              Thank you. The Trust will review the proposed contribution and contact you where
+              clarification, verification or a suitable next step is available.
             </p>
             <p className="text-sm text-muted-foreground">
-              The pledge has not yet been accepted, and no money, resource or obligation has been
-              transferred.
+              No money or resource has been accepted or transferred. Payment or transfer details
+              will only be provided after the appropriate review and formal acceptance process.
             </p>
             {reference && (
               <p className="text-sm text-muted-foreground">
@@ -280,55 +273,27 @@ export const DonatePage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-2">
                 <Label htmlFor="pledge-name">Name *</Label>
-                <Input
-                  id="pledge-name"
-                  value={pledge.name}
-                  onChange={(event) => updateField("name", event.target.value)}
-                  required
-                />
+                <Input id="pledge-name" value={pledge.name} onChange={(event) => updateField("name", event.target.value)} required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pledge-email">Email *</Label>
-                <Input
-                  id="pledge-email"
-                  type="email"
-                  value={pledge.email}
-                  onChange={(event) => updateField("email", event.target.value)}
-                  required
-                />
+                <Input id="pledge-email" type="email" value={pledge.email} onChange={(event) => updateField("email", event.target.value)} required />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pledge-phone">Telephone</Label>
-                <Input
-                  id="pledge-phone"
-                  type="tel"
-                  value={pledge.phone}
-                  onChange={(event) => updateField("phone", event.target.value)}
-                />
+                <Input id="pledge-phone" type="tel" value={pledge.phone} onChange={(event) => updateField("phone", event.target.value)} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pledge-location">Country or Location</Label>
-                <Input
-                  id="pledge-location"
-                  value={pledge.location}
-                  onChange={(event) => updateField("location", event.target.value)}
-                />
+                <Input id="pledge-location" value={pledge.location} onChange={(event) => updateField("location", event.target.value)} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pledge-organisation">Organisation</Label>
-                <Input
-                  id="pledge-organisation"
-                  value={pledge.organisation}
-                  onChange={(event) => updateField("organisation", event.target.value)}
-                />
+                <Input id="pledge-organisation" value={pledge.organisation} onChange={(event) => updateField("organisation", event.target.value)} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pledge-position">Role or Authority to Make the Offer</Label>
-                <Input
-                  id="pledge-position"
-                  value={pledge.position}
-                  onChange={(event) => updateField("position", event.target.value)}
-                />
+                <Input id="pledge-position" value={pledge.position} onChange={(event) => updateField("position", event.target.value)} />
               </div>
             </div>
 
@@ -356,44 +321,23 @@ export const DonatePage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="space-y-2">
-                <Label htmlFor="pledge-scale">Quantity, Scale or Estimated Value</Label>
-                <Input
-                  id="pledge-scale"
-                  value={pledge.scaleOrValue}
-                  onChange={(event) => updateField("scaleOrValue", event.target.value)}
-                  placeholder="Where known"
-                />
+                <Label htmlFor="pledge-scale">Amount, Quantity, Scale or Estimated Value</Label>
+                <Input id="pledge-scale" value={pledge.scaleOrValue} onChange={(event) => updateField("scaleOrValue", event.target.value)} placeholder="Where known" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="pledge-availability">Availability or Proposed Timing</Label>
-                <Input
-                  id="pledge-availability"
-                  value={pledge.availability}
-                  onChange={(event) => updateField("availability", event.target.value)}
-                />
+                <Input id="pledge-availability" value={pledge.availability} onChange={(event) => updateField("availability", event.target.value)} />
               </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="pledge-purpose">Preferred Purpose, Project or Geography</Label>
-              <Textarea
-                id="pledge-purpose"
-                value={pledge.preferredPurpose}
-                onChange={(event) => updateField("preferredPurpose", event.target.value)}
-                rows={3}
-                placeholder="Leave blank where the Trust may match the contribution to the most suitable work."
-              />
+              <Textarea id="pledge-purpose" value={pledge.preferredPurpose} onChange={(event) => updateField("preferredPurpose", event.target.value)} rows={3} placeholder="Leave blank where the Trust may match the contribution to the most suitable work." />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="pledge-restrictions">Proposed Restrictions or Conditions</Label>
-              <Textarea
-                id="pledge-restrictions"
-                value={pledge.restrictions}
-                onChange={(event) => updateField("restrictions", event.target.value)}
-                rows={3}
-                placeholder="Any proposed restriction remains subject to review and formal Trustee acceptance."
-              />
+              <Textarea id="pledge-restrictions" value={pledge.restrictions} onChange={(event) => updateField("restrictions", event.target.value)} rows={3} placeholder="Any proposed restriction remains subject to review and formal Trustee acceptance." />
             </div>
 
             <div className="space-y-2">
@@ -413,33 +357,23 @@ export const DonatePage = () => {
 
             <div className="hidden" aria-hidden="true">
               <Label htmlFor="pledge-company-website">Company website</Label>
-              <Input
-                id="pledge-company-website"
-                tabIndex={-1}
-                autoComplete="off"
-                value={pledge.honeypot}
-                onChange={(event) => updateField("honeypot", event.target.value)}
-              />
+              <Input id="pledge-company-website" tabIndex={-1} autoComplete="off" value={pledge.honeypot} onChange={(event) => updateField("honeypot", event.target.value)} />
             </div>
 
             <div className="flex items-start gap-3">
-              <Checkbox
-                id="pledge-consent"
-                checked={pledge.consent}
-                onCheckedChange={(checked) => updateField("consent", checked === true)}
-                className="mt-1"
-              />
+              <Checkbox id="pledge-consent" checked={pledge.consent} onCheckedChange={(checked) => updateField("consent", checked === true)} className="mt-1" />
               <Label htmlFor="pledge-consent" className="text-sm leading-relaxed cursor-pointer">
-                I consent to the Trust processing the information provided to review this pledge
-                and contact me about it. I understand that submitting a pledge does not create a
-                donation, contract, appointment or acceptance of the proposed contribution. *
+                I consent to the Trust processing the information provided to review this pledge,
+                carry out appropriate verification and contact me about the next steps. I understand
+                that submitting a pledge does not create a donation, contract, appointment or
+                acceptance of the proposed contribution. *
               </Label>
             </div>
 
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Please do not upload or send sensitive documents through this initial form. The
-              Trust may request evidence of ownership, condition, authority, value, safety or
-              suitability through an appropriate secure route after review.
+              Please do not upload or send identity, banking, source-of-funds or other sensitive
+              documents through this initial form. The Trust will request any required information
+              through an appropriate secure route after the initial review.
             </p>
 
             <Button type="submit" size="lg" disabled={isSubmitting || !pledge.consent} className="w-full">
@@ -453,73 +387,31 @@ export const DonatePage = () => {
         <h2>What Happens After a Pledge</h2>
         <ol className="space-y-4 list-decimal pl-5">
           <li><strong>Initial review:</strong> the Trust considers the offer, its relevance and whether it can be considered within the Trust's charitable purposes.</li>
-          <li><strong>Clarification:</strong> the Trust may ask about ownership, condition, value, availability, location, restrictions, intended use or delivery requirements.</li>
-          <li><strong>Suitability and due diligence:</strong> appropriate checks may cover provenance, authority, safety, safeguarding, sanctions, conflicts, data protection, insurance, storage, maintenance and total cost of acceptance.</li>
-          <li><strong>Agreement:</strong> where suitable, the Trust confirms the purpose, acceptance terms, responsibilities, recognition arrangements and documentation required.</li>
+          <li><strong>Clarification:</strong> the Trust may ask about ownership, authority, condition, value, availability, location, restrictions, intended use or delivery requirements.</li>
+          <li><strong>Verification and due diligence:</strong> checks are proportionate to the contribution and may concern identity, organisation, source of funds or assets, sanctions, conflicts, safeguarding, safety and total cost of acceptance.</li>
+          <li><strong>Formal acceptance:</strong> where suitable, the Trust confirms the approved purpose, terms, responsibilities, recognition arrangements and transfer process.</li>
           <li><strong>Contribution and acknowledgement:</strong> the contribution is recorded only after it has been formally accepted and, where applicable, received, transferred or made available.</li>
         </ol>
-      </div>
-
-      <div className="section-container">
-        <h2>Contributions the Trust May Be Unable to Accept</h2>
-        <p>The Trust may decline a proposed contribution where it:</p>
-        <ul>
-          <li>Does not advance its charitable purposes</li>
-          <li>Creates disproportionate cost or risk</li>
-          <li>Cannot be safely stored, maintained, transported or used</li>
-          <li>Is subject to unsuitable restrictions</li>
-          <li>Creates inappropriate private benefit or influence</li>
-          <li>Cannot be verified or lawfully accepted</li>
-          <li>Conflicts with safeguarding, sanctions, ethical or reputational requirements</li>
-          <li>Is not currently needed by an approved or developing project</li>
-        </ul>
-        <p>
-          Declining an offer does not diminish the generosity behind it. It ensures that accepted
-          contributions can be used responsibly and effectively.
-        </p>
       </div>
 
       <div className="section-container">
         <h2>Charitable Independence</h2>
         <p>
           A contribution does not confer ownership of charitable work, governance authority,
-          access to beneficiaries or control over Trustee decisions.
+          access to beneficiaries or control over Trustee decisions. Every accepted contribution
+          remains subject to the Trust's charitable purposes, governance and Trustee oversight.
         </p>
-        <p>
-          Supporters may express preferences and help shape a proposition, but every accepted
-          contribution remains subject to the Trust's charitable purposes, governance, financial
-          controls and Trustee oversight.
-        </p>
-      </div>
-
-      <div className="section-container">
-        <h2>Existing and Commissioned Projects</h2>
-        <p>
-          Supporters may contribute to an approved area of work, pledge support that can be
-          matched to a suitable project or create a new public-benefit project through the
-          commissioned-project process.
-        </p>
-        <p>
-          A contribution may combine funding and expertise, premises and equipment, technology
-          and logistics, land and training, or supplies, transport and local relationships.
-        </p>
-        <div className="flex flex-wrap gap-3 mt-5">
-          <Button asChild><Link to="/our-work">Explore Our Work</Link></Button>
-          <Button asChild variant="outline"><Link to="/commission-projects">Commission a Public-Benefit Project</Link></Button>
-          <Button asChild variant="outline"><Link to="/how-we-work">Read How We Work</Link></Button>
-        </div>
       </div>
 
       <div className="section-container">
         <p className="featured-text">A meaningful contribution is not defined only by its monetary value.</p>
         <p>
           The right expertise, equipment, premises, relationship or practical resource can unlock
-          work that funding alone cannot deliver. The Trust's role is to consider each offer
-          carefully and connect suitable contributions with properly structured charitable work.
+          work that funding alone cannot deliver.
         </p>
         <div className="flex flex-wrap gap-3 mt-5">
           <Button asChild><a href="#pledge-form">Pledge a Contribution</a></Button>
-          <Button asChild variant="outline"><Link to="/donation-form">Make a Financial Contribution</Link></Button>
+          <Button asChild variant="outline"><Link to="/commission-projects">Commission a Public-Benefit Project</Link></Button>
           <Button asChild variant="outline"><Link to="/contact-the-trust">Contact the Trust</Link></Button>
         </div>
       </div>
