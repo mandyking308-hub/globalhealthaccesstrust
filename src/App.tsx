@@ -20,8 +20,6 @@ import { DonorRecognitionPage } from "./pages/DonorRecognitionPage";
 import { SupportTheTrustPage } from "./pages/SupportTheTrustPage";
 import { FrequentlyAskedQuestionsPage } from "./pages/FrequentlyAskedQuestionsPage";
 import { ContactTheTrustPage } from "./pages/ContactTheTrustPage";
-import { BlogIndexPage } from "./pages/BlogIndexPage";
-import { BlogPostPage } from "./pages/BlogPostPage";
 import { GetInvolvedPage } from "./pages/GetInvolvedPage";
 import { PublicationsPage } from "./pages/PublicationsPage";
 import { ContactPage } from "./pages/ContactPage";
@@ -126,8 +124,6 @@ const App = () => (
             <Route path="contact-the-trust" element={<ContactTheTrustPage />} />
             <Route path="about" element={<Navigate to="/about-the-trust" replace />} />
             <Route path="what-we-do" element={<Navigate to="/our-work" replace />} />
-            <Route path="blog" element={<BlogIndexPage />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="get-involved" element={<GetInvolvedPage />} />
             <Route path="donate" element={<DonatePage />} />
             <Route path="commission-projects" element={<CommissionProjectsPage />} />
