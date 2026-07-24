@@ -15,6 +15,24 @@ export interface LegalDocumentRecord {
 
 export const LEGAL_DOCUMENTS: LegalDocumentRecord[] = [
   {
+    slug: "signed-constitution",
+    title: "Signed Constitution",
+    version: "Signed June 2025",
+    effectiveDate: "2025-06-01",
+    route: "/constitution",
+    audience: ["public", "donor", "project_team", "admin"],
+    active: true,
+  },
+  {
+    slug: "trust-deed-record",
+    title: "Trust Deed",
+    version: "Formal governance record",
+    effectiveDate: "2024-12-01",
+    route: "/constitution",
+    audience: ["public", "donor", "project_team", "admin"],
+    active: true,
+  },
+  {
     slug: "terms-of-use",
     title: "Website and Portal Terms of Use",
     version: "1.0",
