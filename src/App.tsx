@@ -15,6 +15,8 @@ import { AboutTheTrustPage } from "./pages/AboutTheTrustPage";
 import { TrusteeBiographiesPage } from "./pages/TrusteeBiographiesPage";
 import { GovernanceLegalFrameworkPage } from "./pages/GovernanceLegalFrameworkPage";
 import { OurWorkPage } from "./pages/OurWorkPage";
+import { WorkstreamsIndexPage } from "./pages/WorkstreamsIndexPage";
+import { WorkstreamPage } from "./pages/WorkstreamPage";
 import { CharitableHistoryPage } from "./pages/CharitableHistoryPage";
 import { CharitableHistory1990sPage } from "./pages/CharitableHistory1990sPage";
 import { CharitableHistory2000sPage } from "./pages/CharitableHistory2000sPage";
@@ -120,6 +122,8 @@ const App = () => (
             <Route path="trustee-biographies" element={<TrusteeBiographiesPage />} />
             <Route path="governance-legal-framework" element={<GovernanceLegalFrameworkPage />} />
             <Route path="our-work" element={<OurWorkPage />} />
+            <Route path="current-workstreams" element={<WorkstreamsIndexPage />} />
+            <Route path="current-workstreams/:slug" element={<WorkstreamPage />} />
             <Route path="our-history" element={<CharitableHistoryPage />} />
             <Route path="our-history/1991-1999" element={<CharitableHistory1990sPage />} />
             <Route path="our-history/2000-2009" element={<CharitableHistory2000sPage />} />
