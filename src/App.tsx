@@ -18,6 +18,7 @@ import { OurWorkPage } from "./pages/OurWorkPage";
 import { WorkstreamsIndexPage } from "./pages/WorkstreamsIndexPage";
 import { WorkstreamPage } from "./pages/WorkstreamPage";
 import { CharitableHistoryPage } from "./pages/CharitableHistoryPage";
+import { CharitableHistoryDecadePage } from "./pages/CharitableHistoryDecadePage";
 import { HowWeWorkPage } from "./pages/HowWeWorkPage";
 import { DonorRecognitionPage } from "./pages/DonorRecognitionPage";
 import { SupportTheTrustPage } from "./pages/SupportTheTrustPage";
@@ -123,6 +124,7 @@ const App = () => (
             <Route path="current-workstreams" element={<WorkstreamsIndexPage />} />
             <Route path="current-workstreams/:slug" element={<WorkstreamPage />} />
             <Route path="our-history" element={<CharitableHistoryPage />} />
+            <Route path="our-history/1991-1999" element={<CharitableHistoryDecadePage />} />
             <Route path="how-we-work" element={<HowWeWorkPage />} />
             <Route path="support-the-trust" element={<SupportTheTrustPage />} />
             <Route path="donor-recognition" element={<DonorRecognitionPage />} />
