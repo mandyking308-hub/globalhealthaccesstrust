@@ -1,19 +1,17 @@
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { WorkstreamCards } from "./WorkstreamCards";
 
-export const HomepageWorkstreamsSection = () => (
+const WorkstreamsContent = () => (
   <section className="border-t border-foreground/10 bg-muted/20 py-20 md:py-28" aria-labelledby="home-workstreams-heading">
     <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
       <div className="mb-12 grid gap-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div className="max-w-4xl">
           <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Current work</span>
-          <h2
-            id="home-workstreams-heading"
-            className="mb-5 text-foreground"
-            style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(34px, 4.4vw, 64px)", lineHeight: 1.02, letterSpacing: "-0.035em", fontWeight: 650, textTransform: "none" }}
-          >
+          <h2 id="home-workstreams-heading" className="display-condensed mb-5 text-foreground">
             Five current workstreams
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
@@ -38,3 +36,46 @@ export const HomepageWorkstreamsSection = () => (
     </div>
   </section>
 );
+
+export const HomepageWorkstreamsSection = () => {
+  const [target, setTarget] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const homepage = document.querySelector<HTMLElement>(".homepage-editorial");
+    if (!homepage) return;
+
+    const obsoleteSection = Array.from(homepage.querySelectorAll<HTMLElement>(":scope > section")).find((section) =>
+      section.textContent?.includes("Work andInstitutional Learning") ||
+      section.textContent?.includes("Work and Institutional Learning"),
+    );
+
+    const purposeSection = Array.from(homepage.querySelectorAll<HTMLElement>(":scope > section")).find((section) =>
+      section.textContent?.includes("About the Trust"),
+    );
+
+    const anchor = obsoleteSection ?? purposeSection;
+    if (!anchor) return;
+
+    const mount = document.createElement("div");
+    mount.id = "current-workstreams";
+    mount.className = "scroll-mt-28";
+    anchor.before(mount);
+
+    if (obsoleteSection) {
+      obsoleteSection.hidden = true;
+      obsoleteSection.setAttribute("aria-hidden", "true");
+    }
+
+    setTarget(mount);
+
+    return () => {
+      if (obsoleteSection) {
+        obsoleteSection.hidden = false;
+        obsoleteSection.removeAttribute("aria-hidden");
+      }
+      mount.remove();
+    };
+  }, []);
+
+  return target ? createPortal(<WorkstreamsContent />, target) : null;
+};
