@@ -21,6 +21,8 @@ const entries: SitemapEntry[] = [
   { path: "/governance-legal-framework", changefreq: "yearly", priority: "0.8", lastmod: today },
   { path: "/governance", changefreq: "yearly", priority: "0.7", lastmod: today },
   { path: "/our-work", changefreq: "monthly", priority: "0.9", lastmod: today },
+  { path: "/our-history", changefreq: "monthly", priority: "0.9", lastmod: today },
+  { path: "/our-history/1991-1999", changefreq: "monthly", priority: "0.8", lastmod: today },
   { path: "/how-we-work", changefreq: "monthly", priority: "0.8", lastmod: today },
   { path: "/support-the-trust", changefreq: "monthly", priority: "0.8", lastmod: today },
   { path: "/donate", changefreq: "monthly", priority: "0.8", lastmod: today },
