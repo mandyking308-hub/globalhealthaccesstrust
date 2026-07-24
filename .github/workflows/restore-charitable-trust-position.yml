@@ -1,0 +1,217 @@
+name: Restore GHAT Charitable Trust Position
+
+on:
+  push:
+    paths:
+      - ".github/workflows/restore-charitable-trust-position.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore Trust Deed and Constitution hierarchy
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def update(path_str, replacements):
+              path = Path(path_str)
+              if not path.exists():
+                  raise SystemExit(f"Missing expected file: {path_str}")
+              text = path.read_text(encoding="utf-8")
+              original = text
+              for old, new in replacements:
+                  text = text.replace(old, new)
+              if text != original:
+                  path.write_text(text, encoding="utf-8")
+                  print(f"Updated {path_str}")
+
+          # Public and central descriptions.
+          update("src/lib/constants.ts", [
+              ('description: "An unincorporated charitable organisation that develops, funds and coordinates projects which enable better healthcare."',
+               'description: "A charitable trust that develops, funds and coordinates projects which enable better healthcare."'),
+              ('{ label: "Constitution", href: "/constitution" }',
+               '{ label: "Trust Deed & Constitution", href: "/constitution" }'),
+          ])
+
+          update("src/components/common/SearchModal.tsx", [
+              ('keywords: "mission history charitable organisation public benefit"',
+               'keywords: "mission history charitable trust public benefit"'),
+              ('title: "Constitution",\n    url: "/constitution",\n    excerpt: "The signed governing document adopted by the founding trustees in June 2025."',
+               'title: "Trust Deed & Constitution",\n    url: "/constitution",\n    excerpt: "The founding Trust Deed effective 1 December 2024 and the supplementary signed Constitution adopted in June 2025."'),
+          ])
+
+          update("src/components/TrusteeBiographiesGrid.tsx", [
+              ('Trustee authority is exercised collectively and in accordance with the Constitution and published governance framework.',
+               'Trustee authority is exercised collectively in accordance with the Trust Deed, the supplementary signed Constitution and the published governance framework.'),
+          ])
+
+          update("src/pages/TrusteeBiographiesPage.tsx", [
+              ('appointed in accordance with the Constitution.',
+               'appointed in accordance with the Trust Deed and applicable supplementary governance arrangements.'),
+          ])
+
+          update("src/pages/AboutPage.tsx", [
+              ('Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and administered by its Board of Trustees.',
+               'Global Health Access Trust is a charitable trust established under the laws of England and Wales. It was constituted by Trust Deed with effect from 1 December 2024 and is administered by its Board of Trustees. The trustees also adopted a signed Constitution in June 2025 as a supplementary governance document.'),
+              ('Global Health Access Trust is an unincorporated charitable organisation established in\n                England and Wales. It is governed by its Constitution and administered\n                by its Board of Trustees exclusively for charitable purposes.',
+               'Global Health Access Trust is a charitable trust established under the\n                laws of England and Wales. It was constituted by Trust Deed with effect from 1 December 2024 and is administered\n                by its Board of Trustees exclusively for charitable purposes.'),
+          ])
+
+          update("src/pages/AboutTheTrustPage.tsx", [
+              ('Global Health Access Trust is governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.',
+               'Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024. It is governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.'),
+              ('Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.',
+               'Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It is led by its Board of Trustees for charitable purposes and the public benefit.'),
+              ('Global Health Access Trust is governed by its signed Constitution, adopted in June 2025. It establishes the organisation\'s charitable purposes, trustee powers and decision-making framework, supported by the governance policies published on this website.',
+               'Global Health Access Trust was established by its Trust Deed with effect from 1 December 2024. The trustees also adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements. The Constitution supports, and does not replace, the Trust Deed.'),
+              ('View the Signed Constitution — Adopted June 2025',
+               'View the Trust Deed & Signed Constitution record'),
+          ])
+
+          update("src/pages/GovernanceLegalFrameworkPage.tsx", [
+              ('description="Legal status, charitable purpose and governance framework of the Global Health Access Trust, governed by its signed Constitution and Board of Trustees."',
+               'description="Legal status, regulatory responsibilities and governance framework of Global Health Access Trust, a charitable trust constituted by Trust Deed under the laws of England and Wales."'),
+              ('description="Legal status, charitable purpose and governance framework of the Global Health Access Trust, an unincorporated charitable organisation established in England and Wales."',
+               'description="Legal status, regulatory responsibilities and governance framework of Global Health Access Trust, a charitable trust constituted by Trust Deed under the laws of England and Wales."'),
+              ('Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.',
+               'Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It operates exclusively for charitable purposes and for the public benefit. The trustees adopted a signed Constitution in June 2025 as a supplementary governance and operating document.'),
+              ('Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025. It operates exclusively for charitable purposes and for the public benefit.',
+               'Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It operates exclusively for charitable purposes and for the public benefit. The trustees adopted a signed Constitution in June 2025 as a supplementary governance and operating document.'),
+              ('The organisation is administered by its Board of Trustees,', 'The Trust is administered by its Board of Trustees,'),
+              ('All funds are administered in accordance with the Constitution, applicable law, the Trust\'s financial controls and formal decisions of the Board.',
+               'All funds are administered in accordance with the Trust Deed, applicable law, the supplementary Constitution, the Trust\'s financial controls and formal decisions of the Board.'),
+              ('Charity law and the duties applying to charity trustees', 'Charity and trust law'),
+              ('permitted by the Constitution and applicable law', 'permitted by the Trust Deed and applicable law'),
+          ])
+
+          update("src/pages/FrequentlyAskedQuestionsPage.tsx", [
+              ('The Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.',
+               'Global Health Access Trust is a charitable trust established under the laws of England and Wales. It was constituted by Trust Deed with effect from 1 December 2024 and is administered by its Board of Trustees for charitable purposes and the public benefit.'),
+              ('The Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025.',
+               'Global Health Access Trust is a charitable trust established under the laws of England and Wales and constituted by Trust Deed with effect from 1 December 2024.'),
+              ('The organisation is governed by its signed Constitution, adopted in June 2025, together with its governance, safeguarding, financial-control and risk policies.',
+               'The Trust is governed by its Trust Deed effective from 1 December 2024. Its signed Constitution, adopted in June 2025, records supplementary governance and operating arrangements and supports, but does not replace, the Trust Deed.'),
+          ])
+
+          update("src/pages/TermsOfUsePage.tsx", [
+              ('Global Health Access Trust is an unincorporated charitable organisation established in England and Wales.\n            It is governed by its Constitution and administered by its Board of Trustees exclusively for\n            charitable purposes.',
+               'Global Health Access Trust is a charitable trust established under the laws of England and Wales.\n            It was constituted by Trust Deed with effect from 1 December 2024 and is administered by its Board of Trustees exclusively for\n            charitable purposes.'),
+              ('Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales.\n            It is governed by its signed Constitution, adopted in June 2025, and administered by its Board of Trustees.',
+               'Global Health Access Trust is a charitable trust established under the laws of England and Wales.\n            It was constituted by Trust Deed with effect from 1 December 2024 and is administered by its Board of Trustees.'),
+              ('contrary to its Constitution, charitable purposes', 'contrary to its Trust Deed, supplementary governance arrangements, charitable purposes'),
+              ('subject to the Constitution, applicable law', 'subject to the Trust Deed, supplementary governance arrangements and applicable law'),
+              ('inconsistent with the Constitution, outside', 'inconsistent with the Trust Deed or supplementary governance arrangements, outside'),
+              ('under the applicable donation terms, the Constitution and applicable law', 'under the applicable donation terms, the Trust Deed, supplementary governance arrangements and applicable law'),
+          ])
+
+          update("src/pages/PrivacyPolicyPage.tsx", [
+              ('{LEGAL_ENTITY.legalName} is an unincorporated charitable organisation established in England and Wales.\n            It is governed by its Constitution and administered by its Board of Trustees exclusively for\n            charitable purposes.',
+               '{LEGAL_ENTITY.legalName} is a charitable trust established under the laws of England and Wales.\n            It was constituted by Trust Deed with effect from 1 December 2024 and is administered by its Board of Trustees exclusively for\n            charitable purposes.'),
+              ('{LEGAL_ENTITY.legalName} is a charitable organisation working for public benefit under the laws of England and Wales.\n            It is governed by its signed Constitution, adopted in June 2025, and administered by its Board of Trustees.',
+               '{LEGAL_ENTITY.legalName} is a charitable trust established under the laws of England and Wales.\n            It was constituted by Trust Deed with effect from 1 December 2024 and is administered by its Board of Trustees.'),
+          ])
+
+          update("src/pages/CharitableHistory2020sPage.tsx", [
+              ('The Global Health Access Trust entered a formal organisational-development phase from <strong className="text-foreground">December 2024</strong>. Its Constitution was adopted by the founding trustees in June 2025, establishing the governance framework used today. Earlier work forms part of the voluntary history and international network that shaped the organisation.',
+               'The Global Health Access Trust was formally established under its Trust Deed with effect from <strong className="text-foreground">1 December 2024</strong>. The trustees later adopted a signed Constitution in June 2025 as a supplementary governance document. Work before the Trust Deed forms part of the voluntary history and international network that shaped the Trust.'),
+              ('This year records the transition from the earlier voluntary international network into the formal organisational development that led to the Constitution adopted in June 2025.',
+               'This year is divided into two legally distinct periods: the voluntary international network operating before the Trust existed, and the formal history of GHAT beginning under the Trust Deed on 1 December 2024.'),
+              ('<p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">From December 2024</p>',
+               '<p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">From 1 December 2024</p>'),
+              ('<p>Formal organisational development began in December 2024, and the founding trustees adopted the Global Health Access Trust Constitution in June 2025.</p>',
+               '<p>The Global Health Access Trust was formally established under its Trust Deed with effect from <strong>1 December 2024</strong>. The trustees later adopted the signed Constitution in June 2025 as a supplementary governance document.</p>'),
+              ('routes="Constitution, trustees, safeguarding and financial accountability"',
+               'routes="Trust Deed, supplementary Constitution, trustees, safeguarding and financial accountability"'),
+              ('turning the Constitution and long history of voluntary work into an operational charitable platform.',
+               'turning the Trust Deed, supplementary Constitution and long history of voluntary work into an operational charitable platform.'),
+          ])
+
+          update("src/pages/CharitableHistoryPage.tsx", [
+              ('GHAT\'s formal organisational development from December 2024, adoption of its Constitution in June 2025 and its present-day development.',
+               'the formal establishment of GHAT under its Trust Deed on 1 December 2024, adoption of its supplementary Constitution in June 2025 and the Trust\'s present-day development.'),
+              ('The earlier pages describe the voluntary work and international network that preceded GHAT\'s formal organisational development. The final chapter explains the transition beginning in December 2024 and the adoption of the Constitution in June 2025.',
+               'The earlier pages describe voluntary work undertaken before the Trust existed. The final chapter separates the earlier international network from formal GHAT activity beginning under the Trust Deed on 1 December 2024, followed by the supplementary Constitution in June 2025.'),
+          ])
+
+          update("src/pages/HomePage.tsx", [
+              ('description="An unincorporated charitable organisation developing, funding and coordinating',
+               'description="A charitable trust developing, funding and coordinating'),
+          ])
+
+          update("src/pages/admin/AdminManualPage.tsx", [
+              ('UK unincorporated charitable organisation', 'UK charitable trust'),
+          ])
+
+          # Publications page: show both documents clearly.
+          pub = Path("src/pages/PublicationsPage.tsx")
+          text = pub.read_text(encoding="utf-8")
+          old = '''              <span className="text-xs uppercase tracking-widest text-muted-foreground">Governing Document</span>
+              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Signed Constitution</h2>
+              <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+                The Constitution signed by the three founding trustees establishes the organisation's charitable objectives, Trustee powers and governance framework.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
+                <div><strong>Adopted</strong><br /><span className="text-muted-foreground">June 2025</span></div>
+                <div><strong>Version</strong><br /><span className="text-muted-foreground">1.0</span></div>
+                <div><strong>Document reference</strong><br /><span className="text-muted-foreground">GHAT-CONSTITUTION-2025</span></div>
+              </div>
+              <Button asChild>
+                <Link to="/constitution">View the Signed Constitution</Link>
+              </Button>'''
+          new = '''              <span className="text-xs uppercase tracking-widest text-muted-foreground">Founding & Governance Documents</span>
+              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Trust Deed & Signed Constitution</h2>
+              <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+                The Trust Deed effective from 1 December 2024 is the founding and principal governing document. The signed Constitution adopted in June 2025 records supplementary governance and operating arrangements, including those provided during banking due diligence. It does not replace the Trust Deed.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
+                <div><strong>Trust Deed</strong><br /><span className="text-muted-foreground">Effective 1 December 2024</span></div>
+                <div><strong>Constitution</strong><br /><span className="text-muted-foreground">Signed June 2025</span></div>
+                <div><strong>Legal form</strong><br /><span className="text-muted-foreground">Charitable trust</span></div>
+              </div>
+              <Button asChild>
+                <Link to="/constitution">View the document record</Link>
+              </Button>'''
+          if old not in text:
+              raise SystemExit("Publications governing-document block not found")
+          pub.write_text(text.replace(old, new), encoding="utf-8")
+          print("Updated src/pages/PublicationsPage.tsx")
+          PY
+
+      - name: Verify legal identity is consistent
+        shell: bash
+        run: |
+          if grep -RIn "unincorporated charitable organisation" src --include='*.ts' --include='*.tsx'; then
+            echo "Incorrect reclassification remains" >&2
+            exit 1
+          fi
+          if grep -RIn "signed Constitution is the governing document\|Constitution is the governing document\|governed by its Constitution adopted" src --include='*.ts' --include='*.tsx'; then
+            echo "Constitution-only governing wording remains" >&2
+            exit 1
+          fi
+          grep -RIn "Trust Deed" src --include='*.ts' --include='*.tsx' >/dev/null
+          grep -RIn "supplementary" src/pages/ConstitutionPage.tsx src/lib/legalEntity.ts >/dev/null
+
+      - name: Build website
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit corrected position
+        shell: bash
+        run: |
+          rm .github/workflows/restore-charitable-trust-position.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src .github/workflows/restore-charitable-trust-position.yml
+          git commit -m "Restore GHAT charitable trust and two-document position"
+          git pull --rebase origin main
+          git push origin HEAD:main
