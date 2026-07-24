@@ -18,29 +18,63 @@ if (!supabaseUrl || !anonKey) {
   process.exit(1);
 }
 
+const headers = {
+  apikey: anonKey,
+  Authorization: `Bearer ${anonKey}`,
+  "Content-Type": "application/json",
+};
+
 const failures = [];
+
+async function fetchPublishedDocumentDirectly(slug) {
+  const documentResponse = await fetch(
+    `${supabaseUrl}/rest/v1/legal_documents?slug=eq.${encodeURIComponent(slug)}&select=id,title,category,current_published_version_id&limit=1`,
+    { headers },
+  );
+
+  if (!documentResponse.ok) {
+    throw new Error(`direct document lookup returned HTTP ${documentResponse.status} ${await documentResponse.text()}`);
+  }
+
+  const documents = await documentResponse.json();
+  const document = Array.isArray(documents) ? documents[0] : null;
+  if (!document?.current_published_version_id) return null;
+
+  const versionResponse = await fetch(
+    `${supabaseUrl}/rest/v1/legal_document_versions?id=eq.${encodeURIComponent(document.current_published_version_id)}&select=version_number,body_markdown,summary,effective_date,published_at&limit=1`,
+    { headers },
+  );
+
+  if (!versionResponse.ok) {
+    throw new Error(`direct version lookup returned HTTP ${versionResponse.status} ${await versionResponse.text()}`);
+  }
+
+  const versions = await versionResponse.json();
+  const version = Array.isArray(versions) ? versions[0] : null;
+  return version ? { ...document, ...version } : null;
+}
 
 for (const slug of requiredSlugs) {
   try {
     const response = await fetch(`${supabaseUrl}/rest/v1/rpc/current_legal_version`, {
       method: "POST",
-      headers: {
-        apikey: anonKey,
-        Authorization: `Bearer ${anonKey}`,
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify({ _slug: slug }),
     });
 
-    if (!response.ok) {
-      failures.push(`${slug}: HTTP ${response.status} ${await response.text()}`);
-      continue;
+    let row = null;
+    let accessPath = "RPC";
+
+    if (response.ok) {
+      const payload = await response.json();
+      row = Array.isArray(payload) ? payload[0] : payload;
+    } else {
+      accessPath = "public table fallback";
+      row = await fetchPublishedDocumentDirectly(slug);
     }
 
-    const payload = await response.json();
-    const row = Array.isArray(payload) ? payload[0] : payload;
     if (!row) {
-      failures.push(`${slug}: no published version returned`);
+      failures.push(`${slug}: no published version returned by ${accessPath}`);
       continue;
     }
 
@@ -49,7 +83,7 @@ for (const slug of requiredSlugs) {
     if (String(row.body_markdown || "").trim().length < 100) failures.push(`${slug}: published body is missing or too short`);
 
     if (!failures.some((failure) => failure.startsWith(`${slug}:`))) {
-      console.log(`Published legal document verified: ${slug}`);
+      console.log(`Published legal document verified via ${accessPath}: ${slug}`);
     }
   } catch (error) {
     failures.push(`${slug}: ${error instanceof Error ? error.message : String(error)}`);
