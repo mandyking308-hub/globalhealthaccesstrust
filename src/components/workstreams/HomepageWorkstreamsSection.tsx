@@ -24,13 +24,6 @@ export const HomepageWorkstreamsSection = () => (
       </div>
 
       <WorkstreamCards compact />
-
-      <div className="mt-10 border-l-4 border-primary bg-background p-6 sm:p-7">
-        <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-primary">A clear public record</p>
-        <p className="m-0 max-w-5xl leading-relaxed text-muted-foreground">
-          Statistics describe the wider need, not results claimed by GHAT. Each project page distinguishes current activity from planned phases and explains what will be produced, how progress will be measured and what must happen before support is accepted or delivery expands.
-        </p>
-      </div>
     </div>
   </section>
 );
