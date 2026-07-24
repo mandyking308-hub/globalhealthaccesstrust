@@ -74,7 +74,7 @@ export const WorkstreamCards = ({ compact = false, limit }: WorkstreamCardsProps
       </article>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {remaining.map((workstream, index) => (
+        {remaining.map((workstream) => (
           <article key={workstream.slug} className="group flex min-h-full flex-col overflow-hidden border border-foreground/15 bg-background">
             <Link
               to={`/current-workstreams/${workstream.slug}`}
@@ -85,7 +85,7 @@ export const WorkstreamCards = ({ compact = false, limit }: WorkstreamCardsProps
                 src={workstream.image}
                 alt={workstream.imageAlt}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
-                loading={index < 1 ? "eager" : "lazy"}
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" aria-hidden="true" />
               <p className="absolute bottom-4 left-4 m-0 text-[10px] font-bold uppercase tracking-[0.18em] text-white sm:bottom-5 sm:left-5">
