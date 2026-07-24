@@ -21,6 +21,7 @@ export const AboutTheTrustPage = () => {
           <p>From 2019, this work developed through an international network of clinicians, technologists, faith-based organisations and professional contributors, many of whom contributed their time, expertise and practical support without charge.</p>
           <p>The Trust was constituted by Trust Deed with effect from 1 December 2024, bringing that experience within a permanent charitable institution capable of developing and supporting larger, longer-term projects.</p>
           <p>Today, the Trust applies that experience through defined programmes, trusted delivery relationships and accountable systems established for enduring public benefit.</p>
+          <p className="block"><Link to="/our-history" className="text-primary hover:underline inline-block py-2">Explore Our History of Charitable Work →</Link></p>
         </div>
 
         <div className="section-container">
