@@ -28,7 +28,7 @@ export const WorkNavigationStrip = () => {
               className={`flex min-w-0 items-center justify-center border-b-2 px-1.5 py-3 text-center text-[9.5px] font-bold uppercase tracking-[0.08em] no-underline transition-colors sm:px-4 sm:text-[11px] sm:tracking-[0.15em] md:shrink-0 ${
                 active
                   ? "border-accent bg-white/[0.08] text-primary-foreground"
-                  : "border-transparent text-primary-foreground/78 hover:bg-white/[0.06] hover:text-primary-foreground"
+                  : "border-transparent text-primary-foreground/75 hover:bg-white/[0.06] hover:text-primary-foreground"
               }`}
             >
               {item.label}
