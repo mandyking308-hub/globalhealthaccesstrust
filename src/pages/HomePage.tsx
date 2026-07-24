@@ -1,15 +1,61 @@
+import { ArrowRight, HandHeart, LockKeyhole, MessageCircle, ShieldCheck, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { HomepageWorkstreamsSection } from "@/components/workstreams/HomepageWorkstreamsSection";
 import { PROGRAM_AREAS } from "@/lib/constants";
+import { WORKSTREAMS } from "@/lib/workstreams";
 import { SEO } from "@/components/SEO";
 import { organizationSchema } from "@/lib/seo";
-import heroImage from "@/assets/ghat-hero-community-health.jpg";
-import clinicImage from "@/assets/ghat-maternal-care.jpg";
-import systemsImage from "@/assets/ghat-infrastructure-delivery.jpg";
-import ruralImage from "@/assets/ghat-capacity-training.jpg";
-import mandateImage from "@/assets/ghat-field-clinic-humanitarian.jpg";
+
+const deliverySteps = [
+  {
+    title: "Define the need",
+    description: "Understand the setting, public-benefit purpose, intended outcome and constraints before proposing a response.",
+  },
+  {
+    title: "Structure the project",
+    description: "Set responsibilities, resources, safeguards, budget, milestones and the evidence that will be required.",
+  },
+  {
+    title: "Verify and agree",
+    description: "Review contributors, supporters and delivery arrangements before commitments are accepted or work begins.",
+  },
+  {
+    title: "Deliver and evidence",
+    description: "Record progress, expenditure, outcomes, learning and the decision to conclude, repeat or expand.",
+  },
+];
+
+const participationRoutes = [
+  {
+    icon: HandHeart,
+    eyebrow: "Support",
+    title: "Pledge a useful resource",
+    description: "Offer funding, equipment, technology, facilities, logistics, professional time or another defined resource.",
+    action: "Pledge support",
+    href: "/donate#pledge-form",
+  },
+  {
+    icon: Users,
+    eyebrow: "Contribute",
+    title: "Bring relevant capability",
+    description: "Register professional, technical, practical or local knowledge for review against an identified project need.",
+    action: "Apply to contribute",
+    href: "/volunteer-apply",
+  },
+  {
+    icon: MessageCircle,
+    eyebrow: "Collaborate",
+    title: "Begin a project conversation",
+    description: "Discuss a partnership, a defined project phase or the support currently required by a live workstream.",
+    action: "Contact the Trust",
+    href: "/contact",
+  },
+];
 
 export const HomePage = () => {
+  const heroProjects = WORKSTREAMS.slice(0, 4);
+
   return (
     <>
       <SEO
@@ -20,389 +66,302 @@ export const HomePage = () => {
       />
 
       <div className="homepage-editorial flex flex-col bg-background">
-        <section className="relative bg-background border-b border-foreground/10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[calc(100vh-108px)]">
-            <div className="flex flex-col justify-center px-6 md:px-16 lg:px-24 py-20 lg:py-24 order-2 lg:order-1">
-              <div className="max-w-[640px]">
-                <div className="flex items-center gap-3 mb-8">
-                  <span className="h-px w-10 bg-foreground" />
-                  <span className="uppercase tracking-[0.28em] text-foreground text-[10px] font-bold">
-                    Emergency Briefing — Ukraine
+        <section className="border-b border-foreground/10 bg-background">
+          <div className="grid min-h-[calc(100vh-108px)] grid-cols-1 lg:grid-cols-[0.92fr_1.08fr]">
+            <div className="order-2 flex flex-col justify-center px-6 py-16 md:px-16 lg:order-1 lg:px-20 xl:px-24">
+              <div className="max-w-[680px]">
+                <div className="mb-8 flex items-center gap-3">
+                  <span className="h-px w-10 bg-foreground" aria-hidden="true" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-foreground">
+                    Global Health Access Trust
                   </span>
                 </div>
                 <h1 className="text-foreground">
-                  The Global Health Access Trust builds the systems that make healthcare possible.
+                  Building the systems that make health, safety and opportunity possible.
                 </h1>
-                <p className="mt-8 max-w-[560px] text-lg md:text-xl leading-relaxed text-foreground/80">
-                  Aligning professional and clinical expertise, essential infrastructure, responsible technology and resources where need is greatest.
+                <p className="mt-8 max-w-[610px] text-lg leading-relaxed text-foreground/80 md:text-xl">
+                  GHAT connects professional expertise, essential systems, responsible technology and practical resources around clearly defined public-benefit needs.
                 </p>
-                <div className="mt-12 flex flex-wrap gap-5">
-                  <Link
-                    to="/about-the-trust"
-                    className="inline-block text-foreground text-[15px] font-semibold border-b-2 border-foreground pb-1 hover:text-accent hover:border-accent transition-colors"
-                  >
-                    Learn more about who we are
-                  </Link>
-                  <Link
-                    to="/our-work"
-                    className="inline-block text-foreground text-[15px] font-semibold border-b-2 border-foreground pb-1 hover:text-accent hover:border-accent transition-colors"
-                  >
-                    Explore our work
-                  </Link>
+                <div className="mt-10 flex flex-wrap gap-4">
+                  <Button asChild size="lg" className="rounded-none px-7">
+                    <a href="#current-workstreams">
+                      Explore current work <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                    </a>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="rounded-none px-7">
+                    <Link to="/about-the-trust">About the Trust</Link>
+                  </Button>
                 </div>
               </div>
             </div>
 
-            <div className="relative order-1 lg:order-2 min-h-[45vh] lg:min-h-full overflow-hidden bg-muted">
-              <img
-                src={heroImage}
-                alt="A mother and child on a residential street in an Eastern European town affected by the Ukraine crisis"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                loading="eager"
-              />
+            <div className="order-1 grid min-h-[58vh] grid-cols-2 grid-rows-2 gap-px bg-foreground/10 lg:order-2 lg:min-h-full">
+              {heroProjects.map((project) => (
+                <Link
+                  key={project.slug}
+                  to={`/current-workstreams/${project.slug}`}
+                  className="group relative overflow-hidden bg-muted no-underline"
+                  aria-label={`View ${project.title}`}
+                >
+                  <img
+                    src={project.image}
+                    alt={project.imageAlt}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+                    loading="eager"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/5 to-transparent" aria-hidden="true" />
+                  <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">
+                    <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white/75">
+                      Workstream {project.number}
+                    </p>
+                    <p className="m-0 max-w-[260px] text-sm font-semibold leading-snug text-white sm:text-base">
+                      {project.shortTitle}
+                    </p>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-3 border-b border-foreground/10 bg-background">
+        <section className="grid grid-cols-1 border-b border-foreground/10 bg-background md:grid-cols-3" aria-label="Trust reach and development">
           {[
-            { cat: "Reach", n: "12", label: "Countries", d: "Practical work, learning and professional relationships across twelve countries." },
-            { cat: "Network", n: "40+", label: "Relationships", d: "Professional, technical, faith-based and community relationships supporting public-benefit work." },
-            { cat: "Development", n: "2019", label: "Coordinated Expansion", d: "The point at which longstanding service began developing into a coordinated international network." },
+            {
+              category: "Reach",
+              value: "12",
+              label: "Countries",
+              description: "Practical work, learning and professional relationships across twelve countries.",
+            },
+            {
+              category: "Network",
+              value: "40+",
+              label: "Relationships",
+              description: "Professional, technical, faith-based and community relationships supporting public-benefit work.",
+            },
+            {
+              category: "Development",
+              value: "2019",
+              label: "Coordinated expansion",
+              description: "The point at which longstanding service began developing into a coordinated international network.",
+            },
           ].map((stat, index) => (
             <div
-              key={stat.cat}
-              className={`p-10 md:p-12 lg:p-16 flex flex-col justify-between ${index < 2 ? "border-b md:border-b-0 md:border-r border-foreground/10" : ""}`}
+              key={stat.category}
+              className={`flex flex-col justify-between p-9 md:p-11 lg:p-14 ${
+                index < 2 ? "border-b border-foreground/10 md:border-b-0 md:border-r" : ""
+              }`}
             >
-              <span className="uppercase tracking-[0.22em] text-[10px] font-bold text-foreground mb-10">
-                {stat.cat}
+              <span className="mb-9 text-[10px] font-bold uppercase tracking-[0.22em] text-foreground">
+                {stat.category}
               </span>
               <div>
-                <span
-                  className="font-serif block mb-4 text-foreground display-condensed"
-                  style={{ fontSize: "clamp(52px, 5.4vw, 88px)", lineHeight: 0.9, fontWeight: 900, letterSpacing: "-0.015em" }}
-                >
-                  {stat.n}
+                <span className="display-condensed mb-4 block font-serif text-foreground" style={{ fontSize: "clamp(48px, 5vw, 82px)", lineHeight: 0.9 }}>
+                  {stat.value}
                 </span>
-                <p className="text-sm uppercase tracking-[0.2em] font-bold text-foreground">{stat.label}</p>
-                <p className="text-sm mt-4 leading-relaxed text-muted-foreground">{stat.d}</p>
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-foreground">{stat.label}</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{stat.description}</p>
               </div>
             </div>
           ))}
         </section>
 
-        <section className="py-16 md:py-20 px-6 bg-background border-b border-foreground/10">
-          <div className="max-w-4xl mx-auto">
-            <span className="block h-px w-12 bg-accent mb-8" />
-            <blockquote
-              className="text-foreground"
-              style={{ fontSize: "clamp(24px, 2.9vw, 42px)", lineHeight: 1.12, fontWeight: 800, letterSpacing: "-0.008em", textTransform: "uppercase" }}
-            >
-              The Trust builds on decades of voluntary, self-funded and pro bono service—now applied through larger, structured projects with clear purpose, oversight and evidence.
-            </blockquote>
-            <p className="uppercase tracking-[0.25em] text-xs font-bold text-foreground mt-10">— The Board of Trustees</p>
-          </div>
-        </section>
+        <div id="current-workstreams" className="scroll-mt-28">
+          <HomepageWorkstreamsSection />
+        </div>
 
-        <section className="p-6 md:p-16 lg:p-24 border-b border-foreground/10 bg-background">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
-            <div className="max-w-3xl">
-              <h2
-                className="display-condensed text-foreground"
-                style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
+        <section className="bg-primary py-20 text-primary-foreground md:py-28">
+          <div className="mx-auto grid max-w-[1280px] gap-10 px-6 md:grid-cols-[170px_1fr] md:px-10 md:gap-16">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-accent md:mt-3">Connected mission</span>
+            <div>
+              <h2 className="display-condensed mb-10 text-primary-foreground">Health depends on the systems around it.</h2>
+              <div className="grid gap-8 md:grid-cols-2 md:gap-12">
+                <p className="border-t border-primary-foreground/25 pt-7 text-lg leading-relaxed text-primary-foreground/90 md:text-xl">
+                  Food, safe living conditions, education, livelihoods, technology, mental health and community resilience all influence whether people can live safely and access appropriate care.
+                </p>
+                <p className="border-t border-primary-foreground/25 pt-7 text-lg leading-relaxed text-primary-foreground/90 md:text-xl">
+                  GHAT develops projects at those points of connection, while keeping human judgement, local leadership, safeguarding and professional responsibility at the centre.
+                </p>
+              </div>
+              <Link
+                to="/about-the-trust"
+                className="mt-12 inline-flex items-center gap-3 border-b border-primary-foreground pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground no-underline hover:border-accent hover:text-accent"
               >
-                Work and<br />Institutional Learning
-              </h2>
-              <p className="mt-6 text-[16.5px] leading-relaxed text-muted-foreground">
-                Selected records of practical work, professional contribution and institutional learning. Identities are withheld where confidentiality, safety or professional discretion requires it.
-              </p>
-            </div>
-            <Link
-              to="/our-work"
-              className="text-xs uppercase tracking-[0.22em] font-bold text-foreground border-b border-foreground pb-2 hover:text-accent hover:border-accent transition-colors"
-            >
-              Explore our work
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-            {[
-              { img: clinicImage, cat: "Healthcare Access", alt: "A nurse examining a mother and newborn in a field maternity clinic", title: "Enabling healthcare in field settings.", copy: "Access supported through appropriately regulated local and field providers." },
-              { img: systemsImage, cat: "Systems Infrastructure", alt: "Aid workers unloading essential supplies outside a damaged building", title: "Rebuilding the systems that make care possible.", copy: "Supply, logistics and infrastructure work in conflict-affected and underserved settings." },
-              { img: ruralImage, cat: "Human Capability", alt: "A multi-region group of professionals in a field training session", title: "Strengthening capability beyond conventional provision.", copy: "Professional and practical capability-building where geography or system weakness limits access." },
-            ].map((item) => (
-              <article key={item.cat} className="group flex flex-col">
-                <div className="mb-7 overflow-hidden aspect-[4/5] bg-muted">
-                  <img
-                    src={item.img}
-                    alt={item.alt}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <span className="text-[11px] uppercase tracking-[0.22em] text-accent font-bold">{item.cat}</span>
-                <h3
-                  className="font-serif mt-3 mb-3 text-foreground"
-                  style={{ fontSize: "clamp(22px, 1.9vw, 30px)", lineHeight: 1.2, fontWeight: 400, letterSpacing: "-0.01em" }}
-                >
-                  {item.title}
-                </h3>
-                <p className="text-[15.5px] leading-relaxed text-muted-foreground">{item.copy}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="bg-primary text-primary-foreground py-24 md:py-32">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16">
-              <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent md:mt-3">Purpose</span>
-              <div>
-                <h2
-                  className="display-condensed text-primary-foreground mb-12"
-                  style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
-                >
-                  About the Trust
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                  <div className="pt-8 border-t border-primary-foreground/25">
-                    <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                      The Trust develops projects where healthcare access is inseparable from infrastructure, housing, education, food systems, technology and human capability.
-                    </p>
-                  </div>
-                  <div className="pt-8 border-t border-primary-foreground/25">
-                    <p className="text-primary-foreground/90 text-lg md:text-xl leading-relaxed">
-                      Technology, including artificial intelligence, strengthens research, coordination, logistics and evidence. Human judgment, local leadership and professional responsibility remain central.
-                    </p>
-                  </div>
-                </div>
-                <Link
-                  to="/about-the-trust"
-                  className="inline-flex mt-14 items-center gap-3 text-[11px] uppercase tracking-[0.22em] font-bold text-primary-foreground border-b border-primary-foreground pb-2 hover:text-accent hover:border-accent transition-colors"
-                >
-                  About the Trust →
-                </Link>
-              </div>
+                Understand the Trust <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </section>
 
-        <section className="py-24 md:py-32 border-b border-foreground/10 bg-background">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16">
-              <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-primary md:mt-3">Approach</span>
-              <div>
-                <h2 className="font-serif text-foreground mb-8" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500 }}>
-                  From Need to Accountable Delivery
-                </h2>
-                <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px] mb-14">
-                  Projects begin with a defined public-benefit need and proceed through disciplined scoping, capability-building, verification, delivery and evidence.
+        <section className="border-b border-foreground/10 bg-background py-20 md:py-28">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10">
+            <div className="mb-12 grid gap-8 md:grid-cols-[170px_1fr] md:gap-16">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:mt-3">Delivery</span>
+              <div className="max-w-4xl">
+                <h2 className="mb-7 text-foreground">From a defined need to accountable delivery.</h2>
+                <p className="text-lg leading-relaxed text-foreground md:text-xl">
+                  Projects move through disciplined stages so that urgency does not replace judgement and ambition does not outrun evidence.
                 </p>
-                <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-                  {[
-                    { t: "Define the Need", d: "The setting, public-benefit purpose, intended outcome and constraints are understood." },
-                    { t: "Structure the Project", d: "Responsibilities, partners, resources, safeguards, budget and milestones are established." },
-                    { t: "Verify and Agree", d: "Contributors, supporters and delivery arrangements complete the appropriate review and agreements." },
-                    { t: "Deliver and Evidence", d: "Progress, expenditure, evidence and learning are recorded through proportionate systems." },
-                  ].map((step, index) => (
-                    <li key={step.t}>
-                      <span className="timeline-node">0{index + 1}</span>
-                      <h3 className="mb-3 text-foreground">{step.t}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{step.d}</p>
-                    </li>
-                  ))}
-                </ol>
-                <div className="mt-16">
-                  <Link to="/how-we-work">
-                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                      Read How We Work
-                    </Button>
-                  </Link>
-                </div>
               </div>
+            </div>
+
+            <ol className="grid gap-0 border-y border-foreground/15 md:grid-cols-2 lg:grid-cols-4">
+              {deliverySteps.map((step, index) => (
+                <li
+                  key={step.title}
+                  className={`p-7 sm:p-8 ${index < deliverySteps.length - 1 ? "border-b border-foreground/12 lg:border-b-0 lg:border-r" : ""}`}
+                >
+                  <span className="mb-7 block font-serif text-2xl font-black text-primary">0{index + 1}</span>
+                  <h3 className="mb-4 text-foreground">{step.title}</h3>
+                  <p className="m-0 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-10">
+              <Button asChild variant="outline" size="lg" className="rounded-none">
+                <Link to="/how-we-work">Read how projects move into delivery</Link>
+              </Button>
             </div>
           </div>
         </section>
 
-        <section className="py-24 md:py-28 bg-secondary/60 border-b border-foreground/10">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16">
-              <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-primary md:mt-3">Mandate</span>
-              <div>
-                <h2 className="font-serif text-foreground mb-8" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500 }}>
-                  Public-Benefit Project Areas
-                </h2>
-                <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px] mb-14">
-                  Funding and other accepted resources are applied only to work that advances the Trust's charitable purposes and approved public-benefit outcomes.
+        <section className="border-b border-foreground/10 bg-secondary/60 py-20 md:py-28">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10">
+            <div className="mb-12 grid gap-8 md:grid-cols-[170px_1fr] md:gap-16">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:mt-3">Permanent mandate</span>
+              <div className="max-w-4xl">
+                <h2 className="mb-7 text-foreground">The wider charitable scope behind today’s five workstreams.</h2>
+                <p className="text-lg leading-relaxed text-foreground md:text-xl">
+                  Current projects change as needs and evidence develop. These standing programme areas define the wider public-benefit purposes within which future work can be considered.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
-                  <div className="md:col-span-5 md:sticky md:top-28">
-                    <div className="aspect-[4/5] overflow-hidden bg-muted">
-                      <img src={mandateImage} alt="Public-benefit work in an underserved setting" className="w-full h-full object-cover" loading="lazy" />
-                    </div>
-                  </div>
-                  <ol className="md:col-span-7 divide-y divide-foreground/12 border-t border-b border-foreground/15">
-                    {PROGRAM_AREAS.slice(0, 5).map((area, index) => (
-                      <li key={area.id} className="grid grid-cols-[56px_1fr] gap-6 py-8">
-                        <span className="font-serif text-primary text-[20px] font-black tracking-tight pt-1">0{index + 1}</span>
-                        <div>
-                          <h3 className="mb-3 text-foreground m-0">{area.title}</h3>
-                          <p className="text-muted-foreground leading-relaxed m-0">{area.description}</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-                <div className="mt-14">
-                  <Link to="/our-work">
-                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                      View the Full Mandate
-                    </Button>
-                  </Link>
-                </div>
               </div>
+            </div>
+
+            <ol className="grid gap-px overflow-hidden border border-foreground/12 bg-foreground/12 md:grid-cols-2 lg:grid-cols-3">
+              {PROGRAM_AREAS.map((area, index) => (
+                <li key={area.id} className="bg-background p-7 sm:p-8">
+                  <span className="mb-5 block font-serif text-xl font-black text-primary">0{index + 1}</span>
+                  <h3 className="mb-3 text-foreground">{area.title}</h3>
+                  <p className="m-0 text-sm leading-relaxed text-muted-foreground">{area.description}</p>
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-10">
+              <Button asChild variant="outline" size="lg" className="rounded-none">
+                <Link to="/our-work">View the full charitable mandate</Link>
+              </Button>
             </div>
           </div>
         </section>
 
-        <section className="py-24 md:py-32 bg-background border-b border-foreground/10">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16">
-              <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-primary md:mt-3">Governance</span>
+        <section className="border-b border-foreground/10 bg-background py-20 md:py-28">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10">
+            <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
               <div>
-                <h2 className="font-serif text-foreground mb-10" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500 }}>
-                  Charitable Control and Accountability
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-                  {[
-                    { label: "Trustee Oversight", copy: "The Trustees retain collective responsibility for charitable purpose, safeguarding, financial stewardship and project approval." },
-                    { label: "Independent Structure", copy: "The Trust remains legally and financially separate from private and commercial interests." },
-                    { label: "Evidence and Review", copy: "Work is documented through appropriate agreements, financial records, project evidence and professional scrutiny where required." },
-                  ].map((item) => (
-                    <div key={item.label} className="pt-8 border-t border-foreground/15">
-                      <h3 className="mb-3 text-foreground">{item.label}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{item.copy}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-14 flex flex-wrap gap-4">
-                  <Link to="/governance-legal-framework">
-                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                      Legal Framework
-                    </Button>
-                  </Link>
-                  <Link to="/governance">
-                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                      Governance &amp; Oversight
-                    </Button>
-                  </Link>
-                </div>
+                <span className="mb-5 block text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">Accountability</span>
+                <h2 className="mb-7 text-foreground">Evidence, independence and charitable control.</h2>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  The live work is ambitious, but the public claims remain disciplined. Statistics describe the wider need; GHAT outcomes are reported only when a defined intervention and suitable evidence exist.
+                </p>
               </div>
+
+              <div className="grid gap-7 md:grid-cols-3">
+                {[
+                  {
+                    title: "Trustee oversight",
+                    description: "Trustees retain collective responsibility for charitable purpose, project approval, safeguarding and financial stewardship.",
+                  },
+                  {
+                    title: "Independent structure",
+                    description: "The Trust remains legally and financially separate from private businesses and connected commercial interests.",
+                  },
+                  {
+                    title: "Evidence before claims",
+                    description: "Milestones, expenditure, outputs and learning are recorded through proportionate project and professional systems.",
+                  },
+                ].map((item) => (
+                  <article key={item.title} className="border-t border-foreground/15 pt-7">
+                    <ShieldCheck className="mb-5 h-6 w-6 text-primary" aria-hidden="true" />
+                    <h3 className="mb-3 text-foreground">{item.title}</h3>
+                    <p className="m-0 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-12 flex flex-wrap gap-4">
+              <Button asChild variant="outline" size="lg" className="rounded-none">
+                <Link to="/governance">Governance and oversight</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-none">
+                <Link to="/governance-legal-framework">Legal framework</Link>
+              </Button>
             </div>
           </div>
         </section>
 
-        <section className="py-20 md:py-24 border-b border-foreground/10 bg-background">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="max-w-3xl mb-12">
-              <span className="portal-eyebrow">Secure Access</span>
-              <h2 className="font-serif text-foreground mt-4" style={{ fontSize: "clamp(28px, 3vw, 44px)", lineHeight: 1.08, fontWeight: 500 }}>
-                Supporter and Project-Team Workspaces
-              </h2>
-              <p className="text-muted-foreground mt-5 text-[16.5px] leading-relaxed">
-                Approved supporters and project teams use separate secure workspaces. Accounts and access are established through the Trust's review and approval processes.
+        <section className="border-b border-foreground/10 bg-muted/25 py-20 md:py-24">
+          <div className="mx-auto grid max-w-[1280px] gap-10 px-6 md:grid-cols-[170px_1fr] md:px-10 md:gap-16">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:mt-3">Continuity</span>
+            <div>
+              <blockquote className="max-w-5xl text-foreground" style={{ fontSize: "clamp(27px, 3.2vw, 48px)", lineHeight: 1.1 }}>
+                The Trust builds on decades of voluntary, self-funded, professional and pro bono service—now carried forward through structured projects with clear purpose, oversight and evidence.
+              </blockquote>
+              <p className="mt-8 text-xs font-bold uppercase tracking-[0.22em] text-foreground">The Board of Trustees</p>
+              <Button asChild variant="outline" size="lg" className="mt-10 rounded-none">
+                <Link to="/our-history">Explore the history on which GHAT builds</Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-foreground/10 bg-background py-20 md:py-28">
+          <div className="mx-auto max-w-[1280px] px-6 md:px-10">
+            <div className="mb-12 max-w-4xl">
+              <span className="mb-5 block text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">Participate</span>
+              <h2 className="mb-7 text-foreground">Turn concern into a responsible next step.</h2>
+              <p className="text-lg leading-relaxed text-muted-foreground md:text-xl">
+                Support begins with a defined project need. A pledge or expression of interest is reviewed before funding, resources, appointments or access are accepted.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-foreground/15">
-              <div className="p-8 md:p-10 border-b md:border-b-0 md:border-r border-foreground/15 bg-background">
-                <span className="text-[10.5px] font-bold uppercase tracking-[0.24em] text-foreground/55">For approved supporters</span>
-                <h3 className="font-serif text-foreground mt-3" style={{ fontSize: "clamp(22px, 1.9vw, 28px)", fontWeight: 500 }}>
-                  Donor Portal
-                </h3>
-                <p className="text-muted-foreground text-[15px] leading-relaxed mt-4 max-w-md">
-                  View accepted financial contributions, commissioned projects, agreements, expenditure information, milestones, approved evidence and secure messages.
-                </p>
-                <div className="flex flex-wrap gap-3 mt-8">
-                  <Link to="/auth?portal=donor">
-                    <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[12.5px] font-semibold h-11 px-6">
-                      Donor Login
-                    </Button>
-                  </Link>
-                  <Link to="/donor-guide">
-                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[12.5px] font-semibold h-11 px-6">
-                      About the Donor Portal
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-
-              <div className="p-8 md:p-10 bg-foreground/[0.02]">
-                <span className="text-[10.5px] font-bold uppercase tracking-[0.24em] text-foreground/55">For approved contributors</span>
-                <h3 className="font-serif text-foreground mt-3" style={{ fontSize: "clamp(22px, 1.9vw, 28px)", fontWeight: 500 }}>
-                  Project Team Portal
-                </h3>
-                <p className="text-muted-foreground text-[15px] leading-relaxed mt-4 max-w-md">
-                  Approved professionals, volunteers, coordinators and delivery partners submit progress, evidence, milestones and expenses for assigned projects.
-                </p>
-                <div className="flex flex-wrap gap-3 mt-8">
-                  <Link to="/auth?portal=team">
-                    <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[12.5px] font-semibold h-11 px-6">
-                      Project Team Login
-                    </Button>
-                  </Link>
-                  <Link to="/volunteer-apply">
-                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[12.5px] font-semibold h-11 px-6">
-                      Apply to Join
-                    </Button>
-                  </Link>
-                </div>
-                <p className="text-[11.5px] text-muted-foreground mt-5 leading-relaxed">
-                  Access is granted only after approval, verification, agreement and assignment to an appropriate project or role.
-                </p>
-              </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {participationRoutes.map(({ icon: Icon, eyebrow, title, description, action, href }) => (
+                <article key={title} className="flex min-h-full flex-col border border-foreground/12 bg-background p-7 sm:p-8">
+                  <Icon className="mb-6 h-7 w-7 text-primary" aria-hidden="true" />
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">{eyebrow}</p>
+                  <h3 className="mb-4 text-foreground">{title}</h3>
+                  <p className="mb-8 text-sm leading-relaxed text-muted-foreground">{description}</p>
+                  <Button asChild className="mt-auto rounded-none">
+                    <Link to={href}>
+                      {action} <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                    </Link>
+                  </Button>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="py-24 md:py-32 bg-background">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16">
-              <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-primary md:mt-3">Contribute</span>
+        <section className="bg-primary py-9 text-primary-foreground">
+          <div className="mx-auto flex max-w-[1280px] flex-col gap-6 px-6 md:flex-row md:items-center md:justify-between md:px-10">
+            <div className="flex items-start gap-4">
+              <LockKeyhole className="mt-1 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
               <div>
-                <h2 className="font-serif text-foreground mb-8" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500 }}>
-                  Support Begins With a Pledge
-                </h2>
-                <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px] mb-12">
-                  A contribution may be funding, time, expertise, equipment, premises, technology, services, logistics, relationships or a combination of resources.
+                <p className="mb-1 text-xs font-bold uppercase tracking-[0.18em] text-accent">Secure access</p>
+                <p className="m-0 max-w-3xl text-sm leading-relaxed text-primary-foreground/80">
+                  Approved supporters and project-team members use secure workspaces after verification, agreement and assignment.
                 </p>
-                <ol className="timeline grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-                  {[
-                    { t: "Submit a Pledge", d: "Tell the Trust what you may be able to contribute and any preferred purpose or conditions." },
-                    { t: "Initial Review", d: "The Trust considers relevance, charitable purpose, suitability and the appropriate next step." },
-                    { t: "Verification & Agreement", d: "Identity, authority, source, ownership, restrictions and other proportionate checks are completed where required." },
-                    { t: "Acceptance & Transfer", d: "Only after formal acceptance does the Trust provide the approved payment, transfer or delivery route." },
-                  ].map((step, index) => (
-                    <li key={step.t}>
-                      <span className="timeline-node">0{index + 1}</span>
-                      <h3 className="mb-3 text-foreground">{step.t}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{step.d}</p>
-                    </li>
-                  ))}
-                </ol>
-                <div className="mt-16 flex flex-wrap gap-4">
-                  <Link to="/donate#pledge-form">
-                    <Button size="lg" className="rounded-none bg-primary text-primary-foreground hover:bg-primary/90 tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                      Pledge a Contribution
-                    </Button>
-                  </Link>
-                  <Link to="/commission-projects">
-                    <Button variant="outline" size="lg" className="rounded-none border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground tracking-[0.12em] text-[13px] font-semibold h-12 px-8">
-                      Commission a Public-Benefit Project
-                    </Button>
-                  </Link>
-                </div>
               </div>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild variant="outline" className="rounded-none border-white/55 bg-transparent text-white hover:bg-white hover:text-primary">
+                <Link to="/auth?portal=donor">Donor login</Link>
+              </Button>
+              <Button asChild variant="outline" className="rounded-none border-white/55 bg-transparent text-white hover:bg-white hover:text-primary">
+                <Link to="/auth?portal=team">Project-team login</Link>
+              </Button>
             </div>
           </div>
         </section>
