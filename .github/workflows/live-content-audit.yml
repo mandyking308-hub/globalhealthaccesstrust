@@ -1,0 +1,186 @@
+name: Live content audit
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: live-content-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compare-live-content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install browser tooling
+        run: |
+          bun add --dev --no-save playwright@1.52.0
+          bunx playwright install --with-deps chromium
+
+      - name: Compare live pages with current GitHub wording
+        id: audit
+        continue-on-error: true
+        env:
+          EXPECTED_COMMIT: ${{ github.sha }}
+        run: |
+          cat > /tmp/live-content-audit.mjs <<'EOF'
+          import { writeFileSync } from "node:fs";
+          import { chromium } from "playwright";
+
+          const base = "https://globalhealthaccesstrust.com";
+          const expectedCommit = process.env.EXPECTED_COMMIT;
+          const checks = [
+            {
+              route: "/",
+              expected: [
+                "The Global Health Access Trust builds the systems that make healthcare possible.",
+                "The Trust builds on decades of voluntary, self-funded and pro bono service",
+                "Emergency Briefing — Ukraine",
+              ],
+              forbidden: ["A private charitable trust directing capital into healthcare access"],
+            },
+            {
+              route: "/our-work",
+              expected: [
+                "The Trust organises its work across six interconnected areas.",
+                "6. Humanitarian & War-Affected Response",
+                "Responsible AI & Health Intelligence",
+              ],
+              forbidden: ["five legally defined funding pillars"],
+            },
+            {
+              route: "/governance-legal-framework",
+              expected: [
+                "with effect from 1 December 2024",
+                "Any regulatory or registration particulars will be published only when formally confirmed",
+              ],
+              forbidden: ["registration in progress", "expected 2025"],
+            },
+            {
+              route: "/donate",
+              expected: ["Pledge", "contribution"],
+              forbidden: ["Donate Now"],
+            },
+            {
+              route: "/commission-projects",
+              expected: ["Commission", "public-benefit"],
+              forbidden: [],
+            },
+            {
+              route: "/volunteer-apply",
+              expected: ["Project Team & Contributor Application", "Register Your Interest"],
+              forbidden: [],
+            },
+          ];
+
+          const browser = await chromium.launch({ headless: true });
+          const results = [];
+          const failures = [];
+
+          for (const check of checks) {
+            const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+            const response = await page.goto(`${base}${check.route}`, { waitUntil: "networkidle", timeout: 45000 });
+            const body = await page.locator("body").innerText();
+            const missing = check.expected.filter((text) => !body.includes(text));
+            const forbidden = check.forbidden.filter((text) => body.includes(text));
+            results.push({ route: check.route, status: response?.status(), title: await page.title(), missing, forbidden });
+            if (!response?.ok()) failures.push(`${check.route}: HTTP ${response?.status() ?? "none"}`);
+            for (const text of missing) failures.push(`${check.route}: missing current wording: ${text}`);
+            for (const text of forbidden) failures.push(`${check.route}: still contains retired wording: ${text}`);
+            await page.close();
+          }
+
+          {
+            const page = await browser.newPage();
+            const response = await page.goto(`${base}/blog`, { waitUntil: "networkidle", timeout: 45000 });
+            const body = await page.locator("body").innerText();
+            const retired = /page not found|404 — not found/i.test(body);
+            results.push({ route: "/blog", status: response?.status(), retired, title: await page.title() });
+            if (!retired) failures.push("/blog: Blog route still exists or redirects instead of showing Not Found");
+            await page.close();
+          }
+
+          let release = null;
+          try {
+            const response = await fetch(`${base}/release.json?audit=${Date.now()}`);
+            const text = await response.text();
+            release = { status: response.status, text };
+            if (!response.ok) failures.push(`/release.json: HTTP ${response.status}`);
+            if (response.ok) {
+              const manifest = JSON.parse(text);
+              release.manifest = manifest;
+              if (manifest.source_commit !== expectedCommit) failures.push(`/release.json: live ${manifest.source_commit || "missing"}, expected ${expectedCommit}`);
+            }
+          } catch (error) {
+            failures.push(`/release.json: ${error instanceof Error ? error.message : String(error)}`);
+          }
+
+          await browser.close();
+          const report = { expectedCommit, checkedAt: new Date().toISOString(), results, release, failures };
+          writeFileSync("live-content-audit.json", JSON.stringify(report, null, 2));
+          console.log(JSON.stringify(report, null, 2));
+          if (failures.length) process.exit(1);
+          EOF
+
+          node /tmp/live-content-audit.mjs
+
+      - name: Upload live comparison report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-content-audit
+          path: live-content-audit.json
+          if-no-files-found: ignore
+
+      - name: Report live content success
+        if: steps.audit.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT live content matches GitHub',
+              description: 'Live wording, retired Blog route and release SHA match GitHub',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report live content mismatch
+        if: steps.audit.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT live content matches GitHub',
+              description: 'Live website differs from the current GitHub build',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Fail on live mismatch
+        if: steps.audit.outcome != 'success'
+        run: exit 1
