@@ -23,13 +23,13 @@ export const LegalIndexPage = () => {
     <div className="max-w-4xl mx-auto px-6 md:px-10 py-14">
       <Helmet>
         <title>Legal, Privacy & Governance | Global Health Access Trust</title>
-        <meta name="description" content="Official Terms, Privacy Notice, Complaints Policy, Safeguarding Policy and other governance documents of the Global Health Access Trust." />
+        <meta name="description" content="Terms, privacy, complaints, safeguarding and other governance documents published by Global Health Access Trust." />
       </Helmet>
       <span className="text-xs uppercase tracking-widest text-muted-foreground">Trust Governance</span>
       <h1 className="font-serif text-5xl mt-2">Legal, Privacy & Governance</h1>
       <p className="mt-4 text-muted-foreground text-lg">
-        The following documents govern the relationship between the Trust, its supporters, its project teams and the beneficiaries it serves.
-        Each document is versioned and published only after trustee approval.
+        The following documents explain the relationship between the Trust, its supporters, its project teams and the beneficiaries it serves.
+        The status shown beside each document indicates whether a current version is available for public reference.
       </p>
 
       {Object.entries(grouped).map(([cat, list]) => (
