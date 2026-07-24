@@ -90,7 +90,7 @@ export const HistoryVisualInterlude = ({ pathname }: { pathname: string }) => {
             className={index === 1 ? "history-visual-interlude__figure history-visual-interlude__figure--offset" : "history-visual-interlude__figure"}
           >
             <div className="history-visual-interlude__image-wrap">
-              <img src={record.src} alt={record.alt} loading="lazy" />
+              <img src={record.src} alt={record.alt} loading="eager" />
               <span>Editorial archive · {pathname.split("/").pop()}</span>
             </div>
             <figcaption>
