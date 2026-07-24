@@ -26,7 +26,7 @@ export const AboutTheTrustPage = () => {
 
         <div className="section-container">
           <h2>Structure &amp; Leadership</h2>
-          <p>Global Health Access Trust is an unincorporated charitable organisation governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.</p>
+          <p>Global Health Access Trust is governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.</p>
           <p>The Board is supported, where appropriate, by advisers and professional contributors with experience across healthcare, finance, law, technology and international delivery.</p>
           <p>All Trustees act under fiduciary duty and in accordance with the Constitution, applicable law and the Trust's published governance framework.</p>
           <p className="block"><Link to="/trustee-biographies" className="text-primary hover:underline inline-block py-2">View Trustee Biographies →</Link></p>
