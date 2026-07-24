@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, HandHeart, MessageCircle, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, HandHeart, MessageCircle, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { WorkstreamCards } from "@/components/workstreams/WorkstreamCards";
@@ -125,31 +125,6 @@ export const WorkstreamsIndexPage = () => {
                   </Link>
                 </article>
               ))}
-            </div>
-          </section>
-
-          <section className="grid gap-6 border border-primary/15 bg-primary/[0.035] p-7 sm:p-9 md:grid-cols-[auto_1fr] md:items-start">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <ShieldCheck className="h-6 w-6" aria-hidden="true" />
-            </div>
-            <div>
-              <h2 className="mb-3 text-3xl font-semibold">Evidence without overstatement</h2>
-              <p className="mb-5 text-muted-foreground">
-                Statistics on these pages describe the wider public need. They are not presented as GHAT results. Outcomes will only be published when a defined baseline, intervention, timeframe and appropriate evidence exist.
-              </p>
-              <ul className="grid gap-3 text-foreground sm:grid-cols-2">
-                {[
-                  "Sources are identified on each workstream page.",
-                  "Sensitive identities and delivery details may remain private.",
-                  "Earlier personal and pro bono work is distinguished from formal Trust delivery.",
-                  "Project stages and current activity are described precisely.",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           </section>
         </div>
