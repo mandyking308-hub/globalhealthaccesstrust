@@ -3,7 +3,7 @@
 export const SITE_CONFIG = {
   name: "Global Health Access Trust",
   shortName: "GHAT",
-  description: "A charitable trust that develops, funds and coordinates projects which enable better healthcare.",
+  description: "An unincorporated charitable organisation that develops, funds and coordinates projects which enable better healthcare.",
   url: "https://globalhealthaccesstrust.com",
   address: {
     line1: "2 Harley Street",

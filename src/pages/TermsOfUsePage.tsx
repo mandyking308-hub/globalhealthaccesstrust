@@ -108,7 +108,7 @@ export const TermsOfUsePage = () => {
             operated by {LEGAL_ENTITY.legalName}.
           </p>
           <p className="mt-4 text-[16px] leading-[1.75] text-foreground/85">
-            Global Health Access Trust is a charitable trust established under the laws of England and Wales.
+            Global Health Access Trust is an unincorporated charitable organisation established in England and Wales.
             It is governed by its Constitution and administered by its Board of Trustees exclusively for
             charitable purposes.
           </p>

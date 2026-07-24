@@ -35,7 +35,7 @@ const periods = [
     period: "2020–2026",
     title: "Frontline community action and the establishment of the Trust",
     description:
-      "This final chapter covers the hands-on COVID-19 response, continuing international humanitarian work, the formal establishment of GHAT on 1 December 2024 and the Trust's present-day development.",
+      "This final chapter covers the hands-on COVID-19 response, continuing international humanitarian work, GHAT's formal organisational development from December 2024, adoption of its Constitution in June 2025 and its present-day development.",
     href: "/our-history/2020-2026",
     status: "Explore the final chapter",
     active: true,
@@ -144,7 +144,7 @@ export const CharitableHistoryPage = () => {
               The work that shaped the Trust
             </h2>
             <p className="text-muted-foreground">
-              The earlier pages describe voluntary work undertaken before the Trust existed. The final chapter clearly separates the international network before 1 December 2024 from formal GHAT activity beginning on that date.
+              The earlier pages describe the voluntary work and international network that preceded GHAT's formal organisational development. The final chapter explains the transition beginning in December 2024 and the adoption of the Constitution in June 2025.
             </p>
           </div>
 

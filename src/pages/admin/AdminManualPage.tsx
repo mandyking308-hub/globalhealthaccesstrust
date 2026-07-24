@@ -43,7 +43,7 @@ const SITE_OVERVIEW = {
   projectName: "Global Health Access Trust (GHAT)",
   domain: "globalhealthaccesstrust.lovable.app",
   purpose:
-    "An institutional digital platform for a UK charitable trust focused on global health access. Serves as the public-facing website, donor portal, volunteer management system, and administrative command centre.",
+    "An institutional digital platform for a UK unincorporated charitable organisation focused on global health access. Serves as the public-facing website, donor portal, volunteer management system, and administrative command centre.",
   positioning:
     "Formal, institutional tone aligned with UK charity governance standards. Professional, high-trust design with clean white backgrounds and structured layouts.",
 };

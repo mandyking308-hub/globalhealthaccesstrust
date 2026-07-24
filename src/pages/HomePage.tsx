@@ -58,7 +58,7 @@ export const HomePage = () => {
     <>
       <SEO
         title="Global Health Access Trust"
-        description="A charitable trust developing, funding and coordinating the systems and conditions that enable better healthcare through professional expertise, infrastructure, responsible technology and public-benefit projects."
+        description="An unincorporated charitable organisation developing, funding and coordinating the systems and conditions that enable better healthcare through professional expertise, infrastructure, responsible technology and public-benefit projects."
         canonical="/"
         schema={organizationSchema}
       />
