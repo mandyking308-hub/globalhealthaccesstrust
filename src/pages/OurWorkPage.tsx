@@ -19,6 +19,14 @@ export const OurWorkPage = () => {
       <p>The Trust organises its work across six interconnected areas. Every project must demonstrate a clear route to public benefit and remain within the Trust's charitable purpose.</p>
       <p>We prioritise impact over volume, and depth over display.</p>
 
+      <div className="section-container border border-primary/20 bg-primary/[0.035] p-6 sm:p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-3">The work that came before the Trust</p>
+        <h2>Our History of Charitable Work</h2>
+        <p>Our present work is grounded in more than three decades of voluntary charitable activity, humanitarian fundraising, community support, health advocacy and practical assistance in the UK and internationally.</p>
+        <p>The historical record separates this earlier voluntary work from projects formally undertaken through the Trust from December 2024 onward.</p>
+        <p className="block"><Link to="/our-history" className="text-primary hover:underline inline-block py-2 font-semibold">Explore Our History of Charitable Work →</Link></p>
+      </div>
+
       <div className="section-container">
         <h2>1. Ethical Access to Healthcare</h2>
         <p>We develop, fund and coordinate lawful projects that improve access to care where it is absent, delayed, unaffordable or under severe pressure. This may include:</p>
