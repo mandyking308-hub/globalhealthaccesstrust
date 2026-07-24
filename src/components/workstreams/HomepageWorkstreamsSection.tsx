@@ -5,32 +5,32 @@ import { WorkstreamCards } from "./WorkstreamCards";
 
 export const HomepageWorkstreamsSection = () => (
   <section className="border-t border-foreground/10 bg-muted/20 py-20 md:py-28" aria-labelledby="home-workstreams-heading">
-    <div className="mx-auto max-w-[1400px] px-6 md:px-10">
-      <div className="mb-12 grid gap-8 md:grid-cols-[180px_1fr_auto] md:items-end md:gap-12">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:mb-3">Current work</span>
+    <div className="mx-auto max-w-[1280px] px-5 sm:px-8 lg:px-10">
+      <div className="mb-12 grid gap-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div className="max-w-4xl">
+          <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Current work</span>
           <h2
             id="home-workstreams-heading"
-            className="mb-6 font-serif text-foreground"
-            style={{ fontSize: "clamp(36px, 5vw, 72px)", lineHeight: 0.98, letterSpacing: "-0.01em" }}
+            className="mb-5 text-foreground"
+            style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(34px, 4.4vw, 64px)", lineHeight: 1.02, letterSpacing: "-0.035em", fontWeight: 650, textTransform: "none" }}
           >
-            Five Current Workstreams
+            Five current workstreams
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
             Evidence-led projects across food systems, vulnerable children, conflict recovery, responsible AI and global mental health—each with a defined stage, project plan and route for participation.
           </p>
         </div>
-        <Button asChild variant="outline" size="lg" className="rounded-none">
+        <Button asChild variant="outline" size="lg" className="rounded-none lg:mb-1">
           <Link to="/current-workstreams">
             Explore all workstreams <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </Link>
         </Button>
       </div>
 
-      <WorkstreamCards />
+      <WorkstreamCards compact />
 
       <div className="mt-10 border-l-4 border-primary bg-background p-6 sm:p-7">
-        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-primary">A clear public record</p>
+        <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-primary">A clear public record</p>
         <p className="m-0 max-w-5xl leading-relaxed text-muted-foreground">
           Statistics describe the wider need, not results claimed by GHAT. Each project page distinguishes current activity from planned phases and explains what will be produced, how progress will be measured and what must happen before support is accepted or delivery expands.
         </p>

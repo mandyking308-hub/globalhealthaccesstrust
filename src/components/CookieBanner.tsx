@@ -4,6 +4,7 @@ import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
+import "@/styles/cookie-banner.css";
 
 const PREFERENCE_VERSION = "cookie-notice-1.0";
 const STORAGE_KEY = "ghat-cookie-consent";
@@ -88,7 +89,6 @@ export const CookieBanner = () => {
   useEffect(() => {
     const stored = getStoredPrefs();
     if (!stored) {
-      // Deny-by-default before any consent
       applyGtagConsent(DEFAULT_PREFS);
       setShowBanner(true);
     } else {
@@ -116,28 +116,20 @@ export const CookieBanner = () => {
           role="dialog"
           aria-label="Cookie choices"
           aria-live="polite"
-          className="fixed inset-x-0 bottom-0 z-50 bg-background border-t border-foreground/15 shadow-lg"
+          className="ghat-cookie-banner fixed inset-x-0 bottom-0 z-50"
         >
-          <div className="max-w-6xl mx-auto p-5 md:p-6 flex flex-col md:flex-row gap-4 md:items-center">
-            <div className="flex-1 text-sm leading-relaxed">
-              <p className="font-semibold mb-1">Your cookie choices</p>
-              <p className="text-muted-foreground">
-                We use strictly necessary storage to keep the site working. With your consent we also use functional,
-                analytics and other optional technologies. You can accept, reject non-essential, or manage each category.
-                Read the{" "}
+          <div className="ghat-cookie-banner__inner">
+            <div className="ghat-cookie-banner__copy">
+              <p className="ghat-cookie-banner__title">Your cookie choices</p>
+              <p className="ghat-cookie-banner__text">
+                Necessary storage keeps the site working. With consent, we also use functional, analytics and other optional technologies. You can accept all, reject non-essential, or manage each category. Read the{" "}
                 <Link to="/cookie-policy" className="underline underline-offset-2">Cookie Notice</Link>.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2 md:flex-shrink-0">
-              <Button variant="outline" onClick={rejectNonEssential} className="min-w-[160px]">
-                Reject non-essential
-              </Button>
-              <Button variant="outline" onClick={() => setShowManage(true)} className="min-w-[160px]">
-                Manage choices
-              </Button>
-              <Button onClick={acceptAll} className="min-w-[160px]">
-                Accept all
-              </Button>
+            <div className="ghat-cookie-banner__actions">
+              <Button variant="outline" onClick={rejectNonEssential}>Reject non-essential</Button>
+              <Button variant="outline" onClick={() => setShowManage(true)}>Manage choices</Button>
+              <Button onClick={acceptAll}>Accept all</Button>
             </div>
           </div>
         </div>
@@ -148,8 +140,7 @@ export const CookieBanner = () => {
           <DialogHeader>
             <DialogTitle>Manage cookie choices</DialogTitle>
             <DialogDescription>
-              Strictly necessary items always run because they keep the site secure and functional. All other categories
-              are off unless you turn them on.
+              Strictly necessary items always run because they keep the site secure and functional. All other categories are off unless you turn them on.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-5">

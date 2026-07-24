@@ -7,6 +7,7 @@ import { Analytics } from "@/components/Analytics";
 import { ContentProtection } from "@/components/ContentProtection";
 import { HomepageWorkstreamsSection } from "@/components/workstreams/HomepageWorkstreamsSection";
 import { WorkstreamFormContext } from "@/components/workstreams/WorkstreamFormContext";
+import "@/styles/workstream-type-overrides.css";
 
 export const Layout = () => {
   const location = useLocation();

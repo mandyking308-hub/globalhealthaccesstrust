@@ -1,0 +1,9 @@
+#main-content .workstream-page h1.workstream-page-title,
+#main-content .workstreams-index h1.workstreams-index-title {
+  font-family: var(--font-sans) !important;
+  font-size: clamp(2.45rem, 4.4vw, 4.75rem) !important;
+  font-weight: 650 !important;
+  line-height: 1.01 !important;
+  letter-spacing: -0.045em !important;
+  text-transform: none !important;
+}
