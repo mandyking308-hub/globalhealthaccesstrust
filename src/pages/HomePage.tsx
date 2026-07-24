@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { HomepageWorkstreamsSection } from "@/components/workstreams/HomepageWorkstreamsSection";
 import { PROGRAM_AREAS } from "@/lib/constants";
-import { WORKSTREAMS } from "@/lib/workstreams";
 import { SEO } from "@/components/SEO";
 import { organizationSchema } from "@/lib/seo";
+import heroImage from "@/assets/ghat-hero-community-health.jpg";
 
 const deliverySteps = [
   {
@@ -54,8 +54,6 @@ const participationRoutes = [
 ];
 
 export const HomePage = () => {
-  const heroProjects = WORKSTREAMS.slice(0, 4);
-
   return (
     <>
       <SEO
@@ -95,31 +93,13 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="order-1 grid min-h-[58vh] grid-cols-2 grid-rows-2 gap-px bg-foreground/10 lg:order-2 lg:min-h-full">
-              {heroProjects.map((project) => (
-                <Link
-                  key={project.slug}
-                  to={`/current-workstreams/${project.slug}`}
-                  className="group relative overflow-hidden bg-muted no-underline"
-                  aria-label={`View ${project.title}`}
-                >
-                  <img
-                    src={project.image}
-                    alt={project.imageAlt}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
-                    loading="eager"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/5 to-transparent" aria-hidden="true" />
-                  <div className="absolute inset-x-0 bottom-0 p-5 text-white sm:p-7">
-                    <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.2em] text-white/75">
-                      Workstream {project.number}
-                    </p>
-                    <p className="m-0 max-w-[260px] text-sm font-semibold leading-snug text-white sm:text-base">
-                      {project.shortTitle}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+            <div className="relative order-1 min-h-[58vh] overflow-hidden bg-muted lg:order-2 lg:min-h-full">
+              <img
+                src={heroImage}
+                alt="A mother and child on a residential street in an Eastern European town affected by the Ukraine crisis"
+                className="absolute inset-0 h-full w-full object-cover object-center"
+                loading="eager"
+              />
             </div>
           </div>
         </section>
