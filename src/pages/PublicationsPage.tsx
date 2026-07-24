@@ -99,7 +99,7 @@ export const PublicationsPage = () => {
         <title>Publications & Documents | Global Health Access Trust</title>
         <meta
           name="description"
-          content="Official governing documents, policies, reports and project publications approved for public release by the Global Health Access Trust."
+          content="Governing documents, policies, reports and project publications made available by the Global Health Access Trust."
         />
         <link rel="canonical" href="https://globalhealthaccesstrust.com/publications" />
       </Helmet>
@@ -108,10 +108,10 @@ export const PublicationsPage = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">Publications &amp; Documents</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-5">
-            Official governing documents, policies, reports and project publications approved for public release by the Board of Trustees.
+            Governing documents, policies, reports and project publications made available by Global Health Access Trust.
           </p>
           <p className="text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Materials are published only when final, authorised and suitable for public access. Some information may be redacted or withheld where required to protect confidentiality, safeguarding, legal privilege, data protection or personal safety.
+            Materials are published when final, authorised and suitable for public access. Some information may be redacted or withheld where required to protect confidentiality, safeguarding, legal privilege, data protection or personal safety.
           </p>
         </div>
 
@@ -119,17 +119,17 @@ export const PublicationsPage = () => {
           <Card className="card-elevated">
             <CardContent className="p-8">
               <span className="text-xs uppercase tracking-widest text-muted-foreground">Governing Document</span>
-              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Trust Constitution</h2>
+              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Signed Constitution</h2>
               <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
-                The signed governing document establishes the Trust's charitable purposes, Trustee powers and institutional framework.
+                The Constitution signed by the three founding trustees establishes the organisation's charitable objectives, Trustee powers and governance framework.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
-                <div><strong>Effective date</strong><br /><span className="text-muted-foreground">1 December 2024</span></div>
-                <div><strong>Version</strong><br /><span className="text-muted-foreground">1.0 — Original</span></div>
-                <div><strong>Document reference</strong><br /><span className="text-muted-foreground">GHAT-CONSTITUTION-1.0</span></div>
+                <div><strong>Adopted</strong><br /><span className="text-muted-foreground">June 2025</span></div>
+                <div><strong>Version</strong><br /><span className="text-muted-foreground">1.0</span></div>
+                <div><strong>Document reference</strong><br /><span className="text-muted-foreground">GHAT-CONSTITUTION-2025</span></div>
               </div>
               <Button asChild>
-                <Link to="/constitution">View the Constitution</Link>
+                <Link to="/constitution">View the Signed Constitution</Link>
               </Button>
             </CardContent>
           </Card>
@@ -173,7 +173,7 @@ export const PublicationsPage = () => {
                 <li>Evaluations, lessons learned and completed-project records</li>
               </ul>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Publications will be added only after appropriate review and approval. Drafts, internal working materials and secure donor or project-team records will not be presented as final public publications.
+                Publications will be added only after appropriate review and authorisation. Drafts, internal working materials and secure donor or project-team records will not be presented as final public publications.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 Public reporting will protect beneficiary confidentiality, professional discretion, safeguarding and personal safety.
