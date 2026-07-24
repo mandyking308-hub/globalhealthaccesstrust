@@ -6,7 +6,7 @@ export const GovernanceLegalFrameworkPage = () => {
     <ContentLayout>
       <SEO
         title="Governance & Legal Framework"
-        description="Legal status, charitable purpose and governance framework of the Global Health Access Trust, governed by its signed Constitution and Board of Trustees."
+        description="Legal status, regulatory responsibilities and governance framework of Global Health Access Trust, a charitable trust constituted by Trust Deed under the laws of England and Wales."
         canonical="/governance-legal-framework"
       />
       <h1>Governance &amp; Legal Framework</h1>
@@ -15,17 +15,18 @@ export const GovernanceLegalFrameworkPage = () => {
 
       <div className="section-container">
         <h2>Legal Status</h2>
-        <p>Global Health Access Trust works for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.</p>
-        <p>The organisation is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with the governing document and the lawful advancement of its charitable purposes.</p>
+        <p>Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It operates exclusively for charitable purposes and for the public benefit.</p>
+        <p>The Trust Deed is the founding and principal governing document. The trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including information prepared during banking due diligence. The Constitution supports, and does not replace, the Trust Deed.</p>
+        <p>The Trust is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with the governing documents and the lawful advancement of its charitable purposes.</p>
         <p>Any regulatory or registration particulars will be published only when formally confirmed and available for publication.</p>
-        <p>All funds are administered in accordance with the Constitution, applicable law, the Trust's financial controls and formal decisions of the Board.</p>
+        <p>All funds are administered in accordance with the Trust Deed, applicable law, the supplementary Constitution, the Trust's financial controls and formal decisions of the Board.</p>
       </div>
 
       <div className="section-container">
         <h2>Regulatory Compliance</h2>
         <p>The Trust maintains policies and procedures proportionate to its activities, including:</p>
         <ul>
-          <li>Charity law and the duties applying to charity trustees</li>
+          <li>Charity and trust law</li>
           <li>Trustee fiduciary duties and conflicts of interest</li>
           <li>Anti-money laundering, counter-terrorist financing and sanctions compliance</li>
           <li>Data protection, confidentiality and cyber security</li>
@@ -45,7 +46,7 @@ export const GovernanceLegalFrameworkPage = () => {
           <li>Overseeing safeguarding, legal compliance and institutional risk</li>
           <li>Appointing and overseeing advisers, delivery partners, independent reviewers and auditors where appropriate</li>
         </ul>
-        <p>No Trustee may receive private benefit from the Trust except where expressly permitted by the Constitution and applicable law, properly authorised and transparently recorded.</p>
+        <p>No Trustee may receive private benefit from the Trust except where expressly permitted by the Trust Deed and applicable law, properly authorised and transparently recorded.</p>
       </div>
 
       <div className="section-container">
@@ -93,7 +94,7 @@ export const GovernanceLegalFrameworkPage = () => {
         <h2>Accountability &amp; Transparency</h2>
         <p>The Trust publishes the governance and policy documents required to explain how it operates. Its accountability framework includes:</p>
         <ul>
-          <li>The signed Constitution and published governance policies</li>
+          <li>The Trust Deed, signed supplementary Constitution and published governance policies</li>
           <li>Financial accounts and trustee reporting prepared or filed where required</li>
           <li>Secure donor reporting on approved projects, allocations, milestones and evidence</li>
           <li>Published complaints, safeguarding and protected-concerns procedures</li>
