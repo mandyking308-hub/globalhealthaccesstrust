@@ -2,7 +2,7 @@
 export const SITE_CONFIG = {
   name: "Global Health Access Trust",
   url: "https://globalhealthaccesstrust.com",
-  description: "A charitable trust constituted by Trust Deed that develops, funds and coordinates public-benefit projects which enable better healthcare",
+  description: "An organisation established for charitable purposes and public benefit, governed through its signed Constitution and wider legal and governance framework",
   image: "/ghat-logo.png"
 };
 
@@ -14,7 +14,7 @@ export const organizationSchema = {
   "alternateName": "GHAT",
   "url": "https://globalhealthaccesstrust.com",
   "logo": "https://globalhealthaccesstrust.com/ghat-logo.png",
-  "description": "A charitable trust constituted by Trust Deed under the laws of England and Wales, developing, funding and coordinating public-benefit projects that advance health, relieve illness and preserve life.",
+  "description": "Global Health Access Trust builds on charitable and community work carried out since 2019. It was formally established with effect from 1 December 2024 and is governed through its signed Constitution and wider legal and governance framework.",
   "foundingDate": "2024-12-01",
   "foundingLocation": {
     "@type": "Country",
