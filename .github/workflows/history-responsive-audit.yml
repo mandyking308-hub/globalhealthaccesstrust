@@ -1,0 +1,243 @@
+name: GHAT history responsive audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/pages/CharitableHistory*.tsx"
+      - "src/components/layout/**"
+      - "src/index.css"
+      - "src/App.tsx"
+      - ".github/workflows/history-responsive-audit.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  history-responsive-audit:
+    runs-on: ubuntu-latest
+    env:
+      VITE_SUPABASE_URL: https://example.supabase.co
+      VITE_SUPABASE_PUBLISHABLE_KEY: release-check-placeholder-key
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Correct completed final-chapter navigation
+        id: continuity
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/pages/CharitableHistory2010sPage.tsx")
+          text = path.read_text()
+          old = '''          <div className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+            Next: 2020–2026 <ArrowRight className="h-4 w-4" />
+            <span className="text-xs font-normal">(in preparation)</span>
+          </div>'''
+          new = '''          <Link
+            to="/our-history/2020-2026"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:underline"
+          >
+            Next: 2020–2026 <ArrowRight className="h-4 w-4" />
+          </Link>'''
+
+          if old in text:
+              path.write_text(text.replace(old, new))
+              print("changed=true")
+              with open(Path.home() / "continuity-output", "w") as output:
+                  output.write("true")
+          elif new in text:
+              print("Navigation was already correct.")
+              with open(Path.home() / "continuity-output", "w") as output:
+                  output.write("false")
+          else:
+              raise SystemExit("Expected history navigation block was not found")
+          PY
+          echo "changed=$(cat "$HOME/continuity-output")" >> "$GITHUB_OUTPUT"
+
+      - name: Commit continuity correction
+        if: steps.continuity.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/pages/CharitableHistory2010sPage.tsx
+          git commit -m "Connect 2010s history to final chapter"
+          git push
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build website
+        run: bun run build
+
+      - name: Install Chromium
+        run: bunx playwright install --with-deps chromium
+
+      - name: Start production preview
+        shell: bash
+        run: |
+          bun run preview -- --host 127.0.0.1 --port 4173 > /tmp/ghat-history-preview.log 2>&1 &
+          for attempt in {1..60}; do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/ghat-history-preview.log
+          exit 1
+
+      - name: Render and inspect history pages
+        shell: bash
+        run: |
+          mkdir -p history-responsive-audit
+          node <<'JS'
+          const { chromium } = require('playwright');
+          const fs = require('node:fs');
+          const path = require('node:path');
+
+          const routes = [
+            { name: 'home', route: '/' },
+            { name: 'history-index', route: '/our-history' },
+            { name: 'history-1991-1999', route: '/our-history/1991-1999' },
+            { name: 'history-2000-2009', route: '/our-history/2000-2009' },
+            { name: 'history-2010-2019', route: '/our-history/2010-2019' },
+            { name: 'history-2020-2026', route: '/our-history/2020-2026' },
+          ];
+          const viewports = [
+            { name: 'mobile', width: 390, height: 844 },
+            { name: 'tablet', width: 768, height: 1024 },
+            { name: 'desktop', width: 1440, height: 1000 },
+          ];
+
+          const report = [];
+          let failed = false;
+          const browser = await chromium.launch();
+
+          for (const viewport of viewports) {
+            let homepageFonts = null;
+
+            for (const item of routes) {
+              const page = await browser.newPage({ viewport });
+              const consoleErrors = [];
+              const pageErrors = [];
+              page.on('console', message => {
+                if (message.type() === 'error') consoleErrors.push(message.text());
+              });
+              page.on('pageerror', error => pageErrors.push(error.message));
+
+              const response = await page.goto(`http://127.0.0.1:4173${item.route}`, {
+                waitUntil: 'networkidle',
+                timeout: 60000,
+              });
+
+              await page.evaluate(() => {
+                const banner = Array.from(document.querySelectorAll('[role="dialog"], aside, div'))
+                  .find(element => /cookie/i.test(element.textContent || '') && /accept|reject|preferences/i.test(element.textContent || ''));
+                if (banner && banner instanceof HTMLElement) banner.style.display = 'none';
+              });
+
+              const metrics = await page.evaluate(() => {
+                const body = getComputedStyle(document.body);
+                const h1 = document.querySelector('h1');
+                const h2 = document.querySelector('h2');
+                const root = document.documentElement;
+                const overflowing = Array.from(document.querySelectorAll('body *'))
+                  .filter(element => {
+                    const rect = element.getBoundingClientRect();
+                    return rect.width > 0 && (rect.right > root.clientWidth + 1 || rect.left < -1);
+                  })
+                  .slice(0, 12)
+                  .map(element => ({
+                    tag: element.tagName,
+                    className: typeof element.className === 'string' ? element.className : '',
+                    text: (element.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 100),
+                  }));
+
+                return {
+                  title: document.title,
+                  h1: h1?.textContent?.trim() || null,
+                  bodyFont: body.fontFamily,
+                  bodySize: body.fontSize,
+                  bodyLineHeight: body.lineHeight,
+                  h1Font: h1 ? getComputedStyle(h1).fontFamily : null,
+                  h1Size: h1 ? getComputedStyle(h1).fontSize : null,
+                  h1LineHeight: h1 ? getComputedStyle(h1).lineHeight : null,
+                  h2Font: h2 ? getComputedStyle(h2).fontFamily : null,
+                  scrollWidth: root.scrollWidth,
+                  clientWidth: root.clientWidth,
+                  overflowing,
+                  inPreparation: document.body.innerText.includes('(in preparation)'),
+                  missingImages: Array.from(document.images)
+                    .filter(image => image.complete && image.naturalWidth === 0)
+                    .map(image => image.currentSrc || image.src),
+                  finalChapterLink: Boolean(document.querySelector('a[href="/our-history/2020-2026"]')),
+                };
+              });
+
+              if (item.name === 'home') {
+                homepageFonts = {
+                  bodyFont: metrics.bodyFont,
+                  h1Font: metrics.h1Font,
+                };
+              }
+
+              const checks = {
+                statusOk: response?.status() === 200,
+                noHorizontalOverflow: metrics.scrollWidth <= metrics.clientWidth + 1,
+                noOverflowingElements: metrics.overflowing.length === 0,
+                noConsoleErrors: consoleErrors.length === 0,
+                noPageErrors: pageErrors.length === 0,
+                noMissingImages: metrics.missingImages.length === 0,
+                bodyFontMatchesHomepage: item.name === 'home' || metrics.bodyFont === homepageFonts?.bodyFont,
+                headingFontMatchesHomepage: item.name === 'home' || metrics.h1Font === homepageFonts?.h1Font,
+                noStalePreparationLabel: item.name !== 'history-2010-2019' || !metrics.inPreparation,
+                finalChapterConnected: item.name !== 'history-2010-2019' || metrics.finalChapterLink,
+              };
+
+              if (Object.values(checks).some(value => value === false)) failed = true;
+
+              await page.screenshot({
+                path: path.join('history-responsive-audit', `${item.name}-${viewport.name}.png`),
+                fullPage: true,
+              });
+
+              report.push({
+                page: item.name,
+                route: item.route,
+                viewport,
+                status: response?.status() || null,
+                metrics,
+                checks,
+                consoleErrors,
+                pageErrors,
+              });
+              await page.close();
+            }
+          }
+
+          await browser.close();
+          fs.writeFileSync(
+            path.join('history-responsive-audit', 'report.json'),
+            JSON.stringify(report, null, 2),
+          );
+          if (failed) process.exitCode = 1;
+          JS
+
+      - name: Upload responsive audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ghat-history-responsive-audit
+          path: history-responsive-audit
+          retention-days: 30
