@@ -8,13 +8,13 @@ export const LEGAL_ENTITY = {
   shortName: "GHAT",
 
   publicLegalDescription:
-    "Global Health Access Trust is a charitable trust established under the laws of England and Wales. It is governed by its Trust Deed and administered by its Board of Trustees exclusively for charitable purposes.",
+    "Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025. It is administered by its Board of Trustees exclusively for charitable purposes and the public benefit.",
 
   publicLegalDescriptionLong:
-    "Global Health Access Trust is a charitable trust established under the laws of England and Wales. The Trust is governed by its Trust Deed and administered by its Board of Trustees. The Trustees are responsible for ensuring that the Trust's assets and activities are applied exclusively in furtherance of its charitable purposes and for the public benefit.",
+    "Global Health Access Trust is an unincorporated charitable organisation established in England and Wales. The organisation is governed by its Constitution adopted in June 2025 and administered by its Board of Trustees. The Trustees are responsible for ensuring that its assets and activities are applied exclusively in furtherance of its charitable purposes and for the public benefit.",
 
   jurisdiction: "England and Wales",
-  governingDocument: "Trust Deed",
+  governingDocument: "Constitution",
 
   chair: "Mandy King",
   constitutionalSignatories: [
