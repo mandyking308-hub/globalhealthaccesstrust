@@ -89,7 +89,7 @@ export const Header = () => {
 
         {/* Main bar */}
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 h-[84px]">
-          <div className="flex h-full items-center justify-between gap-2 sm:gap-4 lg:gap-10">
+          <div className="flex h-full items-center justify-between gap-2 sm:gap-3 lg:gap-10">
 
             {/* Logo — GHAT institutional wordmark */}
             <Link
@@ -97,7 +97,7 @@ export const Header = () => {
               className="flex min-w-0 items-center hover:opacity-85 transition-opacity duration-200 flex-shrink-0"
               aria-label="Global Health Access Trust - Home"
             >
-              <GHATLogo className="h-10 w-[180px] sm:h-12 sm:w-[270px] md:h-16 md:w-auto" />
+              <GHATLogo className="h-10 w-[148px] sm:h-12 sm:w-[220px] md:h-14 md:w-[245px] lg:h-16 lg:w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -140,13 +140,13 @@ export const Header = () => {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 pl-0 sm:pl-2 lg:pl-4 lg:border-l lg:border-foreground/10">
+            <div className="flex items-center gap-1 sm:gap-3 flex-shrink-0 pl-0 sm:pl-2 lg:pl-4 lg:border-l lg:border-foreground/10">
               <button
                 onClick={() => setIsSearchOpen(true)}
                 aria-label="Search website"
-                className="h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center text-foreground/70 hover:text-foreground transition-colors"
+                className="h-11 w-11 flex items-center justify-center border border-foreground/15 bg-background text-foreground hover:border-primary/40 hover:text-primary transition-colors"
               >
-                <Search className="w-[18px] h-[18px]" />
+                <Search className="w-5 h-5" />
               </button>
 
               <Link
@@ -163,7 +163,7 @@ export const Header = () => {
               </Link>
 
               <button
-                className="lg:hidden h-9 w-9 flex items-center justify-center"
+                className="lg:hidden h-11 w-11 flex items-center justify-center border border-foreground/15 bg-background text-foreground hover:border-primary/40 hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
               >
