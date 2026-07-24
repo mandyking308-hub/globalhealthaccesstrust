@@ -185,7 +185,7 @@ jobs:
               });
 
               await page.evaluate(() => {
-                const candidates = Array.from(document.querySelectorAll('[role="dialog"], aside, body > div'));
+                const candidates = Array.from(document.querySelectorAll('[role="dialog"], [class*="cookie"], [id*="cookie"]'));
                 const banner = candidates.find((element) => {
                   const text = element.textContent || '';
                   return /cookie/i.test(text) && /accept|reject|preferences/i.test(text);
