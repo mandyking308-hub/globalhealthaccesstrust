@@ -17,8 +17,10 @@ const periods = [
     period: "2000–2009",
     title: "Global health, disaster response and community care",
     description:
-      "This period included major humanitarian emergencies, international health campaigns and important changes in mental-health, social-care and autism policy.",
-    status: "Historical record in preparation",
+      "This period included major humanitarian emergencies, child health, disability access and the development of a stronger focus on mental health, autism and standards of care.",
+    href: "/our-history/2000-2009",
+    status: "Explore the decade",
+    active: true,
   },
   {
     period: "2010–2018",
@@ -99,6 +101,12 @@ export const CharitableHistoryPage = () => {
                 Explore 1991–1999 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
+                to="/our-history/2000-2009"
+                className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
+              >
+                Explore 2000–2009 <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
                 to="/our-work"
                 className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
               >
@@ -137,7 +145,7 @@ export const CharitableHistoryPage = () => {
           </div>
 
           <div className="space-y-5">
-            {periods.map((item, index) => (
+            {periods.map((item) => (
               <article
                 key={item.period}
                 className={`grid gap-5 border p-6 sm:p-8 md:grid-cols-[180px_1fr_auto] md:items-center ${
@@ -209,16 +217,24 @@ export const CharitableHistoryPage = () => {
         </section>
 
         <section className="mt-16 border-t border-foreground/10 pt-10 text-center">
-          <h2 className="mb-4 text-3xl font-serif font-bold">Service that shaped the Trust</h2>
+          <h2 className="mb-4 text-3xl font-serif font-bold">Continue through the history</h2>
           <p className="mx-auto mb-7 max-w-2xl text-muted-foreground">
-            The Global Health Access Trust continues values developed over many years: dignity, compassion, practical action and a belief that everyone should have a fair opportunity to obtain care and support.
+            Two complete decades are now available, covering voluntary humanitarian, health and community work from 1991 through 2009.
           </p>
-          <Link
-            to="/our-history/1991-1999"
-            className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground no-underline transition-colors hover:bg-primary/90"
-          >
-            Begin with 1991–1999 <ArrowRight className="h-4 w-4" />
-          </Link>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              to="/our-history/1991-1999"
+              className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
+            >
+              1991–1999 <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/our-history/2000-2009"
+              className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground no-underline transition-colors hover:bg-primary/90"
+            >
+              2000–2009 <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </section>
       </ContentLayout>
     </>
