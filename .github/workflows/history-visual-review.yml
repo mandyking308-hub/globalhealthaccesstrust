@@ -1,19 +1,18 @@
-name: GHAT history visual review
+name: GHAT tablet overflow diagnostic
 
 on:
   push:
     branches: [main]
     paths:
       - ".github/workflows/history-visual-review.yml"
-  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  render:
+  diagnose:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     env:
       VITE_SUPABASE_URL: https://example.supabase.co
       VITE_SUPABASE_PUBLISHABLE_KEY: release-check-placeholder-key
@@ -29,95 +28,48 @@ jobs:
       - run: bunx vite build
       - name: Start preview
         run: |
-          bunx vite preview --host 0.0.0.0 --port 4173 > /tmp/ghat-preview.log 2>&1 &
+          bunx vite preview --host 0.0.0.0 --port 4173 >/tmp/preview.log 2>&1 &
           for attempt in {1..40}; do
-            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then exit 0; fi
+            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
             sleep 1
           done
-          cat /tmp/ghat-preview.log
+          cat /tmp/preview.log
           exit 1
-      - name: Capture responsive pages
+      - name: Find tablet overflow elements
         run: |
-          mkdir -p history-visual-review
-          cat > history-visual-review.mjs <<'EOF'
+          mkdir -p overflow-diagnostic
+          cat > diagnose.mjs <<'EOF'
           import { chromium } from 'playwright';
           import { writeFile } from 'node:fs/promises';
-
           const pages = [
-            ['home', '/'],
-            ['history-index', '/our-history'],
-            ['history-1991-1999', '/our-history/1991-1999'],
-            ['history-2000-2009', '/our-history/2000-2009'],
-            ['history-2010-2019', '/our-history/2010-2019'],
-            ['history-2020-2026', '/our-history/2020-2026'],
+            ['home','/'],['our-work','/our-work'],['history-index','/our-history'],
+            ['history-1991','/our-history/1991-1999'],['history-2000','/our-history/2000-2009'],
+            ['history-2010','/our-history/2010-2019'],['history-2020','/our-history/2020-2026']
           ];
-          const viewports = [
-            ['mobile', 390, 844],
-            ['tablet', 768, 1024],
-            ['desktop', 1440, 1000],
-          ];
-
-          const browser = await chromium.launch({
-            executablePath: '/usr/bin/google-chrome',
-            headless: true,
-            args: ['--no-sandbox'],
-          });
-          const report = [];
-
-          for (const [viewportName, width, height] of viewports) {
-            for (const [name, route] of pages) {
-              const context = await browser.newContext({ viewport: { width, height } });
-              const page = await context.newPage();
-              const response = await page.goto(`http://127.0.0.1:4173${route}`, {
-                waitUntil: 'networkidle',
-                timeout: 60000,
-              });
-
-              const consentButtons = [
-                /reject all/i,
-                /reject/i,
-                /decline/i,
-                /necessary only/i,
-              ];
-              for (const pattern of consentButtons) {
-                const button = page.getByRole('button', { name: pattern }).first();
-                if (await button.count()) {
-                  await button.click().catch(() => {});
-                  break;
-                }
-              }
-              await page.waitForTimeout(250);
-
-              const metrics = await page.evaluate(() => {
-                const root = document.documentElement;
-                const h1 = document.querySelector('h1');
-                const bodyStyle = getComputedStyle(document.body);
-                return {
-                  title: document.title,
-                  h1: h1?.textContent?.trim() || null,
-                  bodyFont: bodyStyle.fontFamily,
-                  h1Font: h1 ? getComputedStyle(h1).fontFamily : null,
-                  scrollWidth: root.scrollWidth,
-                  clientWidth: root.clientWidth,
-                  documentHeight: Math.max(root.scrollHeight, document.body.scrollHeight),
-                };
-              });
-
-              await page.screenshot({
-                path: `history-visual-review/${name}-${viewportName}.png`,
-                fullPage: true,
-              });
-              report.push({ name, route, viewportName, width, height, status: response?.status(), metrics });
-              await context.close();
-            }
+          const browser = await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
+          const report=[];
+          for (const [name,route] of pages) {
+            const context=await browser.newContext({viewport:{width:768,height:1024}});
+            const page=await context.newPage();
+            await page.goto(`http://127.0.0.1:4173${route}`,{waitUntil:'networkidle'});
+            const result=await page.evaluate(() => {
+              const vw=document.documentElement.clientWidth;
+              const offenders=Array.from(document.querySelectorAll('body *')).map((el)=>{
+                const r=el.getBoundingClientRect();
+                const s=getComputedStyle(el);
+                return {tag:el.tagName,id:el.id,className:typeof el.className==='string'?el.className:'',text:(el.textContent||'').trim().replace(/\s+/g,' ').slice(0,80),left:r.left,right:r.right,width:r.width,position:s.position,overflowX:s.overflowX};
+              }).filter(x=>x.width>0&&(x.right>vw+1||x.left<-1)).sort((a,b)=>(b.right-vw)-(a.right-vw)).slice(0,30);
+              return {scrollWidth:document.documentElement.scrollWidth,clientWidth:vw,offenders};
+            });
+            report.push({name,route,...result});
+            await context.close();
           }
-
           await browser.close();
-          await writeFile('history-visual-review/report.json', JSON.stringify(report, null, 2));
+          await writeFile('overflow-diagnostic/report.json',JSON.stringify(report,null,2));
           EOF
-          bun history-visual-review.mjs
+          bun diagnose.mjs
       - uses: actions/upload-artifact@v4
         with:
-          name: ghat-history-visual-review
-          path: history-visual-review
+          name: ghat-tablet-overflow-diagnostic
+          path: overflow-diagnostic
           retention-days: 7
