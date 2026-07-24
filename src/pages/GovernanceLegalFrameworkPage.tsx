@@ -16,10 +16,10 @@ export const GovernanceLegalFrameworkPage = () => {
       <div className="section-container">
         <h2>Legal Status</h2>
         <p>Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It operates exclusively for charitable purposes and for the public benefit.</p>
-        <p>The Trust Deed is the founding and principal governing document. The trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including information prepared during banking due diligence. The Constitution supports, and does not replace, the Trust Deed.</p>
+        <p>The Trust Deed is the founding and principal governing document. The Trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including information prepared during banking due diligence. The Constitution supports, and does not replace, the Trust Deed.</p>
         <p>The Trust is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with the governing documents and the lawful advancement of its charitable purposes.</p>
-        <p>Any regulatory or registration particulars will be published only when formally confirmed and available for publication.</p>
-        <p>All funds are administered in accordance with the Trust Deed, applicable law, the supplementary Constitution, the Trust's financial controls and formal decisions of the Board.</p>
+        <p>The Trust is not a company and is not currently presented as a registered charity. Any regulatory or registration particulars will be published only when formally confirmed and available for publication.</p>
+        <p>All funds and assets are administered in accordance with the Trust Deed, applicable law, the supplementary Constitution, the Trust's financial controls and formal decisions of the Board.</p>
       </div>
 
       <div className="section-container">
@@ -92,10 +92,10 @@ export const GovernanceLegalFrameworkPage = () => {
 
       <div className="section-container">
         <h2>Accountability &amp; Transparency</h2>
-        <p>The Trust publishes the governance and policy documents required to explain how it operates. Its accountability framework includes:</p>
+        <p>The Trust publishes the governance and policy information required to explain how it operates. Its accountability framework includes:</p>
         <ul>
-          <li>The Trust Deed, signed supplementary Constitution and published governance policies</li>
-          <li>Financial accounts and trustee reporting prepared or filed where required</li>
+          <li>A public record of the Trust Deed, the signed supplementary Constitution and published governance policies</li>
+          <li>Financial accounts and Trustee reporting prepared or filed where required</li>
           <li>Secure donor reporting on approved projects, allocations, milestones and evidence</li>
           <li>Published complaints, safeguarding and protected-concerns procedures</li>
           <li>Public project and impact information where appropriate</li>
