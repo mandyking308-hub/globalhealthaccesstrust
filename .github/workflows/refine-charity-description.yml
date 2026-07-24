@@ -1,0 +1,78 @@
+name: Refine Public Charity Description
+
+on:
+  push:
+    paths:
+      - ".github/workflows/refine-charity-description.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Replace blunt legal-status wording
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              "Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025. It operates exclusively for charitable purposes and for the public benefit.":
+              "Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.",
+
+              "The Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025.":
+              "The Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.",
+
+              "Global Health Access Trust is an unincorporated charitable organisation governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.":
+              "Global Health Access Trust is governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.",
+
+              "Global Health Access Trust is an unincorporated charitable organisation established in England and Wales.\n            It is governed by its Constitution and administered by its Board of Trustees exclusively for\n            charitable purposes.":
+              "Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales.\n            It is governed by its signed Constitution, adopted in June 2025, and administered by its Board of Trustees.",
+
+              "{LEGAL_ENTITY.legalName} is an unincorporated charitable organisation established in England and Wales.\n            It is governed by its Constitution and administered by its Board of Trustees exclusively for\n            charitable purposes.":
+              "{LEGAL_ENTITY.legalName} is a charitable organisation working for public benefit under the laws of England and Wales.\n            It is governed by its signed Constitution, adopted in June 2025, and administered by its Board of Trustees.",
+
+              "Global Health Access Trust is an unincorporated charitable organisation established in\n                England and Wales. It is governed by its Constitution and administered\n                by its Board of Trustees exclusively for charitable purposes.":
+              "Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and administered by its Board of Trustees.",
+
+              "Legal status, charitable purpose and governance framework of the Global Health Access Trust, an unincorporated charitable organisation established in England and Wales.":
+              "Legal status, charitable purpose and governance framework of the Global Health Access Trust, governed by its signed Constitution and Board of Trustees.",
+          }
+
+          changed = []
+          for path in Path("src").rglob("*.tsx"):
+              original = path.read_text(encoding="utf-8")
+              updated = original
+              for old, new in replacements.items():
+                  updated = updated.replace(old, new)
+              if updated != original:
+                  path.write_text(updated, encoding="utf-8")
+                  changed.append(str(path))
+
+          print("Updated files:")
+          print("\n".join(changed) if changed else "None")
+          PY
+
+      - name: Verify old phrase is gone
+        run: |
+          if grep -RIn "unincorporated charitable organisation" src --include='*.tsx'; then
+            echo "Old phrase remains" >&2
+            exit 1
+          fi
+
+      - name: Build website
+        run: |
+          npm ci
+          npm run build
+
+      - name: Remove one-time workflow and commit
+        run: |
+          rm .github/workflows/refine-charity-description.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src .github/workflows/refine-charity-description.yml
+          git commit -m "Refine public description of the Trust"
+          git push
