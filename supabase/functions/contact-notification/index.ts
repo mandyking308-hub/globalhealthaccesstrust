@@ -14,6 +14,7 @@ const enquiryOptions = new Set([
   "General Enquiry",
   "Partnership Opportunity",
   "Funding Engagement",
+  "Donation or Active Project Support",
   "Legal / Legacy Matters",
   "Media / Press",
   "Other",
@@ -21,6 +22,7 @@ const enquiryOptions = new Set([
 
 const tagMap: Record<string, string[]> = {
   "Funding Engagement": ["funding", "donor", "capital"],
+  "Donation or Active Project Support": ["funding", "pledge", "donor", "project-support"],
   "Partnership Opportunity": ["partnership", "collaboration"],
   "Legal / Legacy Matters": ["legal", "governance"],
   "Media / Press": ["media", "communications"],
@@ -45,7 +47,7 @@ const clean = (value: unknown, max: number) =>
 const validEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 320;
 
 const priorityFor = (enquiryType: string) => {
-  if (["Funding Engagement", "Legal / Legacy Matters"].includes(enquiryType)) return "High";
+  if (["Funding Engagement", "Donation or Active Project Support", "Legal / Legacy Matters"].includes(enquiryType)) return "High";
   if (["Partnership Opportunity", "Media / Press"].includes(enquiryType)) return "Medium";
   return "Low";
 };
