@@ -18,7 +18,7 @@ export const FrequentlyAskedQuestionsPage = () => {
       <div className="section-container">
         <h2>About the Trust</h2>
         <h3>What is the Global Health Access Trust?</h3>
-        <p>The Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025.</p>
+        <p>Global Health Access Trust works for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.</p>
         <p>Its purposes are to advance health, relieve illness and preserve life. The Trust develops, funds and coordinates projects for public benefit under the authority and oversight of its Board of Trustees.</p>
         <h3>What makes this Trust different from other health charities?</h3>
         <p>The Trust is structured as a permanent institution rather than a temporary campaign.</p>
