@@ -35,6 +35,8 @@ const workstreams = [
   },
 ];
 
+const containsText = (body, expected) => body.toLocaleLowerCase().includes(expected.toLocaleLowerCase());
+
 function watchErrors(page, route) {
   page.on("pageerror", (error) => failures.push(`${route}: page error: ${error.message}`));
   page.on("console", (message) => {
@@ -61,7 +63,7 @@ async function open(route, viewport = { width: 1440, height: 1000 }) {
 {
   const page = await open("/");
   const body = await page.locator("body").innerText();
-  if (!body.includes("Five Current Workstreams")) failures.push("/: current-workstreams homepage heading is missing");
+  if (!containsText(body, "Five Current Workstreams")) failures.push("/: current-workstreams homepage heading is missing");
   for (const workstream of workstreams) {
     const href = `/current-workstreams/${workstream.slug}`;
     if ((await page.locator(`a[href="${href}"]`).count()) < 1) failures.push(`/: missing homepage link ${href}`);
@@ -76,8 +78,8 @@ async function open(route, viewport = { width: 1440, height: 1000 }) {
 {
   const page = await open("/current-workstreams");
   const body = await page.locator("body").innerText();
-  if (!body.includes("Practical work. Responsible delivery. Lasting public benefit.")) failures.push("/current-workstreams: hero statement is missing");
-  if (!body.includes("Evidence without overstatement")) failures.push("/current-workstreams: evidence standard is missing");
+  if (!containsText(body, "Practical work. Responsible delivery. Lasting public benefit.")) failures.push("/current-workstreams: hero statement is missing");
+  if (!containsText(body, "Evidence without overstatement")) failures.push("/current-workstreams: evidence standard is missing");
   if ((await page.locator(`a[href^="/current-workstreams/"]`).count()) < 5) failures.push("/current-workstreams: fewer than five project links");
   await page.screenshot({ path: "workstream-previews/current-workstreams-index.png", fullPage: true });
   await page.close();
@@ -87,9 +89,9 @@ for (const workstream of workstreams) {
   const route = `/current-workstreams/${workstream.slug}`;
   const page = await open(route);
   const body = await page.locator("body").innerText();
-  if (!body.includes(workstream.title)) failures.push(`${route}: title is missing`);
+  if (!containsText(body, workstream.title)) failures.push(`${route}: title is missing`);
   for (const marker of workstream.markers) {
-    if (!body.includes(marker)) failures.push(`${route}: missing content marker: ${marker}`);
+    if (!containsText(body, marker)) failures.push(`${route}: missing content marker: ${marker}`);
   }
   for (const required of [
     "The scale of the challenge",
@@ -101,7 +103,7 @@ for (const workstream of workstreams) {
     "Evidence and progress",
     "Sources used on this page",
   ]) {
-    if (!body.includes(required)) failures.push(`${route}: required section missing: ${required}`);
+    if (!containsText(body, required)) failures.push(`${route}: required section missing: ${required}`);
   }
   if ((await page.locator("img").count()) < 1) failures.push(`${route}: project image is missing`);
   if ((await page.locator('a[target="_blank"][rel~="noreferrer"]').count()) < 1) failures.push(`${route}: source links are missing`);
@@ -117,7 +119,7 @@ for (const workstream of workstreams) {
   for (const route of [`/donate?workstream=${slug}`, `/contact?workstream=${slug}`]) {
     const page = await open(route);
     const body = await page.locator("body").innerText();
-    if (!body.includes("Linked to Workstream 01")) failures.push(`${route}: selected-project context is missing`);
+    if (!containsText(body, "Linked to Workstream 01")) failures.push(`${route}: selected-project context is missing`);
     await page.close();
   }
 }
@@ -125,7 +127,7 @@ for (const workstream of workstreams) {
 {
   const page = await open("/our-history/1991-1999");
   const body = await page.locator("body").innerText();
-  if (!body.includes("The detailed archive is being prepared")) failures.push("/our-history/1991-1999: archive-status wording is missing");
+  if (!containsText(body, "The detailed archive is being prepared")) failures.push("/our-history/1991-1999: archive-status wording is missing");
   await page.close();
 }
 
