@@ -1,4 +1,4 @@
-import emergencyRecoveryImage from "@/assets/emergency-relief-hero.jpg";
+import recoveryInfrastructureImage from "@/assets/ghat-infrastructure-delivery.jpg";
 import { africaAgriculture } from "./africaAgriculture";
 import { asiaChildren } from "./asiaChildren";
 import { conflictRecovery } from "./conflictRecovery";
@@ -7,8 +7,8 @@ import { mentalHealth } from "./mentalHealth";
 
 const conflictAndRecovery = {
   ...conflictRecovery,
-  image: emergencyRecoveryImage,
-  imageAlt: "Emergency relief supplies and practical recovery support in a conflict-affected community",
+  image: recoveryInfrastructureImage,
+  imageAlt: "Aid workers unloading essential supplies outside a damaged building in a conflict-affected community",
 };
 
 export const WORKSTREAMS = [
