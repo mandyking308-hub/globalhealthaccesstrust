@@ -56,7 +56,7 @@ export const ConstitutionPage = () => {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div><strong>Adopted</strong><br /><span className="text-muted-foreground">June 2025</span></div>
-                  <div><strong>Reference</strong><br /><span className="text-muted-foreground">GHAT-CONSTITUTION-2025</span></div>
+                  <div><strong>Signatories</strong><br /><span className="text-muted-foreground">Three Trustees</span></div>
                 </div>
                 <Button asChild>
                   <a href="/GHAT_Constitution_2025_Refined.pdf" target="_blank" rel="noopener noreferrer">Open Signed Constitution</a>
