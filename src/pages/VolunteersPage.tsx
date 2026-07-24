@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,7 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import { SEO } from "@/components/SEO";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Loader2 } from "lucide-react";
+import { CircleDot, Loader2 } from "lucide-react";
+import { getWorkstream } from "@/lib/workstreams";
 import educationTrainingHero from "@/assets/education-training-hero.jpg";
 
 const AVAILABILITY_OPTIONS = [
@@ -51,6 +52,8 @@ const ALLOWED_MIME = [
 
 export const VolunteersPage = () => {
   const { toast } = useToast();
+  const [searchParams] = useSearchParams();
+  const selectedWorkstream = getWorkstream(searchParams.get("workstream") ?? undefined);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [cvFile, setCvFile] = useState<File | null>(null);
@@ -117,6 +120,11 @@ export const VolunteersPage = () => {
         .upload(objectPath, cvFile, { contentType: cvFile.type, upsert: false });
       if (uploadError) throw uploadError;
 
+      const projectContext = selectedWorkstream
+        ? `Selected workstream: Workstream ${selectedWorkstream.number} — ${selectedWorkstream.title}`
+        : "";
+      const motivation = [projectContext, formData.motivation].filter(Boolean).join("\n\n");
+
       const { error: rpcError } = await supabase.rpc("submit_volunteer_application", {
         _name: formData.name,
         _email: formData.email,
@@ -128,7 +136,7 @@ export const VolunteersPage = () => {
         _skills: formData.skills,
         _experience: formData.experience,
         _languages: formData.languages,
-        _motivation: formData.motivation || null,
+        _motivation: motivation || null,
         _cv_object_path: objectPath,
         _cv_original_filename: cvFile.name,
         _cv_mime_type: cvFile.type,
@@ -155,6 +163,10 @@ export const VolunteersPage = () => {
     }
   };
 
+  const pledgeHref = selectedWorkstream
+    ? `/donate?workstream=${selectedWorkstream.slug}#pledge-form`
+    : "/donate#pledge-form";
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEO
@@ -163,6 +175,27 @@ export const VolunteersPage = () => {
         canonical="/volunteer-apply"
       />
       <Header />
+
+      {selectedWorkstream && (
+        <aside className="border-b border-primary/15 bg-primary/[0.055]" aria-label="Selected workstream">
+          <div className="container flex max-w-[1400px] flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+            <div>
+              <p className="mb-1 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
+                <CircleDot className="h-3 w-3" aria-hidden="true" /> Project-specific contributor interest
+              </p>
+              <p className="m-0 text-sm font-semibold text-foreground">
+                Linked to Workstream {selectedWorkstream.number}: {selectedWorkstream.title}
+              </p>
+            </div>
+            <Link
+              to={`/current-workstreams/${selectedWorkstream.slug}`}
+              className="text-xs font-bold uppercase tracking-[0.14em] text-primary no-underline hover:underline"
+            >
+              Return to project page
+            </Link>
+          </div>
+        </aside>
+      )}
 
       <main className="flex-grow">
         <section
@@ -207,7 +240,7 @@ export const VolunteersPage = () => {
                   for the Trust to consider before a formal project-team process is appropriate.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild variant="outline"><Link to="/donate#pledge-form">Pledge Time or Expertise</Link></Button>
+                  <Button asChild variant="outline"><Link to={pledgeHref}>Pledge Time or Expertise</Link></Button>
                   <Button asChild variant="outline"><Link to="/project-team-login">Existing Team Login</Link></Button>
                 </div>
               </div>
@@ -259,7 +292,11 @@ export const VolunteersPage = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-3">
-                    <Button asChild><Link to="/our-work">Explore Our Work</Link></Button>
+                    {selectedWorkstream ? (
+                      <Button asChild><Link to={`/current-workstreams/${selectedWorkstream.slug}`}>Return to Selected Project</Link></Button>
+                    ) : (
+                      <Button asChild><Link to="/our-work">Explore Our Work</Link></Button>
+                    )}
                     <Button asChild variant="outline"><Link to="/get-involved">Return to Get Involved</Link></Button>
                   </div>
                 </CardContent>
