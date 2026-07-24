@@ -1,0 +1,99 @@
+name: Live bundle parity
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: live-bundle-parity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compare-bundles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      VITE_SUPABASE_URL: https://example.supabase.co
+      VITE_SUPABASE_PUBLISHABLE_KEY: release-check-placeholder-key
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install and build
+        run: |
+          bun install --frozen-lockfile
+          set -a
+          source .env
+          set +a
+          bun run build
+
+      - name: Compare live and built bundle fingerprints
+        id: parity
+        continue-on-error: true
+        shell: bash
+        run: |
+          expected_js="$(grep -oE 'src="/assets/[^"]+\.js"' dist/index.html | head -1 | cut -d'"' -f2)"
+          expected_css="$(grep -oE 'href="/assets/[^"]+\.css"' dist/index.html | head -1 | cut -d'"' -f2)"
+
+          live_html="$(curl --fail --silent --show-error --max-time 30 "https://globalhealthaccesstrust.com/?bundle-check=$GITHUB_SHA")"
+          live_js="$(printf '%s' "$live_html" | grep -oE 'src="/assets/[^"]+\.js"' | head -1 | cut -d'"' -f2)"
+          live_css="$(printf '%s' "$live_html" | grep -oE 'href="/assets/[^"]+\.css"' | head -1 | cut -d'"' -f2)"
+
+          echo "Built JavaScript: ${expected_js:-missing}"
+          echo "Live JavaScript:  ${live_js:-missing}"
+          echo "Built CSS:        ${expected_css:-missing}"
+          echo "Live CSS:         ${live_css:-missing}"
+
+          echo "expected_js=$expected_js" >> "$GITHUB_OUTPUT"
+          echo "live_js=$live_js" >> "$GITHUB_OUTPUT"
+          echo "expected_css=$expected_css" >> "$GITHUB_OUTPUT"
+          echo "live_css=$live_css" >> "$GITHUB_OUTPUT"
+
+          test -n "$expected_js"
+          test -n "$expected_css"
+          test "$live_js" = "$expected_js"
+          test "$live_css" = "$expected_css"
+
+      - name: Report bundle parity success
+        if: steps.parity.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT live bundle matches GitHub',
+              description: 'Live JavaScript and CSS fingerprints match the GitHub build',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report bundle parity failure
+        if: steps.parity.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT live bundle matches GitHub',
+              description: 'Live application bundle differs from the current GitHub build',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Fail on bundle mismatch
+        if: steps.parity.outcome != 'success'
+        run: exit 1
