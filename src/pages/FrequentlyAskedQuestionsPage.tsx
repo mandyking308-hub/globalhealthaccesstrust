@@ -18,7 +18,7 @@ export const FrequentlyAskedQuestionsPage = () => {
       <div className="section-container">
         <h2>About the Trust</h2>
         <h3>What is the Global Health Access Trust?</h3>
-        <p>Global Health Access Trust works for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.</p>
+        <p>Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales.</p>
         <p>Its purposes are to advance health, relieve illness and preserve life. The Trust develops, funds and coordinates projects for public benefit under the authority and oversight of its Board of Trustees.</p>
         <h3>What makes this Trust different from other health charities?</h3>
         <p>The Trust is structured as a permanent institution rather than a temporary campaign.</p>
@@ -26,7 +26,7 @@ export const FrequentlyAskedQuestionsPage = () => {
         <p>Where a project includes clinical services, those services are delivered and governed by appropriately licensed healthcare providers within their own professional and legal responsibilities.</p>
         <p>We prioritise systems-building over dependency, human capability over displacement, dignity over publicity and sustained public benefit over short-term display.</p>
         <h3>How is the Trust constituted?</h3>
-        <p>The organisation is governed by its signed Constitution, adopted in June 2025, together with its governance, safeguarding, financial-control and risk policies.</p>
+        <p>The Trust Deed effective from 1 December 2024 is the founding and principal governing document. The trustees later adopted a signed Constitution in June 2025 as a supplementary governance and banking document. The Constitution supports, and does not replace, the Trust Deed.</p>
         <p>Its correspondence address is Global Health Access Trust, 2 Harley Street, London, England, United Kingdom.</p>
       </div>
 
