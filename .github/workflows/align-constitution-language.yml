@@ -1,0 +1,51 @@
+name: Align Constitution Language
+
+on:
+  push:
+    paths:
+      - ".github/workflows/align-constitution-language.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Align governing document references
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          roots = [Path("src"), Path("public")]
+          extensions = {".ts", ".tsx", ".js", ".jsx", ".md", ".json", ".html", ".txt"}
+          changed = []
+
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in root.rglob("*"):
+                  if not path.is_file() or path.suffix.lower() not in extensions:
+                      continue
+                  original = path.read_text(encoding="utf-8")
+                  updated = original.replace("Trust Deed", "Constitution").replace("trust deed", "constitution")
+                  if updated != original:
+                      path.write_text(updated, encoding="utf-8")
+                      changed.append(str(path))
+
+          print("Updated files:")
+          print("\n".join(changed) if changed else "None")
+          PY
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/align-constitution-language.yml
+
+      - name: Commit aligned wording
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src public .github/workflows/align-constitution-language.yml
+          git commit -m "Align remaining Constitution references" || exit 0
+          git push
