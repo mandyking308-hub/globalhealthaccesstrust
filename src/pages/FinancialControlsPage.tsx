@@ -45,7 +45,7 @@ export const FinancialControlsPage = () => (
                 <li>Any individual or organisation acting on behalf of the Trust</li>
               </ul>
               <p className="text-muted-foreground mt-4">
-                It covers income, expenditure, record-keeping, financial reporting, and independent review procedures.
+                It covers income, expenditure, banking, record-keeping, financial reporting, and independent review procedures.
               </p>
             </CardContent>
           </Card>
@@ -56,7 +56,7 @@ export const FinancialControlsPage = () => (
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Financial decisions must be authorised in accordance with documented Trustee decisions and delegated limits</li>
                 <li>Charitable funds and assets must be protected from loss, fraud, misuse, or waste</li>
-                <li>Financial records and reporting must follow the legal and accounting requirements applicable to the organisation's status and activities</li>
+                <li>Financial records and reporting must follow the legal and accounting requirements applicable to the Trust's status and activities</li>
                 <li>Trustees must monitor solvency and financial sustainability</li>
               </ul>
             </CardContent>
@@ -69,7 +69,7 @@ export const FinancialControlsPage = () => (
                 <li><strong>Chair of Trustees:</strong> Oversees strategic financial direction and compliance</li>
                 <li><strong>Finance Lead or designated Trustee:</strong> Maintains financial oversight and reporting</li>
                 <li><strong>Board of Trustees:</strong> Approves budgets and significant expenditure and receives appropriate financial updates</li>
-                <li><strong>Independent Examiner or Auditor:</strong> Reviews accounts where required by law or formally commissioned by the Board</li>
+                <li><strong>Independent Auditor:</strong> Reviews the annual financial statements in accordance with the signed Constitution and any applicable professional requirements</li>
               </ul>
             </CardContent>
           </Card>
@@ -92,16 +92,19 @@ export const FinancialControlsPage = () => (
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>All income is recorded promptly and allocated according to any applicable restrictions</li>
                 <li>Restricted and unrestricted funds are recorded separately</li>
+                <li>A pledge, proposed gift, payment instruction or pending transfer is not recorded as received income until funds or assets have been formally accepted, received and reconciled</li>
                 <li>Any future Gift Aid claims will be made only after the necessary HMRC recognition, declarations and processes are in place</li>
-                <li>Legacy income is recorded following legal confirmation of the bequest</li>
+                <li>Legacy income is recorded following legal confirmation and receipt of the bequest</li>
               </ul>
             </CardContent>
           </Card>
 
           <Card className="card-professional">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-serif font-bold mb-4">7. Budgeting and Reporting</h2>
+              <h2 className="text-2xl font-serif font-bold mb-4">7. Banking, Budgeting and Reporting</h2>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
+                <li>Banking arrangements must be held in the legal name Global Health Access Trust and authorised by documented Trustee decision</li>
+                <li>The financial year runs from 1 April to 31 March, as recorded in the signed Constitution</li>
                 <li>A budget is prepared when required for the Trust's activities and approved by the Board</li>
                 <li>Actual income and expenditure are reviewed against approved budgets at appropriate intervals</li>
                 <li>Financial information is provided to Trustees for oversight and decision-making</li>
@@ -116,16 +119,17 @@ export const FinancialControlsPage = () => (
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Transactions are supported by receipts, invoices, agreements or other appropriate records</li>
                 <li>Financial records are retained for the period required by applicable law and good governance practice</li>
-                <li>Accounting and reporting will follow the requirements applicable to the organisation's legal status, income and activities</li>
+                <li>Accounting and reporting follow the requirements applicable to the Trust's legal status, income and activities</li>
               </ul>
             </CardContent>
           </Card>
 
           <Card className="card-professional">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-serif font-bold mb-4">9. Independent Review</h2>
+              <h2 className="text-2xl font-serif font-bold mb-4">9. Annual Audit and Other Independent Review</h2>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
-                <li>Financial statements will be independently examined or audited where required by law or formally commissioned by the Board</li>
+                <li>Annual financial statements will be audited in accordance with the signed June 2025 Constitution</li>
+                <li>The Trustees may commission additional independent examination, specialist review or assurance where appropriate to the Trust's activities or risk</li>
                 <li>Reports required by any regulator with jurisdiction over the Trust will be submitted in accordance with applicable requirements</li>
                 <li>Any findings or recommendations will be considered by the Trustees and used to strengthen controls where appropriate</li>
               </ul>
@@ -147,7 +151,7 @@ export const FinancialControlsPage = () => (
             <CardContent className="p-8">
               <h2 className="text-2xl font-serif font-bold mb-4">11. Review and Training</h2>
               <p className="text-muted-foreground mb-6">
-                The policy is reviewed when the Trust's activities, legal obligations or financial risks materially change. Trustees and authorised personnel receive information or training proportionate to their responsibilities.
+                The policy is reviewed when the Trust's activities, governing documents, legal obligations or financial risks materially change. Trustees and authorised personnel receive information or training proportionate to their responsibilities.
               </p>
               
               <div className="border-t pt-6">
