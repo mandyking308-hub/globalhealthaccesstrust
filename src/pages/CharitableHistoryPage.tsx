@@ -23,17 +23,19 @@ const periods = [
     active: true,
   },
   {
-    period: "2010–2018",
-    title: "Health access, autism and international support",
+    period: "2010–2019",
+    title: "Humanitarian response, mental-health reform and a growing international network",
     description:
-      "Our work continued across mental health, neurodiversity, disability, children and families, humanitarian response and access to appropriate healthcare.",
-    status: "Historical record in preparation",
+      "Our work continued across disasters, conflict, epidemics, refugees, autism, SEND and neurodevelopment, while clinicians and international contributors began connecting around a wider shared purpose.",
+    href: "/our-history/2010-2019",
+    status: "Explore the decade",
+    active: true,
   },
   {
-    period: "2019–2024",
-    title: "Building an international network",
+    period: "2020–2024",
+    title: "The international network and the path towards the Trust",
     description:
-      "From 2019, the work developed through a wider network of clinicians, technologists, professional contributors, community organisations and international contacts.",
+      "The network continued developing through clinicians, technologists, professional contributors, community organisations and international contacts before the Trust was formally established.",
     status: "Historical record in preparation",
   },
   {
@@ -105,6 +107,12 @@ export const CharitableHistoryPage = () => {
                 className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
               >
                 Explore 2000–2009 <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/our-history/2010-2019"
+                className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
+              >
+                Explore 2010–2019 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/our-work"
@@ -219,7 +227,7 @@ export const CharitableHistoryPage = () => {
         <section className="mt-16 border-t border-foreground/10 pt-10 text-center">
           <h2 className="mb-4 text-3xl font-serif font-bold">Continue through the history</h2>
           <p className="mx-auto mb-7 max-w-2xl text-muted-foreground">
-            Two complete decades are now available, covering voluntary humanitarian, health and community work from 1991 through 2009.
+            Three complete periods are now available, covering voluntary humanitarian, health and community work from 1991 through 2019.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
@@ -230,9 +238,15 @@ export const CharitableHistoryPage = () => {
             </Link>
             <Link
               to="/our-history/2000-2009"
-              className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground no-underline transition-colors hover:bg-primary/90"
+              className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
             >
               2000–2009 <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/our-history/2010-2019"
+              className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground no-underline transition-colors hover:bg-primary/90"
+            >
+              2010–2019 <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </section>
