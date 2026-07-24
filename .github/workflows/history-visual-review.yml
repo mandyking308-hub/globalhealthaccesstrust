@@ -1,0 +1,123 @@
+name: GHAT history visual review
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/history-visual-review.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VITE_SUPABASE_URL: https://example.supabase.co
+      VITE_SUPABASE_PUBLISHABLE_KEY: release-check-placeholder-key
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bunx vite build
+      - name: Start preview
+        run: |
+          bunx vite preview --host 0.0.0.0 --port 4173 > /tmp/ghat-preview.log 2>&1 &
+          for attempt in {1..40}; do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/ghat-preview.log
+          exit 1
+      - name: Capture responsive pages
+        run: |
+          mkdir -p history-visual-review
+          cat > history-visual-review.mjs <<'EOF'
+          import { chromium } from 'playwright';
+          import { writeFile } from 'node:fs/promises';
+
+          const pages = [
+            ['home', '/'],
+            ['history-index', '/our-history'],
+            ['history-1991-1999', '/our-history/1991-1999'],
+            ['history-2000-2009', '/our-history/2000-2009'],
+            ['history-2010-2019', '/our-history/2010-2019'],
+            ['history-2020-2026', '/our-history/2020-2026'],
+          ];
+          const viewports = [
+            ['mobile', 390, 844],
+            ['tablet', 768, 1024],
+            ['desktop', 1440, 1000],
+          ];
+
+          const browser = await chromium.launch({
+            executablePath: '/usr/bin/google-chrome',
+            headless: true,
+            args: ['--no-sandbox'],
+          });
+          const report = [];
+
+          for (const [viewportName, width, height] of viewports) {
+            for (const [name, route] of pages) {
+              const context = await browser.newContext({ viewport: { width, height } });
+              const page = await context.newPage();
+              const response = await page.goto(`http://127.0.0.1:4173${route}`, {
+                waitUntil: 'networkidle',
+                timeout: 60000,
+              });
+
+              const consentButtons = [
+                /reject all/i,
+                /reject/i,
+                /decline/i,
+                /necessary only/i,
+              ];
+              for (const pattern of consentButtons) {
+                const button = page.getByRole('button', { name: pattern }).first();
+                if (await button.count()) {
+                  await button.click().catch(() => {});
+                  break;
+                }
+              }
+              await page.waitForTimeout(250);
+
+              const metrics = await page.evaluate(() => {
+                const root = document.documentElement;
+                const h1 = document.querySelector('h1');
+                const bodyStyle = getComputedStyle(document.body);
+                return {
+                  title: document.title,
+                  h1: h1?.textContent?.trim() || null,
+                  bodyFont: bodyStyle.fontFamily,
+                  h1Font: h1 ? getComputedStyle(h1).fontFamily : null,
+                  scrollWidth: root.scrollWidth,
+                  clientWidth: root.clientWidth,
+                  documentHeight: Math.max(root.scrollHeight, document.body.scrollHeight),
+                };
+              });
+
+              await page.screenshot({
+                path: `history-visual-review/${name}-${viewportName}.png`,
+                fullPage: true,
+              });
+              report.push({ name, route, viewportName, width, height, status: response?.status(), metrics });
+              await context.close();
+            }
+          }
+
+          await browser.close();
+          await writeFile('history-visual-review/report.json', JSON.stringify(report, null, 2));
+          EOF
+          bun history-visual-review.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ghat-history-visual-review
+          path: history-visual-review
+          retention-days: 7
