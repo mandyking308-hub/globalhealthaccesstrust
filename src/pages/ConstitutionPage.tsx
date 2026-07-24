@@ -16,11 +16,11 @@ export const ConstitutionPage = () => {
         <div className="container-content">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-4">
-              <Badge variant="outline" className="text-sm">Founding & Governance Documents</Badge>
+              <Badge variant="outline" className="text-sm">Founding &amp; Governance Documents</Badge>
             </div>
             <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">Trust Deed &amp; Signed Constitution</h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Global Health Access Trust was constituted as a charitable trust by Trust Deed with effect from 1 December 2024. The trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements.
+              Global Health Access Trust was constituted as a charitable trust by Trust Deed with effect from 1 December 2024. The Trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements.
             </p>
           </div>
 
@@ -31,7 +31,7 @@ export const ConstitutionPage = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground leading-relaxed">
-                  The Trust Deed is the founding and principal governing document of Global Health Access Trust. It establishes the charitable trust, its purposes, trustee authority and the legal framework under which its assets must be applied.
+                  The Trust Deed is the founding and principal governing document of Global Health Access Trust. It establishes the charitable trust, its purposes, Trustee authority and the legal framework under which its assets must be applied.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div><strong>Effective date</strong><br /><span className="text-muted-foreground">1 December 2024</span></div>
@@ -48,11 +48,11 @@ export const ConstitutionPage = () => {
 
             <Card className="card-elevated h-full">
               <CardHeader>
-                <CardTitle>Signed Constitution</CardTitle>
+                <CardTitle>Constitution (Signed)</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground leading-relaxed">
-                  The Constitution was adopted and signed by the three trustees in June 2025. It records supplementary governance and operating arrangements and was completed for institutional and banking due diligence. It supports, and does not replace, the Trust Deed.
+                  The Constitution was adopted and signed by the three Trustees in June 2025. It records supplementary governance and operating arrangements prepared for institutional and banking due diligence. It supports, and does not replace, the Trust Deed.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div><strong>Adopted</strong><br /><span className="text-muted-foreground">June 2025</span></div>
@@ -71,8 +71,8 @@ export const ConstitutionPage = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p><strong className="text-foreground">The Trust Deed is primary.</strong> It created the charitable trust and is the governing document used for Charity Commission registration as a charitable trust.</p>
-                <p><strong className="text-foreground">The Constitution is supplementary.</strong> It records the trustees' later agreed governance and operating procedures, including information required during the NatWest community-account process.</p>
+                <p><strong className="text-foreground">The Trust Deed is primary.</strong> It created the charitable trust and is the principal governing document for the Trust and any Charity Commission registration application made in that legal form.</p>
+                <p><strong className="text-foreground">The Constitution is supplementary.</strong> It records the Trustees' later agreed governance and operating procedures, including arrangements prepared during banking due diligence.</p>
                 <p>If any wording in a supplementary policy or the Constitution conflicts with the Trust Deed or applicable law, the Trust Deed and applicable law take priority.</p>
               </div>
             </CardContent>
