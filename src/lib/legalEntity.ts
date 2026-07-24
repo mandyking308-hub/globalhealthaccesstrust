@@ -16,6 +16,7 @@ export const LEGAL_ENTITY = {
   jurisdiction: "England and Wales",
   governingDocument: "Signed Constitution adopted June 2025",
   supportingGovernanceDocument: "Trust Deed held as part of the wider legal and governance framework",
+  supplementaryGovernanceDocument: "Trust Deed held as part of the wider legal and governance framework",
 
   chair: "Mandy King",
   constitutionalSignatories: [
