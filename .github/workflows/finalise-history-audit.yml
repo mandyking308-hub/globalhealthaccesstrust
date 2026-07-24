@@ -42,3 +42,5 @@ jobs:
           git add -A
           git commit -m "Finalise responsive history review tooling"
           git push
+
+# Triggered after workflow registration.
