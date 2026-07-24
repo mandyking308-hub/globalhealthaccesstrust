@@ -6,7 +6,7 @@ export const GovernanceLegalFrameworkPage = () => {
     <ContentLayout>
       <SEO
         title="Governance & Legal Framework"
-        description="Legal status, regulatory compliance, and governance framework of the Global Health Access Trust, a charitable trust under English and Welsh law."
+        description="Legal status, charitable purpose and governance framework of the Global Health Access Trust, an unincorporated charitable organisation established in England and Wales."
         canonical="/governance-legal-framework"
       />
       <h1>Governance &amp; Legal Framework</h1>
@@ -15,17 +15,17 @@ export const GovernanceLegalFrameworkPage = () => {
 
       <div className="section-container">
         <h2>Legal Status</h2>
-        <p>Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It operates exclusively for charitable purposes and for the public benefit.</p>
-        <p>The Trust is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with the governing document and the lawful advancement of its charitable purposes.</p>
+        <p>Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025. It operates exclusively for charitable purposes and for the public benefit.</p>
+        <p>The organisation is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with the governing document and the lawful advancement of its charitable purposes.</p>
         <p>Any regulatory or registration particulars will be published only when formally confirmed and available for publication.</p>
-        <p>All funds are administered in accordance with the Trust Deed, applicable law, the Trust's financial controls and formal decisions of the Board.</p>
+        <p>All funds are administered in accordance with the Constitution, applicable law, the Trust's financial controls and formal decisions of the Board.</p>
       </div>
 
       <div className="section-container">
         <h2>Regulatory Compliance</h2>
         <p>The Trust maintains policies and procedures proportionate to its activities, including:</p>
         <ul>
-          <li>Charity and trust law</li>
+          <li>Charity law and the duties applying to charity trustees</li>
           <li>Trustee fiduciary duties and conflicts of interest</li>
           <li>Anti-money laundering, counter-terrorist financing and sanctions compliance</li>
           <li>Data protection, confidentiality and cyber security</li>
@@ -37,7 +37,7 @@ export const GovernanceLegalFrameworkPage = () => {
 
       <div className="section-container">
         <h2>Board of Trustees</h2>
-        <p>The Board acts collectively and each Trustee serves under binding fiduciary obligation.</p>
+        <p>The Board acts collectively and each Trustee serves under binding fiduciary obligations.</p>
         <p>The Board is responsible for:</p>
         <ul>
           <li>Safeguarding the Trust's charitable purpose and independence</li>
@@ -45,7 +45,7 @@ export const GovernanceLegalFrameworkPage = () => {
           <li>Overseeing safeguarding, legal compliance and institutional risk</li>
           <li>Appointing and overseeing advisers, delivery partners, independent reviewers and auditors where appropriate</li>
         </ul>
-        <p>No Trustee may receive private benefit from the Trust except where expressly permitted by the Trust Deed and applicable law, properly authorised and transparently recorded.</p>
+        <p>No Trustee may receive private benefit from the Trust except where expressly permitted by the Constitution and applicable law, properly authorised and transparently recorded.</p>
       </div>
 
       <div className="section-container">
