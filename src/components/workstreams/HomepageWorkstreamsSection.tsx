@@ -9,11 +9,7 @@ export const HomepageWorkstreamsSection = () => (
       <div className="mb-12 grid gap-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div className="max-w-4xl">
           <span className="mb-4 block text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Current work</span>
-          <h2
-            id="home-workstreams-heading"
-            className="mb-5 text-foreground"
-            style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(34px, 4.4vw, 64px)", lineHeight: 1.02, letterSpacing: "-0.035em", fontWeight: 650, textTransform: "none" }}
-          >
+          <h2 id="home-workstreams-heading" className="display-condensed mb-5 text-foreground">
             Five current workstreams
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
