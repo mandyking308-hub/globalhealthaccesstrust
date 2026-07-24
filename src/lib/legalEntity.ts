@@ -8,14 +8,14 @@ export const LEGAL_ENTITY = {
   shortName: "GHAT",
 
   publicLegalDescription:
-    "Global Health Access Trust is a charitable trust established under the laws of England and Wales. It was constituted by Trust Deed with effect from 1 December 2024 and is administered by its Board of Trustees exclusively for charitable purposes and the public benefit.",
+    "Global Health Access Trust builds on charitable and community work carried out since 2019. The organisation was formally established with effect from 1 December 2024 and operates for charitable purposes and the public benefit.",
 
   publicLegalDescriptionLong:
-    "Global Health Access Trust is a charitable trust established under the laws of England and Wales. Its founding and principal governing document is the Trust Deed effective from 1 December 2024. The trustees also adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including the arrangements provided for banking due diligence. The Constitution does not replace the Trust Deed. The Trustees are responsible for ensuring that the Trust's assets and activities are applied exclusively in furtherance of its charitable purposes and for the public benefit.",
+    "Global Health Access Trust builds on charitable and community work carried out since 2019. The organisation was formally established with effect from 1 December 2024. Its Trustees subsequently signed the Constitution in June 2025, confirming the governance and operating arrangements effective from that date. The signed Constitution sits at the centre of the Trust's governance. A Trust Deed is also held as part of its wider legal and governance framework.",
 
   jurisdiction: "England and Wales",
-  governingDocument: "Trust Deed",
-  supplementaryGovernanceDocument: "Signed Constitution adopted June 2025",
+  governingDocument: "Signed Constitution adopted June 2025",
+  supportingGovernanceDocument: "Trust Deed held as part of the wider legal and governance framework",
 
   chair: "Mandy King",
   constitutionalSignatories: [
