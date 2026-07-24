@@ -76,8 +76,7 @@ export const LegalDocumentPage = () => {
 
         if (versionError) throw versionError;
         if (active) setDoc(publishedVersion ? { ...legalDocument, ...publishedVersion } : null);
-      } catch (error) {
-        console.error("Unable to load published legal document", error);
+      } catch {
         if (active) {
           setDoc(null);
           setLoadFailed(true);
