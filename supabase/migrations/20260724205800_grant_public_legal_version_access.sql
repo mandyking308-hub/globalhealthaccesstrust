@@ -1,6 +1,7 @@
 -- Allow website visitors to read only the current published legal-document version
 -- through the existing public.current_legal_version RPC used by LegalDocumentPage.
 -- This does not grant direct table access or any write/admin permission.
+-- Deployment is verified immediately against every required public legal document.
 
 DO $$
 DECLARE
