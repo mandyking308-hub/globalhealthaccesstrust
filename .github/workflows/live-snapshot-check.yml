@@ -55,8 +55,9 @@ jobs:
             fi
           }
 
-          assert_contains "/" "The Global Health Access Trust builds the systems that make healthcare possible."
-          assert_contains "/" "Emergency Briefing — Ukraine"
+          assert_contains "/" "Building the systems that make health, safety and opportunity possible."
+          assert_contains "/" "Five current workstreams"
+          assert_contains "/" "Health depends on the systems around it."
           assert_absent "/" "A private charitable trust directing capital into healthcare access"
 
           assert_contains "/our-work" "The Trust organises its work across six interconnected areas."
@@ -64,6 +65,11 @@ jobs:
 
           assert_contains "/governance-legal-framework" "with effect from 1 December 2024"
           assert_absent "/governance-legal-framework" "registration in progress"
+
+          assert_contains "/constitution" "Signed Constitution &amp; Trust Deed"
+          assert_contains "/constitution" "Open Signed Constitution"
+          assert_contains "/constitution" "Open Updated Trust Deed"
+          assert_contains "/GHAT_Updated_Trust_Deed_24_July_2026.html" "Updated Trust Deed"
 
           assert_contains "/volunteer-apply" "Project Team &amp; Contributor Application"
           assert_contains "/commission-projects" "public-benefit"
@@ -91,7 +97,7 @@ jobs:
               sha: context.sha,
               state: 'success',
               context: 'GHAT visible live snapshot',
-              description: 'Visible website wording and retired Blog route match GitHub',
+              description: 'Approved website wording, governing documents and retired Blog route match GitHub',
               target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
             });
 
