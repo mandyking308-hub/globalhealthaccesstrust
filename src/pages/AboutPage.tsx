@@ -66,9 +66,9 @@ export const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="section-container">
               <p className="text-[15px] text-muted-foreground leading-[1.7]">
-                Global Health Access Trust is an unincorporated charitable organisation established in
-                England and Wales. It is governed by its Constitution and administered
-                by its Board of Trustees exclusively for charitable purposes.
+                Global Health Access Trust is a charitable trust established under the
+                laws of England and Wales. It was constituted by Trust Deed with effect from
+                1 December 2024 and is administered by its Board of Trustees exclusively for charitable purposes.
               </p>
             </div>
             <div className="section-container">
