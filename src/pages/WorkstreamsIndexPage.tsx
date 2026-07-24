@@ -1,4 +1,4 @@
-import { ArrowRight, HandHeart, MessageCircle, Users } from "lucide-react";
+import { ArrowRight, HandHeart, MessageCircle, ShieldCheck, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { WorkstreamCards } from "@/components/workstreams/WorkstreamCards";
@@ -77,6 +77,30 @@ export const WorkstreamsIndexPage = () => {
                   <span className="text-xs font-bold uppercase tracking-[0.12em] text-foreground">{stage}</span>
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section className="border-b border-foreground/10 bg-background px-6 py-12 sm:px-10 sm:py-16" aria-labelledby="evidence-standard-heading">
+            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+              <div>
+                <ShieldCheck className="mb-5 h-8 w-8 text-primary" aria-hidden="true" />
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">Evidence standard</p>
+                <h2 id="evidence-standard-heading" className="mb-4 text-3xl font-semibold sm:text-4xl">Claims follow evidence, not ambition.</h2>
+              </div>
+              <div className="grid gap-5 md:grid-cols-3">
+                <article className="border-t border-foreground/15 pt-5">
+                  <h3 className="mb-3 text-xl font-semibold">Stage evidence</h3>
+                  <p className="m-0 text-sm leading-relaxed text-muted-foreground">The published stage must be supported by recorded decisions, project preparation or delivery activity.</p>
+                </article>
+                <article className="border-t border-foreground/15 pt-5">
+                  <h3 className="mb-3 text-xl font-semibold">Financial evidence</h3>
+                  <p className="m-0 text-sm leading-relaxed text-muted-foreground">Pledged, accepted, committed, spent, remaining and returned amounts are distinguished rather than presented as one figure.</p>
+                </article>
+                <article className="border-t border-foreground/15 pt-5">
+                  <h3 className="mb-3 text-xl font-semibold">Outcome evidence</h3>
+                  <p className="m-0 text-sm leading-relaxed text-muted-foreground">Outputs and outcomes are described only when suitable records exist; planned or intended benefit is clearly labelled as such.</p>
+                </article>
+              </div>
             </div>
           </section>
 
