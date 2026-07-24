@@ -79,7 +79,7 @@ export const HomePage = () => {
     <>
       <SEO
         title="Global Health Access Trust"
-        description="A charitable trust constituted by Trust Deed, developing, funding and coordinating the systems and conditions that enable better healthcare through professional expertise, infrastructure, responsible technology and public-benefit projects."
+        description="Global Health Access Trust builds on charitable and community work carried out since 2019. It was formally established with effect from 1 December 2024 and is governed through its signed Constitution and wider legal and governance framework."
         canonical="/"
         schema={organizationSchema}
       />
