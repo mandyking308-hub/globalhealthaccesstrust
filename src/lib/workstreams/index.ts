@@ -1,4 +1,5 @@
 import recoveryInfrastructureImage from "@/assets/ghat-infrastructure-delivery.jpg";
+import mentalHealthSystemsImage from "@/assets/systems-strengthening-hero.jpg";
 import { africaAgriculture } from "./africaAgriculture";
 import { asiaChildren } from "./asiaChildren";
 import { conflictRecovery } from "./conflictRecovery";
@@ -13,8 +14,8 @@ const conflictAndRecovery = {
 
 const mentalHealthAndPrevention = {
   ...mentalHealth,
-  image: "https://images.pexels.com/photos/5711177/pexels-photo-5711177.jpeg?auto=compress&cs=tinysrgb&w=2200",
-  imageAlt: "Three men supporting one another during a facilitated group conversation",
+  image: mentalHealthSystemsImage,
+  imageAlt: "A health-systems setting representing professional collaboration, research and routes to mental-health support",
 };
 
 export const WORKSTREAMS = [
