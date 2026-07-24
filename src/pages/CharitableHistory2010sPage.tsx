@@ -531,10 +531,12 @@ export const CharitableHistory2010sPage = () => {
           >
             <ArrowLeft className="h-4 w-4" /> Previous: 2000–2009
           </Link>
-          <div className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">
-            Next: 2020–2026 <ArrowRight className="h-4 w-4" />
-            <span className="text-xs font-normal">(in preparation)</span>
-          </div>
+          <Link
+  to="/our-history/2020-2026"
+  className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:underline"
+>
+  Next: 2020–2026 <ArrowRight className="h-4 w-4" />
+</Link>
         </section>
       </ContentLayout>
     </>
