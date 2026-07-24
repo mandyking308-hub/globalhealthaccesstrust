@@ -1,0 +1,52 @@
+name: Final Bank Readiness Preflight
+
+on:
+  push:
+    paths:
+      - ".github/workflows/final-bank-readiness-preflight.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+
+      - name: Audit legal and approval wording
+        run: |
+          {
+            echo "GHAT final bank-readiness preflight"
+            echo "Source commit: $GITHUB_SHA"
+            echo
+            echo "LEGACY LEGAL IDENTITY MATCHES"
+            grep -RInE --exclude='*.pdf' --exclude-dir='node_modules' --exclude-dir='.git' \
+              'Trust Deed|trust deed|charitable trust|1 December 2024|effective from 1 December 2024|effective 1 December 2024|constituted by' src public || true
+            echo
+            echo "APPROVAL OR LEGAL-REVIEW WORDING"
+            grep -RInEi --exclude='*.pdf' --exclude-dir='node_modules' --exclude-dir='.git' \
+              'solicitor approved|lawyer approved|legally approved|legal approval|required legal review|requires legal review|approved by:' src public || true
+            echo
+            echo "FIXED ALLOCATION WORDING"
+            grep -RInE --exclude='*.pdf' --exclude-dir='node_modules' --exclude-dir='.git' \
+              '20% operating|80% delivery|Operating \(20%\)|Delivery \(80%\)' src public || true
+          } > bank-readiness-preflight.txt
+          cat bank-readiness-preflight.txt
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/final-bank-readiness-preflight.yml
+
+      - name: Commit preflight record
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bank-readiness-preflight.txt .github/workflows/final-bank-readiness-preflight.yml
+          git commit -m "Record final bank-readiness preflight"
+          git push
