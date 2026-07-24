@@ -86,6 +86,14 @@ jobs:
           path: workstreams-smoke.log
           if-no-files-found: ignore
 
+      - name: Upload rendered page previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-workstreams-previews
+          path: workstream-previews
+          if-no-files-found: ignore
+
       - name: Stop after browser failure
         if: steps.smoke.outcome != 'success'
         run: exit 1
