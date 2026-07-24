@@ -60,7 +60,31 @@ async function open(route, viewport = { width: 1440, height: 1000 }) {
   return page;
 }
 
+async function settleLazyImages(page) {
+  await page.locator("img").evaluateAll((elements) => {
+    for (const element of elements) {
+      if (element instanceof HTMLImageElement) element.loading = "eager";
+    }
+  });
+
+  await page.evaluate(async () => {
+    const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+    const step = Math.max(400, Math.floor(window.innerHeight * 0.75));
+    const maximum = document.documentElement.scrollHeight;
+
+    for (let y = 0; y <= maximum; y += step) {
+      window.scrollTo(0, y);
+      await wait(75);
+    }
+
+    window.scrollTo(0, 0);
+  });
+
+  await page.waitForTimeout(500);
+}
+
 async function checkImages(page, selector, route, expectedMinimum) {
+  await settleLazyImages(page);
   const images = page.locator(selector);
   const count = await images.count();
   if (count < expectedMinimum) failures.push(`${route}: expected at least ${expectedMinimum} images, found ${count}`);
@@ -108,7 +132,7 @@ async function checkImages(page, selector, route, expectedMinimum) {
     if ((await page.locator(`a[href="${href}"]`).count()) < 1) failures.push(`/: missing homepage link ${href}`);
   }
   await checkImages(page, 'section[aria-labelledby="home-workstreams-heading"] img', "/", 5);
-  await checkImages(page, 'main img', "/", 9);
+  await checkImages(page, "main img", "/", 9);
   await page.screenshot({ path: "workstream-previews/homepage-current-workstreams.png", fullPage: true });
   await page.close();
 }
@@ -128,7 +152,7 @@ for (const viewport of [
   const page = await open("/current-workstreams");
   const body = await page.locator("body").innerText();
   if (!containsText(body, "Practical work. Responsible delivery. Lasting public benefit.")) failures.push("/current-workstreams: hero statement is missing");
-  if (!containsText(body, "Evidence without overstatement")) failures.push("/current-workstreams: evidence standard is missing");
+  if (!containsText(body, "Claims follow evidence, not ambition.")) failures.push("/current-workstreams: evidence standard is missing");
   if ((await page.locator('a[href^="/current-workstreams/"]').count()) < 5) failures.push("/current-workstreams: fewer than five project links");
   await checkImages(page, "main img", "/current-workstreams", 5);
   await page.screenshot({ path: "workstream-previews/current-workstreams-index.png", fullPage: true });
