@@ -85,7 +85,7 @@ export const FOOTER_SECTIONS = {
     { label: "Conflicts of Interest", href: "/conflict-of-interest" },
     { label: "Whistleblowing", href: "/whistleblowing" },
     { label: "Anti-Fraud & Anti-Corruption", href: "/anti-fraud" },
-    { label: "Trust Deed", href: "/constitution" },
+    { label: "Constitution", href: "/constitution" },
   ],
 } as const;
 

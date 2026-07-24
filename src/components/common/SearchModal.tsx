@@ -126,7 +126,7 @@ const SEARCH_INDEX: SiteSearchResult[] = [
   },
   {
     type: "document",
-    title: "Trust Deed",
+    title: "Constitution",
     url: "/constitution",
     excerpt: "The Trust's authoritative governing document, effective 1 December 2024.",
     keywords: "constitution governing document objects advance health relieve illness preserve life",

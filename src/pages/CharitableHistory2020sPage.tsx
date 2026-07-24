@@ -273,7 +273,7 @@ export const CharitableHistory2020sPage = () => {
               As international humanitarian emergencies continued, the wider professional network also grew. Clinicians, healthcare organisations, community groups and international contacts increasingly wanted to contribute expertise, resources and practical support.
             </p>
             <p>
-              The Global Health Access Trust was formally established under its Trust Deed with effect from <strong className="text-foreground">1 December 2024</strong>. Work before that date forms part of the voluntary history and international network that shaped the Trust. Formal GHAT activity begins from that date.
+              The Global Health Access Trust was formally established under its Constitution with effect from <strong className="text-foreground">1 December 2024</strong>. Work before that date forms part of the voluntary history and international network that shaped the Trust. Formal GHAT activity begins from that date.
             </p>
           </div>
         </header>
@@ -382,7 +382,7 @@ export const CharitableHistory2020sPage = () => {
                   <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">From 1 December 2024</p>
                   <h3 className="mb-5 text-3xl font-serif font-bold">The Global Health Access Trust is established</h3>
                   <div className="max-w-4xl space-y-4 text-base leading-relaxed text-foreground/85">
-                    <p>The Global Health Access Trust was formally established under its Trust Deed with effect from <strong>1 December 2024</strong>.</p>
+                    <p>The Global Health Access Trust was formally established under its Constitution with effect from <strong>1 December 2024</strong>.</p>
                     <p>The Trust was created to provide a permanent and accountable structure through which the values and experience developed over many years could continue.</p>
                     <p>The first trustees were Mandy King, Dr Jagdev Thukral and John O'Sullivan BA FCA.</p>
                     <p>The establishment of the Trust introduced a clear legal and governance boundary. The earlier voluntary work and wider professional network shaped GHAT, but they did not retrospectively become GHAT projects.</p>
@@ -392,7 +392,7 @@ export const CharitableHistory2020sPage = () => {
                   <MetaGrid
                     areas="Formal charitable establishment and governance"
                     contribution="Trustee oversight, defined charitable purposes and organisational development"
-                    routes="Trust Deed, trustees, safeguarding and financial accountability"
+                    routes="Constitution, trustees, safeguarding and financial accountability"
                   />
                 </section>
               </div>
@@ -408,7 +408,7 @@ export const CharitableHistory2020sPage = () => {
               <div>
                 <h2 className="mb-4 text-3xl font-serif font-bold leading-tight sm:text-4xl">The first full year of the Trust</h2>
                 <p className="mb-8 max-w-4xl text-lg leading-relaxed text-muted-foreground">
-                  The first full year focused on turning the Trust Deed and long history of voluntary work into an operational charitable platform.
+                  The first full year focused on turning the Constitution and long history of voluntary work into an operational charitable platform.
                 </p>
                 <StatPanel
                   title="The scale of the global challenge"

@@ -76,7 +76,7 @@ export const TrusteeBiographiesGrid = () => {
           Trustees and Constitutional Signatories
         </h2>
         <p className="text-muted-foreground mb-6 max-w-3xl">
-          Mandy King, Dr Jagdev Thukral and John O'Sullivan BA FCA are the Trust's appointed Trustees and constitutional signatories. Trustee authority is exercised collectively and in accordance with the Trust Deed and published governance framework.
+          Mandy King, Dr Jagdev Thukral and John O'Sullivan BA FCA are the Trust's appointed Trustees and constitutional signatories. Trustee authority is exercised collectively and in accordance with the Constitution and published governance framework.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {constitutionalTrustees.map((t, i) => <TrusteeCard key={i} trustee={t} />)}

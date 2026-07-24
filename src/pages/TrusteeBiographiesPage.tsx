@@ -18,7 +18,7 @@ export const TrusteeBiographiesPage = () => {
 
       <p className="mt-8">A full register of trustee declarations, including interests and annual governance statements, is available upon request.</p>
       
-      <p>Specialist contributors support the Trust in an advisory capacity and do not hold trustee authority unless separately appointed in accordance with the Trust Deed.</p>
+      <p>Specialist contributors support the Trust in an advisory capacity and do not hold trustee authority unless separately appointed in accordance with the Constitution.</p>
     </ContentLayout>
   );
 };
