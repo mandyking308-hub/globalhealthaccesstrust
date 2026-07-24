@@ -108,8 +108,8 @@ export const TermsOfUsePage = () => {
             operated by {LEGAL_ENTITY.legalName}.
           </p>
           <p className="mt-4 text-[16px] leading-[1.75] text-foreground/85">
-            Global Health Access Trust is an unincorporated charitable organisation established in England and Wales.
-            It is governed by its Constitution and administered by its Board of Trustees exclusively for
+            Global Health Access Trust is a charitable trust established under the laws of England and Wales.
+            It is governed by its Trust Deed and administered by its Board of Trustees exclusively for
             charitable purposes.
           </p>
           <p className="mt-4 text-[16px] leading-[1.75] text-foreground/85">
@@ -258,10 +258,10 @@ export const TermsOfUsePage = () => {
           "a right to receive confidential, privileged, safeguarding-restricted or security-sensitive information;",
           "authority to make payments or commitments for the Trust;",
           "authority to speak for the Trust; or",
-          "a right to require the Trust to act contrary to its Constitution, charitable purposes, legal responsibilities or safeguarding duties.",
+          "a right to require the Trust to act contrary to its Trust Deed, charitable purposes, legal responsibilities or safeguarding duties.",
         ]} />
         <P>Donors may express preferences, ask questions, comment on proposals and request reasonable changes.</P>
-        <P>All decisions remain subject to the Constitution, applicable law, project feasibility, safeguarding, compliance and final approval by the Trust.</P>
+        <P>All decisions remain subject to the Trust Deed, applicable law, project feasibility, safeguarding, compliance and final approval by the Trust.</P>
 
         {/* 7 Project Team Portal */}
         <H n={7} id="project-team-portal">The Project Team Portal</H>
@@ -310,7 +310,7 @@ export const TermsOfUsePage = () => {
           "decisions required in the best interests of the Trust and its charitable purposes.",
         ]} />
         <P>Donor consultation, Project Team agreement and Portal communications do not remove or transfer the Trustees’ responsibilities.</P>
-        <P>The Trust may decline, pause or alter an action requested through a Portal where the requested action would be unlawful, unsafe, impracticable, inconsistent with the Constitution, outside the Trust’s charitable purposes, contrary to safeguarding requirements or not in the Trust’s best interests.</P>
+        <P>The Trust may decline, pause or alter an action requested through a Portal where the requested action would be unlawful, unsafe, impracticable, inconsistent with the Trust Deed, outside the Trust’s charitable purposes, contrary to safeguarding requirements or not in the Trust’s best interests.</P>
 
         {/* 9 Project information and delivery */}
         <H n={9} id="project-information">Project information and delivery</H>
@@ -604,7 +604,7 @@ export const TermsOfUsePage = () => {
           "a separate arrangement providing access has ended.",
         ]} />
         <P>Suspension or termination of Portal access does not determine whether any donation must be returned.</P>
-        <P>Any question concerning donated funds will be considered under the applicable donation terms, the Constitution and applicable law.</P>
+        <P>Any question concerning donated funds will be considered under the applicable donation terms, the Trust Deed and applicable law.</P>
 
         {/* 23 Professional advice */}
         <H n={23} id="professional-advice">Information and professional advice</H>

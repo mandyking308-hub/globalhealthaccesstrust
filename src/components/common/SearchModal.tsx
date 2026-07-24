@@ -24,7 +24,7 @@ const SEARCH_INDEX: SiteSearchResult[] = [
     title: "About the Trust",
     url: "/about-the-trust",
     excerpt: "The Trust's purpose, history, structure and approach to enabling better healthcare.",
-    keywords: "mission history charitable organisation public benefit",
+    keywords: "mission history charitable trust public benefit",
   },
   {
     type: "page",
@@ -126,9 +126,9 @@ const SEARCH_INDEX: SiteSearchResult[] = [
   },
   {
     type: "document",
-    title: "Constitution",
+    title: "Trust Deed",
     url: "/constitution",
-    excerpt: "The signed governing document adopted by the founding trustees in June 2025.",
+    excerpt: "The Trust's authoritative governing document, effective 1 December 2024.",
     keywords: "constitution governing document objects advance health relieve illness preserve life",
   },
   {

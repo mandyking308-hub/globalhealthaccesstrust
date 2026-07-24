@@ -3,7 +3,7 @@
 export const SITE_CONFIG = {
   name: "Global Health Access Trust",
   shortName: "GHAT",
-  description: "An unincorporated charitable organisation that develops, funds and coordinates projects which enable better healthcare.",
+  description: "A charitable trust that develops, funds and coordinates projects which enable better healthcare.",
   url: "https://globalhealthaccesstrust.com",
   address: {
     line1: "2 Harley Street",
@@ -85,7 +85,7 @@ export const FOOTER_SECTIONS = {
     { label: "Conflicts of Interest", href: "/conflict-of-interest" },
     { label: "Whistleblowing", href: "/whistleblowing" },
     { label: "Anti-Fraud & Anti-Corruption", href: "/anti-fraud" },
-    { label: "Constitution", href: "/constitution" },
+    { label: "Trust Deed", href: "/constitution" },
   ],
 } as const;
 

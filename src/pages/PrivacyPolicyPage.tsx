@@ -102,8 +102,8 @@ export const PrivacyPolicyPage = () => {
             protects personal information.
           </P>
           <P>
-            {LEGAL_ENTITY.legalName} is an unincorporated charitable organisation established in England and Wales.
-            It is governed by its Constitution and administered by its Board of Trustees exclusively for
+            {LEGAL_ENTITY.legalName} is a charitable trust established under the laws of England and Wales.
+            It is governed by its Trust Deed and administered by its Board of Trustees exclusively for
             charitable purposes.
           </P>
           <P>
