@@ -31,15 +31,12 @@ export const SEO = ({
   const fullTitle = title.includes("Global Health Access Trust") ? title : `${title} | Global Health Access Trust`;
   const canonicalUrl = canonical ? `${siteUrl}${canonical}` : undefined;
   const imageUrl = image.startsWith("http") ? image : `${siteUrl}${image}`;
-  const safeDescription = description
-    .replace("An unincorporated charitable organisation", "A charitable trust")
-    .replace("an unincorporated charitable organisation", "a charitable trust");
 
   return (
     <Helmet>
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
-      <meta name="description" content={safeDescription} />
+      <meta name="description" content={description} />
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       
       {/* SEO directives */}
@@ -49,7 +46,7 @@ export const SEO = ({
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={safeDescription} />
+      <meta property="og:description" content={description} />
       <meta property="og:image" content={imageUrl} />
       <meta property="og:site_name" content="Global Health Access Trust" />
       {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
@@ -70,7 +67,7 @@ export const SEO = ({
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={safeDescription} />
+      <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
       
       {/* Schema.org JSON-LD */}
