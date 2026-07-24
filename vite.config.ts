@@ -11,8 +11,27 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+    alias: [
+      {
+        find: "@/assets/family-medical-care.jpg",
+        replacement: path.resolve(__dirname, "./src/assets/ghat-maternal-care.jpg"),
+      },
+      {
+        find: "@/assets/conflict-ukraine-humanitarian.jpg",
+        replacement: path.resolve(__dirname, "./src/assets/ghat-infrastructure-delivery.jpg"),
+      },
+      {
+        find: "@/assets/education-training-hero.jpg",
+        replacement: path.resolve(__dirname, "./src/assets/ghat-capacity-training.jpg"),
+      },
+      {
+        find: "@/assets/policy-research-hero.jpg",
+        replacement: path.resolve(__dirname, "./src/assets/ghat-hero-community-health.jpg"),
+      },
+      {
+        find: "@",
+        replacement: path.resolve(__dirname, "./src"),
+      },
+    ],
   },
 }));
