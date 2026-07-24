@@ -1,0 +1,104 @@
+name: Finalise Legal History
+
+on:
+  push:
+    paths:
+      - ".github/workflows/finalise-legal-history.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  correct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Correct residual legal identity and history wording
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              "src/lib/constants.ts": [
+                  ('description: "A charitable trust that develops, funds and coordinates projects which enable better healthcare."',
+                   'description: "An unincorporated charitable organisation that develops, funds and coordinates projects which enable better healthcare."'),
+              ],
+              "src/components/common/SearchModal.tsx": [
+                  ('keywords: "mission history charitable trust public benefit"',
+                   'keywords: "mission history charitable organisation public benefit"'),
+                  ('excerpt: "The Trust\'s authoritative governing document, effective 1 December 2024."',
+                   'excerpt: "The signed governing document adopted by the founding trustees in June 2025."'),
+              ],
+              "src/pages/PrivacyPolicyPage.tsx": [
+                  ('{LEGAL_ENTITY.legalName} is a charitable trust established under the laws of England and Wales.',
+                   '{LEGAL_ENTITY.legalName} is an unincorporated charitable organisation established in England and Wales.'),
+              ],
+              "src/pages/TermsOfUsePage.tsx": [
+                  ('Global Health Access Trust is a charitable trust established under the laws of England and Wales.',
+                   'Global Health Access Trust is an unincorporated charitable organisation established in England and Wales.'),
+              ],
+              "src/pages/AboutPage.tsx": [
+                  ('Global Health Access Trust is a charitable trust established under the\n                laws of England and Wales.',
+                   'Global Health Access Trust is an unincorporated charitable organisation established in\n                England and Wales.'),
+              ],
+              "src/pages/admin/AdminManualPage.tsx": [
+                  ('An institutional digital platform for a UK charitable trust focused on global health access.',
+                   'An institutional digital platform for a UK unincorporated charitable organisation focused on global health access.'),
+              ],
+              "src/pages/HomePage.tsx": [
+                  ('description="A charitable trust developing, funding and coordinating the systems and conditions that enable better healthcare through professional expertise, infrastructure, responsible technology and public-benefit projects."',
+                   'description="An unincorporated charitable organisation developing, funding and coordinating the systems and conditions that enable better healthcare through professional expertise, infrastructure, responsible technology and public-benefit projects."'),
+              ],
+              "src/pages/CharitableHistory2020sPage.tsx": [
+                  ('The Global Health Access Trust was formally established under its Constitution with effect from <strong className="text-foreground">1 December 2024</strong>. Work before that date forms part of the voluntary history and international network that shaped the Trust. Formal GHAT activity begins from that date.',
+                   'The Global Health Access Trust entered a formal organisational-development phase from <strong className="text-foreground">December 2024</strong>. Its Constitution was adopted by the founding trustees in June 2025, establishing the governance framework used today. Earlier work forms part of the voluntary history and international network that shaped the organisation.'),
+                  ('This year is divided into two legally distinct periods: the voluntary international network operating before the Trust existed, and the formal history of GHAT beginning on 1 December 2024.',
+                   'This year records the transition from the earlier voluntary international network into the formal organisational development that led to the Constitution adopted in June 2025.'),
+                  ('<p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">From 1 December 2024</p>',
+                   '<p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-primary">From December 2024</p>'),
+                  ('<p>The Global Health Access Trust was formally established under its Constitution with effect from <strong>1 December 2024</strong>.</p>',
+                   '<p>Formal organisational development began in December 2024, and the founding trustees adopted the Global Health Access Trust Constitution in June 2025.</p>'),
+              ],
+              "src/pages/CharitableHistoryPage.tsx": [
+                  ('"This final chapter covers the hands-on COVID-19 response, continuing international humanitarian work, the formal establishment of GHAT on 1 December 2024 and the Trust\'s present-day development."',
+                   '"This final chapter covers the hands-on COVID-19 response, continuing international humanitarian work, GHAT\'s formal organisational development from December 2024, adoption of its Constitution in June 2025 and its present-day development."'),
+                  ('The earlier pages describe voluntary work undertaken before the Trust existed. The final chapter clearly separates the international network before 1 December 2024 from formal GHAT activity beginning on that date.',
+                   'The earlier pages describe the voluntary work and international network that preceded GHAT\'s formal organisational development. The final chapter explains the transition beginning in December 2024 and the adoption of the Constitution in June 2025.'),
+              ],
+          }
+
+          missed = []
+          changed = []
+          for filename, pairs in replacements.items():
+              path = Path(filename)
+              text = path.read_text(encoding="utf-8")
+              original = text
+              for old, new in pairs:
+                  if old not in text:
+                      missed.append(f"{filename}: {old[:90]}")
+                  text = text.replace(old, new)
+              if text != original:
+                  path.write_text(text, encoding="utf-8")
+                  changed.append(filename)
+
+          print("Changed:")
+          print("\n".join(changed))
+          if missed:
+              print("Missed exact patterns:")
+              print("\n".join(missed))
+              raise SystemExit(1)
+          PY
+
+      - name: Remove one-time workflow and audit record
+        run: |
+          rm .github/workflows/finalise-legal-history.yml
+          rm -f legal-audit.txt
+
+      - name: Commit corrections
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src .github/workflows/finalise-legal-history.yml legal-audit.txt
+          git commit -m "Finalise Constitution identity and history"
+          git push
