@@ -1,4 +1,4 @@
-name: Finish GHAT homepage and history experience
+name: Complete GHAT responsive navigation and history visuals
 
 on:
   push:
@@ -15,63 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Preserve content and apply presentation fixes
+      - name: Apply remaining presentation fixes without changing history copy
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
 
-          def replace_once(path: Path, old: str, new: str, label: str) -> None:
-              text = path.read_text()
-              if old not in text:
-                  raise SystemExit(f"Expected pattern not found for {label} in {path}")
-              path.write_text(text.replace(old, new, 1))
-
-          # Homepage: remove the superseded editorial cards only, retain all other sections,
-          # and place the five live workstreams immediately after the Board statement.
-          home = Path("src/pages/HomePage.tsx")
-          text = home.read_text()
-
-          import_anchor = 'import { organizationSchema } from "@/lib/seo";\n'
-          workstreams_import = 'import { HomepageWorkstreamsSection } from "@/components/workstreams/HomepageWorkstreamsSection";\n'
-          if workstreams_import not in text:
-              if import_anchor not in text:
-                  raise SystemExit("Homepage import anchor not found")
-              text = text.replace(import_anchor, import_anchor + workstreams_import, 1)
-
-          for unused_import in [
-              'import clinicImage from "@/assets/ghat-maternal-care.jpg";\n',
-              'import systemsImage from "@/assets/ghat-infrastructure-delivery.jpg";\n',
-              'import ruralImage from "@/assets/ghat-capacity-training.jpg";\n',
-          ]:
-              text = text.replace(unused_import, "")
-
-          start_marker = '        <section className="p-6 md:p-16 lg:p-24 border-b border-foreground/10 bg-background">'
-          purpose_marker = '        <section className="bg-primary text-primary-foreground py-24 md:py-32">'
-          start = text.find(start_marker)
-          purpose = text.find(purpose_marker)
-          if start == -1 or purpose == -1 or purpose <= start:
-              raise SystemExit("Superseded homepage section boundaries were not found")
-          text = text[:start] + text[purpose:]
-
-          if '<HomepageWorkstreamsSection />' not in text:
-              if purpose_marker not in text:
-                  raise SystemExit("Homepage purpose section anchor not found")
-              text = text.replace(
-                  purpose_marker,
-                  '        <HomepageWorkstreamsSection />\n\n' + purpose_marker,
-                  1,
-              )
-          home.write_text(text)
-
-          # The workstreams now live inside HomePage, not after the entire Outlet.
-          layout = Path("src/components/layout/Layout.tsx")
-          text = layout.read_text()
-          text = text.replace('import { HomepageWorkstreamsSection } from "@/components/workstreams/HomepageWorkstreamsSection";\n', '')
-          text = text.replace('        {location.pathname === "/" && <HomepageWorkstreamsSection />}\n', '')
-          layout.write_text(text)
-
-          # Make the five-workstream heading use the same display system as the homepage.
+          # Align the five-workstream heading with the homepage display system.
           workstreams = Path("src/components/workstreams/HomepageWorkstreamsSection.tsx")
           text = workstreams.read_text()
           old_heading = '''            className="mb-5 text-foreground"
@@ -79,11 +29,13 @@ jobs:
 '''
           new_heading = '''            className="display-condensed mb-5 text-foreground"
 '''
-          if old_heading not in text:
+          if old_heading in text:
+              text = text.replace(old_heading, new_heading, 1)
+          elif 'className="display-condensed mb-5 text-foreground"' not in text:
               raise SystemExit("Current-workstream heading pattern was not found")
-          workstreams.write_text(text.replace(old_heading, new_heading, 1))
+          workstreams.write_text(text)
 
-          # Ensure mobile and tablet controls remain clearly visible beside the wordmark.
+          # Keep mobile and tablet search/menu controls visible beside the wordmark.
           header = Path("src/components/layout/Header.tsx")
           text = header.read_text()
           replacements = {
@@ -97,12 +49,13 @@ jobs:
                   'className="lg:hidden h-11 w-11 flex items-center justify-center border border-foreground/15 bg-background text-foreground hover:border-primary/40 hover:text-primary transition-colors"',
           }
           for old, new in replacements.items():
-              if old not in text:
+              if old in text:
+                  text = text.replace(old, new, 1)
+              elif new not in text:
                   raise SystemExit(f"Header pattern not found: {old}")
-              text = text.replace(old, new, 1)
           header.write_text(text)
 
-          # Replace the secondary work navigation with a three-column mobile layout.
+          # All three links fit evenly on mobile; history remains active on decade routes.
           Path("src/components/layout/WorkNavigationStrip.tsx").write_text('''import { Link, useLocation } from "react-router-dom";
 
 const items = [
@@ -146,7 +99,7 @@ export const WorkNavigationStrip = () => {
 };
 ''')
 
-          # Add curated thematic visual records without altering any history-page copy.
+          # Curated visual records use the site's existing coherent documentary-style asset library.
           history_dir = Path("src/components/history")
           history_dir.mkdir(parents=True, exist_ok=True)
           Path("src/components/history/HistoryVisualInterlude.tsx").write_text('''import conflictAfrica from "@/assets/conflict-africa-humanitarian.jpg";
@@ -301,9 +254,7 @@ export const HistoryVisualInterlude = ({ pathname }: { pathname: string }) => {
   text-transform: uppercase;
 }
 
-.history-visual-interlude__heading > h2 {
-  margin: 0;
-}
+.history-visual-interlude__heading > h2 { margin: 0; }
 
 .history-visual-interlude__heading > span {
   color: hsl(var(--muted-foreground));
@@ -319,13 +270,8 @@ export const HistoryVisualInterlude = ({ pathname }: { pathname: string }) => {
   align-items: start;
 }
 
-.history-visual-interlude__figure {
-  margin: 0;
-}
-
-.history-visual-interlude__figure--offset {
-  margin-top: clamp(24px, 5vw, 64px);
-}
+.history-visual-interlude__figure { margin: 0; }
+.history-visual-interlude__figure--offset { margin-top: clamp(24px, 5vw, 64px); }
 
 .history-visual-interlude__image-wrap {
   position: relative;
@@ -384,21 +330,14 @@ export const HistoryVisualInterlude = ({ pathname }: { pathname: string }) => {
 }
 
 @media (max-width: 640px) {
-  .history-visual-interlude__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .history-visual-interlude__figure--offset {
-    margin-top: 12px;
-  }
-
-  .history-visual-interlude__image-wrap {
-    aspect-ratio: 16 / 11;
-  }
+  .history-visual-interlude__grid { grid-template-columns: 1fr; }
+  .history-visual-interlude__figure--offset { margin-top: 12px; }
+  .history-visual-interlude__image-wrap { aspect-ratio: 16 / 11; }
 }
 ''')
 
-          # The shared content layout injects the visual record into decade pages only.
+          # Inject the visual record into decade pages through the shared layout.
+          # No history-page source text is edited, shortened or removed.
           Path("src/components/layout/ContentLayout.tsx").write_text('''import { Children, Fragment, ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { HistoryVisualInterlude } from "@/components/history/HistoryVisualInterlude";
@@ -440,12 +379,11 @@ export const ContentLayout = ({ children, className = "" }: ContentLayoutProps) 
 };
 ''')
 
-          # Remove this one-time workflow from the completed site.
           Path(".github/workflows/finish-home-history-experience.yml").unlink()
           PY
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Finish homepage flow and history presentation"
+          git commit -m "Polish responsive navigation and history visuals"
           git push
