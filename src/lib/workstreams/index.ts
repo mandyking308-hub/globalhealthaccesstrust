@@ -1,4 +1,5 @@
 import recoveryInfrastructureImage from "@/assets/ghat-infrastructure-delivery.jpg";
+import mentalHealthSupportImage from "@/assets/ghat-capacity-training.jpg";
 import { africaAgriculture } from "./africaAgriculture";
 import { asiaChildren } from "./asiaChildren";
 import { conflictRecovery } from "./conflictRecovery";
@@ -11,12 +12,18 @@ const conflictAndRecovery = {
   imageAlt: "Aid workers unloading essential supplies outside a damaged building in a conflict-affected community",
 };
 
+const mentalHealthAndPrevention = {
+  ...mentalHealth,
+  image: mentalHealthSupportImage,
+  imageAlt: "A diverse group of professionals taking part in a facilitated health and community-support session",
+};
+
 export const WORKSTREAMS = [
   africaAgriculture,
   asiaChildren,
   conflictAndRecovery,
   aiHumanFirst,
-  mentalHealth,
+  mentalHealthAndPrevention,
 ] as const;
 
 export const getWorkstream = (slug?: string) =>
