@@ -23,7 +23,7 @@ function renderMarkdown(md: string): string {
     }
     if (line.trim() === "") { flushList(); out.push(""); continue; }
     flushList();
-    let html = escape(line)
+    const html = escape(line)
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(.+?)\*/g, "<em>$1</em>");
     out.push(`<p>${html}</p>`);
@@ -36,13 +36,59 @@ export const LegalDocumentPage = () => {
   const { slug } = useParams();
   const [doc, setDoc] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [loadFailed, setLoadFailed] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const { data } = await supabase.rpc("current_legal_version", { _slug: slug });
-      setDoc(Array.isArray(data) && data.length ? data[0] : null);
-      setLoading(false);
-    })();
+    let active = true;
+
+    const loadDocument = async () => {
+      setLoading(true);
+      setLoadFailed(false);
+
+      try {
+        const { data: rpcData, error: rpcError } = await supabase.rpc("current_legal_version", { _slug: slug });
+        const rpcDocument = Array.isArray(rpcData) && rpcData.length ? rpcData[0] : null;
+
+        if (!rpcError && rpcDocument) {
+          if (active) setDoc(rpcDocument);
+          return;
+        }
+
+        // Public read-only fallback. The legal index already uses legal_documents;
+        // this follows its current_published_version_id and reads only that version.
+        const { data: legalDocument, error: documentError } = await supabase
+          .from("legal_documents")
+          .select("id,title,category,current_published_version_id")
+          .eq("slug", slug || "")
+          .maybeSingle();
+
+        if (documentError) throw documentError;
+        if (!legalDocument?.current_published_version_id) {
+          if (active) setDoc(null);
+          return;
+        }
+
+        const { data: publishedVersion, error: versionError } = await supabase
+          .from("legal_document_versions")
+          .select("version_number,body_markdown,summary,effective_date,published_at")
+          .eq("id", legalDocument.current_published_version_id)
+          .maybeSingle();
+
+        if (versionError) throw versionError;
+        if (active) setDoc(publishedVersion ? { ...legalDocument, ...publishedVersion } : null);
+      } catch (error) {
+        console.error("Unable to load published legal document", error);
+        if (active) {
+          setDoc(null);
+          setLoadFailed(true);
+        }
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+
+    loadDocument();
+    return () => { active = false; };
   }, [slug]);
 
   return (
@@ -54,6 +100,13 @@ export const LegalDocumentPage = () => {
       <Link to="/legal" className="text-xs uppercase tracking-widest text-muted-foreground hover:text-primary">← Legal Centre</Link>
       {loading ? (
         <p className="mt-6 text-muted-foreground">Loading…</p>
+      ) : loadFailed ? (
+        <div className="mt-6">
+          <h1 className="font-serif text-3xl">Document temporarily unavailable</h1>
+          <p className="mt-3 text-muted-foreground">
+            The published document could not be loaded. Please use the Legal Centre or contact the Trust for assistance.
+          </p>
+        </div>
       ) : !doc ? (
         <div className="mt-6">
           <h1 className="font-serif text-3xl">Not yet published</h1>
