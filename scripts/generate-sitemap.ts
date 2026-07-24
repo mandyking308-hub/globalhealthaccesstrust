@@ -13,7 +13,7 @@ interface SitemapEntry {
 const today = new Date().toISOString().split("T")[0];
 
 // Include only canonical, public and indexable routes. Redirects, portals,
-// intake forms, admin routes and unpublished Blog content are deliberately excluded.
+// intake forms, admin routes and retired Blog content are deliberately excluded.
 const entries: SitemapEntry[] = [
   { path: "/", changefreq: "weekly", priority: "1.0", lastmod: today },
   { path: "/about-the-trust", changefreq: "monthly", priority: "0.9", lastmod: today },
@@ -21,6 +21,12 @@ const entries: SitemapEntry[] = [
   { path: "/governance-legal-framework", changefreq: "yearly", priority: "0.8", lastmod: today },
   { path: "/governance", changefreq: "yearly", priority: "0.7", lastmod: today },
   { path: "/our-work", changefreq: "monthly", priority: "0.9", lastmod: today },
+  { path: "/current-workstreams", changefreq: "weekly", priority: "0.95", lastmod: today },
+  { path: "/current-workstreams/africa-food-agriculture-resilient-systems", changefreq: "monthly", priority: "0.9", lastmod: today },
+  { path: "/current-workstreams/asia-children-without-family-care", changefreq: "monthly", priority: "0.9", lastmod: today },
+  { path: "/current-workstreams/conflict-war-zone-recovery-support", changefreq: "monthly", priority: "0.9", lastmod: today },
+  { path: "/current-workstreams/ai-first-human-first-youth-enterprise-employment", changefreq: "monthly", priority: "0.9", lastmod: today },
+  { path: "/current-workstreams/global-mental-health-neurodiversity-suicide-prevention", changefreq: "monthly", priority: "0.9", lastmod: today },
   { path: "/our-history", changefreq: "monthly", priority: "0.9", lastmod: today },
   { path: "/our-history/1991-1999", changefreq: "monthly", priority: "0.8", lastmod: today },
   { path: "/our-history/2000-2009", changefreq: "monthly", priority: "0.8", lastmod: today },
