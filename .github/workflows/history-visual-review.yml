@@ -1,4 +1,4 @@
-name: GHAT tablet overflow diagnostic
+name: Apply GHAT tablet responsive fixes
 
 on:
   push:
@@ -10,68 +10,40 @@ permissions:
   contents: write
 
 jobs:
-  diagnose:
+  fix:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      VITE_SUPABASE_URL: https://example.supabase.co
-      VITE_SUPABASE_PUBLISHABLE_KEY: release-check-placeholder-key
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - run: bun install --frozen-lockfile
-      - run: bunx vite build
-      - name: Start preview
+      - name: Correct tablet header and homepage layout
+        shell: bash
         run: |
-          bunx vite preview --host 0.0.0.0 --port 4173 >/tmp/preview.log 2>&1 &
-          for attempt in {1..40}; do
-            if curl -fsS http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
-            sleep 1
-          done
-          cat /tmp/preview.log
-          exit 1
-      - name: Find tablet overflow elements
-        run: |
-          mkdir -p audit-results
-          cat > diagnose.mjs <<'EOF'
-          import { chromium } from 'playwright';
-          import { writeFile } from 'node:fs/promises';
-          const pages = [
-            ['home','/'],['our-work','/our-work'],['history-index','/our-history'],
-            ['history-1991','/our-history/1991-1999'],['history-2000','/our-history/2000-2009'],
-            ['history-2010','/our-history/2010-2019'],['history-2020','/our-history/2020-2026']
-          ];
-          const browser = await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
-          const report=[];
-          for (const [name,route] of pages) {
-            const context=await browser.newContext({viewport:{width:768,height:1024}});
-            const page=await context.newPage();
-            await page.goto(`http://127.0.0.1:4173${route}`,{waitUntil:'networkidle'});
-            const result=await page.evaluate(() => {
-              const vw=document.documentElement.clientWidth;
-              const offenders=Array.from(document.querySelectorAll('body *')).map((el)=>{
-                const r=el.getBoundingClientRect();
-                const s=getComputedStyle(el);
-                return {tag:el.tagName,id:el.id,className:typeof el.className==='string'?el.className:'',text:(el.textContent||'').trim().replace(/\s+/g,' ').slice(0,100),left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),position:s.position,display:s.display};
-              }).filter(x=>x.width>0&&(x.right>vw+1||x.left<-1)).sort((a,b)=>(b.right-vw)-(a.right-vw)).slice(0,40);
-              return {scrollWidth:document.documentElement.scrollWidth,clientWidth:vw,offenders};
-            });
-            report.push({name,route,...result});
-            await context.close();
+          python - <<'PY'
+          from pathlib import Path
+
+          header = Path('src/components/layout/Header.tsx')
+          text = header.read_text()
+          old = 'className="hidden sm:inline-flex items-center h-10'
+          if text.count(old) != 2:
+              raise SystemExit('Expected two tablet portal button classes')
+          header.write_text(text.replace(old, 'className="hidden lg:inline-flex items-center h-10'))
+
+          home = Path('src/pages/HomePage.tsx')
+          text = home.read_text()
+          replacements = {
+              '<span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-primary md:mt-3">Mandate</span>\n              <div>': '<span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-primary md:mt-3">Mandate</span>\n              <div className="min-w-0">',
+              'className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start"': 'className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start"',
+              'className="md:col-span-5 md:sticky md:top-28"': 'className="lg:col-span-5 lg:sticky lg:top-28"',
+              'className="md:col-span-7 divide-y divide-foreground/12 border-t border-b border-foreground/15"': 'className="lg:col-span-7 divide-y divide-foreground/12 border-t border-b border-foreground/15"',
           }
-          await browser.close();
-          await writeFile('audit-results/tablet-overflow-report.json',JSON.stringify(report,null,2));
-          EOF
-          bun diagnose.mjs
-      - name: Commit diagnostic report
-        run: |
+          for old_text, new_text in replacements.items():
+              if old_text not in text:
+                  raise SystemExit(f'Expected homepage layout pattern not found: {old_text}')
+              text = text.replace(old_text, new_text, 1)
+          home.write_text(text)
+          PY
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add audit-results/tablet-overflow-report.json
-          git commit -m "Record tablet overflow diagnostic"
+          git add src/components/layout/Header.tsx src/pages/HomePage.tsx
+          git commit -m "Fix tablet header and homepage overflow"
           git push
