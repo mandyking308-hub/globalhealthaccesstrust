@@ -66,9 +66,10 @@ export const AboutPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="section-container">
               <p className="text-[15px] text-muted-foreground leading-[1.7]">
-                Global Health Access Trust is a charitable trust established under the
-                laws of England and Wales. It was constituted by Trust Deed with effect from
-                1 December 2024 and is administered by its Board of Trustees exclusively for charitable purposes.
+                Global Health Access Trust builds on charitable and community work carried out since 2019. The organisation was formally established with effect from 1 December 2024. Its Trustees subsequently signed the Constitution in June 2025, confirming the governance and operating arrangements effective from that date.
+              </p>
+              <p className="text-[15px] text-muted-foreground leading-[1.7] mt-4">
+                The signed Constitution sits at the centre of the Trust's governance. A Trust Deed is also held as part of its wider legal and governance framework.
               </p>
             </div>
             <div className="section-container">
@@ -92,7 +93,7 @@ export const AboutPage = () => {
               Charities Act 2011.
             </p>
             <blockquote className="text-[15px] italic text-primary leading-[1.7]">
-              "It is chartered under law, grounded in public duty, and built to endure."
+              "It is grounded in public duty, accountable governance and a commitment built to endure."
             </blockquote>
           </div>
         </div>
