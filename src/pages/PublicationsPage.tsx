@@ -118,18 +118,18 @@ export const PublicationsPage = () => {
         <section className="mb-12">
           <Card className="card-elevated">
             <CardContent className="p-8">
-              <span className="text-xs uppercase tracking-widest text-muted-foreground">Founding &amp; Governance Documents</span>
-              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Trust Deed &amp; Signed Constitution</h2>
+              <span className="text-xs uppercase tracking-widest text-muted-foreground">Governing &amp; Legal Documents</span>
+              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Signed Constitution &amp; Trust Deed</h2>
               <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
-                The Trust Deed effective from 1 December 2024 is the founding and principal governing document of Global Health Access Trust. The signed Constitution adopted in June 2025 records supplementary governance and operating arrangements, including information prepared during banking due diligence. It supports, and does not replace, the Trust Deed.
+                Global Health Access Trust was formally established with effect from 1 December 2024. The Trustees signed the Constitution in June 2025, confirming the governance and operating arrangements effective from that date. The signed Constitution sits at the centre of the Trust's governance, and a Trust Deed is held alongside it as part of the wider legal and governance framework.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
-                <div><strong>Trust Deed</strong><br /><span className="text-muted-foreground">Effective 1 December 2024</span></div>
                 <div><strong>Constitution</strong><br /><span className="text-muted-foreground">Signed June 2025</span></div>
-                <div><strong>Legal form</strong><br /><span className="text-muted-foreground">Charitable trust</span></div>
+                <div><strong>Formal establishment</strong><br /><span className="text-muted-foreground">1 December 2024</span></div>
+                <div><strong>Trust Deed</strong><br /><span className="text-muted-foreground">Held within the wider governance framework</span></div>
               </div>
               <Button asChild>
-                <Link to="/constitution">View the document record</Link>
+                <Link to="/constitution">View the governing document record</Link>
               </Button>
             </CardContent>
           </Card>
