@@ -45,11 +45,8 @@ export const WorkstreamsIndexPage = () => {
             <aside className="flex flex-col justify-end border-t border-primary/10 bg-primary px-7 py-9 text-primary-foreground lg:border-l lg:border-t-0 lg:px-9 lg:py-12">
               <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-primary-foreground/65">What visitors can expect</p>
               <h2 className="mb-5 text-3xl font-semibold text-primary-foreground">Five areas of active development and delivery</h2>
-              <p className="mb-4 text-primary-foreground/82">
-                Each workstream has a visible stage, defined purpose, delivery framework, intended outputs and evidence plan.
-              </p>
               <p className="m-0 text-primary-foreground/82">
-                Publication does not imply that every phase is funded, approved or already in delivery.
+                Each workstream has a visible stage, defined purpose, delivery framework, intended outputs and evidence plan.
               </p>
             </aside>
           </section>
