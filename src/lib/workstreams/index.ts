@@ -1,3 +1,4 @@
+// Lovable sync marker: improved homepage flow, relevant workstream imagery and approved single hero.
 import { africaAgriculture } from "./africaAgriculture";
 import { asiaChildren } from "./asiaChildren";
 import { conflictRecovery } from "./conflictRecovery";
