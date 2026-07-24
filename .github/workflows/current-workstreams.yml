@@ -71,7 +71,24 @@ jobs:
           exit 1
 
       - name: Test all current workstream pages
-        run: node scripts/workstreams-smoke.mjs
+        id: smoke
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/workstreams-smoke.mjs 2>&1 | tee workstreams-smoke.log
+
+      - name: Upload browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-workstreams-browser-log
+          path: workstreams-smoke.log
+          if-no-files-found: ignore
+
+      - name: Stop after browser failure
+        if: steps.smoke.outcome != 'success'
+        run: exit 1
 
       - name: Report success
         if: success()
