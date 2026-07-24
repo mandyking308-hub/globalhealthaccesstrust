@@ -20,6 +20,7 @@ jobs:
       - name: Restore approved homepage and apply only agreed edits
         shell: bash
         run: |
+          # Restore from the approved pre-redesign homepage commit.
           git show 8fb495eb34c7e8fa897cafe813787677a9c964e6:src/pages/HomePage.tsx > src/pages/HomePage.tsx
 
           python - <<'PY'
