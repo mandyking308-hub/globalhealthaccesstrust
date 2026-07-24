@@ -21,6 +21,7 @@ import { CharitableHistoryPage } from "./pages/CharitableHistoryPage";
 import { CharitableHistory1990sPage } from "./pages/CharitableHistory1990sPage";
 import { CharitableHistory2000sPage } from "./pages/CharitableHistory2000sPage";
 import { CharitableHistory2010sPage } from "./pages/CharitableHistory2010sPage";
+import { CharitableHistory2020sPage } from "./pages/CharitableHistory2020sPage";
 import { HowWeWorkPage } from "./pages/HowWeWorkPage";
 import { DonorRecognitionPage } from "./pages/DonorRecognitionPage";
 import { SupportTheTrustPage } from "./pages/SupportTheTrustPage";
@@ -129,6 +130,7 @@ const App = () => (
             <Route path="our-history/1991-1999" element={<CharitableHistory1990sPage />} />
             <Route path="our-history/2000-2009" element={<CharitableHistory2000sPage />} />
             <Route path="our-history/2010-2019" element={<CharitableHistory2010sPage />} />
+            <Route path="our-history/2020-2026" element={<CharitableHistory2020sPage />} />
             <Route path="how-we-work" element={<HowWeWorkPage />} />
             <Route path="support-the-trust" element={<SupportTheTrustPage />} />
             <Route path="donor-recognition" element={<DonorRecognitionPage />} />
