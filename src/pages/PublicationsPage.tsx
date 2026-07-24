@@ -118,18 +118,18 @@ export const PublicationsPage = () => {
         <section className="mb-12">
           <Card className="card-elevated">
             <CardContent className="p-8">
-              <span className="text-xs uppercase tracking-widest text-muted-foreground">Governing Document</span>
-              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Signed Constitution</h2>
+              <span className="text-xs uppercase tracking-widest text-muted-foreground">Founding &amp; Governance Documents</span>
+              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Trust Deed &amp; Signed Constitution</h2>
               <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
-                The Constitution signed by the three founding trustees establishes the organisation's charitable objectives, Trustee powers and governance framework.
+                The Trust Deed effective from 1 December 2024 is the founding and principal governing document of Global Health Access Trust. The signed Constitution adopted in June 2025 records supplementary governance and operating arrangements, including information prepared during banking due diligence. It supports, and does not replace, the Trust Deed.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
-                <div><strong>Adopted</strong><br /><span className="text-muted-foreground">June 2025</span></div>
-                <div><strong>Version</strong><br /><span className="text-muted-foreground">1.0</span></div>
-                <div><strong>Document reference</strong><br /><span className="text-muted-foreground">GHAT-CONSTITUTION-2025</span></div>
+                <div><strong>Trust Deed</strong><br /><span className="text-muted-foreground">Effective 1 December 2024</span></div>
+                <div><strong>Constitution</strong><br /><span className="text-muted-foreground">Signed June 2025</span></div>
+                <div><strong>Legal form</strong><br /><span className="text-muted-foreground">Charitable trust</span></div>
               </div>
               <Button asChild>
-                <Link to="/constitution">View the Signed Constitution</Link>
+                <Link to="/constitution">View the document record</Link>
               </Button>
             </CardContent>
           </Card>
