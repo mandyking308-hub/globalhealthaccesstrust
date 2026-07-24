@@ -228,20 +228,20 @@ export const HomePage = () => {
           <div className="max-w-[1400px] mx-auto px-6 md:px-10">
             <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-10 md:gap-16">
               <span className="text-[11px] uppercase tracking-[0.22em] font-semibold text-primary md:mt-3">Mandate</span>
-              <div>
+              <div className="min-w-0">
                 <h2 className="font-serif text-foreground mb-8" style={{ fontSize: "clamp(32px, 3.6vw, 56px)", lineHeight: 1.05, fontWeight: 500 }}>
                   Public-Benefit Project Areas
                 </h2>
                 <p className="text-lg md:text-xl text-foreground leading-relaxed max-w-[820px] mb-14">
                   Funding and other accepted resources are applied only to work that advances the Trust's charitable purposes and approved public-benefit outcomes.
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
-                  <div className="md:col-span-5 md:sticky md:top-28">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+                  <div className="lg:col-span-5 lg:sticky lg:top-28">
                     <div className="aspect-[4/5] overflow-hidden bg-muted">
                       <img src={mandateImage} alt="Public-benefit work in an underserved setting" className="w-full h-full object-cover" loading="lazy" />
                     </div>
                   </div>
-                  <ol className="md:col-span-7 divide-y divide-foreground/12 border-t border-b border-foreground/15">
+                  <ol className="lg:col-span-7 divide-y divide-foreground/12 border-t border-b border-foreground/15">
                     {PROGRAM_AREAS.slice(0, 5).map((area, index) => (
                       <li key={area.id} className="grid grid-cols-[56px_1fr] gap-6 py-8">
                         <span className="font-serif text-primary text-[20px] font-black tracking-tight pt-1">0{index + 1}</span>
