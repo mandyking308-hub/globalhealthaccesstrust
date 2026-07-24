@@ -1,0 +1,80 @@
+name: Legal publication diagnostics
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: legal-publication-diagnostics-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Load live public configuration
+        run: |
+          set -a
+          source .env
+          set +a
+          echo "VITE_SUPABASE_URL=$VITE_SUPABASE_URL" >> "$GITHUB_ENV"
+          echo "VITE_SUPABASE_PUBLISHABLE_KEY=$VITE_SUPABASE_PUBLISHABLE_KEY" >> "$GITHUB_ENV"
+
+      - name: Verify live legal documents
+        id: legal
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/verify-live-legal.mjs 2>&1 | tee live-legal-check.log
+
+      - name: Upload legal diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-legal-publication-log
+          path: live-legal-check.log
+          if-no-files-found: error
+
+      - name: Report legal publication success
+        if: steps.legal.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT live legal documents',
+              description: 'All required legal documents are published with full content',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report legal publication failure
+        if: steps.legal.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT live legal documents',
+              description: 'One or more required legal documents are not published live',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Fail if legal documents are incomplete
+        if: steps.legal.outcome != 'success'
+        run: exit 1
