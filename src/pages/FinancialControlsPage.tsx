@@ -48,7 +48,7 @@ export const FinancialControlsPage = () => (
                 <li>Any individual or organisation acting on behalf of the Trust</li>
               </ul>
               <p className="text-muted-foreground mt-4">
-                It covers income, expenditure, banking, record-keeping, financial reporting, and audit procedures.
+                It covers income, expenditure, record-keeping, financial reporting, and audit procedures.
               </p>
             </CardContent>
           </Card>
@@ -93,7 +93,7 @@ export const FinancialControlsPage = () => (
             <CardContent className="p-8">
               <h2 className="text-2xl font-serif font-bold mb-4">6. Income Handling</h2>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
-                <li>Donations are deposited into a designated charitable bank account</li>
+                <li>All income is recorded promptly and allocated according to any applicable restrictions</li>
                 <li>Restricted and unrestricted funds are tracked separately</li>
                 <li>Any future Gift Aid claims would be submitted only after HMRC recognition is confirmed and required declarations are in place</li>
                 <li>Legacy income is recorded upon legal confirmation of the bequest</li>
@@ -103,18 +103,7 @@ export const FinancialControlsPage = () => (
 
           <Card className="card-professional">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-serif font-bold mb-4">7. Banking Arrangements</h2>
-              <ul className="list-disc pl-6 text-muted-foreground space-y-2">
-                <li>The Trust holds accounts in its name with a UK-registered bank</li>
-                <li>Online banking access is limited to designated finance personnel and monitored by trustees</li>
-                <li>Monthly bank reconciliations are conducted and reviewed by the Finance Lead</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          <Card className="card-professional">
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-serif font-bold mb-4">8. Budgeting and Reporting</h2>
+              <h2 className="text-2xl font-serif font-bold mb-4">7. Budgeting and Reporting</h2>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>An annual budget is prepared and approved by the Board of Trustees</li>
                 <li>Actual performance is compared to budget quarterly</li>
@@ -126,7 +115,7 @@ export const FinancialControlsPage = () => (
 
           <Card className="card-professional">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-serif font-bold mb-4">9. Record Keeping</h2>
+              <h2 className="text-2xl font-serif font-bold mb-4">8. Record Keeping</h2>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>All transactions are documented with receipts, invoices, or funding agreements</li>
                 <li>Financial records are retained for at least six years</li>
@@ -137,7 +126,7 @@ export const FinancialControlsPage = () => (
 
           <Card className="card-professional">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-serif font-bold mb-4">10. External Review & Audit</h2>
+              <h2 className="text-2xl font-serif font-bold mb-4">9. External Review & Audit</h2>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Annual financial statements are independently examined or audited</li>
                 <li>Reports required by any regulator with jurisdiction over the Trust will be submitted in accordance with applicable deadlines</li>
@@ -148,7 +137,7 @@ export const FinancialControlsPage = () => (
 
           <Card className="card-professional">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-serif font-bold mb-4">11. Fraud Prevention</h2>
+              <h2 className="text-2xl font-serif font-bold mb-4">10. Fraud Prevention</h2>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>All financial activity is subject to internal controls to prevent fraud or theft</li>
                 <li>Any suspected irregularity must be reported immediately to the Chair or Finance Lead</li>
@@ -159,7 +148,7 @@ export const FinancialControlsPage = () => (
 
           <Card className="card-professional">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-serif font-bold mb-4">12. Review and Training</h2>
+              <h2 className="text-2xl font-serif font-bold mb-4">11. Review and Training</h2>
               <p className="text-muted-foreground mb-6">
                 This policy is reviewed annually by the Board. Training on financial governance is provided to new trustees and reviewed every two years.
               </p>
