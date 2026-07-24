@@ -1,0 +1,115 @@
+name: Live snapshot check
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: live-snapshot-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check visible live content
+        id: check
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          failures=0
+
+          render() {
+            google-chrome --headless=new --no-sandbox --disable-gpu --hide-scrollbars \
+              --virtual-time-budget=7000 --dump-dom "https://globalhealthaccesstrust.com$1" 2>/dev/null
+          }
+
+          assert_contains() {
+            route="$1"
+            phrase="$2"
+            dom="$(render "$route")"
+            if printf '%s' "$dom" | grep -Fq "$phrase"; then
+              echo "PASS $route contains: $phrase"
+            else
+              echo "FAIL $route missing: $phrase"
+              failures=$((failures + 1))
+            fi
+          }
+
+          assert_absent() {
+            route="$1"
+            phrase="$2"
+            dom="$(render "$route")"
+            if printf '%s' "$dom" | grep -Fq "$phrase"; then
+              echo "FAIL $route still contains retired wording: $phrase"
+              failures=$((failures + 1))
+            else
+              echo "PASS $route excludes retired wording: $phrase"
+            fi
+          }
+
+          assert_contains "/" "The Global Health Access Trust builds the systems that make healthcare possible."
+          assert_contains "/" "Emergency Briefing — Ukraine"
+          assert_absent "/" "A private charitable trust directing capital into healthcare access"
+
+          assert_contains "/our-work" "The Trust organises its work across six interconnected areas."
+          assert_contains "/our-work" "6. Humanitarian &amp; War-Affected Response"
+
+          assert_contains "/governance-legal-framework" "with effect from 1 December 2024"
+          assert_absent "/governance-legal-framework" "registration in progress"
+
+          assert_contains "/volunteer-apply" "Project Team &amp; Contributor Application"
+          assert_contains "/commission-projects" "public-benefit"
+
+          blog_dom="$(render "/blog")"
+          if printf '%s' "$blog_dom" | grep -Eiq "page not found|404[^<]{0,20}not found"; then
+            echo "PASS /blog is retired and shows Not Found"
+          else
+            echo "FAIL /blog does not show the retired Not Found page"
+            failures=$((failures + 1))
+          fi
+
+          echo "TOTAL_FAILURES=$failures"
+          echo "failure_count=$failures" >> "$GITHUB_OUTPUT"
+          test "$failures" -eq 0
+
+      - name: Report snapshot success
+        if: steps.check.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT visible live snapshot',
+              description: 'Visible website wording and retired Blog route match GitHub',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report snapshot mismatch
+        if: steps.check.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT visible live snapshot',
+              description: `${{ steps.check.outputs.failure_count }} live content checks differ from GitHub`,
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Fail on mismatch
+        if: steps.check.outcome != 'success'
+        run: exit 1
