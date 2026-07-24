@@ -6,6 +6,9 @@ import { PROGRAM_AREAS } from "@/lib/constants";
 import { SEO } from "@/components/SEO";
 import { organizationSchema } from "@/lib/seo";
 import heroImage from "@/assets/ghat-hero-community-health.jpg";
+import maternalCareImage from "@/assets/ghat-maternal-care.jpg";
+import infrastructureImage from "@/assets/ghat-infrastructure-delivery.jpg";
+import capacityImage from "@/assets/ghat-capacity-training.jpg";
 
 const deliverySteps = [
   {
@@ -50,6 +53,24 @@ const participationRoutes = [
     description: "Discuss a partnership, a defined project phase or the support currently required by a live workstream.",
     action: "Contact the Trust",
     href: "/contact",
+  },
+];
+
+const connectedSystems = [
+  {
+    image: maternalCareImage,
+    alt: "Healthcare professional supporting a mother and infant in a clinical setting",
+    label: "Healthcare access",
+  },
+  {
+    image: infrastructureImage,
+    alt: "Medical supplies and infrastructure supporting healthcare delivery",
+    label: "Essential systems",
+  },
+  {
+    image: capacityImage,
+    alt: "Healthcare professionals participating in a training session",
+    label: "Human capability",
   },
 ];
 
@@ -148,6 +169,23 @@ export const HomePage = () => {
         <div id="current-workstreams" className="scroll-mt-28">
           <HomepageWorkstreamsSection />
         </div>
+
+        <section className="border-y border-foreground/10 bg-background" aria-label="Connected systems supporting health">
+          <div className="grid grid-cols-1 md:grid-cols-3">
+            {connectedSystems.map((item, index) => (
+              <figure
+                key={item.label}
+                className={`relative m-0 aspect-[4/3] overflow-hidden bg-muted ${index < connectedSystems.length - 1 ? "border-b border-foreground/10 md:border-b-0 md:border-r" : ""}`}
+              >
+                <img src={item.image} alt={item.alt} className="h-full w-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" aria-hidden="true" />
+                <figcaption className="absolute bottom-5 left-5 text-xs font-bold uppercase tracking-[0.18em] text-white sm:bottom-7 sm:left-7">
+                  {item.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
 
         <section className="bg-primary py-20 text-primary-foreground md:py-28">
           <div className="mx-auto grid max-w-[1280px] gap-10 px-6 md:grid-cols-[170px_1fr] md:px-10 md:gap-16">
