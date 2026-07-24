@@ -1,309 +1,67 @@
-name: Website Release Check
+name: Final GHAT Legal Wording Audit
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
 
 permissions:
   contents: write
-  statuses: write
-
-env:
-  VITE_SUPABASE_URL: https://example.supabase.co
-  VITE_SUPABASE_PUBLISHABLE_KEY: release-check-placeholder-key
 
 jobs:
-  build-and-preview:
+  audit-and-fix:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Correct completed history navigation
-        id: continuity
+      - name: Fix final hidden wording and audit the repository
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
 
-          path = Path("src/pages/CharitableHistory2010sPage.tsx")
-          text = path.read_text()
-          pattern = re.compile(
-              r'''          <div className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">\s*'''
-              r'''Next: 2020–2026 <ArrowRight className="h-4 w-4" />\s*'''
-              r'''<span className="text-xs font-normal">\(in preparation\)</span>\s*'''
-              r'''</div>'''
-          )
-          new = '''          <Link
-            to="/our-history/2020-2026"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:underline"
-          >
-            Next: 2020–2026 <ArrowRight className="h-4 w-4" />
-          </Link>'''
-
-          updated, count = pattern.subn(new, text, count=1)
-          if count == 1:
-              path.write_text(updated)
-              changed = "true"
-          elif 'to="/our-history/2020-2026"' in text and '(in preparation)' not in text:
-              changed = "false"
-          else:
-              raise SystemExit("Expected completed-history navigation block was not found")
-
-          with open(Path.home() / "continuity-output", "w") as output:
-              output.write(changed)
-          print(f"changed={changed}")
+          home = Path("src/pages/HomePage.tsx")
+          text = home.read_text(encoding="utf-8")
+          old = "An unincorporated charitable organisation developing, funding and coordinating"
+          new = "A charitable trust developing, funding and coordinating"
+          if old not in text:
+              raise SystemExit("Expected homepage metadata wording was not found")
+          home.write_text(text.replace(old, new), encoding="utf-8")
           PY
-          echo "changed=$(cat "$HOME/continuity-output")" >> "$GITHUB_OUTPUT"
 
-      - name: Commit completed history navigation
-        if: steps.continuity.outputs.changed == 'true'
+          if grep -RIn "unincorporated charitable organisation" src --include='*.ts' --include='*.tsx'; then
+            echo "Incorrect legal classification remains" >&2
+            exit 1
+          fi
+
+          if grep -RIn "Constitution is the governing document\|signed Constitution is the governing document\|governed by its Constitution adopted" src --include='*.ts' --include='*.tsx'; then
+            echo "Constitution-only governing wording remains" >&2
+            exit 1
+          fi
+
+          grep -RIn "charitable trust" src --include='*.ts' --include='*.tsx' >/dev/null
+          grep -RIn "Trust Deed" src --include='*.ts' --include='*.tsx' >/dev/null
+          grep -RIn "supplementary" src/pages/ConstitutionPage.tsx src/pages/AboutTheTrustPage.tsx src/pages/GovernanceLegalFrameworkPage.tsx src/pages/PublicationsPage.tsx >/dev/null
+
+      - name: Restore normal release workflow
+        shell: bash
+        run: |
+          git show HEAD^^:.github/workflows/release-check.yml > .github/workflows/release-check.yml
+          rm -f legal-repair-trigger.txt
+
+      - name: Build website
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit final repair
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/pages/CharitableHistory2010sPage.tsx
-          git commit -m "Connect 2010s history to final chapter"
-          git push
-
-      - name: Mark preview check pending
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-            await github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: 'pending',
-              context: 'GHAT finished-site preview',
-              description: 'Building and rendering responsive finished-site previews',
-              target_url: targetUrl
-            });
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
-
-      - name: Build website and capture log
-        id: build
-        shell: bash
-        run: |
-          set +e
-          bunx vite build > build-output.log 2>&1
-          code=$?
-          cat build-output.log
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Upload build diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ghat-build-diagnostics
-          path: build-output.log
-          if-no-files-found: warn
-          retention-days: 7
-
-      - name: Stop if build failed
-        if: steps.build.outputs.exit_code != '0'
-        run: exit 1
-
-      - name: Start production preview
-        run: |
-          bunx vite preview --host 0.0.0.0 --port 4173 > /tmp/ghat-preview.log 2>&1 &
-          echo $! > /tmp/ghat-preview.pid
-          for attempt in {1..40}; do
-            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
-              exit 0
-            fi
-            sleep 1
-          done
-          cat /tmp/ghat-preview.log
-          exit 1
-
-      - name: Render responsive finished-site previews
-        run: |
-          mkdir -p preview-images
-          cat > render-preview.mjs <<'EOF'
-          import { chromium } from 'playwright';
-          import { writeFile } from 'node:fs/promises';
-
-          const pages = [
-            ['home', '/'],
-            ['our-work', '/our-work'],
-            ['history-index', '/our-history'],
-            ['history-1991-1999', '/our-history/1991-1999'],
-            ['history-2000-2009', '/our-history/2000-2009'],
-            ['history-2010-2019', '/our-history/2010-2019'],
-            ['history-2020-2026', '/our-history/2020-2026'],
-          ];
-
-          const viewports = [
-            ['mobile', 390, 844],
-            ['tablet', 768, 1024],
-            ['desktop', 1440, 1000],
-          ];
-
-          const browser = await chromium.launch({
-            executablePath: '/usr/bin/google-chrome',
-            headless: true,
-            args: ['--no-sandbox'],
-          });
-          const results = [];
-          let failed = false;
-
-          for (const [viewportName, width, height] of viewports) {
-            let referenceFonts = null;
-
-            for (const [name, pagePath] of pages) {
-              const context = await browser.newContext({ viewport: { width, height } });
-              const page = await context.newPage();
-              const consoleErrors = [];
-              const pageErrors = [];
-
-              page.on('console', (message) => {
-                if (message.type() === 'error') consoleErrors.push(message.text());
-              });
-              page.on('pageerror', (error) => pageErrors.push(error.message));
-
-              const response = await page.goto(`http://127.0.0.1:4173${pagePath}`, {
-                waitUntil: 'networkidle',
-                timeout: 60000,
-              });
-
-              await page.evaluate(() => {
-                const candidates = Array.from(document.querySelectorAll('[role="dialog"], [class*="cookie"], [id*="cookie"]'));
-                const banner = candidates.find((element) => {
-                  const text = element.textContent || '';
-                  return /cookie/i.test(text) && /accept|reject|preferences/i.test(text);
-                });
-                if (banner instanceof HTMLElement) banner.style.display = 'none';
-              });
-
-              const metrics = await page.evaluate(() => {
-                const root = document.documentElement;
-                const body = getComputedStyle(document.body);
-                const h1 = document.querySelector('h1');
-                const h2 = document.querySelector('h2');
-                const brokenImages = Array.from(document.images)
-                  .filter((image) => image.complete && image.naturalWidth === 0)
-                  .map((image) => image.currentSrc || image.src);
-
-                return {
-                  title: document.title,
-                  h1: h1?.textContent?.trim() || null,
-                  bodyFont: body.fontFamily,
-                  bodySize: body.fontSize,
-                  bodyLineHeight: body.lineHeight,
-                  h1Font: h1 ? getComputedStyle(h1).fontFamily : null,
-                  h1Size: h1 ? getComputedStyle(h1).fontSize : null,
-                  h1LineHeight: h1 ? getComputedStyle(h1).lineHeight : null,
-                  h2Font: h2 ? getComputedStyle(h2).fontFamily : null,
-                  scrollWidth: root.scrollWidth,
-                  clientWidth: root.clientWidth,
-                  brokenImages,
-                  stalePreparationLabel: document.body.innerText.includes('(in preparation)'),
-                  finalChapterLink: Boolean(document.querySelector('a[href="/our-history/2020-2026"]')),
-                };
-              });
-
-              if (name === 'home') {
-                referenceFonts = {
-                  bodyFont: metrics.bodyFont,
-                  h1Font: metrics.h1Font,
-                };
-              }
-
-              const checks = {
-                statusOk: response?.status() === 200,
-                noHorizontalOverflow: metrics.scrollWidth <= metrics.clientWidth + 1,
-                noConsoleErrors: consoleErrors.length === 0,
-                noPageErrors: pageErrors.length === 0,
-                noBrokenImages: metrics.brokenImages.length === 0,
-                bodyFontMatchesHomepage: name === 'home' || metrics.bodyFont === referenceFonts?.bodyFont,
-                headingFontMatchesHomepage: name === 'home' || metrics.h1Font === referenceFonts?.h1Font,
-                noStalePreparationLabel: name !== 'history-2010-2019' || !metrics.stalePreparationLabel,
-                finalChapterConnected: name !== 'history-2010-2019' || metrics.finalChapterLink,
-              };
-
-              if (Object.values(checks).some((value) => value === false)) failed = true;
-
-              await page.screenshot({
-                path: `preview-images/${name}-${viewportName}.png`,
-                fullPage: true,
-              });
-
-              results.push({
-                name,
-                path: pagePath,
-                viewport: { name: viewportName, width, height },
-                status: response?.status() ?? null,
-                metrics,
-                checks,
-                consoleErrors,
-                pageErrors,
-              });
-
-              await context.close();
-            }
-          }
-
-          await browser.close();
-          await writeFile('preview-images/preview-report.json', JSON.stringify(results, null, 2));
-          if (failed) process.exitCode = 1;
-          EOF
-          bun render-preview.mjs
-
-      - name: Upload finished-site previews
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ghat-finished-site-preview
-          path: preview-images
-          if-no-files-found: warn
-          retention-days: 30
-
-      - name: Mark preview check successful
-        if: success()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-            await github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: 'success',
-              context: 'GHAT finished-site preview',
-              description: 'Responsive build and visual checks passed',
-              target_url: targetUrl
-            });
-
-      - name: Mark preview check failed
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-            await github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: 'failure',
-              context: 'GHAT finished-site preview',
-              description: 'Responsive build or visual checks failed',
-              target_url: targetUrl
-            });
+          git add src/pages/HomePage.tsx .github/workflows/release-check.yml legal-repair-trigger.txt
+          git commit -m "Complete final GHAT legal wording audit"
+          git pull --rebase origin main
+          git push origin HEAD:main
