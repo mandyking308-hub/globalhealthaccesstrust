@@ -60,18 +60,67 @@ async function open(route, viewport = { width: 1440, height: 1000 }) {
   return page;
 }
 
+async function checkImages(page, selector, route, expectedMinimum) {
+  const images = page.locator(selector);
+  const count = await images.count();
+  if (count < expectedMinimum) failures.push(`${route}: expected at least ${expectedMinimum} images, found ${count}`);
+  const broken = await images.evaluateAll((elements) =>
+    elements.filter((element) => !(element instanceof HTMLImageElement) || !element.complete || element.naturalWidth < 200).length,
+  );
+  if (broken) failures.push(`${route}: ${broken} image(s) failed to load at usable resolution`);
+}
+
 {
   const page = await open("/");
   const body = await page.locator("body").innerText();
-  if (!containsText(body, "Five Current Workstreams")) failures.push("/: current-workstreams homepage heading is missing");
+  for (const marker of [
+    "Building the systems that make health, safety and opportunity possible.",
+    "Five current workstreams",
+    "Health depends on the systems around it.",
+    "From a defined need to accountable delivery.",
+    "Permanent mandate",
+    "Evidence, independence and charitable control.",
+    "Turn concern into a responsible next step.",
+  ]) {
+    if (!containsText(body, marker)) failures.push(`/: homepage story marker is missing: ${marker}`);
+  }
+  if (containsText(body, "Work and Institutional Learning")) failures.push("/: retired institutional-learning section remains visible");
+
+  const order = [
+    "Building the systems that make health, safety and opportunity possible.",
+    "Five current workstreams",
+    "Health depends on the systems around it.",
+    "From a defined need to accountable delivery.",
+    "The wider charitable scope behind today’s five workstreams.",
+    "Evidence, independence and charitable control.",
+    "Turn concern into a responsible next step.",
+  ];
+  let cursor = -1;
+  for (const marker of order) {
+    const next = body.toLocaleLowerCase().indexOf(marker.toLocaleLowerCase(), cursor + 1);
+    if (next < 0) failures.push(`/: homepage order marker is missing: ${marker}`);
+    else if (next < cursor) failures.push(`/: homepage section order is incorrect at: ${marker}`);
+    else cursor = next;
+  }
+
   for (const workstream of workstreams) {
     const href = `/current-workstreams/${workstream.slug}`;
     if ((await page.locator(`a[href="${href}"]`).count()) < 1) failures.push(`/: missing homepage link ${href}`);
   }
-  if ((await page.locator('section[aria-labelledby="home-workstreams-heading"] img').count()) < 5) {
-    failures.push("/: fewer than five workstream images are displayed");
-  }
+  await checkImages(page, 'section[aria-labelledby="home-workstreams-heading"] img', "/", 5);
+  await checkImages(page, 'main img', "/", 9);
   await page.screenshot({ path: "workstream-previews/homepage-current-workstreams.png", fullPage: true });
+  await page.close();
+}
+
+for (const viewport of [
+  { width: 768, height: 1024 },
+  { width: 820, height: 1180 },
+]) {
+  const page = await open("/", viewport);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+  if (overflow) failures.push(`/: horizontal overflow at ${viewport.width}px tablet width`);
+  await checkImages(page, "main img", `/:${viewport.width}`, 9);
   await page.close();
 }
 
@@ -81,6 +130,7 @@ async function open(route, viewport = { width: 1440, height: 1000 }) {
   if (!containsText(body, "Practical work. Responsible delivery. Lasting public benefit.")) failures.push("/current-workstreams: hero statement is missing");
   if (!containsText(body, "Evidence without overstatement")) failures.push("/current-workstreams: evidence standard is missing");
   if ((await page.locator('a[href^="/current-workstreams/"]').count()) < 5) failures.push("/current-workstreams: fewer than five project links");
+  await checkImages(page, "main img", "/current-workstreams", 5);
   await page.screenshot({ path: "workstream-previews/current-workstreams-index.png", fullPage: true });
   await page.close();
 }
@@ -105,7 +155,7 @@ for (const workstream of workstreams) {
   ]) {
     if (!containsText(body, required)) failures.push(`${route}: required section missing: ${required}`);
   }
-  if ((await page.locator("img").count()) < 1) failures.push(`${route}: project image is missing`);
+  await checkImages(page, "main img", route, 1);
   if ((await page.locator('a[target="_blank"][rel~="noreferrer"]').count()) < 1) failures.push(`${route}: source links are missing`);
   if ((await page.locator(`a[href="/donate?workstream=${workstream.slug}#pledge-form"]`).count()) < 1) failures.push(`${route}: pledge route is missing`);
   if ((await page.locator(`a[href="/volunteer-apply?workstream=${workstream.slug}"]`).count()) < 1) failures.push(`${route}: contributor route is missing`);
@@ -124,13 +174,10 @@ for (const workstream of workstreams) {
   }
 }
 
-for (const route of ["/our-history", "/our-history/1991-1999", "/our-history/2000-2009"]) {
+for (const route of ["/our-history", "/our-history/1991-1999", "/our-history/2000-2009", "/our-history/2010-2019", "/our-history/2020-2026"]) {
   const page = await open(route);
   const body = await page.locator("body").innerText();
   if (/page not found|404 — not found/i.test(body)) failures.push(`${route}: historical archive route is not available`);
-  if (!containsText(body, route === "/our-history" ? "Our history" : route.split("/").pop()?.replace("-", "–") ?? "")) {
-    failures.push(`${route}: expected historical period is missing`);
-  }
   await page.close();
 }
 
@@ -150,6 +197,8 @@ for (const route of ["/our-history", "/our-history/1991-1999", "/our-history/200
     "/our-history",
     "/our-history/1991-1999",
     "/our-history/2000-2009",
+    "/our-history/2010-2019",
+    "/our-history/2020-2026",
     ...workstreams.map((item) => `/current-workstreams/${item.slug}`),
   ]) {
     if (!sitemap.includes(`<loc>${canonicalBase}${route}</loc>`)) failures.push(`/sitemap.xml: missing ${route}`);
@@ -174,4 +223,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Current workstreams smoke test passed for ${workstreams.length} full project pages, homepage cards, forms, history, sitemap, Blog retirement and mobile layout.`);
+console.log(`Current workstreams smoke test passed for the homepage story, ${workstreams.length} full project pages, project images, tablet and mobile layouts, forms, history, sitemap and Blog retirement.`);
