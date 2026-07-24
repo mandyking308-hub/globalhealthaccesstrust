@@ -1,9 +1,6 @@
-import conflictAfrica from "@/assets/conflict-africa-humanitarian.jpg";
-import emergencyRelief from "@/assets/emergency-relief-hero.jpg";
-import healthcareAccess from "@/assets/healthcare-access-hero.jpg";
-import familyMedicalCare from "@/assets/family-medical-care.jpg";
-import conflictUkraine from "@/assets/conflict-ukraine-humanitarian.jpg";
-import educationTraining from "@/assets/education-training-hero.jpg";
+import communityHealth from "@/assets/ghat-hero-community-health.jpg";
+import maternalCare from "@/assets/ghat-maternal-care.jpg";
+import infrastructureDelivery from "@/assets/ghat-infrastructure-delivery.jpg";
 import capacityTraining from "@/assets/ghat-capacity-training.jpg";
 import fieldClinic from "@/assets/ghat-field-clinic-humanitarian.jpg";
 
@@ -17,41 +14,41 @@ type VisualRecord = {
 const visualRecords: Record<string, VisualRecord[]> = {
   "/our-history/1991-1999": [
     {
-      src: conflictAfrica,
-      alt: "Humanitarian workers moving through a conflict-affected African setting",
+      src: infrastructureDelivery,
+      alt: "Humanitarian supplies being moved through a disrupted community setting",
       title: "Humanitarian response across borders",
       caption: "A thematic editorial image reflecting conflict response, displacement and the community networks described in this chapter.",
     },
     {
-      src: emergencyRelief,
-      alt: "Emergency relief supplies prepared for distribution",
+      src: maternalCare,
+      alt: "A nurse supporting a mother and baby in a field healthcare setting",
       title: "Practical support in times of crisis",
       caption: "A thematic editorial image reflecting fundraising, essential goods and direct community support during the 1990s.",
     },
   ],
   "/our-history/2000-2009": [
     {
-      src: healthcareAccess,
-      alt: "Healthcare access in an underserved community setting",
+      src: communityHealth,
+      alt: "A mother and child in a community affected by crisis",
       title: "Healthcare access and humanitarian need",
       caption: "A thematic editorial image reflecting the chapter's focus on health access, disaster response and vulnerable communities.",
     },
     {
-      src: familyMedicalCare,
-      alt: "A family receiving medical support in a community setting",
+      src: maternalCare,
+      alt: "A mother and baby receiving healthcare support",
       title: "Children, families and continuity of care",
       caption: "A thematic editorial image reflecting child health, disability inclusion and sustained family support.",
     },
   ],
   "/our-history/2010-2019": [
     {
-      src: conflictUkraine,
-      alt: "Humanitarian support in a conflict-affected European setting",
+      src: infrastructureDelivery,
+      alt: "Aid workers moving essential supplies in a conflict-affected setting",
       title: "Conflict, displacement and recovery",
       caption: "A thematic editorial image reflecting the decade's work around refugees, conflict response and communities under pressure.",
     },
     {
-      src: educationTraining,
+      src: capacityTraining,
       alt: "Professionals taking part in a field training session",
       title: "Professional learning and wider capability",
       caption: "A thematic editorial image reflecting the growing international network, training and shared professional purpose.",
