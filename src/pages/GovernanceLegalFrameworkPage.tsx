@@ -6,7 +6,7 @@ export const GovernanceLegalFrameworkPage = () => {
     <ContentLayout>
       <SEO
         title="Governance & Legal Framework"
-        description="Legal status, regulatory responsibilities and governance framework of Global Health Access Trust, a charitable trust constituted by Trust Deed under the laws of England and Wales."
+        description="The legal and governance framework of Global Health Access Trust, centred on its signed Constitution and supported by its wider governance documents and controls."
         canonical="/governance-legal-framework"
       />
       <h1>Governance &amp; Legal Framework</h1>
@@ -15,11 +15,12 @@ export const GovernanceLegalFrameworkPage = () => {
 
       <div className="section-container">
         <h2>Legal Status</h2>
-        <p>Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It operates exclusively for charitable purposes and for the public benefit.</p>
-        <p>The Trust Deed is the founding and principal governing document. The Trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including information prepared during banking due diligence. The Constitution supports, and does not replace, the Trust Deed.</p>
-        <p>The Trust is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with the governing documents and the lawful advancement of its charitable purposes.</p>
+        <p>Global Health Access Trust builds on charitable and community work carried out since 2019. The organisation was formally established with effect from 1 December 2024 and operates for charitable purposes and the public benefit in England and Wales.</p>
+        <p>The Trustees subsequently signed the Constitution in June 2025, confirming the governance and operating arrangements effective from that date. The signed Constitution sits at the centre of the Trust's governance.</p>
+        <p>A Trust Deed is also held as part of the Trust's wider legal and governance framework. The Constitution and Trust Deed are maintained together with the Trust's policies, financial controls and recorded Trustee decisions.</p>
+        <p>The Trust is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with its governance framework and the lawful advancement of its charitable purposes.</p>
         <p>The Trust is not a company and is not currently presented as a registered charity. Any regulatory or registration particulars will be published only when formally confirmed and available for publication.</p>
-        <p>All funds and assets are administered in accordance with the Trust Deed, applicable law, the supplementary Constitution, the Trust's financial controls and formal decisions of the Board.</p>
+        <p>All funds and assets are administered in accordance with the signed Constitution, applicable law, the wider legal and governance framework, the Trust's financial controls and formal decisions of the Board.</p>
       </div>
 
       <div className="section-container">
@@ -46,7 +47,7 @@ export const GovernanceLegalFrameworkPage = () => {
           <li>Overseeing safeguarding, legal compliance and institutional risk</li>
           <li>Appointing and overseeing advisers, delivery partners, independent reviewers and auditors where appropriate</li>
         </ul>
-        <p>No Trustee may receive private benefit from the Trust except where expressly permitted by the Trust Deed and applicable law, properly authorised and transparently recorded.</p>
+        <p>No Trustee may receive private benefit from the Trust except where expressly permitted by the Trust's governance framework and applicable law, properly authorised and transparently recorded.</p>
       </div>
 
       <div className="section-container">
@@ -94,7 +95,7 @@ export const GovernanceLegalFrameworkPage = () => {
         <h2>Accountability &amp; Transparency</h2>
         <p>The Trust publishes the governance and policy information required to explain how it operates. Its accountability framework includes:</p>
         <ul>
-          <li>A public record of the Trust Deed, the signed supplementary Constitution and published governance policies</li>
+          <li>A public record of the signed Constitution, the Trust Deed and published governance policies</li>
           <li>Financial accounts and Trustee reporting prepared or filed where required</li>
           <li>Secure donor reporting on approved projects, allocations, milestones and evidence</li>
           <li>Published complaints, safeguarding and protected-concerns procedures</li>
