@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - workstreams-live-build
+      - workstreams-integrated
   workflow_dispatch:
 
 permissions:
@@ -109,7 +109,7 @@ jobs:
               sha: context.sha,
               state: 'success',
               context: 'GHAT current workstreams',
-              description: 'Five project pages, homepage cards, routes, sources and mobile checks passed',
+              description: 'Five project pages, homepage cards, routes, sources, history and mobile checks passed',
               target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
             });
 
@@ -127,3 +127,119 @@ jobs:
               description: 'Current workstream validation failed',
               target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
             });
+
+  verify-live-workstreams:
+    if: github.ref == 'refs/heads/main'
+    needs: validate-workstreams
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Install Chromium
+        run: bunx playwright install --with-deps chromium
+
+      - name: Wait for custom-domain deployment
+        shell: bash
+        run: |
+          cat > /tmp/wait-for-workstreams.mjs <<'EOF'
+          import { chromium } from "playwright";
+
+          const browser = await chromium.launch({ headless: true });
+          let ready = false;
+
+          for (let attempt = 1; attempt <= 40; attempt += 1) {
+            const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+            try {
+              await page.goto("https://globalhealthaccesstrust.com/current-workstreams", {
+                waitUntil: "networkidle",
+                timeout: 45_000,
+              });
+              const body = (await page.locator("body").innerText()).toLocaleLowerCase();
+              ready = body.includes("practical work. responsible delivery. lasting public benefit.");
+              console.log(`Attempt ${attempt}: ${ready ? "current workstreams are live" : "deployment not visible yet"}`);
+            } catch (error) {
+              console.log(`Attempt ${attempt}: ${error instanceof Error ? error.message : String(error)}`);
+            } finally {
+              await page.close();
+            }
+
+            if (ready) break;
+            await new Promise((resolve) => setTimeout(resolve, 15_000));
+          }
+
+          await browser.close();
+          if (!ready) process.exit(1);
+          EOF
+          node /tmp/wait-for-workstreams.mjs
+
+      - name: Test the published custom domain
+        id: live_smoke
+        continue-on-error: true
+        env:
+          SMOKE_BASE_URL: https://globalhealthaccesstrust.com
+        shell: bash
+        run: |
+          rm -rf workstream-previews
+          set -o pipefail
+          node scripts/workstreams-smoke.mjs 2>&1 | tee live-workstreams-smoke.log
+
+      - name: Upload live browser report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-current-workstreams-browser-log
+          path: live-workstreams-smoke.log
+          if-no-files-found: ignore
+
+      - name: Upload live page previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-current-workstreams-previews
+          path: workstream-previews
+          if-no-files-found: ignore
+
+      - name: Report live success
+        if: steps.live_smoke.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT live current workstreams',
+              description: 'Published .com project pages, homepage cards, forms, history and mobile checks passed',
+              target_url: `https://globalhealthaccesstrust.com/current-workstreams`,
+            });
+
+      - name: Report live failure
+        if: steps.live_smoke.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT live current workstreams',
+              description: 'Published .com current-workstream checks failed',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Fail if live checks failed
+        if: steps.live_smoke.outcome != 'success'
+        run: exit 1
