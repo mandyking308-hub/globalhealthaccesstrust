@@ -6,7 +6,7 @@ export const GovernanceLegalFrameworkPage = () => {
     <ContentLayout>
       <SEO
         title="Governance & Legal Framework"
-        description="Legal status, charitable purpose and governance framework of the Global Health Access Trust, an unincorporated charitable organisation established in England and Wales."
+        description="Legal status, charitable purpose and governance framework of the Global Health Access Trust, governed by its signed Constitution and Board of Trustees."
         canonical="/governance-legal-framework"
       />
       <h1>Governance &amp; Legal Framework</h1>
@@ -15,7 +15,7 @@ export const GovernanceLegalFrameworkPage = () => {
 
       <div className="section-container">
         <h2>Legal Status</h2>
-        <p>Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025. It operates exclusively for charitable purposes and for the public benefit.</p>
+        <p>Global Health Access Trust works for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.</p>
         <p>The organisation is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with the governing document and the lawful advancement of its charitable purposes.</p>
         <p>Any regulatory or registration particulars will be published only when formally confirmed and available for publication.</p>
         <p>All funds are administered in accordance with the Constitution, applicable law, the Trust's financial controls and formal decisions of the Board.</p>
