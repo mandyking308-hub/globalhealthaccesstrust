@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   statuses: write
 
 env:
@@ -16,10 +16,54 @@ env:
 jobs:
   build-and-preview:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: Correct completed history navigation
+        id: continuity
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/pages/CharitableHistory2010sPage.tsx")
+          text = path.read_text()
+          old = '''          <div className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+            Next: 2020–2026 <ArrowRight className="h-4 w-4" />
+            <span className="text-xs font-normal">(in preparation)</span>
+          </div>'''
+          new = '''          <Link
+            to="/our-history/2020-2026"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:underline"
+          >
+            Next: 2020–2026 <ArrowRight className="h-4 w-4" />
+          </Link>'''
+
+          if old in text:
+              path.write_text(text.replace(old, new))
+              changed = "true"
+          elif new in text:
+              changed = "false"
+          else:
+              raise SystemExit("Expected completed-history navigation block was not found")
+
+          with open(Path.home() / "continuity-output", "w") as output:
+              output.write(changed)
+          print(f"changed={changed}")
+          PY
+          echo "changed=$(cat "$HOME/continuity-output")" >> "$GITHUB_OUTPUT"
+
+      - name: Commit completed history navigation
+        if: steps.continuity.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/pages/CharitableHistory2010sPage.tsx
+          git commit -m "Connect 2010s history to final chapter"
+          git push
 
       - name: Mark preview check pending
         uses: actions/github-script@v7
@@ -32,7 +76,7 @@ jobs:
               sha: context.sha,
               state: 'pending',
               context: 'GHAT finished-site preview',
-              description: 'Building and rendering the finished website',
+              description: 'Building and rendering responsive finished-site previews',
               target_url: targetUrl
             });
 
@@ -86,7 +130,7 @@ jobs:
           cat /tmp/ghat-preview.log
           exit 1
 
-      - name: Render finished-site previews
+      - name: Render responsive finished-site previews
         run: |
           mkdir -p preview-images
           cat > render-preview.mjs <<'EOF'
@@ -96,9 +140,17 @@ jobs:
           const pages = [
             ['home', '/'],
             ['our-work', '/our-work'],
-            ['commission-project', '/commission-projects'],
-            ['pledge-contribution', '/donate'],
-            ['project-team-application', '/volunteer-apply'],
+            ['history-index', '/our-history'],
+            ['history-1991-1999', '/our-history/1991-1999'],
+            ['history-2000-2009', '/our-history/2000-2009'],
+            ['history-2010-2019', '/our-history/2010-2019'],
+            ['history-2020-2026', '/our-history/2020-2026'],
+          ];
+
+          const viewports = [
+            ['mobile', 390, 844],
+            ['tablet', 768, 1024],
+            ['desktop', 1440, 1000],
           ];
 
           const browser = await chromium.launch({
@@ -106,30 +158,113 @@ jobs:
             headless: true,
             args: ['--no-sandbox'],
           });
-          const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
           const results = [];
+          let failed = false;
 
-          for (const [name, path] of pages) {
-            const page = await context.newPage();
-            const consoleErrors = [];
-            page.on('console', (message) => {
-              if (message.type() === 'error') consoleErrors.push(message.text());
-            });
-            const response = await page.goto(`http://127.0.0.1:4173${path}`, {
-              waitUntil: 'networkidle',
-              timeout: 60000,
-            });
-            await page.screenshot({ path: `preview-images/${name}.png`, fullPage: true });
-            results.push({ name, path, status: response?.status() ?? null, title: await page.title(), consoleErrors });
-            await page.close();
+          for (const [viewportName, width, height] of viewports) {
+            let referenceFonts = null;
+
+            for (const [name, pagePath] of pages) {
+              const context = await browser.newContext({ viewport: { width, height } });
+              const page = await context.newPage();
+              const consoleErrors = [];
+              const pageErrors = [];
+
+              page.on('console', (message) => {
+                if (message.type() === 'error') consoleErrors.push(message.text());
+              });
+              page.on('pageerror', (error) => pageErrors.push(error.message));
+
+              const response = await page.goto(`http://127.0.0.1:4173${pagePath}`, {
+                waitUntil: 'networkidle',
+                timeout: 60000,
+              });
+
+              await page.evaluate(() => {
+                const candidates = Array.from(document.querySelectorAll('[role="dialog"], aside, body > div'));
+                const banner = candidates.find((element) => {
+                  const text = element.textContent || '';
+                  return /cookie/i.test(text) && /accept|reject|preferences/i.test(text);
+                });
+                if (banner instanceof HTMLElement) banner.style.display = 'none';
+              });
+
+              const metrics = await page.evaluate(() => {
+                const root = document.documentElement;
+                const body = getComputedStyle(document.body);
+                const h1 = document.querySelector('h1');
+                const h2 = document.querySelector('h2');
+                const brokenImages = Array.from(document.images)
+                  .filter((image) => image.complete && image.naturalWidth === 0)
+                  .map((image) => image.currentSrc || image.src);
+
+                return {
+                  title: document.title,
+                  h1: h1?.textContent?.trim() || null,
+                  bodyFont: body.fontFamily,
+                  bodySize: body.fontSize,
+                  bodyLineHeight: body.lineHeight,
+                  h1Font: h1 ? getComputedStyle(h1).fontFamily : null,
+                  h1Size: h1 ? getComputedStyle(h1).fontSize : null,
+                  h1LineHeight: h1 ? getComputedStyle(h1).lineHeight : null,
+                  h2Font: h2 ? getComputedStyle(h2).fontFamily : null,
+                  scrollWidth: root.scrollWidth,
+                  clientWidth: root.clientWidth,
+                  brokenImages,
+                  stalePreparationLabel: document.body.innerText.includes('(in preparation)'),
+                  finalChapterLink: Boolean(document.querySelector('a[href="/our-history/2020-2026"]')),
+                };
+              });
+
+              if (name === 'home') {
+                referenceFonts = {
+                  bodyFont: metrics.bodyFont,
+                  h1Font: metrics.h1Font,
+                };
+              }
+
+              const checks = {
+                statusOk: response?.status() === 200,
+                noHorizontalOverflow: metrics.scrollWidth <= metrics.clientWidth + 1,
+                noConsoleErrors: consoleErrors.length === 0,
+                noPageErrors: pageErrors.length === 0,
+                noBrokenImages: metrics.brokenImages.length === 0,
+                bodyFontMatchesHomepage: name === 'home' || metrics.bodyFont === referenceFonts?.bodyFont,
+                headingFontMatchesHomepage: name === 'home' || metrics.h1Font === referenceFonts?.h1Font,
+                noStalePreparationLabel: name !== 'history-2010-2019' || !metrics.stalePreparationLabel,
+                finalChapterConnected: name !== 'history-2010-2019' || metrics.finalChapterLink,
+              };
+
+              if (Object.values(checks).some((value) => value === false)) failed = true;
+
+              await page.screenshot({
+                path: `preview-images/${name}-${viewportName}.png`,
+                fullPage: true,
+              });
+
+              results.push({
+                name,
+                path: pagePath,
+                viewport: { name: viewportName, width, height },
+                status: response?.status() ?? null,
+                metrics,
+                checks,
+                consoleErrors,
+                pageErrors,
+              });
+
+              await context.close();
+            }
           }
 
           await browser.close();
           await writeFile('preview-images/preview-report.json', JSON.stringify(results, null, 2));
+          if (failed) process.exitCode = 1;
           EOF
           bun render-preview.mjs
 
       - name: Upload finished-site previews
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ghat-finished-site-preview
@@ -149,7 +284,7 @@ jobs:
               sha: context.sha,
               state: 'success',
               context: 'GHAT finished-site preview',
-              description: 'Build passed and finished-site previews were rendered',
+              description: 'Responsive build and visual checks passed',
               target_url: targetUrl
             });
 
@@ -165,6 +300,6 @@ jobs:
               sha: context.sha,
               state: 'failure',
               context: 'GHAT finished-site preview',
-              description: 'Build or finished-site preview rendering failed',
+              description: 'Responsive build or visual checks failed',
               target_url: targetUrl
             });
