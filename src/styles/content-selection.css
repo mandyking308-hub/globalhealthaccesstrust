@@ -1,4 +1,5 @@
-/* Keep standard browser interactions available across the public website. */
+/* Keep standard browser interactions available across the public website.
+   This file intentionally overrides the earlier site-wide selection lock. */
 html,
 body,
 #root,
