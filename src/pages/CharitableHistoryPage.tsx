@@ -32,19 +32,21 @@ const periods = [
     active: true,
   },
   {
-    period: "2020–2024",
-    title: "The international network and the path towards the Trust",
+    period: "2020–2026",
+    title: "Frontline community action and the establishment of the Trust",
     description:
-      "The network continued developing through clinicians, technologists, professional contributors, community organisations and international contacts before the Trust was formally established.",
-    status: "Historical record in preparation",
+      "This final chapter covers the hands-on COVID-19 response, continuing international humanitarian work, the formal establishment of GHAT on 1 December 2024 and the Trust's present-day development.",
+    href: "/our-history/2020-2026",
+    status: "Explore the final chapter",
+    active: true,
   },
   {
-    period: "From December 2024",
+    period: "Our work today",
     title: "The Global Health Access Trust",
     description:
-      "The establishment of the Trust brought this long history of voluntary service into a permanent charitable structure with defined governance, safeguarding and accountability.",
-    href: "/our-work",
-    status: "View our work today",
+      "The Trust now brings this long history of voluntary service into a permanent charitable structure with defined governance, safeguarding, accountability and public workstreams.",
+    href: "/current-workstreams",
+    status: "View current workstreams",
     active: true,
   },
 ];
@@ -100,22 +102,16 @@ export const CharitableHistoryPage = () => {
                 to="/our-history/1991-1999"
                 className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground no-underline transition-colors hover:bg-primary/90"
               >
-                Explore 1991–1999 <ArrowRight className="h-4 w-4" />
+                Begin in 1991 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                to="/our-history/2000-2009"
+                to="/our-history/2020-2026"
                 className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
               >
-                Explore 2000–2009 <ArrowRight className="h-4 w-4" />
+                Read 2020–2026 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                to="/our-history/2010-2019"
-                className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
-              >
-                Explore 2010–2019 <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                to="/our-work"
+                to="/current-workstreams"
                 className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
               >
                 View our work today
@@ -136,7 +132,7 @@ export const CharitableHistoryPage = () => {
               Much of this work was carried out quietly through churches, hospitals, charities, community organisations and trusted contacts. We raised money, collected essential items, supported public appeals and contributed our time and experience where we believed it could add value to a difficult situation.
             </p>
             <p>
-              At the time, our priority was helping people—not creating a public record. We are now bringing that history together, decade by decade.
+              At the time, our priority was helping people—not creating a public record. We have now brought that history together from 1991 to the present day.
             </p>
           </div>
         </section>
@@ -148,7 +144,7 @@ export const CharitableHistoryPage = () => {
               The work that shaped the Trust
             </h2>
             <p className="text-muted-foreground">
-              The earlier pages describe voluntary work undertaken before the Trust existed. Activity from December 2024 onward is recorded separately as formal Trust work.
+              The earlier pages describe voluntary work undertaken before the Trust existed. The final chapter clearly separates the international network before 1 December 2024 from formal GHAT activity beginning on that date.
             </p>
           </div>
 
@@ -171,18 +167,12 @@ export const CharitableHistoryPage = () => {
                   <p className="mb-0 text-sm leading-relaxed text-muted-foreground sm:text-base">{item.description}</p>
                 </div>
                 <div className="md:text-right">
-                  {item.href ? (
-                    <Link
-                      to={item.href}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:underline"
-                    >
-                      {item.status} <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  ) : (
-                    <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-                      {item.status}
-                    </span>
-                  )}
+                  <Link
+                    to={item.href}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:underline"
+                  >
+                    {item.status} <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </article>
             ))}
@@ -219,34 +209,28 @@ export const CharitableHistoryPage = () => {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-primary">About the record</p>
             <h2 className="mb-4 text-3xl font-serif font-bold">An archive being carefully recovered</h2>
             <p className="text-muted-foreground">
-              Much of the earlier work took place before digital records became commonplace. The history is being reconstructed from recollections, photographs, correspondence, travel records, financial records and participant accounts. Appropriate archive material will be added as it is recovered.
+              Much of the earlier work took place before digital records became commonplace. The history has been reconstructed from recollections, photographs, correspondence, travel records, financial records and participant accounts. Appropriate archive material will continue to be added as it is recovered.
             </p>
           </div>
         </section>
 
         <section className="mt-16 border-t border-foreground/10 pt-10 text-center">
-          <h2 className="mb-4 text-3xl font-serif font-bold">Continue through the history</h2>
+          <h2 className="mb-4 text-3xl font-serif font-bold">The complete history is now available</h2>
           <p className="mx-auto mb-7 max-w-2xl text-muted-foreground">
-            Three complete periods are now available, covering voluntary humanitarian, health and community work from 1991 through 2019.
+            Four complete chapters now trace the work from its early voluntary beginnings in 1991 through the formal establishment and present-day development of the Global Health Access Trust.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              to="/our-history/1991-1999"
-              className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
-            >
+            <Link to="/our-history/1991-1999" className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5">
               1991–1999 <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              to="/our-history/2000-2009"
-              className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5"
-            >
+            <Link to="/our-history/2000-2009" className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5">
               2000–2009 <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link
-              to="/our-history/2010-2019"
-              className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground no-underline transition-colors hover:bg-primary/90"
-            >
+            <Link to="/our-history/2010-2019" className="inline-flex items-center gap-2 border border-primary/30 px-5 py-3 text-sm font-semibold text-primary no-underline transition-colors hover:bg-primary/5">
               2010–2019 <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link to="/our-history/2020-2026" className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground no-underline transition-colors hover:bg-primary/90">
+              2020–2026 <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </section>
