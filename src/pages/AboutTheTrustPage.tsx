@@ -19,16 +19,17 @@ export const AboutTheTrustPage = () => {
           <h2>Origins &amp; Institutional Development</h2>
           <p>Global Health Access Trust builds on decades of voluntary, self-funded and pro bono work across healthcare, technology, education, community support and humanitarian response.</p>
           <p>From 2019, this work developed through an international network of clinicians, technologists, faith-based organisations and professional contributors, many of whom contributed their time, expertise and practical support without charge.</p>
-          <p>The organisation adopted its Constitution in June 2025, bringing that experience within a defined charitable governance framework capable of developing and supporting larger, longer-term projects.</p>
+          <p>The Trust was constituted by Trust Deed with effect from 1 December 2024, bringing that experience within a permanent charitable institution capable of developing and supporting larger, longer-term projects.</p>
+          <p>The trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including those prepared during banking due diligence.</p>
           <p>Today, the Trust applies that experience through defined programmes, trusted delivery relationships and accountable systems established for enduring public benefit.</p>
           <p className="block"><Link to="/our-history" className="text-primary hover:underline inline-block py-2">Explore Our History of Charitable Work →</Link></p>
         </div>
 
         <div className="section-container">
           <h2>Structure &amp; Leadership</h2>
-          <p>Global Health Access Trust is governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.</p>
+          <p>Global Health Access Trust is a charitable trust governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.</p>
           <p>The Board is supported, where appropriate, by advisers and professional contributors with experience across healthcare, finance, law, technology and international delivery.</p>
-          <p>All Trustees act under fiduciary duty and in accordance with the Constitution, applicable law and the Trust's published governance framework.</p>
+          <p>All Trustees act under fiduciary duty and in accordance with the Trust Deed, applicable law, the supplementary Constitution and the Trust's published governance framework.</p>
           <p className="block"><Link to="/trustee-biographies" className="text-primary hover:underline inline-block py-2">View Trustee Biographies →</Link></p>
         </div>
 
@@ -64,9 +65,9 @@ export const AboutTheTrustPage = () => {
         </div>
 
         <div className="section-container">
-          <h2>Constitution &amp; Governance</h2>
-          <p>Global Health Access Trust is governed by its signed Constitution, adopted in June 2025. It establishes the organisation's charitable purposes, trustee powers and decision-making framework, supported by the governance policies published on this website.</p>
-          <p className="block"><a href="/GHAT_Constitution_2025_Refined.pdf" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline inline-block py-2">View the Signed Constitution — Adopted June 2025</a></p>
+          <h2>Trust Deed &amp; Constitution</h2>
+          <p>The Trust Deed effective from 1 December 2024 is the founding and principal governing document of Global Health Access Trust. The signed Constitution adopted in June 2025 records supplementary governance and operating arrangements. It supports, and does not replace, the Trust Deed.</p>
+          <p className="block"><Link to="/constitution" className="text-primary hover:underline inline-block py-2">View the Trust Deed &amp; Signed Constitution record →</Link></p>
         </div>
 
         <div className="flex flex-wrap gap-4 mt-8">
