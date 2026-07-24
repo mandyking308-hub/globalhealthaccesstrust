@@ -20,7 +20,7 @@ export const AboutTheTrustPage = () => {
           <p>Global Health Access Trust builds on decades of voluntary, self-funded and pro bono work across healthcare, technology, education, community support and humanitarian response.</p>
           <p>From 2019, this work developed through an international network of clinicians, technologists, faith-based organisations and professional contributors, many of whom contributed their time, expertise and practical support without charge.</p>
           <p>The Trust was constituted by Trust Deed with effect from 1 December 2024, bringing that experience within a permanent charitable institution capable of developing and supporting larger, longer-term projects.</p>
-          <p>The trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including those prepared during banking due diligence.</p>
+          <p>The Trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including those prepared during banking due diligence.</p>
           <p>Today, the Trust applies that experience through defined programmes, trusted delivery relationships and accountable systems established for enduring public benefit.</p>
           <p className="block"><Link to="/our-history" className="text-primary hover:underline inline-block py-2">Explore Our History of Charitable Work →</Link></p>
         </div>
@@ -35,9 +35,9 @@ export const AboutTheTrustPage = () => {
 
         <div className="section-container">
           <h2>Charitable Purpose</h2>
-          <p>The charitable purpose of the Trust is:</p>
-          <p className="featured-text">"To advance health, relieve illness, and preserve life—particularly among vulnerable or underserved populations—through lawful and equitable means, as recognised under section 3 of the Charities Act 2011."</p>
-          <p>All funding and programme activity is directed solely toward these ends.</p>
+          <p>The Trust's charitable purposes are to advance health, relieve illness and preserve life for the public benefit.</p>
+          <p>Projects may address healthcare access and the systems or conditions on which health, safety and dignified living depend, provided that each project remains within the Trust Deed, is lawful and demonstrates a clear route to public benefit.</p>
+          <p>All funds, assets and programme activity must be applied exclusively in furtherance of those charitable purposes.</p>
         </div>
 
         <div className="section-container">
@@ -45,9 +45,9 @@ export const AboutTheTrustPage = () => {
           <p>In accordance with the Charity Commission's public benefit requirement, the Trust affirms that all of its charitable activities:</p>
           <ul>
             <li>Are exclusively for public benefit;</li>
-            <li>Provide measurable outcomes that improve health or healthcare access;</li>
-            <li>Are accessible without unjust exclusion, prejudice, or private gain;</li>
-            <li>Operate under principles of transparency, non-partisanship, and institutional independence.</li>
+            <li>Are intended to improve health, healthcare access or the systems and conditions materially connected to health;</li>
+            <li>Avoid unjust exclusion, prejudice and unauthorised private benefit;</li>
+            <li>Operate under principles of transparency, non-partisanship and institutional independence.</li>
           </ul>
           <p className="featured-text">We exist to serve—not to sell. We work to restore dignity where it has been denied, and to strengthen systems where they have failed.</p>
         </div>
@@ -61,7 +61,7 @@ export const AboutTheTrustPage = () => {
             <li>We choose partnerships based on ethics, alignment, and legal compliance.</li>
             <li>We operate with quiet fidelity to our mission—always guided by public duty, not profile.</li>
           </ul>
-          <p>Every action is reviewed for legality, impact, and integrity. This is not philanthropy in passing; this is long-term stewardship for public good.</p>
+          <p>Every action is reviewed for legality, public benefit, risk and integrity. This is not philanthropy in passing; this is long-term stewardship for public good.</p>
         </div>
 
         <div className="section-container">
