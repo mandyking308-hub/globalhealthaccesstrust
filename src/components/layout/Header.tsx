@@ -5,7 +5,17 @@ import { Button } from "@/components/ui/button";
 import { NAVIGATION_ITEMS, SITE_CONFIG } from "@/lib/constants";
 import { SearchModal } from "@/components/common/SearchModal";
 
-const publicNavigationItems = NAVIGATION_ITEMS.filter((item) => item.href !== "/blog");
+const publicNavigationItems = NAVIGATION_ITEMS.filter((item) => item.href !== "/blog").map((item) =>
+  item.href === "/our-work"
+    ? {
+        ...item,
+        submenu: [
+          ...item.submenu,
+          { label: "Our History of Charitable Work", href: "/our-history" },
+        ],
+      }
+    : item,
+);
 
 const GHATLogo = ({ className }: { className?: string }) => (
   <svg
