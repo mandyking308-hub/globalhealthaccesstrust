@@ -18,7 +18,7 @@ export const FrequentlyAskedQuestionsPage = () => {
       <div className="section-container">
         <h2>About the Trust</h2>
         <h3>What is Global Health Access Trust?</h3>
-        <p>Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales.</p>
+        <p>Global Health Access Trust builds on charitable and community work carried out since 2019. The organisation was formally established with effect from 1 December 2024 and operates for charitable purposes and the public benefit.</p>
         <p>Its purposes are to advance health, relieve illness and preserve life. The Trust develops, funds and coordinates projects for public benefit under the authority and oversight of its Board of Trustees.</p>
         <p>The Trust is not a company and is not currently presented as a registered charity. Any registration particulars will be published only when formally confirmed.</p>
         <h3>What makes this Trust different from other health charities?</h3>
@@ -26,8 +26,9 @@ export const FrequentlyAskedQuestionsPage = () => {
         <p>It brings together professional and clinical expertise, community relationships, essential infrastructure, responsible artificial intelligence and accountable funding to solve defined healthcare-access and system problems.</p>
         <p>Where a project includes clinical services, those services are delivered and governed by appropriately licensed healthcare providers within their own professional and legal responsibilities.</p>
         <p>We prioritise systems-building over dependency, human capability over displacement, dignity over publicity and sustained public benefit over short-term display.</p>
-        <h3>How is the Trust constituted?</h3>
-        <p>The Trust Deed effective from 1 December 2024 is the founding and principal governing document. The Trustees later adopted a signed Constitution in June 2025 as a supplementary governance and banking document. The Constitution supports, and does not replace, the Trust Deed.</p>
+        <h3>How is the Trust governed?</h3>
+        <p>The Trustees signed the Constitution in June 2025, confirming the governance and operating arrangements effective from that date. The signed Constitution sits at the centre of the Trust's governance.</p>
+        <p>A Trust Deed is also held as part of the Trust's wider legal and governance framework. The documents are maintained together with the Trust's policies, financial controls and recorded Trustee decisions.</p>
         <p>Its correspondence address is Global Health Access Trust, 2 Harley Street, London, England, United Kingdom.</p>
       </div>
 
