@@ -1,0 +1,143 @@
+name: Homepage story validation
+
+on:
+  push:
+    branches:
+      - main
+      - homepage-story-images
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: homepage-story-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate-homepage-story:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Type-check and build
+        run: |
+          bunx tsc --noEmit
+          bun run build
+
+      - name: Install Chromium
+        run: bunx playwright install --with-deps chromium
+
+      - name: Start production preview
+        run: |
+          bunx vite preview --host 127.0.0.1 --port 4173 > /tmp/homepage-preview.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4173/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/homepage-preview.log
+          exit 1
+
+      - name: Test project pages and homepage routes
+        run: node scripts/workstreams-smoke.mjs
+
+      - name: Test homepage story, imagery and section order
+        run: |
+          cat > /tmp/homepage-story.mjs <<'EOF'
+          import { mkdirSync } from "node:fs";
+          import { chromium } from "playwright";
+
+          const browser = await chromium.launch({ headless: true });
+          const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+          await page.goto("http://127.0.0.1:4173/", { waitUntil: "networkidle", timeout: 45_000 });
+
+          const body = (await page.locator("body").innerText()).toLowerCase();
+          const required = [
+            "building the systems that make health, safety and opportunity possible",
+            "five current workstreams",
+            "health depends on the systems around it",
+            "from a defined need to accountable delivery",
+            "permanent mandate",
+            "evidence, independence and charitable control",
+            "turn concern into a responsible next step",
+          ];
+          for (const marker of required) {
+            if (!body.includes(marker)) throw new Error(`Homepage marker missing: ${marker}`);
+          }
+          if (body.includes("work and institutional learning")) throw new Error("Retired institutional-learning section is still present");
+
+          const headings = await page.locator("h1, h2").allInnerTexts();
+          const joined = headings.join(" | ").toLowerCase();
+          const order = [
+            "building the systems",
+            "five current workstreams",
+            "health depends on the systems",
+            "from a defined need",
+            "the wider charitable scope",
+            "evidence, independence",
+            "turn concern into a responsible next step",
+          ];
+          let cursor = -1;
+          for (const marker of order) {
+            const next = joined.indexOf(marker, cursor + 1);
+            if (next < 0) throw new Error(`Homepage heading order marker missing: ${marker}`);
+            cursor = next;
+          }
+
+          const workstreamImages = page.locator('section[aria-labelledby="home-workstreams-heading"] img');
+          if ((await workstreamImages.count()) < 5) throw new Error("Fewer than five workstream images are visible");
+          const broken = await workstreamImages.evaluateAll((images) =>
+            images.filter((image) => !(image instanceof HTMLImageElement) || !image.complete || image.naturalWidth < 200).length,
+          );
+          if (broken) throw new Error(`${broken} workstream image(s) failed to load at usable resolution`);
+
+          const mobile = await browser.newPage({ viewport: { width: 390, height: 844 } });
+          await mobile.goto("http://127.0.0.1:4173/", { waitUntil: "networkidle", timeout: 45_000 });
+          const overflow = await mobile.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 2);
+          if (overflow) throw new Error("Homepage has horizontal overflow on mobile");
+
+          mkdirSync("homepage-story-previews", { recursive: true });
+          await page.screenshot({ path: "homepage-story-previews/homepage-desktop.png", fullPage: true });
+          await mobile.screenshot({ path: "homepage-story-previews/homepage-mobile.png", fullPage: true });
+          await mobile.close();
+          await page.close();
+          await browser.close();
+          EOF
+          node /tmp/homepage-story.mjs
+
+      - name: Upload homepage previews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: homepage-story-previews
+          path: homepage-story-previews
+          if-no-files-found: ignore
+
+      - name: Report success
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: "success",
+              context: "GHAT homepage story",
+              description: "Homepage story, project images, links, mobile layout and full workstream suite passed",
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
