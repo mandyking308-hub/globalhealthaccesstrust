@@ -9,7 +9,7 @@ export const SITE_CONFIG = {
 // Organization Schema
 export const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "NGO",
+  "@type": "Organization",
   "name": "Global Health Access Trust",
   "alternateName": "GHAT",
   "url": "https://globalhealthaccesstrust.com",
