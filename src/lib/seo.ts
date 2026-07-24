@@ -2,7 +2,7 @@
 export const SITE_CONFIG = {
   name: "Global Health Access Trust",
   url: "https://globalhealthaccesstrust.com",
-  description: "A charity building lasting access to healthcare for vulnerable and underserved populations worldwide",
+  description: "A charitable trust constituted by Trust Deed that develops, funds and coordinates public-benefit projects which enable better healthcare",
   image: "/ghat-logo.png"
 };
 
@@ -14,14 +14,16 @@ export const organizationSchema = {
   "alternateName": "GHAT",
   "url": "https://globalhealthaccesstrust.com",
   "logo": "https://globalhealthaccesstrust.com/ghat-logo.png",
-  "description": "A charity building lasting access to healthcare for vulnerable and underserved populations worldwide through ethical healthcare interventions, capacity building, and systems strengthening.",
-  "foundingDate": "2025",
+  "description": "A charitable trust constituted by Trust Deed under the laws of England and Wales, developing, funding and coordinating public-benefit projects that advance health, relieve illness and preserve life.",
+  "foundingDate": "2024-12-01",
   "foundingLocation": {
     "@type": "Country",
     "name": "United Kingdom"
   },
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "2 Harley Street",
+    "addressLocality": "London",
     "addressCountry": "GB"
   },
   "sameAs": [
