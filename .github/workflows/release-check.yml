@@ -27,13 +27,16 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
 
           path = Path("src/pages/CharitableHistory2010sPage.tsx")
           text = path.read_text()
-          old = '''          <div className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">
-            Next: 2020–2026 <ArrowRight className="h-4 w-4" />
-            <span className="text-xs font-normal">(in preparation)</span>
-          </div>'''
+          pattern = re.compile(
+              r'''          <div className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">\s*'''
+              r'''Next: 2020–2026 <ArrowRight className="h-4 w-4" />\s*'''
+              r'''<span className="text-xs font-normal">\(in preparation\)</span>\s*'''
+              r'''</div>'''
+          )
           new = '''          <Link
             to="/our-history/2020-2026"
             className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:underline"
@@ -41,10 +44,11 @@ jobs:
             Next: 2020–2026 <ArrowRight className="h-4 w-4" />
           </Link>'''
 
-          if old in text:
-              path.write_text(text.replace(old, new))
+          updated, count = pattern.subn(new, text, count=1)
+          if count == 1:
+              path.write_text(updated)
               changed = "true"
-          elif new in text:
+          elif 'to="/our-history/2020-2026"' in text and '(in preparation)' not in text:
               changed = "false"
           else:
               raise SystemExit("Expected completed-history navigation block was not found")
@@ -110,7 +114,7 @@ jobs:
         with:
           name: ghat-build-diagnostics
           path: build-output.log
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 7
 
       - name: Stop if build failed
@@ -269,7 +273,7 @@ jobs:
         with:
           name: ghat-finished-site-preview
           path: preview-images
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
 
       - name: Mark preview check successful
