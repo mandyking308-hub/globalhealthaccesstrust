@@ -9,7 +9,7 @@ export const ConstitutionPage = () => {
     <>
       <SEO
         title="Signed Constitution & Trust Deed"
-        description="The signed Constitution at the centre of Global Health Access Trust's governance, together with the Trust Deed held within its wider legal and governance framework."
+        description="The signed Constitution at the centre of Global Health Access Trust's governance, together with the Updated Trust Deed dated 24 July 2026 within its wider legal and governance framework."
         canonical="/constitution"
       />
       <div className="py-16">
@@ -45,18 +45,18 @@ export const ConstitutionPage = () => {
 
             <Card className="card-elevated h-full">
               <CardHeader>
-                <CardTitle>Trust Deed</CardTitle>
+                <CardTitle>Updated Trust Deed</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground leading-relaxed">
-                  A Trust Deed is also held as part of the Trust's wider legal and governance framework. It sits alongside the signed Constitution and supports the formal record of the Trust's establishment and charitable arrangements.
+                  The Updated Trust Deed is dated 24 July 2026. It sits alongside the signed Constitution and records the wider legal, charitable-property and institutional framework supporting the Trust's formal establishment and charitable arrangements.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div><strong>Formal establishment</strong><br /><span className="text-muted-foreground">1 December 2024</span></div>
-                  <div><strong>Document position</strong><br /><span className="text-muted-foreground">Wider legal and governance framework</span></div>
+                  <div><strong>Updated record</strong><br /><span className="text-muted-foreground">24 July 2026</span></div>
                 </div>
                 <Button variant="outline" asChild>
-                  <a href="/contact-the-trust">Trust Deed enquiries</a>
+                  <a href="/GHAT_Updated_Trust_Deed_24_July_2026.html" target="_blank" rel="noopener noreferrer">Open Updated Trust Deed</a>
                 </Button>
               </CardContent>
             </Card>
@@ -69,7 +69,7 @@ export const ConstitutionPage = () => {
             <CardContent>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p><strong className="text-foreground">The signed Constitution is central.</strong> It confirms the governance and operating arrangements agreed by the Trustees and is the principal public reference for how the Trust is governed.</p>
-                <p><strong className="text-foreground">The Trust Deed is held alongside it.</strong> It forms part of the wider legal and governance framework supporting the Trust's formal establishment and charitable arrangements.</p>
+                <p><strong className="text-foreground">The Updated Trust Deed is held alongside it.</strong> It forms part of the wider legal and governance framework supporting the Trust's formal establishment, charitable-property stewardship and institutional continuity.</p>
                 <p>The two documents are maintained together with the Trust's policies, financial controls and recorded Trustee decisions so that the legal and operational record remains consistent.</p>
               </div>
             </CardContent>
@@ -79,7 +79,7 @@ export const ConstitutionPage = () => {
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2">Document Integrity</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                The signed Constitution and Trust Deed form part of the Trust's formal records. Public copies may be redacted where necessary to protect signatures, home addresses or other personal information, while full copies are provided securely where lawfully required.
+                The signed Constitution and Updated Trust Deed form part of the Trust's formal records. Public copies may be redacted where necessary to protect signatures, home addresses or other personal information, while complete records are retained by the Trust.
               </p>
             </CardContent>
           </Card>
