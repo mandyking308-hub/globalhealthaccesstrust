@@ -1,4 +1,4 @@
-name: Website Release Check
+name: One-Time GHAT Legal Identity Repair
 
 on:
   push:
@@ -7,303 +7,238 @@ on:
 
 permissions:
   contents: write
-  statuses: write
-
-env:
-  VITE_SUPABASE_URL: https://example.supabase.co
-  VITE_SUPABASE_PUBLISHABLE_KEY: release-check-placeholder-key
 
 jobs:
-  build-and-preview:
+  repair:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Correct completed history navigation
-        id: continuity
+      - name: Repair Trust Deed and Constitution wording without disturbing site design
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
 
-          path = Path("src/pages/CharitableHistory2010sPage.tsx")
-          text = path.read_text()
-          pattern = re.compile(
-              r'''          <div className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">\s*'''
-              r'''Next: 2020–2026 <ArrowRight className="h-4 w-4" />\s*'''
-              r'''<span className="text-xs font-normal">\(in preparation\)</span>\s*'''
-              r'''</div>'''
-          )
-          new = '''          <Link
-            to="/our-history/2020-2026"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary no-underline hover:underline"
-          >
-            Next: 2020–2026 <ArrowRight className="h-4 w-4" />
-          </Link>'''
+          def rw(path_str, fn):
+              path = Path(path_str)
+              text = path.read_text(encoding="utf-8")
+              updated = fn(text)
+              if updated != text:
+                  path.write_text(updated, encoding="utf-8")
+                  print(f"Updated {path_str}")
 
-          updated, count = pattern.subn(new, text, count=1)
-          if count == 1:
-              path.write_text(updated)
-              changed = "true"
-          elif 'to="/our-history/2020-2026"' in text and '(in preparation)' not in text:
-              changed = "false"
-          else:
-              raise SystemExit("Expected completed-history navigation block was not found")
+          # Restore simple references changed by the earlier blanket Constitution replacement.
+          simple_files = [
+              "src/components/TrusteeBiographiesGrid.tsx",
+              "src/pages/TrusteeBiographiesPage.tsx",
+              "src/pages/PrivacyPolicyPage.tsx",
+              "src/pages/TermsOfUsePage.tsx",
+          ]
+          for filename in simple_files:
+              def fix_simple(text):
+                  text = text.replace("an unincorporated charitable organisation", "a charitable trust")
+                  text = text.replace("An unincorporated charitable organisation", "A charitable trust")
+                  text = text.replace("UK unincorporated charitable organisation", "UK charitable trust")
+                  text = text.replace("governed by its Constitution", "governed by its Trust Deed")
+                  text = text.replace("in accordance with the Constitution", "in accordance with the Trust Deed")
+                  text = text.replace("contrary to its Constitution", "contrary to its Trust Deed")
+                  text = text.replace("subject to the Constitution", "subject to the Trust Deed")
+                  text = text.replace("inconsistent with the Constitution", "inconsistent with the Trust Deed")
+                  text = text.replace("the Constitution and applicable law", "the Trust Deed and applicable law")
+                  text = text.replace("the Constitution, applicable law", "the Trust Deed, applicable law")
+                  return text
+              rw(filename, fix_simple)
 
-          with open(Path.home() / "continuity-output", "w") as output:
-              output.write(changed)
-          print(f"changed={changed}")
+          rw("src/lib/constants.ts", lambda text: text
+             .replace("An unincorporated charitable organisation that develops, funds and coordinates projects which enable better healthcare.",
+                      "A charitable trust that develops, funds and coordinates projects which enable better healthcare.")
+             .replace('{ label: "Constitution", href: "/constitution" }',
+                      '{ label: "Trust Deed & Constitution", href: "/constitution" }'))
+
+          rw("src/components/common/SearchModal.tsx", lambda text: text
+             .replace('keywords: "mission history charitable organisation public benefit"',
+                      'keywords: "mission history charitable trust public benefit"')
+             .replace('title: "Constitution",\n    url: "/constitution",\n    excerpt: "The signed governing document adopted by the founding trustees in June 2025."',
+                      'title: "Trust Deed & Constitution",\n    url: "/constitution",\n    excerpt: "The founding Trust Deed effective 1 December 2024 and the supplementary signed Constitution adopted in June 2025."'))
+
+          rw("src/pages/HomePage.tsx", lambda text: text
+             .replace('description="An unincorporated charitable organisation developing, funding and coordinating',
+                      'description="A charitable trust developing, funding and coordinating'))
+
+          rw("src/pages/admin/AdminManualPage.tsx", lambda text: text
+             .replace("UK unincorporated charitable organisation", "UK charitable trust"))
+
+          # About the Trust: preserve page design, replace only legal-document statements.
+          def fix_about_trust(text):
+              text = text.replace(
+                  "Global Health Access Trust is governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight.",
+                  "Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024. It is governed by a Board of Trustees with responsibility for charitable purpose, strategy, safeguarding, financial stewardship and institutional oversight."
+              )
+              text = text.replace(
+                  "Global Health Access Trust is a charitable organisation working for public benefit under the laws of England and Wales. It is governed by its signed Constitution, adopted in June 2025, and led by its Board of Trustees.",
+                  "Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It is led by its Board of Trustees for charitable purposes and the public benefit."
+              )
+              text = text.replace(
+                  "Global Health Access Trust is an unincorporated charitable organisation established in England and Wales and governed by its Constitution adopted in June 2025.",
+                  "Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales."
+              )
+              text = re.sub(
+                  r'<h2>Constitution &amp; Governance</h2>.*?</div>',
+                  '''<h2>Trust Deed &amp; Constitution</h2>
+          <p>Global Health Access Trust was constituted by Trust Deed with effect from 1 December 2024. The Trust Deed is its founding and principal governing document. The trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including those prepared during banking due diligence. The Constitution supports, and does not replace, the Trust Deed.</p>
+          <p className="block"><Link to="/constitution" className="text-primary hover:underline inline-block py-2">View the Trust Deed &amp; Signed Constitution record →</Link></p>
+        </div>''',
+                  text,
+                  count=1,
+                  flags=re.S,
+              )
+              return text
+          rw("src/pages/AboutTheTrustPage.tsx", fix_about_trust)
+
+          # Governance page: reset the legal-status block and the document hierarchy.
+          def fix_governance(text):
+              text = re.sub(
+                  r'<h2>Legal Status</h2>.*?</div>',
+                  '''<h2>Legal Status</h2>
+        <p>Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales. It operates exclusively for charitable purposes and for the public benefit.</p>
+        <p>The Trust Deed is the founding and principal governing document. The trustees later adopted a signed Constitution in June 2025 to record supplementary governance and operating arrangements, including information prepared during banking due diligence. The Constitution supports, and does not replace, the Trust Deed.</p>
+        <p>The Trust is administered by its Board of Trustees, which is collectively responsible for the stewardship of its assets, compliance with the governing documents and the lawful advancement of its charitable purposes.</p>
+        <p>Any regulatory or registration particulars will be published only when formally confirmed and available for publication.</p>
+        <p>All funds are administered in accordance with the Trust Deed, applicable law, the supplementary Constitution, the Trust's financial controls and formal decisions of the Board.</p>
+      </div>''',
+                  text,
+                  count=1,
+                  flags=re.S,
+              )
+              text = text.replace("Charity law and the duties applying to charity trustees", "Charity and trust law")
+              text = text.replace("permitted by the Constitution and applicable law", "permitted by the Trust Deed and applicable law")
+              text = text.replace("<li>The signed Constitution and published governance policies</li>",
+                                  "<li>The Trust Deed, signed supplementary Constitution and published governance policies</li>")
+              text = text.replace("an unincorporated charitable organisation established in England and Wales",
+                                  "a charitable trust constituted by Trust Deed under the laws of England and Wales")
+              return text
+          rw("src/pages/GovernanceLegalFrameworkPage.tsx", fix_governance)
+
+          # FAQ: ensure the public explanation is plain and complete.
+          def fix_faq(text):
+              text = re.sub(
+                  r'<h3>What is the Global Health Access Trust\?</h3>.*?<h3>What makes this Trust different',
+                  '''<h3>What is the Global Health Access Trust?</h3>
+        <p>Global Health Access Trust is a charitable trust constituted by Trust Deed with effect from 1 December 2024 under the laws of England and Wales.</p>
+        <p>Its purposes are to advance health, relieve illness and preserve life. The Trust develops, funds and coordinates projects for public benefit under the authority and oversight of its Board of Trustees.</p>
+        <h3>What makes this Trust different''',
+                  text,
+                  count=1,
+                  flags=re.S,
+              )
+              text = re.sub(
+                  r'<h3>How is the Trust constituted\?</h3>.*?<p>Its correspondence address',
+                  '''<h3>How is the Trust constituted?</h3>
+        <p>The Trust Deed effective from 1 December 2024 is the founding and principal governing document. The trustees later adopted a signed Constitution in June 2025 as a supplementary governance and banking document. The Constitution supports, and does not replace, the Trust Deed.</p>
+        <p>Its correspondence address''',
+                  text,
+                  count=1,
+                  flags=re.S,
+              )
+              return text
+          rw("src/pages/FrequentlyAskedQuestionsPage.tsx", fix_faq)
+
+          # Publications: show both documents separately and accurately.
+          def fix_publications(text):
+              pattern = re.compile(
+                  r'<span className="text-xs uppercase tracking-widest text-muted-foreground">(?:Governing Document|Founding &amp; Governance Documents)</span>.*?<Button asChild>.*?</Button>',
+                  re.S,
+              )
+              replacement = '''<span className="text-xs uppercase tracking-widest text-muted-foreground">Founding &amp; Governance Documents</span>
+              <h2 className="text-2xl font-serif font-bold mt-2 mb-4">Trust Deed &amp; Signed Constitution</h2>
+              <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
+                The Trust Deed effective from 1 December 2024 is the founding and principal governing document of Global Health Access Trust. The signed Constitution adopted in June 2025 records supplementary governance and operating arrangements, including information prepared during banking due diligence. It does not replace the Trust Deed.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-sm">
+                <div><strong>Trust Deed</strong><br /><span className="text-muted-foreground">Effective 1 December 2024</span></div>
+                <div><strong>Constitution</strong><br /><span className="text-muted-foreground">Signed June 2025</span></div>
+                <div><strong>Legal form</strong><br /><span className="text-muted-foreground">Charitable trust</span></div>
+              </div>
+              <Button asChild>
+                <Link to="/constitution">View the document record</Link>
+              </Button>'''
+              text, count = pattern.subn(replacement, text, count=1)
+              if count != 1:
+                  raise SystemExit("Could not replace Publications governing-document card")
+              return text
+          rw("src/pages/PublicationsPage.tsx", fix_publications)
+
+          # Restore the formal history without removing later editorial/design work.
+          def fix_history_2020s(text):
+              text = text.replace(
+                  'The Global Health Access Trust entered a formal organisational-development phase from <strong className="text-foreground">December 2024</strong>. Its Constitution was adopted by the founding trustees in June 2025, establishing the governance framework used today. Earlier work forms part of the voluntary history and international network that shaped the organisation.',
+                  'The Global Health Access Trust was formally established under its Trust Deed with effect from <strong className="text-foreground">1 December 2024</strong>. The trustees later adopted a signed Constitution in June 2025 as a supplementary governance document. Work before the Trust Deed forms part of the voluntary history and international network that shaped the Trust.'
+              )
+              text = text.replace(
+                  'This year records the transition from the earlier voluntary international network into the formal organisational development that led to the Constitution adopted in June 2025.',
+                  'This year is divided into two legally distinct periods: the voluntary international network operating before the Trust existed, and the formal history of GHAT beginning under the Trust Deed on 1 December 2024.'
+              )
+              text = text.replace('>From December 2024</p>', '>From 1 December 2024</p>')
+              text = text.replace(
+                  '<p>Formal organisational development began in December 2024, and the founding trustees adopted the Global Health Access Trust Constitution in June 2025.</p>',
+                  '<p>The Global Health Access Trust was formally established under its Trust Deed with effect from <strong>1 December 2024</strong>. The trustees later adopted the signed Constitution in June 2025 as a supplementary governance document.</p>'
+              )
+              text = text.replace('routes="Constitution, trustees, safeguarding and financial accountability"',
+                                  'routes="Trust Deed, supplementary Constitution, trustees, safeguarding and financial accountability"')
+              text = text.replace('turning the Constitution and long history of voluntary work into an operational charitable platform.',
+                                  'turning the Trust Deed, supplementary Constitution and long history of voluntary work into an operational charitable platform.')
+              return text
+          rw("src/pages/CharitableHistory2020sPage.tsx", fix_history_2020s)
+
+          def fix_history_index(text):
+              text = text.replace(
+                  "GHAT's formal organisational development from December 2024, adoption of its Constitution in June 2025 and its present-day development.",
+                  "the formal establishment of GHAT under its Trust Deed on 1 December 2024, adoption of its supplementary Constitution in June 2025 and the Trust's present-day development."
+              )
+              text = text.replace(
+                  "The earlier pages describe the voluntary work and international network that preceded GHAT's formal organisational development. The final chapter explains the transition beginning in December 2024 and the adoption of the Constitution in June 2025.",
+                  "The earlier pages describe voluntary work undertaken before the Trust existed. The final chapter separates the earlier international network from formal GHAT activity beginning under the Trust Deed on 1 December 2024, followed by the supplementary Constitution in June 2025."
+              )
+              return text
+          rw("src/pages/CharitableHistoryPage.tsx", fix_history_index)
           PY
-          echo "changed=$(cat "$HOME/continuity-output")" >> "$GITHUB_OUTPUT"
 
-      - name: Commit completed history navigation
-        if: steps.continuity.outputs.changed == 'true'
+      - name: Restore the normal release workflow
+        shell: bash
+        run: git show HEAD^:.github/workflows/release-check.yml > .github/workflows/release-check.yml
+
+      - name: Verify legal consistency
+        shell: bash
+        run: |
+          if grep -RIn "unincorporated charitable organisation" src --include='*.ts' --include='*.tsx'; then
+            echo "Incorrect legal reclassification remains" >&2
+            exit 1
+          fi
+          if grep -RIn "Constitution is the governing document\|signed Constitution is the governing document\|governed by its Constitution adopted" src --include='*.ts' --include='*.tsx'; then
+            echo "Constitution-only wording remains" >&2
+            exit 1
+          fi
+          grep -RIn "charitable trust" src --include='*.ts' --include='*.tsx' >/dev/null
+          grep -RIn "Trust Deed" src --include='*.ts' --include='*.tsx' >/dev/null
+          grep -RIn "supplementary" src/pages/ConstitutionPage.tsx src/pages/AboutTheTrustPage.tsx src/pages/GovernanceLegalFrameworkPage.tsx src/pages/PublicationsPage.tsx >/dev/null
+
+      - name: Build website
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit repaired legal position and restore workflow
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/pages/CharitableHistory2010sPage.tsx
-          git commit -m "Connect 2010s history to final chapter"
-          git push
-
-      - name: Mark preview check pending
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-            await github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: 'pending',
-              context: 'GHAT finished-site preview',
-              description: 'Building and rendering responsive finished-site previews',
-              target_url: targetUrl
-            });
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install --frozen-lockfile
-
-      - name: Build website and capture log
-        id: build
-        shell: bash
-        run: |
-          set +e
-          bunx vite build > build-output.log 2>&1
-          code=$?
-          cat build-output.log
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Upload build diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ghat-build-diagnostics
-          path: build-output.log
-          if-no-files-found: warn
-          retention-days: 7
-
-      - name: Stop if build failed
-        if: steps.build.outputs.exit_code != '0'
-        run: exit 1
-
-      - name: Start production preview
-        run: |
-          bunx vite preview --host 0.0.0.0 --port 4173 > /tmp/ghat-preview.log 2>&1 &
-          echo $! > /tmp/ghat-preview.pid
-          for attempt in {1..40}; do
-            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
-              exit 0
-            fi
-            sleep 1
-          done
-          cat /tmp/ghat-preview.log
-          exit 1
-
-      - name: Render responsive finished-site previews
-        run: |
-          mkdir -p preview-images
-          cat > render-preview.mjs <<'EOF'
-          import { chromium } from 'playwright';
-          import { writeFile } from 'node:fs/promises';
-
-          const pages = [
-            ['home', '/'],
-            ['our-work', '/our-work'],
-            ['history-index', '/our-history'],
-            ['history-1991-1999', '/our-history/1991-1999'],
-            ['history-2000-2009', '/our-history/2000-2009'],
-            ['history-2010-2019', '/our-history/2010-2019'],
-            ['history-2020-2026', '/our-history/2020-2026'],
-          ];
-
-          const viewports = [
-            ['mobile', 390, 844],
-            ['tablet', 768, 1024],
-            ['desktop', 1440, 1000],
-          ];
-
-          const browser = await chromium.launch({
-            executablePath: '/usr/bin/google-chrome',
-            headless: true,
-            args: ['--no-sandbox'],
-          });
-          const results = [];
-          let failed = false;
-
-          for (const [viewportName, width, height] of viewports) {
-            let referenceFonts = null;
-
-            for (const [name, pagePath] of pages) {
-              const context = await browser.newContext({ viewport: { width, height } });
-              const page = await context.newPage();
-              const consoleErrors = [];
-              const pageErrors = [];
-
-              page.on('console', (message) => {
-                if (message.type() === 'error') consoleErrors.push(message.text());
-              });
-              page.on('pageerror', (error) => pageErrors.push(error.message));
-
-              const response = await page.goto(`http://127.0.0.1:4173${pagePath}`, {
-                waitUntil: 'networkidle',
-                timeout: 60000,
-              });
-
-              await page.evaluate(() => {
-                const candidates = Array.from(document.querySelectorAll('[role="dialog"], [class*="cookie"], [id*="cookie"]'));
-                const banner = candidates.find((element) => {
-                  const text = element.textContent || '';
-                  return /cookie/i.test(text) && /accept|reject|preferences/i.test(text);
-                });
-                if (banner instanceof HTMLElement) banner.style.display = 'none';
-              });
-
-              const metrics = await page.evaluate(() => {
-                const root = document.documentElement;
-                const body = getComputedStyle(document.body);
-                const h1 = document.querySelector('h1');
-                const h2 = document.querySelector('h2');
-                const brokenImages = Array.from(document.images)
-                  .filter((image) => image.complete && image.naturalWidth === 0)
-                  .map((image) => image.currentSrc || image.src);
-
-                return {
-                  title: document.title,
-                  h1: h1?.textContent?.trim() || null,
-                  bodyFont: body.fontFamily,
-                  bodySize: body.fontSize,
-                  bodyLineHeight: body.lineHeight,
-                  h1Font: h1 ? getComputedStyle(h1).fontFamily : null,
-                  h1Size: h1 ? getComputedStyle(h1).fontSize : null,
-                  h1LineHeight: h1 ? getComputedStyle(h1).lineHeight : null,
-                  h2Font: h2 ? getComputedStyle(h2).fontFamily : null,
-                  scrollWidth: root.scrollWidth,
-                  clientWidth: root.clientWidth,
-                  brokenImages,
-                  stalePreparationLabel: document.body.innerText.includes('(in preparation)'),
-                  finalChapterLink: Boolean(document.querySelector('a[href="/our-history/2020-2026"]')),
-                };
-              });
-
-              if (name === 'home') {
-                referenceFonts = {
-                  bodyFont: metrics.bodyFont,
-                  h1Font: metrics.h1Font,
-                };
-              }
-
-              const checks = {
-                statusOk: response?.status() === 200,
-                noHorizontalOverflow: metrics.scrollWidth <= metrics.clientWidth + 1,
-                noConsoleErrors: consoleErrors.length === 0,
-                noPageErrors: pageErrors.length === 0,
-                noBrokenImages: metrics.brokenImages.length === 0,
-                bodyFontMatchesHomepage: name === 'home' || metrics.bodyFont === referenceFonts?.bodyFont,
-                headingFontMatchesHomepage: name === 'home' || metrics.h1Font === referenceFonts?.h1Font,
-                noStalePreparationLabel: name !== 'history-2010-2019' || !metrics.stalePreparationLabel,
-                finalChapterConnected: name !== 'history-2010-2019' || metrics.finalChapterLink,
-              };
-
-              if (Object.values(checks).some((value) => value === false)) failed = true;
-
-              await page.screenshot({
-                path: `preview-images/${name}-${viewportName}.png`,
-                fullPage: true,
-              });
-
-              results.push({
-                name,
-                path: pagePath,
-                viewport: { name: viewportName, width, height },
-                status: response?.status() ?? null,
-                metrics,
-                checks,
-                consoleErrors,
-                pageErrors,
-              });
-
-              await context.close();
-            }
-          }
-
-          await browser.close();
-          await writeFile('preview-images/preview-report.json', JSON.stringify(results, null, 2));
-          if (failed) process.exitCode = 1;
-          EOF
-          bun render-preview.mjs
-
-      - name: Upload finished-site previews
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ghat-finished-site-preview
-          path: preview-images
-          if-no-files-found: warn
-          retention-days: 30
-
-      - name: Mark preview check successful
-        if: success()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-            await github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: 'success',
-              context: 'GHAT finished-site preview',
-              description: 'Responsive build and visual checks passed',
-              target_url: targetUrl
-            });
-
-      - name: Mark preview check failed
-        if: failure()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const targetUrl = `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`;
-            await github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: 'failure',
-              context: 'GHAT finished-site preview',
-              description: 'Responsive build or visual checks failed',
-              target_url: targetUrl
-            });
+          git add src .github/workflows/release-check.yml
+          git commit -m "Complete GHAT Trust Deed and Constitution repair"
+          git pull --rebase origin main
+          git push origin HEAD:main
