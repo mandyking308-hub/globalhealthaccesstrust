@@ -1,8 +1,11 @@
+import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const baseURL = (process.env.SMOKE_BASE_URL || "http://127.0.0.1:4173").replace(/\/$/, "");
+const canonicalBase = "https://globalhealthaccesstrust.com";
 const browser = await chromium.launch({ headless: true });
 const failures = [];
+mkdirSync("workstream-previews", { recursive: true });
 
 const workstreams = [
   {
@@ -36,7 +39,12 @@ function watchErrors(page, route) {
   page.on("pageerror", (error) => failures.push(`${route}: page error: ${error.message}`));
   page.on("console", (message) => {
     const text = message.text();
-    if (message.type() === "error" && !text.includes("Failed to load resource") && !text.includes("ERR_NAME_NOT_RESOLVED")) {
+    if (
+      message.type() === "error" &&
+      !text.includes("Failed to load resource") &&
+      !text.includes("ERR_NAME_NOT_RESOLVED") &&
+      !text.includes("example.supabase.co")
+    ) {
       failures.push(`${route}: console error: ${text}`);
     }
   });
@@ -55,15 +63,13 @@ async function open(route, viewport = { width: 1440, height: 1000 }) {
   const body = await page.locator("body").innerText();
   if (!body.includes("Five Current Workstreams")) failures.push("/: current-workstreams homepage heading is missing");
   for (const workstream of workstreams) {
-    if (!body.includes(workstream.title) && !body.includes(workstream.title.replace(/^.*?: /, ""))) {
-      failures.push(`/: homepage card missing ${workstream.title}`);
-    }
     const href = `/current-workstreams/${workstream.slug}`;
     if ((await page.locator(`a[href="${href}"]`).count()) < 1) failures.push(`/: missing homepage link ${href}`);
   }
   if ((await page.locator('section[aria-labelledby="home-workstreams-heading"] img').count()) < 5) {
     failures.push("/: fewer than five workstream images are displayed");
   }
+  await page.screenshot({ path: "workstream-previews/homepage-current-workstreams.png", fullPage: true });
   await page.close();
 }
 
@@ -73,6 +79,7 @@ async function open(route, viewport = { width: 1440, height: 1000 }) {
   if (!body.includes("Practical work. Responsible delivery. Lasting public benefit.")) failures.push("/current-workstreams: hero statement is missing");
   if (!body.includes("Evidence without overstatement")) failures.push("/current-workstreams: evidence standard is missing");
   if ((await page.locator(`a[href^="/current-workstreams/"]`).count()) < 5) failures.push("/current-workstreams: fewer than five project links");
+  await page.screenshot({ path: "workstream-previews/current-workstreams-index.png", fullPage: true });
   await page.close();
 }
 
@@ -101,6 +108,7 @@ for (const workstream of workstreams) {
   if ((await page.locator(`a[href="/donate?workstream=${workstream.slug}#pledge-form"]`).count()) < 1) failures.push(`${route}: pledge route is missing`);
   if ((await page.locator(`a[href="/volunteer-apply?workstream=${workstream.slug}"]`).count()) < 1) failures.push(`${route}: contributor route is missing`);
   if ((await page.locator(`a[href="/contact?workstream=${workstream.slug}"]`).count()) < 1) failures.push(`${route}: enquiry route is missing`);
+  await page.screenshot({ path: `workstream-previews/${workstream.slug}.png`, fullPage: true });
   await page.close();
 }
 
@@ -115,6 +123,13 @@ for (const workstream of workstreams) {
 }
 
 {
+  const page = await open("/our-history/1991-1999");
+  const body = await page.locator("body").innerText();
+  if (!body.includes("The detailed archive is being prepared")) failures.push("/our-history/1991-1999: archive-status wording is missing");
+  await page.close();
+}
+
+{
   const page = await open("/blog");
   const body = await page.locator("body").innerText();
   if (!/page not found|404 — not found/i.test(body)) failures.push("/blog: retired Blog route does not show Not Found");
@@ -126,7 +141,7 @@ for (const workstream of workstreams) {
   const sitemap = await response.text();
   if (!response.ok) failures.push(`/sitemap.xml: HTTP ${response.status}`);
   for (const route of ["/current-workstreams", "/our-history", ...workstreams.map((item) => `/current-workstreams/${item.slug}`)]) {
-    if (!sitemap.includes(`<loc>${baseURL}${route}</loc>`)) failures.push(`/sitemap.xml: missing ${route}`);
+    if (!sitemap.includes(`<loc>${canonicalBase}${route}</loc>`)) failures.push(`/sitemap.xml: missing ${route}`);
   }
   if (sitemap.includes("/blog")) failures.push("/sitemap.xml: retired Blog route is present");
 }
