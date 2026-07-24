@@ -46,21 +46,23 @@ jobs:
 
       - name: Apply permission to live Supabase project
         id: apply
+        continue-on-error: true
         shell: bash
         run: |
           TOKEN="${SUPABASE_ACCESS_TOKEN:-$SUPABASE_MANAGEMENT_TOKEN}"
           if [ -z "$TOKEN" ]; then
-            echo "No Supabase management access token is configured for this repository."
+            echo "No Supabase management access token is configured for this repository." | tee legal-permission-response.txt
             exit 1
           fi
 
+          set -o pipefail
           curl --fail-with-body --silent --show-error \
             --request POST \
             --header "Authorization: Bearer $TOKEN" \
             --header "Content-Type: application/json" \
             --data-binary @legal-permission-query.json \
             "https://api.supabase.com/v1/projects/${PROJECT_REF}/database/query" \
-            | tee legal-permission-response.json
+            | tee legal-permission-response.txt
 
       - name: Load live public configuration
         if: steps.apply.outcome == 'success'
@@ -75,6 +77,7 @@ jobs:
       - name: Verify all published legal documents
         id: verify
         if: steps.apply.outcome == 'success'
+        continue-on-error: true
         shell: bash
         run: |
           set -o pipefail
@@ -93,15 +96,24 @@ jobs:
         with:
           name: legal-public-read-repair-log
           path: |
-            legal-permission-response.json
+            legal-permission-response.txt
             live-legal-after-permission.log
           if-no-files-found: ignore
 
       - name: Report success
-        if: steps.apply.outcome == 'success' && steps.verify.outcome == 'success'
+        if: always() && steps.apply.outcome == 'success' && steps.verify.outcome == 'success'
         uses: actions/github-script@v7
         with:
           script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT legal permission deployment',
+              description: 'Public legal read permission was applied and verified',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
             await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -113,7 +125,7 @@ jobs:
             });
 
       - name: Report failure
-        if: steps.apply.outcome != 'success' || steps.verify.outcome != 'success'
+        if: always() && (steps.apply.outcome != 'success' || steps.verify.outcome != 'success')
         uses: actions/github-script@v7
         with:
           script: |
@@ -122,11 +134,11 @@ jobs:
               repo: context.repo.repo,
               sha: context.sha,
               state: 'failure',
-              context: 'GHAT live legal documents',
-              description: 'Legal read permission could not be applied or verified',
+              context: 'GHAT legal permission deployment',
+              description: 'Management credentials were unavailable or verification failed',
               target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
             });
 
       - name: Fail if repair was not verified
-        if: steps.apply.outcome != 'success' || steps.verify.outcome != 'success'
+        if: always() && (steps.apply.outcome != 'success' || steps.verify.outcome != 'success')
         run: exit 1
