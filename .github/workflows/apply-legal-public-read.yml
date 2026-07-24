@@ -1,0 +1,132 @@
+name: Apply legal-document public read permission
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "supabase/migrations/20260724205800_grant_public_legal_version_access.sql"
+      - ".github/workflows/apply-legal-public-read.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  statuses: write
+
+concurrency:
+  group: apply-legal-public-read
+  cancel-in-progress: false
+
+jobs:
+  apply-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      PROJECT_REF: oaovlhbzqymwhuqmwwku
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_MANAGEMENT_TOKEN: ${{ secrets.SUPABASE_MANAGEMENT_TOKEN }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Prepare exact migration query
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const query = fs.readFileSync(
+            'supabase/migrations/20260724205800_grant_public_legal_version_access.sql',
+            'utf8',
+          );
+          fs.writeFileSync(
+            'legal-permission-query.json',
+            JSON.stringify({ query, read_only: false }),
+          );
+          NODE
+
+      - name: Apply permission to live Supabase project
+        id: apply
+        shell: bash
+        run: |
+          TOKEN="${SUPABASE_ACCESS_TOKEN:-$SUPABASE_MANAGEMENT_TOKEN}"
+          if [ -z "$TOKEN" ]; then
+            echo "No Supabase management access token is configured for this repository."
+            exit 1
+          fi
+
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Authorization: Bearer $TOKEN" \
+            --header "Content-Type: application/json" \
+            --data-binary @legal-permission-query.json \
+            "https://api.supabase.com/v1/projects/${PROJECT_REF}/database/query" \
+            | tee legal-permission-response.json
+
+      - name: Load live public configuration
+        if: steps.apply.outcome == 'success'
+        shell: bash
+        run: |
+          set -a
+          source .env
+          set +a
+          echo "VITE_SUPABASE_URL=$VITE_SUPABASE_URL" >> "$GITHUB_ENV"
+          echo "VITE_SUPABASE_PUBLISHABLE_KEY=$VITE_SUPABASE_PUBLISHABLE_KEY" >> "$GITHUB_ENV"
+
+      - name: Verify all published legal documents
+        id: verify
+        if: steps.apply.outcome == 'success'
+        shell: bash
+        run: |
+          set -o pipefail
+          for attempt in 1 2 3 4 5 6; do
+            if node scripts/verify-live-legal.mjs 2>&1 | tee live-legal-after-permission.log; then
+              exit 0
+            fi
+            echo "Verification attempt $attempt did not pass yet; retrying after schema refresh."
+            sleep 10
+          done
+          exit 1
+
+      - name: Upload repair diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: legal-public-read-repair-log
+          path: |
+            legal-permission-response.json
+            live-legal-after-permission.log
+          if-no-files-found: ignore
+
+      - name: Report success
+        if: steps.apply.outcome == 'success' && steps.verify.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'GHAT live legal documents',
+              description: 'All required legal documents are publicly readable with full content',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Report failure
+        if: steps.apply.outcome != 'success' || steps.verify.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'failure',
+              context: 'GHAT live legal documents',
+              description: 'Legal read permission could not be applied or verified',
+              target_url: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            });
+
+      - name: Fail if repair was not verified
+        if: steps.apply.outcome != 'success' || steps.verify.outcome != 'success'
+        run: exit 1
