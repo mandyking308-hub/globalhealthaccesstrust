@@ -1,0 +1,85 @@
+name: Restore approved GHAT homepage
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/restore-approved-homepage.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore approved homepage and apply only agreed edits
+        shell: bash
+        run: |
+          git show 8fb495eb34c7e8fa897cafe813787677a9c964e6:src/pages/HomePage.tsx > src/pages/HomePage.tsx
+
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/pages/HomePage.tsx")
+          text = path.read_text()
+
+          button_import = 'import { Button } from "@/components/ui/button";\n'
+          workstreams_import = 'import { HomepageWorkstreamsSection } from "@/components/workstreams/HomepageWorkstreamsSection";\n'
+          if workstreams_import not in text:
+              if button_import not in text:
+                  raise SystemExit("Button import anchor missing")
+              text = text.replace(button_import, button_import + workstreams_import, 1)
+
+          for obsolete_import in [
+              'import clinicImage from "@/assets/ghat-maternal-care.jpg";\n',
+              'import systemsImage from "@/assets/ghat-infrastructure-delivery.jpg";\n',
+              'import ruralImage from "@/assets/ghat-capacity-training.jpg";\n',
+          ]:
+              text = text.replace(obsolete_import, "")
+
+          start_marker = '        <section className="p-6 md:p-16 lg:p-24 border-b border-foreground/10 bg-background">'
+          end_marker = '        <section className="bg-primary text-primary-foreground py-24 md:py-32">'
+          start = text.find(start_marker)
+          end = text.find(end_marker)
+          if start == -1 or end == -1 or end <= start:
+              raise SystemExit("Approved homepage section anchors were not found")
+
+          replacement = '''        <div id="current-workstreams" className="scroll-mt-28">
+          <HomepageWorkstreamsSection />
+        </div>
+
+'''
+          text = text[:start] + replacement + text[end:]
+
+          required = [
+              'src={heroImage}',
+              'The Global Health Access Trust builds the systems that make healthcare possible.',
+              'The Trust builds on decades of voluntary, self-funded and pro bono service',
+              '<HomepageWorkstreamsSection />',
+              'About the Trust',
+              'From Need to Accountable Delivery',
+              'Public-Benefit Project Areas',
+              'Charitable Control and Accountability',
+              'Supporter and Project-Team Workspaces',
+              'Support Begins With a Pledge',
+          ]
+          for marker in required:
+              if marker not in text:
+                  raise SystemExit(f"Required approved homepage content missing: {marker}")
+
+          if 'Work and<br />Institutional Learning' in text:
+              raise SystemExit("Obsolete institutional-learning section remains")
+
+          path.write_text(text)
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/pages/HomePage.tsx
+          git commit -m "Restore approved homepage and retain current workstreams"
+          git push
